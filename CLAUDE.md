@@ -14,3 +14,4 @@ App local para llevar el registro de las películas que veo, con Excel sincroniz
 - Recomendaciones: `tools/catalogo_recomendaciones.txt` (título ES | original | año | director | país | géneros | prestigio). Tras añadir líneas, `python tools/enriquecer.py --rapido`.
 - Wikimedia limita peticiones: usar `tools/bulk.py` (SPARQL por lotes) antes que búsquedas una a una.
 - Escala de notas: 0–10 con un decimal.
+- Web pública de solo lectura: https://micinemateca.netlify.app (Netlify publica `app/` y ejecuta `tools/build_static.py`). Para actualizarla tras registrar pelis: commit + push de `data/db.json`.

@@ -129,7 +129,19 @@ const S = {
 try { Object.assign(S.coll, JSON.parse(localStorage.getItem("cine.coll") || "{}"), { limit: 120 }); } catch (e) { /* sin storage */ }
 const saveUI = () => { try { localStorage.setItem("cine.coll", JSON.stringify({ mode: S.coll.mode, sort: S.coll.sort })); } catch (e) { /* */ } };
 
+// Versión pública (Netlify): sin servidor, lee JSON estáticos y no permite editar.
+const STATIC = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || new URLSearchParams(location.search).has("vitrina");
+if (STATIC) document.documentElement.classList.add("ro");
+const STATIC_FILES = { db: "data/db.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json" };
+
 async function api(path, opts = {}) {
+  if (STATIC) {
+    if (opts.method && opts.method !== "GET") throw new Error("Esta es la versión para compartir: solo lectura");
+    if (path.startsWith("buscar")) return [];
+    const r = await fetch(STATIC_FILES[path] || `data/${path}.json`, { cache: "no-cache" });
+    if (!r.ok) throw new Error(`No encuentro los datos (${r.status})`);
+    return r.json();
+  }
   const r = await fetch(`/api/${path}`, { headers: { "Content-Type": "application/json" }, ...opts, body: opts.body ? JSON.stringify(opts.body) : undefined });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(j.error || `Error ${r.status}`);
@@ -233,19 +245,25 @@ const NAV = [
   ["series", "Series", "tv"],
   ["ajustes", "Ajustes", "settings"],
 ];
+const navItems = () => NAV.filter((n) => !(STATIC && n[0] === "ajustes"));
 function route() {
   const h = location.hash.replace(/^#\/?/, "");
   const [name, qs] = h.split("?");
-  return { name: NAV.some((n) => n[0] === name) ? name : "inicio", qs: new URLSearchParams(qs || "") };
+  return { name: navItems().some((n) => n[0] === name) ? name : "inicio", qs: new URLSearchParams(qs || "") };
 }
 function renderChrome() {
   const r = route().name;
   const counts = { coleccion: S.db.peliculas.length, pendientes: S.db.pendientes.length, series: S.db.series.length };
-  $("#nav").innerHTML = NAV.map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${l}</span>${counts[k] != null ? `<span class="count">${counts[k]}</span>` : ""}</a>`).join("");
+  $("#nav").innerHTML = navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${l}</span>${counts[k] != null ? `<span class="count">${counts[k]}</span>` : ""}</a>`).join("");
   $("#tabbar").innerHTML = NAV.filter((n) => ["inicio", "coleccion", "estrenos", "recomendaciones", "estadisticas"].includes(n[0]))
     .map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${l}</span></a>`).join("");
   const e = S.db.estado || {};
   const hora = e.excel_at ? new Date(e.excel_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) : null;
+  if (STATIC) {
+    const f = S.db.actualizado ? new Date(S.db.actualizado).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" }) : "";
+    $("#sideFoot").innerHTML = `<b>Versión para compartir</b><br><span class="dim">Solo lectura${f ? ` · actualizada el ${f}` : ""}</span>`;
+    return;
+  }
   $("#sideFoot").innerHTML = e.excel_error
     ? `<span class="warn">⚠ ${esc(e.excel_error)}</span>`
     : `<b>Excel sincronizado</b>${hora ? ` · ${hora}` : ""}<br><a href="/api/excel" class="dim">Descargar Mi Cinemateca.xlsx</a>`;
@@ -963,7 +981,7 @@ VIEWS.pendientes = (v) => {
   const W = [...S.db.pendientes].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || "")));
   v.innerHTML = `
   <div class="page-head"><div><div class="eyebrow">Watchlist</div><h1 class="h1">Pendientes</h1><p>Lo que quieres ver. Cuando la veas, pulsa <b>La he visto</b> y pasa directamente a tu colección con su nota.</p></div></div>
-  <div class="card card-pad" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">
+  <div class="card card-pad rw" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">
     <input class="input" id="wT" placeholder="Título" style="flex:2 1 220px"><input class="input" id="wY" placeholder="Año" type="number" style="flex:0 1 110px"><input class="input" id="wM" placeholder="¿Por qué? (quién te la recomendó…)" style="flex:2 1 220px">
     <button class="btn btn-primary" id="wAdd">${icon("plus")}Añadir</button></div>
   ${W.length ? `<div class="wl">${W.map((w) => `<div class="card"><div style="min-width:0"><div class="t">${esc(w.titulo)} <span class="dim">${w.anio || ""}</span></div><div class="s">${esc(w.motivo || "")}</div></div>
@@ -1052,6 +1070,7 @@ document.addEventListener("click", async (e) => {
   const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sdel]");
   if (!t) return;
   const d = t.dataset;
+  if (STATIC && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "serie", "sdel"].some((k) => d[k] !== undefined)) return;
   if (d.close !== undefined) { if (t.tagName !== "A") e.preventDefault(); closeModal(); return; }
   if (d.action === "add") return openForm();
   if (d.open) return openFilm(d.open);
@@ -1088,7 +1107,7 @@ document.addEventListener("keydown", (e) => {
   const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);
   if (typing || !$("#modal").hidden) return;
   if (e.key === "/") { e.preventDefault(); if (route().name !== "coleccion") location.hash = "#/coleccion"; setTimeout(() => $("#fq")?.focus(), 60); }
-  if (e.key === "n") { e.preventDefault(); openForm(); }
+  if (e.key === "n" && !STATIC) { e.preventDefault(); openForm(); }
 });
 // tooltips
 const tip = document.createElement("div");
@@ -1107,6 +1126,8 @@ window.addEventListener("hashchange", () => { closeModal(); render(); });
     await loadAll();
     render();
   } catch (e) {
-    $("#view").innerHTML = `<div class="empty"><div class="h2">No puedo conectar con la app</div>Arranca el servidor con <code>Iniciar.bat</code> (o <code>python server.py</code>) y recarga.<br><span class="dim">${esc(e.message)}</span></div>`;
+    $("#view").innerHTML = STATIC
+      ? `<div class="empty"><div class="h2">No se han podido cargar los datos</div>Prueba a recargar la página.<br><span class="dim">${esc(e.message)}</span></div>`
+      : `<div class="empty"><div class="h2">No puedo conectar con la app</div>Arranca el servidor con <code>Iniciar.bat</code> (o <code>python server.py</code>) y recarga.<br><span class="dim">${esc(e.message)}</span></div>`;
   }
 })();

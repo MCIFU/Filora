@@ -8,3 +8,6 @@ data/config.json
 *.tmp
 Mi Cinemateca.xlsx
 ~$*.xlsx
+
+# Datos de la web estática (los genera tools/build_static.py / Netlify)
+app/data/

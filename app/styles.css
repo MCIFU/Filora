@@ -453,3 +453,8 @@ code { background: var(--surface-2); padding: 1px 6px; border-radius: 5px; font-
 }
 .toast[hidden], .tip[hidden] { display: none; }
 .ac .search { flex: none; }
+
+/* versión de solo lectura (web pública) */
+.ro [data-action="add"], .ro [data-edit], .ro [data-del], .ro [data-fav], .ro [data-want], .ro [data-seen],
+.ro [data-relwant], .ro [data-relseen], .ro [data-wseen], .ro [data-wdel], .ro #sAdd, .ro .rw { display: none !important; }
+.ro [data-serie] { cursor: default; }

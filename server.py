@@ -28,17 +28,13 @@ DATA = ROOT / "data"
 DB_PATH = DATA / "db.json"
 EST_PATH = DATA / "estrenos.json"
 CFG_PATH = DATA / "config.json"
-CAT_PATH = ROOT / "tools" / "catalogo_recomendaciones.txt"
 BACKUPS = DATA / "backups"
 PORT = 8765
 
 LOCK = threading.RLock()
 STATE = {"excel_error": None, "excel_at": None}
 
-GEN = {"A": "Acción", "Av": "Aventura", "An": "Animación", "CF": "Ciencia ficción", "C": "Comedia",
-       "Cr": "Crimen", "D": "Drama", "F": "Fantasía", "T": "Terror", "Th": "Thriller", "R": "Romance",
-       "M": "Musical", "B": "Bélico", "W": "Western", "S": "Superhéroes", "Mi": "Misterio",
-       "Bio": "Biográfico", "H": "Histórico", "Fa": "Familiar", "Doc": "Documental"}
+from catalogo import load_catalog  # noqa: E402
 
 
 def read_json(p, default=None):
@@ -81,19 +77,6 @@ def regenerate_excel(db=None):
 def next_id(items, prefix):
     n = max([int(x["id"][1:]) for x in items if x.get("id", "")[1:].isdigit()] + [0]) + 1
     return f"{prefix}{n:04d}"
-
-
-def load_catalog():
-    extra = read_json(DATA / "catalogo_extra.json", {}) or {}
-    out = []
-    for line in CAT_PATH.read_text(encoding="utf-8").splitlines():
-        if not line.strip() or line.startswith("#"):
-            continue
-        es, orig, anio, director, pais, codes, prest = [x.strip() for x in line.split("|")]
-        out.append({"titulo": es, "tituloOriginal": orig, "anio": int(anio), "director": director, "pais": pais,
-                    "generos": [GEN[c] for c in codes.split(",")], "prestigio": float(prest),
-                    **extra.get(f"{orig}|{anio}", {})})
-    return out
 
 
 def enrich_background(kind, item_id):

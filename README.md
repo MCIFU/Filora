@@ -32,6 +32,14 @@ python tools/pelis.py pendiente "Sirāt" --motivo "Recomendación"
 python tools/pelis.py excel
 ```
 
+## Versión web para compartir (Netlify)
+
+La app completa necesita el servidor local, pero hay una **versión de solo lectura** que funciona en cualquier hosting estático: colección, fichas, estadísticas, gustos, recomendaciones y estrenos, sin botones de edición.
+
+- `netlify.toml` le dice a Netlify que ejecute `python3 tools/build_static.py` (genera `app/data/*.json`) y publique la carpeta `app/`.
+- Cada `git push` actualiza la web con lo último registrado.
+- Para verla en local: `python tools/build_static.py` y abre `app/` con cualquier servidor estático añadiendo `?vitrina` a la URL.
+
 ## Estructura
 
 ```
@@ -43,6 +51,7 @@ tools/importar_excel.py   importación inicial desde el Excel original (con corr
 tools/excel.py            exportar / reimportar el Excel profesional
 tools/enriquecer.py       carátulas e IDs externos vía Wikidata (SPARQL por lotes)
 tools/pelis.py            registro rápido por línea de comandos
+tools/build_static.py     datos para la versión web de solo lectura (Netlify)
 ```
 
 Opcional: con una clave gratuita de [TMDb](https://www.themoviedb.org/settings/api) (en Ajustes) el calendario de estrenos se actualiza automáticamente.
