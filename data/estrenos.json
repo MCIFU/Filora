@@ -1,0 +1,1480 @@
+{
+ "actualizado": "2026-09-27",
+ "fuentes": [
+  "ecartelera.com",
+  "elseptimoarte.net",
+  "decine21.com",
+  "laguiago.com"
+ ],
+ "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
+ "cines": [
+  {
+   "id": "ocine-fresnos",
+   "nombre": "Ocine Premium Los Fresnos",
+   "ciudad": "Gijón",
+   "direccion": "C.C. Los Fresnos, C/ Río de Oro 3",
+   "web": "https://www.ocinepremiumlosfresnos.es/",
+   "filmaffinity": "https://www.filmaffinity.com/es/theater-showtimes.php?id=1269",
+   "principal": true
+  },
+  {
+   "id": "yelmo-ocimax",
+   "nombre": "Yelmo Cines Ocimax Gijón",
+   "ciudad": "Gijón",
+   "direccion": "C.C. Ocimax, La Calzada",
+   "web": "https://yelmocines.es/cartelera/asturias/ocimax-gijon",
+   "filmaffinity": "https://www.filmaffinity.com/es/theater-showtimes.php?id=402",
+   "principal": true
+  },
+  {
+   "id": "yelmo-prados",
+   "nombre": "Yelmo Cines Los Prados",
+   "ciudad": "Oviedo",
+   "direccion": "C.C. Los Prados, C/ Joaquín Costa",
+   "web": "https://yelmocines.es/cartelera/asturias/los-prados",
+   "filmaffinity": "https://www.filmaffinity.com/es/cat_new_th_es.html",
+   "principal": true
+  },
+  {
+   "id": "embajadores-foncalada",
+   "nombre": "Cines Embajadores Foncalada",
+   "ciudad": "Oviedo",
+   "direccion": "C/ General Elorza 45",
+   "web": "https://cinesembajadores.es/oviedo/",
+   "filmaffinity": "https://www.filmaffinity.com/es/cat_new_th_es.html",
+   "principal": false
+  },
+  {
+   "id": "cinesa-principado",
+   "nombre": "Cinesa LUXE Parque Principado",
+   "ciudad": "Oviedo (Siero)",
+   "direccion": "C.C. Parque Principado",
+   "web": "https://www.cinesa.es/cines/parque-principado/",
+   "filmaffinity": "https://www.filmaffinity.com/es/cat_new_th_es.html",
+   "principal": false
+  }
+ ],
+ "estrenos": [
+  {
+   "fecha": "2026-10-02",
+   "titulo": "Digger",
+   "original": "Digger",
+   "director": "Alejandro González Iñárritu",
+   "generos": [
+    "Comedia",
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "reparto": "Tom Cruise",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q129677718",
+    "imdb": "tt31450459",
+    "filmaffinity": "440322",
+    "rt": "m/digger_2026",
+    "letterboxd": "digger-2026",
+    "tmdb": "1248832",
+    "allocine": "327174"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/7/7b/Digger_%282026_film%29_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-02",
+   "titulo": "Verity. La sombra de un engaño",
+   "original": "Verity",
+   "director": "Michael Showalter",
+   "generos": [
+    "Thriller",
+    "Misterio"
+   ],
+   "pais": "Estados Unidos",
+   "reparto": "Anne Hathaway, Dakota Johnson",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q131523413",
+    "imdb": "tt32261958",
+    "rt": "m/verity",
+    "letterboxd": "verity-2026",
+    "tmdb": "1283515",
+    "allocine": "1000015739"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/6/60/Verity_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-02",
+   "titulo": "Lucky Strike",
+   "original": "Lucky Strike",
+   "generos": [
+    "Drama",
+    "Bélico"
+   ],
+   "ids": {
+    "wikidata": "Q140003925",
+    "imdb": "tt19035928",
+    "filmaffinity": "269929",
+    "rt": "m/lucky_strike_2026",
+    "letterboxd": "lucky-strike-2026",
+    "tmdb": "1594914",
+    "allocine": "241631"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/d/da/Lucky_Strike_2026_Film_Poster.jpg"
+  },
+  {
+   "fecha": "2026-10-02",
+   "titulo": "Narciso",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-02",
+   "titulo": "Sunny Dancer",
+   "original": "Sunny Dancer",
+   "generos": [
+    "Drama",
+    "Comedia"
+   ],
+   "ids": {
+    "wikidata": "Q134540620",
+    "imdb": "tt32212403",
+    "rt": "m/sunny_dancer",
+    "letterboxd": "sunny-dancer",
+    "tmdb": "1280015"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/c/cc/Sunny_Dancer_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-02",
+   "titulo": "Nuda propiedad",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "España"
+  },
+  {
+   "fecha": "2026-10-02",
+   "titulo": "La leyenda de la ballena cantora",
+   "original": "The Last Whale Singer",
+   "generos": [
+    "Animación",
+    "Familiar"
+   ],
+   "ids": {
+    "wikidata": "Q137247498",
+    "imdb": "tt13518550",
+    "filmaffinity": "990671",
+    "rt": "m/the_last_whale_singer",
+    "letterboxd": "the-last-whale-singer",
+    "tmdb": "677558",
+    "allocine": "275256"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/2/29/The_Last_Whale_Singer_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-02",
+   "titulo": "Sombra nómada",
+   "original": "Nomad Shadow",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-02",
+   "titulo": "Edith Stein: una rosa en invierno",
+   "generos": [
+    "Biográfico",
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "El precio de la red",
+   "original": "The Social Reckoning",
+   "director": "Aaron Sorkin",
+   "generos": [
+    "Drama",
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q136387857",
+    "imdb": "tt37510326",
+    "filmaffinity": "279550",
+    "rt": "m/the_social_reckoning",
+    "letterboxd": "the-social-reckoning",
+    "tmdb": "1281331",
+    "allocine": "1000026649"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/a/a1/The_Social_Reckoning_poster.jpeg"
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "Su propio infierno",
+   "original": "Her Private Hell",
+   "director": "Nicolas Winding Refn",
+   "generos": [
+    "Thriller",
+    "Terror"
+   ],
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q134430061",
+    "imdb": "tt36629665",
+    "rt": "m/her_private_hell",
+    "letterboxd": "her-private-hell-2026",
+    "tmdb": "1469342",
+    "allocine": "1000023438"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/5/51/Her_Private_Hell_Poster.jpg"
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "La otra madre",
+   "generos": [
+    "Terror",
+    "Thriller"
+   ],
+   "reparto": "Jessica Chastain"
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "El árbol muy muy lejano",
+   "original": "The Magic Faraway Tree",
+   "generos": [
+    "Fantasía",
+    "Familiar"
+   ],
+   "pais": "Reino Unido",
+   "ids": {
+    "wikidata": "Q126930033",
+    "imdb": "tt7734244",
+    "filmaffinity": "976447",
+    "rt": "m/the_magic_faraway_tree",
+    "letterboxd": "the-magic-faraway-tree",
+    "tmdb": "1140521",
+    "allocine": "234819"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/8/85/The_Magic_Faraway_Tree_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "Mascotas al rescate",
+   "original": "Falcon Express",
+   "generos": [
+    "Animación",
+    "Familiar",
+    "Aventura"
+   ]
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "Doraemon: Aventuras en el mundo del arte",
+   "generos": [
+    "Animación",
+    "Familiar"
+   ],
+   "pais": "Japón"
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "Ceniza en la boca",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "Las ciegas hormigas",
+   "original": "Inurri itsuak",
+   "generos": [
+    "Drama",
+    "Histórico"
+   ],
+   "pais": "España"
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "La vida de una mujer",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "Naza",
+   "generos": [
+    "Documental"
+   ]
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "Street Fighter",
+   "original": "Street Fighter",
+   "director": "Kitao Sakurai",
+   "generos": [
+    "Acción"
+   ],
+   "pais": "Estados Unidos",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q130345436",
+    "imdb": "tt27419420",
+    "rt": "m/street_fighter_2026",
+    "letterboxd": "street-fighter-1",
+    "tmdb": "1153576",
+    "allocine": "314939"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/d/d4/Street_Fighter_2026_film_poster.jpeg"
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "Whalefall",
+   "original": "Whalefall",
+   "director": "Brian Duffield",
+   "generos": [
+    "Ciencia ficción",
+    "Thriller",
+    "Aventura"
+   ],
+   "ids": {
+    "wikidata": "Q134876629",
+    "imdb": "tt28535715",
+    "filmaffinity": "249049",
+    "rt": "m/whalefall",
+    "letterboxd": "whalefall",
+    "tmdb": "1255833",
+    "allocine": "318791"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/1/18/Whalefall_poster.jpeg"
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "La invitación",
+   "original": "The Invite",
+   "director": "Olivia Wilde",
+   "generos": [
+    "Comedia",
+    "Drama"
+   ],
+   "ids": {
+    "wikidata": "Q134083296",
+    "imdb": "tt14173636",
+    "filmaffinity": "554234",
+    "rt": "m/the_invite",
+    "letterboxd": "the-invite-2026",
+    "tmdb": "950028",
+    "allocine": "317219"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/f/f9/The_Invite_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "Kakeru",
+   "original": "Sheep in the Box",
+   "director": "Hirokazu Kore-eda",
+   "generos": [
+    "Ciencia ficción",
+    "Drama"
+   ],
+   "pais": "Japón",
+   "ids": {
+    "wikidata": "Q137640905",
+    "imdb": "tt38551209",
+    "filmaffinity": "448187",
+    "rt": "m/sheep_in_the_box",
+    "letterboxd": "sheep-in-the-box",
+    "tmdb": "1553969",
+    "allocine": "1000035477"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/b/bd/Sheep_in_the_Box_2026.jpg"
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "Young Washington",
+   "original": "Young Washington",
+   "generos": [
+    "Histórico",
+    "Biográfico"
+   ],
+   "ids": {
+    "wikidata": "Q136002124",
+    "imdb": "tt32104007",
+    "filmaffinity": "991503",
+    "rt": "m/young_washington",
+    "letterboxd": "young-washington",
+    "tmdb": "1308767"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/4/4e/Young_Washington_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "Chopin",
+   "generos": [
+    "Biográfico",
+    "Musical",
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "Masterplan",
+   "generos": [
+    "Crimen",
+    "Thriller"
+   ]
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "El mal hijo",
+   "generos": [
+    "Thriller",
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "La maleta",
+   "generos": [
+    "Romance",
+    "Comedia"
+   ]
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "Boiúna: La leyenda del Amazonas",
+   "generos": [
+    "Terror",
+    "Aventura"
+   ]
+  },
+  {
+   "fecha": "2026-10-16",
+   "titulo": "Lo dejamos acá",
+   "generos": [
+    "Comedia",
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Clayface",
+   "original": "Clayface",
+   "director": "James Watkins",
+   "generos": [
+    "Terror",
+    "Superhéroes"
+   ],
+   "pais": "Estados Unidos",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q131460936",
+    "imdb": "tt34890576",
+    "rt": "m/clayface",
+    "letterboxd": "clayface",
+    "tmdb": "1400940",
+    "allocine": "1000016901"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/4/4f/Clayface_%28film%29_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Sentido y sensibilidad",
+   "original": "Sense and Sensibility",
+   "director": "Georgia Oakley",
+   "generos": [
+    "Drama",
+    "Romance"
+   ],
+   "pais": "Reino Unido",
+   "ids": {
+    "wikidata": "Q135436961",
+    "imdb": "tt13609648",
+    "rt": "m/sense_and_sensibility_2026",
+    "letterboxd": "sense-and-sensibility-2026",
+    "tmdb": "1503762",
+    "allocine": "1000026622"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/2/2f/Sense_and_Sensibility_%282026%29_Official_US_Poster.jpg"
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Wife and Dog",
+   "original": "Wife & Dog",
+   "director": "Guy Ritchie",
+   "generos": [
+    "Comedia",
+    "Drama"
+   ],
+   "pais": "Reino Unido",
+   "ids": {
+    "wikidata": "Q131179858",
+    "imdb": "tt32359344",
+    "letterboxd": "wife-dog",
+    "tmdb": "1290000",
+    "allocine": "1000004480"
+   }
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Ali G: Kién es yo?",
+   "generos": [
+    "Comedia"
+   ],
+   "reparto": "Sacha Baron Cohen"
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "El samurái y el prisionero",
+   "generos": [
+    "Drama",
+    "Histórico"
+   ],
+   "pais": "Japón"
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "¿Me entiendes o te lo explico?",
+   "generos": [
+    "Comedia",
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Superthings: La película",
+   "generos": [
+    "Animación",
+    "Familiar"
+   ]
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Leones en invierno",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-28",
+   "titulo": "Your Mother Your Mother Your Mother",
+   "generos": [
+    "Terror"
+   ]
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "Klara y el sol",
+   "original": "Klara and the Sun",
+   "director": "Taika Waititi",
+   "generos": [
+    "Ciencia ficción",
+    "Drama"
+   ],
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q124409386",
+    "imdb": "tt14371256",
+    "filmaffinity": "897940",
+    "rt": "m/klara_and_the_sun",
+    "letterboxd": "klara-and-the-sun",
+    "tmdb": "858035",
+    "allocine": "315883"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/7/77/Klara_and_the_Sun_%28film%29_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "Hope",
+   "original": "Hope",
+   "director": "Na Hong-jin",
+   "generos": [
+    "Ciencia ficción",
+    "Acción",
+    "Thriller"
+   ],
+   "pais": "Corea del Sur",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q117429496",
+    "imdb": "tt27369017",
+    "filmaffinity": "761467",
+    "rt": "m/hope_2026",
+    "letterboxd": "hope-2026",
+    "tmdb": "1058424",
+    "allocine": "314882"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/0/03/Hope_%282026_film%29_poster.png"
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "Victorian Psycho",
+   "original": "Victorian Psycho",
+   "director": "Zachary Wigon",
+   "generos": [
+    "Thriller",
+    "Terror"
+   ],
+   "ids": {
+    "wikidata": "Q130751977",
+    "imdb": "tt34374553",
+    "rt": "m/victorian_psycho",
+    "tmdb": "1379486",
+    "allocine": "1000014318"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/f/f8/Victorian_Psycho_poster.jpeg"
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "Leviticus",
+   "original": "Leviticus",
+   "director": "Adrian Chiarella",
+   "generos": [
+    "Terror"
+   ],
+   "pais": "Australia",
+   "ids": {
+    "wikidata": "Q137557964",
+    "imdb": "tt39143902",
+    "filmaffinity": "721730",
+    "rt": "m/leviticus",
+    "letterboxd": "leviticus-2026",
+    "tmdb": "1564614",
+    "allocine": "1000037443"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/f/f7/Leviticus_%28film%29_poster.jpg"
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "El hombre que desafió al rey",
+   "generos": [
+    "Drama",
+    "Histórico"
+   ]
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "Wicker",
+   "generos": [
+    "Fantasía",
+    "Romance"
+   ]
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "Aniquilación",
+   "generos": [
+    "Acción",
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "Tiempos de ilusión",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "Una niña llamada Willow",
+   "generos": [
+    "Fantasía",
+    "Familiar"
+   ]
+  },
+  {
+   "fecha": "2026-10-30",
+   "titulo": "La oveja Shaun. Misión calabaza",
+   "generos": [
+    "Animación",
+    "Familiar",
+    "Comedia"
+   ],
+   "pais": "Reino Unido"
+  },
+  {
+   "fecha": "2026-11-06",
+   "titulo": "Godzilla Minus Zero",
+   "original": "Godzilla Minus Zero",
+   "director": "Takashi Yamazaki",
+   "generos": [
+    "Ciencia ficción",
+    "Acción",
+    "Drama"
+   ],
+   "pais": "Japón",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q136700760",
+    "imdb": "tt34384661",
+    "rt": "m/godzilla_minus_zero",
+    "letterboxd": "godzilla-minus-zero",
+    "tmdb": "1381071",
+    "allocine": "1000014492"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/0/09/Godzilla_Minus_Zero_poster.jpg"
+  },
+  {
+   "fecha": "2026-11-06",
+   "titulo": "El gato con sombrero",
+   "original": "The Cat in the Hat",
+   "generos": [
+    "Animación",
+    "Familiar",
+    "Comedia"
+   ],
+   "ids": {
+    "wikidata": "Q122932991",
+    "imdb": "tt2321555",
+    "filmaffinity": "373516",
+    "rt": "m/the_cat_in_the_hat",
+    "letterboxd": "the-cat-in-the-hat-2026",
+    "tmdb": "1117898"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/e/e4/The_Cat_in_the_Hat_%282026_film_poster%29.png"
+  },
+  {
+   "fecha": "2026-11-06",
+   "titulo": "Sacamantecas",
+   "generos": [
+    "Terror",
+    "Crimen"
+   ],
+   "pais": "España"
+  },
+  {
+   "fecha": "2026-11-06",
+   "titulo": "Los miserables",
+   "original": "Les Misérables",
+   "generos": [
+    "Drama",
+    "Histórico"
+   ],
+   "ids": {
+    "wikidata": "Q138509280",
+    "imdb": "tt35518109",
+    "letterboxd": "les-miserables-2026",
+    "tmdb": "1241803",
+    "allocine": "326160"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/9/92/Les_Mis%C3%A9rables_2026_film_poster.jpg"
+  },
+  {
+   "fecha": "2026-11-06",
+   "titulo": "Runner",
+   "generos": [
+    "Thriller"
+   ]
+  },
+  {
+   "fecha": "2026-11-06",
+   "titulo": "Ruega por nosotras",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "Los rivales de Amziah King",
+   "original": "The Rivals of Amziah King",
+   "director": "Andrew Patterson",
+   "generos": [
+    "Thriller",
+    "Crimen"
+   ],
+   "pais": "Estados Unidos",
+   "reparto": "Matthew McConaughey",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q122585845",
+    "imdb": "tt27706593",
+    "filmaffinity": "184041",
+    "rt": "m/the_rivals_of_amziah_king",
+    "letterboxd": "the-rivals-of-amziah-king",
+    "tmdb": "1124142",
+    "allocine": "316021"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/b/b5/The_Rivals_of_Amziah_King_poster.jpeg"
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "Wild Horse Nine",
+   "original": "Wild Horse Nine",
+   "director": "Martin McDonagh",
+   "generos": [
+    "Comedia",
+    "Thriller"
+   ],
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q133341572",
+    "imdb": "tt15799564",
+    "rt": "m/wild_horse_nine",
+    "letterboxd": "wild-horse-nine",
+    "tmdb": "891621",
+    "allocine": "298024"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/4/44/Wild_Horse_Nine_poster.jpeg"
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "Cómo robar un banco",
+   "original": "How to Rob a Bank",
+   "director": "David Leitch",
+   "generos": [
+    "Acción",
+    "Crimen"
+   ],
+   "ids": {
+    "wikidata": "Q134520822",
+    "imdb": "tt35866986",
+    "rt": "m/how_to_rob_a_bank_2026",
+    "letterboxd": "how-to-rob-a-bank-2026",
+    "tmdb": "1437511",
+    "allocine": "1000020289"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/9/92/How_to_Rob_a_Bank_poster.jpg"
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "Scrooge y los fantasmas de la Navidad",
+   "original": "Ebenezer: A Christmas Carol",
+   "director": "Ti West",
+   "generos": [
+    "Fantasía",
+    "Drama"
+   ],
+   "reparto": "Johnny Depp"
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "Ratones al ataque: Operación Navidad",
+   "generos": [
+    "Animación",
+    "Familiar"
+   ]
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "La violinista",
+   "generos": [
+    "Drama",
+    "Musical"
+   ]
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "Trinidad",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Los juegos del hambre: Amanecer en la cosecha",
+   "original": "The Hunger Games: Sunrise on the Reaping",
+   "director": "Francis Lawrence",
+   "generos": [
+    "Ciencia ficción",
+    "Aventura",
+    "Acción"
+   ],
+   "pais": "Estados Unidos",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q126390739",
+    "imdb": "tt32558705",
+    "filmaffinity": "161937",
+    "rt": "m/the_hunger_games_sunrise_on_the_reaping",
+    "letterboxd": "the-hunger-games-sunrise-on-the-reaping",
+    "tmdb": "1300968",
+    "allocine": "1000004528"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/d/da/The_Hunger_Games_-_Sunrise_on_the_Reaping_poster.jpg"
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Pinocho: Desatado",
+   "original": "Pinocchio: Unstrung",
+   "director": "Rhys Frake-Waterfield",
+   "generos": [
+    "Terror"
+   ],
+   "ids": {
+    "wikidata": "Q124317046",
+    "imdb": "tt30887701",
+    "letterboxd": "pinocchio-unstrung",
+    "tmdb": "1232569"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/1/17/Pinocchio_Unstrung_poster.jpg"
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Adolescencia, sexo y muerte en Campamento Miasma",
+   "generos": [
+    "Comedia",
+    "Terror"
+   ]
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Rose",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Ooh La La! ¿Quién lo hubiera pensado?",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Francia"
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Hechizo: Bienvenidos a Hexe",
+   "original": "Hexed",
+   "generos": [
+    "Animación",
+    "Familiar",
+    "Fantasía"
+   ],
+   "pais": "Estados Unidos",
+   "ids": {
+    "wikidata": "Q136027913",
+    "imdb": "tt38077943",
+    "filmaffinity": "992434",
+    "rt": "m/hexed_2026",
+    "letterboxd": "hexed-2026",
+    "tmdb": "1538497",
+    "allocine": "312529"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/7/72/Hexed_poster.jpg"
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Ahora los suegros son ellos",
+   "generos": [
+    "Comedia"
+   ]
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Ray Gunn",
+   "original": "Ray Gunn",
+   "director": "Brad Bird",
+   "generos": [
+    "Animación",
+    "Ciencia ficción",
+    "Acción"
+   ],
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q126722991",
+    "imdb": "tt18270542",
+    "rt": "m/ray_gunn",
+    "letterboxd": "ray-gunn",
+    "tmdb": "940009",
+    "allocine": "301039"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/1/14/Ray_Gunn_poster.jpg"
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Fatherland",
+   "original": "Fatherland",
+   "director": "Paweł Pawlikowski",
+   "generos": [
+    "Drama",
+    "Histórico"
+   ],
+   "ids": {
+    "wikidata": "Q135825188",
+    "imdb": "tt37304295",
+    "rt": "m/fatherland_2026",
+    "letterboxd": "fatherland-3",
+    "tmdb": "1437696",
+    "allocine": "1000031164"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/7/73/Fatherland_poster.jpeg"
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Noche de paz 2",
+   "original": "Violent Night 2",
+   "director": "Tommy Wirkola",
+   "generos": [
+    "Acción",
+    "Comedia"
+   ],
+   "ids": {
+    "wikidata": "Q136108814",
+    "imdb": "tt32432428",
+    "filmaffinity": "808270",
+    "rt": "m/violent_night_2",
+    "letterboxd": "violent-night-2",
+    "tmdb": "1078446",
+    "allocine": "312651"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/a/a2/Violent_Night_2_poster.jpeg"
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "I Want Your Sex",
+   "original": "I Want Your Sex",
+   "director": "Gregg Araki",
+   "generos": [
+    "Thriller",
+    "Comedia"
+   ],
+   "ids": {
+    "wikidata": "Q130646766",
+    "imdb": "tt32332915",
+    "filmaffinity": "259916",
+    "rt": "m/i_want_your_sex",
+    "letterboxd": "i-want-your-sex",
+    "tmdb": "1288059",
+    "allocine": "1000003998"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/8/89/I_Want_Your_Sex_%28film%29_poster.jpg"
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Burundanga",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España"
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "El fantasma de la ópera",
+   "generos": [
+    "Musical",
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Club Kid",
+   "generos": [
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Rebelión en la granja",
+   "original": "Animal Farm",
+   "director": "Andy Serkis",
+   "generos": [
+    "Animación",
+    "Drama"
+   ],
+   "ids": {
+    "wikidata": "Q111946852",
+    "imdb": "tt2467700",
+    "filmaffinity": "970668",
+    "rt": "m/animal_farm_2025",
+    "letterboxd": "animal-farm-2025",
+    "tmdb": "539745",
+    "allocine": "214587"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/0/0f/Animal_Farm_poster.jpg"
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Charlie el superperro",
+   "generos": [
+    "Animación",
+    "Familiar"
+   ]
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "El peso de la libertad",
+   "original": "The Weight",
+   "generos": [
+    "Drama",
+    "Acción"
+   ],
+   "ids": {
+    "wikidata": "Q135906914",
+    "imdb": "tt10794054",
+    "rt": "m/the_weight_2026",
+    "letterboxd": "the-weight-2026",
+    "tmdb": "1433583",
+    "allocine": "1000019874"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/b/b1/The_Weight_poster_%282026%29.jpg"
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Charlie y Harper",
+   "generos": [
+    "Comedia",
+    "Drama"
+   ]
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Entrega al límite",
+   "generos": [
+    "Acción",
+    "Thriller"
+   ]
+  },
+  {
+   "fecha": "2026-12-18",
+   "titulo": "Vengadores: Doomsday",
+   "original": "Avengers: Doomsday",
+   "director": "Anthony Russo / Joe Russo",
+   "generos": [
+    "Superhéroes",
+    "Acción",
+    "Ciencia ficción"
+   ],
+   "pais": "Estados Unidos",
+   "saga": "UCM",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q113244839",
+    "imdb": "tt21357150",
+    "rt": "m/avengers_doomsday",
+    "letterboxd": "avengers-doomsday",
+    "tmdb": "1003596",
+    "allocine": "269068"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/e/ee/Avengers_Doomsday_poster.jpg"
+  },
+  {
+   "fecha": "2026-12-18",
+   "titulo": "Dune: Parte Tres",
+   "original": "Dune: Part Three",
+   "director": "Denis Villeneuve",
+   "generos": [
+    "Ciencia ficción",
+    "Aventura",
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "saga": "Dune",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q124714245",
+    "imdb": "tt31378509",
+    "filmaffinity": "766877",
+    "rt": "m/dune_part_three",
+    "letterboxd": "dune-part-three",
+    "tmdb": "1170608",
+    "allocine": "324508"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/7/7b/Dune_Part_Three_poster.jpg"
+  },
+  {
+   "fecha": "2026-12-18",
+   "titulo": "Cartas amarillas",
+   "original": "Gelbe Briefe",
+   "director": "İlker Çatak",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Alemania"
+  },
+  {
+   "fecha": "2026-12-25",
+   "titulo": "Jumanji: Mundo abierto",
+   "original": "Jumanji 3",
+   "director": "Jake Kasdan",
+   "generos": [
+    "Aventura",
+    "Comedia",
+    "Acción"
+   ],
+   "saga": "Jumanji",
+   "destacado": true
+  },
+  {
+   "fecha": "2026-12-25",
+   "titulo": "Historias paralelas",
+   "original": "Parallel Tales",
+   "director": "Asghar Farhadi",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Francia",
+   "ids": {
+    "wikidata": "Q134184074",
+    "imdb": "tt36646880",
+    "rt": "m/parallel_tales",
+    "letterboxd": "parallel-tales",
+    "tmdb": "1157869",
+    "allocine": "1000023480"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/c/c7/Parallel-tales-2026.jpg"
+  },
+  {
+   "fecha": "2026-12-25",
+   "titulo": "Werwulf",
+   "original": "Werwulf",
+   "director": "Robert Eggers",
+   "generos": [
+    "Terror",
+    "Histórico"
+   ],
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q131853471",
+    "imdb": "tt35514120",
+    "filmaffinity": "399436",
+    "rt": "m/werwulf",
+    "letterboxd": "werwulf",
+    "tmdb": "1421903",
+    "allocine": "1000018715"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/7/73/Werwulf_poster.jpg"
+  },
+  {
+   "fecha": "2027-01-22",
+   "titulo": "Yo soy Rocky",
+   "original": "I Play Rocky",
+   "director": "Peter Farrelly",
+   "generos": [
+    "Biográfico",
+    "Drama"
+   ],
+   "saga": "Rocky / Creed",
+   "ids": {
+    "wikidata": "Q136524973",
+    "imdb": "tt11995650",
+    "filmaffinity": "416737",
+    "rt": "m/i_play_rocky",
+    "letterboxd": "i-play-rocky",
+    "tmdb": "1286656",
+    "allocine": "1000002678"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/5/5e/I_Play_Rocky_poster.png"
+  },
+  {
+   "fecha": "2027-02-12",
+   "titulo": "El exorcista",
+   "original": "The Exorcist",
+   "director": "Mike Flanagan",
+   "generos": [
+    "Terror"
+   ]
+  },
+  {
+   "fecha": "2027-03-19",
+   "titulo": "Sonic 4: La película",
+   "original": "Sonic the Hedgehog 4",
+   "generos": [
+    "Acción",
+    "Aventura",
+    "Comedia"
+   ],
+   "ids": {
+    "wikidata": "Q131495871",
+    "imdb": "tt16744566",
+    "letterboxd": "sonic-the-hedgehog-4",
+    "tmdb": "1401586",
+    "allocine": "1000017329"
+   }
+  },
+  {
+   "fecha": "2027-03-26",
+   "titulo": "The Legend of Zelda",
+   "original": "The Legend of Zelda",
+   "director": "Wes Ball",
+   "generos": [
+    "Aventura",
+    "Fantasía",
+    "Acción"
+   ],
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q123367920",
+    "imdb": "tt29873948",
+    "letterboxd": "the-legend-of-zelda",
+    "tmdb": "1177369",
+    "allocine": "223110"
+   },
+   "poster": "https://thumb.wikimedia.org/wikipedia/en/thumb/a/ab/The_Legend_of_Zelda_film_logo.jpg/500px-The_Legend_of_Zelda_film_logo.jpg"
+  },
+  {
+   "fecha": "2027-03-26",
+   "titulo": "Godzilla x Kong: Supernova",
+   "original": "Godzilla x Kong: Supernova",
+   "generos": [
+    "Acción",
+    "Ciencia ficción"
+   ],
+   "ids": {
+    "wikidata": "Q133820356",
+    "imdb": "tt32561550",
+    "letterboxd": "godzilla-x-kong-supernova",
+    "tmdb": "1288438",
+    "allocine": "1000002997"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/f/f8/Godzilla_X_Kong_Supernova_logo.png"
+  },
+  {
+   "fecha": "2027-05-28",
+   "titulo": "Star Wars: Starfighter",
+   "original": "Star Wars: Starfighter",
+   "director": "Shawn Levy",
+   "generos": [
+    "Ciencia ficción",
+    "Aventura",
+    "Acción"
+   ],
+   "saga": "Star Wars",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q133894182",
+    "imdb": "tt28069611",
+    "rt": "m/star_wars_starfighter",
+    "letterboxd": "star-wars-starfighter",
+    "tmdb": "1417668",
+    "allocine": "310191"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/8/8f/Star_Wars%2C_Starfighter_logo.jpg"
+  },
+  {
+   "fecha": "2027-06-25",
+   "titulo": "Spider-Man: Más allá del Spider-Verso",
+   "original": "Spider-Man: Beyond the Spider-Verse",
+   "director": "Joaquim Dos Santos / Justin K. Thompson",
+   "generos": [
+    "Animación",
+    "Superhéroes",
+    "Acción"
+   ],
+   "saga": "Spider-Man",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q110152284",
+    "imdb": "tt16360004",
+    "rt": "m/spider_man_beyond_the_spider_verse",
+    "letterboxd": "spider-man-beyond-the-spider-verse",
+    "tmdb": "911916"
+   },
+   "poster": "https://thumb.wikimedia.org/wikipedia/en/thumb/a/a0/Spider-Man_Beyond_the_Spider-Verse_logo.jpg/500px-Spider-Man_Beyond_the_Spider-Verse_logo.jpg"
+  },
+  {
+   "fecha": "2027-06-30",
+   "titulo": "Shrek 5",
+   "original": "Shrek 5",
+   "generos": [
+    "Animación",
+    "Comedia",
+    "Familiar"
+   ],
+   "ids": {
+    "wikidata": "Q30750216",
+    "imdb": "tt6113186",
+    "filmaffinity": "519421",
+    "rt": "m/shrek_5",
+    "letterboxd": "shrek-5",
+    "tmdb": "421892",
+    "allocine": "227363"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/b/b6/Shrek_5_film_poster.jpg"
+  },
+  {
+   "fecha": "2027-07-23",
+   "titulo": "Los Simpson: La película 2",
+   "original": "The Simpsons Movie 2",
+   "generos": [
+    "Animación",
+    "Comedia"
+   ]
+  },
+  {
+   "fecha": "2027-07-30",
+   "titulo": "Un lugar tranquilo 3",
+   "original": "A Quiet Place Part III",
+   "director": "John Krasinski",
+   "generos": [
+    "Terror",
+    "Ciencia ficción"
+   ]
+  },
+  {
+   "fecha": "2027-10-01",
+   "titulo": "The Batman: Parte II",
+   "original": "The Batman Part II",
+   "director": "Matt Reeves",
+   "generos": [
+    "Superhéroes",
+    "Crimen",
+    "Thriller"
+   ],
+   "saga": "Batman",
+   "destacado": true
+  },
+  {
+   "fecha": "2027-11-26",
+   "titulo": "Frozen 3",
+   "original": "Frozen III",
+   "generos": [
+    "Animación",
+    "Musical",
+    "Familiar"
+   ],
+   "ids": {
+    "wikidata": "Q116740642",
+    "imdb": "tt26680923",
+    "filmaffinity": "728655",
+    "rt": "m/frozen_3",
+    "letterboxd": "frozen-3",
+    "tmdb": "1024604",
+    "allocine": "279451"
+   },
+   "poster": "https://upload.wikimedia.org/wikipedia/en/a/a5/Frozen_3_logo.png"
+  },
+  {
+   "fecha": "2027-12-17",
+   "titulo": "Vengadores: Secret Wars",
+   "original": "Avengers: Secret Wars",
+   "director": "Anthony Russo / Joe Russo",
+   "generos": [
+    "Superhéroes",
+    "Acción",
+    "Ciencia ficción"
+   ],
+   "saga": "UCM",
+   "destacado": true,
+   "provisional": true,
+   "ids": {
+    "wikidata": "Q113244842",
+    "imdb": "tt21361444",
+    "rt": "m/avengers_secret_wars",
+    "letterboxd": "avengers-secret-wars",
+    "tmdb": "1003598",
+    "allocine": "295478"
+   }
+  },
+  {
+   "fecha": "2027-12-17",
+   "titulo": "El Señor de los Anillos: La caza de Gollum",
+   "original": "The Lord of the Rings: The Hunt for Gollum",
+   "director": "Andy Serkis",
+   "generos": [
+    "Fantasía",
+    "Aventura"
+   ],
+   "saga": "El Señor de los Anillos",
+   "destacado": true,
+   "provisional": true,
+   "ids": {
+    "wikidata": "Q125858982",
+    "imdb": "tt32328070",
+    "letterboxd": "lord-of-the-rings-the-hunt-for-gollum",
+    "tmdb": "1090869",
+    "allocine": "313770"
+   }
+  }
+ ]
+}

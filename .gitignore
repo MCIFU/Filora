@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+
+# Generados / locales
+data/backups/
+data/config.json
+*.tmp
+Mi Cinemateca.xlsx
+~$*.xlsx

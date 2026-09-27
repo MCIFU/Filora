@@ -1,0 +1,625 @@
+# TITULO_EXCEL[@AÑO] | Título original | códigos de género
+# A=Acción Av=Aventura An=Animación CF=Ciencia ficción C=Comedia Cr=Crimen D=Drama F=Fantasía
+# T=Terror Th=Thriller R=Romance M=Musical B=Bélico W=Western S=Superhéroes Mi=Misterio
+# Bio=Biográfico H=Histórico Fa=Familiar Doc=Documental
+LA ODISEA|The Odyssey|Av,F,A
+BACKROOMS|Backrooms|T,CF
+OBSESSION|Obsession|T,Th
+HOKUM|Hokum|T
+MICHAEL|Michael|Bio,M,D
+SPIDER-MAN: BRAND NEW DAY|Spider-Man: Brand New Day|S,A,Av
+EL FINAL DE OAK STREET|Flowervale Street|CF,A,Av
+EL SER QUERIDO|El ser querido|D
+SUPER MARIO GALAXY|The Super Mario Galaxy Movie|An,Av,Fa
+LA MOMIA DE LEE CRONIN|Lee Cronin's The Mummy|T
+EL PASAJERO NOCTURNO|Passenger|T
+MICKEY 17|Mickey 17|CF,C
+WEAPONS|Weapons|T,Mi
+F1|F1|A,D
+THUNDERBOLTS|Thunderbolts*|S,A
+LOS CUATRO FANTÁSTICOS: PRIMEROS PASOS|The Fantastic Four: First Steps|S,CF
+EXPEDIENTE WARREN: EL ÚLTIMO RITO|The Conjuring: Last Rites|T
+CAPITÁN AMÉRICA: BRAVE NEW WORLD|Captain America: Brave New World|S,A
+UNTIL DAWN|Until Dawn|T
+STRANGERS: CAPÍTULO 2|The Strangers: Chapter 2|T
+HEREJE|Heretic|T,Th
+LA SUSTANCIA|The Substance|T,CF
+INSIDE OUT 2|Inside Out 2|An,C,Fa
+BITELCHÚS BITELCHÚS|Beetlejuice Beetlejuice|C,F,T
+DEADPOOL & WOLVERINE|Deadpool & Wolverine|S,A,C
+STRANGERS: CAPÍTULO 1|The Strangers: Chapter 1|T
+ALIEN: ROMULUS|Alien: Romulus|CF,T
+GODZILLA Y KONG: EL NUEVO IMPERIO|Godzilla x Kong: The New Empire|A,CF
+OPPENHEIMER|Oppenheimer|Bio,D,H
+SPIDER-MAN: CRUZANDO EL UNIVERSO|Spider-Man: Across the Spider-Verse|An,S,A
+BARBIE|Barbie|C,F
+SABEN AQUELL|Saben aquell|Bio,C,D
+MISIÓN IMPOSIBLE: SENTENCIA MORTAL - PARTE 1|Mission: Impossible – Dead Reckoning Part One|A,Th
+SUPER MARIO BROS|The Super Mario Bros. Movie|An,Av,C
+GUARDIANES DE LA GALAXIA: VOL. 3|Guardians of the Galaxy Vol. 3|S,CF,A
+LA MONJA II|The Nun II|T
+HERMANA MUERTE|Hermana Muerte|T
+INSIDIOUS: LA PUERTA ROJA|Insidious: The Red Door|T
+ANT-MAN Y LA AVISPA: QUANTUMANÍA|Ant-Man and the Wasp: Quantumania|S,CF
+EL EXORCISTA: CREYENTE|The Exorcist: Believer|T
+THE MARVELS|The Marvels|S,CF
+VIDA PERRA|Strays|C
+CAMPEONEX|Campeonex|C
+AS BESTAS|As bestas|Th,D
+THE BATMAN|The Batman|S,Cr,Th
+PUÑALES POR LA ESPALDA: EL MISTERIO DE GLASS ONION|Glass Onion: A Knives Out Mystery|Mi,C,Cr
+MODELO 77|Modelo 77|D,Th,H
+EL MENÚ|The Menu|Th,C,T
+ONE PIECE FILM RED|One Piece Film: Red|An,A,Av
+SMILE|Smile|T
+TODO A LA VEZ EN TODAS PARTES|Everything Everywhere All at Once|CF,C,A
+THOR: LOVE AND THUNDER|Thor: Love and Thunder|S,C
+EL EXTRAÑO|Watcher|Th,T
+PINOCHO@2022|Pinocchio|F,Fa
+DRAGON BALL SUPER: SUPER HERO|Dragon Ball Super: Super Hero|An,A
+UNCHARTED|Uncharted|A,Av
+BLACK PANTHER: WAKANDA FOREVER|Black Panther: Wakanda Forever|S,A
+DOCTOR STRANGE EN EL MULTIVERSO DE LA LOCURA|Doctor Strange in the Multiverse of Madness|S,F
+JURASSIC WORLD: DOMINION|Jurassic World Dominion|A,Av,CF
+DUNE|Dune|CF,Av
+THE MAURITANIAN|The Mauritanian|D,Th,Bio
+TICK TICK....BOOM!|tick, tick... BOOM!|M,Bio,D
+EL BUEN PATRÓN|El buen patrón|C,D
+THE INNOCENTS|De uskyldige|T,F,D
+SPIDER-MAN: NO WAY HOME|Spider-Man: No Way Home|S,A
+NO MIRES ARRIBA|Don't Look Up|C,CF
+MADRES PARALELAS|Madres paralelas|D
+MAIXABEL|Maixabel|D,Bio
+ENCANTO|Encanto|An,M,Fa
+LA ABUELA|La abuela|T
+VIUDA NEGRA|Black Widow|S,A
+JOSEFINA|Josefina|D,R
+SHANG-CHI Y LA LEYENDA DE LOS DIEZ ANILLOS|Shang-Chi and the Legend of the Ten Rings|S,A
+ETERNALS|Eternals|S,CF
+BAJOCERO|Bajocero|A,Th
+FREE GUY|Free Guy|C,A,CF
+EXPEDIENTE WARREN: OBLIGADO POR EL DEMONIO|The Conjuring: The Devil Made Me Do It|T
+TITANE|Titane|T,D,CF
+VENECIAFRENIA|Veneciafrenia|T
+A TODO TREN. DESTINO ASTURIAS|A todo tren. Destino Asturias|C,Fa
+DINNER IN AMERICA|Dinner in America|C,R
+EL PADRE|The Father|D
+SOUL|Soul|An,C,F
+OTRA RONDA|Druk|D,C
+TENET|Tenet|CF,A,Th
+NO MATARÁS|No matarás|Th
+HISTORIAS LAMENTABLES|Historias lamentables|C
+EL HOMBRE INVISIBLE|The Invisible Man|T,CF,Th
+TYLER RAKE|Extraction|A,Th
+UNA JOVEN PROMETEDORA|Promising Young Woman|Th,D,C
+ONWARD|Onward|An,Av,F
+SENTIMENTAL|Sentimental|C,D
+EL PRACTICANTE|El practicante|Th,T
+EL JUICIO DE LOS 7 DE CHICAGO|The Trial of the Chicago 7|D,H
+UNO PARA TODOS|Uno para todos|D
+LAS NIÑAS|Las niñas|D
+MALNAZIDOS|Malnazidos|C,T,B
+RELIC|Relic|T
+EL JINETE DEL DRAGÓN|Dragon Rider|An,Av,F
+ANE|Ane|D,Th
+HOGAR|Hogar|Th
+EXPLOTA EXPLOTA|Explota explota|M,C,R
+HASTA EL CIELO|Hasta el cielo|Cr,A
+SONIC, LA PELÍCULA|Sonic the Hedgehog|A,Av,C
+AMOR. BODA. AZAR|Love Wedding Repeat|C,R
+ADÚ|Adú|D
+MAMÁ TE QUIERE|Run|Th
+LA BODA DE ROSA|La boda de Rosa|C,D
+MALASAÑA 32|Malasaña 32|T
+DA 5 BLOODS: HERMANOS DE ARMAS|Da 5 Bloods|B,D,Av
+ESTOY PENSANDO EN DEJARLO|I'm Thinking of Ending Things|D,Th
+LOS NUEVOS MUTANTES|The New Mutants|S,T
+365 DÍAS|365 dni|R,D
+LOS ÚLTIMOS DÍAS DEL CRIMEN|The Last Days of American Crime|A,Cr
+PARÁSITOS|Parasite|Th,D,C
+JOKER|Joker|D,Cr,Th
+VENGADORES: ENDGAME|Avengers: Endgame|S,A,CF
+JOJO RABBIT|Jojo Rabbit|C,D,B
+EL TIEMPO CONTIGO|Weathering with You|An,R,F
+KLAUS|Klaus|An,Fa,C
+PUÑALES POR LA ESPALDA|Knives Out|Mi,C,Cr
+TOY STORY 4|Toy Story 4|An,C,Fa
+MIDSOMMAR|Midsommar|T,D
+DOLOR Y GLORIA|Dolor y gloria|D
+1917|1917|B,D
+LA ODISEA DE LOS GILES|La odisea de los giles|C,Cr
+LA TRINCHERA INFINITA|La trinchera infinita|D,H
+QUIÉN A HIERRO MATA|Quien a hierro mata|Th,Cr
+ÉRASE UNA VEZ EN...HOLLYWOOD|Once Upon a Time in Hollywood|C,D
+MIENTRAS DURE LA GUERRA|Mientras dure la guerra|D,H
+VIVIR DOS VECES|Vivir dos veces|C,D
+SAINT MAUD|Saint Maud|T
+CORPUS CHRISTI|Corpus Christi|D
+SECRETOS DE ESTADO|Official Secrets|D,Th,Bio
+YESTERDAY|Yesterday|C,M,R
+ALITA: ÁNGEL DE COMBATE|Alita: Battle Angel|CF,A
+EL IRLANDÉS|The Irishman|Cr,D,Bio
+THE VAST OF NIGHT|The Vast of Night|CF,Mi
+SPIDER-MAN: FAR FROM HOME|Spider-Man: Far From Home|S,A
+FELIZ DÍA DE TU MUERTE 2|Happy Death Day 2U|T,C,CF
+EL HOYO|El hoyo|CF,T,Th
+THE GENTLEMEN: LOS SEÑORES DE LA MAFIA|The Gentlemen|Cr,C,A
+NOSOTROS|Us|T,Th
+GUNS AKIMBO|Guns Akimbo|A,C
+JUMANJI: SIGUIENTE NIVEL|Jumanji: The Next Level|Av,C,A
+CAPITANA MARVEL|Captain Marvel|S,CF
+IT CAPÍTULO 2|It Chapter Two|T
+CHICOS BUENOS|Good Boys|C
+6 EN LA SOMBRA|6 Underground|A
+PADRE NO HAY MÁS QUE UNO|Padre no hay más que uno|C,Fa
+A PESAR DE TODO|A pesar de todo|C
+VENGADORES: INFINITY WAR|Avengers: Infinity War|S,A,CF
+GREEN BOOK|Green Book|D,C,Bio
+SPIDER-MAN: UN NUEVO UNIVERSO|Spider-Man: Into the Spider-Verse|An,S,A
+CAMPEONES|Campeones|C,D
+EL REINO|El reino|Th,D
+UN DÍA MÁS CON VIDA|Another Day of Life|An,D,B
+DRAGON BALL SUPER: BROLY|Dragon Ball Super: Broly|An,A
+BOHEMIAN RHAPSODY|Bohemian Rhapsody|Bio,M,D
+TODOS LO SABEN|Todos lo saben|Th,D,Mi
+BIENVENIDOS A MARWEN|Welcome to Marwen|D,F
+HEREDITARY|Hereditary|T
+UN LUGAR TRANQUILO|A Quiet Place|T,CF
+HA NACIDO UNA ESTRELLA|A Star Is Born|D,M,R
+INFILTRADO EN EL KKKLAN|BlacKkKlansman|D,Cr,C
+SICARIO: EL DÍA DEL SOLDADO|Sicario: Day of the Soldado|A,Th,Cr
+CREED II: LA LEYENDA DE ROCKY|Creed II|D
+READY PLAYER ONE|Ready Player One|CF,Av,A
+VERANO DEL 84|Summer of 84|T,Mi
+YUCATÁN|Yucatán|C
+HAN SOLO: UNA HISTORIA DE STAR WARS|Solo: A Star Wars Story|CF,Av
+BLACK PANTHER|Black Panther|S,A
+VENOM|Venom|S,A
+STAR WARS: EL ASCENSO DE SKYWALKER|Star Wars: The Rise of Skywalker|CF,Av,A
+DOBLE TRAICIÓN|Backstabbing for Beginners|Th,D
+ANT-MAN Y LA AVISPA|Ant-Man and the Wasp|S,C
+ELIMINADO: DARK WEB|Unfriended: Dark Web|T,Th
+VERDAD O RETO|Truth or Dare|T
+CADÁVER|The Possession of Hannah Grace|T
+LA PRIMERA PURGA: LA NOCHE DE LAS BESTIAS|The First Purge|T,A
+LA NOCHE DE HALLOWEEN|Halloween|T
+¿QUIÉN ESTÁ MATANDO A LOS MUÑECOS?|The Happytime Murders|C,Cr
+EL MEJOR VERANO DE MI VIDA|El mejor verano de mi vida|C,Fa
+INSIDIOUS: LA ÚLTIMA LLAVE|Insidious: The Last Key|T
+LA MONJA|The Nun|T
+MEGALODÓN|The Meg|A,CF,T
+HACERSE MAYOR Y OTROS PROBLEMAS|Hacerse mayor y otros problemas|C,D
+BLADE RUNNER 2049|Blade Runner 2049|CF,D
+LOVING VINCENT|Loving Vincent|An,Bio,D
+IT|It|T
+DÉJAME SALIR|Get Out|T,Th
+EL SECRETO DE MARROWBONE|Marrowbone|T,D,Mi
+DUNKERQUE|Dunkirk|B,H,A
+EL INSTANTE MÁS OSCURO|Darkest Hour|Bio,H,D
+COCO|Coco|An,Fa,M
+EL GRAN SHOWMAN|The Greatest Showman|M,Bio,D
+JUMANJI: BIENVENIDOS A LA JUNGLA|Jumanji: Welcome to the Jungle|Av,C,A
+GUARDIANES DE LA GALAXIA VOL. 2|Guardians of the Galaxy Vol. 2|S,CF,C
+THOR: RAGNAROK|Thor: Ragnarok|S,C
+MUTAFUKAZ|Mutafukaz|An,A
+THE SQUARE|The Square|D,C
+TOC TOC@2017|Toc Toc|C
+VERÓNICA|Verónica|T
+KINGSMAN: EL CÍRCULO DE ORO|Kingsman: The Golden Circle|A,C
+HASTA LOS HUESOS|To the Bone|D
+STAR WARS: LOS ÚLTIMOS JEDI|Star Wars: The Last Jedi|CF,Av,A
+SPIDER-MAN. HOMECOMING|Spider-Man: Homecoming|S,A
+FELIZ DÍA DE TU MUERTE|Happy Death Day|T,C,Mi
+PERFECTOS DESCONOCIDOS|Perfectos desconocidos|C,D
+EN REALIDAD NUNCA ESTUVISTE AQUÍ|You Were Never Really Here|Th,Cr,D
+FE DE ETARRAS|Fe de etarras|C
+TIME TRAP|Time Trap|CF,Av
+1922|1922|T,D,Cr
+GRU 3: MI VILLANO FAVORITO|Despicable Me 3|An,C,Fa
+SEÑOR DAME PACIENCIA|Señor, dame paciencia|C
+DESNUDO|Naked|C
+CAPITÁN AMÉRICA: CIVIL WAR|Captain America: Civil War|S,A
+YOUR NAME|Your Name|An,R,F
+LA LA LAND|La La Land|M,R,D
+HASTA EL ÚLTIMO HOMBRE|Hacksaw Ridge|B,Bio,D
+MANCHESTER FRENTE AL MAR|Manchester by the Sea|D
+EXPEDIENTE WARREN: EL CASO ENFIELD|The Conjuring 2|T
+MÚLTIPLE|Split|Th,T
+TARDE PARA LA IRA|Tarde para la ira|Th,Cr,D
+QUE DIOS NOS PERDONE|Que Dios nos perdone|Th,Cr
+CONTRATIEMPO|Contratiempo|Th,Mi,Cr
+LA LLEGADA|Arrival|CF,D,Mi
+¡CANTA!|Sing|An,M,C
+UN ESPÍA Y MEDIO|Central Intelligence|C,A
+SNOWDEN|Snowden|Bio,Th,D
+DOS BUENOS TIPOS|The Nice Guys|C,Cr,A
+ROGUE ONE: UNA HISTORIA DE STAR WARS|Rogue One: A Star Wars Story|CF,Av,A
+CRIANDO RATAS|Criando ratas|C,Cr
+NO RESPIRES|Don't Breathe|T,Th
+SECUESTRO|Secuestro|Th
+LA PURGA: ELECTION YEAR|The Purge: Election Year|T,A
+ICE AGE: EL GRAN CATACLISMO|Ice Age: Collision Course|An,C,Fa
+CIEN AÑOS DE PERDÓN|Cien años de perdón|Th,Cr
+BRIDGET JONES' BABY|Bridget Jones's Baby|C,R
+LA FIESTA DE LAS SALCHICHAS|Sausage Party|An,C
+DOCTOR STRANGE|Doctor Strange|S,F
+THE DO-OVER|The Do-Over|C,A
+TERRIFIER|Terrifier|T
+ESCUADRÓN SUICIDA|Suicide Squad|S,A
+VILLAVICIOSA DE AL LADO|Villaviciosa de al lado|C
+EL PREGÓN|El pregón|C
+CUERPO DE ÉLITE|Cuerpo de élite|C
+INSIDE OUT|Inside Out|An,C,Fa
+SPOTLIGHT|Spotlight|D,H
+LA HABITACIÓN|Room|D
+MAD MAX: FURY ROAD|Mad Max: Fury Road|A,CF,Av
+EL RENACIDO|The Revenant|W,Av,D
+TRUMAN|Truman|D,C
+STAR WARS: EL DESPERTAR DE LA FUERZA|Star Wars: The Force Awakens|CF,Av,A
+LA INVITACIÓN|The Invitation|Th,T
+LOS ODIOSOS OCHO|The Hateful Eight|W,Mi,Cr
+HA VUELTO|Look Who's Back|C
+VENGADORES: LA ERA DE ULTRÓN|Avengers: Age of Ultron|S,A
+CREED: LA LEYENDA DE ROCKY|Creed|D
+FAST & FURIOUS 7|Furious 7|A
+TOC TOC@2015|Knock Knock|Th,T
+DRAGON BALL Z: LA RESURRECCIÓN DE F|Dragon Ball Z: Resurrection 'F'|An,A
+VACACIONES|Vacation|C
+ANACLETO: AGENTE SECRETO|Anacleto: agente secreto|C,A
+LA BRUJA|The Witch|T
+ANT-MAN|Ant-Man|S,C
+INSIDIOUS: CAPÍTULO 3|Insidious: Chapter 3|T
+MI GRAN NOCHE|Mi gran noche|C
+BEING 14|Being 14|D
+OCHO APELLIDOS CATALANES|Ocho apellidos catalanes|C,R
+CINCUENTA SOMBRAS DE GREY|Fifty Shades of Grey|R,D
+INTERSTELLAR|Interstellar|CF,D,Av
+WHIPLASH|Whiplash|D,M
+LA ISLA MÍNIMA|La isla mínima|Th,Cr
+PERDIDA|Gone Girl|Th,Mi,D
+BIRDMAN|Birdman|C,D
+GUARDIANES DE LA GALAXIA|Guardians of the Galaxy|S,CF,C
+NIGHTCRAWLER|Nightcrawler|Th,Cr,D
+KINGSMAN: SERVICIO SECRETO|Kingsman: The Secret Service|A,C
+CAPITÁN AMÉRICA: EL SOLDADO DE INVIERNO|Captain America: The Winter Soldier|S,A,Th
+IT FOLLOWS|It Follows|T
+OCHO APELLIDOS VASCOS|Ocho apellidos vascos|C,R
+CREEP|Creep|T
+THE AMAZING SPIDER-MAN 2: EL PODER DE ELECTRO|The Amazing Spider-Man 2|S,A
+ELIMINADO|Unfriended|T
+LA CUEVA|La cueva|T
+STEREO|Stereo|Th
+LA PURGA: ANARCHY|The Purge: Anarchy|T,A
+LA ENTREVISTA|The Interview|C
+TORRENTE 5: OPERACIÓN EUROVEGAS|Torrente 5: Operación Eurovegas|C,A
+DOS TONTOS TODAVÍA MÁS TONTOS|Dumb and Dumber To|C
+REC 4|REC 4: Apocalipsis|T
+HER|Her|R,CF,D
+EL LOBO DE WALL STREET|The Wolf of Wall Street|Bio,C,Cr
+COHERENCE|Coherence|CF,Th,Mi
+EXPEDIENTE WARREN: THE CONJURING|The Conjuring|T
+LA PURGA: LA NOCHE DE LAS BESTIAS|The Purge|T,Th
+VIVIR ES FÁCIL CON LOS OJOS CERRADOS|Vivir es fácil con los ojos cerrados|D,C
+GRU 2: MI VILLANO FAVORITO|Despicable Me 2|An,C,Fa
+EL HOMBRE DE ACERO|Man of Steel|S,A
+LA VIDA DE ADÈLE|Blue Is the Warmest Colour|R,D
+IRON MAN 3|Iron Man 3|S,A
+SOMOS LOS MILLER|We're the Millers|C
+INSIDIOUS: CAPÍTULO 2|Insidious: Chapter 2|T
+DRAGON BALL Z: LA BATALLA DE LOS DIOSES|Dragon Ball Z: Battle of Gods|An,A
+DON JON|Don Jon|C,R,D
+MAMÁ|Mama|T
+THOR: EL MUNDO OSCURO|Thor: The Dark World|S,F
+NIÑOS GRANDES 2|Grown Ups 2|C
+GUERRA MUNDIAL Z|World War Z|A,T,CF
+3 BODAS DE MÁS|3 bodas de más|C,R
+R3SACÓN|The Hangover Part III|C
+SCARY MOVIE 5|Scary Movie 5|C,T
+LA CAZA|The Hunt|D
+DJANGO DESENCADENADO|Django Unchained|W,D
+ARGO|Argo|Th,H,D
+EL LADO BUENO DE LAS COSAS|Silver Linings Playbook|C,R,D
+LOOPER|Looper|CF,A,Th
+BLANCANIEVES@2012|Blancanieves|D,F
+LO IMPOSIBLE|Lo imposible|D
+LOS VENGADORES|The Avengers|S,A
+ROMPE RALPH|Wreck-It Ralph|An,C,Fa
+PROJECT X|Project X|C
+EL DICTADOR|The Dictator|C
+EL INVITADO|Safe House|A,Th
+HOTEL TRANSILVANIA|Hotel Transylvania|An,C,Fa
+ICE AGE 4: LA FORMACIÓN DE LOS CONTINENTES|Ice Age: Continental Drift|An,C,Fa
+THE AMAZING SPIDER-MAN|The Amazing Spider-Man|S,A
+LAS AVENTURAS DE TADEO JONES|Las aventuras de Tadeo Jones|An,Av,C
+REC 3: GÉNESIS|REC 3: Génesis|T,C
+PROMETHEUS|Prometheus|CF,T
+SINISTER|Sinister|T
+TED|Ted|C
+PROMOCIÓN FANTASMA|Promoción fantasma|C,F
+INTOCABLE|The Intouchables|C,D
+DRIVE|Drive|Cr,D,Th
+LA PIEL QUE HABITO|La piel que habito|Th,D
+PRIMOS|Primos|C
+MIENTRAS DUERMES|Mientras duermes|Th,T
+LAS AVENTURAS DE TINTÍN: EL SECRETO DEL UNICORNIO|The Adventures of Tintin|An,Av
+EL INOCENTE|The Lincoln Lawyer|Th,Cr
+RANGO|Rango|An,W,C
+CAPITÁN AMÉRICA: EL PRIMER VENGADOR|Captain America: The First Avenger|S,A
+RESACÓN 2: AHORA EN TAILANDIA|The Hangover Part II|C
+NO HABRÁ PAZ PARA LOS MALVADOS|No habrá paz para los malvados|Th,Cr
+CARS 2|Cars 2|An,C,Fa
+SÍGUEME EL ROLLO|Just Go with It|C,R
+CON DERECHO A ROCE|Friends with Benefits|C,R
+CREPÚSCULO: AMANECER PARTE 1|The Twilight Saga: Breaking Dawn – Part 1|R,F
+EL CAMBIAZO|The Change-Up|C
+LOS PINGÜINOS DEL SR. POPPER|Mr. Popper's Penguins|C,Fa
+TORRENTE 4: LETHAL CRISIS|Torrente 4: Lethal Crisis|C,A
+THOR|Thor|S,F
+ORIGEN|Inception|CF,A,Th
+SHUTTER ISLAND|Shutter Island|Th,Mi
+LA RED SOCIAL|The Social Network|D,Bio
+TOY STORY 3|Toy Story 3|An,C,Fa
+FOUR LIONS|Four Lions|C
+MI NOMBRE ES KHAN|My Name Is Khan|D
+IRON MAN 2|Iron Man 2|S,A
+CÓMO ENTRENAR A TU DRAGÓN|How to Train Your Dragon|An,Av,F
+INSIDIOUS|Insidious|T
+GRU, MI VILLANO FAVORITO|Despicable Me|An,C,Fa
+BURIED|Buried|Th
+SECUESTRADOS|Secuestrados|T,Th
+QUE SE MUERAN LOS FEOS|Que se mueran los feos|C,R
+ALICIA EN EL PAÍS DE LAS MARAVILLAS@2010|Alice in Wonderland|F,Av
+CREPÚSCULO: ECLIPSE|The Twilight Saga: Eclipse|R,F
+NIÑOS GRANDES|Grown Ups|C
+LA NIÑERA MÁGICA Y EL BIG BANG|Nanny McPhee and the Big Bang|F,Fa,C
+MALDITOS BASTARDOS|Inglourious Basterds|B,A,D
+CELDA 211|Celda 211|Th,A,D
+UP|Up|An,Av,C
+RESACÓN EN LAS VEGAS|The Hangover|C
+REC 2|REC 2|T
+PLANET 51|Planet 51|An,CF,C
+CREPÚSCULO: LUNA NUEVA|The Twilight Saga: New Moon|R,F
+ICE AGE 3: EL ORIGEN DE LOS DINOSAURIOS|Ice Age: Dawn of the Dinosaurs|An,C,Fa
+LA PROPOSICIÓN|The Proposal|C,R
+G.I. JOE|G.I. Joe: The Rise of Cobra|A,CF
+FUGA DE CEREBROS|Fuga de cerebros|C
+2012|2012|A,CF
+G-FORCE: LICENCIA PARA ESPIAR|G-Force|Fa,A,C
+BARBIE Y LAS TRES MOSQUETERAS|Barbie and the Three Musketeers|An,Fa
+SPANISH MOVIE|Spanish Movie|C
+MENTIRAS Y GORDAS|Mentiras y gordas|D
+EL CABALLERO OSCURO|The Dark Knight|S,Cr,A
+WALL-E|WALL-E|An,CF,R
+GRAN TORINO|Gran Torino|D
+LA OLA|The Wave|D,Th
+CAMINO|Camino|D
+IRON MAN|Iron Man|S,A
+CREPÚSCULO|Twilight|R,F
+MADAGASCAR 2|Madagascar: Escape 2 Africa|An,C,Fa
+KUNG FU PANDA|Kung Fu Panda|An,A,C
+MAMMA MIA!|Mamma Mia!|M,C,R
+EL INCREÍBLE HULK|The Incredible Hulk|S,A
+REC|REC|T
+LARS Y UNA CHICA DE VERDAD|Lars and the Real Girl|C,D,R
+ZODIAC|Zodiac|Th,Cr,Mi
+SOY LEYENDA|I Am Legend|CF,T,D
+RATATOUILLE|Ratatouille|An,C,Fa
+SUPERSALIDOS|Superbad|C
+LA GUERRA DE CHARLIE WILSON|Charlie Wilson's War|Bio,C,D
+JUNO|Juno|C,D
+SPIDER-MAN 3|Spider-Man 3|S,A
+LA HABITACIÓN DE FERMAT|La habitación de Fermat|Th,Mi
+LOS 4 FANTÁSTICOS Y SILVER SURFER|Fantastic Four: Rise of the Silver Surfer|S,A
+CAFÉ SOLO O CON ELLAS|Café solo o con ellas|C,R
+JUEGOS SECRETOS|Little Children|D,R
+NO SE LO DIGAS A NADIE|Tell No One|Th,Mi
+INFILTRADOS|The Departed|Cr,Th
+EL TRUCO FINAL|The Prestige|Mi,Th,D
+VOLVER|Volver|D,C
+ICE AGE 2: EL DESHIELO|Ice Age: The Meltdown|An,C,Fa
+CARS|Cars|An,C,Fa
+LA CASA DEL LAGO|The Lake House|R,D,F
+FAST & FURIOUS 3: TOKYO RACE|The Fast and the Furious: Tokyo Drift|A
+HAPPY FEET: ROMPIENDO EL HIELO|Happy Feet|An,M,Fa
+SAW 3|Saw III|T
+NOCHE EN EL MUSEO|Night at the Museum|C,Fa,F
+ARTHUR Y LOS MINIMOYS|Arthur and the Invisibles|An,Av,Fa
+SCARY MOVIE 4|Scary Movie 4|C,T
+PEQUEÑO PERO MATÓN|Little Man|C
+SERPIENTES EN EL AVIÓN|Snakes on a Plane|A,Th
+7 VÍRGENES|7 vírgenes|D
+STAR WARS EPISODIO III: LA VENGANZA DE LOS SITH|Star Wars: Episode III – Revenge of the Sith|CF,Av,A
+V DE VENDETTA|V for Vendetta|A,CF,Th
+BATMAN BEGINS|Batman Begins|S,A
+EL MÉTODO|El método|Th,D
+CHARLIE Y LA FÁBRICA DE CHOCOLATE|Charlie and the Chocolate Factory|F,Fa,C
+MADAGASCAR|Madagascar|An,C,Fa
+LA NOVIA CADÁVER|Corpse Bride|An,F,M
+LAS CRÓNICAS DE NARNIA: EL LEÓN, LA BRUJA Y EL ARMARIO|The Chronicles of Narnia: The Lion, the Witch and the Wardrobe|F,Av,Fa
+POKÉMON 8: LUCARIO Y EL MISTERIO DE MEW|Pokémon: Lucario and the Mystery of Mew|An,Av
+SAW 2|Saw II|T
+LOS 4 FANTÁSTICOS|Fantastic Four|S,A
+TORRENTE 3: EL PROTECTOR|Torrente 3: El protector|C,A
+EL CASTILLO AMBULANTE|Howl's Moving Castle|An,F,R
+MILLION DOLLAR BABY|Million Dollar Baby|D
+SAW|Saw|T,Th
+YO, ROBOT|I, Robot|CF,A
+LOS INCREÍBLES|The Incredibles|An,S,A
+SPIDER-MAN 2|Spider-Man 2|S,A
+ZOMBIES PARTY|Shaun of the Dead|C,T
+LE LLAMABAN SHIN CHAN|Crayon Shin-chan: The Storm Called: The Kasukabe Boys of the Evening Sun|An,C
+OLDBOY|Oldboy|Th,Mi,D
+EL SEÑOR DE LOS ANILLOS: EL RETORNO DEL REY|The Lord of the Rings: The Return of the King|F,Av
+MYSTIC RIVER|Mystic River|D,Cr,Mi
+LOVE ACTUALLY|Love Actually|R,C
+BUSCANDO A NEMO|Finding Nemo|An,Av,Fa
+GOOD BYE, LENIN!|Good Bye, Lenin!|C,D
+KILL BILL VOLUMEN 1|Kill Bill: Volume 1|A,Cr
+LA GRAN AVENTURA DE MORTADELO Y FILEMÓN|La gran aventura de Mortadelo y Filemón|C
+FAST & FURIOUS 2|2 Fast 2 Furious|A
+ESCUELA DE ROCK|School of Rock|C,M
+SCARY MOVIE 3|Scary Movie 3|C,T
+COMO DIOS|Bruce Almighty|C,F
+EL PIANISTA|The Pianist|D,B,Bio
+EL SEÑOR DE LOS ANILLOS: LAS DOS TORRES|The Lord of the Rings: The Two Towers|F,Av
+ICE AGE|Ice Age|An,C,Fa
+SPIDER-MAN|Spider-Man|S,A
+SHIN CHAN: EL PEQUEÑO SAMURAI|Crayon Shin-chan: The Battle of the Warring States|An,C
+MEN IN BLACK 2|Men in Black II|CF,C,A
+STAR WARS EPISODIO II: EL ATAQUE DE LOS CLONES|Star Wars: Episode II – Attack of the Clones|CF,Av,A
+EL VIAJE DE CHIHIRO|Spirited Away|An,F,Av
+EL SEÑOR DE LOS ANILLOS: LA COMUNIDAD DEL ANILLO|The Lord of the Rings: The Fellowship of the Ring|F,Av
+SHREK|Shrek|An,C,F
+LOS OTROS|The Others|T,Mi
+SHIN CHAN: LOS ADULTOS CONTRAATACAN|Crayon Shin-chan: The Adult Empire Strikes Back|An,C
+MONSTRUOS S.A.|Monsters, Inc.|An,C,Fa
+FAST & FURIOUS|The Fast and the Furious|A
+AMERICAN PIE 2|American Pie 2|C
+SCARY MOVIE 2|Scary Movie 2|C,T
+TORRENTE 2: MISIÓN MARBELLA|Torrente 2: Misión en Marbella|C,A
+MEMENTO|Memento|Th,Mi
+RÉQUIEM POR UN SUEÑO|Requiem for a Dream|D
+DETECTIVE CONAN 4: ATRAPADO EN SUS OJOS|Detective Conan: Captured in Her Eyes|An,Mi
+AMERICAN PSYCHO|American Psycho|T,Th,C
+SCARY MOVIE|Scary Movie|C,T
+SHIN CHAN: PERDIDOS EN LA JUNGLA|Crayon Shin-chan: Jungle That Invites Storm|An,C
+POKÉMON 3: EL HECHIZO DE LOS UNOWN|Pokémon 3: The Movie|An,Av
+YO, YO MISMO E IRENE|Me, Myself & Irene|C
+AMERICAN BEAUTY|American Beauty|D
+MATRIX|The Matrix|CF,A
+EL SEXTO SENTIDO|The Sixth Sense|T,Mi,D
+TODO SOBRE MI MADRE|Todo sobre mi madre|D
+EL CLUB DE LA LUCHA|Fight Club|D,Th
+LA LENGUA DE LAS MARIPOSAS|La lengua de las mariposas|D,H
+EL GIGANTE DE HIERRO|The Iron Giant|An,CF,Fa
+LA MOMIA|The Mummy|Av,A,F
+TOY STORY 2|Toy Story 2|An,C,Fa
+SLEEPY HOLLOW|Sleepy Hollow|T,F,Mi
+NOTTING HILL|Notting Hill|R,C
+DETECTIVE CONAN 3: EL ÚLTIMO MAGO DEL SIGLO|Detective Conan: The Last Wizard of the Century|An,Mi
+TARZÁN|Tarzan|An,Av,Fa
+STAR WARS EPISODIO I: LA AMENAZA FANTASMA|Star Wars: Episode I – The Phantom Menace|CF,Av,A
+AMERICAN PIE|American Pie|C
+POKÉMON 2: EL PODER DE UNO|Pokémon: The Movie 2000|An,Av
+EL PROYECTO DE LA BRUJA DE BLAIR|The Blair Witch Project|T
+AMERICAN HISTORY X|American History X|D,Cr
+DETECTIVE CONAN 2: LA DECIMOCUARTA VÍCTIMA|Detective Conan: The Fourteenth Target|An,Mi
+SALVAR AL SOLDADO RYAN|Saving Private Ryan|B,D
+EL SHOW DE TRUMAN|The Truman Show|C,D,CF
+TORRENTE, EL BRAZO TONTO DE LA LEY|Torrente, el brazo tonto de la ley|C,Cr
+DORAEMON Y LOS PIRATAS DE LOS MARES DEL SUR|Doraemon: Nobita's Great Adventure in the South Seas|An,Av,Fa
+POKÉMON: LA PELÍCULA|Pokémon: The First Movie|An,Av
+LA MÁSCARA DEL ZORRO|The Mask of Zorro|Av,A,W
+SHIN CHAN: OPERACIÓN RESCATE|Crayon Shin-chan: Blitzkrieg! Pig's Hoof's Secret Mission|An,C
+DEEP IMPACT|Deep Impact|CF,D
+LA VIDA ES BELLA|Life Is Beautiful|C,D,B
+EL INDOMABLE WILL HUNTING|Good Will Hunting|D
+LA PRINCESA MONONOKE|Princess Mononoke|An,F,Av
+PERFECT BLUE|Perfect Blue|An,Th,T
+FUNNY GAMES|Funny Games|Th,T
+MEJOR...IMPOSIBLE|As Good as It Gets|C,R,D
+MEN IN BLACK|Men in Black|CF,C,A
+CARNE TRÉMULA|Carne trémula|D,Th
+DETECTIVE CONAN: PELIGRO EN EL RASCACIELOS|Detective Conan: The Time-Bombed Skyscraper|An,Mi
+SHIN CHAN: EN BUSCA DE LAS BOLAS PERDIDAS|Crayon Shin-chan: Pursuit of the Balls of Darkness|An,C
+HÉRCULES|Hercules|An,M,F
+DORAEMON Y LA FÁBRICA DE JUGUETES|Doraemon: Nobita and the Spiral City|An,Fa
+ANACONDA|Anaconda|T,A,Av
+TRAINSPOTTING|Trainspotting|D,C
+LAS DOS CARAS DE LA VERDAD|Primal Fear|Th,Cr,Mi
+TESIS|Tesis|Th,T
+FARGO|Fargo|Cr,Th,C
+EL JOROBADO DE NOTRE DAME|The Hunchback of Notre Dame|An,M,Fa
+DORAEMON Y EL TREN DEL TIEMPO|Doraemon: Nobita and the Galaxy Super-express|An,Av,Fa
+SHIN CHAN: AVENTURAS EN HENDERLAND|Crayon Shin-chan: Adventure in Henderland|An,C
+SCREAM|Scream|T,Mi
+SOSPECHOSOS HABITUALES|The Usual Suspects|Th,Cr,Mi
+TOY STORY|Toy Story|An,C,Fa
+SEVEN|Se7en|Th,Cr,Mi
+DESPERADO|Desperado|A,Cr
+PULP FICTION|Pulp Fiction|Cr,Th,C
+CADENA PERPETUA|The Shawshank Redemption|D,Cr
+FORREST GUMP|Forrest Gump|D,C,R
+EL REY LEÓN|The Lion King|An,M,Fa
+LA MÁSCARA|The Mask|C,F
+DOS TONTOS MUY TONTOS|Dumb and Dumber|C
+NIÑO RICO|Richie Rich|C,Fa
+LA LISTA DE SCHINDLER|Schindler's List|D,H,B
+JURASSIC PARK|Jurassic Park|Av,CF,A
+PESADILLA ANTES DE NAVIDAD|The Nightmare Before Christmas|An,M,F
+DORAEMON Y EL SECRETO DEL LABERINTO|Doraemon: Nobita and the Tin Labyrinth|An,Av,Fa
+KIKA|Kika|C,D
+RESERVOIR DOGS|Reservoir Dogs|Cr,Th
+MALCOLM X|Malcolm X|Bio,D,H
+ALADDIN|Aladdin|An,M,Av
+EL GUARDAESPALDAS|The Bodyguard|R,Th,M
+EL SILENCIO DE LOS CORDEROS|The Silence of the Lambs|Th,Cr,T
+LA BELLA Y LA BESTIA|Beauty and the Beast|An,M,R
+DORAEMON Y LAS MIL Y UNA AVENTURAS|Doraemon: Nobita and the Kingdom of Clouds|An,Av,Fa
+EL PADRINO PARTE III|The Godfather Part III|Cr,D
+GOODFELLAS|Goodfellas|Cr,Bio,D
+DESPERTARES|Awakenings|D,Bio
+GHOST|Ghost|R,F,D
+MISERY|Misery|Th,T
+EL CLUB DE LOS POETAS MUERTOS|Dead Poets Society|D
+NICKY LA APRENDIZ DE BRUJA|Kiki's Delivery Service|An,F,Fa
+LA SIRENITA|The Little Mermaid|An,M,F
+RAIN MAN|Rain Man|D
+AKIRA|Akira|An,CF,A
+WILLOW|Willow|F,Av
+MI VECINO TOTORO|My Neighbor Totoro|An,F,Fa
+LA TUMBA DE LAS LUCIÉRNAGAS|Grave of the Fireflies|An,D,B
+BITELCHÚS|Beetlejuice|C,F,T
+MUJERES AL BORDE DE UN ATAQUE DE NERVIOS|Mujeres al borde de un ataque de nervios|C,D
+GORILAS EN LA NIEBLA|Gorillas in the Mist|Bio,D,Av
+GOOD MORNING VIETNAM|Good Morning, Vietnam|C,D,B
+PREDATOR|Predator|A,CF,T
+PLATOON|Platoon|B,D
+LOS GOONIES|The Goonies|Av,C,Fa
+LA GRAN AVENTURA DE PEE-WEE|Pee-wee's Big Adventure|C,Av
+LOS SANTOS INOCENTES|Los santos inocentes|D
+PESADILLA EN ELM STREET|A Nightmare on Elm Street|T
+GREMLINS|Gremlins|C,T,F
+LOS CAZAFANTASMAS|Ghostbusters|C,F,A
+KARATE KID|The Karate Kid|D,A,Fa
+SCARFACE|Scarface|Cr,D
+STAR WARS EPISODIO VI: EL RETORNO DEL JEDI|Return of the Jedi|CF,Av,A
+FLASHDANCE|Flashdance|M,R,D
+BLADE RUNNER|Blade Runner|CF,Th
+VOLVER A EMPEZAR|Volver a empezar|D,R
+E.T. EL EXTRATERRESTRE|E.T. the Extra-Terrestrial|CF,Fa,Av
+INDIANA JONES: EN BUSCA DEL ARCA PERDIDA|Raiders of the Lost Ark|Av,A
+EL RESPLANDOR|The Shining|T,Th
+STAR WARS EPISODIO V: EL IMPERIO CONTRAATACA|The Empire Strikes Back|CF,Av,A
+TORO SALVAJE|Raging Bull|D,Bio
+KRAMER CONTRA KRAMER|Kramer vs. Kramer|D
+ALIEN, EL OCTAVO PASAJERO|Alien|CF,T
+APOCALYPSE NOW|Apocalypse Now|B,D
+THE WARRIORS|The Warriors|A,Cr,Th
+GREASE|Grease|M,R,C
+STAR WARS EPISODIO IV: UNA NUEVA ESPERANZA|Star Wars|CF,Av,A
+FIEBRE DEL SÁBADO NOCHE|Saturday Night Fever|M,D
+TAXI DRIVER|Taxi Driver|D,Cr,Th
+¿QUIÉN PUEDE MATAR A UN NIÑO?|¿Quién puede matar a un niño?|T
+ROCKY|Rocky|D
+CARRIE|Carrie|T
+TIBURÓN|Jaws|Th,Av,T
+ALGUIEN VOLÓ SOBRE EL NIDO DEL CUCO|One Flew Over the Cuckoo's Nest|D
+LOS CABALLEROS DE LA MESA CUADRADA Y SUS LOCOS SEGUIDORES|Monty Python and the Holy Grail|C,Av,F
+EL PADRINO PARTE II|The Godfather Part II|Cr,D
+EL GOLPE|The Sting|Cr,C
+EL EXORCISTA|The Exorcist|T
+EL PADRINO|The Godfather|Cr,D
+LA NARANJA MECÁNICA|A Clockwork Orange|CF,Cr,D
+REBELIÓN EN LAS AULAS|To Sir, with Love|D
+EL BUENO, EL FEO Y EL MALO|The Good, the Bad and the Ugly|W,Av
+PSICOSIS|Psycho|T,Th,Mi
+DOCE HOMBRES SIN PIEDAD|12 Angry Men|D,Cr
+PETER PAN|Peter Pan|An,Av,Fa
+ALICIA EN EL PAÍS DE LAS MARAVILLAS@1951|Alice in Wonderland|An,F,Fa
+LA CENICIENTA|Cinderella|An,F,Fa
+EL TERCER HOMBRE|The Third Man|Th,Mi
+CASABLANCA|Casablanca|R,D,B
+HISTORIAS DE FILADELFIA|The Philadelphia Story|C,R
+PINOCHO@1940|Pinocchio|An,F,Fa
+BLANCANIEVES Y LOS SIETE ENANITOS|Snow White and the Seven Dwarfs|An,F,Fa

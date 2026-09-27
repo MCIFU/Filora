@@ -1,0 +1,278 @@
+# Catálogo base para recomendaciones: Título ES | Título original | Año | Director | País | Géneros | Prestigio (0-10)
+# Las que ya estén en tu colección se filtran automáticamente.
+Dune: Parte Dos|Dune: Part Two|2024|Denis Villeneuve|Estados Unidos|CF,Av,A|9.2
+Prisioneros|Prisoners|2013|Denis Villeneuve|Estados Unidos|Th,Cr,Mi|9.0
+Sicario|Sicario|2015|Denis Villeneuve|Estados Unidos|Th,Cr,A|8.6
+Incendies|Incendies|2010|Denis Villeneuve|Canadá|D,Mi,B|8.9
+Enemy|Enemy|2013|Denis Villeneuve|Canadá|Th,Mi|7.8
+Following|Following|1998|Christopher Nolan|Reino Unido|Th,Cr,Mi|8.0
+Insomnio|Insomnia|2002|Christopher Nolan|Estados Unidos|Th,Cr,Mi|7.9
+Jackie Brown|Jackie Brown|1997|Quentin Tarantino|Estados Unidos|Cr,Th|8.3
+Kill Bill: Volumen 2|Kill Bill: Volume 2|2004|Quentin Tarantino|Estados Unidos|A,Cr|8.4
+Death Proof|Death Proof|2007|Quentin Tarantino|Estados Unidos|A,Th|7.2
+Casino|Casino|1995|Martin Scorsese|Estados Unidos|Cr,D|8.8
+El rey de la comedia|The King of Comedy|1982|Martin Scorsese|Estados Unidos|C,D,Cr|8.3
+Los asesinos de la luna|Killers of the Flower Moon|2023|Martin Scorsese|Estados Unidos|Cr,D,H|8.4
+El aviador|The Aviator|2004|Martin Scorsese|Estados Unidos|Bio,D|8.0
+Gangs of New York|Gangs of New York|2002|Martin Scorsese|Estados Unidos|Cr,D,H|8.0
+Malas calles|Mean Streets|1973|Martin Scorsese|Estados Unidos|Cr,D|7.9
+The Game|The Game|1997|David Fincher|Estados Unidos|Th,Mi|8.3
+Millennium: Los hombres que no amaban a las mujeres|The Girl with the Dragon Tattoo|2011|David Fincher|Estados Unidos|Th,Cr,Mi|8.2
+El curioso caso de Benjamin Button|The Curious Case of Benjamin Button|2008|David Fincher|Estados Unidos|D,F,R|8.0
+El asesino|The Killer|2023|David Fincher|Estados Unidos|Th,Cr|7.2
+La conversación|The Conversation|1974|Francis Ford Coppola|Estados Unidos|Th,Mi,D|8.5
+Atrápame si puedes|Catch Me If You Can|2002|Steven Spielberg|Estados Unidos|Cr,Bio,C|8.6
+Minority Report|Minority Report|2002|Steven Spielberg|Estados Unidos|CF,A,Th|8.2
+Múnich|Munich|2005|Steven Spielberg|Estados Unidos|Th,H,D|8.0
+Encuentros en la tercera fase|Close Encounters of the Third Kind|1977|Steven Spielberg|Estados Unidos|CF,D|8.2
+El puente de los espías|Bridge of Spies|2015|Steven Spielberg|Estados Unidos|Th,H,D|8.0
+Indiana Jones y la última cruzada|Indiana Jones and the Last Crusade|1989|Steven Spielberg|Estados Unidos|Av,A|8.5
+Los Fabelman|The Fabelmans|2022|Steven Spielberg|Estados Unidos|D|7.8
+2001: Una odisea del espacio|2001: A Space Odyssey|1968|Stanley Kubrick|Reino Unido|CF,Av|9.3
+La chaqueta metálica|Full Metal Jacket|1987|Stanley Kubrick|Reino Unido|B,D|8.8
+Senderos de gloria|Paths of Glory|1957|Stanley Kubrick|Estados Unidos|B,D|9.0
+¿Teléfono rojo? Volamos hacia Moscú|Dr. Strangelove|1964|Stanley Kubrick|Reino Unido|C,B|8.9
+Barry Lyndon|Barry Lyndon|1975|Stanley Kubrick|Reino Unido|D,H,R|8.5
+Nausicaä del Valle del Viento|Nausicaä of the Valley of the Wind|1984|Hayao Miyazaki|Japón|An,F,Av|8.6
+Porco Rosso|Porco Rosso|1992|Hayao Miyazaki|Japón|An,Av,C|8.3
+El castillo en el cielo|Castle in the Sky|1986|Hayao Miyazaki|Japón|An,Av,F|8.4
+El chico y la garza|The Boy and the Heron|2023|Hayao Miyazaki|Japón|An,F,Av|8.0
+El cuento de la princesa Kaguya|The Tale of the Princess Kaguya|2013|Isao Takahata|Japón|An,F,D|8.6
+Susurros del corazón|Whisper of the Heart|1995|Yoshifumi Kondō|Japón|An,R,D|8.1
+Paprika|Paprika|2006|Satoshi Kon|Japón|An,CF,Th|8.3
+Millennium Actress|Millennium Actress|2001|Satoshi Kon|Japón|An,D,R|8.4
+Tokyo Godfathers|Tokyo Godfathers|2003|Satoshi Kon|Japón|An,C,D|8.4
+Suzume|Suzume|2022|Makoto Shinkai|Japón|An,F,Av|7.9
+Los niños lobo|Wolf Children|2012|Mamoru Hosoda|Japón|An,F,D|8.4
+La chica que saltaba a través del tiempo|The Girl Who Leapt Through Time|2006|Mamoru Hosoda|Japón|An,CF,R|8.2
+Summer Wars|Summer Wars|2009|Mamoru Hosoda|Japón|An,CF,C|7.9
+Ghost in the Shell|Ghost in the Shell|1995|Mamoru Oshii|Japón|An,CF,A|8.4
+A Silent Voice|A Silent Voice|2016|Naoko Yamada|Japón|An,D,R|8.3
+The First Slam Dunk|The First Slam Dunk|2022|Takehiko Inoue|Japón|An,D|8.4
+Memories of Murder|Memories of Murder|2003|Bong Joon-ho|Corea del Sur|Cr,Th,Mi|9.1
+Madre|Mother|2009|Bong Joon-ho|Corea del Sur|Cr,Th,D|8.6
+Rompenieves|Snowpiercer|2013|Bong Joon-ho|Corea del Sur|CF,A|7.9
+The Host|The Host|2006|Bong Joon-ho|Corea del Sur|T,CF,C|7.8
+La doncella|The Handmaiden|2016|Park Chan-wook|Corea del Sur|Th,R,D|8.8
+Decision to Leave|Decision to Leave|2022|Park Chan-wook|Corea del Sur|Th,R,Mi|8.3
+No hay otra opción|No Other Choice|2025|Park Chan-wook|Corea del Sur|Th,C,Cr|8.5
+Sympathy for Lady Vengeance|Sympathy for Lady Vengeance|2005|Park Chan-wook|Corea del Sur|Th,Cr,D|8.1
+Encontré al diablo|I Saw the Devil|2010|Kim Jee-woon|Corea del Sur|Th,T,Cr|8.3
+The Chaser|The Chaser|2008|Na Hong-jin|Corea del Sur|Th,Cr|8.2
+El extraño|The Wailing|2016|Na Hong-jin|Corea del Sur|T,Mi,Th|8.2
+Burning|Burning|2018|Lee Chang-dong|Corea del Sur|Mi,D,Th|8.3
+Train to Busan|Train to Busan|2016|Yeon Sang-ho|Corea del Sur|T,A,Th|8.1
+Los siete samuráis|Seven Samurai|1954|Akira Kurosawa|Japón|A,Av,D|9.4
+Rashōmon|Rashomon|1950|Akira Kurosawa|Japón|D,Mi,Cr|8.9
+Vivir|Ikiru|1952|Akira Kurosawa|Japón|D|9.0
+Battle Royale|Battle Royale|2000|Kinji Fukasaku|Japón|A,Th,CF|7.9
+Un asunto de familia|Shoplifters|2018|Hirokazu Kore-eda|Japón|D,Cr|8.5
+Monster|Monster|2023|Hirokazu Kore-eda|Japón|D,Mi|8.4
+Perfect Days|Perfect Days|2023|Wim Wenders|Japón|D|8.3
+Drive My Car|Drive My Car|2021|Ryūsuke Hamaguchi|Japón|D|8.2
+Cure|Cure|1997|Kiyoshi Kurosawa|Japón|T,Th,Cr|8.1
+Ringu|Ringu|1998|Hideo Nakata|Japón|T,Mi|7.6
+El secreto de sus ojos|El secreto de sus ojos|2009|Juan José Campanella|Argentina|Th,Cr,D|9.0
+Relatos salvajes|Relatos salvajes|2014|Damián Szifron|Argentina|C,Th,D|8.8
+Nueve reinas|Nueve reinas|2000|Fabián Bielinsky|Argentina|Cr,Th,C|8.5
+El orfanato|El orfanato|2007|J.A. Bayona|España|T,D,Mi|8.3
+Un monstruo viene a verme|A Monster Calls|2016|J.A. Bayona|España|D,F|8.0
+La sociedad de la nieve|La sociedad de la nieve|2023|J.A. Bayona|España|D,Bio,Av|8.7
+Mar adentro|Mar adentro|2004|Alejandro Amenábar|España|D,Bio|8.4
+Abre los ojos|Abre los ojos|1997|Alejandro Amenábar|España|Th,CF,Mi|8.3
+El día de la bestia|El día de la bestia|1995|Álex de la Iglesia|España|C,T,A|8.2
+La comunidad|La comunidad|2000|Álex de la Iglesia|España|C,Th|7.9
+Balada triste de trompeta|Balada triste de trompeta|2010|Álex de la Iglesia|España|D,C,T|7.3
+Los lunes al sol|Los lunes al sol|2002|Fernando León de Aranoa|España|D,C|8.2
+Barrio|Barrio|1998|Fernando León de Aranoa|España|D|7.8
+El laberinto del fauno|El laberinto del fauno|2006|Guillermo del Toro|España|F,D,B|8.8
+El espinazo del diablo|El espinazo del diablo|2001|Guillermo del Toro|España|T,F,D|8.0
+Frankenstein|Frankenstein|2025|Guillermo del Toro|Estados Unidos|T,F,D|8.3
+Grupo 7|Grupo 7|2012|Alberto Rodríguez|España|Th,Cr,A|7.9
+El hombre de las mil caras|El hombre de las mil caras|2016|Alberto Rodríguez|España|Th,Bio,Cr|7.5
+Stockholm|Stockholm|2013|Rodrigo Sorogoyen|España|Th,D,R|7.4
+La caja 507|La caja 507|2002|Enrique Urbizu|España|Th,Cr|7.8
+El cuerpo|El cuerpo|2012|Oriol Paulo|España|Th,Mi,Cr|7.4
+Magical Girl|Magical Girl|2014|Carlos Vermut|España|D,Th|7.6
+Te doy mis ojos|Te doy mis ojos|2003|Icíar Bollaín|España|D|8.0
+Hable con ella|Hable con ella|2002|Pedro Almodóvar|España|D,R|8.1
+Cerrar los ojos|Cerrar los ojos|2023|Víctor Erice|España|D,Mi|8.3
+El espíritu de la colmena|El espíritu de la colmena|1973|Víctor Erice|España|D,F|8.4
+Sirāt|Sirāt|2025|Oliver Laxe|España|D,Av,Th|8.4
+Los domingos|Los domingos|2025|Alauda Ruiz de Azúa|España|D|8.2
+El 47|El 47|2024|Marcel Barrena|España|D,Bio,H|7.9
+La infiltrada|La infiltrada|2024|Arantxa Echevarría|España|Th,Cr,Bio|7.6
+Robot Dreams|Robot Dreams|2023|Pablo Berger|España|An,D,C|8.4
+Handia|Handia|2017|Jon Garaño / Aitor Arregi|España|D,Bio,H|7.6
+Salvador (Puig Antich)|Salvador (Puig Antich)|2006|Manuel Huerga|España|D,Bio,H|7.6
+Ciudad de Dios|City of God|2002|Fernando Meirelles / Kátia Lund|Brasil|Cr,D|9.1
+Heat|Heat|1995|Michael Mann|Estados Unidos|Cr,Th,A|9.0
+Collateral|Collateral|2004|Michael Mann|Estados Unidos|Th,Cr,A|8.1
+L.A. Confidential|L.A. Confidential|1997|Curtis Hanson|Estados Unidos|Cr,Th,Mi|8.7
+No es país para viejos|No Country for Old Men|2007|Joel Coen / Ethan Coen|Estados Unidos|Th,Cr,W|8.9
+El gran Lebowski|The Big Lebowski|1998|Joel Coen / Ethan Coen|Estados Unidos|C,Cr|8.6
+Muerte entre las flores|Miller's Crossing|1990|Joel Coen / Ethan Coen|Estados Unidos|Cr,D,Th|8.3
+O Brother!|O Brother, Where Art Thou?|2000|Joel Coen / Ethan Coen|Estados Unidos|C,Av,M|7.9
+Chinatown|Chinatown|1974|Roman Polanski|Estados Unidos|Mi,Th,Cr|8.8
+The French Connection|The French Connection|1971|William Friedkin|Estados Unidos|Cr,A,Th|8.3
+Tarde de perros|Dog Day Afternoon|1975|Sidney Lumet|Estados Unidos|Cr,D,Th|8.7
+Network, un mundo implacable|Network|1976|Sidney Lumet|Estados Unidos|D,C|8.6
+Serpico|Serpico|1973|Sidney Lumet|Estados Unidos|Cr,Bio,D|8.2
+La ventana indiscreta|Rear Window|1954|Alfred Hitchcock|Estados Unidos|Th,Mi|9.1
+Vértigo|Vertigo|1958|Alfred Hitchcock|Estados Unidos|Th,Mi,R|8.9
+Con la muerte en los talones|North by Northwest|1959|Alfred Hitchcock|Estados Unidos|Th,Av,Mi|8.8
+El crepúsculo de los dioses|Sunset Boulevard|1950|Billy Wilder|Estados Unidos|D,Cr|9.0
+Perdición|Double Indemnity|1944|Billy Wilder|Estados Unidos|Cr,Th|8.9
+El apartamento|The Apartment|1960|Billy Wilder|Estados Unidos|C,R,D|9.0
+Con faldas y a lo loco|Some Like It Hot|1959|Billy Wilder|Estados Unidos|C,R|8.9
+Ciudadano Kane|Citizen Kane|1941|Orson Welles|Estados Unidos|D,Mi|8.9
+Lawrence de Arabia|Lawrence of Arabia|1962|David Lean|Reino Unido|Av,B,Bio|9.0
+Hasta que llegó su hora|Once Upon a Time in the West|1968|Sergio Leone|Italia|W|9.1
+La muerte tenía un precio|For a Few Dollars More|1965|Sergio Leone|Italia|W,A|8.7
+Érase una vez en América|Once Upon a Time in America|1984|Sergio Leone|Estados Unidos|Cr,D|9.0
+Sin perdón|Unforgiven|1992|Clint Eastwood|Estados Unidos|W,D|8.9
+Cinema Paradiso|Nuovo Cinema Paradiso|1988|Giuseppe Tornatore|Italia|D,R|9.0
+Amélie|Le Fabuleux Destin d'Amélie Poulain|2001|Jean-Pierre Jeunet|Francia|C,R,F|8.6
+El odio|La Haine|1995|Mathieu Kassovitz|Francia|D,Cr|8.5
+León: El profesional|Léon|1994|Luc Besson|Francia|A,Cr,D|9.0
+El quinto elemento|The Fifth Element|1997|Luc Besson|Francia|CF,A,Av|7.8
+Anatomía de una caída|Anatomie d'une chute|2023|Justine Triet|Francia|D,Th,Mi|8.2
+La vida de los otros|Das Leben der Anderen|2006|Florian Henckel von Donnersmarck|Alemania|D,Th,H|9.0
+El hundimiento|Der Untergang|2004|Oliver Hirschbiegel|Alemania|B,H,Bio|8.7
+El submarino|Das Boot|1981|Wolfgang Petersen|Alemania|B,D,Av|8.8
+Corre, Lola, corre|Lola rennt|1998|Tom Tykwer|Alemania|Th,Cr|7.8
+Sin novedad en el frente|All Quiet on the Western Front|2022|Edward Berger|Alemania|B,D|8.1
+Cónclave|Conclave|2024|Edward Berger|Reino Unido|Th,Mi,D|8.2
+Celebración|Festen|1998|Thomas Vinterberg|Dinamarca|D|8.3
+Déjame entrar|Låt den rätte komma in|2008|Tomas Alfredson|Suecia|T,R,D|8.2
+Snatch: Cerdos y diamantes|Snatch|2000|Guy Ritchie|Reino Unido|Cr,C|8.4
+Lock & Stock|Lock, Stock and Two Smoking Barrels|1998|Guy Ritchie|Reino Unido|Cr,C|8.2
+Arma fatal|Hot Fuzz|2007|Edgar Wright|Reino Unido|A,C,Mi|8.2
+Baby Driver|Baby Driver|2017|Edgar Wright|Reino Unido|A,Cr,M|7.8
+Escondidos en Brujas|In Bruges|2008|Martin McDonagh|Reino Unido|C,Cr,D|8.4
+Tres anuncios en las afueras|Three Billboards Outside Ebbing, Missouri|2017|Martin McDonagh|Reino Unido|D,Cr,C|8.5
+Almas en pena de Inisherin|The Banshees of Inisherin|2022|Martin McDonagh|Irlanda|D,C|8.1
+Hijos de los hombres|Children of Men|2006|Alfonso Cuarón|Reino Unido|CF,Th,D|8.6
+Gravity|Gravity|2013|Alfonso Cuarón|Estados Unidos|CF,Th|8.0
+Roma|Roma|2018|Alfonso Cuarón|México|D|8.2
+Amores perros|Amores perros|2000|Alejandro González Iñárritu|México|D,Th,Cr|8.3
+28 días después|28 Days Later|2002|Danny Boyle|Reino Unido|T,CF,Th|8.0
+28 años después|28 Years Later|2025|Danny Boyle|Reino Unido|T,CF,Th|7.6
+Slumdog Millionaire|Slumdog Millionaire|2008|Danny Boyle|Reino Unido|D,R|8.1
+Moon|Moon|2009|Duncan Jones|Reino Unido|CF,D,Mi|8.3
+Código fuente|Source Code|2011|Duncan Jones|Estados Unidos|CF,Th,Mi|7.8
+Ex Machina|Ex Machina|2014|Alex Garland|Reino Unido|CF,Th|8.2
+Aniquilación|Annihilation|2018|Alex Garland|Reino Unido|CF,T,Mi|7.6
+Civil War|Civil War|2024|Alex Garland|Estados Unidos|A,Th,B|7.8
+Warfare. Tiempo de guerra|Warfare|2025|Alex Garland / Ray Mendoza|Estados Unidos|B,A|7.8
+La zona de interés|The Zone of Interest|2023|Jonathan Glazer|Reino Unido|D,H,B|8.3
+Aftersun|Aftersun|2022|Charlotte Wells|Reino Unido|D|8.4
+Primer|Primer|2004|Shane Carruth|Estados Unidos|CF,Th,Mi|7.9
+Predestination|Predestination|2014|Michael Spierig / Peter Spierig|Australia|CF,Th,Mi|8.0
+Donnie Darko|Donnie Darko|2001|Richard Kelly|Estados Unidos|CF,Th,Mi|8.1
+¡Olvídate de mí!|Eternal Sunshine of the Spotless Mind|2004|Michel Gondry|Estados Unidos|R,CF,D|8.8
+Gattaca|Gattaca|1997|Andrew Niccol|Estados Unidos|CF,Th,D|8.1
+Al filo del mañana|Edge of Tomorrow|2014|Doug Liman|Estados Unidos|CF,A|8.0
+District 9|District 9|2009|Neill Blomkamp|Sudáfrica|CF,A,Th|8.0
+Contact|Contact|1997|Robert Zemeckis|Estados Unidos|CF,D,Mi|8.0
+Regreso al futuro|Back to the Future|1985|Robert Zemeckis|Estados Unidos|CF,Av,C|9.2
+La cosa|The Thing|1982|John Carpenter|Estados Unidos|T,CF,Mi|8.8
+La noche de Halloween (1978)|Halloween|1978|John Carpenter|Estados Unidos|T,Th|8.1
+Terminator 2: El juicio final|Terminator 2: Judgment Day|1991|James Cameron|Estados Unidos|CF,A|9.0
+Aliens: El regreso|Aliens|1986|James Cameron|Estados Unidos|CF,A,T|8.7
+Titanic|Titanic|1997|James Cameron|Estados Unidos|R,D,H|8.5
+La semilla del diablo|Rosemary's Baby|1968|Roman Polanski|Estados Unidos|T,Mi,D|8.5
+Babadook|The Babadook|2014|Jennifer Kent|Australia|T,D|7.6
+Háblame|Talk to Me|2022|Danny Philippou / Michael Philippou|Australia|T,Th|7.8
+Devuélvemela|Bring Her Back|2025|Danny Philippou / Michael Philippou|Australia|T,D|7.8
+Barbarian|Barbarian|2022|Zach Cregger|Estados Unidos|T,Th,Mi|7.6
+El descenso|The Descent|2005|Neil Marshall|Reino Unido|T,Av|7.6
+Late Night with the Devil|Late Night with the Devil|2023|Cameron Cairnes / Colin Cairnes|Australia|T|7.6
+Oddity|Oddity|2024|Damian McCarthy|Irlanda|T,Mi|7.6
+Los pecadores|Sinners|2025|Ryan Coogler|Estados Unidos|T,A,D|8.6
+Nosferatu|Nosferatu|2024|Robert Eggers|Estados Unidos|T,F|7.8
+Longlegs|Longlegs|2024|Osgood Perkins|Estados Unidos|T,Th,Cr|7.2
+La autopsia de Jane Doe|The Autopsy of Jane Doe|2016|André Øvredal|Reino Unido|T,Mi|7.5
+La niebla|The Mist|2007|Frank Darabont|Estados Unidos|T,CF|7.8
+La milla verde|The Green Mile|1999|Frank Darabont|Estados Unidos|D,F,Cr|9.2
+Gladiator|Gladiator|2000|Ridley Scott|Reino Unido|A,H,D|9.0
+Braveheart|Braveheart|1995|Mel Gibson|Estados Unidos|H,B,D|8.6
+Una mente maravillosa|A Beautiful Mind|2001|Ron Howard|Estados Unidos|Bio,D|8.4
+Rush|Rush|2013|Ron Howard|Reino Unido|Bio,D,A|8.2
+En busca de la felicidad|The Pursuit of Happyness|2006|Gabriele Muccino|Estados Unidos|D,Bio|8.1
+Esencia de mujer|Scent of a Woman|1992|Martin Brest|Estados Unidos|D|8.3
+El hombre elefante|The Elephant Man|1980|David Lynch|Reino Unido|D,Bio|8.6
+Mulholland Drive|Mulholland Drive|2001|David Lynch|Estados Unidos|Mi,Th,D|8.4
+Amadeus|Amadeus|1984|Miloš Forman|Estados Unidos|Bio,D,M|9.0
+El cazador|The Deer Hunter|1978|Michael Cimino|Estados Unidos|B,D|8.6
+Ven y mira|Come and See|1985|Elem Klímov|Unión Soviética|B,D|9.0
+Cartas desde Iwo Jima|Letters from Iwo Jima|2006|Clint Eastwood|Estados Unidos|B,D,H|8.3
+Black Hawk derribado|Black Hawk Down|2001|Ridley Scott|Estados Unidos|B,A|8.0
+Pozos de ambición|There Will Be Blood|2007|Paul Thomas Anderson|Estados Unidos|D|9.0
+Magnolia|Magnolia|1999|Paul Thomas Anderson|Estados Unidos|D|8.5
+Una batalla tras otra|One Battle After Another|2025|Paul Thomas Anderson|Estados Unidos|A,Th,C|8.9
+El Gran Hotel Budapest|The Grand Budapest Hotel|2014|Wes Anderson|Estados Unidos|C,Av,Cr|8.7
+Fantástico Sr. Fox|Fantastic Mr. Fox|2009|Wes Anderson|Estados Unidos|An,C,Av|8.4
+Atrapado en el tiempo|Groundhog Day|1993|Harold Ramis|Estados Unidos|C,F,R|8.6
+Pequeña Miss Sunshine|Little Miss Sunshine|2006|Jonathan Dayton / Valerie Faris|Estados Unidos|C,D|8.4
+Lo que hacemos en las sombras|What We Do in the Shadows|2014|Taika Waititi / Jemaine Clement|Nueva Zelanda|C,T|8.0
+¡Aterriza como puedas!|Airplane!|1980|Jim Abrahams / David Zucker / Jerry Zucker|Estados Unidos|C|8.3
+La vida de Brian|Life of Brian|1979|Terry Jones|Reino Unido|C|8.6
+Palm Springs|Palm Springs|2020|Max Barbakow|Estados Unidos|C,R,CF|7.8
+Noche de juegos|Game Night|2018|John Francis Daley / Jonathan Goldstein|Estados Unidos|C,Cr,Mi|7.6
+Almas en pena|The Holdovers|2023|Alexander Payne|Estados Unidos|C,D|8.4
+La gran apuesta|The Big Short|2015|Adam McKay|Estados Unidos|Bio,C,D|8.2
+Moneyball: Rompiendo las reglas|Moneyball|2011|Bennett Miller|Estados Unidos|Bio,D|8.1
+Le Mans '66|Ford v Ferrari|2019|James Mangold|Estados Unidos|Bio,D,A|8.3
+Top Gun: Maverick|Top Gun: Maverick|2022|Joseph Kosinski|Estados Unidos|A,D|8.6
+Misión Imposible: Fallout|Mission: Impossible – Fallout|2018|Christopher McQuarrie|Estados Unidos|A,Th,Av|8.4
+Misión Imposible: Sentencia final|Mission: Impossible – The Final Reckoning|2025|Christopher McQuarrie|Estados Unidos|A,Th,Av|7.8
+John Wick|John Wick|2014|Chad Stahelski|Estados Unidos|A,Th,Cr|7.8
+El camino de los sueños|Big Fish|2003|Tim Burton|Estados Unidos|F,D,Av|8.3
+Eduardo Manostijeras|Edward Scissorhands|1990|Tim Burton|Estados Unidos|F,R,D|8.3
+Los intocables de Eliot Ness|The Untouchables|1987|Brian De Palma|Estados Unidos|Cr,H,Th|8.3
+Atrapado por su pasado|Carlito's Way|1993|Brian De Palma|Estados Unidos|Cr,D,Th|8.3
+Donnie Brasco|Donnie Brasco|1997|Mike Newell|Estados Unidos|Cr,D,Bio|8.1
+Camino a la perdición|Road to Perdition|2002|Sam Mendes|Estados Unidos|Cr,D,Th|8.1
+American Gangster|American Gangster|2007|Ridley Scott|Estados Unidos|Cr,Bio,D|8.0
+The Town: Ciudad de ladrones|The Town|2010|Ben Affleck|Estados Unidos|Cr,Th,A|7.9
+Adiós, pequeña, adiós|Gone Baby Gone|2007|Ben Affleck|Estados Unidos|Cr,Mi,D|8.0
+Comanchería|Hell or High Water|2016|David Mackenzie|Estados Unidos|Cr,Th,W|8.1
+Wind River|Wind River|2017|Taylor Sheridan|Estados Unidos|Th,Cr,Mi|8.0
+Diamantes en bruto|Uncut Gems|2019|Josh Safdie / Benny Safdie|Estados Unidos|Th,Cr,D|7.8
+Marty Supreme|Marty Supreme|2025|Josh Safdie|Estados Unidos|D,C|8.3
+Moonlight|Moonlight|2016|Barry Jenkins|Estados Unidos|D|8.2
+Historia de un matrimonio|Marriage Story|2019|Noah Baumbach|Estados Unidos|D,C|8.2
+Vidas pasadas|Past Lives|2023|Celine Song|Estados Unidos|R,D|8.4
+Anora|Anora|2024|Sean Baker|Estados Unidos|C,D,R|8.2
+The Brutalist|The Brutalist|2024|Brady Corbet|Estados Unidos|D,H|8.0
+Pobres criaturas|Poor Things|2023|Yorgos Lanthimos|Reino Unido|C,CF,R|8.1
+Bugonia|Bugonia|2025|Yorgos Lanthimos|Irlanda|C,CF,Th|7.9
+Valor sentimental|Sentimental Value|2025|Joachim Trier|Noruega|D,C|8.4
+La peor persona del mundo|The Worst Person in the World|2021|Joachim Trier|Noruega|C,D,R|8.0
+12 años de esclavitud|12 Years a Slave|2013|Steve McQueen|Estados Unidos|D,Bio,H|8.4
+El discurso del rey|The King's Speech|2010|Tom Hooper|Reino Unido|Bio,D,H|8.3
+En tierra hostil|The Hurt Locker|2008|Kathryn Bigelow|Estados Unidos|B,Th,D|7.9
+Annie Hall|Annie Hall|1977|Woody Allen|Estados Unidos|C,R|8.3
+Midnight in Paris|Midnight in Paris|2011|Woody Allen|Estados Unidos|C,R,F|7.9
+Rocketman|Rocketman|2019|Dexter Fletcher|Reino Unido|Bio,M,D|7.5
+Elvis|Elvis|2022|Baz Luhrmann|Estados Unidos|Bio,M,D|7.6
+Wicked|Wicked|2024|Jon M. Chu|Estados Unidos|M,F,R|7.8
+A Complete Unknown|A Complete Unknown|2024|James Mangold|Estados Unidos|Bio,M,D|7.8
+Coraline|Coraline|2009|Henry Selick|Estados Unidos|An,F,T|8.1
+Mary and Max|Mary and Max|2009|Adam Elliot|Australia|An,D,C|8.6
+Los Mitchell contra las máquinas|The Mitchells vs. the Machines|2021|Mike Rianda|Estados Unidos|An,C,CF|8.1
+El Gato con Botas: El último deseo|Puss in Boots: The Last Wish|2022|Joel Crawford|Estados Unidos|An,Av,C|8.1
+Robot salvaje|The Wild Robot|2024|Chris Sanders|Estados Unidos|An,CF,Fa|8.3
+Flow, un mundo que salvar|Flow|2024|Gints Zilbalodis|Letonia|An,Av,F|8.2
+Las guerreras K-pop|KPop Demon Hunters|2025|Maggie Kang / Chris Appelhans|Estados Unidos|An,M,A|7.9
+Superman|Superman|2025|James Gunn|Estados Unidos|S,A,Av|7.4
+Los Increíbles 2|Incredibles 2|2018|Brad Bird|Estados Unidos|An,S,A|7.6
+Logan|Logan|2017|James Mangold|Estados Unidos|S,A,D|8.3
+X-Men: Días del futuro pasado|X-Men: Days of Future Past|2014|Bryan Singer|Estados Unidos|S,CF,A|7.9
+Watchmen|Watchmen|2009|Zack Snyder|Estados Unidos|S,Mi,A|7.6
+Frost/Nixon|Frost/Nixon|2008|Ron Howard|Reino Unido|D,H,Bio|7.8
+Siete almas|Seven Pounds|2008|Gabriele Muccino|Estados Unidos|D,R|7.6
+Algunos hombres buenos|A Few Good Men|1992|Rob Reiner|Estados Unidos|D,Th|8.0
+Cuenta conmigo|Stand by Me|1986|Rob Reiner|Estados Unidos|Av,D,C|8.4
+La princesa prometida|The Princess Bride|1987|Rob Reiner|Estados Unidos|Av,F,R|8.3

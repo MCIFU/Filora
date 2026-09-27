@@ -1,0 +1,3228 @@
+{
+ "Dune: Part Two|2024": {
+  "ids": {
+   "wikidata": "Q109228991",
+   "imdb": "tt15239678",
+   "filmaffinity": "180929",
+   "rt": "m/dune_part_two",
+   "letterboxd": "dune-part-two",
+   "tmdb": "693134",
+   "allocine": "278742"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/52/Dune_Part_Two_poster.jpeg"
+ },
+ "Prisoners|2013": {
+  "ids": {
+   "wikidata": "Q3404003",
+   "imdb": "tt1392214",
+   "filmaffinity": "276566",
+   "rt": "m/prisoners_2013",
+   "letterboxd": "prisoners",
+   "tmdb": "146233",
+   "allocine": "180887"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/63/Prisoners2013Poster.jpg"
+ },
+ "Sicario|2015": {
+  "ids": {
+   "wikidata": "Q17337292",
+   "imdb": "tt3397884",
+   "filmaffinity": "484192",
+   "rt": "m/sicario_2015",
+   "letterboxd": "sicario-2015",
+   "tmdb": "273481",
+   "allocine": "228114"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4b/Sicario_poster.jpg"
+ },
+ "Incendies|2010": {
+  "ids": {
+   "wikidata": "Q1212650",
+   "imdb": "tt1255953",
+   "filmaffinity": "551964",
+   "rt": "m/incendies",
+   "letterboxd": "incendies",
+   "tmdb": "46738",
+   "allocine": "179349"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a0/Incendies.jpg"
+ },
+ "Enemy|2013": {
+  "ids": {
+   "wikidata": "Q2844879",
+   "imdb": "tt2316411",
+   "filmaffinity": "617900",
+   "rt": "m/enemy_2013",
+   "letterboxd": "enemy",
+   "tmdb": "181886",
+   "allocine": "205131"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/0d/Enemy_poster.jpg"
+ },
+ "Following|1998": {
+  "ids": {
+   "wikidata": "Q685817",
+   "imdb": "tt0154506",
+   "filmaffinity": "642855",
+   "rt": "m/following",
+   "letterboxd": "following",
+   "tmdb": "11660",
+   "allocine": "21632"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/55/Following_film_poster.jpg"
+ },
+ "Insomnia|2002": {
+  "ids": {
+   "wikidata": "Q429969",
+   "imdb": "tt0278504",
+   "filmaffinity": "329292",
+   "rt": "m/1114154-insomnia",
+   "letterboxd": "insomnia-2002",
+   "tmdb": "320",
+   "allocine": "32704"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/7c/Insomnia2002Poster.jpg"
+ },
+ "Jackie Brown|1997": {
+  "ids": {
+   "wikidata": "Q431252",
+   "imdb": "tt0119396",
+   "filmaffinity": "895044",
+   "rt": "m/jackie_brown",
+   "letterboxd": "jackie-brown",
+   "tmdb": "184",
+   "allocine": "16876"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/89/Jackie_Brown_%281997%29.png"
+ },
+ "Kill Bill: Volume 2|2004": {
+  "ids": {
+   "wikidata": "Q928019",
+   "imdb": "tt0378194",
+   "filmaffinity": "968175",
+   "rt": "m/kill_bill_volume_2",
+   "letterboxd": "kill-bill-vol-2",
+   "tmdb": "393",
+   "allocine": "53879"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c4/Kill_Bill_Volume_2.png"
+ },
+ "Death Proof|2007": {
+  "ids": {
+   "wikidata": "Q1137310",
+   "imdb": "tt1028528",
+   "filmaffinity": "745914",
+   "rt": "m/death_proof",
+   "letterboxd": "death-proof",
+   "tmdb": "1991",
+   "allocine": "108247"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b4/Death_Proof_USA_Poster.png"
+ },
+ "Casino|1995": {
+  "ids": {
+   "wikidata": "Q220910",
+   "imdb": "tt0112641",
+   "filmaffinity": "765048",
+   "rt": "m/1067987-casino",
+   "letterboxd": "casino",
+   "tmdb": "524",
+   "allocine": "14178"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/cb/Casino_%28Martins_Scorsese_film%29.png"
+ },
+ "The King of Comedy|1982": {
+  "ids": {
+   "wikidata": "Q1122281",
+   "imdb": "tt0085794",
+   "filmaffinity": "611397",
+   "rt": "m/1011623-king_of_comedy",
+   "letterboxd": "the-king-of-comedy",
+   "tmdb": "262",
+   "allocine": "1008"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/84/Kingofcomedy.jpg"
+ },
+ "Killers of the Flower Moon|2023": {
+  "ids": {
+   "wikidata": "Q66316924",
+   "imdb": "tt5537002",
+   "filmaffinity": "970587",
+   "rt": "m/killers_of_the_flower_moon",
+   "letterboxd": "killers-of-the-flower-moon",
+   "tmdb": "466420",
+   "allocine": "245813"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/88/Killers_of_the_Flower_Moon_film_poster.jpg"
+ },
+ "The Aviator|2004": {
+  "ids": {
+   "wikidata": "Q201924",
+   "imdb": "tt0338751",
+   "filmaffinity": "753145",
+   "rt": "m/aviator",
+   "letterboxd": "the-aviator",
+   "tmdb": "2567",
+   "allocine": "48371"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/fa/The_Aviator_%282004%29.png"
+ },
+ "Gangs of New York|2002": {
+  "ids": {
+   "wikidata": "Q154581",
+   "imdb": "tt0217505",
+   "filmaffinity": "478154",
+   "rt": "m/gangs_of_new_york",
+   "letterboxd": "gangs-of-new-york-2002",
+   "tmdb": "3131",
+   "allocine": "28968"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/ae/Gangs_of_New_York_Poster.jpg"
+ },
+ "Mean Streets|1973": {
+  "ids": {
+   "wikidata": "Q841335",
+   "imdb": "tt0070379",
+   "filmaffinity": "467712",
+   "rt": "m/mean_streets",
+   "letterboxd": "mean-streets",
+   "tmdb": "203",
+   "allocine": "236"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/26/Mean_Streets_original_1973_theatrical_poster.png"
+ },
+ "The Game|1997": {
+  "ids": {
+   "wikidata": "Q723187",
+   "imdb": "tt0119174",
+   "filmaffinity": "550790",
+   "rt": "m/the_game",
+   "letterboxd": "the-game",
+   "tmdb": "2649",
+   "allocine": "9325"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/22/The_Game_film_poster.jpg"
+ },
+ "The Girl with the Dragon Tattoo|2011": {
+  "ids": {
+   "wikidata": "Q474093",
+   "imdb": "tt1568346",
+   "filmaffinity": "145687",
+   "rt": "m/the_girl_with_the_dragon_tattoo",
+   "letterboxd": "the-girl-with-the-dragon-tattoo-2011",
+   "tmdb": "65754",
+   "allocine": "178974"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/80/The_Girl_with_the_Dragon_Tattoo_Poster.jpg"
+ },
+ "The Curious Case of Benjamin Button|2008": {
+  "ids": {
+   "wikidata": "Q183239",
+   "imdb": "tt0421715",
+   "filmaffinity": "360471",
+   "rt": "m/curious_case_of_benjamin_button",
+   "letterboxd": "the-curious-case-of-benjamin-button",
+   "tmdb": "4922",
+   "allocine": "57060"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/7c/The_Curious_Case_of_Benjamin_Button_%28film%29.png"
+ },
+ "The Killer|2023": {
+  "ids": {
+   "wikidata": "Q111008873",
+   "imdb": "tt1136617",
+   "filmaffinity": "327962",
+   "rt": "m/the_killer_2023",
+   "letterboxd": "the-killer-2023",
+   "tmdb": "800158",
+   "allocine": "290655"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/32/The_Killer_2023_poster.jpg"
+ },
+ "The Conversation|1974": {
+  "ids": {
+   "wikidata": "Q1009788",
+   "imdb": "tt0071360",
+   "filmaffinity": "963644",
+   "rt": "m/the_conversation",
+   "letterboxd": "the-conversation",
+   "tmdb": "592",
+   "allocine": "9955"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e0/Theconversation.jpg"
+ },
+ "Catch Me If You Can|2002": {
+  "ids": {
+   "wikidata": "Q208108",
+   "imdb": "tt0264464",
+   "filmaffinity": "264309",
+   "rt": "m/catch_me_if_you_can",
+   "letterboxd": "catch-me-if-you-can-2002",
+   "tmdb": "640",
+   "allocine": "35973"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4d/Catch_Me_If_You_Can_2002_movie.jpg"
+ },
+ "Minority Report|2002": {
+  "ids": {
+   "wikidata": "Q244604",
+   "imdb": "tt0181689",
+   "filmaffinity": "660421",
+   "rt": "m/minority_report",
+   "letterboxd": "minority-report",
+   "tmdb": "180",
+   "allocine": "34917"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/44/Minority_Report_Poster.jpg"
+ },
+ "Munich|2005": {
+  "ids": {
+   "wikidata": "Q152456",
+   "imdb": "tt0408306",
+   "filmaffinity": "764214",
+   "rt": "m/munich",
+   "letterboxd": "munich",
+   "tmdb": "612",
+   "allocine": "57432"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/08/Munich_1_Poster.jpg"
+ },
+ "Close Encounters of the Third Kind|1977": {
+  "ids": {
+   "wikidata": "Q320588",
+   "imdb": "tt0075860",
+   "filmaffinity": "941282",
+   "rt": "m/close_encounters_of_the_third_kind",
+   "letterboxd": "close-encounters-of-the-third-kind",
+   "tmdb": "840",
+   "allocine": "881"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/ba/Close_Encounters_of_the_Third_Kind_%281977%29_theatrical_poster.jpg"
+ },
+ "Bridge of Spies|2015": {
+  "ids": {
+   "wikidata": "Q18067135",
+   "imdb": "tt3682448",
+   "filmaffinity": "255419",
+   "rt": "m/bridge_of_spies",
+   "letterboxd": "bridge-of-spies",
+   "tmdb": "296098",
+   "allocine": "228473"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/fa/Bridge_of_Spies_poster.jpg"
+ },
+ "Indiana Jones and the Last Crusade|1989": {
+  "ids": {
+   "wikidata": "Q185658",
+   "imdb": "tt0097576",
+   "filmaffinity": "883980",
+   "rt": "m/indiana_jones_and_the_last_crusade",
+   "letterboxd": "indiana-jones-and-the-last-crusade",
+   "tmdb": "89",
+   "allocine": "5032"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/8c/Indiana_Jones_and_the_Last_Crusade.png"
+ },
+ "The Fabelmans|2022": {
+  "ids": {
+   "wikidata": "Q107710009",
+   "imdb": "tt14208870",
+   "filmaffinity": "216826",
+   "rt": "m/the_fabelmans",
+   "letterboxd": "the-fabelmans",
+   "tmdb": "804095",
+   "allocine": "255726"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/ba/Fabelmansposter.jpeg"
+ },
+ "2001: A Space Odyssey|1968": {
+  "ids": {
+   "wikidata": "Q103474",
+   "imdb": "tt0062622",
+   "filmaffinity": "171099",
+   "rt": "m/2001_a_space_odyssey",
+   "letterboxd": "2001-a-space-odyssey",
+   "tmdb": "62",
+   "allocine": "27442"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/11/2001_A_Space_Odyssey_%281968%29.png"
+ },
+ "Full Metal Jacket|1987": {
+  "ids": {
+   "wikidata": "Q243439",
+   "imdb": "tt0093058",
+   "filmaffinity": "462892",
+   "rt": "m/full_metal_jacket",
+   "letterboxd": "full-metal-jacket",
+   "tmdb": "600",
+   "allocine": "2749"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/99/Full_Metal_Jacket_poster.jpg"
+ },
+ "Paths of Glory|1957": {
+  "ids": {
+   "wikidata": "Q747936",
+   "imdb": "tt0050825",
+   "filmaffinity": "448956",
+   "rt": "m/paths_of_glory",
+   "letterboxd": "paths-of-glory",
+   "tmdb": "975",
+   "allocine": "4499"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Paths_of_Glory_%281957_poster%29.jpg/500px-Paths_of_Glory_%281957_poster%29.jpg"
+ },
+ "Dr. Strangelove|1964": {
+  "ids": {
+   "wikidata": "Q105702",
+   "imdb": "tt0057012",
+   "filmaffinity": "479847",
+   "rt": "m/dr_strangelove",
+   "letterboxd": "dr-strangelove-or-how-i-learned-to-stop-worrying-and-love-the-bomb",
+   "tmdb": "935",
+   "allocine": "680"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e6/Dr._Strangelove_poster.jpg"
+ },
+ "Barry Lyndon|1975": {
+  "ids": {
+   "wikidata": "Q471716",
+   "imdb": "tt0072684",
+   "filmaffinity": "921503",
+   "rt": "m/barry_lyndon",
+   "letterboxd": "barry-lyndon",
+   "tmdb": "3175",
+   "allocine": "135"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/ee/Barry_Lyndon_A.jpg"
+ },
+ "Nausicaä of the Valley of the Wind|1984": {
+  "ids": {
+   "wikidata": "Q8885676",
+   "imdb": "tt0087544",
+   "filmaffinity": "313630",
+   "rt": "m/nausicaa_of_the_valley_of_the_wind",
+   "letterboxd": "nausicaa-of-the-valley-of-the-wind",
+   "tmdb": "81",
+   "allocine": "40132"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/bc/Nausicaaposter.jpg"
+ },
+ "Porco Rosso|1992": {
+  "ids": {
+   "wikidata": "Q498375",
+   "imdb": "tt0104652",
+   "filmaffinity": "169128",
+   "rt": "m/porco_rosso",
+   "letterboxd": "porco-rosso",
+   "tmdb": "11621",
+   "allocine": "10257"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/fc/Porco_Rosso_%28Movie_Poster%29.jpg"
+ },
+ "Castle in the Sky|1986": {
+  "ids": {
+   "wikidata": "Q498577",
+   "imdb": "tt0092067",
+   "filmaffinity": "360886",
+   "rt": "m/castle_in_the_sky",
+   "letterboxd": "castle-in-the-sky",
+   "tmdb": "10515",
+   "allocine": "40133"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/f5/Castle_in_the_Sky_%281986%29.png"
+ },
+ "The Boy and the Heron|2023": {
+  "ids": {
+   "wikidata": "Q47482560",
+   "imdb": "tt6587046",
+   "filmaffinity": "489419",
+   "rt": "m/the_boy_and_the_heron",
+   "letterboxd": "the-boy-and-the-heron",
+   "tmdb": "508883",
+   "allocine": "184989"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/41/How_Do_You_Live_poster.jpg"
+ },
+ "The Tale of the Princess Kaguya|2013": {
+  "ids": {
+   "wikidata": "Q888136",
+   "imdb": "tt2576852",
+   "filmaffinity": "931294",
+   "rt": "m/the_tale_of_the_princess_kaguya",
+   "letterboxd": "the-tale-of-the-princess-kaguya",
+   "tmdb": "149871",
+   "allocine": "173271"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/68/The_Tale_of_the_Princess_Kaguya_%28poster%29.jpg"
+ },
+ "Whisper of the Heart|1995": {
+  "ids": {
+   "wikidata": "Q842292",
+   "imdb": "tt0113824",
+   "filmaffinity": "920920",
+   "rt": "m/whisper-of-the-heart",
+   "letterboxd": "whisper-of-the-heart",
+   "tmdb": "37797",
+   "allocine": "182758"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/93/Whisper_of_the_Heart_%28Movie_Poster%29.jpg"
+ },
+ "Paprika|2006": {
+  "ids": {
+   "wikidata": "Q578595",
+   "imdb": "tt0851578",
+   "filmaffinity": "292688",
+   "rt": "m/paprika",
+   "letterboxd": "paprika-2006",
+   "tmdb": "4977",
+   "allocine": "115013"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/16/Paprikaposter.jpg"
+ },
+ "Millennium Actress|2001": {
+  "ids": {
+   "wikidata": "Q939736",
+   "imdb": "tt0291350",
+   "filmaffinity": "350880",
+   "rt": "m/millennium_actress_2001",
+   "letterboxd": "millennium-actress",
+   "tmdb": "33320",
+   "allocine": "41241"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/ee/Sennenyoyu.jpg"
+ },
+ "Tokyo Godfathers|2003": {
+  "ids": {
+   "wikidata": "Q917278",
+   "imdb": "tt0388473",
+   "filmaffinity": "344692",
+   "rt": "m/tokyo_godfathers",
+   "letterboxd": "tokyo-godfathers",
+   "tmdb": "13398",
+   "allocine": "55142"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/ef/Tokyo_Godfathers_%28Movie_Poster%29.jpg"
+ },
+ "Suzume|2022": {
+  "ids": {
+   "wikidata": "Q110126272",
+   "imdb": "tt16428256",
+   "filmaffinity": "346943",
+   "rt": "m/suzume",
+   "letterboxd": "suzume",
+   "tmdb": "916224",
+   "allocine": "299413"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/7f/Suzume_no_Tojimari_poster.jpg"
+ },
+ "The Girl Who Leapt Through Time|2006": {
+  "ids": {
+   "wikidata": "Q336012",
+   "imdb": "tt0808506",
+   "filmaffinity": "830046",
+   "rt": "m/the_girl_who_leapt_through_time",
+   "letterboxd": "the-girl-who-leapt-through-time",
+   "tmdb": "14069",
+   "allocine": "128739"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4e/The_Girl_Who_Leapt_Through_Time_poster.jpg"
+ },
+ "Summer Wars|2009": {
+  "ids": {
+   "wikidata": "Q715526",
+   "imdb": "tt1474276",
+   "filmaffinity": "222123",
+   "rt": "m/summer-wars",
+   "letterboxd": "summer-wars",
+   "tmdb": "28874",
+   "allocine": "177581"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/7d/Summer_Wars_poster.jpg"
+ },
+ "Ghost in the Shell|1995": {
+  "ids": {
+   "wikidata": "Q1066948",
+   "imdb": "tt0113568",
+   "filmaffinity": "523268",
+   "rt": "m/ghost_in_the_shell",
+   "letterboxd": "ghost-in-the-shell",
+   "tmdb": "9323",
+   "allocine": "15254"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/ca/Ghostintheshellposter.jpg"
+ },
+ "A Silent Voice|2016": {
+  "ids": {
+   "wikidata": "Q23925035",
+   "imdb": "tt5323662",
+   "filmaffinity": "275064",
+   "rt": "m/a_silent_voice",
+   "letterboxd": "a-silent-voice-the-movie",
+   "tmdb": "378064",
+   "allocine": "254955"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/32/A_Silent_Voice_Film_Poster.jpg"
+ },
+ "The First Slam Dunk|2022": {
+  "ids": {
+   "wikidata": "Q112897629",
+   "imdb": "tt15242330",
+   "filmaffinity": "885798",
+   "rt": "m/the_first_slam_dunk",
+   "letterboxd": "the-first-slam-dunk",
+   "tmdb": "783675",
+   "allocine": "306133"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/ac/The_First_Slam_Dunk_Poster.jpg"
+ },
+ "Memories of Murder|2003": {
+  "ids": {
+   "wikidata": "Q488169",
+   "imdb": "tt0353969",
+   "filmaffinity": "712766",
+   "rt": "m/memories_of_murder_2003",
+   "letterboxd": "memories-of-murder",
+   "tmdb": "11423",
+   "allocine": "55483"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/01/Salinui-chueok-south-korean-movie-poster-md.jpg"
+ },
+ "Mother|2009": {
+  "ids": {
+   "wikidata": "Q483761",
+   "imdb": "tt1216496",
+   "filmaffinity": "214125",
+   "rt": "m/madeo",
+   "letterboxd": "mother-2009",
+   "tmdb": "30018",
+   "allocine": "135521"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/80/Mother_film_poster.jpg"
+ },
+ "Snowpiercer|2013": {
+  "ids": {
+   "wikidata": "Q492908",
+   "imdb": "tt1706620",
+   "filmaffinity": "245452",
+   "rt": "m/snowpiercer",
+   "letterboxd": "snowpiercer",
+   "tmdb": "110415",
+   "allocine": "123530"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b4/Snowpiercer_poster.jpg"
+ },
+ "The Host|2006": {
+  "ids": {
+   "wikidata": "Q488222",
+   "imdb": "tt0468492",
+   "filmaffinity": "991024",
+   "rt": "m/the_host_2007",
+   "letterboxd": "the-host",
+   "tmdb": "1255",
+   "allocine": "111431"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/55/The_Host_film_poster.jpg"
+ },
+ "The Handmaiden|2016": {
+  "ids": {
+   "wikidata": "Q20444585",
+   "imdb": "tt4016934",
+   "filmaffinity": "948449",
+   "rt": "m/the_handmaiden",
+   "letterboxd": "the-handmaiden",
+   "tmdb": "290098",
+   "allocine": "231299"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a2/The_Handmaiden_film.png"
+ },
+ "Decision to Leave|2022": {
+  "ids": {
+   "wikidata": "Q100889636",
+   "imdb": "tt12477480",
+   "filmaffinity": "959058",
+   "rt": "m/decision_to_leave",
+   "letterboxd": "decision-to-leave",
+   "tmdb": "705996",
+   "allocine": "287116"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/82/Decision_to_Leave_film_poster.jpg"
+ },
+ "No Other Choice|2025": {
+  "ids": {
+   "wikidata": "Q129906152",
+   "imdb": "tt1527793",
+   "filmaffinity": "288774",
+   "rt": "m/no_other_choice",
+   "letterboxd": "no-other-choice-2025",
+   "tmdb": "639988",
+   "allocine": "1000001960"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/12/No_Other_Choice_film_poster.jpeg"
+ },
+ "Sympathy for Lady Vengeance|2005": {
+  "ids": {
+   "wikidata": "Q495134",
+   "imdb": "tt0451094",
+   "filmaffinity": "686407",
+   "rt": "m/sympathy_for_lady_vengeance",
+   "letterboxd": "lady-vengeance",
+   "tmdb": "4550",
+   "allocine": "61182"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c8/Lady_Vengeance_poster.png"
+ },
+ "I Saw the Devil|2010": {
+  "ids": {
+   "wikidata": "Q485725",
+   "imdb": "tt1588170",
+   "filmaffinity": "440099",
+   "rt": "m/i_saw_the_devil_2010",
+   "letterboxd": "i-saw-the-devil",
+   "tmdb": "49797",
+   "allocine": "185542"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/91/I_Saw_the_Devil_film_poster.jpg"
+ },
+ "The Chaser|2008": {
+  "ids": {
+   "wikidata": "Q496724",
+   "imdb": "tt1190539",
+   "filmaffinity": "377285",
+   "rt": "m/the_chaser_2008",
+   "letterboxd": "the-chaser",
+   "tmdb": "13855",
+   "allocine": "134711"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4d/The_Chaser_film_poster.jpg"
+ },
+ "The Wailing|2016": {
+  "ids": {
+   "wikidata": "Q22972803",
+   "imdb": "tt5215952",
+   "filmaffinity": "689813",
+   "rt": "m/the_wailing",
+   "letterboxd": "the-wailing",
+   "tmdb": "293670",
+   "allocine": "230868"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/eb/The_Wailing_%28film%29.png"
+ },
+ "Burning|2018": {
+  "ids": {
+   "wikidata": "Q27964354",
+   "imdb": "tt7282468",
+   "filmaffinity": "813325",
+   "rt": "m/burning_2018",
+   "letterboxd": "burning-2018",
+   "tmdb": "491584",
+   "allocine": "260398"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/45/Burning.png"
+ },
+ "Train to Busan|2016": {
+  "ids": {
+   "wikidata": "Q20948236",
+   "imdb": "tt5700672",
+   "filmaffinity": "312662",
+   "rt": "m/train_to_busan",
+   "letterboxd": "train-to-busan",
+   "tmdb": "396535",
+   "allocine": "246702"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/95/Train_to_Busan.jpg"
+ },
+ "Seven Samurai|1954": {
+  "ids": {
+   "wikidata": "Q189540",
+   "imdb": "tt0047478",
+   "filmaffinity": "168398",
+   "rt": "m/seven_samurai_1956",
+   "letterboxd": "seven-samurai",
+   "tmdb": "346",
+   "allocine": "297"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c8/Seven_Samurai_Poster.png"
+ },
+ "Rashomon|1950": {
+  "ids": {
+   "wikidata": "Q135465",
+   "imdb": "tt0042876",
+   "filmaffinity": "164638",
+   "rt": "m/rashomon",
+   "letterboxd": "rashomon",
+   "tmdb": "548",
+   "allocine": "773"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Rashomon_poster.jpg/500px-Rashomon_poster.jpg"
+ },
+ "Ikiru|1952": {
+  "ids": {
+   "wikidata": "Q152105",
+   "imdb": "tt0044741",
+   "filmaffinity": "246184",
+   "rt": "m/ikiru",
+   "letterboxd": "ikiru",
+   "tmdb": "3782",
+   "allocine": "4471"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Ikiru_poster.jpg/500px-Ikiru_poster.jpg"
+ },
+ "Battle Royale|2000": {
+  "ids": {
+   "wikidata": "Q864592",
+   "imdb": "tt0266308",
+   "filmaffinity": "800688",
+   "rt": "m/battle_royale",
+   "letterboxd": "battle-royale",
+   "tmdb": "3176",
+   "allocine": "28615"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/eb/Battle_Royale-japanese-film-poster.jpg"
+ },
+ "Shoplifters|2018": {
+  "ids": {
+   "wikidata": "Q48765577",
+   "imdb": "tt8075192",
+   "filmaffinity": "213201",
+   "rt": "m/shoplifters",
+   "letterboxd": "shoplifters",
+   "tmdb": "505192",
+   "allocine": "262694"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c9/Shoplifters_%28film%29.jpg"
+ },
+ "Monster|2023": {
+  "ids": {
+   "wikidata": "Q116687945",
+   "imdb": "tt23736044",
+   "filmaffinity": "700716",
+   "rt": "m/monster_2023",
+   "letterboxd": "monster-2023",
+   "tmdb": "1050035",
+   "allocine": "310463"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a3/Monster_2023_film_poster.png"
+ },
+ "Perfect Days|2023": {
+  "ids": {
+   "wikidata": "Q117663112",
+   "imdb": "tt27503384",
+   "filmaffinity": "683705",
+   "rt": "m/perfect_days_2023",
+   "letterboxd": "perfect-days-2023",
+   "tmdb": "976893",
+   "allocine": "314885"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c9/Perfect_Days_poster.jpg"
+ },
+ "Drive My Car|2021": {
+  "ids": {
+   "wikidata": "Q107107865",
+   "imdb": "tt14039582",
+   "filmaffinity": "281888",
+   "rt": "m/drive_my_car",
+   "letterboxd": "drive-my-car",
+   "tmdb": "758866",
+   "allocine": "293106"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/3d/Drive_My_Car_movie_poster.jpeg"
+ },
+ "Cure|1997": {
+  "ids": {
+   "wikidata": "Q1144476",
+   "imdb": "tt0123948",
+   "filmaffinity": "651829",
+   "rt": "m/cure_1997",
+   "letterboxd": "cure",
+   "tmdb": "36095",
+   "allocine": "8368"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/bc/Cureposter.jpg"
+ },
+ "Ringu|1998": {
+  "ids": {
+   "wikidata": "Q531328",
+   "imdb": "tt0178868",
+   "filmaffinity": "756516",
+   "rt": "m/ringu",
+   "letterboxd": "ring-1998",
+   "tmdb": "2671",
+   "allocine": "29346"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4a/Ringu_%281998%29_Japanese_theatrical_poster.jpg"
+ },
+ "El secreto de sus ojos|2009": {
+  "ids": {
+   "wikidata": "Q748851",
+   "imdb": "tt1305806",
+   "filmaffinity": "313601",
+   "rt": "m/secret_in_their_eyes",
+   "letterboxd": "the-secret-in-their-eyes",
+   "tmdb": "25376",
+   "allocine": "171223"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/91/Cartel-nuevo-de-el-secreto-de-sus-ojos.jpg"
+ },
+ "Relatos salvajes|2014": {
+  "ids": {
+   "wikidata": "Q16672466",
+   "imdb": "tt3011894",
+   "filmaffinity": "809035",
+   "rt": "m/wild_tales",
+   "letterboxd": "wild-tales",
+   "tmdb": "265195",
+   "allocine": "221270"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/5e/Relatos_salvajes.jpg"
+ },
+ "Nueve reinas|2000": {
+  "ids": {
+   "wikidata": "Q1404323",
+   "imdb": "tt0247586",
+   "filmaffinity": "572514",
+   "rt": "m/nine_queens",
+   "letterboxd": "nine-queens",
+   "tmdb": "18079",
+   "allocine": "42375"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/db/9reinasposter.jpg"
+ },
+ "El orfanato|2007": {
+  "ids": {
+   "wikidata": "Q923911",
+   "imdb": "tt0464141",
+   "filmaffinity": "245378",
+   "rt": "m/the_orphanage",
+   "letterboxd": "the-orphanage",
+   "tmdb": "6537",
+   "allocine": "128364"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2d/Elorfanato.jpg"
+ },
+ "A Monster Calls|2016": {
+  "ids": {
+   "wikidata": "Q18200409",
+   "imdb": "tt3416532",
+   "filmaffinity": "269350",
+   "rt": "m/a_monster_calls",
+   "letterboxd": "a-monster-calls",
+   "tmdb": "258230",
+   "allocine": "227551"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2d/A_Monster_Calls_poster.jpg"
+ },
+ "La sociedad de la nieve|2023": {
+  "ids": {
+   "wikidata": "Q112252419",
+   "imdb": "tt16277242",
+   "filmaffinity": "484144",
+   "rt": "m/society_of_the_snow",
+   "letterboxd": "society-of-the-snow",
+   "tmdb": "906126",
+   "allocine": "267338"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/76/Society_of_the_Snow_poster.jpg"
+ },
+ "Mar adentro|2004": {
+  "ids": {
+   "wikidata": "Q593615",
+   "imdb": "tt0369702",
+   "filmaffinity": "936995",
+   "rt": "m/sea_inside",
+   "letterboxd": "the-sea-inside",
+   "tmdb": "1913",
+   "allocine": "53097"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/04/Mar_adentro_poster.jpg"
+ },
+ "Abre los ojos|1997": {
+  "ids": {
+   "wikidata": "Q1136400",
+   "imdb": "tt0125659",
+   "filmaffinity": "581441",
+   "rt": "m/open_your_eyes_1999",
+   "letterboxd": "open-your-eyes",
+   "tmdb": "1902",
+   "allocine": "18898"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a6/Abre_los_ojos_movie.jpg"
+ },
+ "El día de la bestia|1995": {
+  "ids": {
+   "wikidata": "Q1312929",
+   "imdb": "tt0112922",
+   "filmaffinity": "926890",
+   "rt": "m/el_dia_de_la_bestia",
+   "letterboxd": "the-day-of-the-beast",
+   "tmdb": "10722",
+   "allocine": "10798"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/cd/Dayofthebeast.jpg"
+ },
+ "La comunidad|2000": {
+  "ids": {
+   "wikidata": "Q2301945",
+   "imdb": "tt0255067",
+   "filmaffinity": "895577",
+   "letterboxd": "common-wealth",
+   "tmdb": "11477",
+   "allocine": "33885"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a1/La_comunidad_film.jpg"
+ },
+ "Balada triste de trompeta|2010": {
+  "ids": {
+   "wikidata": "Q1198387",
+   "imdb": "tt1572491",
+   "filmaffinity": "104627",
+   "rt": "m/balada_triste_de_trompeta",
+   "letterboxd": "the-last-circus",
+   "tmdb": "56812",
+   "allocine": "177409"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b9/Last_circus.jpg"
+ },
+ "Los lunes al sol|2002": {
+  "ids": {
+   "wikidata": "Q1254081",
+   "imdb": "tt0319769",
+   "filmaffinity": "487418",
+   "rt": "m/mondays_in_the_sun",
+   "letterboxd": "mondays-in-the-sun",
+   "tmdb": "54580",
+   "allocine": "48920"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/6c/Los_lunes_al_sol.jpg"
+ },
+ "Barrio|1998": {
+  "ids": {
+   "wikidata": "Q4863702",
+   "imdb": "tt0146468",
+   "filmaffinity": "690962",
+   "rt": "m/barrio",
+   "letterboxd": "barrio",
+   "tmdb": "32118",
+   "allocine": "18911"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4f/Barrio_%28film%29_poster.jpg"
+ },
+ "El laberinto del fauno|2006": {
+  "ids": {
+   "wikidata": "Q216006",
+   "imdb": "tt0457430",
+   "filmaffinity": "977734",
+   "rt": "m/pans_labyrinth",
+   "letterboxd": "pans-labyrinth",
+   "tmdb": "1417",
+   "allocine": "57689"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/67/Pan%27s_Labyrinth.jpg"
+ },
+ "El espinazo del diablo|2001": {
+  "ids": {
+   "wikidata": "Q1350521",
+   "imdb": "tt0256009",
+   "filmaffinity": "587044",
+   "rt": "m/devils_backbone",
+   "letterboxd": "the-devils-backbone",
+   "tmdb": "1433",
+   "allocine": "33420"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/20/Espinazo_del_diablo_poster.jpg"
+ },
+ "Frankenstein|2025": {
+  "ids": {
+   "wikidata": "Q124393045",
+   "imdb": "tt1312221",
+   "filmaffinity": "231576",
+   "rt": "m/frankenstein_2025",
+   "letterboxd": "frankenstein-2025",
+   "tmdb": "1062722",
+   "allocine": "206794"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/94/Frankenstein_2025_film_poster.jpg"
+ },
+ "Grupo 7|2012": {
+  "ids": {
+   "wikidata": "Q2856158",
+   "imdb": "tt1924277",
+   "filmaffinity": "712741",
+   "letterboxd": "unit-7",
+   "tmdb": "98582",
+   "allocine": "193254"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a1/Unit_7_poster.jpg"
+ },
+ "El hombre de las mil caras|2016": {
+  "ids": {
+   "wikidata": "Q22000111",
+   "imdb": "tt1713440",
+   "filmaffinity": "637680",
+   "rt": "m/el_hombre_de_las_mil_caras",
+   "letterboxd": "smoke-mirrors",
+   "tmdb": "361777",
+   "allocine": "208328"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b7/Smoke_%26_Mirrors_2016_film.jpeg"
+ },
+ "Stockholm|2013": {
+  "ids": {
+   "wikidata": "Q19364062",
+   "imdb": "tt2380207",
+   "filmaffinity": "366118",
+   "rt": "m/stockholm",
+   "letterboxd": "stockholm",
+   "tmdb": "185738",
+   "allocine": "208351"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/16/Stockholm_%282013_film%29_poster.jpg"
+ },
+ "La caja 507|2002": {
+  "ids": {
+   "wikidata": "Q2922862",
+   "imdb": "tt0325145",
+   "filmaffinity": "170089",
+   "rt": "m/box_507",
+   "letterboxd": "box-507",
+   "tmdb": "33110",
+   "allocine": "137922"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/14/Box_507_poster.jpg"
+ },
+ "El cuerpo|2012": {
+  "ids": {
+   "wikidata": "Q3050323",
+   "imdb": "tt1937149",
+   "filmaffinity": "510693",
+   "rt": "m/el_cuerpo",
+   "letterboxd": "the-body-2012",
+   "tmdb": "111083",
+   "allocine": "215345"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2c/The-Body-El-Cuerpo.jpg"
+ },
+ "Magical Girl|2014": {
+  "ids": {
+   "wikidata": "Q16766108",
+   "imdb": "tt3089326",
+   "filmaffinity": "764231",
+   "rt": "m/magical_girl",
+   "letterboxd": "magical-girl",
+   "tmdb": "282983",
+   "allocine": "221110"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/ec/Magical_Girl_%28film%29_POSTER.jpg"
+ },
+ "Te doy mis ojos|2003": {
+  "ids": {
+   "wikidata": "Q747441",
+   "imdb": "tt0350193",
+   "filmaffinity": "942734",
+   "rt": "m/te_doy_mis_ojos",
+   "letterboxd": "take-my-eyes",
+   "tmdb": "1418",
+   "allocine": "55771"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/cc/TakeMyEyes.jpg"
+ },
+ "Hable con ella|2002": {
+  "ids": {
+   "wikidata": "Q478780",
+   "imdb": "tt0287467",
+   "filmaffinity": "780724",
+   "rt": "m/talk_to_her",
+   "letterboxd": "talk-to-her",
+   "tmdb": "64",
+   "allocine": "28629"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2c/Talk_to_Her_poster.png"
+ },
+ "Cerrar los ojos|2023": {
+  "ids": {
+   "wikidata": "Q115938677",
+   "imdb": "tt21284358",
+   "filmaffinity": "792411",
+   "rt": "m/close_your_eyes_2023",
+   "letterboxd": "close-your-eyes-2023",
+   "tmdb": "997294",
+   "allocine": "311149"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b5/Close_Your_Eyes_%282023_film%29_poster.jpg"
+ },
+ "El espíritu de la colmena|1973": {
+  "ids": {
+   "wikidata": "Q2290517",
+   "imdb": "tt0070040",
+   "filmaffinity": "855997",
+   "rt": "m/spirit_of_the_beehive",
+   "letterboxd": "the-spirit-of-the-beehive",
+   "tmdb": "4495",
+   "allocine": "3121"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/32/Spiritofthebeehiveposter.jpg"
+ },
+ "Sirāt|2025": {
+  "ids": {
+   "wikidata": "Q133850188",
+   "imdb": "tt32298285",
+   "filmaffinity": "780154",
+   "rt": "m/sirat",
+   "letterboxd": "sirat-2025",
+   "tmdb": "1151272",
+   "allocine": "317783"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/91/Sirat_2025.jpeg"
+ },
+ "Los domingos|2025": {
+  "ids": {
+   "wikidata": "Q132732126",
+   "imdb": "tt35513027",
+   "filmaffinity": "584300",
+   "rt": "m/los_domingos",
+   "letterboxd": "sundays-2025",
+   "tmdb": "1443576",
+   "allocine": "1000020167"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/3f/Los_domingos_2025_teaser.jpeg"
+ },
+ "El 47|2024": {
+  "ids": {
+   "wikidata": "Q115774787",
+   "imdb": "tt27751957",
+   "filmaffinity": "651337",
+   "rt": "m/el_47",
+   "letterboxd": "the-47",
+   "tmdb": "1174481",
+   "allocine": "317665"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c1/The_47_poster.jpg"
+ },
+ "La infiltrada|2024": {
+  "ids": {
+   "wikidata": "Q124080413",
+   "imdb": "tt29270150",
+   "filmaffinity": "932478",
+   "rt": "m/undercover_2024",
+   "letterboxd": "the-infiltrator-2024",
+   "tmdb": "1215185",
+   "allocine": "312989"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/98/Undercover_%282024_film%29_poster.jpg"
+ },
+ "Robot Dreams|2023": {
+  "ids": {
+   "wikidata": "Q119786383",
+   "imdb": "tt13429870",
+   "filmaffinity": "399287",
+   "rt": "m/robot_dreams",
+   "letterboxd": "robot-dreams",
+   "tmdb": "838240",
+   "allocine": "287521"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/ac/Robot_Dreams_%28film%29_poster.jpg"
+ },
+ "Handia|2017": {
+  "ids": {
+   "wikidata": "Q33642863",
+   "imdb": "tt5693136",
+   "filmaffinity": "610629",
+   "rt": "m/handia",
+   "letterboxd": "the-giant-2017-1",
+   "tmdb": "421560",
+   "allocine": "244692"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b6/Handia_poster.jpg"
+ },
+ "City of God|2002": {
+  "ids": {
+   "wikidata": "Q220741",
+   "imdb": "tt0317248",
+   "filmaffinity": "412004",
+   "rt": "m/city_of_god",
+   "letterboxd": "city-of-god",
+   "tmdb": "598",
+   "allocine": "45264"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/10/CidadedeDeus.jpg"
+ },
+ "Heat|1995": {
+  "ids": {
+   "wikidata": "Q42198",
+   "imdb": "tt0113277",
+   "filmaffinity": "267267",
+   "rt": "m/heat_1995",
+   "letterboxd": "heat-1995",
+   "tmdb": "949",
+   "allocine": "14046"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/6c/Heatposter.jpg"
+ },
+ "Collateral|2004": {
+  "ids": {
+   "wikidata": "Q110203",
+   "imdb": "tt0369339",
+   "filmaffinity": "156313",
+   "rt": "m/collateral",
+   "letterboxd": "collateral",
+   "tmdb": "1538",
+   "allocine": "53042"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/45/Collateral_%28Movie%29.jpg"
+ },
+ "L.A. Confidential|1997": {
+  "ids": {
+   "wikidata": "Q339876",
+   "imdb": "tt0119488",
+   "filmaffinity": "474411",
+   "rt": "m/la_confidential",
+   "letterboxd": "la-confidential",
+   "tmdb": "2118",
+   "allocine": "12032"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/d8/La_confidential.jpg"
+ },
+ "No Country for Old Men|2007": {
+  "ids": {
+   "wikidata": "Q183081",
+   "imdb": "tt0477348",
+   "filmaffinity": "177270",
+   "rt": "m/no_country_for_old_men",
+   "letterboxd": "no-country-for-old-men",
+   "tmdb": "6977",
+   "allocine": "110096"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/8b/No_Country_for_Old_Men_poster.jpg"
+ },
+ "The Big Lebowski|1998": {
+  "ids": {
+   "wikidata": "Q337078",
+   "imdb": "tt0118715",
+   "filmaffinity": "237285",
+   "rt": "m/the_big_lebowski",
+   "letterboxd": "the-big-lebowski",
+   "tmdb": "115",
+   "allocine": "16463"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/35/Biglebowskiposter.jpg"
+ },
+ "Miller's Crossing|1990": {
+  "ids": {
+   "wikidata": "Q130142",
+   "imdb": "tt0100150",
+   "filmaffinity": "374677",
+   "rt": "m/millers_crossing",
+   "letterboxd": "millers-crossing",
+   "tmdb": "379",
+   "allocine": "26226"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2b/Millerscrossingposter.jpg"
+ },
+ "O Brother, Where Art Thou?|2000": {
+  "ids": {
+   "wikidata": "Q501874",
+   "imdb": "tt0190590",
+   "filmaffinity": "742046",
+   "rt": "m/o_brother_where_art_thou",
+   "letterboxd": "o-brother-where-art-thou",
+   "tmdb": "134",
+   "allocine": "29785"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/5b/O_brother_where_art_thou_ver1.jpg"
+ },
+ "Chinatown|1974": {
+  "ids": {
+   "wikidata": "Q644987",
+   "imdb": "tt0071315",
+   "filmaffinity": "786390",
+   "rt": "m/chinatown",
+   "letterboxd": "chinatown",
+   "tmdb": "829",
+   "allocine": "2604"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/38/Chinatownposter1.jpg"
+ },
+ "The French Connection|1971": {
+  "ids": {
+   "wikidata": "Q220735",
+   "imdb": "tt0067116",
+   "filmaffinity": "587161",
+   "rt": "m/french_connection",
+   "letterboxd": "the-french-connection",
+   "tmdb": "1051",
+   "allocine": "4423"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b8/TheFrenchConnection.jpg"
+ },
+ "Dog Day Afternoon|1975": {
+  "ids": {
+   "wikidata": "Q458656",
+   "imdb": "tt0072890",
+   "filmaffinity": "663851",
+   "rt": "m/dog_day_afternoon",
+   "letterboxd": "dog-day-afternoon",
+   "tmdb": "968",
+   "allocine": "1621"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/44/Dog_Day_Afternoon_film_poster.jpg"
+ },
+ "Network|1976": {
+  "ids": {
+   "wikidata": "Q572165",
+   "imdb": "tt0074958",
+   "filmaffinity": "480193",
+   "rt": "m/network",
+   "letterboxd": "network",
+   "tmdb": "10774",
+   "allocine": "46077"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e3/Network_%281976_poster%29.png"
+ },
+ "Serpico|1973": {
+  "ids": {
+   "wikidata": "Q657079",
+   "imdb": "tt0070666",
+   "filmaffinity": "351360",
+   "rt": "m/serpico",
+   "letterboxd": "serpico",
+   "tmdb": "9040",
+   "allocine": "37036"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/ef/Serpico_poster.jpg"
+ },
+ "Rear Window|1954": {
+  "ids": {
+   "wikidata": "Q34414",
+   "imdb": "tt0047396",
+   "filmaffinity": "802694",
+   "rt": "m/1017289-rear_window",
+   "letterboxd": "rear-window",
+   "tmdb": "567",
+   "allocine": "983"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Rear_Window_film_poster.jpg/500px-Rear_Window_film_poster.jpg"
+ },
+ "Vertigo|1958": {
+  "ids": {
+   "wikidata": "Q202548",
+   "imdb": "tt0052357",
+   "filmaffinity": "647094",
+   "rt": "m/vertigo",
+   "letterboxd": "vertigo",
+   "tmdb": "426",
+   "allocine": "980"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Vertigomovie_restoration.jpg/500px-Vertigomovie_restoration.jpg"
+ },
+ "North by Northwest|1959": {
+  "ids": {
+   "wikidata": "Q223139",
+   "imdb": "tt0053125",
+   "filmaffinity": "351704",
+   "rt": "m/north_by_northwest",
+   "letterboxd": "north-by-northwest",
+   "tmdb": "213",
+   "allocine": "531"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Northbynorthwest1.jpg/500px-Northbynorthwest1.jpg"
+ },
+ "Sunset Boulevard|1950": {
+  "ids": {
+   "wikidata": "Q193570",
+   "imdb": "tt0043014",
+   "filmaffinity": "536488",
+   "rt": "m/sunset_boulevard",
+   "letterboxd": "sunset-boulevard",
+   "tmdb": "599",
+   "allocine": "836"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Sunset_Boulevard_%281950_poster%29.jpg/500px-Sunset_Boulevard_%281950_poster%29.jpg"
+ },
+ "Double Indemnity|1944": {
+  "ids": {
+   "wikidata": "Q478209",
+   "imdb": "tt0036775",
+   "filmaffinity": "207165",
+   "rt": "m/double_indemnity",
+   "letterboxd": "double-indemnity",
+   "tmdb": "996",
+   "allocine": "105"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Double_Indemnity_%281944_poster%29.jpg/500px-Double_Indemnity_%281944_poster%29.jpg"
+ },
+ "The Apartment|1960": {
+  "ids": {
+   "wikidata": "Q270510",
+   "imdb": "tt0053604",
+   "filmaffinity": "795770",
+   "rt": "m/1001115-apartment",
+   "letterboxd": "the-apartment",
+   "tmdb": "284",
+   "allocine": "2252"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/The_Apartment_%281960_poster%29.jpg/500px-The_Apartment_%281960_poster%29.jpg"
+ },
+ "Some Like It Hot|1959": {
+  "ids": {
+   "wikidata": "Q190086",
+   "imdb": "tt0053291",
+   "filmaffinity": "353180",
+   "rt": "m/some_like_it_hot",
+   "letterboxd": "some-like-it-hot",
+   "tmdb": "239",
+   "allocine": "26186"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Some_Like_It_Hot_%281959_poster%29.png/500px-Some_Like_It_Hot_%281959_poster%29.png"
+ },
+ "Citizen Kane|1941": {
+  "ids": {
+   "wikidata": "Q24815",
+   "imdb": "tt0033467",
+   "filmaffinity": "615891",
+   "rt": "m/citizen_kane",
+   "letterboxd": "citizen-kane",
+   "tmdb": "15",
+   "allocine": "857"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Citizen_Kane_poster%2C_1941_%28Style_B%2C_unrestored%29.jpg/500px-Citizen_Kane_poster%2C_1941_%28Style_B%2C_unrestored%29.jpg"
+ },
+ "Lawrence of Arabia|1962": {
+  "ids": {
+   "wikidata": "Q228186",
+   "imdb": "tt0056172",
+   "filmaffinity": "953245",
+   "rt": "m/lawrence_of_arabia",
+   "letterboxd": "lawrence-of-arabia",
+   "tmdb": "947",
+   "allocine": "4749"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Lawrence_of_arabia_ver3_xxlg.jpg/500px-Lawrence_of_arabia_ver3_xxlg.jpg"
+ },
+ "Once Upon a Time in the West|1968": {
+  "ids": {
+   "wikidata": "Q168154",
+   "imdb": "tt0064116",
+   "filmaffinity": "100958",
+   "rt": "m/once_upon_a_time_in_the_west",
+   "letterboxd": "once-upon-a-time-in-the-west",
+   "tmdb": "335",
+   "allocine": "2021"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a2/Once_upon_a_Time_in_the_West.jpg"
+ },
+ "For a Few Dollars More|1965": {
+  "ids": {
+   "wikidata": "Q153677",
+   "imdb": "tt0059578",
+   "filmaffinity": "956445",
+   "rt": "m/for_a_few_dollars_more",
+   "letterboxd": "for-a-few-dollars-more",
+   "tmdb": "938",
+   "allocine": "929"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/09/For_a_Few_Dollars_More-ita-poster.jpg"
+ },
+ "Once Upon a Time in America|1984": {
+  "ids": {
+   "wikidata": "Q206388",
+   "imdb": "tt0087843",
+   "filmaffinity": "421564",
+   "rt": "m/once_upon_a_time_in_america",
+   "letterboxd": "once-upon-a-time-in-america",
+   "tmdb": "311",
+   "allocine": "1941"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c2/Once_Upon_a_Time_in_America.png"
+ },
+ "Unforgiven|1992": {
+  "ids": {
+   "wikidata": "Q104137",
+   "imdb": "tt0105695",
+   "filmaffinity": "262344",
+   "rt": "m/1041911-unforgiven",
+   "letterboxd": "unforgiven",
+   "tmdb": "33",
+   "allocine": "7663"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4e/Unforgiven_2.jpg"
+ },
+ "Nuovo Cinema Paradiso|1988": {
+  "ids": {
+   "wikidata": "Q464032",
+   "imdb": "tt0095765",
+   "filmaffinity": "420972",
+   "rt": "m/cinema_paradiso",
+   "letterboxd": "cinema-paradiso",
+   "tmdb": "11216",
+   "allocine": "4989"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/86/CinemaParadiso.jpg"
+ },
+ "Le Fabuleux Destin d'Amélie Poulain|2001": {
+  "ids": {
+   "wikidata": "Q484048",
+   "imdb": "tt0211915",
+   "filmaffinity": "151039",
+   "rt": "m/amelie",
+   "letterboxd": "amelie",
+   "tmdb": "194",
+   "allocine": "27063"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/53/Amelie_poster.jpg"
+ },
+ "La Haine|1995": {
+  "ids": {
+   "wikidata": "Q466101",
+   "imdb": "tt0113247",
+   "filmaffinity": "927274",
+   "rt": "m/la_haine",
+   "letterboxd": "la-haine",
+   "tmdb": "406",
+   "allocine": "12551"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/01/La_Haine_%281995_movie_poster%29.jpg"
+ },
+ "The Fifth Element|1997": {
+  "ids": {
+   "wikidata": "Q106506",
+   "imdb": "tt0119116",
+   "filmaffinity": "217833",
+   "rt": "m/fifth_element",
+   "letterboxd": "the-fifth-element",
+   "tmdb": "18",
+   "allocine": "12302"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/65/Fifth_element_poster_%281997%29.jpg"
+ },
+ "Anatomie d'une chute|2023": {
+  "ids": {
+   "wikidata": "Q117037697",
+   "imdb": "tt17009710",
+   "filmaffinity": "108208",
+   "rt": "m/anatomy_of_a_fall",
+   "letterboxd": "anatomy-of-a-fall",
+   "tmdb": "915935",
+   "allocine": "297303"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/88/Anatomy_of_a_Fall_%282023%29_film_poster.jpg"
+ },
+ "Das Leben der Anderen|2006": {
+  "ids": {
+   "wikidata": "Q153882",
+   "imdb": "tt0405094",
+   "filmaffinity": "381846",
+   "rt": "m/the_lives_of_others",
+   "letterboxd": "the-lives-of-others",
+   "tmdb": "582",
+   "allocine": "111643"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/9f/Leben_der_anderen.jpg"
+ },
+ "Der Untergang|2004": {
+  "ids": {
+   "wikidata": "Q152857",
+   "imdb": "tt0363163",
+   "filmaffinity": "599984",
+   "rt": "m/downfall",
+   "letterboxd": "downfall",
+   "tmdb": "613",
+   "allocine": "58349"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/dc/Der_Untergang_Downfall_poster.png"
+ },
+ "Das Boot|1981": {
+  "ids": {
+   "wikidata": "Q62730",
+   "imdb": "tt0082096",
+   "filmaffinity": "247709",
+   "rt": "m/das_boot",
+   "letterboxd": "das-boot",
+   "tmdb": "387",
+   "allocine": "4616"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a3/Das_boot_ver1.jpg"
+ },
+ "Lola rennt|1998": {
+  "ids": {
+   "wikidata": "Q468697",
+   "imdb": "tt0130827",
+   "filmaffinity": "531259",
+   "rt": "m/run_lola_run",
+   "letterboxd": "run-lola-run",
+   "tmdb": "104",
+   "allocine": "10295"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/f5/Lola_Rennt_poster.jpg"
+ },
+ "All Quiet on the Western Front|2022": {
+  "ids": {
+   "wikidata": "Q108837349",
+   "imdb": "tt1016150",
+   "filmaffinity": "621534",
+   "rt": "m/all_quiet_on_the_western_front_2022",
+   "letterboxd": "all-quiet-on-the-western-front-2022",
+   "tmdb": "49046",
+   "allocine": "182953"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c3/All_quiet_on_the_western_front_%282022_film%29.jpg"
+ },
+ "Conclave|2024": {
+  "ids": {
+   "wikidata": "Q116701124",
+   "imdb": "tt20215234",
+   "filmaffinity": "159138",
+   "rt": "m/conclave",
+   "letterboxd": "conclave",
+   "tmdb": "974576",
+   "allocine": "304895"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/76/Conclave_film_poster.jpg"
+ },
+ "Snatch|2000": {
+  "ids": {
+   "wikidata": "Q335160",
+   "imdb": "tt0208092",
+   "filmaffinity": "568510",
+   "rt": "m/snatch",
+   "letterboxd": "snatch",
+   "tmdb": "107",
+   "allocine": "26251"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a7/Snatch_ver4.jpg"
+ },
+ "Lock, Stock and Two Smoking Barrels|1998": {
+  "ids": {
+   "wikidata": "Q851095",
+   "imdb": "tt0120735",
+   "filmaffinity": "807126",
+   "rt": "m/lock_stock_and_two_smoking_barrels",
+   "letterboxd": "lock-stock-and-two-smoking-barrels",
+   "tmdb": "100",
+   "allocine": "19298"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e9/Lock%2C_Stock_and_Two_Smoking_Barrels_2.jpg"
+ },
+ "Hot Fuzz|2007": {
+  "ids": {
+   "wikidata": "Q729788",
+   "imdb": "tt0425112",
+   "filmaffinity": "869783",
+   "rt": "m/hot_fuzz",
+   "letterboxd": "hot-fuzz",
+   "tmdb": "4638",
+   "allocine": "108917"
+  },
+  "poster": "https://thumb.wikimedia.org/wikipedia/en/thumb/c/c9/HotFuzzUKposter.jpg/330px-HotFuzzUKposter.jpg"
+ },
+ "Baby Driver|2017": {
+  "ids": {
+   "wikidata": "Q23016644",
+   "imdb": "tt3890160",
+   "filmaffinity": "354019",
+   "rt": "m/baby_driver",
+   "letterboxd": "baby-driver",
+   "tmdb": "339403",
+   "allocine": "230453"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/8e/Baby_Driver_poster.jpg"
+ },
+ "In Bruges|2008": {
+  "ids": {
+   "wikidata": "Q244931",
+   "imdb": "tt0780536",
+   "filmaffinity": "838496",
+   "rt": "m/in_bruges",
+   "letterboxd": "in-bruges",
+   "tmdb": "8321",
+   "allocine": "127122"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/ee/In_Bruges_poster.png"
+ },
+ "Three Billboards Outside Ebbing, Missouri|2017": {
+  "ids": {
+   "wikidata": "Q24053277",
+   "imdb": "tt5027774",
+   "filmaffinity": "652266",
+   "rt": "m/three_billboards_outside_ebbing_missouri",
+   "letterboxd": "three-billboards-outside-ebbing-missouri",
+   "tmdb": "359940",
+   "allocine": "245010"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c7/Three_Billboards_Outside_Ebbing%2C_Missouri_poster.png"
+ },
+ "The Banshees of Inisherin|2022": {
+  "ids": {
+   "wikidata": "Q108314506",
+   "imdb": "tt11813216",
+   "filmaffinity": "941659",
+   "rt": "m/the_banshees_of_inisherin",
+   "letterboxd": "the-banshees-of-inisherin",
+   "tmdb": "674324",
+   "allocine": "281293"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/6e/The_Banshees_of_Inisherin.jpg"
+ },
+ "Children of Men|2006": {
+  "ids": {
+   "wikidata": "Q221090",
+   "imdb": "tt0206634",
+   "filmaffinity": "976261",
+   "rt": "m/children_of_men",
+   "letterboxd": "children-of-men",
+   "tmdb": "9693",
+   "allocine": "60792"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/fc/Children_of_men_ver4.jpg"
+ },
+ "Gravity|2013": {
+  "ids": {
+   "wikidata": "Q2579784",
+   "imdb": "tt1454468",
+   "filmaffinity": "883807",
+   "rt": "m/gravity_2013",
+   "letterboxd": "gravity-2013",
+   "tmdb": "49047",
+   "allocine": "178496"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/f6/Gravity_Poster.jpg"
+ },
+ "Roma|2018": {
+  "ids": {
+   "wikidata": "Q27959455",
+   "imdb": "tt6155172",
+   "filmaffinity": "850453",
+   "rt": "m/roma_2018",
+   "letterboxd": "roma-2018",
+   "tmdb": "426426",
+   "allocine": "250095"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/85/Roma_theatrical_poster.png"
+ },
+ "Amores perros|2000": {
+  "ids": {
+   "wikidata": "Q474098",
+   "imdb": "tt0245712",
+   "filmaffinity": "769597",
+   "rt": "m/amores_perros",
+   "letterboxd": "amores-perros",
+   "tmdb": "55",
+   "allocine": "26066"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4b/Amores_Perros_poster.jpg"
+ },
+ "28 Days Later|2002": {
+  "ids": {
+   "wikidata": "Q221075",
+   "imdb": "tt0289043",
+   "filmaffinity": "502524",
+   "rt": "m/28_days_later",
+   "letterboxd": "28-days-later",
+   "tmdb": "170",
+   "allocine": "46940"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e4/28_days_later.jpg"
+ },
+ "28 Years Later|2025": {
+  "ids": {
+   "wikidata": "Q125392328",
+   "imdb": "tt10548174",
+   "filmaffinity": "751338",
+   "rt": "m/28_years_later",
+   "letterboxd": "28-years-later",
+   "tmdb": "1100988",
+   "allocine": "139772"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/38/28_Years_Later_film_poster.jpg"
+ },
+ "Slumdog Millionaire|2008": {
+  "ids": {
+   "wikidata": "Q125076",
+   "imdb": "tt1010048",
+   "filmaffinity": "230028",
+   "rt": "m/slumdog_millionaire",
+   "letterboxd": "slumdog-millionaire",
+   "tmdb": "12405",
+   "allocine": "129924"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/92/Slumdog_Millionaire_poster.png"
+ },
+ "Moon|2009": {
+  "ids": {
+   "wikidata": "Q26751",
+   "imdb": "tt1182345",
+   "filmaffinity": "957408",
+   "rt": "m/moon",
+   "letterboxd": "moon",
+   "tmdb": "17431",
+   "allocine": "136189"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/af/Moon_%282009_film%29.jpg"
+ },
+ "Source Code|2011": {
+  "ids": {
+   "wikidata": "Q266209",
+   "imdb": "tt0945513",
+   "filmaffinity": "332725",
+   "rt": "m/source_code",
+   "letterboxd": "source-code",
+   "tmdb": "45612",
+   "allocine": "175053"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e5/Source_Code_Poster.jpg"
+ },
+ "Ex Machina|2014": {
+  "ids": {
+   "wikidata": "Q16635326",
+   "imdb": "tt0470752",
+   "filmaffinity": "132582",
+   "rt": "m/ex_machina",
+   "letterboxd": "ex-machina-2015",
+   "tmdb": "264660",
+   "allocine": "219931"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/ba/Ex-machina-uk-poster.jpg"
+ },
+ "Annihilation|2018": {
+  "ids": {
+   "wikidata": "Q25136228",
+   "imdb": "tt2798920",
+   "filmaffinity": "253007",
+   "rt": "m/annihilation",
+   "letterboxd": "annihilation",
+   "tmdb": "300668",
+   "allocine": "232771"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/f6/Annihilation_%28film%29.png"
+ },
+ "Civil War|2024": {
+  "ids": {
+   "wikidata": "Q111538862",
+   "imdb": "tt17279496",
+   "filmaffinity": "975245",
+   "rt": "m/civil_war_2024",
+   "letterboxd": "civil-war-2024",
+   "tmdb": "929590",
+   "allocine": "300282"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/0d/Civil_War_2024_film_poster.jpeg"
+ },
+ "Warfare|2025": {
+  "ids": {
+   "wikidata": "Q125217247",
+   "imdb": "tt31434639",
+   "filmaffinity": "431234",
+   "rt": "m/warfare",
+   "letterboxd": "warfare",
+   "tmdb": "1241436",
+   "allocine": "326528"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/0d/Warfare_film_poster.jpg"
+ },
+ "The Zone of Interest|2023": {
+  "ids": {
+   "wikidata": "Q115993222",
+   "imdb": "tt7160372",
+   "filmaffinity": "655530",
+   "rt": "m/the_zone_of_interest",
+   "letterboxd": "the-zone-of-interest",
+   "tmdb": "467244",
+   "allocine": "266159"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/24/The_Zone_of_Interest_film_poster.jpg"
+ },
+ "Aftersun|2022": {
+  "ids": {
+   "wikidata": "Q111668106",
+   "imdb": "tt19770238",
+   "filmaffinity": "801174",
+   "rt": "m/aftersun",
+   "letterboxd": "aftersun",
+   "tmdb": "965150",
+   "allocine": "303803"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/11/Aftersun.jpg"
+ },
+ "Primer|2004": {
+  "ids": {
+   "wikidata": "Q1434995",
+   "imdb": "tt0390384",
+   "filmaffinity": "338192",
+   "rt": "m/primer",
+   "letterboxd": "primer",
+   "tmdb": "14337",
+   "allocine": "58126"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/f7/Primer_%282004_film_poster%29.jpg"
+ },
+ "Predestination|2014": {
+  "ids": {
+   "wikidata": "Q17014394",
+   "imdb": "tt2397535",
+   "filmaffinity": "758826",
+   "rt": "m/predestination",
+   "letterboxd": "predestination",
+   "tmdb": "206487",
+   "allocine": "226449"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4b/Predestination_poster.jpg"
+ },
+ "Donnie Darko|2001": {
+  "ids": {
+   "wikidata": "Q426828",
+   "imdb": "tt0246578",
+   "filmaffinity": "645363",
+   "rt": "m/donnie_darko",
+   "letterboxd": "donnie-darko",
+   "tmdb": "141",
+   "allocine": "34193"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/db/Donnie_Darko_poster.jpg"
+ },
+ "Eternal Sunshine of the Spotless Mind|2004": {
+  "ids": {
+   "wikidata": "Q208269",
+   "imdb": "tt0338013",
+   "filmaffinity": "982810",
+   "rt": "m/eternal_sunshine_of_the_spotless_mind",
+   "letterboxd": "eternal-sunshine-of-the-spotless-mind",
+   "tmdb": "38",
+   "allocine": "40191"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a4/Eternal_Sunshine_of_the_Spotless_Mind.png"
+ },
+ "Gattaca|1997": {
+  "ids": {
+   "wikidata": "Q491800",
+   "imdb": "tt0119177",
+   "filmaffinity": "895828",
+   "rt": "m/gattaca",
+   "letterboxd": "gattaca",
+   "tmdb": "782",
+   "allocine": "17079"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/de/Gattaca_poster.jpg"
+ },
+ "Edge of Tomorrow|2014": {
+  "ids": {
+   "wikidata": "Q1187607",
+   "imdb": "tt1631867",
+   "filmaffinity": "461628",
+   "rt": "m/live_die_repeat_edge_of_tomorrow",
+   "letterboxd": "edge-of-tomorrow",
+   "tmdb": "137113",
+   "allocine": "185030"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/f9/Edge_of_Tomorrow_Poster.jpg"
+ },
+ "District 9|2009": {
+  "ids": {
+   "wikidata": "Q201819",
+   "imdb": "tt1136608",
+   "filmaffinity": "757761",
+   "rt": "m/district_9",
+   "letterboxd": "district-9",
+   "tmdb": "17654",
+   "allocine": "143026"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/d7/District_nine_ver2.jpg"
+ },
+ "Contact|1997": {
+  "ids": {
+   "wikidata": "Q270215",
+   "imdb": "tt0118884",
+   "filmaffinity": "815526",
+   "rt": "m/1078021-contact",
+   "letterboxd": "contact",
+   "tmdb": "686",
+   "allocine": "15753"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/75/Contact_ver2.jpg"
+ },
+ "Back to the Future|1985": {
+  "ids": {
+   "wikidata": "Q91540",
+   "imdb": "tt0088763",
+   "filmaffinity": "309023",
+   "rt": "m/back_to_the_future",
+   "letterboxd": "back-to-the-future",
+   "tmdb": "105",
+   "allocine": "448"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg"
+ },
+ "The Thing|1982": {
+  "ids": {
+   "wikidata": "Q210756",
+   "imdb": "tt0084787",
+   "filmaffinity": "313264",
+   "rt": "m/1021244-thing",
+   "letterboxd": "the-thing",
+   "tmdb": "1091",
+   "allocine": "1048"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e3/The_Thing_%281982_film%29.png"
+ },
+ "Halloween|1978": {
+  "ids": {
+   "wikidata": "Q221103",
+   "imdb": "tt0077651",
+   "filmaffinity": "384174",
+   "rt": "m/1009113-halloween",
+   "letterboxd": "halloween-1978",
+   "tmdb": "948",
+   "allocine": "9434"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/af/Halloween_%281978%29_theatrical_poster.jpg"
+ },
+ "Terminator 2: Judgment Day|1991": {
+  "ids": {
+   "wikidata": "Q170564",
+   "imdb": "tt0103064",
+   "filmaffinity": "576352",
+   "rt": "m/terminator_2_judgment_day",
+   "letterboxd": "terminator-2-judgment-day",
+   "tmdb": "280",
+   "allocine": "7124"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/5e/Terminator_2-Judgment_Day.png"
+ },
+ "Aliens|1986": {
+  "ids": {
+   "wikidata": "Q104814",
+   "imdb": "tt0090605",
+   "filmaffinity": "682537",
+   "rt": "m/1000617-aliens",
+   "letterboxd": "aliens",
+   "tmdb": "679",
+   "allocine": "2167"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/fb/Aliens_poster.jpg"
+ },
+ "Titanic|1997": {
+  "ids": {
+   "wikidata": "Q44578",
+   "imdb": "tt0120338",
+   "filmaffinity": "814379",
+   "rt": "m/titanic",
+   "letterboxd": "titanic-1997",
+   "tmdb": "597",
+   "allocine": "5818"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/18/Titanic_%281997_film%29_poster.png"
+ },
+ "Rosemary's Baby|1968": {
+  "ids": {
+   "wikidata": "Q607179",
+   "imdb": "tt0063522",
+   "filmaffinity": "721028",
+   "rt": "m/rosemarys_baby",
+   "letterboxd": "rosemarys-baby",
+   "tmdb": "805",
+   "allocine": "7120"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/ef/Rosemarys_baby_poster.jpg"
+ },
+ "The Babadook|2014": {
+  "ids": {
+   "wikidata": "Q16011764",
+   "imdb": "tt2321549",
+   "filmaffinity": "287094",
+   "rt": "m/the_babadook",
+   "letterboxd": "the-babadook",
+   "tmdb": "242224",
+   "allocine": "226493"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/d7/The-Babadook-Poster.jpg"
+ },
+ "Talk to Me|2022": {
+  "ids": {
+   "wikidata": "Q116193178",
+   "imdb": "tt10638522",
+   "filmaffinity": "394613",
+   "rt": "m/talk_to_me_2023",
+   "letterboxd": "talk-to-me-2022",
+   "tmdb": "1008042",
+   "allocine": "311203"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/ef/TalkToMe2022poster.jpg"
+ },
+ "Bring Her Back|2025": {
+  "ids": {
+   "wikidata": "Q127602379",
+   "imdb": "tt32246771",
+   "filmaffinity": "102649",
+   "rt": "m/bring_her_back",
+   "letterboxd": "bring-her-back",
+   "tmdb": "1151031",
+   "allocine": "1000002538"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/fd/Bring_Her_Back_film_poster.jpg"
+ },
+ "Barbarian|2022": {
+  "ids": {
+   "wikidata": "Q38526439",
+   "imdb": "tt15791034",
+   "filmaffinity": "880123",
+   "rt": "m/barbarian_2022",
+   "letterboxd": "barbarian-2022",
+   "tmdb": "913290",
+   "allocine": "279104"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/eb/Barbarian_2022_film_poster.png"
+ },
+ "The Descent|2005": {
+  "ids": {
+   "wikidata": "Q1367317",
+   "imdb": "tt0435625",
+   "filmaffinity": "585020",
+   "rt": "m/descent",
+   "letterboxd": "the-descent",
+   "tmdb": "9392",
+   "allocine": "47101"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/d5/Descentposter.jpg"
+ },
+ "Late Night with the Devil|2023": {
+  "ids": {
+   "wikidata": "Q119718080",
+   "imdb": "tt14966898",
+   "filmaffinity": "897658",
+   "rt": "m/late_night_with_the_devil",
+   "letterboxd": "late-night-with-the-devil",
+   "tmdb": "938614",
+   "allocine": "313588"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/cb/Late_Night_with_the_Devil_poster.jpg"
+ },
+ "Oddity|2024": {
+  "ids": {
+   "wikidata": "Q124852795",
+   "imdb": "tt26470109",
+   "filmaffinity": "413857",
+   "rt": "m/oddity",
+   "letterboxd": "oddity-2024",
+   "tmdb": "1216191",
+   "allocine": "326687"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/03/Oddity_film_poster.jpg"
+ },
+ "Sinners|2025": {
+  "ids": {
+   "wikidata": "Q125473145",
+   "imdb": "tt31193180",
+   "filmaffinity": "699169",
+   "rt": "m/sinners_2025",
+   "letterboxd": "sinners-2025",
+   "tmdb": "1233413",
+   "allocine": "326355"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/5f/Sinners_%282025_film%29_poster.jpg"
+ },
+ "Nosferatu|2024": {
+  "ids": {
+   "wikidata": "Q116361132",
+   "imdb": "tt5040012",
+   "filmaffinity": "779702",
+   "rt": "m/nosferatu_2024",
+   "letterboxd": "nosferatu-2024",
+   "tmdb": "426063",
+   "allocine": "239839"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/48/Nosferatu_IMAX_poster_2024.jpg"
+ },
+ "Longlegs|2024": {
+  "ids": {
+   "wikidata": "Q116470610",
+   "imdb": "tt23468450",
+   "filmaffinity": "595778",
+   "rt": "m/longlegs",
+   "letterboxd": "longlegs",
+   "tmdb": "1226578",
+   "allocine": "310151"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/60/Longlegs_film_poster.jpg"
+ },
+ "The Autopsy of Jane Doe|2016": {
+  "ids": {
+   "wikidata": "Q27458304",
+   "imdb": "tt3289956",
+   "filmaffinity": "138981",
+   "rt": "m/the_autopsy_of_jane_doe",
+   "letterboxd": "the-autopsy-of-jane-doe",
+   "tmdb": "397243",
+   "allocine": "227014"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/47/The_Autopsy_of_Jane_Doe.jpeg"
+ },
+ "The Mist|2007": {
+  "ids": {
+   "wikidata": "Q695209",
+   "imdb": "tt0884328",
+   "filmaffinity": "133932",
+   "rt": "m/mist",
+   "letterboxd": "the-mist",
+   "tmdb": "5876",
+   "allocine": "122632"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a1/The_Mist_poster.jpg"
+ },
+ "The Green Mile|1999": {
+  "ids": {
+   "wikidata": "Q208263",
+   "imdb": "tt0120689",
+   "filmaffinity": "463120",
+   "rt": "m/green_mile",
+   "letterboxd": "the-green-mile",
+   "tmdb": "497",
+   "allocine": "22779"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e2/The_Green_Mile_%28movie_poster%29.jpg"
+ },
+ "Gladiator|2000": {
+  "ids": {
+   "wikidata": "Q128518",
+   "imdb": "tt0172495",
+   "filmaffinity": "392075",
+   "rt": "m/gladiator",
+   "letterboxd": "gladiator-2000",
+   "tmdb": "98",
+   "allocine": "24944"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/fb/Gladiator_%282000_film_poster%29.png"
+ },
+ "Braveheart|1995": {
+  "ids": {
+   "wikidata": "Q162729",
+   "imdb": "tt0112573",
+   "filmaffinity": "395715",
+   "rt": "m/1065684-braveheart",
+   "letterboxd": "braveheart",
+   "tmdb": "197",
+   "allocine": "10080"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e1/Braveheart_film_poster.png"
+ },
+ "A Beautiful Mind|2001": {
+  "ids": {
+   "wikidata": "Q164103",
+   "imdb": "tt0268978",
+   "filmaffinity": "326587",
+   "rt": "m/beautiful_mind",
+   "letterboxd": "a-beautiful-mind",
+   "tmdb": "453",
+   "allocine": "28384"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b8/A_Beautiful_Mind_Poster.jpg"
+ },
+ "Rush|2013": {
+  "ids": {
+   "wikidata": "Q1768437",
+   "imdb": "tt1979320",
+   "filmaffinity": "374668",
+   "rt": "m/rush_2013",
+   "letterboxd": "rush-2013",
+   "tmdb": "96721",
+   "allocine": "195370"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/d0/Rush_UK_poster.jpeg"
+ },
+ "The Pursuit of Happyness|2006": {
+  "ids": {
+   "wikidata": "Q220515",
+   "imdb": "tt0454921",
+   "filmaffinity": "294674",
+   "rt": "m/pursuit_of_happyness",
+   "letterboxd": "the-pursuit-of-happyness",
+   "tmdb": "1402",
+   "allocine": "54098"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/81/Poster-pursuithappyness.jpg"
+ },
+ "Scent of a Woman|1992": {
+  "ids": {
+   "wikidata": "Q321561",
+   "imdb": "tt0105323",
+   "filmaffinity": "835426",
+   "rt": "m/1042193-scent_of_a_woman",
+   "letterboxd": "scent-of-a-woman",
+   "tmdb": "9475",
+   "allocine": "31052"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/91/Scent_of_a_Woman.jpg"
+ },
+ "The Elephant Man|1980": {
+  "ids": {
+   "wikidata": "Q272860",
+   "imdb": "tt0080678",
+   "filmaffinity": "418539",
+   "rt": "m/1006527-elephant_man",
+   "letterboxd": "the-elephant-man",
+   "tmdb": "1955",
+   "allocine": "180"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/27/TheElephantManposter.jpg"
+ },
+ "Mulholland Drive|2001": {
+  "ids": {
+   "wikidata": "Q272608",
+   "imdb": "tt0166924",
+   "filmaffinity": "178603",
+   "rt": "m/mulholland_dr",
+   "letterboxd": "mulholland-drive",
+   "tmdb": "1018",
+   "allocine": "28682"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/0f/Mulholland.png"
+ },
+ "Amadeus|1984": {
+  "ids": {
+   "wikidata": "Q190956",
+   "imdb": "tt0086879",
+   "filmaffinity": "491709",
+   "rt": "m/amadeus",
+   "letterboxd": "amadeus",
+   "tmdb": "279",
+   "allocine": "67"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2f/Amadeusmov.jpg"
+ },
+ "The Deer Hunter|1978": {
+  "ids": {
+   "wikidata": "Q201674",
+   "imdb": "tt0077416",
+   "filmaffinity": "764534",
+   "rt": "m/the_deer_hunter",
+   "letterboxd": "the-deer-hunter",
+   "tmdb": "11778",
+   "allocine": "29714"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/57/The_Deer_Hunter_poster.jpg"
+ },
+ "Come and See|1985": {
+  "ids": {
+   "wikidata": "Q1130395",
+   "imdb": "tt0091251",
+   "filmaffinity": "843365",
+   "rt": "m/come_and_see",
+   "letterboxd": "come-and-see",
+   "tmdb": "25237",
+   "allocine": "2688"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/08/Come_and_See_%28poster%29.jpg"
+ },
+ "Letters from Iwo Jima|2006": {
+  "ids": {
+   "wikidata": "Q275187",
+   "imdb": "tt0498380",
+   "filmaffinity": "176123",
+   "rt": "m/letters_from_iwo_jima",
+   "letterboxd": "letters-from-iwo-jima",
+   "tmdb": "1251",
+   "allocine": "112342"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/87/Letters_from_Iwo_Jima.jpg"
+ },
+ "Black Hawk Down|2001": {
+  "ids": {
+   "wikidata": "Q221384",
+   "imdb": "tt0265086",
+   "filmaffinity": "104172",
+   "rt": "m/black_hawk_down",
+   "letterboxd": "black-hawk-down",
+   "tmdb": "855",
+   "allocine": "35144"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/0c/Black_hawk_down_ver1.jpg"
+ },
+ "There Will Be Blood|2007": {
+  "ids": {
+   "wikidata": "Q244315",
+   "imdb": "tt0469494",
+   "filmaffinity": "531158",
+   "rt": "m/there_will_be_blood",
+   "letterboxd": "there-will-be-blood",
+   "tmdb": "7345",
+   "allocine": "109788"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/da/There_Will_Be_Blood_Poster.jpg"
+ },
+ "Magnolia|1999": {
+  "ids": {
+   "wikidata": "Q588420",
+   "imdb": "tt0175880",
+   "filmaffinity": "411816",
+   "rt": "m/magnolia",
+   "letterboxd": "magnolia",
+   "tmdb": "334",
+   "allocine": "22858"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4b/Magnolia_poster.png"
+ },
+ "One Battle After Another|2025": {
+  "ids": {
+   "wikidata": "Q117085614",
+   "imdb": "tt30144839",
+   "filmaffinity": "910030",
+   "rt": "m/one_battle_after_another",
+   "letterboxd": "one-battle-after-another",
+   "tmdb": "1054867",
+   "allocine": "311364"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/5d/One_Battle_After_Another.jpg"
+ },
+ "The Grand Budapest Hotel|2014": {
+  "ids": {
+   "wikidata": "Q3521099",
+   "imdb": "tt2278388",
+   "filmaffinity": "817968",
+   "rt": "m/the_grand_budapest_hotel",
+   "letterboxd": "the-grand-budapest-hotel",
+   "tmdb": "120467",
+   "allocine": "207825"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Grand_Budapest_Hotel.png"
+ },
+ "Fantastic Mr. Fox|2009": {
+  "ids": {
+   "wikidata": "Q465275",
+   "imdb": "tt0432283",
+   "filmaffinity": "604587",
+   "rt": "m/1197696-fantastic_mr_fox",
+   "letterboxd": "fantastic-mr-fox",
+   "tmdb": "10315",
+   "allocine": "114976"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/af/Fantastic_mr_fox.jpg"
+ },
+ "Groundhog Day|1993": {
+  "ids": {
+   "wikidata": "Q488655",
+   "imdb": "tt0107048",
+   "filmaffinity": "245798",
+   "rt": "m/groundhog_day",
+   "letterboxd": "groundhog-day",
+   "tmdb": "137",
+   "allocine": "8066"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b1/Groundhog_Day_%28movie_poster%29.jpg"
+ },
+ "Little Miss Sunshine|2006": {
+  "ids": {
+   "wikidata": "Q192073",
+   "imdb": "tt0449059",
+   "filmaffinity": "481444",
+   "rt": "m/little_miss_sunshine",
+   "letterboxd": "little-miss-sunshine",
+   "tmdb": "773",
+   "allocine": "109815"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/16/Little_miss_sunshine_poster.jpg"
+ },
+ "What We Do in the Shadows|2014": {
+  "ids": {
+   "wikidata": "Q17036671",
+   "imdb": "tt3416742",
+   "filmaffinity": "493854",
+   "rt": "m/what_we_do_in_the_shadows",
+   "letterboxd": "what-we-do-in-the-shadows",
+   "tmdb": "246741",
+   "allocine": "226427"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/70/What_We_Do_in_the_Shadows_poster.jpg"
+ },
+ "Airplane!|1980": {
+  "ids": {
+   "wikidata": "Q497256",
+   "imdb": "tt0080339",
+   "filmaffinity": "445878",
+   "rt": "m/airplane",
+   "letterboxd": "airplane",
+   "tmdb": "813",
+   "allocine": "36184"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/21/Airplane%21_%281980_film%29.jpg"
+ },
+ "Life of Brian|1979": {
+  "ids": {
+   "wikidata": "Q24953",
+   "imdb": "tt0079470",
+   "filmaffinity": "612331",
+   "rt": "m/monty_pythons_life_of_brian",
+   "letterboxd": "life-of-brian",
+   "tmdb": "583",
+   "allocine": "249"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/18/Lifeofbrianfilmposter.jpg"
+ },
+ "Palm Springs|2020": {
+  "ids": {
+   "wikidata": "Q65084655",
+   "imdb": "tt9484998",
+   "filmaffinity": "357802",
+   "rt": "m/palm_springs_2020",
+   "letterboxd": "palm-springs-2020",
+   "tmdb": "587792",
+   "allocine": "272475"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/c/c5/Palm_Springs_poster.jpeg"
+ },
+ "Game Night|2018": {
+  "ids": {
+   "wikidata": "Q30011713",
+   "imdb": "tt2704998",
+   "filmaffinity": "592178",
+   "rt": "m/game_night_2018",
+   "letterboxd": "game-night",
+   "tmdb": "445571",
+   "allocine": "218449"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a4/Game_Night_%28film%29.png"
+ },
+ "The Holdovers|2023": {
+  "ids": {
+   "wikidata": "Q112114745",
+   "imdb": "tt14849194",
+   "filmaffinity": "119599",
+   "rt": "m/the_holdovers",
+   "letterboxd": "the-holdovers",
+   "tmdb": "840430",
+   "allocine": "293640"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/62/Holdovers_film_poster.jpg"
+ },
+ "The Big Short|2015": {
+  "ids": {
+   "wikidata": "Q19850715",
+   "imdb": "tt1596363",
+   "filmaffinity": "774066",
+   "rt": "m/the_big_short",
+   "letterboxd": "the-big-short",
+   "tmdb": "318846",
+   "allocine": "227900"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/16/The_Big_Short_%282015_film_poster%29.png"
+ },
+ "Moneyball|2011": {
+  "ids": {
+   "wikidata": "Q221820",
+   "imdb": "tt1210166",
+   "filmaffinity": "974637",
+   "rt": "m/moneyball",
+   "letterboxd": "moneyball",
+   "tmdb": "60308",
+   "allocine": "140005"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2e/Moneyball_Poster.jpg"
+ },
+ "Ford v Ferrari|2019": {
+  "ids": {
+   "wikidata": "Q55081822",
+   "imdb": "tt1950186",
+   "filmaffinity": "274299",
+   "rt": "m/ford_v_ferrari",
+   "letterboxd": "ford-v-ferrari",
+   "tmdb": "359724",
+   "allocine": "262396"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a4/Ford_v._Ferrari_%282019_film_poster%29.png"
+ },
+ "Mission: Impossible – Fallout|2018": {
+  "ids": {
+   "wikidata": "Q29261993",
+   "imdb": "tt4912910",
+   "filmaffinity": "286514",
+   "rt": "m/mission_impossible_fallout",
+   "letterboxd": "mission-impossible-fallout",
+   "tmdb": "353081",
+   "allocine": "238132"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/ff/MI_%E2%80%93_Fallout.jpg"
+ },
+ "Mission: Impossible – The Final Reckoning|2025": {
+  "ids": {
+   "wikidata": "Q61876374",
+   "imdb": "tt9603208",
+   "filmaffinity": "923082",
+   "rt": "m/mission_impossible_the_final_reckoning",
+   "letterboxd": "mission-impossible-the-final-reckoning",
+   "tmdb": "575265",
+   "allocine": "270936"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/1f/Mission_Impossible_%E2%80%93_The_Final_Reckoning_Poster.jpg"
+ },
+ "John Wick|2014": {
+  "ids": {
+   "wikidata": "Q15732802",
+   "imdb": "tt2911666",
+   "filmaffinity": "351657",
+   "rt": "m/john_wick",
+   "letterboxd": "john-wick",
+   "tmdb": "245891",
+   "allocine": "221387"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/98/John_Wick_TeaserPoster.jpg"
+ },
+ "Big Fish|2003": {
+  "ids": {
+   "wikidata": "Q278997",
+   "imdb": "tt0319061",
+   "filmaffinity": "974553",
+   "rt": "m/1127787-big_fish",
+   "letterboxd": "big-fish",
+   "tmdb": "587",
+   "allocine": "28644"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/41/Big_Fish_movie_poster.png"
+ },
+ "Edward Scissorhands|1990": {
+  "ids": {
+   "wikidata": "Q217182",
+   "imdb": "tt0099487",
+   "filmaffinity": "827774",
+   "rt": "m/edward_scissorhands",
+   "letterboxd": "edward-scissorhands",
+   "tmdb": "162",
+   "allocine": "27624"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/3b/Edwardscissorhandsposter.JPG"
+ },
+ "The Untouchables|1987": {
+  "ids": {
+   "wikidata": "Q108525",
+   "imdb": "tt0094226",
+   "filmaffinity": "520318",
+   "rt": "m/untouchables",
+   "letterboxd": "the-untouchables",
+   "tmdb": "117",
+   "allocine": "2770"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/92/UntouchablesThe.jpg"
+ },
+ "Carlito's Way|1993": {
+  "ids": {
+   "wikidata": "Q939176",
+   "imdb": "tt0106519",
+   "filmaffinity": "989180",
+   "rt": "m/carlitos_way",
+   "letterboxd": "carlitos-way",
+   "tmdb": "6075",
+   "allocine": "9530"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/24/Carlito%27s_Way.jpg"
+ },
+ "Donnie Brasco|1997": {
+  "ids": {
+   "wikidata": "Q738456",
+   "imdb": "tt0119008",
+   "filmaffinity": "648751",
+   "rt": "m/donnie_brasco",
+   "letterboxd": "donnie-brasco",
+   "tmdb": "9366",
+   "allocine": "13896"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/bb/Donnie_brasco_ver2.jpg"
+ },
+ "Road to Perdition|2002": {
+  "ids": {
+   "wikidata": "Q468033",
+   "imdb": "tt0257044",
+   "filmaffinity": "159463",
+   "rt": "m/road_to_perdition",
+   "letterboxd": "road-to-perdition",
+   "tmdb": "4147",
+   "allocine": "28874"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/90/Road_to_Perdition_Film_Poster.jpg"
+ },
+ "American Gangster|2007": {
+  "ids": {
+   "wikidata": "Q270351",
+   "imdb": "tt0765429",
+   "filmaffinity": "881984",
+   "rt": "m/american_gangster",
+   "letterboxd": "american-gangster",
+   "tmdb": "4982",
+   "allocine": "88156"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/9f/American_Gangster_poster.jpg"
+ },
+ "The Town|2010": {
+  "ids": {
+   "wikidata": "Q725539",
+   "imdb": "tt0840361",
+   "filmaffinity": "222873",
+   "rt": "m/the_town",
+   "letterboxd": "the-town",
+   "tmdb": "23168",
+   "allocine": "82376"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/da/The_Town_Poster.jpg"
+ },
+ "Gone Baby Gone|2007": {
+  "ids": {
+   "wikidata": "Q247182",
+   "imdb": "tt0452623",
+   "filmaffinity": "809192",
+   "rt": "m/gone_baby_gone",
+   "letterboxd": "gone-baby-gone",
+   "tmdb": "4771",
+   "allocine": "47165"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/fd/Gone_Baby_Gone_poster.png"
+ },
+ "Hell or High Water|2016": {
+  "ids": {
+   "wikidata": "Q20026847",
+   "imdb": "tt2582782",
+   "filmaffinity": "934874",
+   "rt": "m/hell_or_high_water",
+   "letterboxd": "hell-or-high-water",
+   "tmdb": "338766",
+   "allocine": "206412"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/8f/Hell_or_High_Water_film_poster.png"
+ },
+ "Wind River|2017": {
+  "ids": {
+   "wikidata": "Q25339940",
+   "imdb": "tt5362988",
+   "filmaffinity": "834864",
+   "rt": "m/wind_river_2017",
+   "letterboxd": "wind-river-2017",
+   "tmdb": "395834",
+   "allocine": "244382"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2e/Wind_River_%282017_film%29.png"
+ },
+ "Uncut Gems|2019": {
+  "ids": {
+   "wikidata": "Q56312570",
+   "imdb": "tt5727208",
+   "filmaffinity": "360338",
+   "rt": "m/uncut_gems",
+   "letterboxd": "uncut-gems",
+   "tmdb": "473033",
+   "allocine": "256322"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/a/a7/Uncut_Gems_poster.jpg"
+ },
+ "Marty Supreme|2025": {
+  "ids": {
+   "wikidata": "Q130118681",
+   "imdb": "tt32916440",
+   "filmaffinity": "380589",
+   "rt": "m/marty_supreme",
+   "letterboxd": "marty-supreme",
+   "tmdb": "1317288",
+   "allocine": "1000007317"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/ba/Marty_Supreme_poster.jpg"
+ },
+ "Moonlight|2016": {
+  "ids": {
+   "wikidata": "Q21527875",
+   "imdb": "tt4975722",
+   "filmaffinity": "395573",
+   "rt": "m/moonlight_2016",
+   "letterboxd": "moonlight-2016",
+   "tmdb": "376867",
+   "allocine": "242054"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/84/Moonlight_%282016_film%29.png"
+ },
+ "Marriage Story|2019": {
+  "ids": {
+   "wikidata": "Q48671199",
+   "imdb": "tt7653254",
+   "filmaffinity": "845261",
+   "rt": "m/marriage_story_2019",
+   "letterboxd": "marriage-story-2019",
+   "tmdb": "492188",
+   "allocine": "261015"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/55/MarriageStoryPoster.png"
+ },
+ "Past Lives|2023": {
+  "ids": {
+   "wikidata": "Q116025865",
+   "imdb": "tt13238346",
+   "filmaffinity": "450022",
+   "rt": "m/past_lives",
+   "letterboxd": "past-lives",
+   "tmdb": "666277",
+   "allocine": "295050"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/da/Past_Lives_film_poster.png"
+ },
+ "Anora|2024": {
+  "ids": {
+   "wikidata": "Q123185887",
+   "imdb": "tt28607951",
+   "filmaffinity": "429924",
+   "rt": "m/anora",
+   "letterboxd": "anora",
+   "tmdb": "1064213",
+   "allocine": "323024"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2b/Anora_%282024_film%29_poster.jpg"
+ },
+ "The Brutalist|2024": {
+  "ids": {
+   "wikidata": "Q101112656",
+   "imdb": "tt8999762",
+   "filmaffinity": "840798",
+   "rt": "m/the_brutalist",
+   "letterboxd": "the-brutalist",
+   "tmdb": "549509",
+   "allocine": "269838"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/7c/TheBrutalist2024.png"
+ },
+ "Poor Things|2023": {
+  "ids": {
+   "wikidata": "Q108760382",
+   "imdb": "tt14230458",
+   "filmaffinity": "270023",
+   "rt": "m/poor_things",
+   "letterboxd": "poor-things-2023",
+   "tmdb": "792307",
+   "allocine": "290065"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/f/f3/Poor_Things_poster.jpg"
+ },
+ "Bugonia|2025": {
+  "ids": {
+   "wikidata": "Q125971387",
+   "imdb": "tt12300742",
+   "filmaffinity": "964057",
+   "rt": "m/bugonia",
+   "letterboxd": "bugonia",
+   "tmdb": "701387",
+   "allocine": "282613"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/27/Bugonia_film_poster.jpg"
+ },
+ "Sentimental Value|2025": {
+  "ids": {
+   "wikidata": "Q130284179",
+   "imdb": "tt27714581",
+   "filmaffinity": "901036",
+   "rt": "m/sentimental_value",
+   "letterboxd": "sentimental-value-2025",
+   "tmdb": "1124566",
+   "allocine": "298726"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/5c/Sentimental_Value_2025.jpeg"
+ },
+ "The Worst Person in the World|2021": {
+  "ids": {
+   "wikidata": "Q107089587",
+   "imdb": "tt10370710",
+   "filmaffinity": "818283",
+   "rt": "m/the_worst_person_in_the_world",
+   "letterboxd": "the-worst-person-in-the-world",
+   "tmdb": "660120",
+   "allocine": "279214"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/54/The_Worst_Person_in_the_World_%28film%29.jpg"
+ },
+ "12 Years a Slave|2013": {
+  "ids": {
+   "wikidata": "Q3023357",
+   "imdb": "tt2024544",
+   "filmaffinity": "554692",
+   "rt": "m/12_years_a_slave",
+   "letterboxd": "12-years-a-slave",
+   "tmdb": "76203",
+   "allocine": "196885"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/5/5c/12_Years_a_Slave_film_poster.jpg"
+ },
+ "The King's Speech|2010": {
+  "ids": {
+   "wikidata": "Q160060",
+   "imdb": "tt1504320",
+   "filmaffinity": "968462",
+   "rt": "m/the_kings_speech",
+   "letterboxd": "the-kings-speech",
+   "tmdb": "45269",
+   "allocine": "175305"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/4a/The_King%27s_Speech_poster.jpg"
+ },
+ "The Hurt Locker|2008": {
+  "ids": {
+   "wikidata": "Q183066",
+   "imdb": "tt0887912",
+   "filmaffinity": "588031",
+   "rt": "m/the_hurt_locker",
+   "letterboxd": "the-hurt-locker",
+   "tmdb": "12162",
+   "allocine": "123021"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/6/6c/HLposterUSA2.jpg"
+ },
+ "Annie Hall|1977": {
+  "ids": {
+   "wikidata": "Q233464",
+   "imdb": "tt0075686",
+   "filmaffinity": "487991",
+   "rt": "m/annie_hall",
+   "letterboxd": "annie-hall",
+   "tmdb": "703",
+   "allocine": "88"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/e/e6/Anniehallposter.jpg"
+ },
+ "Midnight in Paris|2011": {
+  "ids": {
+   "wikidata": "Q206124",
+   "imdb": "tt1605783",
+   "filmaffinity": "567174",
+   "rt": "m/midnight_in_paris",
+   "letterboxd": "midnight-in-paris",
+   "tmdb": "59436",
+   "allocine": "178300"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/9f/Midnight_in_Paris_Poster.jpg"
+ },
+ "Rocketman|2019": {
+  "ids": {
+   "wikidata": "Q55934795",
+   "imdb": "tt2066051",
+   "filmaffinity": "148461",
+   "rt": "m/rocketman_2019",
+   "letterboxd": "rocketman-2019",
+   "tmdb": "504608",
+   "allocine": "197810"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/0f/Rocketman_%28film%29.png"
+ },
+ "Elvis|2022": {
+  "ids": {
+   "wikidata": "Q84362533",
+   "imdb": "tt3704428",
+   "filmaffinity": "589077",
+   "rt": "m/elvis",
+   "letterboxd": "elvis-2022",
+   "tmdb": "614934",
+   "allocine": "228681"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/79/Elvis_2022_poster.jpg"
+ },
+ "Wicked|2024": {
+  "ids": {
+   "wikidata": "Q24797403",
+   "imdb": "tt1262426",
+   "filmaffinity": "753623",
+   "rt": "m/wicked_2024",
+   "letterboxd": "wicked-2024",
+   "tmdb": "402431",
+   "allocine": "248289"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/3c/Wicked_%282024_film%29_poster.png"
+ },
+ "A Complete Unknown|2024": {
+  "ids": {
+   "wikidata": "Q118175825",
+   "imdb": "tt11563598",
+   "filmaffinity": "966380",
+   "rt": "m/a_complete_unknown",
+   "letterboxd": "a-complete-unknown",
+   "tmdb": "661539",
+   "allocine": "280195"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/d5/A_Complete_Unknown_poster.jpg"
+ },
+ "Coraline|2009": {
+  "ids": {
+   "wikidata": "Q632668",
+   "imdb": "tt0327597",
+   "filmaffinity": "629275",
+   "rt": "m/coraline",
+   "letterboxd": "coraline",
+   "tmdb": "14836",
+   "allocine": "109125"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/36/Coraline_poster.jpg"
+ },
+ "Mary and Max|2009": {
+  "ids": {
+   "wikidata": "Q1128756",
+   "imdb": "tt0978762",
+   "filmaffinity": "563877",
+   "rt": "m/1209767-mary_and_max",
+   "letterboxd": "mary-and-max",
+   "tmdb": "24238",
+   "allocine": "139621"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/8/8d/Mary_and_max_poster.jpg"
+ },
+ "Puss in Boots: The Last Wish|2022": {
+  "ids": {
+   "wikidata": "Q31271384",
+   "imdb": "tt3915174",
+   "filmaffinity": "542141",
+   "rt": "m/puss_in_boots_the_last_wish",
+   "letterboxd": "puss-in-boots-the-last-wish",
+   "tmdb": "315162",
+   "allocine": "228395"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/78/Puss_in_Boots_The_Last_Wish_poster.jpg"
+ },
+ "The Wild Robot|2024": {
+  "ids": {
+   "wikidata": "Q124378349",
+   "imdb": "tt29623480",
+   "filmaffinity": "605382",
+   "rt": "m/the_wild_robot",
+   "letterboxd": "the-wild-robot",
+   "tmdb": "1184918",
+   "allocine": "268384"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/70/The_Wild_Robot_poster.jpg"
+ },
+ "Flow|2024": {
+  "ids": {
+   "wikidata": "Q125622088",
+   "imdb": "tt4772188",
+   "filmaffinity": "989516",
+   "rt": "m/flow_2024",
+   "letterboxd": "flow-2024",
+   "tmdb": "823219",
+   "allocine": "302474"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2d/Flow_movie_poster.jpg"
+ },
+ "KPop Demon Hunters|2025": {
+  "ids": {
+   "wikidata": "Q130268157",
+   "imdb": "tt14205554",
+   "filmaffinity": "574440",
+   "rt": "m/kpop_demon_hunters",
+   "letterboxd": "kpop-demon-hunters",
+   "tmdb": "803796",
+   "allocine": "291011"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/9/93/KPDHposter.jpeg"
+ },
+ "Superman|2025": {
+  "ids": {
+   "wikidata": "Q116547790",
+   "imdb": "tt5950044",
+   "filmaffinity": "811435",
+   "rt": "m/superman_2025",
+   "letterboxd": "superman-2025",
+   "tmdb": "1061474",
+   "allocine": "229669"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/32/Superman_%282025_film%29_poster.jpg"
+ },
+ "Incredibles 2|2018": {
+  "ids": {
+   "wikidata": "Q24832112",
+   "imdb": "tt3606756",
+   "filmaffinity": "596458",
+   "rt": "m/incredibles_2",
+   "letterboxd": "incredibles-2",
+   "tmdb": "260513",
+   "allocine": "198937"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/1/1f/Incredibles_2_%282018_animated_film%29.jpg"
+ },
+ "Logan|2017": {
+  "ids": {
+   "wikidata": "Q24053263",
+   "imdb": "tt3315342",
+   "filmaffinity": "176022",
+   "rt": "m/logan_2017",
+   "letterboxd": "logan-2017",
+   "tmdb": "263115",
+   "allocine": "225116"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/3/37/Logan_2017_poster.jpg"
+ },
+ "X-Men: Days of Future Past|2014": {
+  "ids": {
+   "wikidata": "Q4985891",
+   "imdb": "tt1877832",
+   "filmaffinity": "736749",
+   "rt": "m/x_men_days_of_future_past",
+   "letterboxd": "x-men-days-of-future-past",
+   "tmdb": "127585",
+   "allocine": "195128"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/0/0c/X-Men_Days_of_Future_Past_poster.jpg"
+ },
+ "Watchmen|2009": {
+  "ids": {
+   "wikidata": "Q162182",
+   "imdb": "tt0409459",
+   "filmaffinity": "267002",
+   "rt": "m/watchmen",
+   "letterboxd": "watchmen",
+   "tmdb": "13183",
+   "allocine": "57769"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/bc/Watchmen_film_poster.jpg"
+ },
+ "Frost/Nixon|2008": {
+  "ids": {
+   "wikidata": "Q691672",
+   "imdb": "tt0870111",
+   "filmaffinity": "772368",
+   "rt": "m/frostnixon",
+   "letterboxd": "frost-nixon",
+   "tmdb": "11499",
+   "allocine": "120435"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/b/b1/Frost_nixon.jpg"
+ },
+ "Seven Pounds|2008": {
+  "ids": {
+   "wikidata": "Q635924",
+   "imdb": "tt0814314",
+   "filmaffinity": "171299",
+   "rt": "m/seven_pounds",
+   "letterboxd": "seven-pounds",
+   "tmdb": "11321",
+   "allocine": "130769"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/2/2d/Seven_Pounds_poster.jpg"
+ },
+ "A Few Good Men|1992": {
+  "ids": {
+   "wikidata": "Q108946",
+   "imdb": "tt0104257",
+   "filmaffinity": "671631",
+   "rt": "m/few_good_men",
+   "letterboxd": "a-few-good-men",
+   "tmdb": "881",
+   "allocine": "5942"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/4/45/A_Few_Good_Men_poster.jpg"
+ },
+ "Stand by Me|1986": {
+  "ids": {
+   "wikidata": "Q494722",
+   "imdb": "tt0092005",
+   "filmaffinity": "279397",
+   "rt": "m/stand_by_me_1986",
+   "letterboxd": "stand-by-me",
+   "tmdb": "235",
+   "allocine": "2495"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/7/74/Stand_By_Me_1986_American_Theatrical_Release_Poster.jpg"
+ },
+ "The Princess Bride|1987": {
+  "ids": {
+   "wikidata": "Q506418",
+   "imdb": "tt0093779",
+   "filmaffinity": "579602",
+   "rt": "m/princess_bride",
+   "letterboxd": "the-princess-bride",
+   "tmdb": "2493",
+   "allocine": "3326"
+  },
+  "poster": "https://upload.wikimedia.org/wikipedia/en/d/db/Princess_bride.jpg"
+ }
+}
