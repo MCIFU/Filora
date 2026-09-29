@@ -1202,9 +1202,13 @@
   {
    "fecha": "2026-11-13",
    "titulo": "El niño",
+   "original": "El niño",
+   "director": "Mariano Barroso",
    "generos": [
     "Drama"
    ],
+   "pais": "España",
+   "sinopsis": "El 23 de octubre de 1980 una gigantesca explosión de gas mató a 50 niños y 3 adultos en el colegio público de Ortuella, Vizcaya. Este suceso, que conmocionó al pueblo vasco y a toda España, afectó y cambió las vidas de esa y muchas otras familias como la de…",
    "poster": "https://pics.filmaffinity.com/el_nino-999691592-mmed.jpg",
    "fa": "283648",
    "destacado": false
@@ -1212,9 +1216,13 @@
   {
    "fecha": "2026-11-13",
    "titulo": "Jaleos",
+   "original": "Jaleos",
+   "director": "Isaki Lacuesta",
    "generos": [
     "Documental"
    ],
+   "pais": "España",
+   "sinopsis": "Largometraje documental construido con archivo, testimonios sonoros y grabaciones actuales que explora cómo la historia del flamenco está íntimamente ligada a la modernidad y al nacimiento de las máquinas. Entre el cuento y el ensayo, propone un viaje por…",
    "poster": "https://pics.filmaffinity.com/jaleos-767340486-mmed.jpg",
    "fa": "897230",
    "destacado": false
@@ -1222,9 +1230,13 @@
   {
    "fecha": "2026-11-13",
    "titulo": "La violinista",
+   "original": "The Violinist",
+   "director": "Ervin Han / Raúl García",
    "generos": [
     "Animación"
    ],
+   "pais": "Singapur",
+   "sinopsis": "Un joven periodista español se adentra en las vidas entrelazadas de dos amantes mientras investiga el origen de un viejo violín. La investigación le lleva al Singapur de 1941, donde el sueño de dos jóvenes violinistas, Kai y Fei, se ve truncado por la…",
    "poster": "https://pics.filmaffinity.com/the_violinist-602690253-mmed.jpg",
    "fa": "906872",
    "destacado": false
@@ -1239,6 +1251,7 @@
    ],
    "pais": "Estados Unidos",
    "reparto": "Matthew McConaughey",
+   "sinopsis": "En lo más profundo de los bosques de la Oklahoma rural, el carismático y musicalmente dotado Amziah King lidera una banda de inadaptados que tocan bluegrass mientras supervisa la principal operación de fabricación de miel del pueblo. Cuando la hija adoptiva…",
    "poster": "https://pics.filmaffinity.com/the_rivals_of_amziah_king-955386817-mmed.jpg",
    "fa": "184041",
    "destacado": true,
@@ -1255,9 +1268,13 @@
   {
    "fecha": "2026-11-13",
    "titulo": "Ratones al ataque: Operación Navidad",
+   "original": "Hvis ingen går i fellaaka",
+   "director": "Henrik Martin Dahlsbakken",
    "generos": [
     "Animación"
    ],
+   "pais": "Noruega",
+   "sinopsis": "Una familia acude a la casa abandonada de su tía para celebrar la Navidad en el campo, sin saber que una familia de ratones ya habita la casa, y no les interesan las visitas. Así que sólo queda una cosa por hacer: poner trampas, estar atentos y defenderse.",
    "poster": "https://pics.filmaffinity.com/hvis_ingen_gar_i_fella-798734028-mmed.jpg",
    "fa": "711767",
    "destacado": false
@@ -1280,9 +1297,13 @@
   {
    "fecha": "2026-11-13",
    "titulo": "Trinidad",
+   "original": "Trinidad",
+   "director": "Laura Alvea / José F. Ortuño",
    "generos": [
     "Western"
    ],
+   "pais": "España",
+   "sinopsis": "A finales del siglo XIX una joven española llamada Trinidad (Gabriela Andrada) llega al Salvaje Oeste acompañada de su madre (Paz Vega) y de su hermana (Sofía Allepuz) huyendo de la justicia que la persigue en su país. Desafiando los roles que la sociedad de…",
    "poster": "https://pics.filmaffinity.com/trinidad-355477673-mmed.jpg",
    "fa": "688376",
    "destacado": false
@@ -1295,6 +1316,8 @@
    "generos": [
     "Terror"
    ],
+   "pais": "Reino Unido",
+   "sinopsis": "1858. Winifred Notty, una institutriz aparentemente perfecta, pero con unas formas inquietantes, llega a la mansión Ensor House. Su misión es educar y cuidar de los dos niños de la familia. Pero empieza a obsesionarse con formar parte de la familia. Bajo una…",
    "poster": "https://pics.filmaffinity.com/victorian_psycho-266092679-mmed.jpg",
    "fa": "916686",
    "destacado": false,
@@ -1331,9 +1354,13 @@
   {
    "fecha": "2026-11-20",
    "titulo": "La noche cerrada",
+   "original": "La noche cerrada",
+   "director": "Belén Macías",
    "generos": [
     "Thriller"
    ],
+   "pais": "España",
+   "sinopsis": "“La noche cerrada” lleva tres décadas siendo el programa de radio más escuchado de la madrugada con Luis Gálvez (Javier Rey) al frente, el locutor más respetado del país. Luis atiende las llamadas de gente con problemas de diversos tipos y siempre encuentra…",
    "poster": "https://pics.filmaffinity.com/la_noche_cerrada-432385919-mmed.jpg",
    "fa": "210497",
    "destacado": false
@@ -1347,6 +1374,7 @@
     "Bélico"
    ],
    "pais": "Estados Unidos",
+   "sinopsis": "Vuelve al mundo de Panem 24 años antes de los acontecimientos de la primera película, comenzando en la mañana de la cosecha de los 50º Juegos del Hambre, también denominados como el Segundo Vasallaje de los Veinticinco. Allí participa un joven Haymitch…",
    "poster": "https://pics.filmaffinity.com/the_hunger_games_sunrise_on_the_reaping-697757768-mmed.jpg",
    "fa": "161937",
    "destacado": true,
