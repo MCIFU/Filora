@@ -22,7 +22,9 @@ def main():
     db.pop("estado", None)
     db.pop("config", None)
     est = json.loads((ROOT / "data" / "estrenos.json").read_text(encoding="utf-8"))
-    files = {"db.json": db, "estrenos.json": est, "catalogo.json": load_catalog()}
+    cart_path = ROOT / "data" / "cartelera.json"
+    cart = json.loads(cart_path.read_text(encoding="utf-8")) if cart_path.exists() else {"cines": []}
+    files = {"db.json": db, "estrenos.json": est, "catalogo.json": load_catalog(), "cartelera.json": cart}
     for name, data in files.items():
         (OUT / name).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"Web estática lista en app/data: {len(db['peliculas'])} películas, "

@@ -23607,8 +23607,12 @@
    "pais": "Estados Unidos",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://upload.wikimedia.org/wikipedia/en/3/37/Citizenfour_poster.jpg",
+   "ids": {
+    "wikidata": "Q18218448",
+    "imdb": "tt4044364",
+    "filmaffinity": "740797"
+   }
   },
   {
    "id": "s0003",
@@ -23619,14 +23623,16 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/201/504567.jpg",
    "ids": {
     "wikidata": "Q65048140",
     "imdb": "tt8033244",
     "filmaffinity": "654192",
     "rt": "tv/the_alcasser_murders",
     "letterboxd": "the-alcasser-murders",
-    "tmdbTv": "90274"
+    "tmdbTv": "90274",
+    "allocineSerie": "23335",
+    "tvmaze": 42577
    }
   },
   {
@@ -23638,13 +23644,14 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/371/928844.jpg",
    "ids": {
     "wikidata": "Q109657075",
     "imdb": "tt15796898",
     "filmaffinity": "663708",
     "rt": "tv/where_is_marta",
-    "tmdbTv": "137899"
+    "tmdbTv": "137899",
+    "tvmaze": 58712
    }
   },
   {
@@ -23663,7 +23670,8 @@
     "filmaffinity": "540680",
     "rt": "tv/november_13",
     "letterboxd": "november-13-attack-on-paris",
-    "tmdbTv": "79932"
+    "tmdbTv": "79932",
+    "allocineSerie": "23663"
    }
   },
   {
@@ -23692,12 +23700,13 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/533/1334816.jpg",
    "ids": {
     "wikidata": "Q130270426",
     "imdb": "tt33050454",
     "filmaffinity": "949616",
-    "tmdbTv": "258847"
+    "tmdbTv": "258847",
+    "tvmaze": 79187
    }
   },
   {
@@ -23710,7 +23719,11 @@
    "animacion": false,
    "resena": "",
    "poster": null,
-   "ids": {}
+   "ids": {
+    "wikidata": "Q64514297",
+    "imdb": "tt5900870",
+    "filmaffinity": "191900"
+   }
   },
   {
    "id": "s0009",
@@ -23750,8 +23763,12 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://upload.wikimedia.org/wikipedia/en/6/66/El_silencio_de_otros.jpg",
+   "ids": {
+    "wikidata": "Q61566329",
+    "imdb": "tt8099236",
+    "filmaffinity": "815791"
+   }
   },
   {
    "id": "s0012",
@@ -23762,8 +23779,12 @@
    "pais": "Estados Unidos",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://upload.wikimedia.org/wikipedia/en/6/6a/Super_Size_Me_Poster.jpg",
+   "ids": {
+    "wikidata": "Q738662",
+    "imdb": "tt0390521",
+    "filmaffinity": "247742"
+   }
   },
   {
    "id": "s0013",
@@ -23774,10 +23795,11 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/403/1009980.jpg",
    "ids": {
     "wikidata": "Q17427162",
-    "imdb": "tt0324823"
+    "imdb": "tt0324823",
+    "tvmaze": 61567
    }
   },
   {
@@ -23789,13 +23811,14 @@
    "pais": "Estados Unidos",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/329/824285.jpg",
    "ids": {
     "wikidata": "Q107469370",
     "imdb": "tt14832996",
     "filmaffinity": "268370",
     "rt": "tv/how_to_become_a_tyrant",
-    "tmdbTv": "127626"
+    "tmdbTv": "127626",
+    "tvmaze": 55934
    }
   },
   {
@@ -23807,13 +23830,15 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/298/747140.jpg",
    "ids": {
     "wikidata": "Q105886249",
     "imdb": "tt14091172",
     "filmaffinity": "219049",
     "rt": "tv/nevenka_breaking_the_silence",
-    "tmdbTv": "120040"
+    "tmdbTv": "120040",
+    "allocineSerie": "28535",
+    "tvmaze": 53916
    }
   },
   {
@@ -23825,8 +23850,12 @@
    "pais": "Estados Unidos",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://upload.wikimedia.org/wikipedia/en/4/4e/Fahrenheit_911_poster.jpg",
+   "ids": {
+    "wikidata": "Q221852",
+    "imdb": "tt0361596",
+    "filmaffinity": "216517"
+   }
   },
   {
    "id": "s0017",
@@ -23837,8 +23866,10 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/521/1302510.jpg",
+   "ids": {
+    "tvmaze": 56287
+   }
   },
   {
    "id": "s0018",
@@ -23863,8 +23894,11 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/399/999026.jpg",
+   "ids": {
+    "tvmaze": 61038,
+    "imdb": "tt18396468"
+   }
   },
   {
    "id": "s0020",
@@ -23875,8 +23909,11 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/464/1160731.jpg",
+   "ids": {
+    "tvmaze": 68694,
+    "imdb": "tt27749701"
+   }
   },
   {
    "id": "s0021",
@@ -23889,9 +23926,9 @@
    "resena": "",
    "poster": null,
    "ids": {
-    "wikidata": "Q124436280",
-    "imdb": "tt31067371",
-    "filmaffinity": "320269",
+    "wikidata": "Q111029725",
+    "imdb": "tt6275154",
+    "filmaffinity": "574915",
     "tmdbTv": "244525"
    }
   },
@@ -23904,8 +23941,11 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/289/723179.jpg",
+   "ids": {
+    "tvmaze": 52455,
+    "imdb": "tt13629842"
+   }
   },
   {
    "id": "s0023",
@@ -23917,7 +23957,11 @@
    "animacion": false,
    "resena": "",
    "poster": null,
-   "ids": {}
+   "ids": {
+    "wikidata": "Q61731409",
+    "imdb": "tt5479590",
+    "filmaffinity": "301091"
+   }
   },
   {
    "id": "s0024",
@@ -23952,13 +23996,14 @@
    "pais": "Reino Unido",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/249/623161.jpg",
    "ids": {
     "wikidata": "Q119499371",
     "imdb": "tt10846202",
     "filmaffinity": "490243",
     "rt": "tv/putin_a_russian_spy_story",
-    "tmdbTv": "107701"
+    "tmdbTv": "107701",
+    "tvmaze": 46987
    }
   },
   {
@@ -23999,7 +24044,11 @@
    "animacion": false,
    "resena": "",
    "poster": null,
-   "ids": {}
+   "ids": {
+    "wikidata": "Q113285164",
+    "imdb": "tt16306510",
+    "filmaffinity": "715955"
+   }
   },
   {
    "id": "s0030",
@@ -24010,12 +24059,13 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/470/1175558.jpg",
    "ids": {
     "wikidata": "Q121886946",
     "imdb": "tt28457132",
     "filmaffinity": "800593",
-    "tmdbTv": "231015"
+    "tmdbTv": "231015",
+    "tvmaze": 70091
    }
   },
   {
@@ -24172,12 +24222,13 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/481/1204389.jpg",
    "ids": {
     "wikidata": "Q123682749",
     "imdb": "tt23739418",
     "filmaffinity": "464846",
-    "tmdbTv": "230585"
+    "tmdbTv": "230585",
+    "tvmaze": 70427
    }
   },
   {
@@ -24189,12 +24240,13 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/425/1063594.jpg",
    "ids": {
-    "wikidata": "Q113645218",
-    "imdb": "tt16021642",
+    "wikidata": "Q108903361",
+    "imdb": "tt11470588",
     "filmaffinity": "147790",
-    "tmdbTv": "155548"
+    "tmdbTv": "136365",
+    "tvmaze": 64499
    }
   },
   {
@@ -24257,13 +24309,15 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/443/1108566.jpg",
    "ids": {
     "wikidata": "Q115956263",
     "imdb": "tt15787870",
     "filmaffinity": "519449",
     "rt": "tv/the_snow_girl",
-    "tmdbTv": "215333"
+    "tmdbTv": "215333",
+    "allocineSerie": "30494",
+    "tvmaze": 65472
    }
   },
   {
@@ -24295,8 +24349,11 @@
    "pais": "Japón",
    "animacion": true,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/260/651975.jpg",
+   "ids": {
+    "tvmaze": 48547,
+    "imdb": "tt12031040"
+   }
   },
   {
    "id": "s0047",
@@ -24343,13 +24400,15 @@
    "pais": "Japón",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/11/29190.jpg",
    "ids": {
     "wikidata": "Q477916",
-    "imdb": "tt0121220",
+    "imdb": "tt0214341",
     "filmaffinity": "942334",
     "rt": "tv/dragon_ball_z",
-    "tmdbTv": "12971"
+    "tmdbTv": "12971",
+    "allocineSerie": "3461",
+    "tvmaze": 2103
    }
   },
   {
@@ -24380,13 +24439,14 @@
    "pais": "Japón",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/632/1582290.jpg",
    "ids": {
     "wikidata": "Q22126305",
     "imdb": "tt2560140",
     "filmaffinity": "935438",
     "rt": "tv/attack_on_titan",
-    "tmdbTv": "1429"
+    "tmdbTv": "1429",
+    "tvmaze": 919
    }
   },
   {
@@ -24434,13 +24494,15 @@
    "pais": "Reino Unido",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/564/1411764.jpg",
    "ids": {
     "wikidata": "Q558112",
     "imdb": "tt2085059",
     "filmaffinity": "800295",
     "rt": "tv/black_mirror",
-    "tmdbTv": "42009"
+    "tmdbTv": "42009",
+    "allocineSerie": "10855",
+    "tvmaze": 305
    }
   },
   {
@@ -24452,13 +24514,14 @@
    "pais": "Japón",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/170/425395.jpg",
    "ids": {
     "wikidata": "Q5363072",
     "imdb": "tt0131179",
     "filmaffinity": "235504",
     "rt": "tv/case_closed_1996",
-    "tmdbTv": "30983"
+    "tmdbTv": "30983",
+    "tvmaze": 5429
    }
   },
   {
@@ -24470,8 +24533,11 @@
    "pais": "Dinamarca",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/288/722488.jpg",
+   "ids": {
+    "tvmaze": 46581,
+    "imdb": "tt11823102"
+   }
   },
   {
    "id": "s0057",
@@ -24540,8 +24606,10 @@
    "pais": "Estados Unidos",
    "animacion": true,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/629/1573702.jpg",
+   "ids": {
+    "tvmaze": 4533
+   }
   },
   {
    "id": "s0061",
@@ -24552,12 +24620,14 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/256/640534.jpg",
    "ids": {
     "wikidata": "Q63344507",
     "imdb": "tt10230502",
     "filmaffinity": "350716",
-    "tmdbTv": "96687"
+    "tmdbTv": "96687",
+    "allocineSerie": "25125",
+    "tvmaze": 44665
    }
   },
   {
@@ -24714,13 +24784,15 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/421/1054409.jpg",
    "ids": {
     "wikidata": "Q105888259",
     "imdb": "tt13106334",
     "filmaffinity": "849096",
     "rt": "tv/the_girl_in_the_mirror",
-    "tmdbTv": "127424"
+    "tmdbTv": "127424",
+    "allocineSerie": "24432",
+    "tvmaze": 39648
    }
   },
   {
@@ -24803,11 +24875,12 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/68/170081.jpg",
    "ids": {
     "wikidata": "Q5236350",
     "imdb": "tt0331134",
-    "tmdbTv": "13581"
+    "tmdbTv": "13581",
+    "tvmaze": 19328
    }
   },
   {
@@ -24854,11 +24927,12 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/68/170143.jpg",
    "ids": {
     "wikidata": "Q954988",
     "imdb": "tt2097031",
-    "tmdbTv": "39485"
+    "tmdbTv": "39485",
+    "tvmaze": 19329
    }
   },
   {
@@ -24905,8 +24979,11 @@
    "pais": "Japón",
    "animacion": true,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/20/52044.jpg",
+   "ids": {
+    "tvmaze": 4517,
+    "imdb": "tt0161952"
+   }
   },
   {
    "id": "s0082",
@@ -24917,12 +24994,14 @@
    "pais": "Estados Unidos",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/24/61412.jpg",
    "ids": {
     "wikidata": "Q719856",
     "imdb": "tt0184111",
     "rt": "tv/ed_edd_n_eddy",
-    "tmdbTv": "606"
+    "tmdbTv": "606",
+    "allocineSerie": "4711",
+    "tvmaze": 6428
    }
   },
   {
@@ -24971,12 +25050,13 @@
    "pais": "Japón",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/116/291841.jpg",
    "ids": {
     "wikidata": "Q5372585",
     "imdb": "tt12853970",
     "filmaffinity": "307437",
-    "tmdbTv": "30623"
+    "tmdbTv": "30623",
+    "tvmaze": 29247
    }
   },
   {
@@ -25074,11 +25154,12 @@
    "pais": "Japón",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/68/172168.jpg",
    "ids": {
     "wikidata": "Q101422118",
     "imdb": "tt0450373",
-    "tmdbTv": "35236"
+    "tmdbTv": "35236",
+    "tvmaze": 19543
    }
   },
   {
@@ -25090,8 +25171,11 @@
    "pais": "Suecia",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/236/591128.jpg",
+   "ids": {
+    "tvmaze": 45875,
+    "imdb": "tt11398870"
+   }
   },
   {
    "id": "s0093",
@@ -25102,14 +25186,15 @@
    "pais": "Estados Unidos",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/563/1409008.jpg",
    "ids": {
     "wikidata": "Q87131973",
     "imdb": "tt3581920",
     "filmaffinity": "205905",
     "rt": "tv/the_last_of_us",
     "tmdbTv": "100088",
-    "allocineSerie": "26316"
+    "allocineSerie": "26316",
+    "tvmaze": 46562
    }
   },
   {
@@ -25121,13 +25206,15 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/376/940830.jpg",
    "ids": {
     "wikidata": "Q29647346",
     "imdb": "tt6468322",
     "filmaffinity": "879405",
     "rt": "tv/money_heist",
-    "tmdbTv": "71446"
+    "tmdbTv": "71446",
+    "allocineSerie": "21504",
+    "tvmaze": 27436
    }
   },
   {
@@ -25191,12 +25278,13 @@
    "pais": "Estados Unidos",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/599/1498208.jpg",
    "ids": {
     "wikidata": "Q82617",
     "imdb": "tt1710308",
     "rt": "tv/regular-show",
-    "tmdbTv": "31132"
+    "tmdbTv": "31132",
+    "tvmaze": 868
    }
   },
   {
@@ -25363,12 +25451,13 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/9/23893.jpg",
    "ids": {
     "wikidata": "Q2402176",
     "imdb": "tt1534370",
     "filmaffinity": "599998",
-    "tmdbTv": "62466"
+    "tmdbTv": "62466",
+    "tvmaze": 1702
    }
   },
   {
@@ -25417,8 +25506,11 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/275/687525.jpg",
+   "ids": {
+    "tvmaze": 49699,
+    "imdb": "tt12945004"
+   }
   },
   {
    "id": "s0112",
@@ -25429,13 +25521,14 @@
    "pais": "Estados Unidos",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/11/27896.jpg",
    "ids": {
     "wikidata": "Q1236206",
     "imdb": "tt0175058",
     "rt": "tv/the_powerpuff_girls_1998",
     "tmdbTv": "607",
-    "allocineSerie": "4412"
+    "allocineSerie": "4412",
+    "tvmaze": 1955
    }
   },
   {
@@ -25516,8 +25609,11 @@
    "pais": "Japón",
    "animacion": true,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/46/115875.jpg",
+   "ids": {
+    "tvmaze": 13389,
+    "imdb": "tt0434693"
+   }
   },
   {
    "id": "s0118",
@@ -25563,11 +25659,12 @@
    "pais": "Japón",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/210/526386.jpg",
    "ids": {
     "wikidata": "Q12972499",
     "imdb": "tt0796127",
-    "tmdbTv": "5719"
+    "tmdbTv": "5719",
+    "tvmaze": 43757
    }
   },
   {
@@ -25652,11 +25749,12 @@
    "pais": "Estados Unidos",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/173/433868.jpg",
    "ids": {
-    "wikidata": "Q25535984",
-    "imdb": "tt1116217",
-    "tmdbTv": "96404"
+    "wikidata": "Q114464753",
+    "imdb": "tt1301582",
+    "tmdbTv": "96404",
+    "tvmaze": 66
    }
   },
   {
@@ -25720,11 +25818,13 @@
    "pais": "Francia",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/34/87258.jpg",
    "ids": {
     "wikidata": "Q637190",
     "imdb": "tt0417311",
-    "tmdbTv": "4622"
+    "tmdbTv": "4622",
+    "allocineSerie": "4228",
+    "tvmaze": 10290
    }
   },
   {
@@ -25790,12 +25890,13 @@
    "pais": "Francia",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/482/1207058.jpg",
    "ids": {
     "wikidata": "Q3529537",
     "imdb": "tt0281498",
     "tmdbTv": "66610",
-    "allocineSerie": "529"
+    "allocineSerie": "529",
+    "tvmaze": 72120
    }
   },
   {
@@ -25807,12 +25908,14 @@
    "pais": "España",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/385/964528.jpg",
    "ids": {
     "wikidata": "Q99773411",
     "imdb": "tt13195218",
     "filmaffinity": "231065",
-    "tmdbTv": "124902"
+    "tmdbTv": "124902",
+    "allocineSerie": "27397",
+    "tvmaze": 59680
    }
   },
   {
@@ -25824,13 +25927,15 @@
    "pais": "Estados Unidos",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/441/1102783.jpg",
    "ids": {
     "wikidata": "Q4533",
     "imdb": "tt1604099",
     "filmaffinity": "329238",
     "rt": "tv/victorious",
-    "tmdbTv": "31251"
+    "tmdbTv": "31251",
+    "allocineSerie": "9417",
+    "tvmaze": 2189
    }
   },
   {
@@ -25877,12 +25982,13 @@
    "pais": "Francia",
    "animacion": true,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/466/1165220.jpg",
    "ids": {
     "wikidata": "Q2219414",
     "imdb": "tt1375683",
     "tmdbTv": "14525",
-    "allocineSerie": "6159"
+    "allocineSerie": "6159",
+    "tvmaze": 69459
    }
   },
   {
@@ -26017,12 +26123,14 @@
    "pais": "",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/132/331125.jpg",
    "ids": {
     "wikidata": "Q16835629",
     "imdb": "tt1320315",
     "filmaffinity": "603797",
-    "tmdbTv": "34353"
+    "tmdbTv": "34353",
+    "allocineSerie": "5823",
+    "tvmaze": 32875
    }
   },
   {
@@ -26051,13 +26159,15 @@
    "pais": "",
    "animacion": false,
    "resena": "",
-   "poster": null,
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/359/898320.jpg",
    "ids": {
     "wikidata": "Q16756",
     "imdb": "tt1442437",
     "filmaffinity": "439937",
     "rt": "tv/modern_family",
-    "tmdbTv": "1421"
+    "tmdbTv": "1421",
+    "allocineSerie": "6085",
+    "tvmaze": 80
    }
   },
   {
@@ -26069,8 +26179,11 @@
    "pais": "",
    "animacion": false,
    "resena": "",
-   "poster": null,
-   "ids": {}
+   "poster": "https://static.tvmaze.com/uploads/images/medium_portrait/485/1213495.jpg",
+   "ids": {
+    "tvmaze": 4223,
+    "imdb": "tt0294023"
+   }
   },
   {
    "id": "s0150",

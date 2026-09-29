@@ -11,8 +11,10 @@ Nació de un Excel que llevo años rellenando a mano (más de 600 películas pun
 - **Mis gustos**: perfil del espectador con radar de géneros, directores de cabecera, década dorada y conclusiones automáticas sobre cómo puntúas.
 - **Estadísticas**: reparto de notas, décadas, géneros, países, sagas, fases del UCM, taquilla, duración frente a nota…
 - **Para ti**: recomendaciones con la nota que predigo que les darías y el porqué. Validado con mis propias notas (dejando una fuera): error medio ±1,0 frente a ±1,3 de adivinar siempre la media.
-- **Estrenos en España**: calendario con fechas de estreno en cines españoles, afinidad con cada película y enlaces a la cartelera de mis cines de Gijón y Oviedo.
-- **Pendientes** y **series**.
+- **Cartelera hoy**: sesiones reales de Ocine Los Fresnos y Yelmo Ocimax (Gijón) con enlace para comprar la entrada, ordenadas por afinidad.
+- **Estrenos en España**: calendario con fechas de estreno, director, sinopsis y afinidad. Se actualiza solo cada día (GitHub Actions + FilmAffinity).
+- **Series**: ficha con enlaces, estadísticas y análisis de gustos.
+- **Pendientes**.
 - **Excel sincronizado** (`Mi Cinemateca.xlsx`): resumen con fórmulas y gráficos, películas, series, UCM con rentabilidad, pendientes y estrenos. Si lo edito a mano, puedo reimportar los cambios.
 
 ## Uso
@@ -52,6 +54,7 @@ tools/excel.py            exportar / reimportar el Excel profesional
 tools/enriquecer.py       carátulas e IDs externos vía Wikidata (SPARQL por lotes)
 tools/pelis.py            registro rápido por línea de comandos
 tools/build_static.py     datos para la versión web de solo lectura (Netlify)
+tools/cartelera.py        sesiones de mis cines y próximos estrenos (FilmAffinity, diario)
 ```
 
 Opcional: con una clave gratuita de [TMDb](https://www.themoviedb.org/settings/api) (en Ajustes) el calendario de estrenos se actualiza automáticamente.

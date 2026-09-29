@@ -9,8 +9,9 @@ App local para llevar el registro de las películas que veo, con Excel sincroniz
 - Registrar desde el chat: `python tools/pelis.py vista "<título>" <nota> --lugar "<cine o plataforma>" --resena "..."`
   (autocompleta datos y póster con Wikidata, quita de pendientes, hace copia y regenera el Excel).
 - Otros: `pelis.py nota`, `pelis.py buscar`, `pelis.py pendiente`, `pelis.py excel`.
-- Estrenos: `data/estrenos.json` (fechas de España). Sin clave TMDb se actualiza a mano: buscar cartelera en ecartelera / sensacine / elseptimoarte y reescribir la lista; luego `python tools/enriquecer.py --rapido` para pósters.
-- Cines del usuario: Ocine Premium Los Fresnos y Yelmo Ocimax (Gijón), Oviedo (Yelmo Los Prados / Embajadores Foncalada / Cinesa Parque Principado).
+- Cartelera (sesiones) y estrenos: `tools/cartelera.py` (FilmAffinity) → `data/cartelera.json`, `data/estrenos.json`, `data/fa_cache.json`. Lo ejecuta a diario GitHub Actions (`.github/workflows/cartelera.yml`) y hace commit → Netlify republica. FA limita peticiones (429): no machacarlo desde local.
+- IMPORTANTE al subir cambios: `git pull --rebase` antes de `git push` (el bot hace commits diarios). Si hay conflicto en esos 3 ficheros de datos, quedarse con la versión remota.
+- Cines del usuario: Ocine Premium Los Fresnos ("Elocine", FA id 1269) y Yelmo Ocimax (FA id 402), en Gijón. Los de Oviedo están como secundarios.
 - Recomendaciones: `tools/catalogo_recomendaciones.txt` (título ES | original | año | director | país | géneros | prestigio). Tras añadir líneas, `python tools/enriquecer.py --rapido`.
 - Wikimedia limita peticiones: usar `tools/bulk.py` (SPARQL por lotes) antes que búsquedas una a una.
 - Escala de notas: 0–10 con un decimal.

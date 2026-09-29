@@ -132,7 +132,7 @@ const saveUI = () => { try { localStorage.setItem("cine.coll", JSON.stringify({ 
 // Versión pública (Netlify): sin servidor, lee JSON estáticos y no permite editar.
 const STATIC = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || new URLSearchParams(location.search).has("vitrina");
 if (STATIC) document.documentElement.classList.add("ro");
-const STATIC_FILES = { db: "data/db.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json" };
+const STATIC_FILES = { db: "data/db.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
 
 async function api(path, opts = {}) {
   if (STATIC) {
@@ -148,8 +148,8 @@ async function api(path, opts = {}) {
   return j;
 }
 async function loadAll() {
-  const [db, est, cat] = await Promise.all([api("db"), api("estrenos"), api("catalogo")]);
-  S.db = db; S.est = est; S.cat = cat; S.prof = null;
+  const [db, est, cat, cart] = await Promise.all([api("db"), api("estrenos"), api("catalogo"), api("cartelera").catch(() => ({ cines: [] }))]);
+  S.db = db; S.est = est; S.cat = cat; S.cart = cart; S.prof = null; S.cartIdx = null;
 }
 async function refreshDB() { S.db = await api("db"); S.prof = null; renderChrome(); }
 
@@ -236,6 +236,7 @@ function predict(item) {
 // ---------------------------------------------------------------- navegación
 const NAV = [
   ["inicio", "Inicio", "home"],
+  ["cartelera", "Cartelera hoy", "ticket"],
   ["coleccion", "Mi colección", "film"],
   ["estrenos", "Estrenos", "calendar"],
   ["recomendaciones", "Para ti", "target"],
@@ -255,8 +256,11 @@ function renderChrome() {
   const r = route().name;
   const counts = { coleccion: S.db.peliculas.length, pendientes: S.db.pendientes.length, series: S.db.series.length };
   $("#nav").innerHTML = navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${l}</span>${counts[k] != null ? `<span class="count">${counts[k]}</span>` : ""}</a>`).join("");
-  $("#tabbar").innerHTML = NAV.filter((n) => ["inicio", "coleccion", "estrenos", "recomendaciones", "estadisticas"].includes(n[0]))
-    .map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${l}</span></a>`).join("");
+  const TAB = { inicio: "Inicio", cartelera: "Cartelera", coleccion: "Colección", estrenos: "Estrenos" };
+  const enTab = Object.keys(TAB).includes(r);
+  $("#tabbar").innerHTML = NAV.filter((n) => TAB[n[0]])
+    .map(([k, , ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${TAB[k]}</span></a>`).join("")
+    + `<a href="#" data-more class="${enTab ? "" : "on"}">${icon("list")}<span>Más</span></a>`;
   const e = S.db.estado || {};
   const hora = e.excel_at ? new Date(e.excel_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) : null;
   if (STATIC) {
@@ -328,7 +332,9 @@ VIEWS.inicio = (v) => {
     </div>
   </section>
 
-  ${prox.length ? `<section class="section">${sectionHead("Próximamente en tus cines", "#/estrenos", "Calendario completo")}
+  ${hoyHTML()}
+
+  ${prox.length ? `<section class="section">${sectionHead("Próximos estrenos", "#/estrenos", "Calendario completo")}
     <div class="rels">${prox.map(relCard).join("")}</div></section>` : ""}
 
   <section class="section">${sectionHead("Recomendadas para ti", "#/recomendaciones")}
@@ -783,6 +789,7 @@ VIEWS.gustos = (v) => {
       </div></div>
   </div>
   <section class="section">${sectionHead("Lo que dicen tus notas")}<div class="insights">${insights().map(insightCard).join("")}</div></section>
+  ${seriesInsights().length ? `<section class="section">${sectionHead("Y en series…", "#/series", "Ver tus series")}<div class="insights">${seriesInsights().map(insightCard).join("")}</div></section>` : ""}
   <section class="section">${sectionHead("Tus directores")}
     <div class="card card-pad"><table class="tbl"><thead><tr><th>Director</th><th class="r">Películas</th><th class="r">Nota media</th><th>Mejor</th><th>Peor</th></tr></thead><tbody>
     ${dirs.slice(0, 25).map((d) => { const s = [...d.items].sort((a, b) => b.nota - a.nota); return `<tr class="click" onclick="location.hash='#/coleccion?q=${encodeURIComponent(d.key)}'"><td><b>${esc(d.key)}</b></td><td class="r dim">${d.n}</td><td class="r">${scoreBadge(d.mean)}</td><td class="muted">${esc(s[0].titulo)} <span class="dim">${fmt1(s[0].nota)}</span></td><td class="muted">${esc(s[s.length - 1].titulo)} <span class="dim">${fmt1(s[s.length - 1].nota)}</span></td></tr>`; }).join("")}
@@ -903,11 +910,11 @@ function openRel(key) {
       ${e.sinopsis ? `<p class="muted" style="margin-top:14px">${esc(e.sinopsis)}</p>` : ""}
       <div class="myscore">${matchTag(m.pct)}<div><div class="lbl">Afinidad contigo</div><div class="verdict">Predicción: ${fmt1(m.nota)} · ${veredicto(m.nota)}</div></div></div>
       ${m.why.length ? `<div style="display:flex;flex-direction:column;gap:6px;color:var(--text-2);font-size:13.5px">${m.why.map((w) => `<span>— ${esc(w)}</span>`).join("")}</div>` : ""}
-      <div class="sub">Cartelera y horarios en tus cines</div>
-      <div class="links">${(S.est.cines || []).filter((c) => c.principal).map((c) => `<a class="ext" href="${esc(c.web)}" target="_blank" rel="noopener"><span class="logo" style="background:#2a2a36">${icon("ticket")}</span>${esc(c.nombre)}</a>`).join("")}</div>
+      ${sesionesDe(e.titulo, e.fa) ? `<div class="sub">Sesiones en tus cines</div>${sesionesHTML(sesionesDe(e.titulo, e.fa), null, 4)}` : `<div class="sub">Cartelera de tus cines</div>
+      <div class="links">${(S.est.cines || []).filter((c) => c.principal).map((c) => `<a class="ext" href="${esc(c.web)}" target="_blank" rel="noopener"><span class="logo" style="background:#2a2a36">${icon("ticket")}</span>${esc(c.nombre)}</a>`).join("")}</div>`}
       <div class="sub">Más info</div>
       <div class="links">
-        <a class="ext" href="https://www.filmaffinity.com/es/search.php?stext=${q}" target="_blank" rel="noopener"><span class="logo" style="background:#1d4d8c">FA</span>FilmAffinity</a>
+        <a class="ext" href="${e.fa ? `https://www.filmaffinity.com/es/film${e.fa}.html` : `https://www.filmaffinity.com/es/search.php?stext=${q}`}" target="_blank" rel="noopener"><span class="logo" style="background:#1d4d8c">FA</span>FilmAffinity</a>
         <a class="ext" href="https://www.sensacine.com/buscar/?q=${q}" target="_blank" rel="noopener"><span class="logo" style="background:#e30613">SC</span>SensaCine</a>
         <a class="ext" href="https://www.imdb.com/es-es/find/?q=${encodeURIComponent(e.original || e.titulo)}" target="_blank" rel="noopener"><span class="logo" style="background:#c9a200">IMDb</span>IMDb</a>
         <a class="ext" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.titulo + " tráiler español")}" target="_blank" rel="noopener"><span class="logo" style="background:#c4302b">${icon("play")}</span>Tráiler</a>
@@ -1009,12 +1016,92 @@ VIEWS.series = (v) => {
   v.innerHTML = `
   <div class="page-head"><div><div class="eyebrow">También en tu radar</div><h1 class="h1">Series y documentales</h1><p>${S.db.series.length} títulos · media ${fmt2(mean(rated.map((s) => s.nota)))}${S.db.series.length - rated.length ? ` · ${S.db.series.length - rated.length} sin nota todavía` : ""}</p></div>
     <button class="btn btn-primary" id="sAdd">${icon("plus")}Añadir serie</button></div>
-  <div class="toolbar" style="position:static"><div class="seg" id="sT"><button data-t="" class="${!st.tipo ? "on" : ""}">Todas</button>${tipos.map((t) => `<button data-t="${esc(t)}" class="${st.tipo === t ? "on" : ""}">${esc(t)}s</button>`).join("")}</div></div>
+  ${seriesStatsHTML()}
+  <div class="toolbar" style="position:static;margin-top:26px"><div class="seg" id="sT"><button data-t="" class="${!st.tipo ? "on" : ""}">Todas</button>${tipos.map((t) => `<button data-t="${esc(t)}" class="${st.tipo === t ? "on" : ""}">${esc(t)}s</button>`).join("")}</div></div>
   <div class="posters">${L.map((s) => `<div class="pcard" data-serie="${s.id}"><div class="frame">${posterHTML({ ...s, anio: s.anios, generos: [s.animacion ? "Animación" : s.tipo === "Documental" ? "Documental" : "Drama"] })}${scoreBadge(s.nota)}</div>
     <div class="meta"><div class="t">${esc(s.titulo)}</div><div class="s">${esc([s.anios, s.pais].filter(Boolean).join(" · "))}</div></div></div>`).join("")}</div>`;
   $$("#sT button", v).forEach((b) => (b.onclick = () => { st.tipo = b.dataset.t; VIEWS.series(v); }));
   $("#sAdd").onclick = () => openSerieForm();
 };
+const serieGen = (x) => [x.animacion ? "Animación" : x.tipo === "Documental" ? "Documental" : "Drama"];
+function seriesLinks(s) {
+  const ids = s.ids || {};
+  const q = encodeURIComponent(s.titulo);
+  return [
+    { n: "FilmAffinity", c: "#1d4d8c", l: "FA", u: ids.filmaffinity ? `https://www.filmaffinity.com/es/film${ids.filmaffinity}.html` : `https://www.filmaffinity.com/es/search.php?stext=${q}` },
+    { n: "IMDb", c: "#c9a200", l: "IMDb", u: ids.imdb ? `https://www.imdb.com/es-es/title/${ids.imdb}/` : `https://www.imdb.com/es-es/find/?q=${q}` },
+    { n: "SensaCine", c: "#e30613", l: "SC", u: ids.allocineSerie ? `https://www.sensacine.com/series/serie-${ids.allocineSerie}/` : `https://www.sensacine.com/buscar/?q=${q}` },
+    { n: "Rotten Tomatoes", c: "#d8321f", l: "RT", u: `https://www.rottentomatoes.com/search?search=${q}` },
+    { n: "JustWatch", c: "#e7b32a", l: "JW", u: `https://www.justwatch.com/es/buscar?q=${q}` },
+  ];
+}
+function openSerie(id) {
+  const s = S.db.series.find((x) => x.id === id);
+  if (!s) return;
+  const rated = S.db.series.filter((x) => x.nota != null).sort((a, b) => b.nota - a.nota);
+  const rank = rated.findIndex((x) => x.id === s.id) + 1;
+  const parecidas = S.db.series.filter((x) => x.id !== s.id && x.tipo === s.tipo && !!x.animacion === !!s.animacion && x.nota != null).sort((a, b) => b.nota - a.nota).slice(0, 8);
+  const card = (x) => `<div class="pcard" data-serie="${x.id}"><div class="frame">${posterHTML({ ...x, anio: x.anios, generos: serieGen(x) })}${scoreBadge(x.nota)}</div><div class="meta"><div class="t">${esc(x.titulo)}</div><div class="s">${esc(x.anios || "")}</div></div></div>`;
+  modal(`
+    ${s.poster ? `<div class="detail-backdrop"><img src="${esc(s.poster)}" alt="" referrerpolicy="no-referrer"></div>` : ""}
+    <div class="sheet-body"><div class="detail">
+      <div><div class="poster">${posterHTML({ ...s, anio: s.anios, generos: serieGen(s) })}</div></div>
+      <div>
+        <div class="eyebrow">${esc(s.tipo || "Serie")}${s.animacion ? " · Animación" : ""}</div>
+        <h2 style="margin-top:8px">${esc(s.titulo)}</h2>
+        <div class="facts">${s.anios ? `<span>${icon("calendar")}${esc(s.anios)}</span>` : ""}${s.pais ? `<span>${icon("globe")}${esc(s.pais)}</span>` : ""}</div>
+        <div class="myscore">${scoreBadge(s.nota, "lg")}<div><div class="lbl">Tu nota</div><div class="verdict">${veredicto(s.nota)}</div>
+          ${rank ? `<div class="dim" style="font-size:12.5px">Puesto ${rank} de ${rated.length} entre tus series</div>` : ""}</div></div>
+        ${s.resena ? `<blockquote class="review">${esc(s.resena)}</blockquote>` : ""}
+        <div class="sub">Ver en</div>
+        <div class="links">${seriesLinks(s).map((l) => `<a class="ext" href="${esc(l.u)}" target="_blank" rel="noopener"><span class="logo" style="background:${l.c}">${l.l}</span>${l.n}</a>`).join("")}</div>
+        <div class="dl-actions"><button class="btn" data-sedit="${s.id}">${icon("edit")}Editar</button><button class="btn btn-ghost btn-danger" data-sdel="${s.id}">${icon("trash")}Eliminar</button></div>
+      </div></div>
+      ${parecidas.length ? `<div class="sub" style="margin-top:34px">Otras ${esc((s.tipo || "serie").toLowerCase())}s${s.animacion ? " de animación" : ""} que te gustaron</div><div class="strip">${parecidas.map(card).join("")}</div>` : ""}
+    </div>`);
+}
+function seriesAgg(key) {
+  const m = new Map();
+  for (const s of S.db.series) {
+    if (s.nota == null) continue;
+    const k = key(s);
+    if (!k) continue;
+    const o = m.get(k) || { key: k, n: 0, sum: 0, items: [] };
+    o.n++; o.sum += s.nota; o.items.push(s); m.set(k, o);
+  }
+  for (const o of m.values()) o.mean = o.sum / o.n;
+  return [...m.values()];
+}
+function seriesInsights() {
+  const R = S.db.series.filter((s) => s.nota != null);
+  if (R.length < 10) return [];
+  const mu = mean(R.map((s) => s.nota));
+  const out = [];
+  const tipos = seriesAgg((s) => s.tipo).filter((t) => t.n >= 5).sort((a, b) => b.mean - a.mean);
+  if (tipos.length > 1) out.push({ big: fmt1(tipos[0].mean), ttl: `Lo tuyo son las ${tipos[0].key.toLowerCase()}s`, txt: `Les das un ${fmt1(tipos[0].mean)} de media (${tipos[0].n} vistas), frente al ${fmt1(tipos[tipos.length - 1].mean)} de los ${tipos[tipos.length - 1].key.toLowerCase()}s.` });
+  const anime = R.filter((s) => s.animacion && s.pais === "Japón"), anim = R.filter((s) => s.animacion && s.pais !== "Japón");
+  if (anime.length >= 5 && anim.length >= 5) out.push({ big: fmt1(mean(anime.map((s) => s.nota))), ttl: "El anime gana a los dibujos occidentales", txt: `Al anime le das ${fmt1(mean(anime.map((s) => s.nota)))} y a la animación occidental ${fmt1(mean(anim.map((s) => s.nota)))}. Tus favoritas: ${[...anime].sort((a, b) => b.nota - a.nota).slice(0, 2).map((s) => s.titulo).join(" y ")}.` });
+  const esp = R.filter((s) => s.pais === "España" && s.tipo === "Documental");
+  if (esp.length >= 5) out.push({ big: esp.length, ttl: "Fan del documental español", txt: `Has visto ${esp.length} documentales españoles con una media de ${fmt1(mean(esp.map((s) => s.nota)))}. El que más te gustó: ${[...esp].sort((a, b) => b.nota - a.nota)[0].titulo}.` });
+  const top = [...R].sort((a, b) => b.nota - a.nota).slice(0, 3);
+  out.push({ big: fmt1(mu), ttl: "Tu podio de series", txt: `${top.map((s) => `${s.titulo} (${fmt1(s.nota)})`).join(", ")}. Nota media en series: ${fmt2(mu)}.` });
+  return out;
+}
+function seriesStatsHTML() {
+  const R = S.db.series.filter((s) => s.nota != null);
+  if (R.length < 5) return "";
+  const tipos = seriesAgg((s) => s.tipo).sort((a, b) => b.n - a.n);
+  const paises = seriesAgg((s) => s.pais).sort((a, b) => b.n - a.n).slice(0, 6);
+  const formato = seriesAgg((s) => (s.animacion ? "Animación" : "Imagen real"));
+  const row = (g) => ({ label: g.key, value: g.n, color: scoreColor(g.mean), right: `${g.n} ${scoreBadge(g.mean)}` });
+  return `<div class="charts">
+    <div class="card chart w4"><h3>Por formato</h3><div class="cap">Número de títulos y tu nota media</div>${hbars(tipos.map(row))}<div style="height:10px"></div>${hbars(formato.map(row))}</div>
+    <div class="card chart w4"><h3>Por país</h3><div class="cap">Los 6 países con más series</div>${hbars(paises.map(row))}</div>
+    <div class="card chart w4"><h3>Lo que dicen tus notas</h3><div class="cap">Tus gustos en series</div>
+      ${seriesInsights().slice(0, 3).map((i) => `<p style="margin:0 0 12px;font-size:13.5px"><b style="color:var(--gold)">${esc(i.ttl)}.</b> <span class="muted">${esc(i.txt)}</span></p>`).join("")}</div>
+  </div>`;
+}
+
 function openSerieForm(s = null) {
   const d = s || { titulo: "", anios: "", tipo: "Serie", pais: "", animacion: false, nota: 7, resena: "" };
   modal(`<div class="sheet-body"><div class="eyebrow">${s ? "Editar serie" : "Nueva serie"}</div><h2 class="h2" style="margin:6px 0 20px">${s ? esc(s.titulo) : "Añadir serie"}</h2>
@@ -1065,13 +1152,135 @@ VIEWS.ajustes = (v) => {
   $("#tmdbSave").onclick = async () => { const k = $("#tmdbKey").value.trim(); if (!k) return; await api("config", { method: "POST", body: { tmdbKey: k } }); await refreshDB(); toast("Clave guardada"); VIEWS.ajustes(v); };
 };
 
+// ---------------------------------------------------------------- Cartelera (sesiones reales de tus cines)
+S.cart_ = { dia: null, cine: "" };
+const hhmm = () => { const d = new Date(); return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`; };
+function carteleraIdx() {
+  if (S.cartIdx) return S.cartIdx;
+  const idx = new Map();
+  for (const c of (S.cart && S.cart.cines) || []) for (const p of c.peliculas || []) {
+    const k = p.fa || norm(p.titulo);
+    const o = idx.get(k) || { ...p, cines: [] };
+    o.cines.push({ id: c.id, nombre: c.nombre, versiones: p.versiones });
+    idx.set(k, o);
+  }
+  return (S.cartIdx = idx);
+}
+function sesionesDe(titulo, fa) {
+  const idx = carteleraIdx();
+  if (fa && idx.has(fa)) return idx.get(fa);
+  const n = norm(titulo);
+  return [...idx.values()].find((p) => norm(p.titulo) === n) || null;
+}
+function infoCartelera(p) {
+  const e = (S.est.estrenos || []).find((x) => (p.fa && x.fa === p.fa) || norm(x.titulo) === norm(p.titulo));
+  const generos = (e && e.generos) || [];
+  const vista = S.db.peliculas.find((x) => (norm(x.titulo) === norm(p.titulo) || norm(x.tituloOriginal) === norm(p.titulo)) && (!p.anio || !x.anio || Math.abs(x.anio - p.anio) <= 1));
+  const m = predict({ titulo: p.titulo, director: p.director, pais: p.pais, anio: p.anio, generos, saga: e && e.saga });
+  return { generos, vista, m, estreno: e };
+}
+const versionCorta = (v) => { const t = (v.match(/\(([^)]+)\)/g) || []).map((x) => x.slice(1, -1)).filter((x) => !/^digital$/i.test(x)); return t.length ? t.join(" · ") : "Castellano"; };
+function sesionesHTML(p, dia, maxDias = 1, cineId = "") {
+  const hoy = todayISO(), ahora = hhmm();
+  return (p.cines || []).filter((c) => !cineId || c.id === cineId).map((c) => {
+    const bloques = c.versiones.map((v) => {
+      const dias = Object.keys(v.dias).sort().filter((d) => (dia ? d === dia : d >= hoy)).slice(0, maxDias);
+      return dias.map((d) => `<div class="ses-row"><span class="ses-v">${esc(versionCorta(v.nombre))}${!dia ? ` · <span class="dim">${d === hoy ? "hoy" : `${diaSemana(d).slice(0, 3)} ${+d.slice(8)}`}</span>` : ""}</span>
+        <span class="ses-times">${v.dias[d].map((x) => { const pasada = d === hoy && x.hora < ahora; return `<a class="time ${pasada ? "past" : ""}" href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.sala || "Comprar entradas")}">${x.hora}</a>`; }).join("")}</span></div>`).join("");
+    }).join("");
+    return bloques ? `<div class="ses-cine"><div class="ses-name">${icon("pin")}${esc(c.nombre.replace("Premium ", ""))}</div>${bloques}</div>` : "";
+  }).join("");
+}
+function diasCartelera() {
+  const hoy = todayISO(), lim = addDays(hoy, 8), set = new Set();
+  for (const p of carteleraIdx().values()) for (const c of p.cines) for (const v of c.versiones) for (const d of Object.keys(v.dias)) if (d >= hoy && d <= lim) set.add(d);
+  return [...set].sort();
+}
+function enCartelera(dia, cineId = "") {
+  const out = [];
+  for (const p of carteleraIdx().values()) {
+    if (p.cines.some((c) => (!cineId || c.id === cineId) && c.versiones.some((v) => v.dias[dia]))) out.push({ ...p, info: infoCartelera(p) });
+  }
+  return out.sort((a, b) => (a.info.vista ? 1 : 0) - (b.info.vista ? 1 : 0) || b.info.m.pct - a.info.m.pct);
+}
+function carteleraCard(p, dia, cineId) {
+  const i = p.info;
+  const g = i.generos.length ? i.generos : ["Drama"];
+  return `<div class="card cfilm">
+    <div class="frame" ${i.estreno ? `data-rel="${esc(i.estreno.fecha + "|" + i.estreno.titulo)}"` : ""}>${posterHTML({ titulo: p.titulo, anio: p.anio, poster: p.poster, generos: g })}</div>
+    <div style="min-width:0">
+      <div class="cfilm-head">
+        <div style="min-width:0"><div class="t">${esc(p.titulo)}</div><div class="s">${esc([p.director, p.pais].filter(Boolean).join(" · ") || "—")}</div></div>
+        ${i.vista ? `<span class="chip on" title="Ya la tienes en tu colección">${icon("check")}Vista · ${fmt1(i.vista.nota)}</span>` : matchTag(i.m.pct)}
+      </div>
+      ${i.generos.length ? `<div class="chips" style="margin:8px 0 2px">${i.generos.slice(0, 3).map((x) => `<span class="chip">${x}</span>`).join("")}</div>` : ""}
+      ${sesionesHTML(p, dia, 1, cineId)}
+    </div></div>`;
+}
+function hoyHTML() {
+  const dias = diasCartelera();
+  if (!dias.length) return "";
+  const L = enCartelera(dias[0]).filter((p) => !p.info.vista).slice(0, 4);
+  if (!L.length) return "";
+  const titulo = dias[0] === todayISO() ? "Hoy en tus cines" : `${diaSemana(dias[0])} en tus cines`;
+  return `<section class="section">${sectionHead(titulo, "#/cartelera", "Todas las sesiones")}
+    <div class="cfilms">${L.map((p) => carteleraCard(p, dias[0], "")).join("")}</div></section>`;
+}
+VIEWS.cartelera = (v) => {
+  const st = S.cart_;
+  const dias = diasCartelera();
+  if (!st.dia || !dias.includes(st.dia)) st.dia = dias[0];
+  const cines = ((S.cart && S.cart.cines) || []).filter((c) => (c.peliculas || []).length);
+  const act = S.cart && S.cart.actualizado ? new Date(S.cart.actualizado) : null;
+  const viejo = act && Date.now() - act.getTime() > 2.5 * 864e5;
+  const L = st.dia ? enCartelera(st.dia, st.cine) : [];
+  const hoy = todayISO();
+  const etiqueta = (d) => (d === hoy ? "Hoy" : d === addDays(hoy, 1) ? "Mañana" : `${diaSemana(d).slice(0, 3)} ${+d.slice(8)}`);
+  const lim = addDays(hoy, 8);
+  const preventa = [...carteleraIdx().values()]
+    .map((p) => ({ p, first: p.cines.flatMap((c) => c.versiones.flatMap((x) => Object.keys(x.dias))).sort()[0] }))
+    .filter((x) => x.first > lim).sort((a, b) => a.first.localeCompare(b.first));
+  const cineCorto = (n) => n.replace("Premium ", "").replace("Yelmo Cines ", "Yelmo ").replace(" Gijón", "");
+  v.innerHTML = `
+  <div class="page-head"><div><div class="eyebrow">Gijón · Ocine Los Fresnos y Yelmo Ocimax</div><h1 class="h1">Cartelera</h1>
+    <p>Sesiones reales de tus cines. Pulsa una hora para comprar la entrada.${act ? ` <span class="dim">Actualizado el ${act.toLocaleDateString("es-ES", { day: "numeric", month: "long" })} a las ${act.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })} · fuente FilmAffinity.</span>` : ""}</p>
+    ${viejo ? `<p style="color:var(--gold)">⚠ Estos horarios tienen más de dos días; pueden haber cambiado.</p>` : ""}</div>
+    ${!STATIC ? `<button class="btn" id="cartUpd">${icon("refresh")}Actualizar ahora</button>` : ""}</div>
+  ${dias.length ? `
+  <div class="toolbar" style="position:static">
+    <div class="chips">${dias.map((d) => `<button class="chip ${d === st.dia ? "on" : ""}" data-cday="${d}">${etiqueta(d)}</button>`).join("")}</div>
+    <div class="seg"><button data-ccine="" class="${!st.cine ? "on" : ""}">Los dos</button>${cines.map((c) => `<button data-ccine="${c.id}" class="${st.cine === c.id ? "on" : ""}">${esc(cineCorto(c.nombre))}</button>`).join("")}</div>
+  </div>
+  <div class="result-line"><b>${L.length}</b> películas ${st.dia === hoy ? "hoy" : `el ${etiqueta(st.dia).toLowerCase()}`} · ordenadas por lo que encajan contigo</div>
+  <div class="cfilms">${L.map((p) => carteleraCard(p, st.dia, st.cine)).join("")}</div>`
+  : `<div class="empty"><div class="h2">Sin sesiones cargadas</div>${STATIC ? "Vuelve a intentarlo más tarde." : "Pulsa «Actualizar ahora» para descargarlas."}</div>`}
+  ${preventa.length ? `<section class="section">${sectionHead("Entradas ya a la venta (preventa)")}<div class="cfilms">${preventa.map(({ p }) => carteleraCard({ ...p, info: infoCartelera(p) }, null, "")).join("")}</div></section>` : ""}`;
+  const up = $("#cartUpd");
+  if (up) up.onclick = async () => {
+    up.disabled = true; up.innerHTML = `${icon("refresh")}Descargando… (1-2 min)`;
+    try { await api("estrenos/actualizar", { method: "POST" }); await loadAll(); toast("Cartelera y estrenos actualizados"); VIEWS.cartelera(v); }
+    catch (err) { toast(err.message, "x"); up.disabled = false; }
+  };
+};
+
+// ---------------------------------------------------------------- Menú «Más» (móvil)
+function openMore() {
+  const r = route().name;
+  modal(`<div class="sheet-body"><div class="eyebrow">Mi Cinemateca</div><h2 class="h2" style="margin:6px 0 16px">Secciones</h2>
+    <div class="more-list">${navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}" data-close>${icon(ic)}<span>${l}</span></a>`).join("")}</div>
+    ${!STATIC ? `<button class="btn btn-primary" data-action="add" style="width:100%;justify-content:center;margin-top:16px">${icon("plus")}Registrar película</button>` : ""}</div>`, "narrow");
+}
+
 // ---------------------------------------------------------------- eventos globales
 document.addEventListener("click", async (e) => {
-  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sdel]");
+  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine]");
   if (!t) return;
   const d = t.dataset;
-  if (STATIC && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "serie", "sdel"].some((k) => d[k] !== undefined)) return;
-  if (d.close !== undefined) { if (t.tagName !== "A") e.preventDefault(); closeModal(); return; }
+  if (STATIC && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "sedit", "sdel"].some((k) => d[k] !== undefined)) return;
+  if (d.more !== undefined) { e.preventDefault(); return openMore(); }
+  if (d.cday) { S.cart_.dia = d.cday; render._keep = true; return VIEWS.cartelera($("#view")); }
+  if (d.ccine !== undefined) { S.cart_.cine = d.ccine; render._keep = true; return VIEWS.cartelera($("#view")); }
+  if (d.close !== undefined) { if (t.tagName !== "A" || t.getAttribute("href") === "#") e.preventDefault(); closeModal(); return; }
   if (d.action === "add") return openForm();
   if (d.open) return openFilm(d.open);
   if (d.cat !== undefined && !d.open) return openCat(+d.cat);
@@ -1099,7 +1308,8 @@ document.addEventListener("click", async (e) => {
   if (d.relseen) { const x = S.est.estrenos.find((y) => y.fecha + "|" + y.titulo === d.relseen); return openForm(null, { titulo: x.titulo, tituloOriginal: x.original || null, anio: +x.fecha.slice(0, 4), director: x.director || "", pais: x.pais || "", generos: x.generos || [], saga: x.saga || "", poster: x.poster || null, lugar: (S.est.cines || [])[0]?.nombre || "" }); }
   if (d.wseen) { const w = S.db.pendientes.find((x) => x.id === d.wseen); return openForm(null, { titulo: w.titulo, tituloOriginal: w.tituloOriginal || null, anio: w.anio || "", _pendiente: w.id }); }
   if (d.wdel) { await api(`pendientes/${d.wdel}`, { method: "DELETE" }); await refreshDB(); render._keep = true; render(); return; }
-  if (d.serie) return openSerieForm(S.db.series.find((s) => s.id === d.serie));
+  if (d.serie) return openSerie(d.serie);
+  if (d.sedit) return openSerieForm(S.db.series.find((s) => s.id === d.sedit));
   if (d.sdel) { if (!confirm("¿Eliminar esta serie?")) return; await api(`series/${d.sdel}`, { method: "DELETE" }); await refreshDB(); closeModal(); render(); }
 });
 document.addEventListener("keydown", (e) => {

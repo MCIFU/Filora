@@ -218,6 +218,8 @@ class Handler(BaseHTTPRequestHandler):
                                        "config": {k: v for k, v in cfg.items() if k != "tmdbKey"}})
             if parts[1:] == ["estrenos"]:
                 return self.send_json(read_json(EST_PATH, {"estrenos": [], "cines": []}))
+            if parts[1:] == ["cartelera"]:
+                return self.send_json(read_json(DATA / "cartelera.json", {"cines": []}))
             if parts[1:] == ["catalogo"]:
                 return self.send_json(load_catalog())
             if parts[1:] == ["buscar"]:
@@ -282,8 +284,14 @@ class Handler(BaseHTTPRequestHandler):
                     save_db(db)
                 return self.send_json({"ok": True, **res})
             if parts[1:] == ["estrenos", "actualizar"]:
-                n = refresh_estrenos_tmdb()
-                return self.send_json({"ok": True, "estrenos": n})
+                cfg = read_json(CFG_PATH, {}) or {}
+                if cfg.get("tmdbKey"):
+                    n = refresh_estrenos_tmdb()
+                    return self.send_json({"ok": True, "estrenos": n})
+                import cartelera
+                cartelera.main()
+                est = read_json(EST_PATH, {})
+                return self.send_json({"ok": True, "estrenos": len(est.get("estrenos", []))})
             if len(parts) == 2 and parts[1] in self.COLLS:
                 key, prefix, kind = self.COLLS[parts[1]]
                 item = self.body()
