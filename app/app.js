@@ -131,16 +131,33 @@ const saveUI = () => { try { localStorage.setItem("cine.coll", JSON.stringify({ 
 
 // Versión pública (Netlify): sin servidor, lee JSON estáticos y no permite editar.
 const STATIC = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || new URLSearchParams(location.search).has("vitrina");
-if (STATIC) document.documentElement.classList.add("ro");
+const PIN_KEY = "cine.pin";
+const getPin = () => { try { return localStorage.getItem(PIN_KEY) || ""; } catch (e) { return ""; } };
+const ro = () => STATIC && !getPin(); // solo lectura: web publicada sin PIN
+document.documentElement.classList.toggle("ro", ro());
 const STATIC_FILES = { db: "data/db.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
 
 async function api(path, opts = {}) {
   if (STATIC) {
-    if (opts.method && opts.method !== "GET") throw new Error("Esta es la versión para compartir: solo lectura");
-    if (path.startsWith("buscar")) return [];
-    const r = await fetch(STATIC_FILES[path] || `data/${path}.json`, { cache: "no-cache" });
-    if (!r.ok) throw new Error(`No encuentro los datos (${r.status})`);
-    return r.json();
+    const method = opts.method || "GET";
+    if (path.startsWith("buscar")) return wikiBuscar(decodeURIComponent(path.split("q=")[1] || ""));
+    if (method === "GET" && path === "db") {
+      try {
+        const r = await fetch("/api/db", { cache: "no-store" });
+        if (r.ok) return r.json();
+      } catch (e) { /* sin función: copia estática */ }
+    }
+    if (method === "GET") {
+      const r = await fetch(STATIC_FILES[path] || `data/${path}.json`, { cache: "no-cache" });
+      if (!r.ok) throw new Error(`No encuentro los datos (${r.status})`);
+      return r.json();
+    }
+    if (!getPin()) throw new Error("Esta es la versión para compartir: entra con tu PIN para editar");
+    const r = await fetch(`/api/${path}`, { method, headers: { "Content-Type": "application/json", "X-Pin": getPin() }, body: opts.body ? JSON.stringify(opts.body) : undefined });
+    const j = await r.json().catch(() => ({}));
+    if (r.status === 401) { try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ } document.documentElement.classList.toggle("ro", ro()); }
+    if (!r.ok) throw new Error(j.error || `Error ${r.status}`);
+    return j;
   }
   const r = await fetch(`/api/${path}`, { headers: { "Content-Type": "application/json" }, ...opts, body: opts.body ? JSON.stringify(opts.body) : undefined });
   const j = await r.json().catch(() => ({}));
@@ -236,6 +253,7 @@ function predict(item) {
 // ---------------------------------------------------------------- navegación
 const NAV = [
   ["inicio", "Inicio", "home"],
+  ["anadir", "Añadir películas", "plus"],
   ["cartelera", "Cartelera hoy", "ticket"],
   ["coleccion", "Mi colección", "film"],
   ["estrenos", "Estrenos", "calendar"],
@@ -246,7 +264,7 @@ const NAV = [
   ["series", "Series", "tv"],
   ["ajustes", "Ajustes", "settings"],
 ];
-const navItems = () => NAV.filter((n) => !(STATIC && n[0] === "ajustes"));
+const navItems = () => NAV.filter((n) => !(STATIC && n[0] === "ajustes") && !(ro() && n[0] === "anadir"));
 function route() {
   const h = location.hash.replace(/^#\/?/, "");
   const [name, qs] = h.split("?");
@@ -256,7 +274,8 @@ function renderChrome() {
   const r = route().name;
   const counts = { coleccion: S.db.peliculas.length, pendientes: S.db.pendientes.length, series: S.db.series.length };
   $("#nav").innerHTML = navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${l}</span>${counts[k] != null ? `<span class="count">${counts[k]}</span>` : ""}</a>`).join("");
-  const TAB = { inicio: "Inicio", cartelera: "Cartelera", coleccion: "Colección", estrenos: "Estrenos" };
+  const TAB = ro() ? { inicio: "Inicio", cartelera: "Cartelera", coleccion: "Colección", estrenos: "Estrenos" }
+    : { inicio: "Inicio", anadir: "Añadir", cartelera: "Cartelera", coleccion: "Colección" };
   const enTab = Object.keys(TAB).includes(r);
   $("#tabbar").innerHTML = NAV.filter((n) => TAB[n[0]])
     .map(([k, , ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${TAB[k]}</span></a>`).join("")
@@ -264,13 +283,15 @@ function renderChrome() {
   const e = S.db.estado || {};
   const hora = e.excel_at ? new Date(e.excel_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) : null;
   if (STATIC) {
-    const f = S.db.actualizado ? new Date(S.db.actualizado).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" }) : "";
-    $("#sideFoot").innerHTML = `<b>Versión para compartir</b><br><span class="dim">Solo lectura${f ? ` · actualizada el ${f}` : ""}</span>`;
+    const f = S.db.actualizado ? new Date(S.db.actualizado + (S.db.actualizado.length === 19 ? "Z" : "")).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" }) : "";
+    $("#sideFoot").innerHTML = ro()
+      ? `<b>Versión para compartir</b><br><span class="dim">Solo lectura${f ? ` · actualizada el ${f}` : ""}</span><br><a href="#" data-login class="dim" style="text-decoration:underline">Entrar para editar</a>`
+      : `<b style="color:var(--gold)">Modo edición</b><br><span class="dim">Los cambios se guardan en la web y llegan a tu PC</span><br><a href="#" data-logout class="dim" style="text-decoration:underline">Salir</a>`;
     return;
   }
   $("#sideFoot").innerHTML = e.excel_error
     ? `<span class="warn">⚠ ${esc(e.excel_error)}</span>`
-    : `<b>Excel sincronizado</b>${hora ? ` · ${hora}` : ""}<br><a href="/api/excel" class="dim">Descargar Mi Cinemateca.xlsx</a>`;
+    : `<b>Excel sincronizado</b>${hora ? ` · ${hora}` : ""}<br><span class="dim">${e.pin ? (e.sync === "ok" ? "Sincronizado con la web" : esc(e.sync || "Sincronizando con la web…")) : "Web sin sincronizar (Ajustes)"}</span><br><a href="/api/excel" class="dim">Descargar Mi Cinemateca.xlsx</a>`;
 }
 function render() {
   const { name, qs } = route();
@@ -607,7 +628,8 @@ function openForm(p = null, preset = {}) {
         const body = { ...data, ids: d.ids || {}, poster: d.poster || null, taquilla: {} };
         if (preset._pendiente) body.desdePendiente = preset._pendiente;
         const r = await api("peliculas", { method: "POST", body });
-        toast(`«${r.titulo}» añadida con un ${fmt1(r.nota)} · Excel actualizado`);
+        toast(`«${r.titulo}» añadida con un ${fmt1(r.nota)}${STATIC ? "" : " · Excel actualizado"}`);
+        completarDesdeWiki(r).then(refrescarSilencioso);
       }
       await refreshDB();
       closeModal();
@@ -1138,17 +1160,23 @@ VIEWS.ajustes = (v) => {
     <div class="card"><h3>${icon("download")} Tu Excel</h3><p>Cada cambio que haces aquí regenera <code>Mi Cinemateca.xlsx</code> en la carpeta de la app, con hojas de resumen, películas, series, UCM, pendientes y estrenos.</p>
       ${e.excel_error ? `<p style="color:var(--gold)">⚠ ${esc(e.excel_error)}</p>` : ""}
       <div class="acts"><a class="btn btn-primary" href="/api/excel">${icon("download")}Descargar Excel</a><button class="btn" id="xRegen">${icon("refresh")}Regenerar</button></div></div>
-    <div class="card"><h3>${icon("upload")} ¿Has editado el Excel a mano?</h3><p>Si cambias notas, reseñas o añades filas en la hoja <b>Películas</b> de <code>Mi Cinemateca.xlsx</code>, guárdalo, ciérralo y pulsa aquí para traer esos cambios a la app. Las filas nuevas sin ID se añaden.</p>
-      <div class="acts"><button class="btn" id="xImp">${icon("upload")}Importar cambios del Excel</button></div></div>
+    <div class="card"><h3>${icon("globe")} Sincronizar con la web</h3><p>Escribe aquí el mismo <b>PIN</b> que configuraste en Netlify. Tu PC y la web se sincronizarán solos (al arrancar, tras cada cambio y cada 5 minutos), así lo que añadas desde el móvil llega a tu Excel.</p>
+      <p class="dim" style="font-size:12.5px">Estado: ${e.pin ? esc(e.sync || "pendiente") : "sin PIN"}${e.sync_at ? ` · última vez ${new Date(e.sync_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}` : ""}</p>
+      <div class="acts"><input class="input" id="pinLocal" type="password" inputmode="numeric" placeholder="${e.pin ? "PIN guardado ✓ (escribe para cambiarlo)" : "PIN de edición"}" style="flex:1"><button class="btn" id="pinSave">Guardar</button><button class="btn btn-ghost" id="syncNow">${icon("refresh")}Sincronizar ahora</button></div></div>
+    <div class="card"><h3>${icon("upload")} Añadir desde el Excel</h3><p>Abre <code>Mi Cinemateca.xlsx</code>, escribe tus películas en la hoja <b>Añadir</b> (Año, Duración, Nota, Título, Director, País…), guarda y cierra: la app las importa sola en unos segundos y completa lo que falte. También detecta cambios de nota o reseña en la hoja <b>Películas</b>.</p>
+      ${e.excel_import ? `<p class="dim" style="font-size:12.5px">Última importación: ${esc(e.excel_import)}</p>` : ""}
+      <div class="acts"><button class="btn" id="xImp">${icon("upload")}Importar ahora</button></div></div>
     <div class="card"><h3>${icon("calendar")} Estrenos automáticos (opcional)</h3><p>Con una clave gratuita de <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener" style="color:var(--gold)">TMDb</a> el calendario se actualiza solo con las fechas de España, sinopsis y carteles. Sin clave, lo mantenemos juntos a mano.</p>
       <div class="acts"><input class="input" id="tmdbKey" type="password" placeholder="${e.tmdb ? "Clave guardada ✓ (escribe para cambiarla)" : "Clave API v3 de TMDb"}" style="flex:1"><button class="btn" id="tmdbSave">Guardar</button></div></div>
-    <div class="card"><h3>${icon("layers")} Copia de seguridad</h3><p>La app guarda una copia automática en <code>data/backups</code> antes de cada cambio (las 30 últimas). También puedes descargar la base de datos completa.</p>
+    <div class="card"><h3>${icon("layers")} Copia de seguridad</h3><p>La app guarda una copia automática en <code>data/local/backups</code> antes de cada cambio (las 30 últimas). También puedes descargar la base de datos completa.</p>
       <div class="acts"><a class="btn" href="/api/backup">${icon("download")}Descargar copia (.json)</a></div></div>
     ${corr.length ? `<div class="card" style="grid-column:1/-1"><h3>${icon("check")} Correcciones aplicadas al importar tu Excel original</h3><p>Revisé tu Excel y arreglé estos errores (tu archivo original no se ha tocado):</p>
       <ul style="margin:0;padding-left:18px;color:var(--text-2);columns:2;column-gap:40px;font-size:13px">${corr.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></div>` : ""}
   </div>`;
   $("#xRegen").onclick = async () => { const r = await api("excel/regenerar", { method: "POST" }); await refreshDB(); toast(r.ok ? "Excel regenerado" : r.excel_error, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
   $("#xImp").onclick = async () => { try { const r = await api("excel/importar", { method: "POST" }); await refreshDB(); toast(`${r.modificadas} modificadas · ${r.nuevas} nuevas`); } catch (err) { toast(err.message, "x"); } };
+  $("#pinSave").onclick = async () => { const k = $("#pinLocal").value.trim(); if (k.length < 4) return toast("El PIN debe tener al menos 4 caracteres", "x"); await api("config", { method: "POST", body: { pin: k } }); const r = await api("sync", { method: "POST" }); await refreshDB(); toast(r.ok ? "PIN guardado · sincronizado con la web" : r.sync, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
+  $("#syncNow").onclick = async () => { const r = await api("sync", { method: "POST" }); await loadAll(); toast(r.ok ? "Sincronizado con la web" : r.sync, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
   $("#tmdbSave").onclick = async () => { const k = $("#tmdbKey").value.trim(); if (!k) return; await api("config", { method: "POST", body: { tmdbKey: k } }); await refreshDB(); toast("Clave guardada"); VIEWS.ajustes(v); };
 };
 
@@ -1268,15 +1296,291 @@ function openMore() {
   const r = route().name;
   modal(`<div class="sheet-body"><div class="eyebrow">Mi Cinemateca</div><h2 class="h2" style="margin:6px 0 16px">Secciones</h2>
     <div class="more-list">${navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}" data-close>${icon(ic)}<span>${l}</span></a>`).join("")}</div>
-    ${!STATIC ? `<button class="btn btn-primary" data-action="add" style="width:100%;justify-content:center;margin-top:16px">${icon("plus")}Registrar película</button>` : ""}</div>`, "narrow");
+    ${!ro() ? `<button class="btn btn-primary" data-action="add" style="width:100%;justify-content:center;margin-top:16px">${icon("plus")}Registrar película</button>` : ""}
+    ${STATIC ? (ro() ? `<button class="btn btn-ghost" data-login style="width:100%;justify-content:center;margin-top:10px">${icon("user")}Entrar para editar</button>` : `<button class="btn btn-ghost" data-logout style="width:100%;justify-content:center;margin-top:10px">${icon("x")}Salir del modo edición</button>`) : ""}</div>`, "narrow");
+}
+
+// ---------------------------------------------------------------- Búsqueda en Wikidata desde el navegador (web publicada)
+const WD_FILM = new Set(["Q11424", "Q202866", "Q24869", "Q229390", "Q506240", "Q17517379", "Q93204", "Q20650540", "Q226730", "Q1261214", "Q336144", "Q110956863", "Q24862"]);
+const WD_TV = new Set(["Q5398426", "Q1259759", "Q15416", "Q526877", "Q63952888", "Q117467246", "Q3464665", "Q21191270", "Q1366112", "Q581714"]);
+const WD_GEN = [[/superh[ée]ro|superhero/, "Superhéroes"], [/terror|horror|slasher/, "Terror"], [/ciencia ficci|science fiction/, "Ciencia ficción"],
+  [/animaci|animad|animated|anime/, "Animación"], [/document/, "Documental"], [/comedia|comedy|parod|sátira|satire/, "Comedia"],
+  [/suspense|thriller/, "Thriller"], [/acci[óo]n|action|artes marciales/, "Acción"], [/aventura|adventure/, "Aventura"], [/fant[áa]s/, "Fantasía"],
+  [/rom[áa]n|romance|romantic/, "Romance"], [/musical/, "Musical"], [/b[ée]lic|guerra|war film/, "Bélico"], [/western|w[ée]stern|del oeste/, "Western"],
+  [/misterio|mystery|detectiv/, "Misterio"], [/biogr/, "Biográfico"], [/hist[óo]ric|period/, "Histórico"], [/famil|infantil|children/, "Familiar"],
+  [/crim|polic|g[áa]ngster|noir|heist|atracos/, "Crimen"], [/drama/, "Drama"]];
+async function wdApi(params, host = "www.wikidata.org") {
+  const u = `https://${host}/w/api.php?` + new URLSearchParams({ ...params, format: "json", origin: "*" });
+  const r = await fetch(u);
+  return r.json();
+}
+async function wikiBuscar(q) {
+  const s = await wdApi({ action: "wbsearchentities", search: q, language: "es", uselang: "es", type: "item", limit: "12" });
+  const ids = (s.search || []).map((x) => x.id);
+  if (!ids.length) return [];
+  const ents = (await wdApi({ action: "wbgetentities", ids: ids.join("|"), props: "claims|labels|sitelinks", languages: "es|en", sitefilter: "enwiki" })).entities || {};
+  const cv = (e, p) => ((e.claims || {})[p] || []).filter((c) => c.rank !== "deprecated").map((c) => c.mainsnak && c.mainsnak.datavalue && c.mainsnak.datavalue.value)
+    .filter((v) => v != null).map((v) => (typeof v === "object" ? v.id || v.time || v.amount || v.text : v));
+  const esPeli = (e) => { const t = cv(e, "P31"); return t.some((x) => WD_FILM.has(x)) || (cv(e, "P345").some((x) => String(x).startsWith("tt")) && !t.some((x) => WD_TV.has(x)) && cv(e, "P57").length > 0); };
+  const pelis = ids.map((i) => ents[i]).filter((e) => e && !e.missing && esPeli(e)).slice(0, 8);
+  if (!pelis.length) return [];
+  const refs = [...new Set(pelis.flatMap((e) => [...cv(e, "P57").slice(0, 3), ...cv(e, "P495").slice(0, 1), ...cv(e, "P136")]))];
+  const labs = refs.length ? (await wdApi({ action: "wbgetentities", ids: refs.slice(0, 50).join("|"), props: "labels", languages: "es|en" })).entities || {} : {};
+  const lab = (e, l = "es") => (e && e.labels && ((e.labels[l] || e.labels.en || {}).value)) || "";
+  const titulos = pelis.map((e) => e.sitelinks && e.sitelinks.enwiki && e.sitelinks.enwiki.title).filter(Boolean);
+  const posters = {};
+  if (titulos.length) {
+    const d = await wdApi({ action: "query", titles: titulos.join("|"), prop: "pageimages", piprop: "thumbnail", pithumbsize: "342", pilicense: "any", redirects: "1" }, "en.wikipedia.org");
+    const q2 = d.query || {};
+    const back = Object.fromEntries([...(q2.redirects || []), ...(q2.normalized || [])].map((r) => [r.to, r.from]));
+    for (const p of Object.values(q2.pages || {})) if (p.thumbnail) posters[back[p.title] || p.title] = p.thumbnail.source.split("?")[0];
+  }
+  return pelis.map((e) => {
+    const años = {};
+    for (const t of cv(e, "P577")) { const m = /[+-](\d{4})/.exec(t); if (m) años[m[1]] = (años[m[1]] || 0) + 1; }
+    const anio = Object.keys(años).sort((a, b) => años[b] - años[a] || a - b)[0];
+    const gl = cv(e, "P136").flatMap((g) => [lab(labs[g], "es"), lab(labs[g], "en")]).map((x) => x.toLowerCase());
+    const generos = [];
+    for (const g of gl) for (const [rx, n] of WD_GEN) if (rx.test(g) && !generos.includes(n)) generos.push(n);
+    const P = { imdb: "P345", filmaffinity: "P480", rt: "P1258", letterboxd: "P6127", tmdb: "P4947", allocine: "P1265" };
+    const idsExt = { wikidata: e.id };
+    for (const [k, p] of Object.entries(P)) { const v = cv(e, p)[0]; if (v) idsExt[k] = String(v); }
+    const dur = cv(e, "P2047")[0];
+    const enw = e.sitelinks && e.sitelinks.enwiki && e.sitelinks.enwiki.title;
+    return {
+      titulo: lab(e, "es"), tituloOriginal: cv(e, "P1476")[0] || lab(e, "en"), anio: anio ? +anio : null,
+      duracion: dur ? Math.round(+dur) : null, director: cv(e, "P57").slice(0, 3).map((d) => lab(labs[d])).filter(Boolean).join(" / "),
+      pais: lab(labs[cv(e, "P495")[0]]), generos: generos.slice(0, 3), ids: idsExt, poster: posters[enw] || null,
+    };
+  });
+}
+// Completa en segundo plano lo que falte de una película añadida desde la web
+async function completarDesdeWiki(p) {
+  if (!STATIC || (p.ids && p.ids.wikidata)) return;
+  try {
+    const res = await wikiBuscar(p.titulo);
+    const m = res.find((r) => !p.anio || !r.anio || Math.abs(r.anio - p.anio) <= 1);
+    if (!m) return;
+    const cambios = { ids: m.ids };
+    if (!p.poster && m.poster) cambios.poster = m.poster;
+    for (const k of ["tituloOriginal", "director", "pais", "duracion", "anio"]) if (!p[k] && m[k]) cambios[k] = m[k];
+    if (!(p.generos || []).length && m.generos.length) cambios.generos = m.generos;
+    await api(`peliculas/${p.id}`, { method: "PUT", body: cambios });
+  } catch (e) { /* sin conexión con Wikidata: se queda como está */ }
+}
+
+// ---------------------------------------------------------------- Modo edición en la web (PIN)
+function openLogin() {
+  modal(`<div class="sheet-body"><div class="eyebrow">Solo para el dueño</div><h2 class="h2" style="margin:6px 0 10px">Entrar para editar</h2>
+    <p class="muted" style="margin:0 0 18px">Con tu PIN podrás añadir y editar películas desde este dispositivo. Tu familia seguirá viendo la web en modo lectura.</p>
+    <form id="loginF" style="display:flex;gap:10px"><input class="input" id="pinIn" type="password" inputmode="numeric" autocomplete="current-password" placeholder="PIN" style="flex:1;font-size:18px;letter-spacing:.3em">
+    <button class="btn btn-primary">${icon("check")}Entrar</button></form><p id="loginErr" style="color:var(--red);min-height:20px;margin:10px 0 0"></p></div>`, "narrow");
+  setTimeout(() => $("#pinIn").focus(), 60);
+  $("#loginF").onsubmit = async (ev) => {
+    ev.preventDefault();
+    const pin = $("#pinIn").value.trim();
+    if (!pin) return;
+    const r = await fetch("/api/login", { method: "POST", headers: { "X-Pin": pin } });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { $("#loginErr").textContent = j.error || "No se pudo entrar"; return; }
+    try { localStorage.setItem(PIN_KEY, pin); } catch (e) { /* */ }
+    document.documentElement.classList.toggle("ro", ro());
+    closeModal(); await refreshDB(); render(); toast("Modo edición activado en este dispositivo");
+  };
+}
+function logout() {
+  try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ }
+  document.documentElement.classList.toggle("ro", ro());
+  toast("Has salido del modo edición", "eyeoff"); render();
+}
+
+// ---------------------------------------------------------------- Añadir (como en el Excel)
+const COLS_XL = [
+  ["anio", "Año", "number"], ["duracion", "Duración", "number"], ["nota", "Nota", "number"], ["titulo", "Título", "text"],
+  ["director", "Director", "text"], ["pais", "País", "text"], ["generos", "Géneros", "text"], ["lugar", "Dónde", "text"], ["fechaVisto", "Visto el", "date"],
+];
+function lugaresLista() { return [...(S.est.cines || []).map((c) => c.nombre), ...PLATAFORMAS, "Televisión", "DVD / Blu-ray", "Otro"]; }
+function parseGeneros(txt) {
+  return String(txt || "").split(/[,;/]/).map((x) => x.trim()).filter(Boolean)
+    .map((x) => GENEROS.find((g) => norm(g) === norm(x)) || GENEROS.find((g) => norm(g).startsWith(norm(x))) || null).filter(Boolean);
+}
+function valorCelda(p, k) {
+  if (k === "generos") return (p.generos || []).join(", ");
+  if (k === "nota") return p.nota == null ? "" : String(p.nota);
+  return p[k] ?? "";
+}
+function leerCelda(k, v) {
+  v = String(v).trim();
+  if (k === "anio" || k === "duracion") return v ? parseInt(v, 10) || null : null;
+  if (k === "nota") return v ? Math.round(clamp(parseFloat(v.replace(",", ".")), 0, 10) * 10) / 10 : null;
+  if (k === "generos") return parseGeneros(v);
+  if (k === "titulo" && v && v === v.toUpperCase() && /[A-ZÁÉÍÓÚÑ]/.test(v)) return v.toLowerCase().replace(/(^|[\s:¿¡(-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
+  return v || null;
+}
+function filaXL(p) {
+  return `<tr data-xl="${p.id}">
+    <td class="xl-poster">${p.poster ? `<img src="${esc(p.poster)}" alt="" referrerpolicy="no-referrer" loading="lazy">` : ""}</td>
+    ${COLS_XL.map(([k, , t]) => `<td class="xl-c-${k}"><input class="xl-in" data-k="${k}" type="${t === "date" ? "date" : "text"}" ${t === "number" ? 'inputmode="decimal"' : ""} ${k === "lugar" ? 'list="xlLugares"' : ""} value="${esc(valorCelda(p, k))}"></td>`).join("")}
+    <td class="xl-act"><button class="icon-btn" data-open="${p.id}" title="Ver ficha">${icon("eye")}</button></td></tr>`;
+}
+VIEWS.anadir = (v) => {
+  if (ro()) { location.hash = "#/inicio"; return; }
+  const recientes = [...S.db.peliculas].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || "")) || String(b.id).localeCompare(String(a.id))).slice(0, 40);
+  v.innerHTML = `
+  <div class="page-head"><div><div class="eyebrow">Como en tu Excel</div><h1 class="h1">Añadir películas</h1>
+    <p>Escribe una fila por película y pulsa <b>Intro</b>. Al teclear el título te propongo la película y relleno el resto (director, país, géneros, póster…). Puedes corregir cualquier celda de abajo: se guarda al salir de ella.</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="xlPaste">${icon("upload")}Pegar filas de Excel</button><button class="btn btn-ghost" data-action="add">${icon("plus")}Formulario completo</button></div></div>
+  <div class="card xl-wrap">
+    <table class="xl">
+      <thead><tr><th></th>${COLS_XL.map(([k, l]) => `<th class="xl-c-${k}">${l}</th>`).join("")}<th></th></tr></thead>
+      <tbody>
+        <tr class="xl-new">
+          <td class="xl-poster" id="xlNewPoster"></td>
+          ${COLS_XL.map(([k, l, t]) => `<td class="xl-c-${k}" data-label="${l}"><div class="${k === "titulo" ? "ac" : ""}"><input class="xl-in" id="xl_${k}" data-k="${k}" type="${t === "date" ? "date" : "text"}" ${t === "number" ? 'inputmode="decimal"' : ""} ${k === "lugar" ? 'list="xlLugares"' : ""} ${k === "generos" ? 'list="xlGeneros"' : ""} placeholder="${k === "titulo" ? "Escribe el título…" : k === "nota" ? "0–10" : k === "generos" ? "Drama, Thriller" : ""}" value="${k === "fechaVisto" ? todayISO() : ""}" autocomplete="off">${k === "titulo" ? `<div class="ac-list" id="xlAc" hidden></div>` : ""}</div></td>`).join("")}
+          <td class="xl-act"><button class="btn btn-primary btn-sm" id="xlSave">${icon("check")}<span>Guardar</span></button></td>
+        </tr>
+        <tr class="xl-sep"><td colspan="${COLS_XL.length + 2}">Últimas añadidas</td></tr>
+        ${recientes.map(filaXL).join("")}
+      </tbody>
+    </table>
+  </div>
+  <datalist id="xlLugares">${lugaresLista().map((x) => `<option value="${esc(x)}">`).join("")}</datalist>
+  <datalist id="xlGeneros">${GENEROS.map((x) => `<option value="${esc(x)}">`).join("")}</datalist>`;
+
+  let elegido = null;
+  const nuevo = () => Object.fromEntries(COLS_XL.map(([k]) => [k, $(`#xl_${k}`).value]));
+  const limpiar = () => { COLS_XL.forEach(([k]) => { $(`#xl_${k}`).value = k === "fechaVisto" ? todayISO() : ""; }); elegido = null; $("#xlNewPoster").innerHTML = ""; $("#xl_titulo").focus(); };
+
+  // autocompletar el título
+  const q = $("#xl_titulo"), list = $("#xlAc");
+  let t, seq = 0, res = [];
+  q.oninput = () => {
+    elegido = null; clearTimeout(t);
+    t = setTimeout(async () => {
+      const s = q.value.trim();
+      if (s.length < 2) { list.hidden = true; return; }
+      const my = ++seq;
+      list.hidden = false; list.innerHTML = `<div class="ac-empty">Buscando “${esc(s)}”…</div>`;
+      try { res = await api(`buscar?q=${encodeURIComponent(s)}`); } catch (e) { res = []; }
+      if (my !== seq) return;
+      list.innerHTML = res.length ? res.map((r, i) => `<div class="ac-item" data-i="${i}"><div class="mini">${r.poster ? `<img src="${esc(r.poster)}" referrerpolicy="no-referrer" alt="">` : ""}</div><div><div style="font-weight:600">${esc(r.titulo)} <span class="dim">${r.anio || ""}</span></div><div class="s">${esc(r.director || "")}</div></div></div>`).join("")
+        : `<div class="ac-empty">Sin coincidencias: se guardará como la escribas.</div>`;
+      $$(".ac-item", list).forEach((el) => (el.onmousedown = (ev) => { ev.preventDefault(); elegir(res[+el.dataset.i]); }));
+    }, 350);
+  };
+  q.onblur = () => setTimeout(() => (list.hidden = true), 150);
+  const elegir = (r) => {
+    elegido = r;
+    q.value = r.titulo;
+    for (const [k, val] of [["anio", r.anio], ["duracion", r.duracion], ["director", r.director], ["pais", r.pais], ["generos", (r.generos || []).join(", ")]]) if (val) $(`#xl_${k}`).value = val;
+    $("#xlNewPoster").innerHTML = r.poster ? `<img src="${esc(r.poster)}" alt="" referrerpolicy="no-referrer">` : "";
+    list.hidden = true;
+    $("#xl_nota").focus();
+  };
+
+  const guardar = async () => {
+    const d = nuevo();
+    if (!d.titulo.trim()) { $("#xl_titulo").focus(); return toast("Falta el título", "x"); }
+    const datos = Object.fromEntries(COLS_XL.map(([k]) => [k, leerCelda(k, d[k])]));
+    const dup = S.db.peliculas.find((x) => (norm(x.titulo) === norm(datos.titulo) || norm(x.tituloOriginal) === norm(datos.titulo)) && (!datos.anio || !x.anio || Math.abs(x.anio - datos.anio) <= 1));
+    if (dup && !confirm(`Ya tienes «${dup.titulo}» (${dup.anio || "s/a"}) con un ${fmt1(dup.nota)}. ¿Añadirla otra vez?`)) return;
+    const body = { ...datos, tituloOriginal: elegido ? elegido.tituloOriginal : null, ids: elegido ? elegido.ids : {}, poster: elegido ? elegido.poster : null, taquilla: {}, resena: "", favorita: false, saga: null };
+    const btn = $("#xlSave"); btn.disabled = true;
+    try {
+      const p = await api("peliculas", { method: "POST", body });
+      toast(`«${p.titulo}» añadida${p.nota != null ? ` con un ${fmt1(p.nota)}` : ""}`);
+      S.db.peliculas.push(p); S.prof = null;
+      $(".xl-sep").insertAdjacentHTML("afterend", filaXL(p));
+      limpiar(); renderChrome();
+      completarDesdeWiki(p).then(refrescarSilencioso);
+    } catch (e) { toast(e.message, "x"); }
+    btn.disabled = false;
+  };
+  $("#xlSave").onclick = guardar;
+  $$(".xl-new .xl-in").forEach((el) => el.addEventListener("keydown", (ev) => {
+    if (ev.key === "Enter" && !(el.id === "xl_titulo" && !list.hidden && res.length)) { ev.preventDefault(); guardar(); }
+    if (ev.key === "Enter" && el.id === "xl_titulo" && !list.hidden && res.length) { ev.preventDefault(); elegir(res[0]); }
+  }));
+
+  // edición directa de las filas existentes (se guarda al salir de la celda)
+  v.addEventListener("change", async (ev) => {
+    const inp = ev.target.closest("tr[data-xl] .xl-in");
+    if (!inp) return;
+    const tr = inp.closest("tr"); const id = tr.dataset.xl; const k = inp.dataset.k;
+    const val = leerCelda(k, inp.value);
+    if (k === "titulo" && !val) { toast("El título no puede quedar vacío", "x"); return; }
+    try {
+      const p = await api(`peliculas/${id}`, { method: "PUT", body: { [k]: val } });
+      const i = S.db.peliculas.findIndex((x) => x.id === id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...p };
+      S.prof = null;
+      inp.value = valorCelda(p, k);
+      inp.classList.add("ok"); setTimeout(() => inp.classList.remove("ok"), 900);
+    } catch (e) { toast(e.message, "x"); }
+  });
+  $("#xlPaste").onclick = openPegar;
+  setTimeout(() => $("#xl_titulo").focus(), 80);
+};
+async function refrescarSilencioso() { try { S.db = await api("db"); S.prof = null; } catch (e) { /* */ } }
+
+// Pegar varias filas copiadas de un Excel (Año · Duración · Nota · Título · Director · País)
+function parsePegado(txt) {
+  const filas = [];
+  for (const linea of String(txt).split(/\r?\n/)) {
+    if (!linea.trim()) continue;
+    let c = linea.split("\t").map((x) => x.trim());
+    while (c.length && !c[0]) c.shift(); // columna A vacía, como en tu Excel original
+    if (!c.length) continue;
+    let d;
+    if (/^\d{4}(\.0)?$/.test(c[0])) d = { anio: c[0], duracion: c[1], nota: c[2], titulo: c[3], director: c[4], pais: c[5], generos: c[6], lugar: c[7] };
+    else d = { titulo: c[0], anio: c[1], nota: c[2], director: c[3], pais: c[4] };
+    if (!d.titulo || /^t[íi]tulo$/i.test(d.titulo)) continue;
+    const it = Object.fromEntries(Object.entries(d).map(([k, val]) => [k, leerCelda(k, val ?? "")]));
+    it.dup = !!S.db.peliculas.find((x) => (norm(x.titulo) === norm(it.titulo) || norm(x.tituloOriginal) === norm(it.titulo)) && (!it.anio || !x.anio || Math.abs(x.anio - it.anio) <= 1));
+    filas.push(it);
+  }
+  return filas;
+}
+function openPegar() {
+  modal(`<div class="sheet-body"><div class="eyebrow">Importar en bloque</div><h2 class="h2" style="margin:6px 0 10px">Pegar filas de Excel</h2>
+    <p class="muted" style="margin:0 0 14px">Copia filas de tu Excel con las columnas <b>Año · Duración · Nota · Título · Director · País</b> (como las tenías siempre) y pégalas aquí. También vale solo <b>Título · Año · Nota</b>.</p>
+    <textarea class="textarea" id="pegTxt" rows="7" placeholder="2026&#9;155&#9;8,5&#9;DUNE: PARTE TRES&#9;DENIS VILLENEUVE&#9;ESTADOS UNIDOS"></textarea>
+    <div id="pegPrev" style="margin-top:14px"></div>
+    <div class="form-foot"><button class="btn btn-ghost" data-close>Cancelar</button><button class="btn btn-primary" id="pegGo" disabled>${icon("check")}Importar</button></div></div>`);
+  let filas = [];
+  const prev = () => {
+    filas = parsePegado($("#pegTxt").value);
+    const nuevas = filas.filter((f) => !f.dup);
+    $("#pegPrev").innerHTML = filas.length ? `<table class="tbl"><thead><tr><th>Título</th><th class="r">Año</th><th class="r">Nota</th><th>Director</th><th></th></tr></thead><tbody>
+      ${filas.map((f) => `<tr><td>${esc(f.titulo)}</td><td class="r">${f.anio || ""}</td><td class="r">${f.nota != null ? scoreBadge(f.nota) : ""}</td><td class="muted">${esc(f.director || "")}</td><td>${f.dup ? `<span class="chip">Ya la tienes</span>` : `<span class="chip on">Nueva</span>`}</td></tr>`).join("")}</tbody></table>` : "";
+    $("#pegGo").disabled = !nuevas.length;
+    $("#pegGo").innerHTML = `${icon("check")}Importar ${nuevas.length || ""} ${nuevas.length === 1 ? "película" : "películas"}`;
+  };
+  $("#pegTxt").oninput = prev;
+  setTimeout(() => $("#pegTxt").focus(), 60);
+  $("#pegGo").onclick = async () => {
+    const btn = $("#pegGo"); btn.disabled = true;
+    let n = 0;
+    for (const f of filas.filter((x) => !x.dup)) {
+      const { dup, ...datos } = f;
+      btn.innerHTML = `${icon("refresh")}Importando ${++n}…`;
+      try {
+        const p = await api("peliculas", { method: "POST", body: { ...datos, fechaVisto: null, ids: {}, poster: null, taquilla: {}, resena: "", favorita: false } });
+        S.db.peliculas.push(p);
+        await completarDesdeWiki(p);
+      } catch (e) { toast(e.message, "x"); break; }
+    }
+    await refrescarSilencioso(); closeModal(); render(); toast(`${n} ${n === 1 ? "película importada" : "películas importadas"}`);
+  };
 }
 
 // ---------------------------------------------------------------- eventos globales
 document.addEventListener("click", async (e) => {
-  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine]");
+  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine],[data-login],[data-logout]");
   if (!t) return;
   const d = t.dataset;
-  if (STATIC && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "sedit", "sdel"].some((k) => d[k] !== undefined)) return;
+  if (d.login !== undefined) { e.preventDefault(); return openLogin(); }
+  if (d.logout !== undefined) { e.preventDefault(); closeModal(); return logout(); }
+  if (ro() && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "sedit", "sdel"].some((k) => d[k] !== undefined)) return;
   if (d.more !== undefined) { e.preventDefault(); return openMore(); }
   if (d.cday) { S.cart_.dia = d.cday; render._keep = true; return VIEWS.cartelera($("#view")); }
   if (d.ccine !== undefined) { S.cart_.cine = d.ccine; render._keep = true; return VIEWS.cartelera($("#view")); }
@@ -1317,7 +1621,7 @@ document.addEventListener("keydown", (e) => {
   const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);
   if (typing || !$("#modal").hidden) return;
   if (e.key === "/") { e.preventDefault(); if (route().name !== "coleccion") location.hash = "#/coleccion"; setTimeout(() => $("#fq")?.focus(), 60); }
-  if (e.key === "n" && !STATIC) { e.preventDefault(); openForm(); }
+  if (e.key === "n" && !ro()) { e.preventDefault(); openForm(); }
 });
 // tooltips
 const tip = document.createElement("div");

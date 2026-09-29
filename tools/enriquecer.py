@@ -16,7 +16,8 @@ import bulk  # noqa: E402
 import wiki  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = ROOT / "data" / "db.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from rutas import DB_PATH  # noqa: E402
 CAT_TXT = ROOT / "tools" / "catalogo_recomendaciones.txt"
 CAT_EXTRA = ROOT / "data" / "catalogo_extra.json"
 EST_PATH = ROOT / "data" / "estrenos.json"

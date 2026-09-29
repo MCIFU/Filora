@@ -15,7 +15,8 @@ from pathlib import Path
 import openpyxl
 
 ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = ROOT / "data" / "db.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from rutas import DB_PATH  # noqa: E402
 
 GENEROS = {
     "A": "Acción", "Av": "Aventura", "An": "Animación", "CF": "Ciencia ficción",

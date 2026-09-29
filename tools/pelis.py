@@ -63,6 +63,7 @@ def cmd_vista(a):
             "origen": "app", "añadido": datetime.now().isoformat(timespec="seconds"),
         }
         p["id"] = server.next_id(db["peliculas"], "p")
+        p["mod"] = server.ahora()
         db["pendientes"] = [w for w in db["pendientes"] if norm(w["titulo"]) != norm(p["titulo"])]
         db["peliculas"].append(p)
         server.save_db(db)
@@ -80,6 +81,7 @@ def cmd_nota(a):
         p = L[0]
         old = p.get("nota")
         p["nota"] = round(a.nota, 1)
+        p["mod"] = server.ahora()
         if a.resena:
             p["resena"] = a.resena
         server.save_db(db)

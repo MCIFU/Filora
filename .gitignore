@@ -11,3 +11,10 @@ Mi Cinemateca.xlsx
 
 # Datos de la web estática (los genera tools/build_static.py / Netlify)
 app/data/
+
+# Node / Netlify
+node_modules/
+.netlify/
+
+# Base de trabajo del PC (se sincroniza con la web)
+data/local/

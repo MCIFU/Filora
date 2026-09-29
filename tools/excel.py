@@ -19,7 +19,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.table import Table, TableStyleInfo
 
 ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = ROOT / "data" / "db.json"
+from rutas import DB_PATH  # noqa: E402
 EST_PATH = ROOT / "data" / "estrenos.json"
 XLSX_PATH = ROOT / "Mi Cinemateca.xlsx"
 
@@ -208,8 +208,30 @@ def export(db=None, estrenos=None, path=XLSX_PATH):
     add_table(ws5, "Estrenos", ecols, erow)
     ws5.freeze_panes = "C2"
 
+    # ------------------------------------------------------------ Añadir (como el Excel de siempre)
+    wa = wb.create_sheet("Añadir", 0)
+    wa.sheet_view.showGridLines = False
+    wa["A1"] = "Añade aquí las películas que veas"
+    wa["A1"].font = Font(name=FONT, size=18, bold=True, color=INK)
+    wa["A2"] = ("Escribe una fila por película (como en tu Excel de siempre), guarda y cierra. "
+                "La app las pasa a tu colección, completa director, país, géneros y póster si los dejas vacíos, y vacía esta hoja.")
+    wa["A2"].font = Font(name=FONT, size=10, color=MUTED)
+    wa["A2"].alignment = Alignment(wrap_text=True, vertical="top")
+    wa.merge_cells("A2:J2")
+    wa.row_dimensions[2].height = 32
+    add_cols = [("Año", None, 8, "0"), ("Duración", None, 10, "0"), ("Nota", None, 8, "0.0"), ("Título", None, 38, None),
+                ("Director", None, 26, None), ("País", None, 16, None), ("Géneros", None, 24, None),
+                ("Dónde", None, 24, None), ("Visto el", None, 12, "dd/mm/yyyy"), ("Reseña", None, 40, None)]
+    add_table(wa, "Anadir", add_cols, [[None] * len(add_cols) for _ in range(25)], start_row=4, style="TableStyleMedium2")
+    from openpyxl.worksheet.datavalidation import DataValidation
+    dv = DataValidation(type="decimal", operator="between", formula1="0", formula2="10", allow_blank=True,
+                        showErrorMessage=True, errorTitle="Nota", error="La nota va de 0 a 10")
+    wa.add_data_validation(dv)
+    dv.add("C5:C29")
+    wa.freeze_panes = "A5"
+
     # ------------------------------------------------------------ Resumen
-    wr = wb.create_sheet("Resumen", 0)
+    wr = wb.create_sheet("Resumen", 1)
     style_title(wr, "Mi Cinemateca", f"Actualizado el {datetime.now().strftime('%d/%m/%Y %H:%M')} · generado desde la app")
     wr.column_dimensions["A"].width = 3
     for col, w in zip("BCDEFGHIJKLMN", (26, 12, 12, 3, 30, 12, 12, 3, 26, 12, 12, 3, 12)):
@@ -365,7 +387,8 @@ def import_pro(path=XLSX_PATH, db=None):
     idx = {h: i for i, h in enumerate(headers)}
     by_id = {p["id"]: p for p in db["peliculas"]}
     changed = added = 0
-    next_n = max([int(p["id"][1:]) for p in db["peliculas"]] + [0]) + 1
+    import random
+    marca = datetime.utcnow().isoformat(timespec="seconds")
     for row in ws.iter_rows(min_row=2, values_only=True):
         g = lambda h: _val(row[idx[h]]) if h in idx and idx[h] < len(row) else None
         if not g("Título"):
@@ -395,14 +418,71 @@ def import_pro(path=XLSX_PATH, db=None):
             t.update(taq)
             t["mundial"] = (t.get("domestica") or 0) + (t.get("internacional") or 0) if (t.get("domestica") or t.get("internacional")) else None
             if json.dumps(p, sort_keys=True, ensure_ascii=False) != before:
+                p["mod"] = marca
                 changed += 1
         else:
-            p = {**upd, "id": f"p{next_n:04d}", "taquilla": {**taq, "mundial": None}, "ids": {}, "poster": None,
-                 "origen": "excel"}
-            next_n += 1
+            p = {**upd, "id": f"p{datetime.utcnow():%Y%m%d%H%M%S}{random.randint(0, 999999):06d}",
+                 "taquilla": {**taq, "mundial": None}, "ids": {}, "poster": None, "origen": "excel-nueva",
+                 "mod": marca, "añadido": marca}
             db["peliculas"].append(p)
             added += 1
+    # hoja «Añadir»: filas nuevas con las columnas del Excel de siempre
+    if "Añadir" in wb.sheetnames:
+        wa = wb["Añadir"]
+        hdr_row = next((r for r in range(1, 10) if wa.cell(row=r, column=4).value == "Título"), None)
+        if hdr_row:
+            hdr = [c.value for c in wa[hdr_row]]
+            ix = {h: i for i, h in enumerate(hdr) if h}
+            existentes = {(_norm(p["titulo"]), p.get("anio")) for p in db["peliculas"]}
+            existentes |= {(_norm(p.get("tituloOriginal")), p.get("anio")) for p in db["peliculas"] if p.get("tituloOriginal")}
+            for row in wa.iter_rows(min_row=hdr_row + 1, values_only=True):
+                g = lambda h: _val(row[ix[h]]) if h in ix and ix[h] < len(row) else None
+                titulo = g("Título")
+                if not titulo:
+                    continue
+                titulo = str(titulo).strip()
+                if titulo.isupper():
+                    titulo = _title_case(titulo)
+                anio = int(g("Año")) if g("Año") else None
+                if (_norm(titulo), anio) in existentes:
+                    continue
+                fv = g("Visto el")
+                if isinstance(fv, datetime):
+                    fv = fv.date().isoformat()
+                nota = g("Nota")
+                if isinstance(nota, str):
+                    nota = float(nota.replace(",", "."))
+                director = g("Director") or ""
+                db["peliculas"].append({
+                    "id": f"p{datetime.utcnow():%Y%m%d%H%M%S}{random.randint(0, 999999):06d}",
+                    "titulo": titulo, "tituloOriginal": None, "anio": anio,
+                    "duracion": int(g("Duración")) if g("Duración") else None,
+                    "nota": round(float(nota), 1) if nota is not None else None,
+                    "director": _title_case(director) if str(director).isupper() else director,
+                    "pais": _title_case(str(g("País"))).replace(" De ", " de ").replace(" Del ", " del ") if g("País") else "",
+                    "generos": [x.strip().capitalize() for x in str(g("Géneros") or "").split(",") if x.strip()],
+                    "saga": None, "fase": None, "presupuesto": None, "taquilla": {},
+                    "fechaVisto": fv, "lugar": g("Dónde"), "resena": g("Reseña") or "", "favorita": False,
+                    "ids": {}, "poster": None, "origen": "excel-nueva", "mod": marca, "añadido": marca,
+                })
+                existentes.add((_norm(titulo), anio))
+                added += 1
     return db, {"modificadas": changed, "nuevas": added}
+
+
+def _norm(x):
+    import re
+    import unicodedata
+    x = unicodedata.normalize("NFKD", str(x or "")).encode("ascii", "ignore").decode()
+    return re.sub(r"[^A-Z0-9]", "", x.upper())
+
+
+def _title_case(x):
+    try:
+        from importar_excel import title_case
+        return title_case(x)
+    except Exception:
+        return str(x).title()
 
 
 if __name__ == "__main__":

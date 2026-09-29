@@ -1,0 +1,14 @@
+{
+  "name": "mi-cinemateca",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/api.test.mts"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.1.1"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^6.0.0"
+  }
+}
