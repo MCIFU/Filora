@@ -64,7 +64,7 @@ def poster(block):
 
 
 def credits(block, cls):
-    m = re.search(rf'class="[^"]*{cls}">(.*?)</div></div>', block, re.S)
+    m = re.search(r'class="(?:[^"]* )?' + cls + r'">(.*?)</div></div>', block, re.S)
     return [txt(x) for x in re.findall(r'title="([^"]+)"', m.group(1))] if m else []
 
 
