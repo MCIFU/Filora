@@ -12,7 +12,7 @@ const mean = (a) => (a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0);
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const fmt1 = (v) => (v == null ? "–" : Number(v).toLocaleString("es-ES", { minimumFractionDigits: 1, maximumFractionDigits: 1 }));
 const fmt2 = (v) => Number(v).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const fmtInt = (v) => Math.round(v).toLocaleString("es-ES");
+const fmtInt = (v) => Math.round(v).toLocaleString("es-ES", { useGrouping: "always" }).replace(/,/g, ".");
 const money = (v) => {
   if (v == null) return "–";
   if (v >= 1e9) return `$${(v / 1e9).toLocaleString("es-ES", { maximumFractionDigits: 2 })} mil M`;
@@ -89,7 +89,7 @@ function veredicto(n) {
 }
 function ring(pct) {
   const r = 10, c = 2 * Math.PI * r;
-  return `<svg class="ring" viewBox="0 0 26 26"><circle cx="13" cy="13" r="${r}" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/><circle cx="13" cy="13" r="${r}" fill="none" stroke="${pct >= 75 ? "#4fbf7f" : pct >= 55 ? "#e3b04b" : "#e0574f"}" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(c * pct) / 100} ${c}" transform="rotate(-90 13 13)"/></svg>`;
+  return `<svg class="ring" viewBox="0 0 26 26"><circle cx="13" cy="13" r="${r}" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/><circle cx="13" cy="13" r="${r}" fill="none" stroke="${pct >= 75 ? "#4fbf7f" : pct >= 55 ? "#e3b04b" : "#6f6e7d"}" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(c * pct) / 100} ${c}" transform="rotate(-90 13 13)"/></svg>`;
 }
 const matchTag = (pct) => `<span class="match">${ring(pct)}${pct}%</span>`;
 
