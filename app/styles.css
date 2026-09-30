@@ -30,7 +30,7 @@
   --red: var(--telon-2); --green: var(--salida);
   --serif: var(--display); --sans: var(--texto);
   --ancho: 1320px;
-  --margen: clamp(18px, 4vw, 56px);
+  --margen: clamp(16px, 2.4vw, 40px);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -85,7 +85,7 @@ img { display: block; max-width: 100%; }
 .btn-add { flex: none; }
 
 .main { min-width: 0; }
-.view { max-width: calc(var(--ancho) + var(--margen) * 2); margin: 0 auto; padding: 56px var(--margen) 110px; }
+.view { max-width: none; margin: 0 auto; padding: 56px var(--margen) 110px; }
 .foot { border-top: 1px solid var(--linea); padding: 26px var(--margen) 40px; font-size: 13px; color: var(--papel-3); text-align: center; line-height: 1.7; }
 .foot b { color: var(--papel-2); font-weight: 600; }
 .foot a { text-decoration: underline; text-underline-offset: 3px; }
@@ -491,7 +491,7 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
 
 /* ---------------- añadir: libro de registro en papel ---------------- */
 .xl-wrap, .card.xl-wrap { padding: 0; overflow: auto; max-height: calc(100vh - 210px); background: var(--papel); color: var(--tinta); border: 0; border-radius: 4px; box-shadow: 0 24px 50px -26px #000; }
-.xl { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px; min-width: 1100px; }
+.xl { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14.5px; min-width: 900px; }
 .xl th { position: sticky; top: 0; z-index: 2; background: var(--tinta); color: var(--papel); font: 600 17px/1 var(--creditos); letter-spacing: .1em; text-transform: uppercase; text-align: left; padding: 12px 10px 10px; }
 .xl td { border-bottom: 1px solid rgba(26, 16, 19, .14); border-right: 1px solid rgba(26, 16, 19, .1); padding: 0; height: 42px; vertical-align: middle; }
 .xl td:last-child { border-right: 0; }
@@ -503,10 +503,9 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
 .xl-c-anio, .xl-c-duracion { width: 80px; }
 .xl-c-nota { width: 70px; }
 .xl-c-nota .xl-in { font: 800 22px/1 var(--display); text-align: center; }
-.xl-c-titulo { width: 22%; }
-.xl-c-director { width: 15%; }
-.xl-c-pais { width: 11%; }
-.xl-c-generos { width: 15%; }
+.xl-c-titulo { width: 26%; }
+.xl-c-director { width: 18%; }
+.xl-c-pais { width: 12%; }
 .xl-c-titulo .xl-in { font-weight: 700; }
 .xl-c-fechaVisto { width: 146px; }
 .xl-poster { width: 40px; padding: 3px 5px !important; }
@@ -644,3 +643,18 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
 ::view-transition-new(root) { animation: .28s ease-out .08s both fundir-entra; }
 @keyframes fundir-sale { to { opacity: 0; } }
 @keyframes fundir-entra { from { opacity: 0; transform: translateY(10px); } }
+
+/* etiquetas de género en la rejilla */
+.tags { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 5px 8px; min-height: 42px; cursor: text; }
+.xl-new .tags { min-height: 56px; }
+.tag { display: inline-flex; align-items: center; gap: 2px; height: 26px; padding: 1px 3px 0 9px; border-radius: 2px; background: var(--tinta); color: var(--papel); font: 500 16px/1 var(--creditos); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.tag-x { border: 0; background: none; color: inherit; opacity: .6; font: 400 17px/1 var(--texto); padding: 0 4px 2px; cursor: pointer; }
+.tag-x:hover { opacity: 1; color: var(--bombilla); }
+.tag-in { flex: 1 1 28px; min-width: 28px; height: 28px; border: 0; background: transparent; outline: none; color: var(--tinta); font: inherit; padding: 0 4px; }
+.tag-in::placeholder { color: rgba(26, 16, 19, .42); }
+.tags:focus-within { background: #fff8e6; box-shadow: inset 0 0 0 2px var(--telon); }
+.posters { grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); }
+@media (max-width: 860px) {
+  .xl-new .tags { background: #fffaf0; border: 1.5px solid rgba(26, 16, 19, .25); border-radius: 3px; min-height: 46px; }
+  .posters { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
+}

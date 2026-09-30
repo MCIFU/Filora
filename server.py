@@ -23,6 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 import excel  # noqa: E402
+import taquilla  # noqa: E402
 import wiki  # noqa: E402
 from rutas import BACKUPS, CFG_PATH, DATA, DB_PATH, asegurar_db  # noqa: E402
 
@@ -185,25 +186,43 @@ def enrich_background(kind, item_id):
             if not it:
                 return
             snapshot = dict(it)
+        ids, poster, extra, bom = {}, None, {}, None
+        tiene = (snapshot.get("ids") or {}).get("wikidata")
         try:
-            if kind == "film":
-                e = wiki.find_movie(snapshot["titulo"], snapshot.get("tituloOriginal"), snapshot.get("anio"))
-            else:
-                a = str(snapshot.get("anios") or "")[:4]
-                e = wiki.find_series(snapshot["titulo"], int(a) if a.isdigit() else None)
-            if not e:
-                return
-            ids = wiki.extract_ids(e)
-            t = wiki.enwiki_title(e)
-            poster = wiki.posters_for([t]).get(t) if t else None
-            extra = {}
-            if kind == "film" and not all(snapshot.get(k) for k in ("director", "pais", "duracion", "generos")):
-                try:
-                    cand = [r for r in wiki.search_films(snapshot["titulo"]) if r["ids"].get("wikidata") == ids.get("wikidata")]
-                    extra = cand[0] if cand else {}
-                except Exception:
-                    extra = {}
+            if not tiene:
+                if kind == "film":
+                    e = wiki.find_movie(snapshot["titulo"], snapshot.get("tituloOriginal"), snapshot.get("anio"))
+                else:
+                    a = str(snapshot.get("anios") or "")[:4]
+                    e = wiki.find_series(snapshot["titulo"], int(a) if a.isdigit() else None)
+                if e:
+                    ids = wiki.extract_ids(e)
+                    t = wiki.enwiki_title(e)
+                    poster = wiki.posters_for([t]).get(t) if t else None
+                    if kind == "film" and not all(snapshot.get(k) for k in ("director", "pais", "duracion", "generos")):
+                        cand = [r for r in wiki.search_films(snapshot["titulo"]) if r["ids"].get("wikidata") == ids.get("wikidata")]
+                        extra = cand[0] if cand else {}
         except Exception:
+            pass
+        if kind == "tv" and not snapshot.get("poster"):
+            de_wiki, poster = poster, None
+            try:  # carátulas de series: TVmaze (sin claves), mejor que el logotipo de Wikipedia
+                q = urllib.parse.quote(snapshot["titulo"])
+                with urllib.request.urlopen(urllib.request.Request(f"https://api.tvmaze.com/search/shows?q={q}", headers={"User-Agent": "MiCinemateca/1.0"}), timeout=20) as r:
+                    shows = [x["show"] for x in json.loads(r.read().decode("utf-8")) if x["show"].get("image")]
+                if shows:
+                    poster = shows[0]["image"]["medium"].replace("http://", "https://")
+                    ids["tvmaze"] = shows[0]["id"]
+            except Exception:
+                pass
+            poster = poster or de_wiki
+        imdb = ids.get("imdb") or (snapshot.get("ids") or {}).get("imdb")
+        if kind == "film" and imdb:
+            try:  # taquilla y presupuesto: Box Office Mojo
+                bom = taquilla.consultar(imdb)
+            except Exception:
+                bom = None
+        if not (ids or poster or extra or bom):
             return
         with LOCK:
             db = load_db()
@@ -216,6 +235,8 @@ def enrich_background(kind, item_id):
                 for k in ("tituloOriginal", "director", "pais", "duracion", "generos"):
                     if extra.get(k) and not it.get(k):
                         it[k] = extra[k]
+                if bom:
+                    taquilla.aplicar(it, bom)
                 it["mod"] = ahora()
                 save_db(db)
     threading.Thread(target=run, daemon=True).start()
@@ -421,7 +442,7 @@ class Handler(BaseHTTPRequestHandler):
                         db["pendientes"] = [w for w in db["pendientes"] if w["id"] != wid]
                         db.setdefault("borrados", {})[wid] = ahora()
                     save_db(db)
-                if kind and not (item.get("ids") or {}).get("wikidata"):
+                if kind:
                     enrich_background(kind, item["id"])
                 return self.send_json(item, 201)
             return self.send_json({"error": "no encontrado"}, 404)

@@ -27,12 +27,13 @@ jobs:
           ruta = pathlib.Path("data/db.json")
           viejo = json.loads(ruta.read_text(encoding="utf-8"))
           # protección: nunca guardar una copia claramente incompleta
-          if len(nuevo.get("peliculas", [])) >= 0.9 * len(viejo.get("peliculas", [])) and nuevo.get("peliculas"):
+          # y solo si la web tiene datos más recientes que el repositorio
+          if len(nuevo.get("peliculas", [])) >= 0.9 * len(viejo.get("peliculas", [])) and nuevo.get("peliculas") and str(nuevo.get("actualizado", "")) > str(viejo.get("actualizado", "")):
               nuevo.pop("estado", None)
               ruta.write_text(json.dumps(nuevo, ensure_ascii=False, indent=1), encoding="utf-8")
               print("Copia actualizada:", len(nuevo["peliculas"]), "películas")
           else:
-              print("Copia descartada por sospechosa")
+              print("Copia no actualizada (la web no tiene datos más recientes)")
           PY
       - name: Guardar cambios (la web los lee directamente de GitHub)
         run: |

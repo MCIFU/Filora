@@ -243,10 +243,6 @@ function predict(item) {
     const d = pr.decades.get(Math.floor(item.anio / 10) * 10);
     if (d) { s += 0.8 * d.adj; if (d.adj > 0.45) why.push(`Los años ${String(d.key).slice(2)} son una de tus décadas fuertes`); }
   }
-  if (item.saga) {
-    const sg = pr.sagas.get(item.saga);
-    if (sg) { s += 0.8 * sg.adj; why.push(`Sigues la saga ${item.saga} (media ${fmt1(sg.mean)})`); }
-  }
   if (item.prestigio) {
     s += 0.45 * (item.prestigio - 7.9);
     if (item.prestigio >= 8.8) why.push("Imprescindible según crítica y público");
@@ -418,7 +414,6 @@ VIEWS.coleccion = (v, qs) => {
     <select class="select" id="fgenre">${opt([...gC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.genre, "Todos los géneros")}</select>
     <select class="select" id="fdecade">${opt([...dC].sort((a, b) => b[0] - a[0]).map(([k, n]) => [k, `Años ${String(k).slice(2)} · ${k} (${n})`]), c.decade, "Todas las décadas")}</select>
     <select class="select" id="fcountry">${opt([...cC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.country, "Todos los países")}</select>
-    <select class="select" id="fsaga">${opt([...sC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.saga, "Todas las sagas")}</select>
     <select class="select" id="fmin">${opt([["9", "Nota ≥ 9"], ["8", "Nota ≥ 8"], ["7", "Nota ≥ 7"], ["5", "Aprobadas (≥ 5)"]], c.min, "Cualquier nota")}</select>
     <select class="select" id="fsort">${opt([["nota", "Mejor nota"], ["peor", "Peor nota"], ["nuevo", "Más recientes"], ["viejo", "Más antiguas"], ["titulo", "Título A–Z"], ["duracion", "Más largas"], ["taquilla", "Mayor taquilla"], ["registro", "Últimas registradas"]], c.sort, "Ordenar")}</select>
     <div class="seg"><button data-mode="grid" class="${c.mode === "grid" ? "on" : ""}" title="Carátulas">${icon("grid")}</button><button data-mode="list" class="${c.mode === "list" ? "on" : ""}" title="Lista">${icon("list")}</button></div>
@@ -444,7 +439,7 @@ VIEWS.coleccion = (v, qs) => {
   };
   let t;
   $("#fq").oninput = (e) => { clearTimeout(t); t = setTimeout(() => { c.q = e.target.value; c.limit = 120; draw(); }, 120); };
-  [["#fgenre", "genre"], ["#fdecade", "decade"], ["#fcountry", "country"], ["#fsaga", "saga"], ["#fmin", "min"], ["#fsort", "sort"]].forEach(([id, k]) => {
+  [["#fgenre", "genre"], ["#fdecade", "decade"], ["#fcountry", "country"], ["#fmin", "min"], ["#fsort", "sort"]].forEach(([id, k]) => {
     $(id).onchange = (e) => { c[k] = e.target.value; c.limit = 120; saveUI(); draw(); };
   });
   $$("[data-mode]", v).forEach((b) => (b.onclick = () => { c.mode = b.dataset.mode; saveUI(); $$("[data-mode]", v).forEach((x) => x.classList.toggle("on", x === b)); draw(); }));
@@ -456,7 +451,7 @@ function openFilm(id) {
   const p = S.db.peliculas.find((x) => x.id === id);
   if (!p) return;
   const t = p.taquilla || {};
-  const similares = S.db.peliculas.filter((x) => x.id !== p.id && (splitDir(x.director).some((d) => splitDir(p.director).includes(d)) || (p.saga && x.saga === p.saga)))
+  const similares = S.db.peliculas.filter((x) => x.id !== p.id && (splitDir(x.director).some((d) => splitDir(p.director).includes(d))))
     .sort((a, b) => (b.nota || 0) - (a.nota || 0)).slice(0, 8);
   const pr = profile();
   const rank = [...pr.P].sort((a, b) => b.nota - a.nota).findIndex((x) => x.id === p.id) + 1;
@@ -467,7 +462,7 @@ function openFilm(id) {
     <div class="sheet-body"><div class="detail">
       <div><div class="poster">${posterHTML(p)}</div></div>
       <div>
-        <div class="eyebrow">${esc([p.saga, p.fase].filter(Boolean).join(" · ") || (p.generos || []).join(" · "))}</div>
+        <div class="eyebrow">${esc([p.anio, p.pais].filter(Boolean).join(" · "))}</div>
         <h2 style="margin-top:8px">${esc(p.titulo)}</h2>
         ${p.tituloOriginal && norm(p.tituloOriginal) !== norm(p.titulo) ? `<div class="orig">${esc(p.tituloOriginal)}</div>` : ""}
         <div class="facts">
@@ -483,7 +478,7 @@ function openFilm(id) {
         ${p.resena ? `<blockquote class="review">${esc(p.resena)}</blockquote>` : ""}
         <div class="sub">Ver en</div>
         ${linksHTML(p)}
-        ${t.mundial || p.presupuesto ? `<div class="sub">Taquilla</div><div class="boxoffice">
+        ${t.mundial || p.presupuesto ? `<div class="sub">Taquilla${(p.ids || {}).imdb ? ` · <a href="https://www.boxofficemojo.com/title/${p.ids.imdb}/" target="_blank" rel="noopener" style="text-decoration:underline">Box Office Mojo</a>` : ""}</div><div class="boxoffice">
           ${p.presupuesto ? `<div><span>Presupuesto</span><b>${money(p.presupuesto)}</b></div>` : ""}
           ${t.apertura ? `<div><span>Estreno EE.UU.</span><b>${money(t.apertura)}</b></div>` : ""}
           ${t.domestica ? `<div><span>EE.UU.</span><b>${money(t.domestica)}</b></div>` : ""}
@@ -498,7 +493,7 @@ function openFilm(id) {
         </div>
       </div>
     </div>
-    ${similares.length ? `<div class="sub" style="margin-top:34px">Del mismo director o saga en tu colección</div><div class="strip">${similares.map((x) => pcard(x)).join("")}</div>` : ""}
+    ${similares.length ? `<div class="sub" style="margin-top:34px">Del mismo director en tu colección</div><div class="strip">${similares.map((x) => pcard(x)).join("")}</div>` : ""}
     </div>`);
 }
 
@@ -542,12 +537,10 @@ function openForm(p = null, preset = {}) {
       <div class="field full"><label>Tu nota</label><div class="rating-input">${scoreBadge(d.nota, "lg")}<input type="range" min="0" max="10" step="0.1" value="${d.nota}" id="fnota"><span class="words" id="fwords">${veredicto(d.nota)}</span></div></div>
       <div class="field s2"><label>Fecha en que la viste</label><input class="input" name="fechaVisto" type="date" value="${esc(d.fechaVisto || "")}"></div>
       <div class="field s2"><label>Dónde</label><select class="select" name="lugar">${lugarOptions(d.lugar)}</select></div>
-      <div class="field s2"><label>Saga</label><input class="input" name="saga" list="sagas" value="${esc(d.saga || "")}"></div>
       <div class="field full"><label>Tu reseña / notas</label><textarea class="textarea" name="resena" placeholder="Qué te pareció, con quién la viste, escenas que recordar…">${esc(d.resena || "")}</textarea></div>
       <div class="field full"><label class="toggle"><input type="checkbox" name="favorita" ${d.favorita ? "checked" : ""}><span class="sw"></span>Favorita</label></div>
     </div>
     <datalist id="paises">${[...new Set(S.db.peliculas.map((x) => x.pais).filter(Boolean))].sort().map((x) => `<option value="${esc(x)}">`).join("")}</datalist>
-    <datalist id="sagas">${sagas.map((x) => `<option value="${esc(x)}">`).join("")}</datalist>
     <div id="fdup"></div>
     <div class="form-foot"><button class="btn btn-ghost" data-close>Cancelar</button><button class="btn btn-primary" id="fsave">${icon("check")}${edit ? "Guardar cambios" : "Añadir a mi colección"}</button></div>
   </div>`, "narrow");
@@ -622,7 +615,7 @@ function openForm(p = null, preset = {}) {
       generos: $$("#fgen .chip.on", sheet).map((b) => b.dataset.g),
       nota: Math.round(+range.value * 10) / 10,
       fechaVisto: val("fechaVisto").value || null, lugar: val("lugar").value || null,
-      saga: val("saga").value.trim() || null, resena: val("resena").value.trim(),
+      resena: val("resena").value.trim(),
       favorita: val("favorita").checked,
     };
     const btn = $("#fsave");
@@ -726,9 +719,7 @@ VIEWS.estadisticas = (v) => {
       <table class="tbl"><tbody>${Dir.slice(0, 8).map((d) => `<tr class="click" onclick="location.hash='#/coleccion?q=${encodeURIComponent(d.key)}'"><td>${esc(d.key)}</td><td class="r dim">${d.n}</td><td class="r">${scoreBadge(d.mean)}</td></tr>`).join("")}</tbody></table></div>
     <div class="card chart"><h3>¿Te gustan más las largas?</h3><div class="cap">Duración (min) frente a tu nota · la línea es la tendencia</div>${scatter(P, (p) => p.duracion, () => [80, 100, 120, 140, 160, 180, 200], [70, 210])}</div>
     <div class="card chart"><h3>¿Antiguas o modernas?</h3><div class="cap">Año de estreno frente a tu nota</div>${scatter(P, (p) => p.anio, () => [1940, 1960, 1980, 2000, 2020], [1935, 2027])}</div>
-    <div class="card chart w8"><h3>Sagas y universos</h3><div class="cap">Tu nota media por saga (mín. 2 películas)</div>
-      ${hbars(Sg.map((s) => ({ label: s.key, value: s.mean, color: scoreColor(s.mean), right: `${fmt1(s.mean)} <span class="dim">· ${s.n}</span>`, href: `#/coleccion?saga=${encodeURIComponent(s.key)}` })), { max: 10 })}</div>
-    <div class="card chart w4"><h3>Universo Marvel por fases</h3><div class="cap">Tu nota media en cada fase del UCM</div>
+    <div class="card chart"><h3>Universo Marvel por fases</h3><div class="cap">Tu nota media en cada fase del UCM</div>
       ${hbars(fases.map((f) => ({ label: f.f.replace(/ · .*/, ""), value: mean(f.L.map((p) => p.nota)), color: scoreColor(mean(f.L.map((p) => p.nota))), right: fmt1(mean(f.L.map((p) => p.nota))), tip: f.f })), { max: 10 })}
       <p class="dim" style="font-size:12.5px;margin-top:14px">${ucm.length} películas del UCM vistas · media ${fmt1(mean(ucm.map((p) => p.nota)))}</p></div>
     <div class="card chart w12"><h3>Las más taquilleras que has visto</h3><div class="cap">Recaudación mundial y tu nota</div>
@@ -935,7 +926,7 @@ function openRel(key) {
     <div><div class="eyebrow">Estreno en cines · ${diaSemana(e.fecha)} ${fechaLarga(e.fecha)} ${e.fecha.slice(0, 4)}${e.provisional ? " (provisional)" : ""}</div>
       <h2 style="margin-top:8px">${esc(e.titulo)}</h2>${e.original && norm(e.original) !== norm(e.titulo) ? `<div class="orig">${esc(e.original)}</div>` : ""}
       <div class="facts">${e.director ? `<span>${icon("user")}${esc(e.director)}</span>` : ""}${e.pais ? `<span>${icon("globe")}${esc(e.pais)}</span>` : ""}${e.reparto ? `<span>${icon("star")}${esc(e.reparto)}</span>` : ""}</div>
-      <div class="chips">${(e.generos || []).map((g) => `<span class="chip">${g}</span>`).join("")}${e.saga ? `<span class="chip gold">${esc(e.saga)}</span>` : ""}</div>
+      <div class="chips">${(e.generos || []).map((g) => `<span class="chip">${g}</span>`).join("")}</div>
       ${e.sinopsis ? `<p class="muted" style="margin-top:14px">${esc(e.sinopsis)}</p>` : ""}
       <div class="myscore">${matchTag(m.pct)}<div><div class="lbl">Afinidad contigo</div><div class="verdict">Predicción: ${fmt1(m.nota)} · ${veredicto(m.nota)}</div></div></div>
       ${m.why.length ? `<div style="display:flex;flex-direction:column;gap:6px;color:var(--text-2);font-size:13.5px">${m.why.map((w) => `<span>— ${esc(w)}</span>`).join("")}</div>` : ""}
@@ -1151,9 +1142,11 @@ function openSerieForm(s = null) {
     const g = (n) => $(`[name="${n}"]`, sh);
     const data = { titulo: g("titulo").value.trim(), anios: g("anios").value.trim(), tipo: g("tipo").value, pais: g("pais").value.trim(), nota: Math.round(+r.value * 10) / 10, resena: g("resena").value.trim(), animacion: g("animacion").checked };
     if (!data.titulo) return g("titulo").focus();
+    let guardada = s;
     if (s) await api(`series/${s.id}`, { method: "PUT", body: data });
-    else await api("series", { method: "POST", body: data });
+    else guardada = await api("series", { method: "POST", body: data });
     await refreshDB(); closeModal(); toast("Serie guardada"); render();
+    completarSerie({ ...guardada, ...data });
   };
 }
 
@@ -1404,7 +1397,7 @@ function logout() {
 // ---------------------------------------------------------------- Añadir (como en el Excel)
 const COLS_XL = [
   ["anio", "Año", "number"], ["duracion", "Duración", "number"], ["nota", "Nota", "number"], ["titulo", "Título", "text"],
-  ["director", "Director", "text"], ["pais", "País", "text"], ["generos", "Géneros", "text"], ["lugar", "Dónde", "text"], ["fechaVisto", "Visto el", "date"],
+  ["director", "Director", "text"], ["pais", "País", "text"], ["generos", "Géneros", "tags"],
 ];
 function lugaresLista() { return [...(S.est.cines || []).map((c) => c.nombre), ...PLATAFORMAS, "Televisión", "DVD / Blu-ray", "Otro"]; }
 function parseGeneros(txt) {
@@ -1424,10 +1417,19 @@ function leerCelda(k, v) {
   if (k === "titulo" && v && v === v.toUpperCase() && /[A-ZÁÉÍÓÚÑ]/.test(v)) return v.toLowerCase().replace(/(^|[\s:¿¡(-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
   return v || null;
 }
+const tagHTML = (g) => `<span class="tag" data-g="${esc(g)}">${esc(g)}<button type="button" class="tag-x" aria-label="Quitar ${esc(g)}">×</button></span>`;
+const tagsHTML = (gen, id = "") => `<div class="tags" ${id ? `id="${id}"` : ""}>${(gen || []).map(tagHTML).join("")}<input class="tag-in" list="xlGeneros" placeholder="${(gen || []).length ? "+" : "+ género"}" autocomplete="off" aria-label="Añadir género"></div>`;
+const leerTags = (c) => $$(".tag", c).map((t) => t.dataset.g);
+function setTags(c, gen) { c.innerHTML = (gen || []).map(tagHTML).join("") + `<input class="tag-in" list="xlGeneros" placeholder="${(gen || []).length ? "+" : "+ género"}" autocomplete="off" aria-label="Añadir género">`; }
+function celdaXL(p, k, t, nueva) {
+  if (t === "tags") return tagsHTML(nueva ? [] : p.generos, nueva ? "xlTagsNew" : "");
+  const ph = nueva ? (k === "titulo" ? "Escribe el título…" : k === "nota" ? "0–10" : "") : "";
+  return `<input class="xl-in" ${nueva ? `id="xl_${k}"` : ""} data-k="${k}" type="text" ${t === "number" ? 'inputmode="decimal"' : ""} placeholder="${ph}" value="${nueva ? "" : esc(valorCelda(p, k))}" autocomplete="off">`;
+}
 function filaXL(p) {
   return `<tr data-xl="${p.id}">
     <td class="xl-poster">${p.poster ? `<img src="${esc(p.poster)}" alt="" referrerpolicy="no-referrer" loading="lazy">` : ""}</td>
-    ${COLS_XL.map(([k, , t]) => `<td class="xl-c-${k}"><input class="xl-in" data-k="${k}" type="${t === "date" ? "date" : "text"}" ${t === "number" ? 'inputmode="decimal"' : ""} ${k === "lugar" ? 'list="xlLugares"' : ""} value="${esc(valorCelda(p, k))}"></td>`).join("")}
+    ${COLS_XL.map(([k, , t]) => `<td class="xl-c-${k}">${celdaXL(p, k, t, false)}</td>`).join("")}
     <td class="xl-act"><button class="icon-btn" data-open="${p.id}" title="Ver ficha">${icon("eye")}</button></td></tr>`;
 }
 VIEWS.anadir = (v) => {
@@ -1435,7 +1437,7 @@ VIEWS.anadir = (v) => {
   const recientes = [...S.db.peliculas].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || "")) || (b.anio || 0) - (a.anio || 0) || (b.nota || 0) - (a.nota || 0)).slice(0, 40);
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Añadir películas</h1>
-    <p>Escribe una fila por película y pulsa <b>Intro</b>. Al teclear el título te propongo la película y relleno el resto (director, país, géneros, póster…). Puedes corregir cualquier celda de abajo: se guarda al salir de ella.</p></div>
+    <p>Escribe una fila por película y pulsa <b>Intro</b>. Al teclear el título te propongo la película y relleno el resto (director, país, géneros y póster). Puedes corregir cualquier celda de abajo: se guarda al salir de ella.</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="xlPaste">${icon("upload")}Pegar filas de Excel</button><button class="btn btn-ghost" data-action="add">${icon("plus")}Formulario completo</button></div></div>
   <div class="card xl-wrap">
     <table class="xl">
@@ -1443,7 +1445,7 @@ VIEWS.anadir = (v) => {
       <tbody>
         <tr class="xl-new">
           <td class="xl-poster" id="xlNewPoster"></td>
-          ${COLS_XL.map(([k, l, t]) => `<td class="xl-c-${k}" data-label="${l}"><div class="${k === "titulo" ? "ac" : ""}"><input class="xl-in" id="xl_${k}" data-k="${k}" type="${t === "date" ? "date" : "text"}" ${t === "number" ? 'inputmode="decimal"' : ""} ${k === "lugar" ? 'list="xlLugares"' : ""} ${k === "generos" ? 'list="xlGeneros"' : ""} placeholder="${k === "titulo" ? "Escribe el título…" : k === "nota" ? "0–10" : k === "generos" ? "Drama, Thriller" : ""}" value="${k === "fechaVisto" ? todayISO() : ""}" autocomplete="off">${k === "titulo" ? `<div class="ac-list" id="xlAc" hidden></div>` : ""}</div></td>`).join("")}
+          ${COLS_XL.map(([k, l, t]) => `<td class="xl-c-${k}" data-label="${l}"><div class="${k === "titulo" ? "ac" : ""}">${celdaXL(null, k, t, true)}${k === "titulo" ? `<div class="ac-list" id="xlAc" hidden></div>` : ""}</div></td>`).join("")}
           <td class="xl-act"><button class="btn btn-primary btn-sm" id="xlSave">${icon("check")}<span>Guardar</span></button></td>
         </tr>
         <tr class="xl-sep"><td colspan="${COLS_XL.length + 2}">Últimas añadidas</td></tr>
@@ -1455,8 +1457,9 @@ VIEWS.anadir = (v) => {
   <datalist id="xlGeneros">${GENEROS.map((x) => `<option value="${esc(x)}">`).join("")}</datalist>`;
 
   let elegido = null;
-  const nuevo = () => Object.fromEntries(COLS_XL.map(([k]) => [k, $(`#xl_${k}`).value]));
-  const limpiar = () => { COLS_XL.forEach(([k]) => { $(`#xl_${k}`).value = k === "fechaVisto" ? todayISO() : ""; }); elegido = null; $("#xlNewPoster").innerHTML = ""; $("#xl_titulo").focus(); };
+  const campos = COLS_XL.filter((c) => c[2] !== "tags").map((c) => c[0]);
+  const nuevo = () => Object.fromEntries(campos.map((k) => [k, $(`#xl_${k}`).value]));
+  const limpiar = () => { campos.forEach((k) => { $(`#xl_${k}`).value = ""; }); setTags($("#xlTagsNew"), []); elegido = null; $("#xlNewPoster").innerHTML = ""; $("#xl_titulo").focus(); };
 
   // autocompletar el título
   const q = $("#xl_titulo"), list = $("#xlAc");
@@ -1479,7 +1482,8 @@ VIEWS.anadir = (v) => {
   const elegir = (r) => {
     elegido = r;
     q.value = r.titulo;
-    for (const [k, val] of [["anio", r.anio], ["duracion", r.duracion], ["director", r.director], ["pais", r.pais], ["generos", (r.generos || []).join(", ")]]) if (val) $(`#xl_${k}`).value = val;
+    for (const [k, val] of [["anio", r.anio], ["duracion", r.duracion], ["director", r.director], ["pais", r.pais]]) if (val) $(`#xl_${k}`).value = val;
+    setTags($("#xlTagsNew"), r.generos || []);
     $("#xlNewPoster").innerHTML = r.poster ? `<img src="${esc(r.poster)}" alt="" referrerpolicy="no-referrer">` : "";
     list.hidden = true;
     $("#xl_nota").focus();
@@ -1488,10 +1492,11 @@ VIEWS.anadir = (v) => {
   const guardar = async () => {
     const d = nuevo();
     if (!d.titulo.trim()) { $("#xl_titulo").focus(); return toast("Falta el título", "x"); }
-    const datos = Object.fromEntries(COLS_XL.map(([k]) => [k, leerCelda(k, d[k])]));
+    const datos = Object.fromEntries(campos.map((k) => [k, leerCelda(k, d[k])]));
+    datos.generos = leerTags($("#xlTagsNew"));
     const dup = S.db.peliculas.find((x) => (norm(x.titulo) === norm(datos.titulo) || norm(x.tituloOriginal) === norm(datos.titulo)) && (!datos.anio || !x.anio || Math.abs(x.anio - datos.anio) <= 1));
     if (dup && !confirm(`Ya tienes «${dup.titulo}» (${dup.anio || "s/a"}) con un ${fmt1(dup.nota)}. ¿Añadirla otra vez?`)) return;
-    const body = { ...datos, tituloOriginal: elegido ? elegido.tituloOriginal : null, ids: elegido ? elegido.ids : {}, poster: elegido ? elegido.poster : null, taquilla: {}, resena: "", favorita: false, saga: null };
+    const body = { ...datos, tituloOriginal: elegido ? elegido.tituloOriginal : null, ids: elegido ? elegido.ids : {}, poster: elegido ? elegido.poster : null, taquilla: {}, resena: "", favorita: false, fechaVisto: todayISO() };
     const btn = $("#xlSave"); btn.disabled = true;
     try {
       const p = await api("peliculas", { method: "POST", body });
@@ -1499,7 +1504,8 @@ VIEWS.anadir = (v) => {
       S.db.peliculas.push(p); S.prof = null;
       $(".xl-sep").insertAdjacentHTML("afterend", filaXL(p));
       limpiar(); renderChrome();
-      completarDesdeWiki(p).then(refrescarSilencioso);
+      completarDesdeWiki(p).then(() => refrescarFila(p.id));
+      [6000, 15000, 30000].forEach((ms) => setTimeout(() => refrescarFila(p.id), ms)); // el póster llega en unos segundos
     } catch (e) { toast(e.message, "x"); }
     btn.disabled = false;
   };
@@ -1510,7 +1516,44 @@ VIEWS.anadir = (v) => {
   }));
 
   // edición directa de las filas existentes (se guarda al salir de la celda)
-  v.addEventListener("change", async (ev) => {
+  // etiquetas de género: añadir con Intro, coma o eligiendo de la lista; quitar con × o retroceso
+  const guardarTags = async (c) => {
+    const tr = c.closest("tr[data-xl]");
+    if (!tr) return;
+    try {
+      const p = await api(`peliculas/${tr.dataset.xl}`, { method: "PUT", body: { generos: leerTags(c) } });
+      const i = S.db.peliculas.findIndex((x) => x.id === tr.dataset.xl); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...p };
+      S.prof = null;
+    } catch (e) { toast(e.message, "x"); }
+  };
+  const ponerTag = (inp, texto) => {
+    const c = inp.closest(".tags");
+    const g = parseGeneros(texto).filter((x) => !leerTags(c).includes(x));
+    inp.value = "";
+    if (!g.length) return false;
+    inp.insertAdjacentHTML("beforebegin", g.map(tagHTML).join(""));
+    inp.placeholder = "+";
+    guardarTags(c);
+    return true;
+  };
+  v.onclick = (ev) => {
+    const x = ev.target.closest(".tag-x");
+    if (x) { const c = x.closest(".tags"); x.parentElement.remove(); guardarTags(c); $(".tag-in", c).focus(); return; }
+    const c = ev.target.closest(".tags");
+    if (c && ev.target === c) $(".tag-in", c).focus();
+  };
+  v.oninput = (ev) => {
+    const inp = ev.target.closest(".tag-in");
+    if (inp && GENEROS.some((g) => norm(g) === norm(inp.value))) ponerTag(inp, inp.value);
+  };
+  v.onkeydown = (ev) => {
+    const inp = ev.target.closest(".tag-in");
+    if (!inp) return;
+    if ((ev.key === "Enter" || ev.key === "," || ev.key === "Tab") && inp.value.trim()) { ev.preventDefault(); ponerTag(inp, inp.value); return; }
+    if (ev.key === "Enter" && inp.closest(".xl-new")) { ev.preventDefault(); guardar(); return; }
+    if (ev.key === "Backspace" && !inp.value) { const c = inp.closest(".tags"); const t = $$(".tag", c).pop(); if (t) { t.remove(); guardarTags(c); } }
+  };
+  v.onchange = async (ev) => {
     const inp = ev.target.closest("tr[data-xl] .xl-in");
     if (!inp) return;
     const tr = inp.closest("tr"); const id = tr.dataset.xl; const k = inp.dataset.k;
@@ -1523,10 +1566,37 @@ VIEWS.anadir = (v) => {
       inp.value = valorCelda(p, k);
       inp.classList.add("ok"); setTimeout(() => inp.classList.remove("ok"), 900);
     } catch (e) { toast(e.message, "x"); }
-  });
+  };
   $("#xlPaste").onclick = openPegar;
   setTimeout(() => $("#xl_titulo").focus(), 80);
 };
+// Trae el póster y los datos que se completan solos tras añadir una película
+async function refrescarFila(id) {
+  await refrescarSilencioso();
+  const p = S.db.peliculas.find((x) => x.id === id);
+  const tr = document.querySelector(`tr[data-xl="${id}"]`);
+  if (!p || !tr) return;
+  if (p.poster && !$(".xl-poster img", tr)) $(".xl-poster", tr).innerHTML = `<img src="${esc(p.poster)}" alt="" referrerpolicy="no-referrer">`;
+  $$(".xl-in", tr).forEach((inp) => { if (!inp.value && document.activeElement !== inp) inp.value = valorCelda(p, inp.dataset.k); });
+  const c = $(".tags", tr);
+  if (c && !leerTags(c).length && (p.generos || []).length) setTags(c, p.generos);
+}
+// Carátula de una serie recién añadida (TVmaze, sin claves)
+async function completarSerie(sr) {
+  if (sr.poster) return;
+  try {
+    const r = await fetch(`https://api.tvmaze.com/search/shows?q=${encodeURIComponent(sr.titulo)}`);
+    const L = await r.json();
+    const y = parseInt(sr.anios, 10);
+    const m = L.map((x) => x.show).find((x) => x.image && (!y || !x.premiered || Math.abs(+x.premiered.slice(0, 4) - y) <= 2));
+    if (!m) return;
+    const ids = { ...(sr.ids || {}), tvmaze: m.id };
+    if (m.externals && m.externals.imdb) ids.imdb = ids.imdb || m.externals.imdb;
+    await api(`series/${sr.id}`, { method: "PUT", body: { poster: m.image.medium.replace("http://", "https://"), ids } });
+    await refrescarSilencioso();
+    if (route().name === "series") { render._keep = true; render(); }
+  } catch (e) { /* sin conexión: se queda sin carátula */ }
+}
 async function refrescarSilencioso() { try { S.db = await api("db"); S.prof = null; } catch (e) { /* */ } }
 
 // Pegar varias filas copiadas de un Excel (Año · Duración · Nota · Título · Director · País)
@@ -1538,7 +1608,7 @@ function parsePegado(txt) {
     while (c.length && !c[0]) c.shift(); // columna A vacía, como en tu Excel original
     if (!c.length) continue;
     let d;
-    if (/^\d{4}(\.0)?$/.test(c[0])) d = { anio: c[0], duracion: c[1], nota: c[2], titulo: c[3], director: c[4], pais: c[5], generos: c[6], lugar: c[7] };
+    if (/^\d{4}(\.0)?$/.test(c[0])) d = { anio: c[0], duracion: c[1], nota: c[2], titulo: c[3], director: c[4], pais: c[5], generos: c[6] };
     else d = { titulo: c[0], anio: c[1], nota: c[2], director: c[3], pais: c[4] };
     if (!d.titulo || /^t[íi]tulo$/i.test(d.titulo)) continue;
     const it = Object.fromEntries(Object.entries(d).map(([k, val]) => [k, leerCelda(k, val ?? "")]));
