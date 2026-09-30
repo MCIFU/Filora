@@ -71,8 +71,8 @@ const icon = (n, fill = false) => `<span class="i"><svg viewBox="0 0 24 24" fill
 // color de la nota: rojo → ámbar → verde
 function scoreColor(n) {
   if (n == null) return "var(--surface-3)";
-  const h = n < 5 ? 4 + (n / 5) * 36 : 40 + ((n - 5) / 5) * 105;
-  return `hsl(${h.toFixed(0)} 62% ${n >= 9 ? 52 : 58}%)`;
+  const h = n < 5 ? (350 + (n / 5) * 54) % 360 : 44 + ((n - 5) / 5) * 102;
+  return `hsl(${h.toFixed(0)} ${n < 5 ? 72 : 64}% ${n < 5 ? 60 : 57}%)`;
 }
 const scoreBadge = (n, cls = "") => (n == null ? `<span class="score none ${cls}">–</span>` : `<span class="score ${cls}" style="--c:${scoreColor(n)}">${fmt1(n)}</span>`);
 function veredicto(n) {
@@ -89,7 +89,7 @@ function veredicto(n) {
 }
 function ring(pct) {
   const r = 10, c = 2 * Math.PI * r;
-  return `<svg class="ring" viewBox="0 0 26 26"><circle cx="13" cy="13" r="${r}" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/><circle cx="13" cy="13" r="${r}" fill="none" stroke="${pct >= 75 ? "#4fbf7f" : pct >= 55 ? "#e3b04b" : "#6f6e7d"}" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(c * pct) / 100} ${c}" transform="rotate(-90 13 13)"/></svg>`;
+  return `<svg class="ring" viewBox="0 0 26 26"><circle cx="13" cy="13" r="${r}" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/><circle cx="13" cy="13" r="${r}" fill="none" stroke="${pct >= 75 ? "#3ddc84" : pct >= 55 ? "#ffc94a" : "#94867a"}" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(c * pct) / 100} ${c}" transform="rotate(-90 13 13)"/></svg>`;
 }
 const matchTag = (pct) => `<span class="match">${ring(pct)}${pct}%</span>`;
 
@@ -254,8 +254,8 @@ function predict(item) {
 const NAV = [
   ["inicio", "Inicio", "home"],
   ["anadir", "Añadir películas", "plus"],
-  ["cartelera", "Cartelera hoy", "ticket"],
-  ["coleccion", "Mi colección", "film"],
+  ["cartelera", "Cartelera", "ticket"],
+  ["coleccion", "Colección", "film"],
   ["estrenos", "Estrenos", "calendar"],
   ["recomendaciones", "Para ti", "target"],
   ["gustos", "Mis gustos", "spark"],
@@ -273,7 +273,8 @@ function route() {
 function renderChrome() {
   const r = route().name;
   const counts = { coleccion: S.db.peliculas.length, pendientes: S.db.pendientes.length, series: S.db.series.length };
-  $("#nav").innerHTML = navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${l}</span>${counts[k] != null ? `<span class="count">${counts[k]}</span>` : ""}</a>`).join("");
+  $("#nav").innerHTML = navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}">${icon(ic)}<span>${l}</span>${counts[k] != null ? `<span class="count">${counts[k]}</span>` : ""}</a>`).join("")
+    + `<a href="#" data-more class="nav-more">Más</a>`;
   const TAB = ro() ? { inicio: "Inicio", cartelera: "Cartelera", coleccion: "Colección", estrenos: "Estrenos" }
     : { inicio: "Inicio", anadir: "Añadir", cartelera: "Cartelera", coleccion: "Colección" };
   const enTab = Object.keys(TAB).includes(r);
@@ -299,6 +300,7 @@ function render() {
   const v = $("#view");
   v.style.animation = "none"; void v.offsetWidth; v.style.animation = "";
   VIEWS[name](v, qs);
+  if (qs.get("ficha")) openFilm(qs.get("ficha"));
   if (!render._keep) window.scrollTo(0, 0);
   render._keep = false;
 }
@@ -311,7 +313,7 @@ function pcard(p, opts = {}) {
   </div>`;
 }
 function sectionHead(t, link, linkText = "Ver todo") {
-  return `<div class="section-head"><h2 class="h2">${t}</h2>${link ? `<a href="${link}">${linkText} →</a>` : ""}</div>`;
+  return `<div class="section-head"><h2 class="h2">${t}</h2>${link ? `<a href="${link}">${linkText}</a>` : ""}</div>`;
 }
 
 // ================================================================ VISTAS
@@ -322,53 +324,46 @@ VIEWS.inicio = (v) => {
   const pr = profile();
   const pelis = S.db.peliculas;
   const horas = pelis.reduce((a, p) => a + (p.duracion || 0), 0) / 60;
-  const dirs = new Set(pelis.flatMap((p) => splitDir(p.director)));
-  const withPoster = pelis.filter((p) => p.poster).sort((a, b) => (b.nota || 0) - (a.nota || 0)).slice(0, 24);
-  const cols = [0, 1, 2, 3, 4, 5].map((c) => withPoster.filter((_, i) => i % 6 === c).slice(0, 4));
-  const h = new Date().getHours();
-  const saludo = h < 7 ? "Buenas noches" : h < 14 ? "Buenos días" : h < 21 ? "Buenas tardes" : "Buenas noches";
-  const masters = pelis.filter((p) => p.nota >= 9).sort((a, b) => b.nota - a.nota);
-  const recientes = [...pelis].filter((p) => p.origen === "app").sort((a, b) => String(b.añadido || b.fechaVisto || "").localeCompare(String(a.añadido || a.fechaVisto || ""))).slice(0, 12);
-  const ultimas = recientes.length ? recientes : [...pelis].sort((a, b) => (b.anio || 0) - (a.anio || 0) || (b.nota || 0) - (a.nota || 0)).slice(0, 12);
-  const recs = topRecs(12, { variedad: 1 });
-  const prox = upcoming().filter((e) => e.fecha <= addDays(todayISO(), 21)).map((e) => ({ ...e, m: predict(e) })).sort((a, b) => b.m.pct - a.m.pct).slice(0, 4);
-  const ins = insights().slice(0, 3);
+  const conPoster = pelis.filter((p) => p.poster && p.nota != null).sort((a, b) => b.nota - a.nota).slice(0, 45);
+  const tiras = [0, 1, 2].map((r) => conPoster.filter((_, k) => k % 3 === r));
+  const olimpo = [...pr.P].sort((a, b) => b.nota - a.nota || (a.anio || 0) - (b.anio || 0)).slice(0, 10);
+  const recientes = [...pelis].filter((p) => ["app", "web"].includes(p.origen)).sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || ""))).slice(0, 14);
+  const ultimas = recientes.length >= 4 ? recientes : [...pelis].sort((a, b) => (b.anio || 0) - (a.anio || 0) || (b.nota || 0) - (a.nota || 0)).slice(0, 14);
+  const recs = topRecs(14, { variedad: 1 });
+  const prox = upcoming().filter((e) => e.fecha >= todayISO() && e.fecha <= addDays(todayISO(), 30)).map((e) => ({ ...e, m: predict(e) })).sort((a, b) => b.m.pct - a.m.pct).slice(0, 4);
+  const tira = (L) => { const h = L.map((p) => `<img src="${esc(p.poster)}" alt="" loading="eager" referrerpolicy="no-referrer">`).join(""); return `<div class="reel"><div class="reel-track">${h}${h}</div></div>`; };
 
   v.innerHTML = `
   <section class="hero">
-    <div class="hero-bg">${cols.map((c) => `<div class="col">${c.map((p) => `<img src="${esc(p.poster)}" alt="" referrerpolicy="no-referrer">`).join("")}</div>`).join("")}</div>
+    <div class="reels" aria-hidden="true">${tiras.map(tira).join("")}</div>
     <div class="hero-content">
-      <div class="eyebrow">${saludo}</div>
-      <h1 class="h1" style="margin-top:10px">Tu vida en el cine,<br><em>fotograma a fotograma.</em></h1>
-      <div class="hero-stats">
-        <div><b>${fmtInt(pelis.length)}</b><span>películas</span></div>
-        <div><b>${fmtInt(horas)}</b><span>horas</span></div>
-        <div><b>${fmt2(pr.mu)}</b><span>nota media</span></div>
-        <div><b>${fmtInt(dirs.size)}</b><span>directores</span></div>
-      </div>
+      <h1><span>Mi</span><span>Cinemateca</span></h1>
+      <p class="hero-lead"><b>${fmtInt(pelis.length)}</b> películas, <b>${fmtInt(horas)}</b> horas a oscuras y una nota para cada una. La media va por <b>${fmt2(pr.mu)}</b>.</p>
       <div class="hero-actions">
-        <button class="btn btn-primary" data-action="add">${icon("plus")}Registrar película</button>
-        <a class="btn" href="#/recomendaciones">${icon("target")}¿Qué veo hoy?</a>
+        <a class="btn btn-primary rw" href="#/anadir">Añadir película</a>
+        <a class="btn" href="#/coleccion">Ver la colección</a>
+        <a class="btn" href="#/recomendaciones">¿Qué veo hoy?</a>
       </div>
     </div>
   </section>
 
   ${hoyHTML()}
 
+  <section class="section">${sectionHead("El Olimpo", "#/coleccion?min=9", `Las ${pr.P.filter((p) => p.nota >= 9).length} con un 9 o más`)}
+    <ol class="olimpo">${olimpo.map((p) => `<li data-open="${p.id}"><div class="mini">${posterHTML(p)}</div>
+      <div style="min-width:0"><div class="t">${esc(p.titulo)}</div><div class="s">${esc([splitDir(p.director).join(" y "), p.anio].filter(Boolean).join(", "))}</div></div>${scoreBadge(p.nota)}</li>`).join("")}</ol></section>
+
+  <section class="section">${sectionHead(recientes.length >= 4 ? "Lo último que has añadido" : "Lo último que has visto", "#/coleccion", "Toda la colección")}
+    <div class="strip">${ultimas.map((p) => pcard(p)).join("")}</div></section>
+
+  <section class="section">${sectionHead("Podrían gustarte", "#/recomendaciones", "Todas las recomendaciones")}
+    <div class="strip">${recs.map((r) => pcard(r, { match: r.m.pct, cat: r._i })).join("")}</div></section>
+
   ${prox.length ? `<section class="section">${sectionHead("Próximos estrenos", "#/estrenos", "Calendario completo")}
     <div class="rels">${prox.map(relCard).join("")}</div></section>` : ""}
 
-  <section class="section">${sectionHead("Recomendadas para ti", "#/recomendaciones")}
-    <div class="strip">${recs.map((r) => pcard(r, { match: r.m.pct, cat: r._i })).join("")}</div></section>
-
-  <section class="section">${sectionHead(recientes.length ? "Últimas registradas" : "Lo último que has visto", "#/coleccion")}
-    <div class="strip">${ultimas.map((p) => pcard(p)).join("")}</div></section>
-
-  <section class="section">${sectionHead(`Tus obras maestras <span class="dim" style="font-family:var(--sans);font-size:14px;font-weight:500">· ${masters.length} con 9 o más</span>`, "#/coleccion?min=9")}
-    <div class="strip">${masters.slice(0, 20).map((p) => pcard(p)).join("")}</div></section>
-
-  <section class="section">${sectionHead("Así ves el cine", "#/gustos", "Tu perfil completo")}
-    <div class="insights">${ins.map(insightCard).join("")}</div></section>`;
+  <section class="section">${sectionHead("Cómo ves el cine", "#/gustos", "Tu perfil completo")}
+    <div class="insights">${insights().slice(0, 3).map(insightCard).join("")}</div></section>`;
 };
 
 // ---------------------------------------------------------------- Colección
@@ -404,8 +399,7 @@ VIEWS.coleccion = (v, qs) => {
   const gC = count((p) => p.generos || []), cC = count((p) => p.pais), sC = count((p) => p.saga), dC = count((p) => (p.anio ? Math.floor(p.anio / 10) * 10 : null));
   const c = S.coll;
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">Colección</div><h1 class="h1">Mis películas</h1></div>
-    <button class="btn btn-primary" data-action="add">${icon("plus")}Registrar película</button></div>
+  <div class="page-head"><div><h1 class="h1">Mis películas</h1></div></div>
   <div class="toolbar">
     <label class="search">${icon("search")}<input class="input" id="fq" placeholder="Buscar título, título original o director…  ( / )" value="${esc(c.q)}"></label>
     <select class="select" id="fgenre">${opt([...gC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.genre, "Todos los géneros")}</select>
@@ -558,7 +552,7 @@ function openForm(p = null, preset = {}) {
     if (edit) return;
     const t = norm(val("titulo").value), y = +val("anio").value;
     const dup = S.db.peliculas.find((x) => (norm(x.titulo) === t || (x.tituloOriginal && norm(x.tituloOriginal) === t)) && (!y || !x.anio || Math.abs(x.anio - y) <= 1));
-    $("#fdup").innerHTML = dup ? `<div class="card" style="padding:12px 14px;margin-top:16px;border-color:rgba(227,176,75,.4)">Ya tienes <b>${esc(dup.titulo)}</b> (${dup.anio}) con un ${fmt1(dup.nota)}. <a href="#" data-edit="${dup.id}" style="color:var(--gold)">Editar esa ficha</a></div>` : "";
+    $("#fdup").innerHTML = dup ? `<div class="card" style="padding:12px 14px;margin-top:16px;border-color:rgba(255,201,74,.4)">Ya tienes <b>${esc(dup.titulo)}</b> (${dup.anio}) con un ${fmt1(dup.nota)}. <a href="#" data-edit="${dup.id}" style="color:var(--gold)">Editar esa ficha</a></div>` : "";
   };
   val("titulo").onblur = checkDup;
   val("anio").onchange = checkDup;
@@ -651,7 +645,7 @@ function histogram(P) {
   const W = 560, H = 210, pad = 26, bw = (W - pad * 2) / 10, max = Math.max(...bins);
   return `<svg viewBox="0 0 ${W} ${H + 24}" width="100%">
     ${[0.25, 0.5, 0.75, 1].map((f) => `<line x1="${pad}" x2="${W - pad}" y1="${H - f * (H - 20)}" y2="${H - f * (H - 20)}" stroke="rgba(255,255,255,.05)"/>`).join("")}
-    ${bins.map((b, i) => { const h = (b / max) * (H - 20); const x = pad + i * bw; return `<g data-tip="${b} películas entre ${i} y ${i + 1}"><rect x="${x + 5}" y="${H - h}" width="${bw - 10}" height="${h}" rx="5" fill="${scoreColor(i + 0.5)}" opacity=".9"/><text x="${x + bw / 2}" y="${H - h - 7}" text-anchor="middle" font-size="12" fill="#a9a8b6">${b}</text><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="12" fill="#6f6e7d">${i}</text></g>`; }).join("")}
+    ${bins.map((b, i) => { const h = (b / max) * (H - 20); const x = pad + i * bw; return `<g data-tip="${b} películas entre ${i} y ${i + 1}"><rect x="${x + 5}" y="${H - h}" width="${bw - 10}" height="${h}" rx="1" fill="${scoreColor(i + 0.5)}" opacity=".9"/><text x="${x + bw / 2}" y="${H - h - 7}" text-anchor="middle" font-size="12" fill="#cdbfa6">${b}</text><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="12" fill="#94867a">${i}</text></g>`; }).join("")}
   </svg>`;
 }
 function decadeChart(pr) {
@@ -660,10 +654,10 @@ function decadeChart(pr) {
   const y = (m) => H - ((m - 3) / 7) * (H - 30);
   const pts = D.map((d, i) => `${pad + i * bw + bw / 2},${y(d.mean)}`).join(" ");
   return `<svg viewBox="0 0 ${W} ${H + 26}" width="100%">
-    ${D.map((d, i) => { const h = (d.n / max) * (H - 40); const x = pad + i * bw; return `<g data-tip="Años ${String(d.key).slice(2)}: ${d.n} películas · media ${fmt1(d.mean)}"><rect x="${x + 6}" y="${H - h}" width="${bw - 12}" height="${h}" rx="5" fill="rgba(227,176,75,.22)"/><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="11.5" fill="#6f6e7d">${String(d.key).slice(2)}s</text></g>`; }).join("")}
-    <polyline points="${pts}" fill="none" stroke="#e3b04b" stroke-width="2.5" stroke-linejoin="round"/>
-    ${D.map((d, i) => `<circle cx="${pad + i * bw + bw / 2}" cy="${y(d.mean)}" r="4.5" fill="#111118" stroke="#e3b04b" stroke-width="2.5" data-tip="Años ${String(d.key).slice(2)}: media ${fmt1(d.mean)}"/>`).join("")}
-  </svg><div class="legend"><span><i style="background:rgba(227,176,75,.35)"></i>Películas vistas</span><span><i style="background:#e3b04b"></i>Tu nota media</span></div>`;
+    ${D.map((d, i) => { const h = (d.n / max) * (H - 40); const x = pad + i * bw; return `<g data-tip="Años ${String(d.key).slice(2)}: ${d.n} películas · media ${fmt1(d.mean)}"><rect x="${x + 6}" y="${H - h}" width="${bw - 12}" height="${h}" rx="1" fill="rgba(241,230,208,.16)"/><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="11.5" fill="#94867a">${String(d.key).slice(2)}s</text></g>`; }).join("")}
+    <polyline points="${pts}" fill="none" stroke="#ffc94a" stroke-width="2.5" stroke-linejoin="round"/>
+    ${D.map((d, i) => `<circle cx="${pad + i * bw + bw / 2}" cy="${y(d.mean)}" r="4.5" fill="#160d10" stroke="#ffc94a" stroke-width="2.5" data-tip="Años ${String(d.key).slice(2)}: media ${fmt1(d.mean)}"/>`).join("")}
+  </svg><div class="legend"><span><i style="background:rgba(255,201,74,.35)"></i>Películas vistas</span><span><i style="background:#ffc94a"></i>Tu nota media</span></div>`;
 }
 function scatter(P, fx, lx, domain) {
   const W = 560, H = 240, pad = 34;
@@ -677,10 +671,10 @@ function scatter(P, fx, lx, domain) {
   const a = my - b * mx;
   const ticks = lx(x0, x1);
   return `<svg viewBox="0 0 ${W} ${H + 22}" width="100%">
-    ${[2, 4, 6, 8, 10].map((n) => `<line x1="${pad}" x2="${W - pad}" y1="${Y(n)}" y2="${Y(n)}" stroke="rgba(255,255,255,.05)"/><text x="${pad - 8}" y="${Y(n) + 4}" text-anchor="end" font-size="11" fill="#6f6e7d">${n}</text>`).join("")}
-    ${ticks.map((t) => `<text x="${X(t)}" y="${H + 16}" text-anchor="middle" font-size="11" fill="#6f6e7d">${t}</text>`).join("")}
+    ${[2, 4, 6, 8, 10].map((n) => `<line x1="${pad}" x2="${W - pad}" y1="${Y(n)}" y2="${Y(n)}" stroke="rgba(255,255,255,.05)"/><text x="${pad - 8}" y="${Y(n) + 4}" text-anchor="end" font-size="11" fill="#94867a">${n}</text>`).join("")}
+    ${ticks.map((t) => `<text x="${X(t)}" y="${H + 16}" text-anchor="middle" font-size="11" fill="#94867a">${t}</text>`).join("")}
     ${pts.map((p) => `<circle cx="${X(fx(p)).toFixed(1)}" cy="${Y(p.nota).toFixed(1)}" r="3.6" fill="${scoreColor(p.nota)}" opacity=".7" data-tip="${esc(p.titulo)} (${p.anio}) · ${fmt1(p.nota)}" data-open="${p.id}" style="cursor:pointer"/>`).join("")}
-    <line x1="${X(x0)}" y1="${Y(a + b * x0)}" x2="${X(x1)}" y2="${Y(a + b * x1)}" stroke="#ecebf2" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6"/>
+    <line x1="${X(x0)}" y1="${Y(a + b * x0)}" x2="${X(x1)}" y2="${Y(a + b * x1)}" stroke="#f1e6d0" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6"/>
   </svg>`;
 }
 VIEWS.estadisticas = (v) => {
@@ -698,7 +692,7 @@ VIEWS.estadisticas = (v) => {
   const longest = [...all].filter((p) => p.duracion).sort((a, b) => b.duracion - a.duracion)[0];
   const oldest = [...all].filter((p) => p.anio).sort((a, b) => a.anio - b.anio)[0];
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">Estadísticas</div><h1 class="h1">Tus números</h1><p>Todo lo que dice tu colección, calculado en directo. Pasa el ratón por los gráficos para ver el detalle.</p></div></div>
+  <div class="page-head"><div><h1 class="h1">Tus números</h1><p>Todo lo que dice tu colección, calculado en directo. Pasa el ratón por los gráficos para ver el detalle.</p></div></div>
   <div class="kpis">
     <div class="card kpi"><div class="l">Películas</div><div class="v">${fmtInt(all.length)}</div><div class="s">${S.db.series.length} series aparte</div></div>
     <div class="card kpi"><div class="l">Horas de cine</div><div class="v">${fmtInt(horas)}</div><div class="s">${fmt1(horas / 24)} días seguidos</div></div>
@@ -790,8 +784,8 @@ function radar(pr) {
     ${[0.25, 0.5, 0.75, 1].map((f) => `<polygon points="${G.map((_, i) => pt(i, R * f).join(",")).join(" ")}" fill="none" stroke="rgba(255,255,255,.07)"/>`).join("")}
     ${G.map((_, i) => `<line x1="${cx}" y1="${cy}" x2="${pt(i, R)[0]}" y2="${pt(i, R)[1]}" stroke="rgba(255,255,255,.06)"/>`).join("")}
     <polygon points="${avgPoly}" fill="none" stroke="rgba(255,255,255,.35)" stroke-dasharray="4 4"/>
-    <polygon points="${poly}" fill="rgba(227,176,75,.2)" stroke="#e3b04b" stroke-width="2"/>
-    ${G.map((g, i) => { const [x, y] = pt(i, R * val(g)); const [lx, ly] = pt(i, R + 26); return `<circle cx="${x}" cy="${y}" r="4" fill="#e3b04b" data-tip="${g.key}: ${fmt1(g.mean)} (${g.n} películas)"/><text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="11.5" fill="#a9a8b6">${g.key}</text>`; }).join("")}
+    <polygon points="${poly}" fill="rgba(255,201,74,.2)" stroke="#ffc94a" stroke-width="2"/>
+    ${G.map((g, i) => { const [x, y] = pt(i, R * val(g)); const [lx, ly] = pt(i, R + 26); return `<circle cx="${x}" cy="${y}" r="4" fill="#ffc94a" data-tip="${g.key}: ${fmt1(g.mean)} (${g.n} películas)"/><text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="11.5" fill="#cdbfa6">${g.key}</text>`; }).join("")}
   </svg>`;
 }
 VIEWS.gustos = (v) => {
@@ -801,9 +795,9 @@ VIEWS.gustos = (v) => {
   const top = [...pr.P].sort((a, b) => b.nota - a.nota).slice(0, 3);
   const persona = `Te mueven <em>${G.slice(0, 2).map((g) => frase(g.key)).join("</em> y <em>")}</em>, confías en <em>${dirs.slice(0, 2).map((d) => d.key).join(" y ")}</em> y tu Olimpo lo forman ${top.map((p) => `«${esc(p.titulo)}»`).join(", ")}.`;
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">Tu perfil de espectador</div><h1 class="h1">Mis gustos</h1><p>Un retrato de cómo ves el cine a partir de tus ${pr.N} notas. Se recalcula cada vez que añades una película.</p></div></div>
+  <div class="page-head"><div><h1 class="h1">Mis gustos</h1><p>Un retrato de cómo ves el cine a partir de tus ${pr.N} notas. Se recalcula cada vez que añades una película.</p></div></div>
   <div class="card card-pad dna">
-    <div>${radar(pr)}<div class="legend" style="justify-content:center"><span><i style="background:#e3b04b"></i>Tu nota por género</span><span><i style="background:rgba(255,255,255,.35)"></i>Tu media general (${fmt2(pr.mu)})</span></div></div>
+    <div>${radar(pr)}<div class="legend" style="justify-content:center"><span><i style="background:#ffc94a"></i>Tu nota por género</span><span><i style="background:rgba(255,255,255,.35)"></i>Tu media general (${fmt2(pr.mu)})</span></div></div>
     <div><div class="eyebrow">En una frase</div><p class="persona" style="margin:12px 0 22px">${persona}</p>
       <div class="grid" style="grid-template-columns:1fr 1fr;gap:22px">
         <div><div class="sub" style="margin-top:0">Te encanta</div>${G.slice(0, 5).map((g) => `<div class="hbar" style="grid-template-columns:1fr 50px"><span class="n">${g.key}</span><span class="v">${scoreBadge(g.mean)}</span></div>`).join("")}</div>
@@ -877,7 +871,7 @@ VIEWS.recomendaciones = (v) => {
     $("#recRes").innerHTML = L.length ? `<div class="recs">${L.map(recCard).join("")}</div>` : `<div class="empty"><div class="h2">Sin recomendaciones con ese filtro</div></div>`;
   };
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">Hecho a tu medida</div><h1 class="h1">Para ti</h1>
+  <div class="page-head"><div><h1 class="h1">Para ti</h1>
     <p>Películas que no tienes registradas, ordenadas por la nota que <b>predigo que les darías</b> según tus géneros, directores, países y épocas favoritos. El % es tu afinidad.</p>
     <p class="dim" style="font-size:12.5px">Probado con tus propias notas (tapando cada película y prediciéndola): el modelo se desvía de media ±1,0 puntos, frente a ±1,3 si adivinara siempre tu media.</p></div></div>
   <div class="toolbar" style="position:static">
@@ -913,7 +907,7 @@ function relCard(e) {
   const seen = isSeen({ titulo: e.titulo, anio: +e.fecha.slice(0, 4), original: e.original, fecha: e.fecha }, seenSet());
   return `<div class="card rel" data-rel="${esc(e.fecha + "|" + e.titulo)}" style="cursor:pointer">
     <div class="frame">${posterHTML({ ...e, anio: e.fecha.slice(0, 4) })}</div>
-    <div style="min-width:0"><div class="t">${esc(e.titulo)}${e.destacado ? ` <span style="color:var(--gold)">●</span>` : ""}</div>
+    <div style="min-width:0"><div class="t">${esc(e.titulo)}${e.destacado ? ` <span class="dest" title="Estreno destacado">●</span>` : ""}</div>
       <div class="s">${esc([e.director, e.pais].filter(Boolean).join(" · ") || "—")}</div>
       <div class="chips" style="margin-top:8px"><span class="chip gold">${diaSemana(e.fecha)} ${fechaLarga(e.fecha)}</span>${(e.generos || []).slice(0, 2).map((g) => `<span class="chip">${g}</span>`).join("")}</div></div>
     <div class="right">${seen ? `<span class="chip on">${icon("check")}Vista</span>` : matchTag(m.pct)}</div></div>`;
@@ -952,11 +946,11 @@ VIEWS.estrenos = (v) => {
   const upd = S.est.actualizado ? new Date(S.est.actualizado + "T12:00").toLocaleDateString("es-ES", { day: "numeric", month: "long" }) : "";
   if (!st.month) st.month = todayISO().slice(0, 7);
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">Cartelera · Gijón y Oviedo</div><h1 class="h1">Estrenos en España</h1>
+  <div class="page-head"><div><h1 class="h1">Estrenos en España</h1>
     <p>Fechas de estreno en cines españoles${upd ? `, actualizadas el ${upd}` : ""}. El % es lo que encaja contigo.</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">${S.db.estado?.tmdb ? `<button class="btn" id="estUpd">${icon("refresh")}Actualizar desde TMDb</button>` : ""}
       <div class="seg" id="estMode"><button data-m="lista" class="${st.mode === "lista" ? "on" : ""}">Lista</button><button data-m="cal" class="${st.mode === "cal" ? "on" : ""}">Calendario</button></div></div></div>
-  <div class="cinemas">${(S.est.cines || []).map((c) => `<div class="card cinema"><div class="n">${esc(c.nombre)}</div><div class="c">${icon("pin")} ${esc(c.ciudad)} · ${esc(c.direccion)}</div>
+  <div class="cinemas">${(S.est.cines || []).filter((c) => c.principal).map((c) => `<div class="card cinema"><div class="n">${esc(c.nombre)}</div><div class="c">${icon("pin")} ${esc(c.ciudad)} · ${esc(c.direccion)}</div>
     <div class="a"><a class="btn btn-sm" href="${esc(c.web)}" target="_blank" rel="noopener">${icon("ticket")}Cartelera</a>${c.filmaffinity ? `<a class="btn btn-sm btn-ghost" href="${esc(c.filmaffinity)}" target="_blank" rel="noopener">Horarios FA</a>` : ""}</div></div>`).join("")}</div>
   <div class="toolbar" style="position:static;margin-top:20px">
     <div class="seg" id="estF">${[["todos", "Todos"], ["parami", "Encajan conmigo"], ["destacados", "Los grandes"]].map(([k, l]) => `<button data-f="${k}" class="${st.filter === k ? "on" : ""}">${l}</button>`).join("")}</div>
@@ -1009,7 +1003,7 @@ VIEWS.estrenos = (v) => {
 VIEWS.pendientes = (v) => {
   const W = [...S.db.pendientes].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || "")));
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">Watchlist</div><h1 class="h1">Pendientes</h1><p>Lo que quieres ver. Cuando la veas, pulsa <b>La he visto</b> y pasa directamente a tu colección con su nota.</p></div></div>
+  <div class="page-head"><div><h1 class="h1">Pendientes</h1><p>Lo que quieres ver. Cuando la veas, pulsa <b>La he visto</b> y pasa directamente a tu colección con su nota.</p></div></div>
   <div class="card card-pad rw" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">
     <input class="input" id="wT" placeholder="Título" style="flex:2 1 220px"><input class="input" id="wY" placeholder="Año" type="number" style="flex:0 1 110px"><input class="input" id="wM" placeholder="¿Por qué? (quién te la recomendó…)" style="flex:2 1 220px">
     <button class="btn btn-primary" id="wAdd">${icon("plus")}Añadir</button></div>
@@ -1036,7 +1030,7 @@ VIEWS.series = (v) => {
   const tipos = [...new Set(S.db.series.map((s) => s.tipo))];
   const rated = S.db.series.filter((s) => s.nota != null);
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">También en tu radar</div><h1 class="h1">Series y documentales</h1><p>${S.db.series.length} títulos · media ${fmt2(mean(rated.map((s) => s.nota)))}${S.db.series.length - rated.length ? ` · ${S.db.series.length - rated.length} sin nota todavía` : ""}</p></div>
+  <div class="page-head"><div><h1 class="h1">Series y documentales</h1><p>${S.db.series.length} títulos · media ${fmt2(mean(rated.map((s) => s.nota)))}${S.db.series.length - rated.length ? ` · ${S.db.series.length - rated.length} sin nota todavía` : ""}</p></div>
     <button class="btn btn-primary" id="sAdd">${icon("plus")}Añadir serie</button></div>
   ${seriesStatsHTML()}
   <div class="toolbar" style="position:static;margin-top:26px"><div class="seg" id="sT"><button data-t="" class="${!st.tipo ? "on" : ""}">Todas</button>${tipos.map((t) => `<button data-t="${esc(t)}" class="${st.tipo === t ? "on" : ""}">${esc(t)}s</button>`).join("")}</div></div>
@@ -1155,7 +1149,7 @@ VIEWS.ajustes = (v) => {
   const e = S.db.estado || {};
   const corr = S.db.correcciones || [];
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">Configuración</div><h1 class="h1">Ajustes</h1></div></div>
+  <div class="page-head"><div><h1 class="h1">Ajustes</h1></div></div>
   <div class="settings">
     <div class="card"><h3>${icon("download")} Tu Excel</h3><p>Cada cambio que haces aquí regenera <code>Mi Cinemateca.xlsx</code> en la carpeta de la app, con hojas de resumen, películas, series, UCM, pendientes y estrenos.</p>
       ${e.excel_error ? `<p style="color:var(--gold)">⚠ ${esc(e.excel_error)}</p>` : ""}
@@ -1296,7 +1290,7 @@ function openMore() {
   const r = route().name;
   modal(`<div class="sheet-body"><div class="eyebrow">Mi Cinemateca</div><h2 class="h2" style="margin:6px 0 16px">Secciones</h2>
     <div class="more-list">${navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}" data-close>${icon(ic)}<span>${l}</span></a>`).join("")}</div>
-    ${!ro() ? `<button class="btn btn-primary" data-action="add" style="width:100%;justify-content:center;margin-top:16px">${icon("plus")}Registrar película</button>` : ""}
+    ${!ro() ? `<button class="btn btn-primary" data-action="add" style="width:100%;justify-content:center;margin-top:16px">${icon("plus")}Añadir película</button>` : ""}
     ${STATIC ? (ro() ? `<button class="btn btn-ghost" data-login style="width:100%;justify-content:center;margin-top:10px">${icon("user")}Entrar para editar</button>` : `<button class="btn btn-ghost" data-logout style="width:100%;justify-content:center;margin-top:10px">${icon("x")}Salir del modo edición</button>`) : ""}</div>`, "narrow");
 }
 
@@ -1406,7 +1400,7 @@ function parseGeneros(txt) {
 }
 function valorCelda(p, k) {
   if (k === "generos") return (p.generos || []).join(", ");
-  if (k === "nota") return p.nota == null ? "" : String(p.nota);
+  if (k === "nota") return p.nota == null ? "" : String(p.nota).replace(".", ",");
   return p[k] ?? "";
 }
 function leerCelda(k, v) {
@@ -1425,9 +1419,9 @@ function filaXL(p) {
 }
 VIEWS.anadir = (v) => {
   if (ro()) { location.hash = "#/inicio"; return; }
-  const recientes = [...S.db.peliculas].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || "")) || String(b.id).localeCompare(String(a.id))).slice(0, 40);
+  const recientes = [...S.db.peliculas].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || "")) || (b.anio || 0) - (a.anio || 0) || (b.nota || 0) - (a.nota || 0)).slice(0, 40);
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">Como en tu Excel</div><h1 class="h1">Añadir películas</h1>
+  <div class="page-head"><div><h1 class="h1">Añadir películas</h1>
     <p>Escribe una fila por película y pulsa <b>Intro</b>. Al teclear el título te propongo la película y relleno el resto (director, país, géneros, póster…). Puedes corregir cualquier celda de abajo: se guarda al salir de ella.</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="xlPaste">${icon("upload")}Pegar filas de Excel</button><button class="btn btn-ghost" data-action="add">${icon("plus")}Formulario completo</button></div></div>
   <div class="card xl-wrap">
