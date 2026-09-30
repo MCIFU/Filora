@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-09-29",
+ "actualizado": "2026-09-30",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -239,21 +239,6 @@
   },
   {
    "fecha": "2026-10-09",
-   "titulo": "Arriba Tutto",
-   "director": "José Mota",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "reparto": "José Mota, Karra Elejalde, Pablo Cabello",
-   "sinopsis": "1905. La feliz infancia de Michi, un niño de siete años finaliza bruscamente con la violenta muerte de su padre, un…",
-   "duracion": 98,
-   "poster": "https://pics.filmaffinity.com/arriba_tutto-516999941-mmed.jpg",
-   "fa": "232354",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
    "titulo": "Ceniza en la boca",
    "original": "Ceniza en la boca",
    "director": "Diego Luna",
@@ -276,7 +261,8 @@
    ],
    "pais": "Japón",
    "reparto": "Movie card actions, Loading...",
-   "sinopsis": "Doraemon, Nobita y sus amigos entran dentro de una pintura que los transporta a Artelia, un mundo ilustrado inspirado en la Europa medieval. Junto a Claire y sus amigos Milo y Chai, se embarcan en una gran aventura para recuperar una misteriosa piedra azul.",
+   "sinopsis": "Doraemon, Nobita y sus amigos entran dentro de una pintura que los transporta a Artelia, un mundo ilustrado inspirado en…",
+   "duracion": 105,
    "poster": "https://pics.filmaffinity.com/eiga_doraemon_nobita_no_esekai_monogatari-306990557-mmed.jpg",
    "fa": "253341",
    "destacado": false
@@ -342,6 +328,20 @@
    "sinopsis": "Cinco años después, Edu, Marina, Viky y Rai vuelven a coincidir misteriosamente en un nuevo local de moda situado en lo alto de la montaña de Montjuïc, donde antiguamente se encontraba el parque de atracciones. No tardarán en darse cuenta de que aquel…",
    "poster": "https://pics.filmaffinity.com/escape_room_2-691857156-mmed.jpg",
    "fa": "903140",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-10-09",
+   "titulo": "La deriva",
+   "original": "Weichenaka",
+   "director": "Tsai Ming-liang",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Taiwán",
+   "sinopsis": "El Caminante llega a San Sebastián, un paisaje de luminosa belleza. Una franja de color rojo ocre se mueve lentamente a través de los bosques y a lo largo del borde del viento y el mar, entre el ruido de la noche y la quietud del día. Con pasos pausados,…",
+   "poster": "https://pics.filmaffinity.com/weichen-289215499-mmed.jpg",
+   "fa": "207417",
    "destacado": false
   },
   {
@@ -427,7 +427,9 @@
     "Thriller"
    ],
    "pais": "Dinamarca",
-   "sinopsis": "Cuando una misteriosa niebla envuelve una metrópolis futurista, liberando a una presencia esquiva y letal, una atormentada joven se lanza a la búsqueda de su padre. Su búsqueda se cruza con la de un soldado estadounidense inmerso en una angustiosa odisea para…",
+   "reparto": "Sophie Thatcher, Charles Melton, Kristine Froseth",
+   "sinopsis": "Cuando una misteriosa niebla envuelve una metrópolis futurista, liberando a una presencia esquiva y letal, una…",
+   "duracion": 107,
    "poster": "https://pics.filmaffinity.com/her_private_hell-395018843-mmed.jpg",
    "fa": "120455",
    "destacado": true,
@@ -675,6 +677,21 @@
    "sinopsis": "Tras veinte años dedicados a «relajarse, fumar y echar un polvo», Ali G se queda de piedra al descubrir que su novia de toda la vida, Julie, está embarazada de ocho meses. Ante la perspectiva de tener otra boca que alimentar, se pone las pilas y se va a…",
    "poster": "https://pics.filmaffinity.com/ali_g_who_iz_i-150114685-mmed.jpg",
    "fa": "171400",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Arriba Tutto",
+   "original": "Arriba Tutto",
+   "director": "José Mota",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España",
+   "reparto": "José Mota, Karra Elejalde, Pablo Cabello",
+   "sinopsis": "1905. La feliz infancia de Michi, un niño de siete años finaliza bruscamente con la violenta muerte de su padre, un artista ambulante que ha enseñado al pequeño a ver la magia y el humor en cada rincón de la vida. Pasados los años, Michi se ha convertido en…",
+   "poster": "https://pics.filmaffinity.com/arriba_tutto-516999941-mmed.jpg",
+   "fa": "232354",
    "destacado": false
   },
   {
@@ -1296,20 +1313,6 @@
   },
   {
    "fecha": "2026-11-13",
-   "titulo": "Trinidad",
-   "original": "Trinidad",
-   "director": "Laura Alvea / José F. Ortuño",
-   "generos": [
-    "Western"
-   ],
-   "pais": "España",
-   "sinopsis": "A finales del siglo XIX una joven española llamada Trinidad (Gabriela Andrada) llega al Salvaje Oeste acompañada de su madre (Paz Vega) y de su hermana (Sofía Allepuz) huyendo de la justicia que la persigue en su país. Desafiando los roles que la sociedad de…",
-   "poster": "https://pics.filmaffinity.com/trinidad-355477673-mmed.jpg",
-   "fa": "688376",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
    "titulo": "Victorian Psycho",
    "original": "Victorian Psycho",
    "director": "Zachary Wigon",
@@ -1353,16 +1356,16 @@
   },
   {
    "fecha": "2026-11-20",
-   "titulo": "La noche cerrada",
-   "original": "La noche cerrada",
-   "director": "Belén Macías",
+   "titulo": "Citas: La película",
+   "original": "Citas: La película",
+   "director": "Gemma Ferraté",
    "generos": [
-    "Thriller"
+    "Comedia"
    ],
    "pais": "España",
-   "sinopsis": "“La noche cerrada” lleva tres décadas siendo el programa de radio más escuchado de la madrugada con Luis Gálvez (Javier Rey) al frente, el locutor más respetado del país. Luis atiende las llamadas de gente con problemas de diversos tipos y siempre encuentra…",
-   "poster": "https://pics.filmaffinity.com/la_noche_cerrada-432385919-mmed.jpg",
-   "fa": "210497",
+   "sinopsis": "Una comedia romántica que entrelaza cuatro historias, realistas y aspiracionales, sobre el amor contemporáneo. Con Barcelona como escenario, las tramas se desarrollan en una de sus fechas más emblemáticas: el día de Sant Jordi, cuando la ciudad se llena de…",
+   "poster": "https://pics.filmaffinity.com/citas_la_pelicula-761099879-mmed.jpg",
+   "fa": "137728",
    "destacado": false
   },
   {
