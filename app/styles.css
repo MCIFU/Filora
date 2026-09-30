@@ -638,3 +638,9 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
   .page-head p { font-size: 16px; }
 }
 .rel .ph b, .rel .ph span, .cfilm .ph b, .cfilm .ph span, .olimpo .ph b, .olimpo .ph span { display: none; }
+
+/* cambio de página: fundido a negro breve, como un cambio de plano */
+::view-transition-old(root) { animation: .16s ease-in both fundir-sale; }
+::view-transition-new(root) { animation: .28s ease-out .08s both fundir-entra; }
+@keyframes fundir-sale { to { opacity: 0; } }
+@keyframes fundir-entra { from { opacity: 0; transform: translateY(10px); } }

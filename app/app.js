@@ -147,6 +147,13 @@ async function api(path, opts = {}) {
         if (r.ok) return r.json();
       } catch (e) { /* sin función: copia estática */ }
     }
+    if (method === "GET" && (path === "cartelera" || path === "estrenos")) {
+      // se actualizan cada día en GitHub: se leen de allí para no depender de un nuevo despliegue
+      try {
+        const r = await fetch(`https://raw.githubusercontent.com/MCIFU/mi-cinemateca/main/data/${path}.json`, { cache: "no-cache" });
+        if (r.ok) return await r.json();
+      } catch (e) { /* sin conexión con GitHub: copia publicada */ }
+    }
     if (method === "GET") {
       const r = await fetch(STATIC_FILES[path] || `data/${path}.json`, { cache: "no-cache" });
       if (!r.ok) throw new Error(`No encuentro los datos (${r.status})`);
@@ -298,11 +305,17 @@ function render() {
   const { name, qs } = route();
   renderChrome();
   const v = $("#view");
-  v.style.animation = "none"; void v.offsetWidth; v.style.animation = "";
-  VIEWS[name](v, qs);
-  if (qs.get("ficha")) openFilm(qs.get("ficha"));
-  if (!render._keep) window.scrollTo(0, 0);
+  const keep = render._keep;
   render._keep = false;
+  const pintar = () => {
+    VIEWS[name](v, qs);
+    if (qs.get("ficha")) openFilm(qs.get("ficha"));
+    if (!keep) window.scrollTo(0, 0);
+  };
+  // fundido entre páginas (como un cambio de plano) si el navegador lo permite
+  if (!keep && render._visto && document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(pintar);
+  else pintar();
+  render._visto = true;
 }
 
 // ---------------------------------------------------------------- componentes

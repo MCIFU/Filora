@@ -34,7 +34,7 @@ jobs:
           else:
               print("Copia descartada por sospechosa")
           PY
-      - name: Guardar cambios (Netlify vuelve a publicar la web)
+      - name: Guardar cambios (la web los lee directamente de GitHub)
         run: |
           git config user.name "cartelera-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -42,6 +42,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Sin cambios"
           else
-            git commit -m "Cartelera y estrenos: $(date +%Y-%m-%d)"
+            git commit -m "Cartelera y estrenos: $(date +%Y-%m-%d) [skip netlify]"
             git push
           fi
