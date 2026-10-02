@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-01",
+ "actualizado": "2026-10-02",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -55,189 +55,6 @@
  ],
  "estrenos": [
   {
-   "fecha": "2026-10-02",
-   "titulo": "Digger",
-   "original": "Digger",
-   "director": "Alejandro González Iñárritu",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Tom Cruise, Riz Ahmed, John Goodman",
-   "sinopsis": "El hombre más poderoso del mundo se embarca en una misión frenética para demostrar que es el salvador de la humanidad…",
-   "duracion": 128,
-   "poster": "https://pics.filmaffinity.com/digger-399332058-mmed.jpg",
-   "fa": "440322",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q129677718",
-    "imdb": "tt31450459",
-    "filmaffinity": "440322",
-    "rt": "m/digger_2026",
-    "letterboxd": "digger-2026",
-    "tmdb": "1248832",
-    "allocine": "327174"
-   }
-  },
-  {
-   "fecha": "2026-10-02",
-   "titulo": "La leyenda de la ballena cantora",
-   "original": "The Last Whale Singer",
-   "director": "Pavel Hrubos / Steven Majaury",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Alemania",
-   "reparto": "Jen Viens, Vincent Tong, Bruce Dinsmore",
-   "sinopsis": "Vincent es una ballena jorobada adolescente que se ha quedado huérfana. Hijo del último Cantor de Ballenas, que protegía…",
-   "duracion": 91,
-   "poster": "https://pics.filmaffinity.com/der_letzte_walsanger-316479309-mmed.jpg",
-   "fa": "990671",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q137247498",
-    "imdb": "tt13518550",
-    "filmaffinity": "990671",
-    "rt": "m/the_last_whale_singer",
-    "letterboxd": "the-last-whale-singer",
-    "tmdb": "677558",
-    "allocine": "275256"
-   }
-  },
-  {
-   "fecha": "2026-10-02",
-   "titulo": "Lucky Strike",
-   "original": "Lucky Strike",
-   "director": "Rod Lurie",
-   "generos": [
-    "Bélico"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Scott Eastwood, Colin Hanks, Aunjanue Ellis-Taylor",
-   "sinopsis": "Un soldado estadounidense gravemente herido lucha por sobrevivir, durante la II Guerra Mundial, detrás de las líneas…",
-   "duracion": 102,
-   "poster": "https://pics.filmaffinity.com/lucky_strike-238654529-mmed.jpg",
-   "fa": "269929",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q140003925",
-    "imdb": "tt19035928",
-    "filmaffinity": "269929",
-    "rt": "m/lucky_strike_2026",
-    "letterboxd": "lucky-strike-2026",
-    "tmdb": "1594914",
-    "allocine": "241631"
-   }
-  },
-  {
-   "fecha": "2026-10-02",
-   "titulo": "Narciso",
-   "director": "Marcelo Martinessi",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Paraguay",
-   "reparto": "Diro Romero, Manuel Cuenca, Margarita Irún",
-   "sinopsis": "Paraguay, 1959. Bajo el régimen militar asfixiante del general Alfredo Stroessner, el carismático y misterioso Narciso…",
-   "duracion": 100,
-   "poster": "https://pics.filmaffinity.com/narciso-490963357-mmed.jpg",
-   "fa": "914688",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-02",
-   "titulo": "Nuda propiedad",
-   "director": "Alberto Utrera",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "reparto": "Susana Abaitua, Maxi Iglesias, David Lorente",
-   "sinopsis": "Vera y Lucas, una pareja cercana a los cuarenta, encuentran un piso enorme a mitad de precio gracias a la nuda…",
-   "duracion": 99,
-   "poster": "https://pics.filmaffinity.com/nuda_propiedad-126027982-mmed.jpg",
-   "fa": "783368",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-02",
-   "titulo": "Sombra nómada",
-   "original": "Nomad Shadow",
-   "director": "Eimi Imanishi",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Nadhira Mohamed, Suleiman Filali, Omar Salem",
-   "sinopsis": "Una joven inconformista es deportada a su país, el Sáhara Occidental, después de haber vivido diez años en España…",
-   "duracion": 82,
-   "poster": "https://pics.filmaffinity.com/nomad_shadow-906690933-mmed.jpg",
-   "fa": "251692",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-02",
-   "titulo": "Sunny Dancer",
-   "original": "Sunny Dancer",
-   "director": "George Jaques",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Bella Ramsey, Daniel Quinn Toye, Ruby Stokes",
-   "sinopsis": "Ivy, de 17 años y con cáncer, asiste a regañadientes a un campamento para jóvenes pacientes. Contra pronóstico, se hace…",
-   "duracion": 106,
-   "poster": "https://pics.filmaffinity.com/sunny_dancer-369366577-mmed.jpg",
-   "fa": "797350",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q134540620",
-    "imdb": "tt32212403",
-    "rt": "m/sunny_dancer",
-    "letterboxd": "sunny-dancer",
-    "tmdb": "1280015"
-   }
-  },
-  {
-   "fecha": "2026-10-02",
-   "titulo": "The Umbrella Fairy",
-   "director": "Jie Shen",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "China",
-   "reparto": "Movie card actions, Loading...",
-   "sinopsis": "En un mundo donde los objetos tienen alma y los deseos cobran vida, dos espíritus nacidos de una antigua pieza de jade…",
-   "duracion": 95,
-   "poster": "https://pics.filmaffinity.com/san_shao_nv-491451204-mmed.jpg",
-   "fa": "460051",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-02",
-   "titulo": "Verity. La sombra de un engaño",
-   "original": "Verity",
-   "director": "Michael Showalter",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Anne Hathaway, Dakota Johnson, Josh Hartnett",
-   "sinopsis": "Lowen Ashleigh es contratada como escritora fantasma por Jeremy Crawford para escribir las novelas de su esposa Verity,…",
-   "duracion": 114,
-   "poster": "https://pics.filmaffinity.com/verity-273395489-mmed.jpg",
-   "fa": "740344",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q131523413",
-    "imdb": "tt32261958",
-    "rt": "m/verity",
-    "letterboxd": "verity-2026",
-    "tmdb": "1283515",
-    "allocine": "1000015739"
-   }
-  },
-  {
    "fecha": "2026-10-09",
    "titulo": "Ceniza en la boca",
    "original": "Ceniza en la boca",
@@ -246,7 +63,9 @@
     "Drama"
    ],
    "pais": "México",
-   "sinopsis": "En busca de una vida mejor, Lucila viaja con su hermano Diego desde México para encontrarse con su madre en Madrid, quien lleva ahí ocho años trabajando ilegalmente para mantenerlos. Al llegar, la vida que los espera resulta más dura de lo que…",
+   "reparto": "Anna Díaz, Adriana Paz, Irene Escolar",
+   "sinopsis": "En busca de una vida mejor, Lucila viaja con su hermano Diego desde México para encontrarse con su madre en Madrid,…",
+   "duracion": 97,
    "poster": "https://pics.filmaffinity.com/ceniza_en_la_boca-859618471-mmed.jpg",
    "fa": "503965",
    "destacado": false
@@ -279,7 +98,7 @@
    "reparto": "Mikey Madison, Jeremy Allen White, Jeremy Strong",
    "sinopsis": "Descrita como una \"pieza complementaria\" de \"La red social\", la nueva película se centra en los acontecimientos que…",
    "duracion": 112,
-   "poster": "https://pics.filmaffinity.com/the_social_reckoning-161231180-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/the_social_reckoning-728059636-mmed.jpg",
    "fa": "279550",
    "destacado": true,
    "ids": {
@@ -326,7 +145,9 @@
     "Comedia"
    ],
    "pais": "España",
-   "sinopsis": "Cinco años después, Edu, Marina, Viky y Rai vuelven a coincidir misteriosamente en un nuevo local de moda situado en lo alto de la montaña de Montjuïc, donde antiguamente se encontraba el parque de atracciones. No tardarán en darse cuenta de que aquel…",
+   "reparto": "Joel Joan, Iván Massagué, Mònica Pérez",
+   "sinopsis": "Cinco años después, Edu, Marina, Viky y Rai vuelven a coincidir misteriosamente en un nuevo local de moda situado en lo…",
+   "duracion": 88,
    "poster": "https://pics.filmaffinity.com/escape_room_2-691857156-mmed.jpg",
    "fa": "903140",
    "destacado": false
@@ -340,7 +161,9 @@
     "Drama"
    ],
    "pais": "Taiwán",
-   "sinopsis": "El Caminante llega a San Sebastián, un paisaje de luminosa belleza. Una franja de color rojo ocre se mueve lentamente a través de los bosques y a lo largo del borde del viento y el mar, entre el ruido de la noche y la quietud del día. Con pasos pausados,…",
+   "reparto": "Lee Kang-sheng",
+   "sinopsis": "El Caminante llega a San Sebastián, un paisaje de luminosa belleza. Una franja de color rojo ocre se mueve lentamente a…",
+   "duracion": 80,
    "poster": "https://pics.filmaffinity.com/weichen-289215499-mmed.jpg",
    "fa": "207417",
    "destacado": false
@@ -369,7 +192,9 @@
     "Drama"
    ],
    "pais": "Francia",
-   "sinopsis": "Gabrielle, de 55 años, se entrega a su trabajo en cuerpo y alma. Como cirujana y jefa de departamento del hospital, está constantemente de un lado para otro, abrumada por el peso de la responsabilidad. Le queda poco tiempo para su vida privada: un marido…",
+   "reparto": "Léa Drucker, Mélanie Thierry, Charles Berling",
+   "sinopsis": "Gabrielle, de 55 años, se entrega a su trabajo en cuerpo y alma. Como cirujana y jefa de departamento del hospital, está…",
+   "duracion": 98,
    "poster": "https://pics.filmaffinity.com/la_vie_d_une_femme-885092719-mmed.jpg",
    "fa": "172492",
    "destacado": false
@@ -399,7 +224,9 @@
     "Animación"
    ],
    "pais": "Francia",
-   "sinopsis": "Cuando un tren de alta velocidad queda fuera de control, un grupo de mascotas atrapadas deberá unirse para evitar el desastre. Falcon, un mapache ingenioso; Rex, un perro policía con un pasado pendiente; y Maggie, una gata rápida y valiente, tendrán que…",
+   "reparto": "Movie card actions, Loading...",
+   "sinopsis": "Cuando un tren de alta velocidad queda fuera de control, un grupo de mascotas atrapadas deberá unirse para evitar el…",
+   "duracion": 99,
    "poster": "https://pics.filmaffinity.com/falcon_express-879360787-mmed.jpg",
    "fa": "392961",
    "destacado": false
@@ -429,7 +256,8 @@
    ],
    "pais": "Dinamarca",
    "reparto": "Sophie Thatcher, Charles Melton, Kristine Froseth",
-   "sinopsis": "Cuando una misteriosa niebla envuelve una metrópolis futurista, liberando a una presencia esquiva y letal, una atormentada joven se lanza a la búsqueda de su padre. Su búsqueda se cruza con la de un soldado estadounidense inmerso en una angustiosa odisea para…",
+   "sinopsis": "Cuando una misteriosa niebla envuelve una metrópolis futurista, liberando a una presencia esquiva y letal, una…",
+   "duracion": 107,
    "poster": "https://pics.filmaffinity.com/her_private_hell-395018843-mmed.jpg",
    "fa": "120455",
    "destacado": true,
@@ -451,7 +279,9 @@
     "Acción"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Río Curuçá, Brasil. Cuando un equipo de jóvenes médicos inicia una misión humanitaria local en un barco por la selva amazónica, pronto queda claro que no todo en la selva se alegra de verlos. Tras un repentino y fatal accidente, la expedición médica se ve…",
+   "reparto": "Kiana Madeira, Jessica Rothe, Logan Marshall-Green",
+   "sinopsis": "Río Curuçá, Brasil. Cuando un equipo de jóvenes médicos inicia una misión humanitaria local en un barco por la selva…",
+   "duracion": 104,
    "poster": "https://pics.filmaffinity.com/beware_boiuna-188696559-mmed.jpg",
    "fa": "192931",
    "destacado": false
@@ -518,7 +348,7 @@
    "original": "Hako no Naka no Hitsujiaka",
    "director": "Hirokazu Koreeda",
    "generos": [
-    "Bélico"
+    "Aventura"
    ],
    "pais": "Japón",
    "sinopsis": "En un futuro cercano, una pareja marcada por la pérdida de su hijo acepta acoger en casa a un niño humanoide creado a su imagen con inteligencia artificial. Lo que empieza como un intento desesperado de aliviar el dolor se convierte en una nueva vida…",
@@ -535,7 +365,9 @@
     "Comedia"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Una pareja invita a los vecinos a su casa, lo que desencadena una velada llena de giros inesperados, revelando emociones profundamente reprimidas y una sexualidad inexplorada en esta historia que explora las complejidades de las relaciones de hoy en día.…",
+   "reparto": "Seth Rogen, Olivia Wilde, Penélope Cruz",
+   "sinopsis": "Una pareja invita a los vecinos a su casa, lo que desencadena una velada llena de giros inesperados, revelando emociones…",
+   "duracion": 108,
    "poster": "https://pics.filmaffinity.com/the_invite-442680119-mmed.jpg",
    "fa": "554234",
    "destacado": false,
@@ -558,7 +390,8 @@
     "Comedia"
    ],
    "pais": "España",
-   "sinopsis": "Laura y Nacho se han conocido en un vuelo, pero una vez que recojan sus maletas, su breve encuentro habrá terminado. Laura no quiere eso, así que propone un juego: si la primera maleta que sale es la de ella, esa misma noche tendrán una cita. Nacho acepta y,…",
+   "reparto": "Lucía Caraballo, Alejandro Speitzer, Leonor Watling",
+   "sinopsis": "Laura y Nacho se han conocido en un vuelo, pero una vez que recojan sus maletas, su breve encuentro habrá terminado…",
    "poster": "https://pics.filmaffinity.com/la_maleta-188790900-mmed.jpg",
    "fa": "331187",
    "destacado": false
@@ -628,7 +461,9 @@
     "Acción"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Nueva película basada en la saga de videojuegos \"Street Fighter\". Ambientada en 1993, los alejados Street Fighters Ryu y Ken Masters son lanzados de nuevo al combate cuando la misteriosa Chun-Li los recluta para el próximo Torneo Mundial de Guerreros: un…",
+   "reparto": "Noah Centineo, Andrew Koji, Callina Liang",
+   "sinopsis": "Nueva película basada en la saga de videojuegos \"Street Fighter\". Ambientada en 1993, los alejados Street Fighters Ryu y…",
+   "duracion": 125,
    "poster": "https://pics.filmaffinity.com/street_fighter-871613292-mmed.jpg",
    "fa": "361470",
    "destacado": true,
@@ -650,7 +485,9 @@
     "Thriller"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Tras la muerte de su padre, Jay Gardiner se sumerge en la costa central de California en busca de sus restos, pero es tragado por una ballena. Atrapado en su interior con solo una hora de oxígeno restante, Jay se da cuenta de que las lecciones que su padre le…",
+   "reparto": "Austin Abrams, Josh Brolin, Elisabeth Shue",
+   "sinopsis": "Tras la muerte de su padre, Jay Gardiner se sumerge en la costa central de California en busca de sus restos, pero es…",
+   "duracion": 105,
    "poster": "https://pics.filmaffinity.com/whalefall-125226915-mmed.jpg",
    "fa": "249049",
    "destacado": false,
@@ -949,7 +786,7 @@
    "original": "Klara and the Sun",
    "director": "Taika Waititi",
    "generos": [
-    "Bélico"
+    "Aventura"
    ],
    "pais": "Estados Unidos",
    "sinopsis": "Klara (Jenna Ortega) es una “Amiga Artificial” cuyo único deseo es encontrar el hogar perfecto. Cuando Klara conoce a Josie (Mia Tharia), ambas perciben de inmediato que son almas gemelas. Josie tiene una relación tensa con su madre (Amy Adams) y ambas han…",
@@ -1168,7 +1005,7 @@
   },
   {
    "fecha": "2026-11-06",
-   "titulo": "Sanguine",
+   "titulo": "Sanguine (Species)",
    "original": "Sanguineaka",
    "director": "Marion Le Corroller",
    "generos": [
@@ -1293,7 +1130,7 @@
    "pais": "Estados Unidos",
    "reparto": "Johnny Depp",
    "sinopsis": "Reimaginación del clásico literario, una historia de fantasmas ambientada en el Londres de Dickens que sigue el viaje sobrenatural de un hombre para enfrentarse a su pasado, presente y futuro y luchar por una segunda oportunidad.\n\nEstreno en USA y España: 13…",
-   "poster": "https://pics.filmaffinity.com/ebenezer-653794083-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/ebenezer-413184933-mmed.jpg",
    "fa": "112391",
    "destacado": false
   },
@@ -1342,6 +1179,20 @@
   },
   {
    "fecha": "2026-11-20",
+   "titulo": "Adolescencia, sexo y muerte en Campamento Miasma",
+   "original": "Teenage Sex and Death at Camp Miasma",
+   "director": "Jane Schoenbrun",
+   "generos": [
+    "Terror"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Tras años de secuelas cutres y un fandom en declive, la franquicia slasher 'Camp Miasma' es puesta en manos de una joven y entusiasta directora para que la resucite. Pero cuando visita a la estrella de la película original, una actriz que ahora vive recluida…",
+   "poster": "https://pics.filmaffinity.com/teenage_sex_and_death_at_camp_miasma-515473998-mmed.jpg",
+   "fa": "963191",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
    "titulo": "Citas: La película",
    "original": "Citas: La película",
    "director": "Gemma Ferraté",
@@ -1370,11 +1221,39 @@
   },
   {
    "fecha": "2026-11-20",
+   "titulo": "Hechos probados",
+   "original": "Hechos probados",
+   "director": "Luis Arranz",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "sinopsis": "Delia (Amaia Salamanca) e Inés (Marta Hazas) son dos hermanas unidas por una vocación y enfrentadas desde hace años por heridas familiares y conflictos del pasado. Ambas son abogadas, pero tienen visiones radicalmente opuestas de entender el derecho y la…",
+   "poster": "https://pics.filmaffinity.com/hechos_probados-400518286-mmed.jpg",
+   "fa": "426287",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Iron Boy",
+   "original": "Le Corset",
+   "director": "Louis Clichy",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Christophe, un chico de 11 años, intenta seguir los pasos de su padre ayudando en la granja familiar en la que viven. Pero todo cambia el día que tiene que llevar un corsé metálico por prescripción médica, que le obliga a desatender las tareas cotidianas de…",
+   "poster": "https://pics.filmaffinity.com/le_corset-388941512-mmed.jpg",
+   "fa": "947062",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
    "titulo": "Los juegos del hambre: Amanecer en la cosecha",
    "original": "The Hunger Games: Sunrise on the Reaping",
    "director": "Francis Lawrence",
    "generos": [
-    "Bélico"
+    "Aventura"
    ],
    "pais": "Estados Unidos",
    "sinopsis": "Vuelve al mundo de Panem 24 años antes de los acontecimientos de la primera película, comenzando en la mañana de la cosecha de los 50º Juegos del Hambre, también denominados como el Segundo Vasallaje de los Veinticinco. Allí participa un joven Haymitch…",
@@ -1390,6 +1269,90 @@
     "tmdb": "1300968",
     "allocine": "1000004528"
    }
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Ooh La La! ¿Quién lo hubiera pensado?",
+   "original": "Cocorico 2aka",
+   "director": "Julien Hervé",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Tras descubrir la verdad sobre sus orígenes gracias a unas pruebas de ADN cuyos resultados fueron, como mínimo, sorprendentes, los Bouvier-Sauvage y los Martin deciden hacer las paces y organizar la boda de sus hijos. Pero no contaban con un imprevisto de…",
+   "poster": "https://pics.filmaffinity.com/cocorico_2-334986138-mmed.jpg",
+   "fa": "236550",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Pinocho desatado",
+   "original": "Pinocchio Unstrung",
+   "director": "Rhys Frake-Waterfield / Scott Chambers",
+   "generos": [
+    "Terror"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Reimaginación macabra de 'Pinocho' dentro del Twisted Childhood Universe. Geppetto presenta a su nieto James un muñeco mágico llamado Pinocho, con el que entabla una amistad. Sin embargo, sin ser consciente de la ingenuidad de Pinocho, James lo introduce en…",
+   "poster": "https://pics.filmaffinity.com/pinocchio_unstrung-692994041-mmed.jpg",
+   "fa": "191465",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Rose",
+   "original": "Rose",
+   "director": "Markus Schleinzer",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Austria",
+   "sinopsis": "A principios del siglo XVII, un misterioso soldado llega a un aislado pueblo protestante de Alemania afirmando ser el heredero de una granja abandonada. Aunque demuestra ser un buen hombre y se integra en la comunidad, las sospechas de los aldeanos sobre su…",
+   "poster": "https://pics.filmaffinity.com/rose-181943635-mmed.jpg",
+   "fa": "941297",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Young Washington",
+   "original": "Young Washingtonaka",
+   "director": "Jon Erwin",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Los primeros años de la vida de George Washington, primer presidente de los Estados Unidos.",
+   "poster": "https://pics.filmaffinity.com/young_washington-550593982-mmed.jpg",
+   "fa": "991503",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-25",
+   "titulo": "Las nuevas desventuras de Cliff Booth",
+   "original": "The Further Mis-Adventures of Cliff Booth",
+   "director": "David Fincher",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Asesinato, chantaje, robo, extorsión… Otro verano más en Hollywood. Es 1977, ocho años después de que Cliff Booth (Brad Pitt) se cruzara con la familia Manson en el Hollywood de 1969 que vimos en Érase una vez en Hollywood.\n\nEn Las nuevas desventuras de Cliff…",
+   "poster": "https://pics.filmaffinity.com/the_further_mis_adventures_of_cliff_booth-321792863-mmed.jpg",
+   "fa": "630924",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Ahora los suegros son ellos",
+   "original": "Focker In-Law",
+   "director": "John Hamburg",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Diez años después de los últimos eventos, los papeles se invierten y Greg Focker (Ben Stiller) se enfrenta a su mayor reto: ser el suegro. Cuando su hijo Henry anuncia su compromiso, Greg intenta ser el patriarca comprensivo que nunca tuvo, pero la presión…",
+   "poster": "https://pics.filmaffinity.com/focker_in_law-431643787-mmed.jpg",
+   "fa": "580952",
+   "destacado": false
   },
   {
    "fecha": "2026-12-11",
