@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-04",
+ "actualizado": "2026-10-05",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -674,20 +674,6 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
-   "titulo": "¿Me entiendes o te lo explico?",
-   "original": "¿Me entiendes o te lo explico?",
-   "director": "Jordi Calvet",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "sinopsis": "Primavera de 1992, Madrid, Chueca, en pleno bullicio previo a un verano que promete ser histórico para España. Pepe regenta una taberna catalana que no puede estar peor: su local está en las últimas, las deudas le quitan el sueño, y por si fuera poco, su…",
-   "poster": "https://pics.filmaffinity.com/me_entiendes_o_te_lo_explico-943354500-mmed.jpg",
-   "fa": "860793",
-   "destacado": false
-  },
-  {
    "fecha": "2026-10-30",
    "titulo": "Aniquilación",
    "original": "Onslaught",
@@ -864,7 +850,7 @@
    ],
    "pais": "Estados Unidos",
    "sinopsis": "Una pescadora vive en la periferia de un pueblo costero; es soltera, apestosa y objeto de burlas constantes. Un día, harta de sus estirados y estrechos vecinos, encarga un marido de mimbre para ella.\n\nPreestreno: Festival de Sundance 2026",
-   "poster": "https://pics.filmaffinity.com/wicker-644852540-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/wicker-359414863-mmed.jpg",
    "fa": "180963",
    "destacado": false
   },
@@ -1176,6 +1162,20 @@
     "tmdb": "891621",
     "allocine": "298024"
    }
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "¿Me entiendes o te lo explico?",
+   "original": "¿Me entiendes o te lo explico?",
+   "director": "Jordi Calvet",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España",
+   "sinopsis": "Primavera de 1992, Madrid, Chueca, en pleno bullicio previo a un verano que promete ser histórico para España. Pepe regenta una taberna catalana que no puede estar peor: su local está en las últimas, las deudas le quitan el sueño, y por si fuera poco, su…",
+   "poster": "https://pics.filmaffinity.com/me_entiendes_o_te_lo_explico-943354500-mmed.jpg",
+   "fa": "860793",
+   "destacado": false
   },
   {
    "fecha": "2026-11-20",
