@@ -1450,7 +1450,7 @@ function sesionesHTML(p, dia, maxDias = 1, cineId = "") {
       return dias.map((d) => `<div class="ses-row"><span class="ses-v">${esc(versionCorta(v.nombre))}${!dia ? ` · <span class="dim">${d === hoy ? "hoy" : `${diaSemana(d).slice(0, 3)} ${+d.slice(8)}`}</span>` : ""}</span>
         <span class="ses-times">${v.dias[d].map((x) => { const pasada = d === hoy && x.hora < ahora; return `<a class="time ${pasada ? "past" : ""}" href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.sala || "Comprar entradas")}">${x.hora}</a>`; }).join("")}</span></div>`).join("");
     }).join("");
-    return bloques ? `<div class="ses-cine"><div class="ses-name">${icon("pin")}${esc(c.nombre.replace("Premium ", ""))}</div>${bloques}</div>` : "";
+    return bloques ? `<div class="ses-cine"><div class="ses-name">${icon("pin")}${esc(c.nombre.replace("Premium ", ""))}</div><div class="ses-filas">${bloques}</div></div>` : "";
   }).join("");
 }
 function diasCartelera() {
