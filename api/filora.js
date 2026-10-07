@@ -13,7 +13,8 @@ import { claveValida, crearSesion, hashClave, leerSesion, normalizarUsuario, nue
 
 const CLAVE = "filora/db.json";
 const DUENO = (process.env.OWNER_USER || "mcifu").toLowerCase();
-const hayAlmacen = () => !!process.env.BLOB_READ_WRITE_TOKEN;
+// Vercel conecta el almacenamiento con OIDC (BLOB_STORE_ID) o, en proyectos antiguos, con un token.
+const hayAlmacen = () => !!(process.env.BLOB_STORE_ID || process.env.BLOB_READ_WRITE_TOKEN);
 
 const json = (data, status = 200) =>
   new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" } });
