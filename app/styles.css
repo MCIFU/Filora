@@ -791,3 +791,22 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
 .imp-barra { height: 8px; background: rgba(var(--fg-rgb), .1); border-radius: 4px; overflow: hidden; margin-top: 10px; }
 .imp-barra span { display: block; height: 100%; width: 0; background: var(--telon); transition: width .3s; }
 .nota-ext .logo, .imp-cab .logo { width: 30px; height: 30px; border-radius: 3px; display: grid; place-items: center; font: 800 12px/1 var(--display); color: #fff; flex: none; }
+
+/* ---------------- cartelera: cartel entero, todas las entradas iguales (horarios con desplazamiento) ---------------- */
+.cartel-fija .cfilm { grid-template-columns: 170px 1fr; height: 255px; }
+.cartel-fija .cfilm::before, .cartel-fija .cfilm::after { left: 161px; }
+.cartel-fija .cfilm .frame { min-height: 0; height: 255px; }
+.cartel-fija .cfilm .frame img, .cartel-fija .cfilm .frame .ph { width: 170px; height: 255px; object-fit: cover; }
+.cartel-fija .cfilm > div:last-child { overflow-y: auto; scrollbar-width: thin; padding-bottom: 24px;
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 26px), transparent); mask-image: linear-gradient(#000 calc(100% - 26px), transparent); }
+@media (max-width: 760px) {
+  .cartel-fija .cfilm { grid-template-columns: 150px 1fr; height: 225px; }
+  .cartel-fija .cfilm::before, .cartel-fija .cfilm::after { left: 141px; }
+  .cartel-fija .cfilm .frame { height: 225px; }
+  .cartel-fija .cfilm .frame img, .cartel-fija .cfilm .frame .ph { width: 150px; height: 225px; }
+  .cartel-fija .cfilm > div:last-child { padding: 12px 12px 22px 14px; }
+  .cartel-fija .cfilm .t { font-size: 17px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .cartel-fija .cfilm .s { font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cartel-fija .cfilm .time { height: 28px; font-size: 16px; padding: 2px 7px 0; }
+  .cartel-fija .cfilm .ses-row { flex-wrap: wrap; gap: 4px 8px; }
+}

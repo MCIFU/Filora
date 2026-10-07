@@ -1402,7 +1402,7 @@ function hoyHTML() {
   if (!L.length) return "";
   const titulo = dias[0] === todayISO() ? "Hoy en tus cines" : `${diaSemana(dias[0])} en tus cines`;
   return `<section class="section">${sectionHead(titulo, "#/cartelera", "Todas las sesiones")}
-    <div class="cfilms">${L.map((p) => carteleraCard(p, dias[0], "")).join("")}</div></section>`;
+    <div class="cfilms cartel-fija">${L.map((p) => carteleraCard(p, dias[0], "")).join("")}</div></section>`;
 }
 VIEWS.cartelera = (v) => {
   const st = S.cart_;
@@ -1440,9 +1440,9 @@ VIEWS.cartelera = (v) => {
     <div class="seg"><button data-ccine="" class="${!st.cine ? "on" : ""}">Todos</button>${cines.map((c) => `<button data-ccine="${c.id}" class="${st.cine === c.id ? "on" : ""}">${esc(cineCorto(c.nombre))}</button>`).join("")}</div>
   </div>
   <div class="result-line"><b>${L.length}</b> películas ${st.dia === hoy ? "hoy" : `el ${etiqueta(st.dia).toLowerCase()}`} · ordenadas por lo que encajan contigo</div>
-  <div class="cfilms">${L.map((p) => carteleraCard(p, st.dia, st.cine)).join("")}</div>`
+  <div class="cfilms cartel-fija">${L.map((p) => carteleraCard(p, st.dia, st.cine)).join("")}</div>`
   : pendientes.length === mis.length ? "" : `<div class="empty"><div class="h2">Sin sesiones cargadas</div>${STATIC ? "Vuelve a intentarlo más tarde." : "Pulsa «Actualizar ahora» para descargarlas."}</div>`}
-  ${preventa.length ? `<section class="section">${sectionHead("Entradas ya a la venta (preventa)")}<div class="cfilms">${preventa.map(({ p }) => carteleraCard({ ...p, info: infoCartelera(p) }, null, "")).join("")}</div></section>` : ""}`;
+  ${preventa.length ? `<section class="section">${sectionHead("Entradas ya a la venta (preventa)")}<div class="cfilms cartel-fija">${preventa.map(({ p }) => carteleraCard({ ...p, info: infoCartelera(p) }, null, "")).join("")}</div></section>` : ""}`;
   const up = $("#cartUpd");
   if (up) up.onclick = async () => {
     up.disabled = true; up.innerHTML = `${icon("refresh")}Descargando… (1-2 min)`;
