@@ -7,7 +7,7 @@
 
 <p align="center"><b>Tu diario de cine privado.</b> Colección puntuada, estadísticas, gustos, recomendaciones y la cartelera de Gijón.</p>
 
-<p align="center"><a href="https://filora.vercel.app">filora.vercel.app</a></p>
+<p align="center"><a href="https://filora-umber.vercel.app">filora-umber.vercel.app</a></p>
 
 ![Filora en ordenador (tema oscuro) y en móvil (tema claro)](docs/captura.jpg)
 

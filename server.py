@@ -30,7 +30,7 @@ from rutas import BACKUPS, CFG_PATH, DATA, DB_PATH, asegurar_db  # noqa: E402
 APP = ROOT / "app"
 EST_PATH = DATA / "estrenos.json"
 PORT = 8765
-WEB = "https://filora.vercel.app"  # web publicada por defecto (se cambia en Ajustes)
+WEB = "https://filora-umber.vercel.app"  # web publicada por defecto (se cambia en Ajustes)
 
 LOCK = threading.RLock()
 STATE = {"excel_error": None, "excel_at": None, "excel_mtime": 0, "sync": None, "sync_at": None}
