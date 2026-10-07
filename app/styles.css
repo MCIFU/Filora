@@ -793,13 +793,16 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
 .nota-ext .logo, .imp-cab .logo { width: 30px; height: 30px; border-radius: 3px; display: grid; place-items: center; font: 800 12px/1 var(--display); color: #fff; flex: none; }
 
 /* ---------------- cartelera: cartel entero, todas las entradas iguales (horarios con desplazamiento) ---------------- */
-.cartel-fija .cfilm { grid-template-columns: 170px 1fr; height: 255px; }
-.cartel-fija .cfilm::before, .cartel-fija .cfilm::after { left: 161px; }
-.cartel-fija .cfilm .frame { min-height: 0; height: 255px; }
-.cartel-fija .cfilm .frame img, .cartel-fija .cfilm .frame .ph { width: 170px; height: 255px; object-fit: cover; }
+.cfilms.cartel-fija { grid-template-columns: repeat(auto-fill, minmax(560px, 1fr)); gap: 26px; }
+.cartel-fija .cfilm { grid-template-columns: 260px 1fr; height: 390px; }
+.cartel-fija .cfilm::before, .cartel-fija .cfilm::after { left: 251px; }
+.cartel-fija .cfilm .frame { min-height: 0; height: 390px; }
+.cartel-fija .cfilm .frame img, .cartel-fija .cfilm .frame .ph { width: 260px; height: 390px; object-fit: cover; }
+.cartel-fija .cfilm > div:last-child { padding: 20px 22px 26px 26px; }
 .cartel-fija .cfilm > div:last-child { overflow-y: auto; scrollbar-width: thin; padding-bottom: 24px;
   -webkit-mask-image: linear-gradient(#000 calc(100% - 26px), transparent); mask-image: linear-gradient(#000 calc(100% - 26px), transparent); }
 @media (max-width: 760px) {
+  .cfilms.cartel-fija { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .cartel-fija .cfilm { grid-template-columns: 150px 1fr; height: 225px; }
   .cartel-fija .cfilm::before, .cartel-fija .cfilm::after { left: 141px; }
   .cartel-fija .cfilm .frame { height: 225px; }
@@ -825,3 +828,4 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
 .myscore .score { flex: none; }
 .logo.logo-img, .ext .logo.logo-img, .nota-ext .logo.logo-img, .imp-cab .logo.logo-img { width: 30px; min-width: 0; height: 30px; padding: 0; border-radius: 7px; object-fit: cover; background: none; flex: none; }
 .ext .logo.logo-img { width: 26px; height: 26px; border-radius: 6px; }
+
