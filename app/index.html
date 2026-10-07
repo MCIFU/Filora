@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Filora</title>
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#13102e">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#13102e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f3fb" media="(prefers-color-scheme: light)">
+<script>try{var t=localStorage.getItem("filora.tema");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="description" content="Mi diario de cine: 621 películas puntuadas, estadísticas, gustos, recomendaciones y la cartelera de Gijón.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Filora">
@@ -33,6 +35,7 @@
 <header class="top">
   <a class="brand" href="#/inicio" aria-label="Filora, inicio"><svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><path fill="#ff6b4a" d="M0 0H82.0L67.4 14.6H14.6V85.4L0 100Z M14.6 38.2H61.8L47.2 52.8H14.6Z"/><path fill="#8f7cff" d="M91.0 9.0L100 0V100H23.6L32.6 91.0H91.0Z"/></svg><span class="brand-text">Filora</span></a>
   <nav class="nav" id="nav" aria-label="Secciones"></nav>
+  <button class="icon-btn tema" id="tema" type="button" aria-label="Tema: automático"><svg class="t-sol" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="t-luna" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="t-auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
   <a class="btn btn-primary btn-add rw" href="#/anadir">Añadir película</a>
 </header>
 <main class="main">

@@ -89,7 +89,7 @@ function veredicto(n) {
 }
 function ring(pct) {
   const r = 10, c = 2 * Math.PI * r;
-  return `<svg class="ring" viewBox="0 0 26 26"><circle cx="13" cy="13" r="${r}" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3"/><circle cx="13" cy="13" r="${r}" fill="none" stroke="${pct >= 75 ? "#3ddc84" : pct >= 55 ? "#8f7cff" : "#94867a"}" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(c * pct) / 100} ${c}" transform="rotate(-90 13 13)"/></svg>`;
+  return `<svg class="ring" viewBox="0 0 26 26"><circle cx="13" cy="13" r="${r}" fill="none" stroke-width="3" style="stroke:rgba(var(--fg-rgb),.12)"/><circle cx="13" cy="13" r="${r}" fill="none" stroke="${pct >= 75 ? "#3ddc84" : pct >= 55 ? "var(--bombilla)" : "#94867a"}" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(c * pct) / 100} ${c}" transform="rotate(-90 13 13)"/></svg>`;
 }
 const matchTag = (pct) => `<span class="match">${ring(pct)}${pct}%</span>`;
 
@@ -558,7 +558,7 @@ function openForm(p = null, preset = {}) {
     if (edit) return;
     const t = norm(val("titulo").value), y = +val("anio").value;
     const dup = S.db.peliculas.find((x) => (norm(x.titulo) === t || (x.tituloOriginal && norm(x.tituloOriginal) === t)) && (!y || !x.anio || Math.abs(x.anio - y) <= 1));
-    $("#fdup").innerHTML = dup ? `<div class="card" style="padding:12px 14px;margin-top:16px;border-color:rgba(255,201,74,.4)">Ya tienes <b>${esc(dup.titulo)}</b> (${dup.anio}) con un ${fmt1(dup.nota)}. <a href="#" data-edit="${dup.id}" style="color:var(--gold)">Editar esa ficha</a></div>` : "";
+    $("#fdup").innerHTML = dup ? `<div class="card" style="padding:12px 14px;margin-top:16px;border-color:rgba(var(--acento-rgb),.4)">Ya tienes <b>${esc(dup.titulo)}</b> (${dup.anio}) con un ${fmt1(dup.nota)}. <a href="#" data-edit="${dup.id}" style="color:var(--gold)">Editar esa ficha</a></div>` : "";
   };
   val("titulo").onblur = checkDup;
   val("anio").onchange = checkDup;
@@ -650,7 +650,7 @@ function histogram(P) {
   const bins = Array.from({ length: 10 }, (_, i) => P.filter((p) => (i === 9 ? p.nota >= 9 : p.nota >= i && p.nota < i + 1)).length);
   const W = 560, H = 210, pad = 26, bw = (W - pad * 2) / 10, max = Math.max(...bins);
   return `<svg viewBox="0 0 ${W} ${H + 24}" width="100%">
-    ${[0.25, 0.5, 0.75, 1].map((f) => `<line x1="${pad}" x2="${W - pad}" y1="${H - f * (H - 20)}" y2="${H - f * (H - 20)}" stroke="rgba(255,255,255,.05)"/>`).join("")}
+    ${[0.25, 0.5, 0.75, 1].map((f) => `<line x1="${pad}" x2="${W - pad}" y1="${H - f * (H - 20)}" y2="${H - f * (H - 20)}" style="stroke:rgba(var(--fg-rgb),.05)"/>`).join("")}
     ${bins.map((b, i) => { const h = (b / max) * (H - 20); const x = pad + i * bw; return `<g data-tip="${b} películas entre ${i} y ${i + 1}"><rect x="${x + 5}" y="${H - h}" width="${bw - 10}" height="${h}" rx="1" fill="${scoreColor(i + 0.5)}" opacity=".9"/><text x="${x + bw / 2}" y="${H - h - 7}" text-anchor="middle" font-size="12" fill="#cdbfa6">${b}</text><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="12" fill="#94867a">${i}</text></g>`; }).join("")}
   </svg>`;
 }
@@ -661,9 +661,9 @@ function decadeChart(pr) {
   const pts = D.map((d, i) => `${pad + i * bw + bw / 2},${y(d.mean)}`).join(" ");
   return `<svg viewBox="0 0 ${W} ${H + 26}" width="100%">
     ${D.map((d, i) => { const h = (d.n / max) * (H - 40); const x = pad + i * bw; return `<g data-tip="Años ${String(d.key).slice(2)}: ${d.n} películas · media ${fmt1(d.mean)}"><rect x="${x + 6}" y="${H - h}" width="${bw - 12}" height="${h}" rx="1" fill="rgba(241,230,208,.16)"/><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="11.5" fill="#94867a">${String(d.key).slice(2)}s</text></g>`; }).join("")}
-    <polyline points="${pts}" fill="none" stroke="#8f7cff" stroke-width="2.5" stroke-linejoin="round"/>
-    ${D.map((d, i) => `<circle cx="${pad + i * bw + bw / 2}" cy="${y(d.mean)}" r="4.5" fill="#13102e" stroke="#8f7cff" stroke-width="2.5" data-tip="Años ${String(d.key).slice(2)}: media ${fmt1(d.mean)}"/>`).join("")}
-  </svg><div class="legend"><span><i style="background:rgba(255,201,74,.35)"></i>Películas vistas</span><span><i style="background:#8f7cff"></i>Tu nota media</span></div>`;
+    <polyline points="${pts}" fill="none" stroke-width="2.5" stroke-linejoin="round" style="stroke:var(--bombilla)"/>
+    ${D.map((d, i) => `<circle cx="${pad + i * bw + bw / 2}" cy="${y(d.mean)}" r="4.5" stroke-width="2.5" data-tip="Años ${String(d.key).slice(2)}: media ${fmt1(d.mean)}" style="fill:var(--sala);stroke:var(--bombilla)"/>`).join("")}
+  </svg><div class="legend"><span><i style="background:rgba(var(--acento-rgb),.35)"></i>Películas vistas</span><span><i style="background:var(--bombilla)"></i>Tu nota media</span></div>`;
 }
 function scatter(P, fx, lx, domain) {
   const W = 560, H = 240, pad = 34;
@@ -677,10 +677,10 @@ function scatter(P, fx, lx, domain) {
   const a = my - b * mx;
   const ticks = lx(x0, x1);
   return `<svg viewBox="0 0 ${W} ${H + 22}" width="100%">
-    ${[2, 4, 6, 8, 10].map((n) => `<line x1="${pad}" x2="${W - pad}" y1="${Y(n)}" y2="${Y(n)}" stroke="rgba(255,255,255,.05)"/><text x="${pad - 8}" y="${Y(n) + 4}" text-anchor="end" font-size="11" fill="#94867a">${n}</text>`).join("")}
+    ${[2, 4, 6, 8, 10].map((n) => `<line x1="${pad}" x2="${W - pad}" y1="${Y(n)}" y2="${Y(n)}" style="stroke:rgba(var(--fg-rgb),.05)"/><text x="${pad - 8}" y="${Y(n) + 4}" text-anchor="end" font-size="11" fill="#94867a">${n}</text>`).join("")}
     ${ticks.map((t) => `<text x="${X(t)}" y="${H + 16}" text-anchor="middle" font-size="11" fill="#94867a">${t}</text>`).join("")}
     ${pts.map((p) => `<circle cx="${X(fx(p)).toFixed(1)}" cy="${Y(p.nota).toFixed(1)}" r="3.6" fill="${scoreColor(p.nota)}" opacity=".7" data-tip="${esc(p.titulo)} (${p.anio}) · ${fmt1(p.nota)}" data-open="${p.id}" style="cursor:pointer"/>`).join("")}
-    <line x1="${X(x0)}" y1="${Y(a + b * x0)}" x2="${X(x1)}" y2="${Y(a + b * x1)}" stroke="#efeaff" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6"/>
+    <line x1="${X(x0)}" y1="${Y(a + b * x0)}" x2="${X(x1)}" y2="${Y(a + b * x1)}" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6" style="stroke:var(--papel)"/>
   </svg>`;
 }
 VIEWS.estadisticas = (v) => {
@@ -785,11 +785,11 @@ function radar(pr) {
   const poly = G.map((g, i) => pt(i, R * val(g)).join(",")).join(" ");
   const avgPoly = G.map((_, i) => pt(i, R * clamp((pr.mu - 3) / 6, 0, 1)).join(",")).join(" ");
   return `<svg viewBox="0 0 420 390" width="100%" style="max-width:440px">
-    ${[0.25, 0.5, 0.75, 1].map((f) => `<polygon points="${G.map((_, i) => pt(i, R * f).join(",")).join(" ")}" fill="none" stroke="rgba(255,255,255,.07)"/>`).join("")}
-    ${G.map((_, i) => `<line x1="${cx}" y1="${cy}" x2="${pt(i, R)[0]}" y2="${pt(i, R)[1]}" stroke="rgba(255,255,255,.06)"/>`).join("")}
-    <polygon points="${avgPoly}" fill="none" stroke="rgba(255,255,255,.35)" stroke-dasharray="4 4"/>
-    <polygon points="${poly}" fill="rgba(255,201,74,.2)" stroke="#8f7cff" stroke-width="2"/>
-    ${G.map((g, i) => { const [x, y] = pt(i, R * val(g)); const [lx, ly] = pt(i, R + 26); return `<circle cx="${x}" cy="${y}" r="4" fill="#8f7cff" data-tip="${g.key}: ${fmt1(g.mean)} (${g.n} películas)"/><text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="11.5" fill="#cdbfa6">${g.key}</text>`; }).join("")}
+    ${[0.25, 0.5, 0.75, 1].map((f) => `<polygon points="${G.map((_, i) => pt(i, R * f).join(",")).join(" ")}" fill="none" stroke="rgba(var(--fg-rgb),.07)"/>`).join("")}
+    ${G.map((_, i) => `<line x1="${cx}" y1="${cy}" x2="${pt(i, R)[0]}" y2="${pt(i, R)[1]}" style="stroke:rgba(var(--fg-rgb),.06)"/>`).join("")}
+    <polygon points="${avgPoly}" fill="none" stroke-dasharray="4 4" style="stroke:rgba(var(--fg-rgb),.35)"/>
+    <polygon points="${poly}" stroke-width="2" style="fill:rgba(var(--acento-rgb),.2);stroke:var(--bombilla)"/>
+    ${G.map((g, i) => { const [x, y] = pt(i, R * val(g)); const [lx, ly] = pt(i, R + 26); return `<circle cx="${x}" cy="${y}" r="4" data-tip="${g.key}: ${fmt1(g.mean)} (${g.n} películas)" style="fill:var(--bombilla)"/><text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="11.5" fill="#cdbfa6">${g.key}</text>`; }).join("")}
   </svg>`;
 }
 VIEWS.gustos = (v) => {
@@ -801,7 +801,7 @@ VIEWS.gustos = (v) => {
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Mis gustos</h1><p>Un retrato de cómo ves el cine a partir de tus ${pr.N} notas. Se recalcula cada vez que añades una película.</p></div></div>
   <div class="card card-pad dna">
-    <div>${radar(pr)}<div class="legend" style="justify-content:center"><span><i style="background:#8f7cff"></i>Tu nota por género</span><span><i style="background:rgba(255,255,255,.35)"></i>Tu media general (${fmt2(pr.mu)})</span></div></div>
+    <div>${radar(pr)}<div class="legend" style="justify-content:center"><span><i style="background:var(--bombilla)"></i>Tu nota por género</span><span><i style="background:rgba(var(--fg-rgb),.35)"></i>Tu media general (${fmt2(pr.mu)})</span></div></div>
     <div><div class="eyebrow">En una frase</div><p class="persona" style="margin:12px 0 22px">${persona}</p>
       <div class="grid" style="grid-template-columns:1fr 1fr;gap:22px">
         <div><div class="sub" style="margin-top:0">Te encanta</div>${G.slice(0, 5).map((g) => `<div class="hbar" style="grid-template-columns:1fr 50px"><span class="n">${g.key}</span><span class="v">${scoreBadge(g.mean)}</span></div>`).join("")}</div>
@@ -1712,6 +1712,35 @@ document.addEventListener("mousemove", (e) => {
   tip.style.left = Math.min(e.clientX + 14, innerWidth - 270) + "px"; tip.style.top = e.clientY + 14 + "px";
 });
 window.addEventListener("hashchange", () => { closeModal(); render(); });
+
+// ---------------------------------------------------------------- tema claro / oscuro
+// Ciclo: automático (sigue al sistema) → claro → oscuro. Se recuerda en este navegador.
+(function tema() {
+  const b = document.getElementById("tema");
+  const nombres = { "": "automático", light: "claro", dark: "oscuro" };
+  const pintar = () => {
+    const t = document.documentElement.dataset.theme || "";
+    b.setAttribute("aria-label", `Tema: ${nombres[t]}. Cambiar`);
+    b.dataset.tip = `Tema ${nombres[t]}`;
+    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => {
+      const claro = t === "light" || (!t && matchMedia("(prefers-color-scheme: light)").matches);
+      m.content = claro ? "#f5f3fb" : "#13102e";
+    });
+  };
+  b.onclick = () => {
+    const sig = { "": "light", light: "dark", dark: "" }[document.documentElement.dataset.theme || ""];
+    if (sig) document.documentElement.dataset.theme = sig; else delete document.documentElement.dataset.theme;
+    try { sig ? localStorage.setItem("filora.tema", sig) : localStorage.removeItem("filora.tema"); } catch (e) {}
+    pintar();
+  };
+  matchMedia("(prefers-color-scheme: light)").addEventListener?.("change", pintar);
+  pintar();
+})();
+
+// ---------------------------------------------------------------- app instalable (PWA)
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+}
 
 // ---------------------------------------------------------------- arranque
 (async function init() {

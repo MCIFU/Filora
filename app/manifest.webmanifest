@@ -1,22 +1,74 @@
 {
+ "id": "/",
  "name": "Filora",
  "short_name": "Filora",
- "start_url": "./",
+ "description": "Mi diario de cine: colección puntuada, estadísticas, recomendaciones y la cartelera de Gijón.",
+ "lang": "es",
+ "dir": "ltr",
+ "start_url": "./#/inicio",
+ "scope": "./",
  "display": "standalone",
+ "display_override": [
+  "window-controls-overlay",
+  "standalone"
+ ],
+ "orientation": "any",
  "background_color": "#13102e",
  "theme_color": "#13102e",
- "lang": "es",
+ "categories": [
+  "entertainment",
+  "lifestyle"
+ ],
  "icons": [
   {
    "src": "icon-192.png",
    "sizes": "192x192",
-   "type": "image/png"
+   "type": "image/png",
+   "purpose": "any"
   },
   {
    "src": "icon-512.png",
    "sizes": "512x512",
    "type": "image/png",
-   "purpose": "any maskable"
+   "purpose": "any"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "Añadir película",
+   "url": "./#/anadir",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
+  },
+  {
+   "name": "Cartelera de hoy",
+   "url": "./#/cartelera",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
+  },
+  {
+   "name": "Mi colección",
+   "url": "./#/coleccion",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
   }
  ]
 }
