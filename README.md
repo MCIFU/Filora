@@ -1,62 +1,44 @@
-# 🎬 Filora
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/logo-oscuro.png">
+    <img src="docs/logo-claro.png" alt="Filora" width="340">
+  </picture>
+</p>
 
-Mi diario de cine personal: una app web local para registrar las películas que veo, puntuarlas y descubrir qué ver después, con un Excel profesional que se actualiza solo.
+<p align="center"><b>Mi diario de cine.</b> Colección puntuada, estadísticas, gustos, recomendaciones y la cartelera de Gijón.</p>
 
-Nació de un Excel que llevo años rellenando a mano (más de 600 películas puntuadas del 0 al 10) y ahora es una app completa.
+<p align="center"><a href="https://filora.vercel.app">filora.vercel.app</a></p>
+
+![Filora en ordenador (tema oscuro) y en móvil (tema claro)](docs/captura.jpg)
 
 ## Qué hace
 
-- **Colección** con carátulas, filtros por género, década, país, saga y nota, y ficha de cada película con enlaces a FilmAffinity, IMDb, Rotten Tomatoes, SensaCine, Letterboxd y JustWatch.
-- **Registrar una película** en segundos: buscas el título y se rellenan solos año, director, país, géneros, duración y póster (vía Wikidata, sin claves de API). Tú pones nota, fecha, dónde la viste y tu reseña.
-- **Mis gustos**: perfil del espectador con radar de géneros, directores de cabecera, década dorada y conclusiones automáticas sobre cómo puntúas.
-- **Estadísticas**: reparto de notas, décadas, géneros, países, sagas, fases del UCM, taquilla, duración frente a nota…
-- **Para ti**: recomendaciones con la nota que predigo que les darías y el porqué. Validado con mis propias notas (dejando una fuera): error medio ±1,0 frente a ±1,3 de adivinar siempre la media.
-- **Cartelera hoy**: sesiones reales de Ocine Los Fresnos y Yelmo Ocimax (Gijón) con enlace para comprar la entrada, ordenadas por afinidad.
-- **Estrenos en España**: calendario con fechas de estreno, director, sinopsis y afinidad. Se actualiza solo cada día (GitHub Actions + FilmAffinity).
-- **Series**: ficha con enlaces, estadísticas y análisis de gustos.
-- **Pendientes**.
-- **Excel sincronizado** (`Filora.xlsx`): resumen con fórmulas y gráficos, películas, series, UCM con rentabilidad, pendientes y estrenos. Si lo edito a mano, puedo reimportar los cambios.
+- **Colección**: más de 600 películas y series con carátula, nota, géneros y taquilla (Box Office Mojo).
+- **Añadir**: como en el Excel; escribes el título y la carátula y los datos se completan solos.
+- **Cartelera y estrenos**: sesiones reales de Ocine Los Fresnos y Yelmo Ocimax Gijón, y estrenos en España, actualizados cada día.
+- **Para ti**: recomendaciones con la nota que predice que le pondrías.
+- **Estadísticas y gustos**: notas, décadas, géneros, directores…
+- **App instalable** (PWA), funciona sin conexión, con tema claro y oscuro, en móvil, tableta y ordenador.
+- **Excel sincronizado** (`Filora.xlsx`) en el PC.
 
 ## Uso
 
-Requisitos: Python 3.10+ y `openpyxl` (`pip install openpyxl`).
+En el PC (Python 3.10+ y `pip install openpyxl`):
 
 ```bash
-python server.py        # o doble clic en Iniciar.bat → http://localhost:8765
+python server.py
 ```
 
-Desde la terminal:
+O doble clic en `Iniciar.bat` → http://localhost:8765
 
-```bash
-python tools/pelis.py vista "Dune: Parte Dos" 8.5 --lugar "Yelmo Cines Ocimax Gijón" --resena "..."
-python tools/pelis.py buscar nolan
-python tools/pelis.py pendiente "Sirāt" --motivo "Recomendación"
-python tools/pelis.py excel
-```
-
-## Versión web para compartir (Netlify)
-
-La app completa necesita el servidor local, pero hay una **versión de solo lectura** que funciona en cualquier hosting estático: colección, fichas, estadísticas, gustos, recomendaciones y estrenos, sin botones de edición.
-
-- `netlify.toml` le dice a Netlify que ejecute `python3 tools/build_static.py` (genera `app/data/*.json`) y publique la carpeta `app/`.
-- Cada `git push` actualiza la web con lo último registrado.
-- Para verla en local: `python tools/build_static.py` y abre `app/` con cualquier servidor estático añadiendo `?vitrina` a la URL.
+La web pública está en Vercel: se lee sin contraseña y se edita con PIN (`EDIT_PIN`), con los datos en Vercel Blob.
 
 ## Estructura
 
 ```
-server.py                 servidor local (API + web + regeneración del Excel + copias de seguridad)
-app/                      interfaz web (HTML/CSS/JS sin dependencias)
-data/db.json              base de datos (fuente de verdad)
-data/estrenos.json        calendario de estrenos en España y mis cines
-tools/importar_excel.py   importación inicial desde el Excel original (con correcciones)
-tools/excel.py            exportar / reimportar el Excel profesional
-tools/enriquecer.py       carátulas e IDs externos vía Wikidata (SPARQL por lotes)
-tools/pelis.py            registro rápido por línea de comandos
-tools/build_static.py     datos para la versión web de solo lectura (Netlify)
-tools/cartelera.py        sesiones de mis cines y próximos estrenos (FilmAffinity, diario)
+app/        interfaz web (HTML, CSS y JS sin dependencias) y PWA
+api/        API para Vercel
+server.py   servidor local + Excel + copias de seguridad
+tools/      importación, enriquecimiento, cartelera, taquilla
+data/       base de datos y estrenos
 ```
-
-Opcional: con una clave gratuita de [TMDb](https://www.themoviedb.org/settings/api) (en Ajustes) el calendario de estrenos se actualiza automáticamente.
-
-Datos de películas: [Wikidata](https://www.wikidata.org/) y [Wikipedia](https://www.wikipedia.org/).
