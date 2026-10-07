@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-07T14:08",
+ "actualizado": "2026-10-07T14:29",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -1589,6 +1589,13 @@
      ]
     }
    ]
+  },
+  {
+   "id": "353",
+   "fa": 353,
+   "nombre": "Odeon Parque Astur",
+   "ciudad": "Avilés",
+   "peliculas": []
   },
   {
    "id": "402",
