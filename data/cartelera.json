@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-07T14:29",
+ "actualizado": "2026-10-07T14:31",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -6060,6 +6060,414 @@
           "hora": "22:00",
           "sala": "Sala 8",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62608&peli=10410&sala=8"
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1300",
+   "fa": 1300,
+   "nombre": "Cines Embajadores Foncalada",
+   "ciudad": "Oviedo",
+   "peliculas": [
+    {
+     "generos": [
+      "Drama"
+     ],
+     "fa": "503965",
+     "titulo": "Ceniza en la boca",
+     "anio": 2026,
+     "pais": "México",
+     "director": "Diego Luna",
+     "reparto": "Anna Díaz, Adriana Paz, Irene Escolar",
+     "poster": "https://pics.filmaffinity.com/ceniza_en_la_boca-859618471-mmed.jpg",
+     "sinopsis": "En busca de una vida mejor, Lucila viaja con su hermano Diego desde México para encontrarse con su madre en Madrid, quien lleva ahí ocho años trabajando ilegalmente para mantenerlos. Al llegar, la vida que los espera resulta más dura de lo que…",
+     "versiones": [
+      {
+       "nombre": "CENIZA EN LA BOCA",
+       "dias": {
+        "2026-10-09": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdceniza-en-la-boca/18590/"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Documental"
+     ],
+     "fa": "105520",
+     "titulo": "Naza",
+     "anio": 2026,
+     "pais": "Reino Unido",
+     "director": "Yuval Abraham / Rachel Szor",
+     "reparto": "Yuval Abraham",
+     "poster": "https://pics.filmaffinity.com/naza-969777841-mmed.jpg",
+     "sinopsis": "Rodada por la noche en los tejados de Tel Aviv, la película revela con todo detalle los mecanismos que hay detrás del asesinato en masa y deliberado de civiles palestinos en Gaza por parte de las tropas de Israel. Naza es la palabra utilizada por el ejército…",
+     "versiones": [
+      {
+       "nombre": "NAZA (VOSE)",
+       "dias": {
+        "2026-10-09": [
+         {
+          "hora": "17:45",
+          "sala": "Sala 2",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdnaza/18587/"
+         },
+         {
+          "hora": "23:00",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdnaza/18596/"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Drama"
+     ],
+     "fa": "172492",
+     "titulo": "La vida de una mujer",
+     "anio": 2026,
+     "pais": "Francia",
+     "director": "Charline Bourgeois-Tacquet",
+     "reparto": "Léa Drucker, Mélanie Thierry, Charles Berling",
+     "poster": "https://pics.filmaffinity.com/la_vie_d_une_femme-885092719-mmed.jpg",
+     "sinopsis": "Gabrielle, de 55 años, se entrega a su trabajo en cuerpo y alma. Como cirujana y jefa de departamento del hospital, está constantemente de un lado para otro, abrumada por el peso de la responsabilidad. Le queda poco tiempo para su vida privada: un marido…",
+     "versiones": [
+      {
+       "nombre": "LA VIDA DE UNA MUJER",
+       "dias": {
+        "2026-10-09": [
+         {
+          "hora": "20:20",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-vida-de-una-mujer/18592/"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Animación",
+      "Comedia",
+      "Familiar"
+     ],
+     "fa": "392961",
+     "titulo": "Mascotas al rescate",
+     "anio": 2025,
+     "pais": "Francia",
+     "director": "Benoît Daffis / Jean-Christian Tassy",
+     "reparto": "",
+     "poster": "https://pics.filmaffinity.com/falcon_express-879360787-mmed.jpg",
+     "sinopsis": "Cuando un tren de alta velocidad queda fuera de control, un grupo de mascotas atrapadas deberá unirse para evitar el desastre. Falcon, un mapache ingenioso; Rex, un perro policía con un pasado pendiente; y Maggie, una gata rápida y valiente, tendrán que…",
+     "versiones": [
+      {
+       "nombre": "MASCOTAS AL RESCATE",
+       "dias": {
+        "2026-10-10": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 2",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdmascotas-al-rescate/18613/"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Comedia",
+      "Drama"
+     ],
+     "fa": "440322",
+     "titulo": "Digger",
+     "anio": 2026,
+     "pais": "Estados Unidos",
+     "director": "Alejandro González Iñárritu",
+     "reparto": "Tom Cruise, Riz Ahmed, John Goodman",
+     "poster": "https://pics.filmaffinity.com/digger-399332058-mmed.jpg",
+     "sinopsis": "El hombre más poderoso del mundo se embarca en una misión frenética para demostrar que es el salvador de la humanidad antes de que el desastre que ha desatado lo destruya todo.\n\nEstreno en cines: octubre 2026",
+     "versiones": [
+      {
+       "nombre": "DIGGER (VOSE)",
+       "dias": {
+        "2026-10-07": [
+         {
+          "hora": "22:15",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hddigger/18525/"
+         }
+        ],
+        "2026-10-09": [
+         {
+          "hora": "22:30",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hddigger/18685/"
+         }
+        ]
+       }
+      },
+      {
+       "nombre": "DIGGER",
+       "dias": {
+        "2026-10-07": [
+         {
+          "hora": "17:30",
+          "sala": "Sala 2",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hddigger/18522/"
+         }
+        ],
+        "2026-10-08": [
+         {
+          "hora": "17:00",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hddigger/18538/"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Drama",
+      "Thriller"
+     ],
+     "fa": "914688",
+     "titulo": "Narciso",
+     "anio": 2026,
+     "pais": "Paraguay",
+     "director": "Marcelo Martinessi",
+     "reparto": "Diro Romero, Manuel Cuenca, Margarita Irún",
+     "poster": "https://pics.filmaffinity.com/narciso-490963357-mmed.jpg",
+     "sinopsis": "Paraguay, 1959. Bajo el régimen militar asfixiante del general Alfredo Stroessner, el carismático y misterioso Narciso regresa de Buenos Aires con el rock & roll en las venas. Se convierte en una sensación radiofónica y en un símbolo de libertad. Deseado por…",
+     "versiones": [
+      {
+       "nombre": "NARCISO",
+       "dias": {
+        "2026-10-07": [
+         {
+          "hora": "17:20",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdnarciso/18523/"
+         }
+        ],
+        "2026-10-08": [
+         {
+          "hora": "17:20",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdnarciso/18534/"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Drama",
+      "Romance"
+     ],
+     "fa": "161036",
+     "titulo": "La bola negra",
+     "anio": 2026,
+     "pais": "España",
+     "director": "Los Javis",
+     "reparto": "Guitarricadelafuente, Miguel Bernardeau, Carlos González",
+     "poster": "https://pics.filmaffinity.com/la_bola_negra-140630574-mmed.jpg",
+     "sinopsis": "Las vidas interconectadas de tres hombres en tres épocas distintas. Tres existencias íntimamente ligadas por la sexualidad y el deseo, el dolor y la herencia, y por una de las últimas obras, inacabada, de Federico García Lorca.",
+     "versiones": [
+      {
+       "nombre": "LA BOLA NEGRA",
+       "dias": {
+        "2026-10-07": [
+         {
+          "hora": "16:15",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18526/"
+         },
+         {
+          "hora": "17:00",
+          "sala": "Sala 1",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18519/"
+         },
+         {
+          "hora": "19:15",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18527/"
+         },
+         {
+          "hora": "19:20",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18524/"
+         },
+         {
+          "hora": "20:00",
+          "sala": "Sala 1",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18520/"
+         },
+         {
+          "hora": "22:00",
+          "sala": "Sala 2",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18521/"
+         },
+         {
+          "hora": "22:15",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18528/"
+         }
+        ],
+        "2026-10-08": [
+         {
+          "hora": "17:00",
+          "sala": "Sala 1",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18531/"
+         },
+         {
+          "hora": "19:20",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18535/"
+         },
+         {
+          "hora": "19:30",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/17977/"
+         },
+         {
+          "hora": "21:45",
+          "sala": "Sala 2",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18533/"
+         },
+         {
+          "hora": "22:30",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18537/"
+         }
+        ],
+        "2026-10-09": [
+         {
+          "hora": "17:00",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18594/"
+         },
+         {
+          "hora": "19:00",
+          "sala": "Sala 1",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18421/"
+         },
+         {
+          "hora": "19:20",
+          "sala": "Sala 2",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18588/"
+         },
+         {
+          "hora": "20:00",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18595/"
+         },
+         {
+          "hora": "22:30",
+          "sala": "Sala 1",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18585/"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Drama"
+     ],
+     "fa": "223018",
+     "titulo": "El ser querido",
+     "anio": 2026,
+     "pais": "España",
+     "director": "Rodrigo Sorogoyen",
+     "reparto": "Javier Bardem, Victoria Luengo, Raúl Arévalo",
+     "poster": "https://pics.filmaffinity.com/el_ser_querido-751969963-mmed.jpg",
+     "sinopsis": "El aclamado director de cine Esteban Martínez (Bardem) es una leyenda tanto por sus películas como por un pasado marcado por la violencia y los excesos. En su nuevo proyecto, le ofrece un papel a su hija Emilia (Luengo) con el pretexto de ayudarla a relanzar…",
+     "versiones": [
+      {
+       "nombre": "CINE   COLOQUIO. EL SER QUERIDO",
+       "dias": {
+        "2026-10-08": [
+         {
+          "hora": "17:00",
+          "sala": "Sala 2",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdcine---coloquio.-el-ser-querido/18532/"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Drama",
+      "Thriller"
+     ],
+     "fa": "445009",
+     "titulo": "Recreación de un asesinato",
+     "anio": 2025,
+     "pais": "Irlanda",
+     "director": "Jim Sheridan / David Merriman",
+     "reparto": "Vicky Krieps, Aidan Gillen, Colm Meaney",
+     "poster": "https://pics.filmaffinity.com/re_creation-848183619-mmed.jpg",
+     "sinopsis": "Un juicio ficticio sobre el asesinato de la productora francesa Sophie Toscan du Plantier cuestiona los hechos y debatiendo la inocencia de su asesino convicto, Ian Bailey.",
+     "versiones": [
+      {
+       "nombre": "RECREACIÓN DE UN ASESINATO (VOSE)",
+       "dias": {
+        "2026-10-08": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdrecreacion-de-un-asesinato/18543/"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Animación",
+      "Drama",
+      "Aventura"
+     ],
+     "fa": "405349",
+     "titulo": "Mary Superchef",
+     "anio": 2023,
+     "pais": "Luxemburgo",
+     "director": "Enzo D'Alò",
+     "reparto": "Movie card actions, Para todos los públicos, Sala 1",
+     "poster": "https://pics.filmaffinity.com/a_greyhound_of_a_girl-682963727-mmed.jpg",
+     "sinopsis": "Mary tiene 11 años y una pasión irrefrenable por la cocina: sueña con convertirse en una gran chef. Su abuela Emer, con la que mantiene una relación muy especial, la anima a hacer realidad este sueño. Pero en todo camino hay escollos y enfrentarse a ellos se…",
+     "versiones": [
+      {
+       "nombre": "MARY SUPERCHEF",
+       "dias": {
+        "2026-10-08": [
+         {
+          "hora": "09:00",
+          "sala": "Sala 1",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdmary-superchef/18684/"
          }
         ]
        }
