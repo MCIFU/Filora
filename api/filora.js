@@ -8,7 +8,7 @@
 // Rutas (vercel.json): /api/<ruta> -> ?ruta=<ruta>
 import { randomBytes } from "node:crypto";
 import { head, list, put } from "@vercel/blob";
-import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido } from "../lib/filora.mjs";
+import { COLECCIONES, actualizar, anotarDemanda, borrar, cinesActivos, crear, fusionar, guardarPreferencias, idsCineValidos, pinValido } from "../lib/filora.mjs";
 import { claveValida, crearSesion, datosSesion, hashClave, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
 
 const CLAVE = "filora/db.json";
@@ -109,8 +109,25 @@ async function registroOEntrada(req, accion) {
   return json({ usuario, token: crearSesion(usuario, await secreto(), Date.now(), { c: cuenta.carpeta, ...(cuenta.dueno ? { d: 1 } : {}) }) });
 }
 
+// ---------------------------------------------------------------- cines pedidos
+// Lista pública de ids de cine que alguien ha elegido: el robot diario descarga sus sesiones.
+const DEMANDA = "filora/demanda.json";
+async function leerDemanda() {
+  try {
+    return (await leerJSON((await head(DEMANDA)).url)) || {};
+  } catch (e) {
+    return {};
+  }
+}
+
 // Aplica una operación (crear, editar, borrar, sincronizar) sobre una colección y la guarda.
 async function operar(req, partes, db, guardarEn) {
+  if (req.method === "PUT" && partes[0] === "preferencias") {
+    const b = await req.json().catch(() => ({}));
+    const prefs = guardarPreferencias(db, { cines: Array.isArray(b.cines) ? b.cines.slice(0, 12) : [] });
+    await guardarEn(db);
+    return json(prefs);
+  }
   if (req.method === "POST" && partes[0] === "sync") {
     const entrante = await req.json();
     if (!Array.isArray(entrante?.peliculas)) return json({ error: "Datos no válidos" }, 400);
@@ -143,6 +160,17 @@ async function manejar(req) {
   const url = new URL(req.url);
   const partes = (url.searchParams.get("ruta") || "").split("/").filter(Boolean);
   try {
+    // ---- cines elegidos (anónimo): alimenta la descarga diaria de sesiones
+    if (partes[0] === "demanda") {
+      if (req.method === "GET") return json({ cines: hayAlmacen() ? cinesActivos(await leerDemanda()) : [] });
+      if (req.method === "POST") {
+        if (!hayAlmacen()) return json({ ok: false }, 503);
+        const ids = idsCineValidos((await req.json().catch(() => ({}))).cines);
+        if (!ids.length) return json({ error: "Sin cines" }, 400);
+        await guardar(anotarDemanda(await leerDemanda(), ids), DEMANDA);
+        return json({ ok: true });
+      }
+    }
     // ---- cuentas de usuario
     if (req.method === "POST" && (partes[0] === "registro" || partes[0] === "entrar")) {
       if (!hayAlmacen()) return json({ error: "Las cuentas aún no están activadas: falta conectar el almacenamiento Blob en Vercel." }, 503);

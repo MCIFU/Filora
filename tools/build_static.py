@@ -24,7 +24,9 @@ def main():
     est = json.loads((ROOT / "data" / "estrenos.json").read_text(encoding="utf-8"))
     cart_path = ROOT / "data" / "cartelera.json"
     cart = json.loads(cart_path.read_text(encoding="utf-8")) if cart_path.exists() else {"cines": []}
-    files = {"estrenos.json": est, "catalogo.json": load_catalog(), "cartelera.json": cart}
+    cines_path = ROOT / "data" / "cines_es.json"
+    cines = json.loads(cines_path.read_text(encoding="utf-8")) if cines_path.exists() else {"cines": []}
+    files = {"cines_es.json": cines, "estrenos.json": est, "catalogo.json": load_catalog(), "cartelera.json": cart}
     for name, data in files.items():
         (OUT / name).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"Web estática lista en app/data (sin colección, es privada): "

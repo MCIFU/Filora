@@ -140,7 +140,7 @@ const setSes = (s) => { try { s ? localStorage.setItem(SES_KEY, JSON.stringify(s
 const ro = () => STATIC && !getPin() && !getSes(); // solo lectura: web publicada sin cuenta ni PIN
 const authHeaders = () => { const ses = getSes(); return ses ? { Authorization: `Bearer ${ses.token}` } : getPin() ? { "X-Pin": getPin() } : {}; };
 document.documentElement.classList.toggle("ro", ro());
-const STATIC_FILES = { estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
+const STATIC_FILES = { cines: "data/cines_es.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
 const coleccionVacia = () => ({ peliculas: [], series: [], pendientes: [], borrados: {}, estado: { web: true, privada: true } });
 
 async function api(path, opts = {}) {
@@ -181,9 +181,10 @@ async function api(path, opts = {}) {
 }
 async function loadAll() {
   const [db, est, cat, cart] = await Promise.all([api("db"), api("estrenos"), api("catalogo"), api("cartelera").catch(() => ({ cines: [] }))]);
-  S.db = db; S.est = est; S.cat = cat; S.cart = cart; S.prof = null; S.cartIdx = null;
+  S.db = db; S.est = est; S.cat = cat; S.cartTodo = cart; S.prof = null;
+  filtrarCartelera(); avisarDemanda();
 }
-async function refreshDB() { S.db = await api("db"); S.prof = null; renderChrome(); }
+async function refreshDB() { S.db = await api("db"); S.prof = null; filtrarCartelera(); renderChrome(); }
 
 function toast(msg, ic = "check") {
   const t = $("#toast");
@@ -538,7 +539,7 @@ function closeModal() { const m = $("#modal"); m.hidden = true; m.innerHTML = ""
 
 // ---------------------------------------------------------------- Formulario película
 function lugarOptions(sel) {
-  const cines = (S.est.cines || []).map((c) => `${c.nombre}`);
+  const cines = misCines().map((c) => `${c.nombre}`);
   const group = (l, arr) => `<optgroup label="${l}">${arr.map((x) => `<option ${x === sel ? "selected" : ""}>${esc(x)}</option>`).join("")}</optgroup>`;
   const extra = sel && ![...cines, ...PLATAFORMAS, "Televisión", "DVD / Blu-ray", "Otro"].includes(sel) ? `<option selected>${esc(sel)}</option>` : "";
   return `<option value="">—</option>${extra}${group("En el cine", cines)}${group("En casa · streaming", PLATAFORMAS)}${group("Otros", ["Televisión", "DVD / Blu-ray", "Otro"])}`;
@@ -964,7 +965,7 @@ function openRel(key) {
       <div class="myscore">${matchTag(m.pct)}<div><div class="lbl">Afinidad contigo</div><div class="verdict">Predicción: ${fmt1(m.nota)} · ${veredicto(m.nota)}</div></div></div>
       ${m.why.length ? `<div style="display:flex;flex-direction:column;gap:6px;color:var(--text-2);font-size:13.5px">${m.why.map((w) => `<span>— ${esc(w)}</span>`).join("")}</div>` : ""}
       ${sesionesDe(e.titulo, e.fa) ? `<div class="sub">Sesiones en tus cines</div>${sesionesHTML(sesionesDe(e.titulo, e.fa), null, 4)}` : `<div class="sub">Cartelera de tus cines</div>
-      <div class="links">${(S.est.cines || []).filter((c) => c.principal).map((c) => `<a class="ext" href="${esc(c.web)}" target="_blank" rel="noopener"><span class="logo" style="background:#2a2a36">${icon("ticket")}</span>${esc(c.nombre)}</a>`).join("")}</div>`}
+      <div class="links">${misCines().length ? misCines().map((c) => `<a class="ext" href="https://www.filmaffinity.com/es/theater-showtimes.php?id=${c.id}" target="_blank" rel="noopener"><span class="logo" style="background:#2a2a36">${icon("ticket")}</span>${esc(c.nombre)}</a>`).join("") : `<a class="ext" href="#" data-cines><span class="logo" style="background:#2a2a36">${icon("pin")}</span>Elegir mis cines</a>`}</div>`}
       <div class="sub">Más info</div>
       <div class="links">
         <a class="ext" href="${e.fa ? `https://www.filmaffinity.com/es/film${e.fa}.html` : `https://www.filmaffinity.com/es/search.php?stext=${q}`}" target="_blank" rel="noopener"><span class="logo" style="background:#1d4d8c">FA</span>FilmAffinity</a>
@@ -987,8 +988,8 @@ VIEWS.estrenos = (v) => {
     <p>Fechas de estreno en cines españoles${upd ? `, actualizadas el ${upd}` : ""}. El % es lo que encaja contigo.</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">${S.db.estado?.tmdb ? `<button class="btn" id="estUpd">${icon("refresh")}Actualizar desde TMDb</button>` : ""}
       <div class="seg" id="estMode"><button data-m="lista" class="${st.mode === "lista" ? "on" : ""}">Lista</button><button data-m="cal" class="${st.mode === "cal" ? "on" : ""}">Calendario</button></div></div></div>
-  <div class="cinemas">${(S.est.cines || []).filter((c) => c.principal).map((c) => `<div class="card cinema"><div class="n">${esc(c.nombre)}</div><div class="c">${icon("pin")} ${esc(c.ciudad)} · ${esc(c.direccion)}</div>
-    <div class="a"><a class="btn btn-sm" href="${esc(c.web)}" target="_blank" rel="noopener">${icon("ticket")}Cartelera</a>${c.filmaffinity ? `<a class="btn btn-sm btn-ghost" href="${esc(c.filmaffinity)}" target="_blank" rel="noopener">Horarios FA</a>` : ""}</div></div>`).join("")}</div>
+  <div class="cinemas">${misCines().map((c) => `<div class="card cinema"><div class="n">${esc(c.nombre)}</div><div class="c">${icon("pin")} ${esc([c.ciudad, c.direccion].filter(Boolean).join(" · "))}</div>
+    <div class="a"><a class="btn btn-sm" href="#/cartelera">${icon("ticket")}Sesiones</a><a class="btn btn-sm btn-ghost" href="https://www.filmaffinity.com/es/theater-showtimes.php?id=${c.id}" target="_blank" rel="noopener">Horarios FA</a></div></div>`).join("")}</div>
   <div class="toolbar" style="position:static;margin-top:20px">
     <div class="seg" id="estF">${[["todos", "Todos"], ["parami", "Encajan conmigo"], ["destacados", "Los grandes"]].map(([k, l]) => `<button data-f="${k}" class="${st.filter === k ? "on" : ""}">${l}</button>`).join("")}</div>
     <span class="dim" style="font-size:13px">${L.length} estrenos</span>
@@ -1215,6 +1216,102 @@ VIEWS.ajustes = (v) => {
   $("#tmdbSave").onclick = async () => { const k = $("#tmdbKey").value.trim(); if (!k) return; await api("config", { method: "POST", body: { tmdbKey: k } }); await refreshDB(); toast("Clave guardada"); VIEWS.ajustes(v); };
 };
 
+// ---------------------------------------------------------------- Tus cines (cada persona elige los suyos)
+// Con cuenta se guardan en tu cuenta; sin cuenta, en este dispositivo. No hay cines por defecto.
+const CINES_KEY = "filora.cines";
+function misCines() {
+  const p = S.db && S.db.preferencias && S.db.preferencias.cines;
+  if (Array.isArray(p) && !ro()) return p;
+  try { return JSON.parse(localStorage.getItem(CINES_KEY) || "[]"); } catch (e) { return []; }
+}
+const idCine = (c) => String(c.fa ?? c.id);
+function filtrarCartelera() {
+  const ids = new Set(misCines().map((c) => String(c.id)));
+  const todos = (S.cartTodo && S.cartTodo.cines) || [];
+  S.cart = { ...(S.cartTodo || {}), cines: todos.filter((c) => ids.has(idCine(c))) };
+  S.cartIdx = null;
+}
+const cinesSinSesiones = () => misCines().filter((c) => !S.cart.cines.some((x) => idCine(x) === String(c.id)));
+// Avisa a la web de qué cines quieres (una vez al día) para que el robot descargue sus sesiones.
+function avisarDemanda(forzar) {
+  if (!STATIC) return;
+  const ids = misCines().map((c) => c.id);
+  if (!ids.length) return;
+  try { if (!forzar && localStorage.getItem("filora.demanda") === todayISO()) return; localStorage.setItem("filora.demanda", todayISO()); } catch (e) { /* */ }
+  fetch("/api/demanda", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cines: ids }) }).catch(() => {});
+}
+async function guardarCines(lista) {
+  const limpia = lista.map(({ id, nombre, ciudad, provincia, direccion }) => ({ id, nombre, ciudad, provincia, direccion }));
+  if (ro()) { try { localStorage.setItem(CINES_KEY, JSON.stringify(limpia)); } catch (e) { /* */ } }
+  else S.db.preferencias = await api("preferencias", { method: "PUT", body: { cines: limpia } });
+  filtrarCartelera(); avisarDemanda(true);
+}
+const kmEntre = ([a, b], [c, d]) => {
+  const r = Math.PI / 180, x = Math.sin(((c - a) * r) / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin(((d - b) * r) / 2) ** 2;
+  return 12742 * Math.asin(Math.sqrt(x));
+};
+async function openCines() {
+  if (!S.cinesCat) {
+    try { S.cinesCat = (await api("cines")).cines || []; } catch (e) { return toast("No se ha podido cargar la lista de cines", "x"); }
+  }
+  let sel = misCines().slice(), pos = null, q = "";
+  modal(`<div class="sheet-body cines-f"><div class="eyebrow">Cartelera</div><h2 class="h2" style="margin:6px 0 8px">Tus cines</h2>
+    <p class="muted" style="margin:0 0 16px">Elige los cines a los que sueles ir y verás sus sesiones. ${ro() ? "Se guardan en este dispositivo." : "Se guardan en tu cuenta."}</p>
+    <div class="cines-busca"><button class="btn" id="cGeo" type="button">${icon("pin")}Cerca de mí</button><input class="input" id="cQ" placeholder="Tu ciudad, provincia o cine" autocomplete="off" enterkeyhint="search"></div>
+    <div id="cSel" class="chips" style="margin:14px 0 4px"></div>
+    <div id="cMsg" class="dim" style="min-height:20px;font-size:13px;margin-top:6px"></div>
+    <ul id="cList" class="cines-list"></ul>
+    <button class="btn btn-primary" id="cOk" style="width:100%;justify-content:center;margin-top:14px">${icon("check")}Guardar mis cines</button></div>`, "narrow");
+  const msg = (m) => ($("#cMsg").textContent = m);
+  const pinta = () => {
+    $("#cSel").innerHTML = sel.length ? sel.map((c) => `<button type="button" class="chip on" data-quita="${c.id}" aria-label="Quitar ${esc(c.nombre)}">${esc(c.nombre)} ×</button>`).join("")
+      : `<span class="dim" style="font-size:13px">Aún no has elegido ningún cine</span>`;
+    const n = norm(q);
+    let L = S.cinesCat;
+    if (n) L = L.filter((c) => norm(`${c.nombre} ${c.ciudad} ${c.provincia}`).includes(n));
+    if (pos) L = L.filter((c) => c.geo).map((c) => ({ ...c, d: kmEntre(pos, c.geo) })).sort((a, b) => a.d - b.d);
+    else if (!n) L = [];
+    const ids = new Set(sel.map((c) => c.id));
+    $("#cList").innerHTML = L.slice(0, 40).map((c) => `<li><label><input type="checkbox" data-cid="${c.id}" ${ids.has(c.id) ? "checked" : ""}>
+      <span><b>${esc(c.nombre)}</b><span class="dim">${esc(c.ciudad)}${c.provincia && c.ciudad !== c.provincia ? ` · ${esc(c.provincia)}` : ""}${c.d != null ? ` · ${c.d < 1 ? "menos de 1" : Math.round(c.d)} km` : ""}</span></span></label></li>`).join("")
+      || (n ? `<li class="dim" style="padding:12px 0">No encuentro cines con «${esc(q)}»</li>` : "");
+  };
+  pinta();
+  setTimeout(() => $("#cQ").focus(), 60);
+  $("#cQ").oninput = (ev) => { q = ev.target.value; if (q) pos = null; msg(""); pinta(); };
+  $("#cGeo").onclick = () => {
+    if (!navigator.geolocation) return msg("Este navegador no permite usar tu ubicación. Escribe tu ciudad.");
+    msg("Buscando tu ubicación…");
+    navigator.geolocation.getCurrentPosition(
+      (p) => { pos = [p.coords.latitude, p.coords.longitude]; q = ""; $("#cQ").value = ""; msg("Cines ordenados por distancia (tu ubicación no se guarda)"); pinta(); },
+      () => msg("No se ha podido usar tu ubicación. Escribe tu ciudad en el buscador."),
+      { timeout: 12000, maximumAge: 600000 });
+  };
+  $("#cList").onchange = (ev) => {
+    const id = +ev.target.dataset.cid;
+    if (!id) return;
+    if (ev.target.checked) {
+      if (sel.length >= 12) { ev.target.checked = false; return msg("Puedes elegir hasta 12 cines."); }
+      sel.push(S.cinesCat.find((c) => c.id === id));
+    } else sel = sel.filter((c) => c.id !== id);
+    pinta();
+  };
+  $("#cSel").onclick = (ev) => { const b = ev.target.closest("[data-quita]"); if (b) { sel = sel.filter((c) => String(c.id) !== b.dataset.quita); pinta(); } };
+  $("#cOk").onclick = async () => {
+    try {
+      await guardarCines(sel);
+      closeModal(); render._keep = true; render();
+      const nuevos = cinesSinSesiones().length;
+      toast(!sel.length ? "Has quitado tus cines" : nuevos ? "Guardado. Las sesiones de tus cines nuevos llegarán en unas horas" : "Tus cines están guardados", "check");
+    } catch (e) { toast(e.message, "x"); }
+  };
+}
+function elegirCinesHTML(titulo = "¿A qué cines vas?") {
+  return `<div class="card elige-cines"><div><div class="h2" style="margin:0 0 6px">${titulo}</div>
+    <p class="muted" style="margin:0">Usa tu ubicación o escribe tu ciudad y elige tus cines para ver sus sesiones de hoy, ordenadas por lo que encajan contigo.</p></div>
+    <button class="btn btn-primary" data-cines>${icon("pin")}Elegir mis cines</button></div>`;
+}
+
 // ---------------------------------------------------------------- Cartelera (sesiones reales de tus cines)
 S.cart_ = { dia: null, cine: "" };
 const hhmm = () => { const d = new Date(); return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`; };
@@ -1281,6 +1378,7 @@ function carteleraCard(p, dia, cineId) {
     </div></div>`;
 }
 function hoyHTML() {
+  if (!misCines().length) return `<section class="section">${sectionHead("Hoy en tus cines")}${elegirCinesHTML()}</section>`;
   const dias = diasCartelera();
   if (!dias.length) return "";
   const L = enCartelera(dias[0]).filter((p) => !p.info.vista).slice(0, 4);
@@ -1303,20 +1401,28 @@ VIEWS.cartelera = (v) => {
   const preventa = [...carteleraIdx().values()]
     .map((p) => ({ p, first: p.cines.flatMap((c) => c.versiones.flatMap((x) => Object.keys(x.dias))).sort()[0] }))
     .filter((x) => x.first > lim).sort((a, b) => a.first.localeCompare(b.first));
-  const cineCorto = (n) => n.replace("Premium ", "").replace("Yelmo Cines ", "Yelmo ").replace(" Gijón", "");
+  const cineCorto = (n) => n.replace("Premium ", "").replace("Yelmo Cines ", "Yelmo ");
+  const mis = misCines();
+  const pendientes = cinesSinSesiones();
+  const ciudades = [...new Set(mis.map((c) => c.ciudad).filter(Boolean))];
+  if (!mis.length) {
+    v.innerHTML = `<div class="page-head"><div><h1 class="h1">Cartelera</h1><p>Sesiones reales de los cines que elijas, con enlace para comprar la entrada.</p></div></div>${elegirCinesHTML("Elige tus cines")}`;
+    return;
+  }
   v.innerHTML = `
-  <div class="page-head"><div><div class="eyebrow">Gijón · Ocine Los Fresnos y Yelmo Ocimax</div><h1 class="h1">Cartelera</h1>
+  <div class="page-head"><div><div class="eyebrow">${esc(ciudades.join(" · "))} · ${esc(mis.map((c) => cineCorto(c.nombre)).join(", "))}</div><h1 class="h1">Cartelera</h1>
     <p>Sesiones reales de tus cines. Pulsa una hora para comprar la entrada.${act ? ` <span class="dim">Actualizado el ${act.toLocaleDateString("es-ES", { day: "numeric", month: "long" })} a las ${act.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })} · fuente FilmAffinity.</span>` : ""}</p>
     ${viejo ? `<p style="color:var(--gold)">⚠ Estos horarios tienen más de dos días; pueden haber cambiado.</p>` : ""}</div>
-    ${!STATIC ? `<button class="btn" id="cartUpd">${icon("refresh")}Actualizar ahora</button>` : ""}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-cines>${icon("pin")}Cambiar cines</button>${!STATIC ? `<button class="btn" id="cartUpd">${icon("refresh")}Actualizar ahora</button>` : ""}</div></div>
+  ${pendientes.length ? `<div class="card aviso-cines">${icon("clock")}<span>Las sesiones de <b>${esc(pendientes.map((c) => c.nombre).join(", "))}</b> se descargan dos veces al día; estarán aquí en unas horas.</span></div>` : ""}
   ${dias.length ? `
   <div class="toolbar" style="position:static">
     <div class="chips">${dias.map((d) => `<button class="chip ${d === st.dia ? "on" : ""}" data-cday="${d}">${etiqueta(d)}</button>`).join("")}</div>
-    <div class="seg"><button data-ccine="" class="${!st.cine ? "on" : ""}">Los dos</button>${cines.map((c) => `<button data-ccine="${c.id}" class="${st.cine === c.id ? "on" : ""}">${esc(cineCorto(c.nombre))}</button>`).join("")}</div>
+    <div class="seg"><button data-ccine="" class="${!st.cine ? "on" : ""}">Todos</button>${cines.map((c) => `<button data-ccine="${c.id}" class="${st.cine === c.id ? "on" : ""}">${esc(cineCorto(c.nombre))}</button>`).join("")}</div>
   </div>
   <div class="result-line"><b>${L.length}</b> películas ${st.dia === hoy ? "hoy" : `el ${etiqueta(st.dia).toLowerCase()}`} · ordenadas por lo que encajan contigo</div>
   <div class="cfilms">${L.map((p) => carteleraCard(p, st.dia, st.cine)).join("")}</div>`
-  : `<div class="empty"><div class="h2">Sin sesiones cargadas</div>${STATIC ? "Vuelve a intentarlo más tarde." : "Pulsa «Actualizar ahora» para descargarlas."}</div>`}
+  : pendientes.length === mis.length ? "" : `<div class="empty"><div class="h2">Sin sesiones cargadas</div>${STATIC ? "Vuelve a intentarlo más tarde." : "Pulsa «Actualizar ahora» para descargarlas."}</div>`}
   ${preventa.length ? `<section class="section">${sectionHead("Entradas ya a la venta (preventa)")}<div class="cfilms">${preventa.map(({ p }) => carteleraCard({ ...p, info: infoCartelera(p) }, null, "")).join("")}</div></section>` : ""}`;
   const up = $("#cartUpd");
   if (up) up.onclick = async () => {
@@ -1505,7 +1611,7 @@ const COLS_XL = [
   ["anio", "Año", "number"], ["duracion", "Duración", "number"], ["nota", "Nota", "number"], ["titulo", "Título", "text"],
   ["director", "Director", "text"], ["pais", "País", "text"], ["generos", "Géneros", "tags"],
 ];
-function lugaresLista() { return [...(S.est.cines || []).map((c) => c.nombre), ...PLATAFORMAS, "Televisión", "DVD / Blu-ray", "Otro"]; }
+function lugaresLista() { return [...misCines().map((c) => c.nombre), ...PLATAFORMAS, "Televisión", "DVD / Blu-ray", "Otro"]; }
 function parseGeneros(txt) {
   return String(txt || "").split(/[,;/]/).map((x) => x.trim()).filter(Boolean)
     .map((x) => GENEROS.find((g) => norm(g) === norm(x)) || GENEROS.find((g) => norm(g).startsWith(norm(x))) || null).filter(Boolean);
@@ -1758,11 +1864,12 @@ function openPegar() {
 
 // ---------------------------------------------------------------- eventos globales
 document.addEventListener("click", async (e) => {
-  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine],[data-login],[data-logout],[data-cuenta]");
+  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine],[data-login],[data-logout],[data-cuenta],[data-cines]");
   if (!t) return;
   const d = t.dataset;
   if (d.login !== undefined) { e.preventDefault(); return openLogin(d.login === "crear" ? "crear" : "entrar"); }
   if (d.cuenta !== undefined) { e.preventDefault(); return openCuenta(); }
+  if (d.cines !== undefined) { e.preventDefault(); return openCines(); }
   if (d.logout !== undefined) { e.preventDefault(); closeModal(); return logout(); }
   if (ro() && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "sedit", "sdel"].some((k) => d[k] !== undefined)) return;
   if (d.more !== undefined) { e.preventDefault(); return openMore(); }

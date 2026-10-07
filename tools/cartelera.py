@@ -8,6 +8,7 @@ biblioteca estándar. Si FilmAffinity falla, conserva los datos anteriores.
 """
 import html
 import json
+import os
 import re
 import sys
 import time
@@ -22,6 +23,10 @@ EST_PATH = ROOT / "data" / "estrenos.json"
 CART_PATH = ROOT / "data" / "cartelera.json"
 CACHE_PATH = ROOT / "data" / "fa_cache.json"   # fichas de FilmAffinity ya consultadas (evita repetir peticiones)
 FA = "https://www.filmaffinity.com/es/"
+WEB = os.environ.get("FILORA_WEB", "https://filora-umber.vercel.app")
+CINES_PATH = ROOT / "data" / "cines_es.json"   # catálogo de cines de España (tools/cines.py)
+LOCAL_DB = ROOT / "data" / "local" / "db.json"
+MAX_CINES = 150
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140 Safari/537.36"
 
 MESES = {"ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6, "jul": 7, "ago": 8,
@@ -97,6 +102,26 @@ def cine_sesiones(fa_id):
     return out
 
 
+def cines_elegidos():
+    """Cines que alguien ha elegido en la web (últimos 30 días) más los de este PC."""
+    ids = []
+    try:
+        with urllib.request.urlopen(urllib.request.Request(f"{WEB}/api/demanda", headers={"User-Agent": UA}), timeout=30) as r:
+            ids += json.loads(r.read().decode("utf-8")).get("cines", [])
+    except Exception as e:
+        print("  No se pudo leer la lista de cines de la web:", e)
+    if LOCAL_DB.exists():
+        try:
+            prefs = json.loads(LOCAL_DB.read_text(encoding="utf-8")).get("preferencias") or {}
+            ids += [c["id"] for c in prefs.get("cines", []) if c.get("id")]
+        except Exception:
+            pass
+    ids = list(dict.fromkeys(int(i) for i in ids))[:MAX_CINES]
+    catalogo = {c["id"]: c for c in json.loads(CINES_PATH.read_text(encoding="utf-8"))["cines"]} if CINES_PATH.exists() else {}
+    return [{"fa_id": i, "id": str(i), "nombre": catalogo.get(i, {}).get("nombre", f"Cine {i}"),
+             "ciudad": catalogo.get(i, {}).get("ciudad")} for i in ids]
+
+
 def actualizar_cartelera(cines):
     res = {"actualizado": datetime.now().isoformat(timespec="minutes"), "fuente": "FilmAffinity", "cines": []}
     for c in cines:
@@ -104,7 +129,7 @@ def actualizar_cartelera(cines):
             continue
         try:
             pelis = cine_sesiones(c["fa_id"])
-            res["cines"].append({"id": c["id"], "nombre": c["nombre"], "peliculas": pelis})
+            res["cines"].append({"id": c["id"], "fa": c["fa_id"], "nombre": c["nombre"], "ciudad": c.get("ciudad"), "peliculas": pelis})
             print(f"  {c['nombre']}: {len(pelis)} películas en cartelera")
         except Exception as e:
             print(f"  {c['nombre']}: error {e}")
@@ -245,8 +270,10 @@ def main():
         except Exception:
             pass
     est = json.loads(EST_PATH.read_text(encoding="utf-8"))
-    print("Cartelera de tus cines…")
-    cart = actualizar_cartelera(est.get("cines", []))
+    est.pop("cines", None)  # cada persona elige sus cines en la web; no hay cines por defecto
+    cines = cines_elegidos()
+    print(f"Cartelera de {len(cines)} cines elegidos…")
+    cart = actualizar_cartelera(cines)
     if any(c["peliculas"] for c in cart["cines"]):
         CART_PATH.write_text(json.dumps(cart, ensure_ascii=False, indent=1), encoding="utf-8")
     print("Próximos estrenos…")

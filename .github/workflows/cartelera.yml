@@ -2,7 +2,8 @@ name: Actualizar cartelera y estrenos
 
 on:
   schedule:
-    - cron: "0 5 * * *"   # todos los días a las 07:00 (hora de España en verano)
+    - cron: "0 5 * * *"    # 07:00 en España (verano)
+    - cron: "0 14 * * *"   # 16:00: recoge los cines que alguien haya elegido por la mañana
   workflow_dispatch: {}    # botón "Run workflow" para lanzarlo a mano
 
 permissions:
@@ -22,7 +23,7 @@ jobs:
         run: |
           git config user.name "cartelera-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/cartelera.json data/estrenos.json data/fa_cache.json
+          git add data/cartelera.json data/estrenos.json data/fa_cache.json data/cines_es.json
           if git diff --cached --quiet; then
             echo "Sin cambios"
           else

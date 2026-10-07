@@ -109,6 +109,20 @@ r = await llamar(DELETE, `peliculas/${id}`, { token: tokMarta, metodo: "DELETE" 
 r = await llamar(GET, "db", { token: tokMarta });
 assert.equal(r.j.peliculas.length, 0);
 
+// tus cines se guardan en tu cuenta
+r = await llamar(PUT, "preferencias", { cuerpo: { cines: [{ id: 402, nombre: "Yelmo" }] }, token: tokLuis, metodo: "PUT" });
+assert.deepEqual(r.j.cines, [{ id: 402, nombre: "Yelmo" }]);
+r = await llamar(GET, "db", { token: tokLuis });
+assert.equal(r.j.preferencias.cines[0].id, 402);
+r = await llamar(GET, "db", { token: tokMarta });
+assert.equal(r.j.preferencias, undefined, "los cines de otro no aparecen");
+
+// cines pedidos (sin cuenta)
+r = await llamar(POST, "demanda", { cuerpo: { cines: [402, "1269", "malo"] } });
+assert.equal(r.status, 200);
+r = await llamar(GET, "demanda");
+assert.deepEqual(r.j.cines.sort(), [1269, 402]);
+
 // las contraseñas no se guardan en claro
 assert.ok(![...almacen.values()].some((v) => v.includes("palomitas")));
 console.log("✓ Cuentas: registro, entrada, sesiones y colecciones separadas");

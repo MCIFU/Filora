@@ -15,7 +15,7 @@
 
 - **Colección**: más de 600 películas y series con carátula, nota, géneros y taquilla (Box Office Mojo).
 - **Añadir**: como en el Excel; escribes el título y la carátula y los datos se completan solos.
-- **Cartelera y estrenos**: sesiones reales de Ocine Los Fresnos y Yelmo Ocimax Gijón, y estrenos en España, actualizados cada día.
+- **Tus cines**: cada persona elige los suyos entre los 634 cines de España (por ubicación o escribiendo su ciudad) y ve sus sesiones reales con enlace para comprar la entrada. Estrenos en España actualizados cada día.
 - **Para ti**: recomendaciones con la nota que predice que le pondrías.
 - **Estadísticas y gustos**: notas, décadas, géneros, directores…
 - **Cuentas privadas**: cada persona crea su cuenta con usuario y contraseña y solo ella ve su colección. Sin cuenta solo se ven la cartelera, los estrenos y las recomendaciones.

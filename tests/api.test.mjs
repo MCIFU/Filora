@@ -1,6 +1,6 @@
 // Pruebas de la lógica de fusión y edición: node tests/api.test.mts
 import assert from "node:assert/strict";
-import { actualizar, borrar, crear, fusionar, nuevoId, pinValido } from "../lib/filora.mjs";
+import { actualizar, anotarDemanda, borrar, cinesActivos, crear, fusionar, idsCineValidos, nuevoId, pinValido } from "../lib/filora.mjs";
 
 const base = () => ({
   peliculas: [
@@ -75,3 +75,20 @@ assert.equal(pinValido(null, "1234"), false);
 assert.equal(pinValido("1234", undefined), false);
 
 console.log("✓ Todas las pruebas de la API pasan");
+
+// ---- preferencias y cines pedidos
+{
+  const a = { peliculas: [], preferencias: { cines: [{ id: 1 }], mod: "2026-01-01T00:00:00" } };
+  const b = { peliculas: [], preferencias: { cines: [{ id: 2 }], mod: "2026-02-01T00:00:00" } };
+  assert.deepEqual(fusionar(a, b).preferencias.cines, [{ id: 2 }], "gana la preferencia más reciente");
+  assert.deepEqual(fusionar(b, a).preferencias.cines, [{ id: 2 }]);
+  assert.deepEqual(fusionar({ peliculas: [] }, a).preferencias.cines, [{ id: 1 }]);
+  const d = anotarDemanda({ 9: "2025-01-01", 5: "2026-09-20" }, [1269, 402], "2026-10-07");
+  assert.deepEqual(Object.keys(d).sort(), ["1269", "402", "5"], "se olvidan los cines que nadie pide hace 45 días");
+  assert.deepEqual(cinesActivos(d, "2026-10-07").slice(0, 2).sort(), [1269, 402]);
+  assert.equal(cinesActivos(d, "2026-10-07")[2], 5, "primero los pedidos más recientemente");
+  assert.deepEqual(cinesActivos(d, "2026-10-25").sort(), [1269, 402]);
+  assert.deepEqual(idsCineValidos(["402", 402, -1, "x", 1.5]), [402]);
+  assert.equal(idsCineValidos(Array.from({ length: 30 }, (_, i) => i + 1)).length, 12);
+  console.log("✓ Preferencias y cines pedidos");
+}

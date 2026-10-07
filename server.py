@@ -349,6 +349,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send_json(read_json(EST_PATH, {"estrenos": [], "cines": []}))
             if parts[1:] == ["cartelera"]:
                 return self.send_json(read_json(DATA / "cartelera.json", {"cines": []}))
+            if parts[1:] == ["cines"]:
+                return self.send_json(read_json(DATA / "cines_es.json", {"cines": []}))
             if parts[1:] == ["catalogo"]:
                 return self.send_json(load_catalog())
             if parts[1:] == ["buscar"]:
@@ -453,6 +455,12 @@ class Handler(BaseHTTPRequestHandler):
     def do_PUT(self):
         parts, _ = self.parts()
         try:
+            if parts == ["api", "preferencias"]:
+                with LOCK:
+                    db = load_db()
+                    db["preferencias"] = {**(db.get("preferencias") or {}), "cines": (self.body().get("cines") or [])[:12], "mod": ahora()}
+                    save_db(db)
+                return self.send_json(db["preferencias"])
             if len(parts) == 3 and parts[0] == "api" and parts[1] in self.COLLS:
                 key, _, kind = self.COLLS[parts[1]]
                 data = self.body()

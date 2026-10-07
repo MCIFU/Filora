@@ -3,7 +3,7 @@
  "fuente": "FilmAffinity",
  "cines": [
   {
-   "id": "ocine-fresnos",
+   "id": "1269",
    "nombre": "Ocine Premium Los Fresnos",
    "peliculas": [
     {
@@ -1183,10 +1183,12 @@
       }
      ]
     }
-   ]
+   ],
+   "fa": 1269,
+   "ciudad": "Gijón"
   },
   {
-   "id": "yelmo-ocimax",
+   "id": "402",
    "nombre": "Yelmo Cines Ocimax Gijón",
    "peliculas": [
     {
@@ -2846,7 +2848,9 @@
       }
      ]
     }
-   ]
+   ],
+   "fa": 402,
+   "ciudad": "Gijón"
   }
  ]
 }
