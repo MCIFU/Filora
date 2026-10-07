@@ -9,7 +9,7 @@
 import { randomBytes } from "node:crypto";
 import { head, list, put } from "@vercel/blob";
 import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido } from "../lib/filora.mjs";
-import { claveValida, crearSesion, hashClave, leerSesion, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
+import { claveValida, crearSesion, datosSesion, hashClave, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
 
 const CLAVE = "filora/db.json";
 const DUENO = (process.env.OWNER_USER || "mcifu").toLowerCase();
@@ -44,7 +44,12 @@ const guardar = (db, ruta = CLAVE) =>
   put(ruta, JSON.stringify(db), { access: "public", addRandomSuffix: false, allowOverwrite: true, contentType: "application/json", cacheControlMaxAge: 60 });
 
 // ---------------------------------------------------------------- cuentas
+// Se guarda en memoria mientras la función siga activa: menos operaciones de Blob (el plan gratis tiene un cupo).
+let SECRETO = null;
 async function secreto() {
+  return (SECRETO ||= await leerSecreto());
+}
+async function leerSecreto() {
   if (process.env.AUTH_SECRET) return process.env.AUTH_SECRET;
   const { blobs } = await list({ prefix: "filora/privado/secreto" });
   if (blobs[0]) return (await leerJSON(blobs[0].url)).s;
@@ -73,8 +78,10 @@ async function cargarUsuario(c) {
 async function cuentaDeSesion(req) {
   const m = /^Bearer (.+)$/.exec(req.headers.get("authorization") || "");
   if (!m) return null;
-  const usuario = leerSesion(m[1], await secreto());
-  return usuario ? leerCuenta(usuario) : null;
+  const d = datosSesion(m[1], await secreto());
+  if (!d) return null;
+  if (d.c) return { usuario: d.u, carpeta: d.c, dueno: !!d.d }; // la sesión ya dice dónde están sus datos
+  return leerCuenta(d.u); // sesiones antiguas
 }
 
 async function registroOEntrada(req, accion) {
@@ -93,13 +100,13 @@ async function registroOEntrada(req, accion) {
     const nueva = { usuario, clave: hashClave(b.clave), carpeta: randomBytes(12).toString("hex"), creado: new Date().toISOString(), ...(dueno ? { dueno: true } : {}) };
     await put(`filora/usuarios/${usuario}/cuenta.json`, JSON.stringify(nueva), { access: "public", addRandomSuffix: true, contentType: "application/json" });
     if (!dueno) await guardar(nuevaColeccion(), rutaDatos(nueva));
-    return json({ usuario, token: crearSesion(usuario, await secreto()) }, 201);
+    return json({ usuario, token: crearSesion(usuario, await secreto(), Date.now(), { c: nueva.carpeta, ...(dueno ? { d: 1 } : {}) }) }, 201);
   }
   if (!cuenta || !verificarClave(b.clave, cuenta.clave)) {
     await espera(800); // frena intentos a ciegas
     return json({ error: "Usuario o contraseña incorrectos." }, 401);
   }
-  return json({ usuario, token: crearSesion(usuario, await secreto()) });
+  return json({ usuario, token: crearSesion(usuario, await secreto(), Date.now(), { c: cuenta.carpeta, ...(cuenta.dueno ? { d: 1 } : {}) }) });
 }
 
 // Aplica una operación (crear, editar, borrar, sincronizar) sobre una colección y la guarda.
