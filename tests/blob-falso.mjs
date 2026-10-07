@@ -9,6 +9,10 @@ export async function put(ruta, cuerpo, opts = {}) {
   almacen.set(p, String(cuerpo));
   return { url: url(p), pathname: p };
 }
+export async function get(ruta) {
+  if (!almacen.has(ruta)) return null;
+  return { statusCode: 200, stream: new Response(almacen.get(ruta)).body, blob: { pathname: ruta } };
+}
 export async function head(ruta) {
   if (!almacen.has(ruta)) throw new Error("BlobNotFoundError");
   return { url: url(ruta), pathname: ruta };

@@ -7,7 +7,7 @@
 // rutas con una parte aleatoria, así que sus direcciones no se pueden adivinar.
 // Rutas (vercel.json): /api/<ruta> -> ?ruta=<ruta>
 import { randomBytes } from "node:crypto";
-import { head, list, put } from "@vercel/blob";
+import { get, list, put } from "@vercel/blob";
 import { COLECCIONES, actualizar, anotarDemanda, borrar, cinesActivos, crear, fusionar, guardarPreferencias, idsCineValidos, pinValido } from "../lib/filora.mjs";
 import { notasExternas } from "../lib/notas.mjs";
 import { claveValida, crearSesion, datosSesion, hashClave, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
@@ -21,6 +21,14 @@ const json = (data, status = 200) =>
   new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" } });
 const espera = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// Lee un archivo que cambia (colecciones, cines pedidos) sin pasar por la caché de Vercel:
+// así nunca se parte de una versión vieja al guardar (dos cambios seguidos no se pisan).
+async function leerFresco(ruta) {
+  const r = await get(ruta, { access: "public", useCache: false });
+  if (!r || r.statusCode !== 200 || !r.stream) return null;
+  return JSON.parse(await new Response(r.stream).text());
+}
+
 const leerJSON = async (url) => {
   const r = await fetch(`${url}${url.includes("?") ? "&" : "?"}t=${Date.now()}`, { cache: "no-store" });
   return r.ok ? r.json() : null;
@@ -28,15 +36,12 @@ const leerJSON = async (url) => {
 
 // Colección del dueño: la guardada en Blob (la sube el PC al sincronizar o se importa
 // desde la web). El repositorio no contiene ninguna colección.
+// Si el almacenamiento falla al leer, el error se propaga (respuesta 500) en vez de devolver
+// una colección vacía que luego se guardaría encima de la buena.
 async function cargar() {
   if (hayAlmacen()) {
-    try {
-      const h = await head(CLAVE);
-      const db = await leerJSON(h.url);
-      if (db) return db;
-    } catch (e) {
-      /* aún no hay nada guardado */
-    }
+    const db = await leerFresco(CLAVE); // null solo si aún no hay nada guardado
+    if (db) return db;
   }
   return nuevaColeccion();
 }
@@ -68,12 +73,7 @@ const rutaDatos = (c) => (c.dueno ? CLAVE : `filora/usuarios/${c.usuario}/${c.ca
 
 async function cargarUsuario(c) {
   if (c.dueno) return cargar();
-  try {
-    const h = await head(rutaDatos(c));
-    return (await leerJSON(h.url)) || nuevaColeccion();
-  } catch (e) {
-    return nuevaColeccion();
-  }
+  return (await leerFresco(rutaDatos(c))) || nuevaColeccion();
 }
 
 async function cuentaDeSesion(req) {
@@ -142,7 +142,7 @@ async function enCatalogo(req, ids) {
 }
 async function leerDemanda() {
   try {
-    return (await leerJSON((await head(DEMANDA)).url)) || {};
+    return (await leerFresco(DEMANDA)) || {};
   } catch (e) {
     return {};
   }
