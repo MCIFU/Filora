@@ -7,8 +7,6 @@
 // rutas con una parte aleatoria, así que sus direcciones no se pueden adivinar.
 // Rutas (vercel.json): /api/<ruta> -> ?ruta=<ruta>
 import { randomBytes } from "node:crypto";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { head, list, put } from "@vercel/blob";
 import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido } from "../lib/filora.mjs";
 import { claveValida, crearSesion, hashClave, leerSesion, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
@@ -26,8 +24,8 @@ const leerJSON = async (url) => {
   return r.ok ? r.json() : null;
 };
 
-// Colección del dueño: la guardada en Blob o, la primera vez, la copia del repositorio
-// (data/db.json va dentro de la función, no se publica en la web).
+// Colección del dueño: la guardada en Blob (la sube el PC al sincronizar o se importa
+// desde la web). El repositorio no contiene ninguna colección.
 async function cargar() {
   if (hayAlmacen()) {
     try {
@@ -38,11 +36,7 @@ async function cargar() {
       /* aún no hay nada guardado */
     }
   }
-  try {
-    return JSON.parse(await readFile(join(process.cwd(), "data", "db.json"), "utf-8"));
-  } catch (e) {
-    return nuevaColeccion();
-  }
+  return nuevaColeccion();
 }
 
 const guardar = (db, ruta = CLAVE) =>

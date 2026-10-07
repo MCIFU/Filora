@@ -18,3 +18,6 @@ node_modules/
 
 # Base de trabajo del PC (se sincroniza con la web)
 data/local/
+
+# Tu colección es privada: vive en tu PC (data/local/) y en tu cuenta de la web, nunca en GitHub
+data/db.json

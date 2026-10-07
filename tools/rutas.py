@@ -1,8 +1,9 @@
 """Rutas de datos compartidas por la app local y las herramientas.
 
-- data/db.json         copia de seguridad publicada en GitHub (la actualiza el bot a diario desde la web)
-- data/local/db.json   base de datos de trabajo de tu PC (no va a git; se sincroniza con la web)
+- data/local/db.json   tu colección en el PC (privada: no va a git; se sincroniza con tu cuenta de la web)
+- data/db.json         copia inicial opcional (tampoco va a git)
 """
+import json
 import shutil
 from pathlib import Path
 
@@ -22,7 +23,10 @@ def asegurar_db():
     """Crea la base de trabajo a partir de la copia publicada si aún no existe."""
     if not DB_PATH.exists():
         LOCAL.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(DB_SEMILLA, DB_PATH)
+        if DB_SEMILLA.exists():
+            shutil.copy2(DB_SEMILLA, DB_PATH)
+        else:  # colección nueva y vacía (al sincronizar se trae la de tu cuenta de la web)
+            DB_PATH.write_text(json.dumps({"peliculas": [], "series": [], "pendientes": [], "borrados": {}}), encoding="utf-8")
         viejo = DATA / "config.json"
         if viejo.exists() and not CFG_PATH.exists():
             shutil.move(str(viejo), CFG_PATH)

@@ -55,10 +55,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "api/filora.js": {
-      "includeFiles": "data/db.json"
-    }
-  }
+  ]
 }

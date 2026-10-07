@@ -1410,7 +1410,18 @@ function openCuenta() {
   if (ses || getPin()) {
     modal(`<div class="sheet-body"><div class="eyebrow">${ses ? "Tu cuenta" : "Modo edición"}</div><h2 class="h2" style="margin:6px 0 10px">${ses ? esc(ses.usuario) : "Dueño"}</h2>
       <p class="muted" style="margin:0 0 18px">${ses ? `${fmtInt(S.db.peliculas.length)} películas y ${fmtInt(S.db.series.length)} series guardadas en tu cuenta. Entra con el mismo usuario en otro dispositivo para verlas allí.` : "Estás editando la colección pública con tu PIN."}</p>
+      ${ses ? `<label class="btn" style="width:100%;justify-content:center;margin-bottom:10px;cursor:pointer">${icon("upload")}Importar una copia (.json)<input type="file" id="impF" accept=".json,application/json" hidden></label>` : ""}
       <button class="btn" data-logout style="width:100%;justify-content:center">${icon("x")}Salir</button></div>`, "narrow");
+    const f = $("#impF");
+    if (f) f.onchange = async () => {
+      try {
+        const datos = JSON.parse(await f.files[0].text());
+        if (!Array.isArray(datos.peliculas)) throw new Error("El archivo no es una copia de Filora");
+        await api("sync", { method: "POST", body: datos });
+        closeModal(); await refreshDB(); render();
+        toast(`Importadas: ${fmtInt(S.db.peliculas.length)} películas en tu cuenta`, "upload");
+      } catch (e) { toast(e.message || "No se ha podido importar", "x"); }
+    };
     return;
   }
   openLogin();

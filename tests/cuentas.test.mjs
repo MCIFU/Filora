@@ -91,8 +91,12 @@ assert.equal(r.status, 403, "PIN incorrecto");
 r = await llamar(POST, "registro", { cuerpo: { usuario: "MCIFU", clave: "una-clave", pin: "4321" } });
 assert.equal(r.status, 201);
 const tokDueno = r.j.token;
+// el PC del dueño sube su colección con el PIN y la cuenta la ve
+const sync = await POST(new Request("https://filora.test/api/filora?ruta=sync", { method: "POST", headers: { "X-Pin": "4321", "Content-Type": "application/json" },
+  body: JSON.stringify({ peliculas: [{ id: "p1", titulo: "Origen", nota: 10, mod: "2026-01-01T00:00:00" }], series: [], pendientes: [] }) }));
+assert.equal(sync.status, 200);
 r = await llamar(GET, "db", { token: tokDueno });
-assert.ok(r.j.peliculas.length > 100, "el dueño ve su colección");
+assert.deepEqual(r.j.peliculas.map((p) => p.titulo), ["Origen"], "el dueño ve su colección");
 r = await llamar(POST, "peliculas", { cuerpo: { titulo: "Prueba del dueño", nota: 7 }, token: tokDueno });
 assert.ok(almacen.has("filora/db.json"), "se guarda en la colección del dueño (la que sincroniza el PC)");
 r = await llamar(GET, "db", { token: tokMarta });
