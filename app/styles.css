@@ -866,3 +866,11 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
   .rel.rel2 .rel-sin { margin-top: 6px; -webkit-line-clamp: 3; font-size: 13.5px; }
   .rel.rel2 .chips { margin-top: 8px; }
 }
+
+/* ---------------- nota final ---------------- */
+.final-ficha { display: flex; align-items: center; gap: 14px; margin: -8px 0 18px; padding: 12px 14px; border: 1.5px solid var(--linea-2); border-radius: 4px; }
+.final-ficha .score { flex: none; height: 40px; font-size: 26px; padding: 0 10px; }
+.final-ficha .lbl { font: 700 13px/1.2 var(--texto); color: var(--papel); }
+.final-ficha .dim { font-size: 12.5px; line-height: 1.4; margin-top: 2px; }
+.list .row { grid-template-columns: 46px 1fr 170px 130px 60px 56px 52px; }
+@media (max-width: 760px) { .list .row { grid-template-columns: 42px 1fr 50px; } .list .row .c { display: none; } }

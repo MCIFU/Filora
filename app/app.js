@@ -185,6 +185,7 @@ async function loadAll() {
   S.db = db; S.est = est; S.cat = cat; S.cartTodo = cart; S.prof = null;
   filtrarCartelera(); avisarDemanda();
   if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500);
+  if (typeof completarNotasWeb === "function") setTimeout(completarNotasWeb, 8000);
 }
 // ---------------------------------------------------------------- todo al día, solo
 // Cualquier cambio (aquí, en otro dispositivo, en el Excel del PC o al sincronizar) recalcula
@@ -420,9 +421,27 @@ function render() {
 }
 
 // ---------------------------------------------------------------- componentes
+// ---------------------------------------------------------------- nota final
+// Mitad tu nota y mitad la media de las webs, todas sobre 10 (Letterboxd y SensaCine, que van
+// sobre 5, se multiplican por 2; de SensaCine, la media de prensa y usuarios).
+function notasWebDe(p) {
+  const out = [], w = p.notasWeb || {}, i = notaImdb(p);
+  if (i) out.push(["IMDb", i[0]]);
+  if (w.fa) out.push(["FilmAffinity", w.fa[0]]);
+  if (w.lb) out.push(["Letterboxd", w.lb[0] * 2]);
+  if (w.sc) { const v = [w.sc.prensa, w.sc.usuarios].filter((x) => x != null); if (v.length) out.push(["SensaCine", mean(v) * 2]); }
+  return out;
+}
+function notaFinal(p) {
+  if (p.nota == null) return null;
+  const w = notasWebDe(p);
+  return w.length ? Math.round((0.5 * p.nota + 0.5 * mean(w.map((x) => x[1]))) * 10) / 10 : p.nota;
+}
+const desgloseFinal = (p) => [`Tú ${fmt1(p.nota)}`, ...notasWebDe(p).map(([n, v]) => `${n} ${fmt1(v)}`)].join(" · ");
+
 function pcard(p, opts = {}) {
   return `<div class="pcard" data-open="${esc(p.id || "")}" ${opts.cat != null ? `data-cat="${opts.cat}"` : ""}>
-    <div class="frame">${posterHTML(p)}${opts.match != null ? matchTag(opts.match) : scoreBadge(p.nota)}${p.favorita ? `<span class="fav">${icon("star", true)}</span>` : ""}</div>
+    <div class="frame" ${opts.final && p.nota != null ? `data-tip="Nota final · ${esc(desgloseFinal(p))}"` : ""}>${posterHTML(p)}${opts.match != null ? matchTag(opts.match) : scoreBadge(opts.final ? notaFinal(p) : p.nota)}${p.favorita ? `<span class="fav">${icon("star", true)}</span>` : ""}</div>
     <div class="meta"><div class="t">${esc(p.titulo)}</div><div class="s">${esc([p.anio, splitDir(p.director)[0]].filter(Boolean).join(" · "))}</div></div>
   </div>`;
 }
@@ -499,12 +518,13 @@ function filtered() {
     if (c.decade && Math.floor((p.anio || 0) / 10) * 10 !== +c.decade) return false;
     if (c.country && p.pais !== c.country) return false;
     if (c.saga && p.saga !== c.saga) return false;
-    if (c.min && !(p.nota >= +c.min)) return false;
+    if (c.min && !(notaFinal(p) >= +c.min)) return false;
     return true;
   });
   const by = {
-    nota: (a, b) => (b.nota ?? -1) - (a.nota ?? -1) || (b.anio || 0) - (a.anio || 0),
-    peor: (a, b) => (a.nota ?? 99) - (b.nota ?? 99),
+    nota: (a, b) => (notaFinal(b) ?? -1) - (notaFinal(a) ?? -1) || (b.nota ?? -1) - (a.nota ?? -1) || (b.anio || 0) - (a.anio || 0),
+    peor: (a, b) => (notaFinal(a) ?? 99) - (notaFinal(b) ?? 99),
+    tunota: (a, b) => (b.nota ?? -1) - (a.nota ?? -1) || (b.anio || 0) - (a.anio || 0),
     nuevo: (a, b) => (b.anio || 0) - (a.anio || 0) || (b.nota || 0) - (a.nota || 0),
     viejo: (a, b) => (a.anio || 0) - (b.anio || 0),
     titulo: (a, b) => a.titulo.localeCompare(b.titulo, "es"),
@@ -528,23 +548,23 @@ VIEWS.coleccion = (v, qs) => {
     <select class="select" id="fgenre">${opt([...gC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.genre, "Todos los géneros")}</select>
     <select class="select" id="fdecade">${opt([...dC].sort((a, b) => b[0] - a[0]).map(([k, n]) => [k, `Años ${String(k).slice(2)} · ${k} (${n})`]), c.decade, "Todas las décadas")}</select>
     <select class="select" id="fcountry">${opt([...cC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.country, "Todos los países")}</select>
-    <select class="select" id="fmin">${opt([["9", "Nota ≥ 9"], ["8", "Nota ≥ 8"], ["7", "Nota ≥ 7"], ["5", "Aprobadas (≥ 5)"]], c.min, "Cualquier nota")}</select>
-    <select class="select" id="fsort">${opt([["nota", "Mejor nota"], ["peor", "Peor nota"], ["nuevo", "Más recientes"], ["viejo", "Más antiguas"], ["titulo", "Título A–Z"], ["duracion", "Más largas"], ["taquilla", "Mayor taquilla"], ["registro", "Últimas registradas"]], c.sort, "Ordenar")}</select>
+    <select class="select" id="fmin">${opt([["9", "Nota final ≥ 9"], ["8", "Nota final ≥ 8"], ["7", "Nota final ≥ 7"], ["5", "Aprobadas (≥ 5)"]], c.min, "Cualquier nota")}</select>
+    <select class="select" id="fsort">${opt([["nota", "Mejor nota final"], ["peor", "Peor nota final"], ["tunota", "Mejor nota tuya"], ["nuevo", "Más recientes"], ["viejo", "Más antiguas"], ["titulo", "Título A–Z"], ["duracion", "Más largas"], ["taquilla", "Mayor taquilla"], ["registro", "Últimas registradas"]], c.sort, "Ordenar")}</select>
     <div class="seg"><button data-mode="grid" class="${c.mode === "grid" ? "on" : ""}" title="Carátulas">${icon("grid")}</button><button data-mode="list" class="${c.mode === "list" ? "on" : ""}" title="Lista">${icon("list")}</button></div>
   </div>
   <div id="collRes"></div>`;
   const draw = () => {
     const L = filtered();
     const shown = L.slice(0, c.limit);
-    const avg = mean(L.filter((p) => p.nota != null).map((p) => p.nota));
+    const avg = mean(L.filter((p) => p.nota != null).map(notaFinal));
     const active = ["q", "genre", "decade", "country", "saga", "min"].some((k) => c[k]);
     $("#collRes").innerHTML = `
-      <div class="result-line"><b>${L.length}</b> ${L.length === 1 ? "película" : "películas"}${L.length ? ` · nota media <b>${fmt2(avg)}</b>` : ""}${active ? ` · <a href="#" id="fclear" style="color:var(--gold)">Quitar filtros</a>` : ""}</div>
+      <div class="result-line"><b>${L.length}</b> ${L.length === 1 ? "película" : "películas"}${L.length ? ` · nota final media <b>${fmt2(avg)}</b> <span class="dim">(mitad tu nota, mitad IMDb, FilmAffinity, Letterboxd y SensaCine)</span>` : ""}${active ? ` · <a href="#" id="fclear" style="color:var(--gold)">Quitar filtros</a>` : ""}</div>
       ${!L.length ? `<div class="empty"><div class="h2">Nada por aquí</div>Prueba con otros filtros.</div>` : c.mode === "grid"
-        ? `<div class="posters">${shown.map((p) => pcard(p)).join("")}</div>`
+        ? `<div class="posters">${shown.map((p) => pcard(p, { final: true })).join("")}</div>`
         : `<div class="list card" style="padding:6px">${shown.map((p) => `<div class="row" data-open="${p.id}"><div class="mini">${posterHTML(p)}</div>
             <div style="min-width:0"><div class="t">${esc(p.titulo)}${p.favorita ? ` <span style="color:var(--gold)">★</span>` : ""}</div><div class="s">${esc([p.tituloOriginal !== p.titulo ? p.tituloOriginal : null, p.director].filter(Boolean).join(" · "))}</div></div>
-            <div class="c">${esc((p.generos || []).slice(0, 2).join(", "))}</div><div class="c">${esc(p.pais || "")}</div><div class="c num">${p.anio || ""}</div>${scoreBadge(p.nota)}</div>`).join("")}</div>`}
+            <div class="c">${esc((p.generos || []).slice(0, 2).join(", "))}</div><div class="c">${esc(p.pais || "")}</div><div class="c num">${p.anio || ""}</div><div class="c dim num" title="Tu nota">tú ${fmt1(p.nota)}</div><span data-tip="${esc(desgloseFinal(p))}">${scoreBadge(notaFinal(p))}</span></div>`).join("")}</div>`}
       ${L.length > c.limit ? `<div class="more"><button class="btn" id="fmore">Mostrar más (${L.length - c.limit})</button></div>` : ""}`;
     const fc = $("#fclear");
     if (fc) fc.onclick = (e) => { e.preventDefault(); Object.assign(c, { q: "", genre: "", decade: "", country: "", saga: "", min: "" }); location.hash = "#/coleccion"; VIEWS.coleccion(v, new URLSearchParams()); };
@@ -588,6 +608,8 @@ function openFilm(id) {
         <div class="chips">${(p.generos || []).map((g) => `<a class="chip" href="#/coleccion?genre=${encodeURIComponent(g)}" data-close>${esc(g)}</a>`).join("")}${p.favorita ? `<span class="chip gold">★ Favorita</span>` : ""}</div>
         <div class="myscore">${scoreBadge(p.nota, "lg")}<div><div class="lbl">Tu nota</div><div class="verdict">${veredicto(p.nota)}</div>
           ${pct ? `<div class="dim" style="font-size:12.5px">Puesto ${rank} de ${pr.N} · mejor que el ${Math.max(0, pct - 1)}% de lo que has visto</div>` : ""}</div></div>
+        ${p.nota != null && notasWebDe(p).length ? `<div class="final-ficha">${scoreBadge(notaFinal(p))}<div><div class="lbl">Nota final</div>
+          <div class="dim">Mitad tu nota (${fmt1(p.nota)}) y mitad la media de las webs (${fmt1(mean(notasWebDe(p).map((x) => x[1])))}): ${esc(notasWebDe(p).map(([n, v]) => `${n} ${fmt1(v)}`).join(" · "))}</div></div></div>` : ""}
         ${visto ? `<div class="muted" style="margin:-6px 0 14px;font-size:13px">${icon("ticket")} ${esc(visto)}</div>` : ""}
         ${p.resena ? `<blockquote class="review">${esc(p.resena)}</blockquote>` : ""}
         <div class="sub">Ver en</div>

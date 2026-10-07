@@ -500,6 +500,63 @@ class Handler(BaseHTTPRequestHandler):
         return self.send_json({"error": "no encontrado"}, 404)
 
 
+def _necesita_notas_web(p):
+    i, w = p.get("ids") or {}, p.get("notasWeb")
+    if not (i.get("filmaffinity") or i.get("letterboxd") or i.get("allocine")):
+        return False
+    if not w:
+        return True
+    dias = (date.today() - date.fromisoformat(w.get("t", "2000-01-01"))).days
+    falta = (i.get("filmaffinity") and not w.get("fa")) or (i.get("letterboxd") and not w.get("lb")) or (i.get("allocine") and not w.get("sc"))
+    return dias > 60 or (falta and dias > 3)
+
+
+def completar_notas_web():
+    """Notas de FilmAffinity, Letterboxd y SensaCine de cada película (para la nota final).
+    Se piden a la web publicada (/api/notas) poco a poco y se guardan cada 20 películas."""
+    time.sleep(20)
+    web = ((read_json(CFG_PATH, {}) or {}).get("web") or WEB).rstrip("/")
+    with LOCK:
+        pendientes = [p["id"] for p in load_db()["peliculas"] if _necesita_notas_web(p)]
+    hechas = {}
+    def guardar():
+        if not hechas:
+            return
+        with LOCK:
+            db = load_db()
+            for p in db["peliculas"]:
+                if p["id"] in hechas:
+                    p["notasWeb"] = {**(p.get("notasWeb") or {}), **hechas[p["id"]]}
+                    p["mod"] = ahora()
+            save_db(db)
+        hechas.clear()
+    for pid in pendientes:
+        with LOCK:
+            p = next((x for x in load_db()["peliculas"] if x["id"] == pid), None)
+        if not p:
+            continue
+        i = p.get("ids") or {}
+        q = urllib.parse.urlencode({k: v for k, v in {"fa": i.get("filmaffinity"), "lb": i.get("letterboxd"), "ac": i.get("allocine")}.items() if v})
+        try:
+            with urllib.request.urlopen(urllib.request.Request(f"{web}/api/notas?{q}", headers={"User-Agent": "Filora-PC/1.0"}), timeout=40) as r:
+                n = json.loads(r.read().decode("utf-8"))
+        except Exception:
+            time.sleep(10)
+            continue
+        w = {"t": date.today().isoformat()}
+        if n.get("fa"):
+            w["fa"] = [n["fa"]["v"], n["fa"].get("n")]
+        if n.get("lb"):
+            w["lb"] = [n["lb"]["v"], n["lb"].get("n")]
+        if n.get("sc"):
+            w["sc"] = n["sc"]
+        hechas[pid] = w
+        if len(hechas) >= 20:
+            guardar()
+        time.sleep(1.5)
+    guardar()
+
+
 def completar_notas_imdb():
     """Nota y votos de IMDb para cada película (la predicción de gustos los usa)."""
     try:
@@ -524,6 +581,7 @@ def main():
         STATE["excel_mtime"] = excel.XLSX_PATH.stat().st_mtime
     threading.Thread(target=hilo_sync, daemon=True).start()
     threading.Thread(target=completar_notas_imdb, daemon=True).start()
+    threading.Thread(target=completar_notas_web, daemon=True).start()
     threading.Thread(target=hilo_excel, daemon=True).start()
     srv = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     url = f"http://localhost:{PORT}"

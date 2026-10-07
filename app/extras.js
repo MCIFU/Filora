@@ -384,3 +384,51 @@ async function completarNotasImdb() {
   await refreshDB();
   if (["inicio", "recomendaciones", "estadisticas", "gustos", "cartelera", "estrenos"].includes(route().name) && $("#modal").hidden) { render._keep = true; render(); }
 }
+
+// ---------------------------------------------------------------- notas de FilmAffinity, Letterboxd y SensaCine de tu colección
+// Para la nota final. Poco a poco (FilmAffinity no deja ir deprisa) y guardando cada 20 películas.
+const DIAS = (iso) => (iso ? (Date.now() - Date.parse(iso)) / 864e5 : 1e9);
+function necesitaNotasWeb(p) {
+  const i = p.ids || {}, w = p.notasWeb;
+  if (!(i.filmaffinity || i.letterboxd || i.allocine)) return false;
+  if (!w) return true;
+  if (DIAS(w.t) > 60) return true;
+  const falta = (i.filmaffinity && !w.fa) || (i.letterboxd && !w.lb) || (i.allocine && !w.sc);
+  return falta && DIAS(w.t) > 3;
+}
+async function notasWebDeWeb(p) {
+  const i = p.ids || {};
+  const q = new URLSearchParams(Object.entries({ fa: i.filmaffinity, lb: i.letterboxd, ac: i.allocine }).filter(([, v]) => v));
+  const r = await fetch(`${WEB_FILORA()}/api/notas?${q}`);
+  if (!r.ok) throw new Error(r.status);
+  const n = await r.json();
+  const w = { t: new Date().toISOString().slice(0, 10) };
+  if (n.fa) w.fa = [n.fa.v, n.fa.n];
+  if (n.lb) w.lb = [n.lb.v, n.lb.n];
+  if (n.sc) w.sc = n.sc;
+  return w;
+}
+async function completarNotasWeb() {
+  if (!STATIC || ro() || completarNotasWeb.activo) return;
+  completarNotasWeb.activo = true;
+  try {
+    const cola = S.db.peliculas.filter(necesitaNotasWeb).map((p) => p.id);
+    let lote = [];
+    const guardar = async () => {
+      if (!lote.length) return;
+      const ahora = new Date().toISOString().slice(0, 19);
+      await api("sync", { method: "POST", body: { peliculas: lote.map((x) => ({ ...x, mod: ahora })), series: [], pendientes: [] } });
+      lote = [];
+      S.db = await api("db"); datosCambiados();
+    };
+    for (const id of cola) {
+      if (ro()) break;
+      const p = S.db.peliculas.find((x) => x.id === id);
+      if (!p || !necesitaNotasWeb(p)) continue;
+      try { lote.push({ ...p, notasWeb: { ...(p.notasWeb || {}), ...(await notasWebDeWeb(p)) } }); } catch (e) { /* esa película, otro día */ }
+      if (lote.length >= 20) await guardar();
+      await new Promise((r) => setTimeout(r, 1500));
+    }
+    await guardar();
+  } finally { completarNotasWeb.activo = false; }
+}
