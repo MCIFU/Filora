@@ -9,6 +9,7 @@
 import { randomBytes } from "node:crypto";
 import { head, list, put } from "@vercel/blob";
 import { COLECCIONES, actualizar, anotarDemanda, borrar, cinesActivos, crear, fusionar, guardarPreferencias, idsCineValidos, pinValido } from "../lib/filora.mjs";
+import { notasExternas } from "../lib/notas.mjs";
 import { claveValida, crearSesion, datosSesion, hashClave, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
 
 const CLAVE = "filora/db.json";
@@ -187,6 +188,13 @@ async function manejar(req) {
   const url = new URL(req.url);
   const partes = (url.searchParams.get("ruta") || "").split("/").filter(Boolean);
   try {
+    // ---- notas de una película en otras webs (pública; Vercel la guarda en caché un día por película)
+    if (req.method === "GET" && partes[0] === "notas") {
+      const q = Object.fromEntries(["fa", "lb", "rt", "ac"].map((k) => [k, url.searchParams.get(k)]));
+      return new Response(JSON.stringify(await notasExternas(q)), {
+        headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800", "Access-Control-Allow-Origin": "*" },
+      });
+    }
     // ---- cines elegidos (anónimo): alimenta la descarga diaria de sesiones
     if (partes[0] === "demanda") {
       if (req.method === "GET") return json({ cines: hayAlmacen() ? cinesActivos(await leerDemanda()) : [] });

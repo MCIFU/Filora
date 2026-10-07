@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 from catalogo import load_catalog  # noqa: E402
+import imdb_notas  # noqa: E402
 
 OUT = ROOT / "app" / "data"
 
@@ -29,6 +30,7 @@ def main():
     files = {"cines_es.json": cines, "estrenos.json": est, "catalogo.json": load_catalog(), "cartelera.json": cart}
     for name, data in files.items():
         (OUT / name).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    imdb_notas.main()
     print(f"Web estática lista en app/data (sin colección, es privada): "
           f"{len(est.get('estrenos', []))} estrenos, {len(files['catalogo.json'])} recomendaciones")
 

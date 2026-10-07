@@ -502,6 +502,7 @@ function openFilm(id) {
         ${p.resena ? `<blockquote class="review">${esc(p.resena)}</blockquote>` : ""}
         <div class="sub">Ver en</div>
         ${linksHTML(p)}
+        <div id="fExtras" class="extras-ficha"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando IMDb, FilmAffinity, Letterboxd, Rotten Tomatoes y SensaCine…</div></div>
         ${t.mundial || p.presupuesto ? `<div class="sub">Taquilla${(p.ids || {}).imdb ? ` · <a href="https://www.boxofficemojo.com/title/${p.ids.imdb}/" target="_blank" rel="noopener" style="text-decoration:underline">Box Office Mojo</a>` : ""}</div><div class="boxoffice">
           ${p.presupuesto ? `<div><span>Presupuesto</span><b>${money(p.presupuesto)}</b></div>` : ""}
           ${t.apertura ? `<div><span>Estreno EE.UU.</span><b>${money(t.apertura)}</b></div>` : ""}
@@ -518,7 +519,7 @@ function openFilm(id) {
       </div>
     </div>
     ${similares.length ? `<div class="sub" style="margin-top:34px">Del mismo director en tu colección</div><div class="strip">${similares.map((x) => pcard(x)).join("")}</div>` : ""}
-    </div>`);
+    </div>`);  if (typeof cargarExtras === "function") cargarExtras(p);
 }
 
 // ---------------------------------------------------------------- Modal genérico
@@ -1534,6 +1535,7 @@ function openCuenta() {
   if (ses || getPin()) {
     modal(`<div class="sheet-body"><div class="eyebrow">${ses ? "Tu cuenta" : "Modo edición"}</div><h2 class="h2" style="margin:6px 0 10px">${ses ? esc(ses.usuario) : "Dueño"}</h2>
       <p class="muted" style="margin:0 0 18px">${ses ? `${fmtInt(S.db.peliculas.length)} películas y ${fmtInt(S.db.series.length)} series guardadas en tu cuenta. Entra con el mismo usuario en otro dispositivo para verlas allí.` : "Estás editando la colección pública con tu PIN."}</p>
+      ${ses ? `<button class="btn" data-importar style="width:100%;justify-content:center;margin-bottom:10px">${icon("download")}Importar de Letterboxd, IMDb…</button>` : ""}
       ${ses ? `<label class="btn" style="width:100%;justify-content:center;margin-bottom:10px;cursor:pointer">${icon("upload")}Importar una copia (.json)<input type="file" id="impF" accept=".json,application/json" hidden></label>` : ""}
       <button class="btn" data-logout style="width:100%;justify-content:center">${icon("x")}Salir</button></div>`, "narrow");
     const f = $("#impF");
@@ -1668,7 +1670,7 @@ VIEWS.anadir = (v) => {
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Añadir películas</h1>
     <p>Escribe una fila por película y pulsa <b>Intro</b>. Al teclear el título te propongo la película y relleno el resto (director, país, géneros y póster). Puedes corregir cualquier celda de abajo: se guarda al salir de ella.</p></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="xlPaste">${icon("upload")}Pegar filas de Excel</button><button class="btn btn-ghost" data-action="add">${icon("plus")}Formulario completo</button></div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-importar>${icon("download")}Importar de Letterboxd, IMDb…</button><button class="btn" id="xlPaste">${icon("upload")}Pegar filas de Excel</button><button class="btn btn-ghost" data-action="add">${icon("plus")}Formulario completo</button></div></div>
   <div class="card xl-wrap">
     <table class="xl">
       <thead><tr><th></th>${COLS_XL.map(([k, l]) => `<th class="xl-c-${k}">${l}</th>`).join("")}<th></th></tr></thead>
@@ -1882,12 +1884,13 @@ function openPegar() {
 
 // ---------------------------------------------------------------- eventos globales
 document.addEventListener("click", async (e) => {
-  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine],[data-login],[data-logout],[data-cuenta],[data-cines]");
+  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine],[data-login],[data-logout],[data-cuenta],[data-cines],[data-importar]");
   if (!t) return;
   const d = t.dataset;
   if (d.login !== undefined) { e.preventDefault(); return openLogin(d.login === "crear" ? "crear" : "entrar"); }
   if (d.cuenta !== undefined) { e.preventDefault(); return openCuenta(); }
   if (d.cines !== undefined) { e.preventDefault(); return openCines(); }
+  if (d.importar !== undefined) { e.preventDefault(); return openImportar(); }
   if (d.logout !== undefined) { e.preventDefault(); closeModal(); return logout(); }
   if (ro() && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "sedit", "sdel"].some((k) => d[k] !== undefined)) return;
   if (d.more !== undefined) { e.preventDefault(); return openMore(); }
