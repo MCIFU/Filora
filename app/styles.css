@@ -731,3 +731,13 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
 .tema .t-sol, .tema .t-luna, .tema .t-auto { display: none; }
 :root:not([data-theme]) .tema .t-auto, :root[data-theme="light"] .tema .t-sol, :root[data-theme="dark"] .tema .t-luna { display: inline-flex; }
 @media (max-width: 760px) { .nav + .tema { margin-left: auto; } }
+
+/* ---------------- cuenta ---------------- */
+.cuenta { margin-left: auto; }
+.cuenta + .tema { margin-left: 0 !important; }
+.cuenta[hidden] + .tema { margin-left: auto !important; }
+.cuenta.on { border-color: var(--bombilla); }
+.cuenta-ini { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--bombilla); color: #fff; font: 700 14px/1 var(--display); }
+.lbl { display: block; font: 600 13px/1.2 var(--texto); color: var(--papel-2); margin-bottom: 6px; }
+.cuenta-f .seg { display: flex; }
+.cuenta-f .seg button { flex: 1; justify-content: center; height: 42px; font-size: 14.5px; }

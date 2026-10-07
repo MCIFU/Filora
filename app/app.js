@@ -133,7 +133,12 @@ const saveUI = () => { try { localStorage.setItem("cine.coll", JSON.stringify({ 
 const STATIC = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || new URLSearchParams(location.search).has("vitrina");
 const PIN_KEY = "cine.pin";
 const getPin = () => { try { return localStorage.getItem(PIN_KEY) || ""; } catch (e) { return ""; } };
-const ro = () => STATIC && !getPin(); // solo lectura: web publicada sin PIN
+// Cuenta de usuario (web publicada): cada uno guarda su propia colección.
+const SES_KEY = "filora.sesion";
+const getSes = () => { try { return JSON.parse(localStorage.getItem(SES_KEY) || "null"); } catch (e) { return null; } };
+const setSes = (s) => { try { s ? localStorage.setItem(SES_KEY, JSON.stringify(s)) : localStorage.removeItem(SES_KEY); } catch (e) { /* */ } };
+const ro = () => STATIC && !getPin() && !getSes(); // solo lectura: web publicada sin cuenta ni PIN
+const authHeaders = () => { const ses = getSes(); return ses ? { Authorization: `Bearer ${ses.token}` } : getPin() ? { "X-Pin": getPin() } : {}; };
 document.documentElement.classList.toggle("ro", ro());
 const STATIC_FILES = { db: "data/db.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
 
@@ -143,8 +148,9 @@ async function api(path, opts = {}) {
     if (path.startsWith("buscar")) return wikiBuscar(decodeURIComponent(path.split("q=")[1] || ""));
     if (method === "GET" && path === "db") {
       try {
-        const r = await fetch("/api/db", { cache: "no-store" });
+        const r = await fetch("/api/db", { cache: "no-store", headers: authHeaders() });
         if (r.ok) return r.json();
+        if (r.status === 401 && getSes()) { setSes(null); document.documentElement.classList.toggle("ro", ro()); toast("Tu sesión ha caducado. Vuelve a entrar", "user"); return api("db"); }
       } catch (e) { /* sin función: copia estática */ }
     }
     if (method === "GET" && (path === "cartelera" || path === "estrenos")) {
@@ -159,10 +165,10 @@ async function api(path, opts = {}) {
       if (!r.ok) throw new Error(`No encuentro los datos (${r.status})`);
       return r.json();
     }
-    if (!getPin()) throw new Error("Esta es la versión para compartir: entra con tu PIN para editar");
-    const r = await fetch(`/api/${path}`, { method, headers: { "Content-Type": "application/json", "X-Pin": getPin() }, body: opts.body ? JSON.stringify(opts.body) : undefined });
+    if (ro()) throw new Error("Entra con tu cuenta para guardar tus películas");
+    const r = await fetch(`/api/${path}`, { method, headers: { "Content-Type": "application/json", ...authHeaders() }, body: opts.body ? JSON.stringify(opts.body) : undefined });
     const j = await r.json().catch(() => ({}));
-    if (r.status === 401) { try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ } document.documentElement.classList.toggle("ro", ro()); }
+    if (r.status === 401) { setSes(null); try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ } document.documentElement.classList.toggle("ro", ro()); renderChrome(); }
     if (!r.ok) throw new Error(j.error || `Error ${r.status}`);
     return j;
   }
@@ -288,9 +294,21 @@ function renderChrome() {
   const hora = e.excel_at ? new Date(e.excel_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) : null;
   if (STATIC) {
     const f = S.db.actualizado ? new Date(S.db.actualizado + (S.db.actualizado.length === 19 ? "Z" : "")).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" }) : "";
-    $("#sideFoot").innerHTML = ro()
-      ? `<b>Versión para compartir</b><br><span class="dim">Solo lectura${f ? ` · actualizada el ${f}` : ""}</span><br><a href="#" data-login class="dim" style="text-decoration:underline">Entrar para editar</a>`
+    const ses = getSes();
+    $("#sideFoot").innerHTML = ses
+      ? `<b style="color:var(--gold)">Hola, ${esc(ses.usuario)}</b><br><span class="dim">Tu colección se guarda en tu cuenta y la ves en cualquier dispositivo</span><br><a href="#" data-logout class="dim" style="text-decoration:underline">Salir</a>`
+      : ro()
+      ? `<b>Colección de muestra</b><br><span class="dim">Solo lectura${f ? ` · actualizada el ${f}` : ""}</span><br><a href="#" data-login class="dim" style="text-decoration:underline">Crea tu cuenta o entra</a>`
       : `<b style="color:var(--gold)">Modo edición</b><br><span class="dim">Los cambios se guardan en la web y llegan a tu PC</span><br><a href="#" data-logout class="dim" style="text-decoration:underline">Salir</a>`;
+    const c = $("#cuenta");
+    if (c) {
+      c.hidden = false;
+      c.innerHTML = ses ? `<span class="cuenta-ini">${esc(ses.usuario[0].toUpperCase())}</span>` : icon("user");
+      const etiqueta = ses ? `Cuenta de ${ses.usuario}` : getPin() ? "Modo edición" : "Entrar o crear cuenta";
+      c.setAttribute("aria-label", etiqueta);
+      c.dataset.tip = etiqueta;
+      c.classList.toggle("on", !ro());
+    }
     return;
   }
   $("#sideFoot").innerHTML = e.excel_error
@@ -333,7 +351,9 @@ VIEWS.inicio = (v) => {
   const pr = profile();
   const pelis = S.db.peliculas;
   const horas = pelis.reduce((a, p) => a + (p.duracion || 0), 0) / 60;
-  const conPoster = pelis.filter((p) => p.poster && p.nota != null).sort((a, b) => b.nota - a.nota).slice(0, 45);
+  const vacia = pelis.length === 0;
+  const conPoster = vacia ? S.cat.filter((c) => c.poster).slice(0, 45)
+    : pelis.filter((p) => p.poster && p.nota != null).sort((a, b) => b.nota - a.nota).slice(0, 45);
   const tiras = [0, 1, 2].map((r) => conPoster.filter((_, k) => k % 3 === r));
   const olimpo = [...pr.P].sort((a, b) => b.nota - a.nota || (a.anio || 0) - (b.anio || 0)).slice(0, 10);
   const recientes = [...pelis].filter((p) => ["app", "web"].includes(p.origen)).sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || ""))).slice(0, 14);
@@ -347,9 +367,11 @@ VIEWS.inicio = (v) => {
     <div class="reels" aria-hidden="true">${tiras.map(tira).join("")}</div>
     <div class="hero-content">
       <h1><span>Filora</span></h1>
-      <p class="hero-lead"><b>${fmtInt(pelis.length)}</b> películas, <b>${fmtInt(horas)}</b> horas a oscuras y una nota para cada una. La media va por <b>${fmt2(pr.mu)}</b>.</p>
+      <p class="hero-lead">${vacia
+        ? `Tu diario de cine empieza aquí. Añade las películas que has visto con tu nota y Filora aprenderá tus gustos para recomendarte qué ver.`
+        : `<b>${fmtInt(pelis.length)}</b> películas, <b>${fmtInt(horas)}</b> horas a oscuras y una nota para cada una. La media va por <b>${fmt2(pr.mu)}</b>.`}</p>
       <div class="hero-actions">
-        <a class="btn btn-primary rw" href="#/anadir">Añadir película</a>
+        <a class="btn btn-primary rw" href="#/anadir">${vacia ? "Añadir mi primera película" : "Añadir película"}</a>
         <a class="btn" href="#/coleccion">Ver la colección</a>
         <a class="btn" href="#/recomendaciones">¿Qué veo hoy?</a>
       </div>
@@ -358,12 +380,12 @@ VIEWS.inicio = (v) => {
 
   ${hoyHTML()}
 
-  <section class="section">${sectionHead("El Olimpo", "#/coleccion?min=9", `Las ${pr.P.filter((p) => p.nota >= 9).length} con un 9 o más`)}
+  ${vacia ? "" : `<section class="section">${sectionHead("El Olimpo", "#/coleccion?min=9", `Las ${pr.P.filter((p) => p.nota >= 9).length} con un 9 o más`)}
     <ol class="olimpo">${olimpo.map((p) => `<li data-open="${p.id}"><div class="mini">${posterHTML(p)}</div>
       <div style="min-width:0"><div class="t">${esc(p.titulo)}</div><div class="s">${esc([splitDir(p.director).join(" y "), p.anio].filter(Boolean).join(", "))}</div></div>${scoreBadge(p.nota)}</li>`).join("")}</ol></section>
 
   <section class="section">${sectionHead(recientes.length >= 4 ? "Lo último que has añadido" : "Lo último que has visto", "#/coleccion", "Toda la colección")}
-    <div class="strip">${ultimas.map((p) => pcard(p)).join("")}</div></section>
+    <div class="strip">${ultimas.map((p) => pcard(p)).join("")}</div></section>`}
 
   <section class="section">${sectionHead("Podrían gustarte", "#/recomendaciones", "Todas las recomendaciones")}
     <div class="strip">${recs.map((r) => pcard(r, { match: r.m.pct, cat: r._i })).join("")}</div></section>
@@ -371,8 +393,8 @@ VIEWS.inicio = (v) => {
   ${prox.length ? `<section class="section">${sectionHead("Próximos estrenos", "#/estrenos", "Calendario completo")}
     <div class="rels">${prox.map(relCard).join("")}</div></section>` : ""}
 
-  <section class="section">${sectionHead("Cómo ves el cine", "#/gustos", "Tu perfil completo")}
-    <div class="insights">${insights().slice(0, 3).map(insightCard).join("")}</div></section>`;
+  ${vacia ? "" : `<section class="section">${sectionHead("Cómo ves el cine", "#/gustos", "Tu perfil completo")}
+    <div class="insights">${insights().slice(0, 3).map(insightCard).join("")}</div></section>`}`;
 };
 
 // ---------------------------------------------------------------- Colección
@@ -686,6 +708,10 @@ function scatter(P, fx, lx, domain) {
 VIEWS.estadisticas = (v) => {
   const pr = profile();
   const P = pr.P;
+  if (P.length < 2) {
+    v.innerHTML = `<div class="page-head"><h1 class="h1">Estadísticas</h1></div><div class="empty"><div class="h2">Aún no hay datos</div>Cuando tengas al menos un par de películas con nota verás aquí tus números: notas, décadas, géneros, países y más.<br><a class="btn btn-primary rw" href="#/anadir" style="margin-top:18px">Añadir película</a></div>`;
+    return;
+  }
   const all = S.db.peliculas;
   const horas = all.reduce((a, p) => a + (p.duracion || 0), 0) / 60;
   const G = [...pr.genres.values()].sort((a, b) => b.n - a.n);
@@ -1299,7 +1325,7 @@ function openMore() {
   modal(`<div class="sheet-body"><div class="eyebrow">Filora</div><h2 class="h2" style="margin:6px 0 16px">Secciones</h2>
     <div class="more-list">${navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}" data-close>${icon(ic)}<span>${l}</span></a>`).join("")}</div>
     ${!ro() ? `<button class="btn btn-primary" data-action="add" style="width:100%;justify-content:center;margin-top:16px">${icon("plus")}Añadir película</button>` : ""}
-    ${STATIC ? (ro() ? `<button class="btn btn-ghost" data-login style="width:100%;justify-content:center;margin-top:10px">${icon("user")}Entrar para editar</button>` : `<button class="btn btn-ghost" data-logout style="width:100%;justify-content:center;margin-top:10px">${icon("x")}Salir del modo edición</button>`) : ""}</div>`, "narrow");
+    ${STATIC ? (ro() ? `<button class="btn btn-ghost" data-login style="width:100%;justify-content:center;margin-top:10px">${icon("user")}Crea tu cuenta o entra</button>` : `<button class="btn btn-ghost" data-logout style="width:100%;justify-content:center;margin-top:10px">${icon("x")}Salir</button>`) : ""}</div>`, "narrow");
 }
 
 // ---------------------------------------------------------------- Búsqueda en Wikidata desde el navegador (web publicada)
@@ -1371,10 +1397,64 @@ async function completarDesdeWiki(p) {
   } catch (e) { /* sin conexión con Wikidata: se queda como está */ }
 }
 
-// ---------------------------------------------------------------- Modo edición en la web (PIN)
-function openLogin() {
-  modal(`<div class="sheet-body"><div class="eyebrow">Solo para el dueño</div><h2 class="h2" style="margin:6px 0 10px">Entrar para editar</h2>
-    <p class="muted" style="margin:0 0 18px">Con tu PIN podrás añadir y editar películas desde este dispositivo. Tu familia seguirá viendo la web en modo lectura.</p>
+// ---------------------------------------------------------------- Cuentas (web publicada)
+function openCuenta() {
+  const ses = getSes();
+  if (ses || getPin()) {
+    modal(`<div class="sheet-body"><div class="eyebrow">${ses ? "Tu cuenta" : "Modo edición"}</div><h2 class="h2" style="margin:6px 0 10px">${ses ? esc(ses.usuario) : "Dueño"}</h2>
+      <p class="muted" style="margin:0 0 18px">${ses ? `${fmtInt(S.db.peliculas.length)} películas y ${fmtInt(S.db.series.length)} series guardadas en tu cuenta. Entra con el mismo usuario en otro dispositivo para verlas allí.` : "Estás editando la colección pública con tu PIN."}</p>
+      <button class="btn" data-logout style="width:100%;justify-content:center">${icon("x")}Salir</button></div>`, "narrow");
+    return;
+  }
+  openLogin();
+}
+function openLogin(modo = "entrar") {
+  const crear = modo === "crear";
+  modal(`<div class="sheet-body cuenta-f">
+    <div class="seg" style="margin-bottom:20px"><button type="button" class="${crear ? "" : "on"}" data-modo="entrar">Entrar</button><button type="button" class="${crear ? "on" : ""}" data-modo="crear">Crear cuenta</button></div>
+    <h2 class="h2" style="margin:0 0 8px">${crear ? "Tu propia Filora" : "Hola de nuevo"}</h2>
+    <p class="muted" style="margin:0 0 18px">${crear ? "Elige un usuario y una contraseña. Tus películas se guardarán en tu cuenta y solo tú podrás editarlas." : "Entra con tu usuario y contraseña para ver y editar tu colección."}</p>
+    <form id="cuentaF" novalidate>
+      <label class="lbl" for="cUser">Usuario</label>
+      <input class="input" id="cUser" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="24" placeholder="marta">
+      <label class="lbl" for="cPass" style="margin-top:12px">Contraseña</label>
+      <input class="input" id="cPass" name="password" type="password" autocomplete="${crear ? "new-password" : "current-password"}" placeholder="${crear ? "Mínimo 6 caracteres" : ""}">
+      ${crear ? `<label class="lbl" for="cPass2" style="margin-top:12px">Repite la contraseña</label><input class="input" id="cPass2" type="password" autocomplete="new-password">` : ""}
+      <p id="cErr" role="alert" style="color:var(--red);min-height:22px;margin:10px 0 6px"></p>
+      <button class="btn btn-primary" id="cBtn" style="width:100%;justify-content:center">${icon(crear ? "plus" : "check")}${crear ? "Crear cuenta" : "Entrar"}</button>
+    </form>
+    <p class="dim" style="margin:18px 0 0;font-size:13px;text-align:center"><a href="#" id="cPin" style="text-decoration:underline">¿Eres el dueño de la colección pública? Entrar con PIN</a></p></div>`, "narrow");
+  setTimeout(() => $("#cUser").focus(), 60);
+  document.querySelectorAll(".cuenta-f [data-modo]").forEach((b) => (b.onclick = () => openLogin(b.dataset.modo)));
+  $("#cPin").onclick = (ev) => { ev.preventDefault(); openPin(); };
+  const err = (m) => ($("#cErr").textContent = m);
+  ["cUser", "cPass", "cPass2"].forEach((id) => { const el = document.getElementById(id); if (el) el.oninput = () => err(""); });
+  $("#cuentaF").onsubmit = async (ev) => {
+    ev.preventDefault();
+    const usuario = $("#cUser").value.trim(), clave = $("#cPass").value;
+    if (!/^[a-zA-Z0-9._-]{3,24}$/.test(usuario)) return err("El usuario debe tener de 3 a 24 letras, números, puntos o guiones, sin espacios.");
+    if (clave.length < 6) return err("La contraseña debe tener al menos 6 caracteres.");
+    if (crear && clave !== $("#cPass2").value) return err("Las contraseñas no coinciden.");
+    const b = $("#cBtn"); b.disabled = true;
+    try {
+      const r = await fetch(`/api/${crear ? "registro" : "entrar"}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ usuario, clave }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) return err(j.error || "No se ha podido conectar. Inténtalo de nuevo.");
+      setSes({ usuario: j.usuario, token: j.token });
+      try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ }
+      document.documentElement.classList.toggle("ro", ro());
+      closeModal(); await refreshDB();
+      location.hash = crear ? "#/anadir" : "#/inicio"; render();
+      toast(crear ? `Cuenta creada. Bienvenido, ${j.usuario}` : `Hola, ${j.usuario}`, "user");
+    } catch (e) {
+      err("No se ha podido conectar. Comprueba tu conexión.");
+    } finally { b.disabled = false; }
+  };
+}
+// El dueño de la colección pública puede seguir editándola con su PIN.
+function openPin() {
+  modal(`<div class="sheet-body"><div class="eyebrow">Solo para el dueño</div><h2 class="h2" style="margin:6px 0 10px">Entrar con PIN</h2>
+    <p class="muted" style="margin:0 0 18px">Con tu PIN podrás editar la colección pública desde este dispositivo.</p>
     <form id="loginF" style="display:flex;gap:10px"><input class="input" id="pinIn" type="password" inputmode="numeric" autocomplete="current-password" placeholder="PIN" style="flex:1;font-size:18px;letter-spacing:.3em">
     <button class="btn btn-primary">${icon("check")}Entrar</button></form><p id="loginErr" style="color:var(--red);min-height:20px;margin:10px 0 0"></p></div>`, "narrow");
   setTimeout(() => $("#pinIn").focus(), 60);
@@ -1385,15 +1465,19 @@ function openLogin() {
     const r = await fetch("/api/login", { method: "POST", headers: { "X-Pin": pin } });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) { $("#loginErr").textContent = j.error || "No se pudo entrar"; return; }
+    setSes(null);
     try { localStorage.setItem(PIN_KEY, pin); } catch (e) { /* */ }
     document.documentElement.classList.toggle("ro", ro());
     closeModal(); await refreshDB(); render(); toast("Modo edición activado en este dispositivo");
   };
 }
-function logout() {
+async function logout() {
+  setSes(null);
   try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ }
   document.documentElement.classList.toggle("ro", ro());
-  toast("Has salido del modo edición", "eyeoff"); render();
+  await refreshDB().catch(() => {});
+  location.hash = "#/inicio"; render();
+  toast("Has salido de tu cuenta", "eyeoff");
 }
 
 // ---------------------------------------------------------------- Añadir (como en el Excel)
@@ -1654,10 +1738,11 @@ function openPegar() {
 
 // ---------------------------------------------------------------- eventos globales
 document.addEventListener("click", async (e) => {
-  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine],[data-login],[data-logout]");
+  const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine],[data-login],[data-logout],[data-cuenta]");
   if (!t) return;
   const d = t.dataset;
   if (d.login !== undefined) { e.preventDefault(); return openLogin(); }
+  if (d.cuenta !== undefined) { e.preventDefault(); return openCuenta(); }
   if (d.logout !== undefined) { e.preventDefault(); closeModal(); return logout(); }
   if (ro() && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "sedit", "sdel"].some((k) => d[k] !== undefined)) return;
   if (d.more !== undefined) { e.preventDefault(); return openMore(); }

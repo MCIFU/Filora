@@ -18,6 +18,7 @@
 - **Cartelera y estrenos**: sesiones reales de Ocine Los Fresnos y Yelmo Ocimax Gijón, y estrenos en España, actualizados cada día.
 - **Para ti**: recomendaciones con la nota que predice que le pondrías.
 - **Estadísticas y gustos**: notas, décadas, géneros, directores…
+- **Cuentas**: cualquiera puede crear su cuenta con usuario y contraseña y llevar su propia colección; sin cuenta se ve la colección de muestra.
 - **App instalable** (PWA), funciona sin conexión, con tema claro y oscuro, en móvil, tableta y ordenador.
 - **Excel sincronizado** (`Filora.xlsx`) en el PC.
 
@@ -31,7 +32,7 @@ python server.py
 
 O doble clic en `Iniciar.bat` → http://localhost:8765
 
-La web pública está en Vercel: se lee sin contraseña y se edita con PIN (`EDIT_PIN`), con los datos en Vercel Blob.
+La web pública está en Vercel, con los datos en Vercel Blob. Sin cuenta se ve la colección de muestra (el dueño la edita con su PIN, `EDIT_PIN`). Cada cuenta guarda su colección aparte; las contraseñas se guardan cifradas con scrypt.
 
 ## Estructura
 
