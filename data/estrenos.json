@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-06",
+ "actualizado": "2026-10-07",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -64,7 +64,7 @@
    ],
    "pais": "México",
    "reparto": "Anna Díaz, Adriana Paz, Irene Escolar",
-   "sinopsis": "En busca de una vida mejor, Lucila viaja con su hermano Diego desde México para encontrarse con su madre en Madrid,…",
+   "sinopsis": "Lucila (Anna Díaz), una joven de 21 años, intenta encontrar su lugar en el mundo frente a la presión familiar, la…",
    "duracion": 97,
    "poster": "https://pics.filmaffinity.com/ceniza_en_la_boca-859618471-mmed.jpg",
    "fa": "503965",
@@ -96,7 +96,7 @@
    ],
    "pais": "Estados Unidos",
    "reparto": "Mikey Madison, Jeremy Allen White, Jeremy Strong",
-   "sinopsis": "Descrita como una \"pieza complementaria\" de \"La red social\", la nueva película se centra en los acontecimientos que…",
+   "sinopsis": "Descrita como una 'pieza complementaria' de 'La red social', la nueva película se centra en los acontecimientos que…",
    "duracion": 112,
    "poster": "https://pics.filmaffinity.com/the_social_reckoning-728059636-mmed.jpg",
    "fa": "279550",
@@ -150,22 +150,6 @@
    "duracion": 88,
    "poster": "https://pics.filmaffinity.com/escape_room_2-691857156-mmed.jpg",
    "fa": "903140",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "La deriva",
-   "original": "Weichenaka",
-   "director": "Tsai Ming-liang",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Taiwán",
-   "reparto": "Lee Kang-sheng",
-   "sinopsis": "El Caminante llega a San Sebastián, un paisaje de luminosa belleza. Una franja de color rojo ocre se mueve lentamente a…",
-   "duracion": 80,
-   "poster": "https://pics.filmaffinity.com/weichen-289215499-mmed.jpg",
-   "fa": "207417",
    "destacado": false
   },
   {
@@ -309,7 +293,9 @@
     "Drama"
    ],
    "pais": "Polonia",
-   "sinopsis": "¿Quién es este joven y valiente pianista? ¿Quién es este compositor polaco que trasciende el poder de la música? ¿Quién es esta estrella que hace que todos los ojos parisinos se vuelvan hacia él? Lo llaman Chopin. Es el centro de todas las conversaciones, la…",
+   "reparto": "Eryk Kulm, Lambert Wilson, Joséphine de La Baume",
+   "sinopsis": "¿Quién es este joven y valiente pianista? ¿Quién es este compositor polaco que trasciende el poder de la música? ¿Quién…",
+   "duracion": 110,
    "poster": "https://pics.filmaffinity.com/chopin_chopin-213812741-mmed.jpg",
    "fa": "309577",
    "destacado": false
@@ -323,7 +309,9 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "Cuando el padre de Rubén, un niño de once años, desaparece misteriosamente, este se ve obligado a irse a vivir con su abuela, a la que apenas conoce. En un entorno rural donde el tiempo parece haberse detenido, el chaval aprenderá de la mano de la anciana…",
+   "reparto": "Miguel Ángel Puro, Susi Sánchez, Hugo Arbués",
+   "sinopsis": "Cuando el padre de Rubén, un niño de once años, desaparece misteriosamente, este se ve obligado a irse a vivir con su…",
+   "duracion": 106,
    "poster": "https://pics.filmaffinity.com/el_mal_hijo-972662001-mmed.jpg",
    "fa": "523744",
    "destacado": false
@@ -351,7 +339,9 @@
     "Aventura"
    ],
    "pais": "Japón",
-   "sinopsis": "En un futuro cercano, una pareja marcada por la pérdida de su hijo acepta acoger en casa a un niño humanoide creado a su imagen con inteligencia artificial. Lo que empieza como un intento desesperado de aliviar el dolor se convierte en una nueva vida…",
+   "reparto": "Haruka Ayase, Rimu Kuwaki, Daigo",
+   "sinopsis": "En un futuro cercano, una pareja marcada por la pérdida de su hijo acepta acoger en casa a un niño humanoide creado a su…",
+   "duracion": 126,
    "poster": "https://pics.filmaffinity.com/hako_no_naka_no_hitsuji-438325340-mmed.jpg",
    "fa": "448187",
    "destacado": false
@@ -583,20 +573,6 @@
   },
   {
    "fecha": "2026-10-23",
-   "titulo": "El tren fluvial",
-   "original": "El tren fluvial",
-   "director": "Lorenzo Ferro / Lucas Vignale",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Argentina",
-   "sinopsis": "Milo, de nueve años, vive en un pueblo remoto de Argentina donde estudia malambo, una danza folclórica llena de bravura. Es un bailarín excelente, pero su único deseo es escapar del campo en tren hacia el Buenos Aires de sus sueños.",
-   "poster": "https://pics.filmaffinity.com/el_tren_fluvial-326005484-mmed.jpg",
-   "fa": "233329",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-23",
    "titulo": "Leones en invierno",
    "original": "Leones en invierno",
    "director": "Albert Pintó",
@@ -657,6 +633,20 @@
    "sinopsis": "Mía, Kai y Finn, tres amigos de sexto de primaria, descubren por accidente un fragmento de Kazoom que fusiona Normalópolis, su gris y ordenada ciudad, con Kaboom City, el disparatado universo de los Superthings, donde los objetos cotidianos han cobrado vida…",
    "poster": "https://pics.filmaffinity.com/superthings_la_pelicula-708857157-mmed.jpg",
    "fa": "643214",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Un amor posible",
+   "original": "Ga-neung-han sa-rangaka",
+   "director": "Lee Chang-Dong",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Corea del Sur",
+   "sinopsis": "Un trabajador despedido y su mujer se cruzan en el camino de una realizadora de documentales y su pareja, y se enfrentan a sus deseos ocultos. Cuando sus mundos chocan, se provocan alteraciones en sus rutinas aparentemente estables. \n\nEstreno limitado en…",
+   "poster": "https://pics.filmaffinity.com/ga_neung_han_sa_rang-341693834-mmed.jpg",
+   "fa": "240529",
    "destacado": false
   },
   {
@@ -1041,6 +1031,20 @@
   },
   {
    "fecha": "2026-11-13",
+   "titulo": "El tren fluvial",
+   "original": "El tren fluvial",
+   "director": "Lorenzo Ferro / Lucas Vignale",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Argentina",
+   "sinopsis": "Milo, de nueve años, vive en un pueblo remoto de Argentina donde estudia malambo, una danza folclórica llena de bravura. Es un bailarín excelente, pero su único deseo es escapar del campo en tren hacia el Buenos Aires de sus sueños.",
+   "poster": "https://pics.filmaffinity.com/el_tren_fluvial-326005484-mmed.jpg",
+   "fa": "233329",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-13",
    "titulo": "Jaleos",
    "original": "Jaleos",
    "director": "Isaki Lacuesta",
@@ -1201,7 +1205,7 @@
    ],
    "pais": "España",
    "sinopsis": "Una comedia romántica que entrelaza cuatro historias, realistas y aspiracionales, sobre el amor contemporáneo. Con Barcelona como escenario, las tramas se desarrollan en una de sus fechas más emblemáticas: el día de Sant Jordi, cuando la ciudad se llena de…",
-   "poster": "https://pics.filmaffinity.com/citas_la_pelicula-425883014-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/citas_la_pelicula-361129412-mmed.jpg",
    "fa": "137728",
    "destacado": false
   },
