@@ -69,6 +69,8 @@ const FAMILIAS = [
   ["venecia", "Venecia", /venecia|venice|le[oó]n de oro|golden lion|copa volpi/],
   ["berlin", "Berlín", /berl[ií]n|oso de (oro|plata)|(golden|silver) bear/],
   ["sansebastian", "San Sebastián", /san sebasti[aá]n|concha de oro/],
+  ["feroz", "Feroz", /feroz/],
+  ["emmy", "Emmy", /emmy/],
   ["cesar", "César", /\bc[ée]sar\b/],
   ["europeo", "Cine Europeo", /cine europeo|european film award/],
   ["critics", "Critics' Choice", /critics.? choice/],
@@ -89,7 +91,7 @@ const iconoPremio = (f) => `<svg viewBox="0 0 24 24" fill="none" stroke="current
 async function premiosDe(p) {
   const q = (p.ids || {}).wikidata;
   if (!/^Q\d+$/.test(q || "")) return null;
-  const hit = cacheLeer("premios." + q, 30);
+  const hit = cacheLeer("premios2." + q, 30);
   if (hit) return hit;
   const sparql = `SELECT ?premio ?premioLabel ?fecha ?tipo WHERE {
     { wd:${q} p:P166 ?s . ?s ps:P166 ?premio . BIND("g" AS ?tipo) } UNION { wd:${q} p:P1411 ?s . ?s ps:P1411 ?premio . BIND("n" AS ?tipo) }
@@ -111,7 +113,7 @@ async function premiosDe(p) {
     visto.add(k);
     lista.push({ f: fam[0], n: nombre, a: anio, g: b.tipo.value === "g" });
   }
-  cacheGuardar("premios." + q, lista);
+  cacheGuardar("premios2." + q, lista);
   return lista;
 }
 function premiosHTML(lista) {
@@ -124,7 +126,7 @@ function premiosHTML(lista) {
     return { f, nombre, ganados, nominaciones };
   }).filter(Boolean);
   if (!grupos.length) return "";
-  const icono = (f) => iconoPremio(["oscar", "goya", "globo", "bafta", "cannes"].includes(f) ? f : "laurel");
+  const icono = (f) => estatuilla(f);
   const resumen = grupos.map((g) => `<div class="premio ${g.ganados.length ? "gana" : ""}"><span class="pi">${icono(g.f)}</span><div>
       <b>${g.ganados.length ? `${g.ganados.length} ${g.nombre}` : g.nombre}</b>
       <span>${g.ganados.length ? (g.nominaciones > g.ganados.length ? `de ${g.nominaciones} nominaciones` : g.ganados.length === 1 ? "ganado" : "ganados") : `${g.nominaciones} ${g.nominaciones === 1 ? "nominación" : "nominaciones"}`}</span></div></div>`).join("");

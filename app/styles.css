@@ -874,3 +874,8 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
 .final-ficha .dim { font-size: 12.5px; line-height: 1.4; margin-top: 2px; }
 .list .row { grid-template-columns: 46px 1fr 170px 130px 60px 56px 52px; }
 @media (max-width: 760px) { .list .row { grid-template-columns: 42px 1fr 50px; } .list .row .c { display: none; } }
+
+/* estatuillas de los premios (lienzo 40 × 64) */
+.premio .pi { width: 22px; height: 35px; }
+.premios-det .pi { width: 12px; height: 19px; }
+.premio .pi svg, .premios-det .pi svg { width: 100%; height: 100%; }

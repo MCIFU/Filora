@@ -2,8 +2,8 @@
 // - /api/*           siempre a la red (datos en vivo y edición)
 // - app y datos      red primero; si no hay conexión, la copia guardada
 // - carteles/fuentes caché primero (no cambian), con límite de tamaño
-const V = "filora-v2";
-const BASE = ["./", "index.html", "styles.css", "app.js", "extras.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
+const V = "filora-v3";
+const BASE = ["./", "index.html", "styles.css", "app.js", "premios-iconos.js", "extras.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(V).then((c) => c.addAll(BASE)).then(() => self.skipWaiting()));
