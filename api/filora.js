@@ -191,8 +191,11 @@ async function manejar(req) {
     // ---- notas de una película en otras webs (pública; Vercel la guarda en caché un día por película)
     if (req.method === "GET" && partes[0] === "notas") {
       const q = Object.fromEntries(["fa", "lb", "rt", "ac"].map((k) => [k, url.searchParams.get(k)]));
-      return new Response(JSON.stringify(await notasExternas(q)), {
-        headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800", "Access-Control-Allow-Origin": "*" },
+      const { completo, ...notas } = await notasExternas(q);
+      // si alguna web no respondió, se vuelve a intentar pronto en vez de guardar un día la respuesta incompleta
+      const cache = completo ? "public, s-maxage=86400, stale-while-revalidate=604800" : "public, s-maxage=300";
+      return new Response(JSON.stringify(notas), {
+        headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": cache, "Access-Control-Allow-Origin": "*" },
       });
     }
     // ---- cines elegidos (anónimo): alimenta la descarga diaria de sesiones

@@ -13,8 +13,9 @@ function cacheLeer(clave, dias) {
     return x && Date.now() - x.t < dias * 864e5 ? x.v : null;
   } catch (e) { return null; }
 }
-function cacheGuardar(clave, v) {
-  try { localStorage.setItem("filora.x." + clave, JSON.stringify({ t: Date.now(), v })); } catch (e) { /* lleno o sin permiso */ }
+function cacheGuardar(clave, v, caduca = 0) {
+  // caduca > 0: guarda como si fuera más antiguo para que dure menos (respuestas incompletas)
+  try { localStorage.setItem("filora.x." + clave, JSON.stringify({ t: Date.now() - caduca, v })); } catch (e) { /* lleno o sin permiso */ }
 }
 
 // ---------------------------------------------------------------- notas en otras webs
@@ -36,7 +37,8 @@ async function notasDe(p) {
     [...q].length ? fetch(`${WEB_FILORA()}/api/notas?${q}`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})) : {},
   ]);
   const out = { ...otras, ...(imdb ? { imdb } : {}) };
-  if (Object.keys(out).length) cacheGuardar(clave, out);
+  const falta = [...q.keys()].some((k) => !out[{ fa: "fa", lb: "lb", rt: "rt", ac: "sc" }[k]]);
+  if (Object.keys(out).length) cacheGuardar(clave, out, falta ? 4.8 * 864e5 : 0); // incompleta: se reintenta en unas horas
   return out;
 }
 const votos = (n) => (n == null ? "" : n >= 1e6 ? `${fmt1(n / 1e6)} M votos` : n >= 1e3 ? `${fmtInt(n / 1e3)} mil votos` : `${fmtInt(n)} votos`);
