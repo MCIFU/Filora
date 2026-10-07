@@ -1023,12 +1023,17 @@ function upcoming() { const t = addDays(todayISO(), -6); return (S.est.estrenos 
 function relCard(e) {
   const m = e.m || predict(e);
   const seen = isSeen({ titulo: e.titulo, anio: +e.fecha.slice(0, 4), original: e.original, fecha: e.fecha }, seenSet());
-  return `<div class="card rel" data-rel="${esc(e.fecha + "|" + e.titulo)}" style="cursor:pointer">
+  return `<div class="card rel rel2" data-rel="${esc(e.fecha + "|" + e.titulo)}" style="cursor:pointer">
     <div class="frame">${posterHTML({ ...e, anio: e.fecha.slice(0, 4) })}</div>
-    <div style="min-width:0"><div class="t">${esc(e.titulo)}${e.destacado ? ` <span class="dest" title="Estreno destacado">●</span>` : ""}</div>
-      <div class="s">${esc([e.director, e.pais].filter(Boolean).join(" · ") || "—")}</div>
-      <div class="chips" style="margin-top:8px"><span class="chip gold">${diaSemana(e.fecha)} ${fechaLarga(e.fecha)}</span>${(e.generos || []).slice(0, 2).map((g) => `<span class="chip">${g}</span>`).join("")}</div></div>
-    <div class="right">${seen ? `<span class="chip on">${icon("check")}Vista</span>` : matchTag(m.pct)}</div></div>`;
+    <div class="rel-cuerpo">
+      <div class="cfilm-head"><div style="min-width:0"><div class="rel-fecha">${diaSemana(e.fecha)} ${fechaLarga(e.fecha)}${e.provisional ? " · provisional" : ""}</div>
+        <div class="t">${esc(e.titulo)}${e.destacado ? ` <span class="dest" title="Estreno destacado">●</span>` : ""}</div>
+        <div class="s">${esc([e.director, e.pais].filter(Boolean).join(" · ") || "—")}</div></div>
+        ${seen ? `<span class="chip on">${icon("check")}Vista</span>` : matchTag(m.pct)}</div>
+      ${e.reparto && !/loading|movie card/i.test(e.reparto) ? `<div class="rel-rep">Con ${esc(e.reparto)}</div>` : ""}
+      ${e.sinopsis ? `<p class="rel-sin">${esc(e.sinopsis)}</p>` : ""}
+      ${(e.generos || []).length ? `<div class="chips">${e.generos.slice(0, 3).map((g) => `<span class="chip">${g}</span>`).join("")}</div>` : ""}
+    </div></div>`;
 }
 function openRel(key) {
   const e = (S.est.estrenos || []).find((x) => x.fecha + "|" + x.titulo === key);

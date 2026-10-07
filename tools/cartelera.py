@@ -70,7 +70,8 @@ def poster(block):
 
 def credits(block, cls):
     m = re.search(r'class="(?:[^"]* )?' + cls + r'">(.*?)</div></div>', block, re.S)
-    return [txt(x) for x in re.findall(r'title="([^"]+)"', m.group(1))] if m else []
+    nombres = [txt(x) for x in re.findall(r'title="([^"]+)"', m.group(1))] if m else []
+    return [n for n in nombres if not re.search(r"loading|movie card", n, re.I)]  # restos de la interfaz de FA
 
 
 # ------------------------------------------------------------------ sesiones

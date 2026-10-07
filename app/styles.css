@@ -838,3 +838,31 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
 .logo.logo-img, .ext .logo.logo-img, .nota-ext .logo.logo-img, .imp-cab .logo.logo-img { width: 30px; min-width: 0; height: 30px; padding: 0; border-radius: 7px; object-fit: cover; background: none; flex: none; }
 .ext .logo.logo-img { width: 26px; height: 26px; border-radius: 6px; }
 
+
+/* ---------------- estrenos: como la cartelera (cartel entero, todas iguales) ---------------- */
+.rels { grid-template-columns: repeat(auto-fill, minmax(520px, 1fr)); gap: 22px; }
+.rel.rel2 { grid-template-columns: 200px minmax(0, 1fr); height: 300px; }
+.rel.rel2::before, .rel.rel2::after { left: 191px; }
+.rel.rel2 .frame { min-height: 0; height: 300px; }
+.rel.rel2 .frame img, .rel.rel2 .frame .ph { width: 200px; height: 300px; object-fit: cover; }
+.rel.rel2 .rel-cuerpo { padding: 18px 20px 18px 24px; min-width: 0; border-left: 2px dashed rgba(20, 17, 46, .28); display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+.rel-fecha { display: inline-block; font: 700 12px/1 var(--texto); letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--telon); padding: 5px 8px; border-radius: 2px; margin-bottom: 8px; }
+.rel.rel2 .t { font-size: 25px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.rel-rep { font-size: 13px; color: rgba(20, 17, 46, .7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rel-sin { margin: 0; font-size: 14px; line-height: 1.45; color: rgba(20, 17, 46, .78); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.rel.rel2 .chips { margin-top: auto; }
+@media (max-width: 760px) {
+  .rels { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .rel.rel2 { grid-template-columns: 92px minmax(0, 1fr); height: auto; padding: 12px; column-gap: 12px; }
+  .rel.rel2::before, .rel.rel2::after { display: none; }
+  .rel.rel2 .frame { grid-row: 1; width: 92px; height: 138px; border-radius: 3px; }
+  .rel.rel2 .frame img, .rel.rel2 .frame .ph { width: 92px; height: 138px; }
+  .rel.rel2 .rel-cuerpo { display: contents; }
+  .rel.rel2 .cfilm-head { grid-column: 2; grid-row: 1; align-self: start; }
+  .rel.rel2 .t { font-size: 18px; -webkit-line-clamp: 3; }
+  .rel-fecha { font-size: 10.5px; padding: 4px 6px; margin-bottom: 6px; }
+  .rel.rel2 .rel-rep, .rel.rel2 .rel-sin, .rel.rel2 .chips { grid-column: 1 / -1; }
+  .rel.rel2 .rel-rep { margin-top: 10px; }
+  .rel.rel2 .rel-sin { margin-top: 6px; -webkit-line-clamp: 3; font-size: 13.5px; }
+  .rel.rel2 .chips { margin-top: 8px; }
+}
