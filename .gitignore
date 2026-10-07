@@ -6,7 +6,7 @@ __pycache__/
 data/backups/
 data/config.json
 *.tmp
-Mi Cinemateca.xlsx
+Filora.xlsx
 ~$*.xlsx
 
 # Datos de la web estática (los genera tools/build_static.py / Netlify)

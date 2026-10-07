@@ -1,6 +1,6 @@
 """Genera el Excel profesional a partir de data/db.json y permite reimportarlo.
 
-    python tools/excel.py exportar            -> Mi Cinemateca.xlsx
+    python tools/excel.py exportar            -> Filora.xlsx
     python tools/excel.py importar [ruta]     -> aplica a db.json lo editado en el Excel
 """
 import json
@@ -21,7 +21,7 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 ROOT = Path(__file__).resolve().parent.parent
 from rutas import DB_PATH  # noqa: E402
 EST_PATH = ROOT / "data" / "estrenos.json"
-XLSX_PATH = ROOT / "Mi Cinemateca.xlsx"
+XLSX_PATH = ROOT / "Filora.xlsx"
 
 INK = "15151C"
 GOLD = "C9962F"
@@ -232,7 +232,7 @@ def export(db=None, estrenos=None, path=XLSX_PATH):
 
     # ------------------------------------------------------------ Resumen
     wr = wb.create_sheet("Resumen", 1)
-    style_title(wr, "Mi Cinemateca", f"Actualizado el {datetime.now().strftime('%d/%m/%Y %H:%M')} · generado desde la app")
+    style_title(wr, "Filora", f"Actualizado el {datetime.now().strftime('%d/%m/%Y %H:%M')} · generado desde la app")
     wr.column_dimensions["A"].width = 3
     for col, w in zip("BCDEFGHIJKLMN", (26, 12, 12, 3, 30, 12, 12, 3, 26, 12, 12, 3, 12)):
         wr.column_dimensions[col].width = w

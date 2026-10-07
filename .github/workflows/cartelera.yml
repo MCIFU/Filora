@@ -20,7 +20,7 @@ jobs:
         run: python tools/cartelera.py
       - name: Copia de seguridad de la colección (lo añadido desde la web)
         run: |
-          curl -sf https://micinemateca.netlify.app/api/db -o /tmp/db.json || exit 0
+          curl -sf https://filora.vercel.app/api/db -o /tmp/db.json || exit 0
           python - <<'PY'
           import json, pathlib
           nuevo = json.load(open("/tmp/db.json", encoding="utf-8"))

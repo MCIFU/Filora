@@ -1,5 +1,5 @@
 /* ============================================================
-   Mi Cinemateca · app
+   Filora · app
    ============================================================ */
 "use strict";
 
@@ -295,7 +295,7 @@ function renderChrome() {
   }
   $("#sideFoot").innerHTML = e.excel_error
     ? `<span class="warn">⚠ ${esc(e.excel_error)}</span>`
-    : `<b>Excel sincronizado</b>${hora ? ` · ${hora}` : ""}<br><span class="dim">${e.pin ? (e.sync === "ok" ? "Sincronizado con la web" : esc(e.sync || "Sincronizando con la web…")) : "Web sin sincronizar (Ajustes)"}</span><br><a href="/api/excel" class="dim">Descargar Mi Cinemateca.xlsx</a>`;
+    : `<b>Excel sincronizado</b>${hora ? ` · ${hora}` : ""}<br><span class="dim">${e.pin ? (e.sync === "ok" ? "Sincronizado con la web" : esc(e.sync || "Sincronizando con la web…")) : "Web sin sincronizar (Ajustes)"}</span><br><a href="/api/excel" class="dim">Descargar Filora.xlsx</a>`;
 }
 function render() {
   const { name, qs } = route();
@@ -346,7 +346,7 @@ VIEWS.inicio = (v) => {
   <section class="hero">
     <div class="reels" aria-hidden="true">${tiras.map(tira).join("")}</div>
     <div class="hero-content">
-      <h1><span>Mi</span><span>Cinemateca</span></h1>
+      <h1><span>Filora</span></h1>
       <p class="hero-lead"><b>${fmtInt(pelis.length)}</b> películas, <b>${fmtInt(horas)}</b> horas a oscuras y una nota para cada una. La media va por <b>${fmt2(pr.mu)}</b>.</p>
       <div class="hero-actions">
         <a class="btn btn-primary rw" href="#/anadir">Añadir película</a>
@@ -1157,14 +1157,14 @@ VIEWS.ajustes = (v) => {
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Ajustes</h1></div></div>
   <div class="settings">
-    <div class="card"><h3>${icon("download")} Tu Excel</h3><p>Cada cambio que haces aquí regenera <code>Mi Cinemateca.xlsx</code> en la carpeta de la app, con hojas de resumen, películas, series, UCM, pendientes y estrenos.</p>
+    <div class="card"><h3>${icon("download")} Tu Excel</h3><p>Cada cambio que haces aquí regenera <code>Filora.xlsx</code> en la carpeta de la app, con hojas de resumen, películas, series, UCM, pendientes y estrenos.</p>
       ${e.excel_error ? `<p style="color:var(--gold)">⚠ ${esc(e.excel_error)}</p>` : ""}
       <div class="acts"><a class="btn btn-primary" href="/api/excel">${icon("download")}Descargar Excel</a><button class="btn" id="xRegen">${icon("refresh")}Regenerar</button></div></div>
     <div class="card"><h3>${icon("globe")} Sincronizar con la web</h3><p>Escribe la dirección de tu web y el mismo <b>PIN</b> que configuraste en Vercel. Tu PC y la web se sincronizarán solos (al arrancar, tras cada cambio y cada 5 minutos), así lo que añadas desde el móvil llega a tu Excel.</p>
       <p class="dim" style="font-size:12.5px">Estado: ${e.pin ? esc(e.sync || "pendiente") : "sin PIN"}${e.sync_at ? ` · última vez ${new Date(e.sync_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}` : ""}</p>
-      <div class="acts" style="margin-bottom:8px"><input class="input" id="webLocal" type="url" placeholder="Dirección de tu web (por defecto https://mi-cinemateca.vercel.app)" value="${esc((S.db.config || {}).web || "")}" style="flex:1"><button class="btn" id="webSave">Guardar</button></div>
+      <div class="acts" style="margin-bottom:8px"><input class="input" id="webLocal" type="url" placeholder="Dirección de tu web (por defecto https://filora.vercel.app)" value="${esc((S.db.config || {}).web || "")}" style="flex:1"><button class="btn" id="webSave">Guardar</button></div>
       <div class="acts"><input class="input" id="pinLocal" type="password" inputmode="numeric" placeholder="${e.pin ? "PIN guardado ✓ (escribe para cambiarlo)" : "PIN de edición"}" style="flex:1"><button class="btn" id="pinSave">Guardar</button><button class="btn btn-ghost" id="syncNow">${icon("refresh")}Sincronizar ahora</button></div></div>
-    <div class="card"><h3>${icon("upload")} Añadir desde el Excel</h3><p>Abre <code>Mi Cinemateca.xlsx</code>, escribe tus películas en la hoja <b>Añadir</b> (Año, Duración, Nota, Título, Director, País…), guarda y cierra: la app las importa sola en unos segundos y completa lo que falte. También detecta cambios de nota o reseña en la hoja <b>Películas</b>.</p>
+    <div class="card"><h3>${icon("upload")} Añadir desde el Excel</h3><p>Abre <code>Filora.xlsx</code>, escribe tus películas en la hoja <b>Añadir</b> (Año, Duración, Nota, Título, Director, País…), guarda y cierra: la app las importa sola en unos segundos y completa lo que falte. También detecta cambios de nota o reseña en la hoja <b>Películas</b>.</p>
       ${e.excel_import ? `<p class="dim" style="font-size:12.5px">Última importación: ${esc(e.excel_import)}</p>` : ""}
       <div class="acts"><button class="btn" id="xImp">${icon("upload")}Importar ahora</button></div></div>
     <div class="card"><h3>${icon("calendar")} Estrenos automáticos (opcional)</h3><p>Con una clave gratuita de <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener" style="color:var(--gold)">TMDb</a> el calendario se actualiza solo con las fechas de España, sinopsis y carteles. Sin clave, lo mantenemos juntos a mano.</p>
@@ -1296,7 +1296,7 @@ VIEWS.cartelera = (v) => {
 // ---------------------------------------------------------------- Menú «Más» (móvil)
 function openMore() {
   const r = route().name;
-  modal(`<div class="sheet-body"><div class="eyebrow">Mi Cinemateca</div><h2 class="h2" style="margin:6px 0 16px">Secciones</h2>
+  modal(`<div class="sheet-body"><div class="eyebrow">Filora</div><h2 class="h2" style="margin:6px 0 16px">Secciones</h2>
     <div class="more-list">${navItems().map(([k, l, ic]) => `<a href="#/${k}" class="${r === k ? "on" : ""}" data-close>${icon(ic)}<span>${l}</span></a>`).join("")}</div>
     ${!ro() ? `<button class="btn btn-primary" data-action="add" style="width:100%;justify-content:center;margin-top:16px">${icon("plus")}Añadir película</button>` : ""}
     ${STATIC ? (ro() ? `<button class="btn btn-ghost" data-login style="width:100%;justify-content:center;margin-top:10px">${icon("user")}Entrar para editar</button>` : `<button class="btn btn-ghost" data-logout style="width:100%;justify-content:center;margin-top:10px">${icon("x")}Salir del modo edición</button>`) : ""}</div>`, "narrow");

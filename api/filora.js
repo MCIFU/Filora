@@ -1,10 +1,10 @@
-// API de Mi Cinemateca en Vercel: lectura pública y edición con PIN.
+// API de Filora en Vercel: lectura pública y edición con PIN.
 // Los datos se guardan en Vercel Blob; si aún no hay nada guardado, se usa la
 // copia publicada (/data/db.json). Rutas (vercel.json): /api/<ruta> -> ?ruta=<ruta>
 import { head, put } from "@vercel/blob";
-import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido } from "../lib/cinemateca.mjs";
+import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido } from "../lib/filora.mjs";
 
-const CLAVE = "cinemateca/db.json";
+const CLAVE = "filora/db.json";
 const hayAlmacen = () => !!process.env.BLOB_READ_WRITE_TOKEN;
 
 const json = (data, status = 200) =>

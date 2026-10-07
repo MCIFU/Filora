@@ -4,7 +4,7 @@
   python tools/pelis.py nota "Tenet" 7.8           cambia la nota de una que ya tienes
   python tools/pelis.py buscar "nolan"             busca en tu colección
   python tools/pelis.py pendiente "Sirāt" --motivo "Me la recomendó Ana"
-  python tools/pelis.py excel                       regenera Mi Cinemateca.xlsx
+  python tools/pelis.py excel                       regenera Filora.xlsx
 
 Busca los datos (año, director, país, géneros, póster, IDs) en Wikidata
 automáticamente. Funciona con la app abierta o cerrada.
@@ -111,7 +111,7 @@ def main():
             s.reconfigure(encoding="utf-8", errors="replace")
         except Exception:
             pass
-    ap = argparse.ArgumentParser(description="Mi Cinemateca desde la terminal")
+    ap = argparse.ArgumentParser(description="Filora desde la terminal")
     sp = ap.add_subparsers(dest="cmd", required=True)
     v = sp.add_parser("vista")
     v.add_argument("titulo"); v.add_argument("nota", type=float)

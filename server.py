@@ -1,10 +1,10 @@
-"""Mi Cinemateca · servidor local.
+"""Filora · servidor local.
 
 Arranca con:  python server.py      (o doble clic en Iniciar.bat)
 Abre:         http://localhost:8765
 
 Sirve la web (carpeta app/), guarda los cambios en data/db.json, hace copias de
-seguridad y regenera "Mi Cinemateca.xlsx" en cada cambio.
+seguridad y regenera "Filora.xlsx" en cada cambio.
 """
 import json
 import mimetypes
@@ -30,7 +30,7 @@ from rutas import BACKUPS, CFG_PATH, DATA, DB_PATH, asegurar_db  # noqa: E402
 APP = ROOT / "app"
 EST_PATH = DATA / "estrenos.json"
 PORT = 8765
-WEB = "https://mi-cinemateca.vercel.app"  # web publicada por defecto (se cambia en Ajustes)
+WEB = "https://filora.vercel.app"  # web publicada por defecto (se cambia en Ajustes)
 
 LOCK = threading.RLock()
 STATE = {"excel_error": None, "excel_at": None, "excel_mtime": 0, "sync": None, "sync_at": None}
@@ -105,7 +105,7 @@ def sync_web():
     enviado = db.get("actualizado")
     web = (cfg.get("web") or WEB).rstrip("/")
     req = urllib.request.Request(f"{web}/api/sync", data=json.dumps(db, ensure_ascii=False).encode("utf-8"), method="POST",
-                                 headers={"Content-Type": "application/json", "X-Pin": pin, "User-Agent": "MiCinemateca-PC/1.0"})
+                                 headers={"Content-Type": "application/json", "X-Pin": pin, "User-Agent": "Filora-PC/1.0"})
     try:
         with urllib.request.urlopen(req, timeout=40) as r:
             web = json.loads(r.read().decode("utf-8"))
@@ -147,7 +147,7 @@ def hilo_sync():
 
 
 def hilo_excel():
-    """Si editas Mi Cinemateca.xlsx a mano y lo guardas, importa los cambios solo."""
+    """Si editas Filora.xlsx a mano y lo guardas, importa los cambios solo."""
     while True:
         time.sleep(4)
         try:
@@ -209,7 +209,7 @@ def enrich_background(kind, item_id):
             de_wiki, poster = poster, None
             try:  # carátulas de series: TVmaze (sin claves), mejor que el logotipo de Wikipedia
                 q = urllib.parse.quote(snapshot["titulo"])
-                with urllib.request.urlopen(urllib.request.Request(f"https://api.tvmaze.com/search/shows?q={q}", headers={"User-Agent": "MiCinemateca/1.0"}), timeout=20) as r:
+                with urllib.request.urlopen(urllib.request.Request(f"https://api.tvmaze.com/search/shows?q={q}", headers={"User-Agent": "Filora/1.0"}), timeout=20) as r:
                     shows = [x["show"] for x in json.loads(r.read().decode("utf-8")) if x["show"].get("image")]
                 if shows:
                     poster = shows[0]["image"]["medium"].replace("http://", "https://")
@@ -311,7 +311,7 @@ def refresh_estrenos_tmdb():
 
 # ------------------------------------------------------------------ HTTP
 class Handler(BaseHTTPRequestHandler):
-    server_version = "MiCinemateca/1.0"
+    server_version = "Filora/1.0"
 
     def log_message(self, fmt, *args):
         if "/api/" in (args[0] if args else ""):
@@ -360,7 +360,7 @@ class Handler(BaseHTTPRequestHandler):
                 data = excel.XLSX_PATH.read_bytes()
                 self.send_response(200)
                 self.send_header("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                self.send_header("Content-Disposition", "attachment; filename*=UTF-8''Mi%20Cinemateca.xlsx")
+                self.send_header("Content-Disposition", "attachment; filename*=UTF-8''Filora.xlsx")
                 self.send_header("Content-Length", str(len(data)))
                 self.end_headers()
                 return self.wfile.write(data)
@@ -368,7 +368,7 @@ class Handler(BaseHTTPRequestHandler):
                 data = DB_PATH.read_bytes()
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
-                self.send_header("Content-Disposition", f"attachment; filename=cinemateca-{date.today()}.json")
+                self.send_header("Content-Disposition", f"attachment; filename=filora-{date.today()}.json")
                 self.end_headers()
                 return self.wfile.write(data)
             return self.send_json({"error": "no encontrado"}, 404)
@@ -498,7 +498,7 @@ def main():
     threading.Thread(target=hilo_excel, daemon=True).start()
     srv = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     url = f"http://localhost:{PORT}"
-    print(f"\n  Mi Cinemateca en marcha → {url}\n  (Cierra esta ventana para apagarla)\n")
+    print(f"\n  Filora en marcha → {url}\n  (Cierra esta ventana para apagarla)\n")
     if "--no-browser" not in sys.argv:
         threading.Timer(0.8, lambda: webbrowser.open(url)).start()
     try:

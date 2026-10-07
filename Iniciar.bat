@@ -1,9 +1,9 @@
 @echo off
 chcp 65001 >nul
 cd /d "%~dp0"
-title Mi Cinemateca
+title Filora
 echo.
-echo   Arrancando Mi Cinemateca...
+echo   Arrancando Filora...
 echo   Se abrira en tu navegador: http://localhost:8765
 echo   Deja esta ventana abierta mientras la uses.
 echo.

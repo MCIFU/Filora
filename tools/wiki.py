@@ -13,7 +13,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-UA = "MiCinemateca/1.0 (https://github.com/mi-cinemateca; uso personal) Python-urllib/3.12"
+UA = "Filora/1.0 (https://github.com/MCIFU/filora; uso personal) Python-urllib/3.12"
 
 FILM_TYPES = {"Q11424", "Q202866", "Q24869", "Q229390", "Q506240", "Q17517379", "Q93204",
               "Q20650540", "Q226730", "Q1261214", "Q336144", "Q110956863", "Q24862"}

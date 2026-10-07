@@ -1,4 +1,4 @@
-# Versión web de solo lectura de Mi Cinemateca.
+# Versión web de solo lectura de Filora.
 # En cada push a GitHub, Netlify genera los datos estáticos y publica la carpeta app/.
 [build]
   command = "python3 tools/build_static.py"

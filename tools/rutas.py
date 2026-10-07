@@ -13,7 +13,9 @@ DB_PATH = LOCAL / "db.json"
 DB_SEMILLA = DATA / "db.json"
 BACKUPS = LOCAL / "backups"
 CFG_PATH = LOCAL / "config.json"
-XLSX_PATH = ROOT / "Mi Cinemateca.xlsx"
+XLSX_PATH = ROOT / "Filora.xlsx"
+if not XLSX_PATH.exists() and (ROOT / "Mi Cinemateca.xlsx").exists():
+    (ROOT / "Mi Cinemateca.xlsx").rename(XLSX_PATH)  # nombre antiguo
 
 
 def asegurar_db():

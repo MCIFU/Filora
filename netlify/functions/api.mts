@@ -1,9 +1,9 @@
-// API de Mi Cinemateca en Netlify: lectura pública y edición con PIN.
+// API de Filora en Netlify: lectura pública y edición con PIN.
 // Los datos viven en Netlify Blobs; si aún no hay nada guardado, se usa la
 // copia estática publicada (/data/db.json).
 import { getDeployStore, getStore } from "@netlify/blobs";
 import type { Config, Context } from "@netlify/functions";
-import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido } from "../../lib/cinemateca.mjs";
+import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido } from "../../lib/filora.mjs";
 
 const CLAVE = "db";
 

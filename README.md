@@ -1,4 +1,4 @@
-# 🎬 Mi Cinemateca
+# 🎬 Filora
 
 Mi diario de cine personal: una app web local para registrar las películas que veo, puntuarlas y descubrir qué ver después, con un Excel profesional que se actualiza solo.
 
@@ -15,7 +15,7 @@ Nació de un Excel que llevo años rellenando a mano (más de 600 películas pun
 - **Estrenos en España**: calendario con fechas de estreno, director, sinopsis y afinidad. Se actualiza solo cada día (GitHub Actions + FilmAffinity).
 - **Series**: ficha con enlaces, estadísticas y análisis de gustos.
 - **Pendientes**.
-- **Excel sincronizado** (`Mi Cinemateca.xlsx`): resumen con fórmulas y gráficos, películas, series, UCM con rentabilidad, pendientes y estrenos. Si lo edito a mano, puedo reimportar los cambios.
+- **Excel sincronizado** (`Filora.xlsx`): resumen con fórmulas y gráficos, películas, series, UCM con rentabilidad, pendientes y estrenos. Si lo edito a mano, puedo reimportar los cambios.
 
 ## Uso
 

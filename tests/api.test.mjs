@@ -1,6 +1,6 @@
 // Pruebas de la lógica de fusión y edición: node tests/api.test.mts
 import assert from "node:assert/strict";
-import { actualizar, borrar, crear, fusionar, nuevoId, pinValido } from "../lib/cinemateca.mjs";
+import { actualizar, borrar, crear, fusionar, nuevoId, pinValido } from "../lib/filora.mjs";
 
 const base = () => ({
   peliculas: [

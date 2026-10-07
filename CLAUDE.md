@@ -1,8 +1,8 @@
-# Mi Cinemateca
+# Filora
 
 App local para llevar el registro de las películas que veo, con Excel sincronizado.
 
-- Fuente de verdad: `data/db.json`. El Excel `Mi Cinemateca.xlsx` se regenera solo en cada cambio (no editarlo mientras la app escribe; si se edita a mano, importarlo desde Ajustes o `python tools/excel.py importar`).
+- Fuente de verdad: `data/db.json`. El Excel `Filora.xlsx` se regenera solo en cada cambio (no editarlo mientras la app escribe; si se edita a mano, importarlo desde Ajustes o `python tools/excel.py importar`).
 - El Excel original del usuario (`C:\Users\PC GAMING\Downloads\Películas.xlsx`) NO se toca nunca.
 - Proyecto en `C:\AI\PROYECTOS\pelis` · repo https://github.com/MCIFU/mi-cinemateca
 - Arrancar: `Iniciar.bat` o `python server.py` → http://localhost:8765
@@ -15,7 +15,7 @@ App local para llevar el registro de las películas que veo, con Excel sincroniz
 - Recomendaciones: `tools/catalogo_recomendaciones.txt` (título ES | original | año | director | país | géneros | prestigio). Tras añadir líneas, `python tools/enriquecer.py --rapido`.
 - Wikimedia limita peticiones: usar `tools/bulk.py` (SPARQL por lotes) antes que búsquedas una a una.
 - Escala de notas: 0–10 con un decimal.
-- Web pública: Vercel (cuenta vercel.com/mcifu; `vercel.json` publica `app/`, ejecuta `tools/build_static.py` y la API está en `api/cinemateca.js` con Vercel Blob + variable EDIT_PIN). Netlify quedó sin créditos y está abandonado (sus ficheros se conservan). La lógica compartida está en `lib/cinemateca.mjs` (pruebas: `npm test`).
+- Web pública: Vercel (cuenta vercel.com/mcifu; `vercel.json` publica `app/`, ejecuta `tools/build_static.py` y la API está en `api/cinemateca.js` con Vercel Blob + variable EDIT_PIN). Netlify quedó sin créditos y está abandonado (sus ficheros se conservan). La lógica compartida está en `lib/filora.mjs` (pruebas: `npm test`).
 - Taquilla: `tools/taquilla.py` (Box Office Mojo por id IMDb); el servidor local la consulta sola al añadir una película.
 - Diseño «la sala» (app/styles.css): fondo terciopelo #160d10, papel #f1e6d0, rojo telón #c8102e, bombilla #ffc94a (con cuentagotas), verde salida para notas altas. Tipos: Big Shoulders Display (títulos, mayúsculas), Sofia Sans Extra Condensed (créditos), Instrument Sans (texto). Elementos propios: tiras de celuloide en la portada, entradas de cine en papel (sesiones/estrenos), libro de registro en papel (Añadir). Evitar: tarjetas redondeadas genéricas, etiquetas redundantes sobre títulos, flechas «→», degradados decorativos.
 - Revisar diseño con capturas: Edge sin ventana (`msedge --headless=new --screenshot=... --window-size=1440,H --user-data-dir=<carpeta nueva cada vez>`); el ancho mínimo real es ~500 px, para móvil usar el panel del navegador con preset mobile.
