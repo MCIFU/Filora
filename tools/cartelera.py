@@ -110,6 +110,7 @@ def cines_elegidos():
             ids += json.loads(r.read().decode("utf-8")).get("cines", [])
     except Exception as e:
         print("  No se pudo leer la lista de cines de la web:", e)
+    ids += [int(x) for x in os.environ.get("FILORA_CINES_NUEVOS", "").split(",") if x.strip().isdigit()]
     if LOCAL_DB.exists():
         try:
             prefs = json.loads(LOCAL_DB.read_text(encoding="utf-8")).get("preferencias") or {}

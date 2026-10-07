@@ -3,7 +3,12 @@ name: Actualizar cartelera y estrenos
 on:
   schedule:
     - cron: "0 5-20/3 * * *"   # cada 3 horas de 07:00 a 22:00 (hora de España en verano)
-  workflow_dispatch: {}         # a mano, o desde la web cuando alguien elige un cine nuevo
+  workflow_dispatch:            # a mano, o desde la web cuando alguien elige un cine nuevo
+    inputs:
+      cines:
+        description: "Ids de FilmAffinity de cines nuevos, separados por comas"
+        required: false
+        default: ""
 
 # una descarga cada vez; si llega otra petición mientras tanto, se hace justo después
 concurrency:
@@ -23,6 +28,8 @@ jobs:
           python-version: "3.12"
       - name: Descargar sesiones y estrenos de FilmAffinity
         run: python tools/cartelera.py
+        env:
+          FILORA_CINES_NUEVOS: ${{ inputs.cines }}
       - name: Guardar cambios (la web los lee directamente de GitHub)
         run: |
           git config user.name "cartelera-bot"

@@ -116,14 +116,14 @@ const DEMANDA = "filora/demanda.json";
 
 // Si hay clave de GitHub (GH_DISPATCH_TOKEN, permiso «Actions: write» solo en este repositorio),
 // un cine que nadie había pedido lanza la descarga al momento en vez de esperar al turno.
-async function lanzarDescarga() {
+async function lanzarDescarga(cines = []) {
   const token = process.env.GH_DISPATCH_TOKEN;
   if (!token) return false;
   const repo = process.env.GH_REPO || "MCIFU/Filora";
   const r = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/cartelera.yml/dispatches`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json", "User-Agent": "Filora", "Content-Type": "application/json" },
-    body: JSON.stringify({ ref: "main" }),
+    body: JSON.stringify({ ref: "main", inputs: { cines: cines.join(",") } }), // los nuevos van directos: la lista guardada tarda en verse
     signal: AbortSignal.timeout(8000),
   }).catch(() => null);
   if (!r || !r.ok) console.error("No se pudo lanzar la descarga", r && r.status);
@@ -208,7 +208,7 @@ async function manejar(req) {
         const antes = await leerDemanda();
         const nuevos = ids.filter((id) => !antes[id]);
         await guardar(anotarDemanda(antes, ids), DEMANDA);
-        const descargando = nuevos.length ? await lanzarDescarga() : false;
+        const descargando = nuevos.length ? await lanzarDescarga(nuevos) : false;
         return json({ ok: true, nuevos, descargando });
       }
     }
