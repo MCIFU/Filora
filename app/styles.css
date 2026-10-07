@@ -810,3 +810,16 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
   .cartel-fija .cfilm .time { height: 28px; font-size: 16px; padding: 2px 7px 0; }
   .cartel-fija .cfilm .ses-row { flex-wrap: wrap; gap: 4px 8px; }
 }
+
+/* ---------------- ajustes de la ficha (Montserrat es más ancha que la letra anterior) ---------------- */
+.score { padding: 0 8px; }
+.score.lg { min-width: 0; width: auto; padding: 0 12px; font-size: 42px; }
+.myscore .verdict { font-size: clamp(20px, 2.4vw, 28px); line-height: 1.05; }
+.ext .logo, .nota-ext .logo, .imp-cab .logo { width: auto; min-width: 30px; padding: 0 5px; font-size: 11px; }
+@media (max-width: 760px) {
+  .score.lg { height: 54px; font-size: 32px; padding: 0 10px; }
+  .myscore .verdict { font-size: 20px; }
+  .nota-ext .np { white-space: normal; line-height: 1.25; }
+  .notas-ext { grid-template-columns: 1fr 1fr; }
+}
+.myscore .score { flex: none; }
