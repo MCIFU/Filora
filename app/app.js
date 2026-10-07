@@ -171,11 +171,13 @@ async function api(path, opts = {}) {
     const j = await r.json().catch(() => ({}));
     if (r.status === 401) { setSes(null); try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ } document.documentElement.classList.toggle("ro", ro()); renderChrome(); }
     if (!r.ok) throw new Error(j.error || `Error ${r.status}`);
+    datosCambiados();
     return j;
   }
   const r = await fetch(`/api/${path}`, { headers: { "Content-Type": "application/json" }, ...opts, body: opts.body ? JSON.stringify(opts.body) : undefined });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(j.error || `Error ${r.status}`);
+  if (opts.method && opts.method !== "GET") datosCambiados();
   return j;
 }
 async function loadAll() {
@@ -184,7 +186,35 @@ async function loadAll() {
   filtrarCartelera(); avisarDemanda();
   if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500);
 }
-async function refreshDB() { S.db = await api("db"); S.prof = null; filtrarCartelera(); renderChrome(); if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500); }
+// ---------------------------------------------------------------- todo al día, solo
+// Cualquier cambio (aquí, en otro dispositivo, en el Excel del PC o al sincronizar) recalcula
+// tus gustos, estadísticas y recomendaciones y repinta la sección abierta.
+const VISTAS_VIVAS = ["inicio", "estadisticas", "gustos", "recomendaciones", "series", "coleccion", "pendientes", "cartelera", "estrenos"];
+function repintarSiToca() {
+  clearTimeout(repintarSiToca._t);
+  repintarSiToca._t = setTimeout(() => {
+    const escribiendo = document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+    if (VISTAS_VIVAS.includes(route().name) && $("#modal").hidden && !escribiendo) { render._keep = true; render(); }
+  }, 400);
+}
+function datosCambiados() { S.prof = null; S.cartIdx = null; repintarSiToca(); }
+async function comprobarCambios() {
+  if (document.hidden || !S.db || comprobarCambios.ocupado) return;
+  comprobarCambios.ocupado = true;
+  try {
+    const db = await api("db");
+    const firma = (d) => `${d.actualizado || ""}|${d.peliculas.length}|${d.series.length}|${d.pendientes.length}`;
+    if (firma(db) !== firma(S.db)) {
+      S.db = db; filtrarCartelera(); renderChrome(); datosCambiados();
+    } else S.db.estado = db.estado;
+  } catch (e) { /* sin conexión: ya se mirará luego */ } finally { comprobarCambios.ocupado = false; }
+}
+// al volver a la app y cada poco mientras está abierta (en el PC más a menudo: no gasta nada)
+addEventListener("focus", () => setTimeout(comprobarCambios, 300));
+document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(comprobarCambios, 300); });
+setInterval(comprobarCambios, STATIC ? 120e3 : 15e3);
+
+async function refreshDB() { S.db = await api("db"); S.prof = null; S.cartIdx = null; filtrarCartelera(); renderChrome(); if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500); }
 
 function toast(msg, ic = "check") {
   const t = $("#toast");
