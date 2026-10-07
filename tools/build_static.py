@@ -28,6 +28,11 @@ def main():
     cines_path = ROOT / "data" / "cines_es.json"
     cines = json.loads(cines_path.read_text(encoding="utf-8")) if cines_path.exists() else {"cines": []}
     imdb_notas.main()
+    # historia de los premios (tools/premios.py)
+    import shutil
+    src = ROOT / "data" / "premios"
+    if src.exists():
+        shutil.copytree(src, OUT / "premios", dirs_exist_ok=True)
     catalogo = load_catalog()
     for c in catalogo:  # nota de IMDb para predecir cuánto te gustará cada recomendación
         r = imdb_notas.nota((c.get("ids") or {}).get("imdb"))

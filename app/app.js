@@ -44,6 +44,7 @@ const ICONS = {
   plus: '<path d="M12 5v14M5 12h14"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   x: '<path d="M6 6l12 12M18 6 6 18"/>',
+  trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7M10 17h4"/>',
   star: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/>',
   ext: '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
   edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
@@ -354,6 +355,7 @@ const NAV = [
   ["cartelera", "Cartelera", "ticket"],
   ["coleccion", "Colección", "film"],
   ["estrenos", "Estrenos", "calendar"],
+  ["premios", "Premios", "trophy"],
   ["recomendaciones", "Para ti", "target"],
   ["gustos", "Mis gustos", "spark"],
   ["estadisticas", "Estadísticas", "chart"],
@@ -365,7 +367,7 @@ const navItems = () => NAV.filter((n) => !(STATIC && n[0] === "ajustes") && !(ro
 function route() {
   const h = location.hash.replace(/^#\/?/, "");
   const [name, qs] = h.split("?");
-  return { name: navItems().some((n) => n[0] === name) ? name : "inicio", qs: new URLSearchParams(qs || "") };
+  return { name: navItems().some((n) => n[0] === name) || name === "persona" ? name : "inicio", qs: new URLSearchParams(qs || "") };
 }
 function renderChrome() {
   const r = route().name;
@@ -603,7 +605,7 @@ function openFilm(id) {
           ${p.anio ? `<span>${icon("calendar")}${p.anio}</span>` : ""}
           ${p.duracion ? `<span>${icon("clock")}${Math.floor(p.duracion / 60)} h ${p.duracion % 60} min</span>` : ""}
           ${p.pais ? `<span>${icon("globe")}${esc(p.pais)}</span>` : ""}
-          ${p.director ? `<span>${icon("user")}${splitDir(p.director).map((d) => `<a href="#/coleccion?q=${encodeURIComponent(d)}" data-close style="text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px">${esc(d)}</a>`).join(", ")}</span>` : ""}
+          ${p.director ? `<span>${icon("user")}${splitDir(p.director).map((d) => `<a href="#/persona?n=${encodeURIComponent(d)}" data-close title="Ver su ficha" style="text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px">${esc(d)}</a>`).join(", ")}</span>` : ""}
         </div>
         <div class="chips">${(p.generos || []).map((g) => `<a class="chip" href="#/coleccion?genre=${encodeURIComponent(g)}" data-close>${esc(g)}</a>`).join("")}${p.favorita ? `<span class="chip gold">★ Favorita</span>` : ""}</div>
         <div class="myscore">${scoreBadge(p.nota, "lg")}<div><div class="lbl">Tu nota</div><div class="verdict">${veredicto(p.nota)}</div>
@@ -978,7 +980,7 @@ VIEWS.gustos = (v) => {
   ${seriesInsights().length ? `<section class="section">${sectionHead("Y en series…", "#/series", "Ver tus series")}<div class="insights">${seriesInsights().map(insightCard).join("")}</div></section>` : ""}
   <section class="section">${sectionHead("Tus directores")}
     <div class="card card-pad"><table class="tbl"><thead><tr><th>Director</th><th class="r">Películas</th><th class="r">Nota media</th><th>Mejor</th><th>Peor</th></tr></thead><tbody>
-    ${dirs.slice(0, 25).map((d) => { const s = [...d.items].sort((a, b) => b.nota - a.nota); return `<tr class="click" onclick="location.hash='#/coleccion?q=${encodeURIComponent(d.key)}'"><td><b>${esc(d.key)}</b></td><td class="r dim">${d.n}</td><td class="r">${scoreBadge(d.mean)}</td><td class="muted">${esc(s[0].titulo)} <span class="dim">${fmt1(s[0].nota)}</span></td><td class="muted">${esc(s[s.length - 1].titulo)} <span class="dim">${fmt1(s[s.length - 1].nota)}</span></td></tr>`; }).join("")}
+    ${dirs.slice(0, 25).map((d) => { const s = [...d.items].sort((a, b) => b.nota - a.nota); return `<tr class="click" onclick="location.hash='#/persona?n=${encodeURIComponent(d.key)}'"><td><b>${esc(d.key)}</b></td><td class="r dim">${d.n}</td><td class="r">${scoreBadge(d.mean)}</td><td class="muted">${esc(s[0].titulo)} <span class="dim">${fmt1(s[0].nota)}</span></td><td class="muted">${esc(s[s.length - 1].titulo)} <span class="dim">${fmt1(s[s.length - 1].nota)}</span></td></tr>`; }).join("")}
     </tbody></table></div></section>`;
 };
 
