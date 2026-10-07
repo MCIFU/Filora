@@ -1,8 +1,8 @@
 // Pruebas de la lógica de fusión y edición: node tests/api.test.mts
 import assert from "node:assert/strict";
-import { actualizar, borrar, crear, fusionar, nuevoId, pinValido, type DB } from "../netlify/functions/lib/cinemateca.mts";
+import { actualizar, borrar, crear, fusionar, nuevoId, pinValido } from "../lib/cinemateca.mjs";
 
-const base = (): DB => ({
+const base = () => ({
   peliculas: [
     { id: "p0001", titulo: "Origen", nota: 10 },
     { id: "p0002", titulo: "Tenet", nota: 7.2 },
@@ -33,7 +33,7 @@ assert.ok(ids.size > 190, "los ids deben ser prácticamente únicos");
   actualizar(pc, "peliculas", "p0002", { nota: 8 });
   const f = fusionar(web, pc);
   assert.equal(f.peliculas.length, 3);
-  assert.equal(f.peliculas.find((p) => p.id === "p0002")!.nota, 8);
+  assert.equal(f.peliculas.find((p) => p.id === "p0002").nota, 8);
   assert.ok(f.peliculas.find((p) => p.id === nueva.id));
 }
 
@@ -56,12 +56,12 @@ assert.ok(ids.size > 190, "los ids deben ser prácticamente únicos");
   await new Promise((r) => setTimeout(r, 1100));
   actualizar(pc, "peliculas", "p0002", { nota: 9 });
   const f = fusionar(web, pc);
-  assert.equal(f.peliculas.find((p) => p.id === "p0002")!.nota, 9);
+  assert.equal(f.peliculas.find((p) => p.id === "p0002").nota, 9);
 }
 
 // no se cuelan campos locales del PC
 {
-  const pc = { ...base(), estado: { excel_error: null }, config: { pin: "x" } } as DB;
+  const pc = { ...base(), estado: { excel_error: null }, config: { pin: "x" } };
   const f = fusionar(base(), pc);
   assert.equal("estado" in f, false);
   assert.equal("config" in f, false);

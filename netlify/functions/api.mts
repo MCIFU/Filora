@@ -3,7 +3,7 @@
 // copia estática publicada (/data/db.json).
 import { getDeployStore, getStore } from "@netlify/blobs";
 import type { Config, Context } from "@netlify/functions";
-import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido, type DB } from "./lib/cinemateca.mts";
+import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido } from "../../lib/cinemateca.mjs";
 
 const CLAVE = "db";
 

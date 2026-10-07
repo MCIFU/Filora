@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm install",
+  "buildCommand": "python3 tools/build_static.py || python tools/build_static.py",
+  "outputDirectory": "app",
+  "rewrites": [
+    { "source": "/api/:ruta*", "destination": "/api/cinemateca?ruta=:ruta*" }
+  ],
+  "headers": [
+    { "source": "/data/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] }
+  ]
+}

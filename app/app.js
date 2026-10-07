@@ -309,8 +309,8 @@ function render() {
     if (!keep) window.scrollTo(0, 0);
   };
   // fundido entre páginas (como un cambio de plano) si el navegador lo permite
-  if (!keep && render._visto && document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(pintar);
-  else pintar();
+  pintar();
+  if (!keep && render._visto) { v.classList.remove("entra"); void v.offsetWidth; v.classList.add("entra"); }
   render._visto = true;
 }
 
@@ -410,7 +410,7 @@ VIEWS.coleccion = (v, qs) => {
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Mis películas</h1></div></div>
   <div class="toolbar">
-    <label class="search">${icon("search")}<input class="input" id="fq" placeholder="Buscar título, título original o director…  ( / )" value="${esc(c.q)}"></label>
+    <label class="search">${icon("search")}<input class="input" id="fq" placeholder="Buscar película o director" value="${esc(c.q)}"></label>
     <select class="select" id="fgenre">${opt([...gC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.genre, "Todos los géneros")}</select>
     <select class="select" id="fdecade">${opt([...dC].sort((a, b) => b[0] - a[0]).map(([k, n]) => [k, `Años ${String(k).slice(2)} · ${k} (${n})`]), c.decade, "Todas las décadas")}</select>
     <select class="select" id="fcountry">${opt([...cC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.country, "Todos los países")}</select>
@@ -1160,8 +1160,9 @@ VIEWS.ajustes = (v) => {
     <div class="card"><h3>${icon("download")} Tu Excel</h3><p>Cada cambio que haces aquí regenera <code>Mi Cinemateca.xlsx</code> en la carpeta de la app, con hojas de resumen, películas, series, UCM, pendientes y estrenos.</p>
       ${e.excel_error ? `<p style="color:var(--gold)">⚠ ${esc(e.excel_error)}</p>` : ""}
       <div class="acts"><a class="btn btn-primary" href="/api/excel">${icon("download")}Descargar Excel</a><button class="btn" id="xRegen">${icon("refresh")}Regenerar</button></div></div>
-    <div class="card"><h3>${icon("globe")} Sincronizar con la web</h3><p>Escribe aquí el mismo <b>PIN</b> que configuraste en Netlify. Tu PC y la web se sincronizarán solos (al arrancar, tras cada cambio y cada 5 minutos), así lo que añadas desde el móvil llega a tu Excel.</p>
+    <div class="card"><h3>${icon("globe")} Sincronizar con la web</h3><p>Escribe la dirección de tu web y el mismo <b>PIN</b> que configuraste en Vercel. Tu PC y la web se sincronizarán solos (al arrancar, tras cada cambio y cada 5 minutos), así lo que añadas desde el móvil llega a tu Excel.</p>
       <p class="dim" style="font-size:12.5px">Estado: ${e.pin ? esc(e.sync || "pendiente") : "sin PIN"}${e.sync_at ? ` · última vez ${new Date(e.sync_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}` : ""}</p>
+      <div class="acts" style="margin-bottom:8px"><input class="input" id="webLocal" type="url" placeholder="Dirección de tu web (por defecto https://mi-cinemateca.vercel.app)" value="${esc((S.db.config || {}).web || "")}" style="flex:1"><button class="btn" id="webSave">Guardar</button></div>
       <div class="acts"><input class="input" id="pinLocal" type="password" inputmode="numeric" placeholder="${e.pin ? "PIN guardado ✓ (escribe para cambiarlo)" : "PIN de edición"}" style="flex:1"><button class="btn" id="pinSave">Guardar</button><button class="btn btn-ghost" id="syncNow">${icon("refresh")}Sincronizar ahora</button></div></div>
     <div class="card"><h3>${icon("upload")} Añadir desde el Excel</h3><p>Abre <code>Mi Cinemateca.xlsx</code>, escribe tus películas en la hoja <b>Añadir</b> (Año, Duración, Nota, Título, Director, País…), guarda y cierra: la app las importa sola en unos segundos y completa lo que falte. También detecta cambios de nota o reseña en la hoja <b>Películas</b>.</p>
       ${e.excel_import ? `<p class="dim" style="font-size:12.5px">Última importación: ${esc(e.excel_import)}</p>` : ""}
@@ -1176,6 +1177,7 @@ VIEWS.ajustes = (v) => {
   $("#xRegen").onclick = async () => { const r = await api("excel/regenerar", { method: "POST" }); await refreshDB(); toast(r.ok ? "Excel regenerado" : r.excel_error, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
   $("#xImp").onclick = async () => { try { const r = await api("excel/importar", { method: "POST" }); await refreshDB(); toast(`${r.modificadas} modificadas · ${r.nuevas} nuevas`); } catch (err) { toast(err.message, "x"); } };
   $("#pinSave").onclick = async () => { const k = $("#pinLocal").value.trim(); if (k.length < 4) return toast("El PIN debe tener al menos 4 caracteres", "x"); await api("config", { method: "POST", body: { pin: k } }); const r = await api("sync", { method: "POST" }); await refreshDB(); toast(r.ok ? "PIN guardado · sincronizado con la web" : r.sync, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
+  $("#webSave").onclick = async () => { const w = $("#webLocal").value.trim(); await api("config", { method: "POST", body: { web: w || null } }); await refreshDB(); toast("Dirección guardada"); VIEWS.ajustes(v); };
   $("#syncNow").onclick = async () => { const r = await api("sync", { method: "POST" }); await loadAll(); toast(r.ok ? "Sincronizado con la web" : r.sync, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
   $("#tmdbSave").onclick = async () => { const k = $("#tmdbKey").value.trim(); if (!k) return; await api("config", { method: "POST", body: { tmdbKey: k } }); await refreshDB(); toast("Clave guardada"); VIEWS.ajustes(v); };
 };
