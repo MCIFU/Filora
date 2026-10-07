@@ -112,6 +112,33 @@ async function registroOEntrada(req, accion) {
 // ---------------------------------------------------------------- cines pedidos
 // Lista pública de ids de cine que alguien ha elegido: el robot diario descarga sus sesiones.
 const DEMANDA = "filora/demanda.json";
+
+// Si hay clave de GitHub (GH_DISPATCH_TOKEN, permiso «Actions: write» solo en este repositorio),
+// un cine que nadie había pedido lanza la descarga al momento en vez de esperar al turno.
+async function lanzarDescarga() {
+  const token = process.env.GH_DISPATCH_TOKEN;
+  if (!token) return false;
+  const repo = process.env.GH_REPO || "MCIFU/Filora";
+  const r = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/cartelera.yml/dispatches`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json", "User-Agent": "Filora", "Content-Type": "application/json" },
+    body: JSON.stringify({ ref: "main" }),
+    signal: AbortSignal.timeout(8000),
+  }).catch(() => null);
+  if (!r || !r.ok) console.error("No se pudo lanzar la descarga", r && r.status);
+  return !!(r && r.ok);
+}
+
+// Solo cines que existen en el catálogo publicado (evita pedir descargas de ids inventados).
+async function enCatalogo(req, ids) {
+  try {
+    const r = await fetch(new URL("/data/cines_es.json", req.url));
+    const validos = new Set((await r.json()).cines.map((c) => c.id));
+    return ids.filter((id) => validos.has(id));
+  } catch (e) {
+    return ids;
+  }
+}
 async function leerDemanda() {
   try {
     return (await leerJSON((await head(DEMANDA)).url)) || {};
@@ -165,10 +192,13 @@ async function manejar(req) {
       if (req.method === "GET") return json({ cines: hayAlmacen() ? cinesActivos(await leerDemanda()) : [] });
       if (req.method === "POST") {
         if (!hayAlmacen()) return json({ ok: false }, 503);
-        const ids = idsCineValidos((await req.json().catch(() => ({}))).cines);
+        const ids = await enCatalogo(req, idsCineValidos((await req.json().catch(() => ({}))).cines));
         if (!ids.length) return json({ error: "Sin cines" }, 400);
-        await guardar(anotarDemanda(await leerDemanda(), ids), DEMANDA);
-        return json({ ok: true });
+        const antes = await leerDemanda();
+        const nuevos = ids.filter((id) => !antes[id]);
+        await guardar(anotarDemanda(antes, ids), DEMANDA);
+        const descargando = nuevos.length ? await lanzarDescarga() : false;
+        return json({ ok: true, nuevos, descargando });
       }
     }
     // ---- cuentas de usuario

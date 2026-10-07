@@ -31,6 +31,7 @@ const { almacen } = await import("./blob-falso.mjs");
 const real = globalThis.fetch;
 globalThis.fetch = async (u, o) => {
   const s = String(u);
+  if (s.endsWith("/data/cines_es.json")) return new Response(JSON.stringify({ cines: [{ id: 402 }, { id: 1269 }] }));
   if (s.startsWith("https://blob.test/")) {
     const v = almacen.get(decodeURIComponent(s.slice(18).split("?")[0]));
     return v == null ? new Response("", { status: 404 }) : new Response(v);
@@ -118,8 +119,12 @@ r = await llamar(GET, "db", { token: tokMarta });
 assert.equal(r.j.preferencias, undefined, "los cines de otro no aparecen");
 
 // cines pedidos (sin cuenta)
-r = await llamar(POST, "demanda", { cuerpo: { cines: [402, "1269", "malo"] } });
+r = await llamar(POST, "demanda", { cuerpo: { cines: [402, "1269", "malo", 77777] } });
 assert.equal(r.status, 200);
+assert.deepEqual(r.j.nuevos.sort(), [1269, 402], "77777 no está en el catálogo");
+assert.equal(r.j.descargando, false, "sin clave de GitHub no se lanza nada");
+r = await llamar(POST, "demanda", { cuerpo: { cines: [402] } });
+assert.deepEqual(r.j.nuevos, [], "un cine ya pedido no es nuevo");
 r = await llamar(GET, "demanda");
 assert.deepEqual(r.j.cines.sort(), [1269, 402]);
 

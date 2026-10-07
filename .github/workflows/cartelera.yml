@@ -2,9 +2,13 @@ name: Actualizar cartelera y estrenos
 
 on:
   schedule:
-    - cron: "0 5 * * *"    # 07:00 en España (verano)
-    - cron: "0 14 * * *"   # 16:00: recoge los cines que alguien haya elegido por la mañana
-  workflow_dispatch: {}    # botón "Run workflow" para lanzarlo a mano
+    - cron: "0 5-20/3 * * *"   # cada 3 horas de 07:00 a 22:00 (hora de España en verano)
+  workflow_dispatch: {}         # a mano, o desde la web cuando alguien elige un cine nuevo
+
+# una descarga cada vez; si llega otra petición mientras tanto, se hace justo después
+concurrency:
+  group: cartelera
+  cancel-in-progress: false
 
 permissions:
   contents: write

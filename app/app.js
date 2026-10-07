@@ -155,13 +155,7 @@ async function api(path, opts = {}) {
       } catch (e) { /* sin conexión con la API */ }
       return coleccionVacia(); // las colecciones son privadas: sin cuenta no se publica ninguna
     }
-    if (method === "GET" && (path === "cartelera" || path === "estrenos")) {
-      // se actualizan cada día en GitHub: se leen de allí para no depender de un nuevo despliegue
-      try {
-        const r = await fetch(`https://raw.githubusercontent.com/MCIFU/Filora/main/data/${path}.json`, { cache: "no-cache" });
-        if (r.ok) return await r.json();
-      } catch (e) { /* sin conexión con GitHub: copia publicada */ }
-    }
+    // cartelera y estrenos: cada actualización del robot vuelve a publicar la web en Vercel (sin caché)
     if (method === "GET") {
       const r = await fetch(STATIC_FILES[path] || `data/${path}.json`, { cache: "no-cache" });
       if (!r.ok) throw new Error(`No encuentro los datos (${r.status})`);
@@ -1233,18 +1227,40 @@ function filtrarCartelera() {
 }
 const cinesSinSesiones = () => misCines().filter((c) => !S.cart.cines.some((x) => idCine(x) === String(c.id)));
 // Avisa a la web de qué cines quieres (una vez al día) para que el robot descargue sus sesiones.
-function avisarDemanda(forzar) {
+async function avisarDemanda(forzar) {
   if (!STATIC) return;
   const ids = misCines().map((c) => c.id);
   if (!ids.length) return;
   try { if (!forzar && localStorage.getItem("filora.demanda") === todayISO()) return; localStorage.setItem("filora.demanda", todayISO()); } catch (e) { /* */ }
-  fetch("/api/demanda", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cines: ids }) }).catch(() => {});
+  try {
+    const r = await fetch("/api/demanda", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cines: ids }) });
+    const j = await r.json();
+    if (j.descargando) S.descargandoHasta = Date.now() + 12 * 60e3;
+    if (cinesSinSesiones().length) esperarSesiones();
+  } catch (e) { /* sin conexión: ya lo recogerá el robot en su turno */ }
+}
+// Mientras llegan las sesiones de un cine nuevo, vuelve a mirar cada minuto (hasta 12 minutos).
+function esperarSesiones() {
+  clearInterval(esperarSesiones._t);
+  let intentos = 0;
+  esperarSesiones._t = setInterval(async () => {
+    if (++intentos > 12 || !cinesSinSesiones().length) return clearInterval(esperarSesiones._t);
+    try {
+      const antes = cinesSinSesiones().length;
+      S.cartTodo = await api("cartelera");
+      filtrarCartelera();
+      if (cinesSinSesiones().length < antes) {
+        toast("Ya están las sesiones de tus cines", "ticket");
+        if (["inicio", "cartelera"].includes(route().name) && $("#modal").hidden) { render._keep = true; render(); }
+      }
+    } catch (e) { /* se reintenta */ }
+  }, 60e3);
 }
 async function guardarCines(lista) {
   const limpia = lista.map(({ id, nombre, ciudad, provincia, direccion }) => ({ id, nombre, ciudad, provincia, direccion }));
   if (ro()) { try { localStorage.setItem(CINES_KEY, JSON.stringify(limpia)); } catch (e) { /* */ } }
   else S.db.preferencias = await api("preferencias", { method: "PUT", body: { cines: limpia } });
-  filtrarCartelera(); avisarDemanda(true);
+  filtrarCartelera(); await avisarDemanda(true);
 }
 const kmEntre = ([a, b], [c, d]) => {
   const r = Math.PI / 180, x = Math.sin(((c - a) * r) / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin(((d - b) * r) / 2) ** 2;
@@ -1302,7 +1318,7 @@ async function openCines() {
       await guardarCines(sel);
       closeModal(); render._keep = true; render();
       const nuevos = cinesSinSesiones().length;
-      toast(!sel.length ? "Has quitado tus cines" : nuevos ? "Guardado. Las sesiones de tus cines nuevos llegarán en unas horas" : "Tus cines están guardados", "check");
+      toast(!sel.length ? "Has quitado tus cines" : !nuevos ? "Tus cines están guardados" : S.descargandoHasta > Date.now() ? "Guardado. Descargando sus sesiones: tardan unos minutos" : "Guardado. Sus sesiones llegarán en la próxima actualización (cada 3 horas)", "check");
     } catch (e) { toast(e.message, "x"); }
   };
 }
@@ -1414,7 +1430,9 @@ VIEWS.cartelera = (v) => {
     <p>Sesiones reales de tus cines. Pulsa una hora para comprar la entrada.${act ? ` <span class="dim">Actualizado el ${act.toLocaleDateString("es-ES", { day: "numeric", month: "long" })} a las ${act.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })} · fuente FilmAffinity.</span>` : ""}</p>
     ${viejo ? `<p style="color:var(--gold)">⚠ Estos horarios tienen más de dos días; pueden haber cambiado.</p>` : ""}</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-cines>${icon("pin")}Cambiar cines</button>${!STATIC ? `<button class="btn" id="cartUpd">${icon("refresh")}Actualizar ahora</button>` : ""}</div></div>
-  ${pendientes.length ? `<div class="card aviso-cines">${icon("clock")}<span>Las sesiones de <b>${esc(pendientes.map((c) => c.nombre).join(", "))}</b> se descargan dos veces al día; estarán aquí en unas horas.</span></div>` : ""}
+  ${pendientes.length ? `<div class="card aviso-cines">${icon("clock")}<span>${S.descargandoHasta > Date.now()
+    ? `Descargando las sesiones de <b>${esc(pendientes.map((c) => c.nombre).join(", "))}</b>. Suelen tardar unos minutos; esta página se actualizará sola.`
+    : `Las sesiones de <b>${esc(pendientes.map((c) => c.nombre).join(", "))}</b> llegarán en la próxima actualización (cada 3 horas, de 7:00 a 22:00).`}</span></div>` : ""}
   ${dias.length ? `
   <div class="toolbar" style="position:static">
     <div class="chips">${dias.map((d) => `<button class="chip ${d === st.dia ? "on" : ""}" data-cday="${d}">${etiqueta(d)}</button>`).join("")}</div>
