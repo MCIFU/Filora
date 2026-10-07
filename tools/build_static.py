@@ -27,10 +27,15 @@ def main():
     cart = json.loads(cart_path.read_text(encoding="utf-8")) if cart_path.exists() else {"cines": []}
     cines_path = ROOT / "data" / "cines_es.json"
     cines = json.loads(cines_path.read_text(encoding="utf-8")) if cines_path.exists() else {"cines": []}
-    files = {"cines_es.json": cines, "estrenos.json": est, "catalogo.json": load_catalog(), "cartelera.json": cart}
+    imdb_notas.main()
+    catalogo = load_catalog()
+    for c in catalogo:  # nota de IMDb para predecir cuánto te gustará cada recomendación
+        r = imdb_notas.nota((c.get("ids") or {}).get("imdb"))
+        if r:
+            c["imdbNota"] = r
+    files = {"cines_es.json": cines, "estrenos.json": est, "catalogo.json": catalogo, "cartelera.json": cart}
     for name, data in files.items():
         (OUT / name).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    imdb_notas.main()
     print(f"Web estática lista en app/data (sin colección, es privada): "
           f"{len(est.get('estrenos', []))} estrenos, {len(files['catalogo.json'])} recomendaciones")
 

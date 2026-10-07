@@ -51,3 +51,33 @@ if __name__ == "__main__":
     except Exception:
         pass
     main()
+
+
+# ---- consulta desde la app local (server.py)
+_trozos = {}
+
+
+def nota(tt):
+    """[nota, votos] de IMDb para un id tt…, o None. Lee los trozos ya generados."""
+    if not tt or not str(tt).startswith("tt"):
+        return None
+    k = str(tt)[-2:]
+    if k not in _trozos:
+        f = OUT / f"{k}.json"
+        _trozos[k] = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+    return _trozos[k].get(tt)
+
+
+def rellenar(db):
+    """Pone imdbNota a las películas que aún no la tienen. Devuelve cuántas ha completado."""
+    if not (OUT / "00.json").exists():
+        main()
+    n = 0
+    for p in db.get("peliculas", []):
+        if p.get("imdbNota"):
+            continue
+        r = nota((p.get("ids") or {}).get("imdb"))
+        if r:
+            p["imdbNota"] = r
+            n += 1
+    return n

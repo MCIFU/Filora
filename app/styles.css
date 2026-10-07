@@ -823,3 +823,5 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
   .notas-ext { grid-template-columns: 1fr 1fr; }
 }
 .myscore .score { flex: none; }
+.logo.logo-img, .ext .logo.logo-img, .nota-ext .logo.logo-img, .imp-cab .logo.logo-img { width: 30px; min-width: 0; height: 30px; padding: 0; border-radius: 7px; object-fit: cover; background: none; flex: none; }
+.ext .logo.logo-img { width: 26px; height: 26px; border-radius: 6px; }

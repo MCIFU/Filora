@@ -23,7 +23,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
 import excel  # noqa: E402
-import taquilla  # noqa: E402
+import taquilla
+import imdb_notas  # noqa: E402
 import wiki  # noqa: E402
 from rutas import BACKUPS, CFG_PATH, DATA, DB_PATH, asegurar_db  # noqa: E402
 
@@ -236,6 +237,9 @@ def enrich_background(kind, item_id):
                 for k in ("tituloOriginal", "director", "pais", "duracion", "generos"):
                     if extra.get(k) and not it.get(k):
                         it[k] = extra[k]
+                nota_imdb = imdb_notas.nota(it["ids"].get("imdb")) if kind == "film" else None
+                if nota_imdb:
+                    it["imdbNota"] = nota_imdb
                 if bom:
                     taquilla.aplicar(it, bom)
                 it["mod"] = ahora()
@@ -352,7 +356,12 @@ class Handler(BaseHTTPRequestHandler):
             if parts[1:] == ["cines"]:
                 return self.send_json(read_json(DATA / "cines_es.json", {"cines": []}))
             if parts[1:] == ["catalogo"]:
-                return self.send_json(load_catalog())
+                cat = load_catalog()
+                for c in cat:
+                    r = imdb_notas.nota((c.get("ids") or {}).get("imdb"))
+                    if r:
+                        c["imdbNota"] = r
+                return self.send_json(cat)
             if parts[1:] == ["buscar"]:
                 q = (qs.get("q") or [""])[0].strip()
                 return self.send_json(wiki.search_films(q) if len(q) >= 2 else [])
@@ -491,6 +500,17 @@ class Handler(BaseHTTPRequestHandler):
         return self.send_json({"error": "no encontrado"}, 404)
 
 
+def completar_notas_imdb():
+    """Nota y votos de IMDb para cada película (la predicción de gustos los usa)."""
+    try:
+        with LOCK:
+            db = load_db()
+            if imdb_notas.rellenar(db):
+                save_db(db)
+    except Exception as e:
+        print("  Notas de IMDb no disponibles:", e)
+
+
 def main():
     for stream in (sys.stdout, sys.stderr):
         try:
@@ -503,6 +523,7 @@ def main():
     else:
         STATE["excel_mtime"] = excel.XLSX_PATH.stat().st_mtime
     threading.Thread(target=hilo_sync, daemon=True).start()
+    threading.Thread(target=completar_notas_imdb, daemon=True).start()
     threading.Thread(target=hilo_excel, daemon=True).start()
     srv = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     url = f"http://localhost:{PORT}"

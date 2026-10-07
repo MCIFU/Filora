@@ -46,7 +46,7 @@ function notasHTML(p, n) {
   const L = Object.fromEntries(extLinks(p).map((l) => [l.n, l]));
   const t = (web, nota, escala, pie) => {
     const l = L[web];
-    return `<a class="nota-ext" href="${esc(l.u)}" target="_blank" rel="noopener"><span class="logo" style="background:${l.c}">${l.l}</span>
+    return `<a class="nota-ext" href="${esc(l.u)}" target="_blank" rel="noopener">${logoWeb(l.l, l.c)}
       <span class="nv"><b>${nota}</b>${escala ? `<small>/${escala}</small>` : ""}</span><span class="np">${pie}</span></a>`;
   };
   const tiles = [];
@@ -308,7 +308,7 @@ const idCliente = (pre) => { const d = new Date().toISOString().replace(/\D/g, "
 function openImportar() {
   if (ro()) return openLogin("crear");
   const fuente = (id, logo, color, nombre, pasos, accept) => `<div class="imp-fuente">
-      <div class="imp-cab"><span class="logo" style="background:${color}">${logo}</span><b>${nombre}</b></div>
+      <div class="imp-cab">${logoWeb(logo, color)}<b>${nombre}</b></div>
       <p class="muted">${pasos}</p>
       ${accept ? `<label class="btn" style="cursor:pointer">${icon("upload")}Elegir archivo<input type="file" data-imp="${id}" accept="${accept}" multiple hidden></label>` : ""}</div>`;
   modal(`<div class="sheet-body"><div class="eyebrow">Importar</div><h2 class="h2" style="margin:6px 0 8px">Trae tus películas de otras webs</h2>
@@ -360,4 +360,27 @@ async function importarArchivos(tipo, archivos) {
   } catch (e) {
     estado(`<div class="empty" style="padding:20px 0"><div class="h2">No se ha podido importar</div>${esc(e.message || "Error al leer el archivo")}</div><button class="btn" onclick="openImportar()">Volver</button>`);
   }
+}
+
+// ---------------------------------------------------------------- nota de IMDb de tu colección (para predecir mejor)
+// Una sola vez por película: descarga los trozos de datos de IMDb que hagan falta y lo guarda en tu cuenta.
+async function completarNotasImdb() {
+  if (!STATIC || ro() || completarNotasImdb.hecho) return;
+  completarNotasImdb.hecho = true;
+  const faltan = S.db.peliculas.filter((p) => !p.imdbNota && /^tt\d+$/.test((p.ids || {}).imdb || ""));
+  if (!faltan.length) return;
+  const trozos = [...new Set(faltan.map((p) => p.ids.imdb.slice(-2)))];
+  const datos = {};
+  const cola = [...trozos];
+  await Promise.all([0, 1, 2, 3].map(async () => {
+    for (let t = cola.shift(); t; t = cola.shift()) {
+      try { const r = await fetch(`${WEB_FILORA()}/data/imdb/${t}.json`); if (r.ok) Object.assign(datos, await r.json()); } catch (e) { /* se reintentará otro día */ }
+    }
+  }));
+  const ahora = new Date().toISOString().slice(0, 19);
+  const cambiadas = faltan.filter((p) => datos[p.ids.imdb]).map((p) => ({ ...p, imdbNota: datos[p.ids.imdb], mod: ahora }));
+  if (!cambiadas.length) return;
+  for (let i = 0; i < cambiadas.length; i += 400) await api("sync", { method: "POST", body: { peliculas: cambiadas.slice(i, i + 400), series: [], pendientes: [] } });
+  await refreshDB();
+  if (["inicio", "recomendaciones", "estadisticas", "gustos", "cartelera", "estrenos"].includes(route().name) && $("#modal").hidden) { render._keep = true; render(); }
 }

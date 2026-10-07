@@ -116,7 +116,12 @@ function extLinks(p) {
     { n: "JustWatch", c: "#e7b32a", l: "JW", u: `https://www.justwatch.com/es/buscar?q=${q}` },
   ];
 }
-const linksHTML = (p) => `<div class="links">${extLinks(p).map((l) => `<a class="ext" href="${esc(l.u)}" target="_blank" rel="noopener"><span class="logo" style="background:${l.c}">${l.l}</span>${l.n}</a>`).join("")}</div>`;
+// Logos oficiales de cada web (app/img/logos); si no hay, la sigla sobre su color.
+const LOGOS = { FA: "filmaffinity", IMDb: "imdb", RT: "rottentomatoes", SC: "sensacine", LB: "letterboxd", JW: "justwatch" };
+const logoWeb = (sigla, color) => LOGOS[sigla]
+  ? `<img class="logo logo-img" src="img/logos/${LOGOS[sigla]}.png" alt="" width="30" height="30" loading="lazy">`
+  : `<span class="logo" style="background:${color}">${sigla}</span>`;
+const linksHTML = (p) => `<div class="links">${extLinks(p).map((l) => `<a class="ext" href="${esc(l.u)}" target="_blank" rel="noopener">${logoWeb(l.l, l.c)}${l.n}</a>`).join("")}</div>`;
 
 // ---------------------------------------------------------------- estado + API
 const S = {
@@ -177,8 +182,9 @@ async function loadAll() {
   const [db, est, cat, cart] = await Promise.all([api("db"), api("estrenos"), api("catalogo"), api("cartelera").catch(() => ({ cines: [] }))]);
   S.db = db; S.est = est; S.cat = cat; S.cartTodo = cart; S.prof = null;
   filtrarCartelera(); avisarDemanda();
+  if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500);
 }
-async function refreshDB() { S.db = await api("db"); S.prof = null; filtrarCartelera(); renderChrome(); }
+async function refreshDB() { S.db = await api("db"); S.prof = null; filtrarCartelera(); renderChrome(); if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500); }
 
 function toast(msg, ic = "check") {
   const t = $("#toast");
@@ -215,43 +221,97 @@ function profile() {
   return S.prof;
 }
 
-// predicción de nota + motivos para una película que no has visto
-function predict(item) {
-  const pr = profile();
-  let s = pr.mu;
-  const why = [];
-  const gs = item.generos || [];
+// ---------------------------------------------------------------- predicción de nota
+// Cada película se describe con: tu afinidad con sus géneros, su director y su década
+// (cuánto se separan tus notas de tu media, con prudencia si hay pocas) y su nota en IMDb.
+// El peso de cada cosa se ajusta a TUS notas (regresión ridge), así que el modelo aprende
+// si tú vas con el público o a tu aire. Validado tapando cada película y prediciéndola:
+// error medio ±0,68 frente a ±0,99 del modelo anterior y ±1,28 de adivinar tu media.
+const notaImdb = (x) => (x && (x.imdbNota || x.imdb)) || null; // [nota, votos]
+function afinidades(pr, it) {
   const W = [1, 0.7, 0.5];
-  let gsum = 0, wsum = 0, best = null, worst = null;
-  gs.forEach((g, i) => {
+  let gs = 0, ws = 0, best = null, worst = null;
+  (it.generos || []).forEach((g, i) => {
     const a = pr.genres.get(g);
-    if (!a) return;
-    gsum += a.adj * (W[i] || 0.4); wsum += W[i] || 0.4;
+    if (!a || !a.n) return;
+    gs += a.adj * (W[i] || 0.4); ws += W[i] || 0.4;
     if (!best || a.adj > best.adj) best = a;
     if (!worst || a.adj < worst.adj) worst = a;
   });
-  if (wsum) s += 1.5 * (gsum / wsum);  // pesos calibrados con validación dejando-una-fuera
-  if (best && best.adj > 0.2) why.push(`Te gusta ${frase(best.key)} (media ${fmt1(best.mean)} en ${best.n})`);
-  if (worst && worst.adj < -0.35 && worst !== best) why.push(`Ojo: ${frase(worst.key)} te suele costar (media ${fmt1(worst.mean)})`);
-  let dBest = null;
-  for (const d of splitDir(item.director)) { const a = pr.directors.get(d); if (a && (!dBest || a.adj > dBest.adj)) dBest = a; }
-  if (dBest) {
-    s += 0.6 * dBest.adj;
-    if (dBest.adj > 0.3) why.unshift(`${dBest.key}: le das una media de ${fmt1(dBest.mean)} (${dBest.n} ${dBest.n === 1 ? "película" : "películas"})`);
-    else if (dBest.adj < -0.4) why.push(`${dBest.key} no te ha convencido (media ${fmt1(dBest.mean)})`);
+  let dir = null;
+  for (const d of splitDir(it.director)) { const a = pr.directors.get(d); if (a && a.n && (!dir || a.adj > dir.adj)) dir = a; }
+  const dec = it.anio ? pr.decades.get(Math.floor(it.anio / 10) * 10) : null;
+  return { g: ws ? gs / ws : 0, d: dir ? dir.adj : 0, e: dec && dec.n ? dec.adj : 0, best, worst, dir, dec };
+}
+function vectorPrediccion(pr, it, f = afinidades(pr, it)) {
+  const r = notaImdb(it);
+  const q = r ? r[0] - pr.imdbMedia : 0, h = r ? 1 : 0, v = r && r[1] ? Math.log10(r[1]) - 5 : 0;
+  return [1, f.g, f.d, f.e, q, h, v * h];
+}
+// perfil sin una película (para entrenar sin que cada una «se vea» a sí misma)
+function sinPelicula(pr, p) {
+  const quita = (m, keys, k) => {
+    const out = new Map(m);
+    for (const key of keys) {
+      const o = m.get(key);
+      if (!o) continue;
+      const n = o.n - 1, sum = o.sum - p.nota;
+      out.set(key, n ? { ...o, n, sum, mean: sum / n, adj: (sum + k * pr.mu) / (n + k) - pr.mu } : { ...o, n: 0, sum: 0, mean: pr.mu, adj: 0 });
+    }
+    return out;
+  };
+  return { ...pr, genres: quita(pr.genres, p.generos || [], 6), directors: quita(pr.directors, splitDir(p.director), 2),
+    decades: quita(pr.decades, p.anio ? [Math.floor(p.anio / 10) * 10] : [], 6) };
+}
+function resolver(A, b) {
+  const n = b.length, M = A.map((r, i) => [...r, b[i]]);
+  for (let i = 0; i < n; i++) {
+    let m = i;
+    for (let j = i + 1; j < n; j++) if (Math.abs(M[j][i]) > Math.abs(M[m][i])) m = j;
+    [M[i], M[m]] = [M[m], M[i]];
+    for (let j = i + 1; j < n; j++) { const f = M[j][i] / M[i][i]; for (let k = i; k <= n; k++) M[j][k] -= f * M[i][k]; }
   }
-  const c = pr.countries.get(item.pais);
-  if (c) { s += 0.5 * c.adj; if (c.adj > 0.35) why.push(`El cine de ${c.key} te funciona (media ${fmt1(c.mean)})`); }
-  if (item.anio) {
-    const d = pr.decades.get(Math.floor(item.anio / 10) * 10);
-    if (d) { s += 0.8 * d.adj; if (d.adj > 0.45) why.push(`Los años ${String(d.key).slice(2)} son una de tus décadas fuertes`); }
+  const x = Array(n).fill(0);
+  for (let i = n - 1; i >= 0; i--) { let t = M[i][n]; for (let k = i + 1; k < n; k++) t -= M[i][k] * x[k]; x[i] = t / M[i][i]; }
+  return x;
+}
+function entrenarModelo(pr) {
+  const conImdb = pr.P.filter((p) => notaImdb(p));
+  pr.imdbMedia = conImdb.length ? mean(conImdb.map((p) => notaImdb(p)[0])) : 7;
+  if (pr.N < 30) return null; // con pocas notas, pesos fijos
+  const X = pr.P.map((p) => vectorPrediccion(sinPelicula(pr, p), p)), y = pr.P.map((p) => p.nota);
+  const k = X[0].length, A = Array.from({ length: k }, () => Array(k).fill(0)), b = Array(k).fill(0);
+  X.forEach((x, i) => { for (let a = 0; a < k; a++) { b[a] += x[a] * y[i]; for (let c = 0; c < k; c++) A[a][c] += x[a] * x[c]; } });
+  for (let a = 1; a < k; a++) A[a][a] += 3; // ridge: evita pesos exagerados
+  const w = resolver(A, b);
+  return w.every(Number.isFinite) ? w : null;
+}
+
+// predicción de nota + motivos para una película que no has visto
+function predict(item) {
+  const pr = profile();
+  if (pr.modelo === undefined) pr.modelo = entrenarModelo(pr);
+  const f = afinidades(pr, item);
+  const r = notaImdb(item);
+  let s;
+  if (pr.modelo) s = vectorPrediccion(pr, item, f).reduce((t, x, i) => t + x * pr.modelo[i], 0);
+  else {
+    s = pr.mu + 1.5 * f.g + 0.6 * f.d + 0.8 * f.e;
+    if (r) s += 0.5 * (r[0] - pr.imdbMedia);
+    else if (item.prestigio) s += 0.45 * (item.prestigio - 7.9);
   }
-  if (item.prestigio) {
-    s += 0.45 * (item.prestigio - 7.9);
-    if (item.prestigio >= 8.8) why.push("Imprescindible según crítica y público");
-  }
+  if (!r && item.prestigio && pr.modelo) s += 0.3 * (item.prestigio - 7.9); // recomendaciones sin dato de IMDb
+  const why = [];
+  if (f.dir && f.dir.adj > 0.3) why.push(`${f.dir.key}: le das una media de ${fmt1(f.dir.mean)} (${f.dir.n} ${f.dir.n === 1 ? "película" : "películas"})`);
+  if (r && r[0] >= 8) why.push(`Muy bien valorada en IMDb (${fmt1(r[0])})`);
+  if (f.best && f.best.adj > 0.2) why.push(`Te gusta ${frase(f.best.key)} (media ${fmt1(f.best.mean)} en ${f.best.n})`);
+  if (f.dir && f.dir.adj < -0.4) why.push(`${f.dir.key} no te ha convencido (media ${fmt1(f.dir.mean)})`);
+  if (r && r[0] < 6) why.push(`El público de IMDb la suspende (${fmt1(r[0])})`);
+  if (f.worst && f.worst.adj < -0.35 && f.worst !== f.best) why.push(`Ojo: ${frase(f.worst.key)} te suele costar (media ${fmt1(f.worst.mean)})`);
+  if (f.dec && f.dec.adj > 0.45) why.push(`Los años ${String(f.dec.key).slice(2)} son una de tus décadas fuertes`);
+  if (item.prestigio >= 8.8 && !(r && r[0] >= 8)) why.push("Imprescindible según crítica y público");
   // estrenos con poca información: menos confianza, se acercan a tu media
-  if (!item.director && !item.prestigio) s = pr.mu + (s - pr.mu) * 0.7;
+  if (!item.director && !r && !item.prestigio) s = pr.mu + (s - pr.mu) * 0.7;
   s = clamp(s, 0, 10);
   return { nota: s, pct: clamp(Math.round(50 + 46 * Math.tanh((s - pr.mu) / 2.3)), 3, 97), why: why.slice(0, 3) };
 }
@@ -676,7 +736,7 @@ function histogram(P) {
   const W = 560, H = 210, pad = 26, bw = (W - pad * 2) / 10, max = Math.max(...bins);
   return `<svg viewBox="0 0 ${W} ${H + 24}" width="100%">
     ${[0.25, 0.5, 0.75, 1].map((f) => `<line x1="${pad}" x2="${W - pad}" y1="${H - f * (H - 20)}" y2="${H - f * (H - 20)}" style="stroke:rgba(var(--fg-rgb),.05)"/>`).join("")}
-    ${bins.map((b, i) => { const h = (b / max) * (H - 20); const x = pad + i * bw; return `<g data-tip="${b} películas entre ${i} y ${i + 1}"><rect x="${x + 5}" y="${H - h}" width="${bw - 10}" height="${h}" rx="1" fill="${scoreColor(i + 0.5)}" opacity=".9"/><text x="${x + bw / 2}" y="${H - h - 7}" text-anchor="middle" font-size="12" fill="#cdbfa6">${b}</text><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="12" fill="#94867a">${i}</text></g>`; }).join("")}
+    ${bins.map((b, i) => { const h = (b / max) * (H - 20); const x = pad + i * bw; return `<g data-tip="${b} películas entre ${i} y ${i + 1}"><rect x="${x + 5}" y="${H - h}" width="${bw - 10}" height="${h}" rx="1" fill="${scoreColor(i + 0.5)}" opacity=".9"/><text x="${x + bw / 2}" y="${H - h - 7}" text-anchor="middle" font-size="12" style="fill:var(--papel-2)">${b}</text><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="12" style="fill:var(--papel-3)">${i}</text></g>`; }).join("")}
   </svg>`;
 }
 function decadeChart(pr) {
@@ -685,12 +745,12 @@ function decadeChart(pr) {
   const y = (m) => H - ((m - 3) / 7) * (H - 30);
   const pts = D.map((d, i) => `${pad + i * bw + bw / 2},${y(d.mean)}`).join(" ");
   return `<svg viewBox="0 0 ${W} ${H + 26}" width="100%">
-    ${D.map((d, i) => { const h = (d.n / max) * (H - 40); const x = pad + i * bw; return `<g data-tip="Años ${String(d.key).slice(2)}: ${d.n} películas · media ${fmt1(d.mean)}"><rect x="${x + 6}" y="${H - h}" width="${bw - 12}" height="${h}" rx="1" fill="rgba(241,230,208,.16)"/><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="11.5" fill="#94867a">${String(d.key).slice(2)}s</text></g>`; }).join("")}
+    ${D.map((d, i) => { const h = (d.n / max) * (H - 40); const x = pad + i * bw; return `<g data-tip="Años ${String(d.key).slice(2)}: ${d.n} películas · media ${fmt1(d.mean)}"><rect x="${x + 6}" y="${H - h}" width="${bw - 12}" height="${h}" rx="1" style="fill:rgba(var(--fg-rgb),.16)"/><text x="${x + bw / 2}" y="${H + 18}" text-anchor="middle" font-size="11.5" style="fill:var(--papel-3)">${String(d.key).slice(2)}s</text></g>`; }).join("")}
     <polyline points="${pts}" fill="none" stroke-width="2.5" stroke-linejoin="round" style="stroke:var(--bombilla)"/>
     ${D.map((d, i) => `<circle cx="${pad + i * bw + bw / 2}" cy="${y(d.mean)}" r="4.5" stroke-width="2.5" data-tip="Años ${String(d.key).slice(2)}: media ${fmt1(d.mean)}" style="fill:var(--sala);stroke:var(--bombilla)"/>`).join("")}
   </svg><div class="legend"><span><i style="background:rgba(var(--acento-rgb),.35)"></i>Películas vistas</span><span><i style="background:var(--bombilla)"></i>Tu nota media</span></div>`;
 }
-function scatter(P, fx, lx, domain) {
+function scatter(P, fx, lx, domain, opts = {}) {
   const W = 560, H = 240, pad = 34;
   const [x0, x1] = domain;
   const X = (v) => pad + ((v - x0) / (x1 - x0)) * (W - pad * 2);
@@ -702,10 +762,11 @@ function scatter(P, fx, lx, domain) {
   const a = my - b * mx;
   const ticks = lx(x0, x1);
   return `<svg viewBox="0 0 ${W} ${H + 22}" width="100%">
-    ${[2, 4, 6, 8, 10].map((n) => `<line x1="${pad}" x2="${W - pad}" y1="${Y(n)}" y2="${Y(n)}" style="stroke:rgba(var(--fg-rgb),.05)"/><text x="${pad - 8}" y="${Y(n) + 4}" text-anchor="end" font-size="11" fill="#94867a">${n}</text>`).join("")}
-    ${ticks.map((t) => `<text x="${X(t)}" y="${H + 16}" text-anchor="middle" font-size="11" fill="#94867a">${t}</text>`).join("")}
+    ${[2, 4, 6, 8, 10].map((n) => `<line x1="${pad}" x2="${W - pad}" y1="${Y(n)}" y2="${Y(n)}" style="stroke:rgba(var(--fg-rgb),.05)"/><text x="${pad - 8}" y="${Y(n) + 4}" text-anchor="end" font-size="11" style="fill:var(--papel-3)">${n}</text>`).join("")}
+    ${ticks.map((t) => `<text x="${X(t)}" y="${H + 16}" text-anchor="middle" font-size="11" style="fill:var(--papel-3)">${opts.etq ? opts.etq(t) : t}</text>`).join("")}
     ${pts.map((p) => `<circle cx="${X(fx(p)).toFixed(1)}" cy="${Y(p.nota).toFixed(1)}" r="3.6" fill="${scoreColor(p.nota)}" opacity=".7" data-tip="${esc(p.titulo)} (${p.anio}) · ${fmt1(p.nota)}" data-open="${p.id}" style="cursor:pointer"/>`).join("")}
-    <line x1="${X(x0)}" y1="${Y(a + b * x0)}" x2="${X(x1)}" y2="${Y(a + b * x1)}" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6" style="stroke:var(--papel)"/>
+    ${opts.diagonal ? `<line x1="${X(Math.max(x0, 0))}" y1="${Y(Math.max(x0, 0))}" x2="${X(Math.min(x1, 10))}" y2="${Y(Math.min(x1, 10))}" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6" style="stroke:var(--papel)"/>`
+      : `<line x1="${X(x0)}" y1="${Y(a + b * x0)}" x2="${X(x1)}" y2="${Y(a + b * x1)}" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6" style="stroke:var(--papel)"/>`}
   </svg>`;
 }
 VIEWS.estadisticas = (v) => {
@@ -726,6 +787,23 @@ VIEWS.estadisticas = (v) => {
   const taq = all.filter((p) => (p.taquilla || {}).mundial).sort((a, b) => b.taquilla.mundial - a.taquilla.mundial).slice(0, 10);
   const longest = [...all].filter((p) => p.duracion).sort((a, b) => b.duracion - a.duracion)[0];
   const oldest = [...all].filter((p) => p.anio).sort((a, b) => a.anio - b.anio)[0];
+  // tú frente al público (IMDb)
+  const conI = P.filter((p) => notaImdb(p));
+  const dif = (p) => p.nota - notaImdb(p)[0];
+  const corr = (() => {
+    if (conI.length < 10) return null;
+    const xs = conI.map((p) => notaImdb(p)[0]), ys = conI.map((p) => p.nota), mx = mean(xs), my = mean(ys);
+    const sxy = xs.reduce((t, x, i) => t + (x - mx) * (ys[i] - my), 0), sx = Math.sqrt(xs.reduce((t, x) => t + (x - mx) ** 2, 0)), sy = Math.sqrt(ys.reduce((t, y) => t + (y - my) ** 2, 0));
+    return sxy / (sx * sy || 1);
+  })();
+  const media_dif = conI.length ? mean(conI.map(dif)) : 0;
+  const defiendes = [...conI].sort((a, b) => dif(b) - dif(a)).slice(0, 6);
+  const contra = [...conI].sort((a, b) => dif(a) - dif(b)).slice(0, 6);
+  const coincide = conI.length ? conI.filter((p) => Math.abs(dif(p)) <= 1).length / conI.length : 0;
+  const filaDif = (p) => `<tr class="click" data-open="${p.id}"><td>${esc(p.titulo)} <span class="dim">${p.anio || ""}</span></td><td class="r dim">${fmt1(notaImdb(p)[0])}</td><td class="r">${scoreBadge(p.nota)}</td><td class="r" style="color:${dif(p) >= 0 ? "var(--salida)" : "var(--telon-2)"};font-weight:700">${dif(p) >= 0 ? "+" : ""}${fmt1(dif(p))}</td></tr>`;
+  const conTaq = P.filter((p) => (p.taquilla || {}).mundial > 1e6);
+  const porAnio = {};
+  for (const p of all) if (p.añadido && /^\d{4}/.test(p.añadido) && ["app", "web", "imdb", "letterboxd", "csv"].includes(p.origen)) porAnio[p.añadido.slice(0, 4)] = (porAnio[p.añadido.slice(0, 4)] || 0) + 1;
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Tus números</h1><p>Todo lo que dice tu colección, calculado en directo. Pasa el ratón por los gráficos para ver el detalle.</p></div></div>
   <div class="kpis">
@@ -735,6 +813,7 @@ VIEWS.estadisticas = (v) => {
     <div class="card kpi"><div class="l">Obras maestras</div><div class="v">${P.filter((p) => p.nota >= 9).length}</div><div class="s">con 9 o más</div></div>
     <div class="card kpi"><div class="l">Suspensos</div><div class="v">${P.filter((p) => p.nota < 5).length}</div><div class="s">${Math.round((100 * P.filter((p) => p.nota < 5).length) / P.length)}% del total</div></div>
     <div class="card kpi"><div class="l">La más larga</div><div class="v">${longest ? longest.duracion : "–"}′</div><div class="s">${esc(longest?.titulo || "")}</div></div>
+    ${corr != null ? `<div class="card kpi"><div class="l">Sintonía con IMDb</div><div class="v">${Math.round(coincide * 100)}%</div><div class="s">a menos de 1 punto · ${media_dif >= 0 ? "pones " + fmt1(media_dif) + " más" : "pones " + fmt1(-media_dif) + " menos"} de media</div></div>` : ""}
     <div class="card kpi"><div class="l">La más antigua</div><div class="v">${oldest?.anio || "–"}</div><div class="s">${esc(oldest?.titulo || "")}</div></div>
   </div>
   <div class="charts section" style="margin-top:22px">
@@ -746,14 +825,20 @@ VIEWS.estadisticas = (v) => {
       ${hbars(C.map((g) => ({ label: g.key, value: g.n, color: scoreColor(g.mean), right: `${g.n} ${scoreBadge(g.mean)}`, tip: `${g.key}: media ${fmt1(g.mean)}`, href: `#/coleccion?country=${encodeURIComponent(g.key)}` })))}
       <div class="sub">Tus directores (mín. 3 películas)</div>
       <table class="tbl"><tbody>${Dir.slice(0, 8).map((d) => `<tr class="click" onclick="location.hash='#/coleccion?q=${encodeURIComponent(d.key)}'"><td>${esc(d.key)}</td><td class="r dim">${d.n}</td><td class="r">${scoreBadge(d.mean)}</td></tr>`).join("")}</tbody></table></div>
+    ${conI.length >= 10 ? `<div class="card chart"><h3>Tú frente al público</h3><div class="cap">Nota de IMDb frente a la tuya · sobre la línea, te gustó más que a la media${corr != null ? ` · correlación ${fmt2(corr)}` : ""}</div>${scatter(conI, (p) => notaImdb(p)[0], () => [4, 5, 6, 7, 8, 9], [3.5, 9.5], { diagonal: true })}</div>
+    <div class="card chart"><h3>Donde vas a tu aire</h3><div class="cap">Las que más defiendes y las que menos, comparadas con IMDb</div>
+      <div class="sub" style="margin-top:4px">Las defiendes más que nadie</div><table class="tbl"><thead><tr><th>Película</th><th class="r">IMDb</th><th class="r">Tú</th><th class="r">Dif.</th></tr></thead><tbody>${defiendes.map(filaDif).join("")}</tbody></table>
+      <div class="sub">Vas contra corriente</div><table class="tbl"><tbody>${contra.map(filaDif).join("")}</tbody></table></div>` : ""}
     <div class="card chart"><h3>¿Te gustan más las largas?</h3><div class="cap">Duración (min) frente a tu nota · la línea es la tendencia</div>${scatter(P, (p) => p.duracion, () => [80, 100, 120, 140, 160, 180, 200], [70, 210])}</div>
     <div class="card chart"><h3>¿Antiguas o modernas?</h3><div class="cap">Año de estreno frente a tu nota</div>${scatter(P, (p) => p.anio, () => [1940, 1960, 1980, 2000, 2020], [1935, 2027])}</div>
-    <div class="card chart"><h3>Universo Marvel por fases</h3><div class="cap">Tu nota media en cada fase del UCM</div>
+    ${conTaq.length >= 15 ? `<div class="card chart"><h3>¿Te van los taquillazos?</h3><div class="cap">Recaudación mundial (escala logarítmica, en millones de $) frente a tu nota</div>${scatter(conTaq, (p) => Math.log10(p.taquilla.mundial / 1e6), () => [0, 1, 2, 3], [-0.2, 3.4], { etq: (t) => ["1", "10", "100", "1.000"][t] })}</div>` : ""}
+    ${Object.keys(porAnio).length >= 2 ? `<div class="card chart"><h3>Tu ritmo</h3><div class="cap">Películas añadidas cada año desde que usas Filora</div>${hbars(Object.entries(porAnio).sort().map(([a, n]) => ({ label: a, value: n })))}</div>` : ""}
+    ${ucm.length >= 3 ? `<div class="card chart"><h3>Universo Marvel por fases</h3><div class="cap">Tu nota media en cada fase del UCM</div>
       ${hbars(fases.map((f) => ({ label: f.f.replace(/ · .*/, ""), value: mean(f.L.map((p) => p.nota)), color: scoreColor(mean(f.L.map((p) => p.nota))), right: fmt1(mean(f.L.map((p) => p.nota))), tip: f.f })), { max: 10 })}
-      <p class="dim" style="font-size:12.5px;margin-top:14px">${ucm.length} películas del UCM vistas · media ${fmt1(mean(ucm.map((p) => p.nota)))}</p></div>
-    <div class="card chart w12"><h3>Las más taquilleras que has visto</h3><div class="cap">Recaudación mundial y tu nota</div>
+      <p class="dim" style="font-size:12.5px;margin-top:14px">${ucm.length} películas del UCM vistas · media ${fmt1(mean(ucm.map((p) => p.nota)))}</p></div>` : ""}
+    ${taq.length ? `<div class="card chart w12"><h3>Las más taquilleras que has visto</h3><div class="cap">Recaudación mundial y tu nota</div>
       <table class="tbl"><thead><tr><th>Película</th><th class="r">Año</th><th class="r">Mundial</th><th class="r">Tu nota</th></tr></thead><tbody>
-      ${taq.map((p) => `<tr class="click" data-open="${p.id}"><td>${esc(p.titulo)}</td><td class="r dim">${p.anio}</td><td class="r">${money(p.taquilla.mundial)}</td><td class="r">${scoreBadge(p.nota)}</td></tr>`).join("")}</tbody></table></div>
+      ${taq.map((p) => `<tr class="click" data-open="${p.id}"><td>${esc(p.titulo)}</td><td class="r dim">${p.anio}</td><td class="r">${money(p.taquilla.mundial)}</td><td class="r">${scoreBadge(p.nota)}</td></tr>`).join("")}</tbody></table></div>` : ""}
   </div>`;
 };
 
@@ -818,7 +903,7 @@ function radar(pr) {
     ${G.map((_, i) => `<line x1="${cx}" y1="${cy}" x2="${pt(i, R)[0]}" y2="${pt(i, R)[1]}" style="stroke:rgba(var(--fg-rgb),.06)"/>`).join("")}
     <polygon points="${avgPoly}" fill="none" stroke-dasharray="4 4" style="stroke:rgba(var(--fg-rgb),.35)"/>
     <polygon points="${poly}" stroke-width="2" style="fill:rgba(var(--acento-rgb),.2);stroke:var(--bombilla)"/>
-    ${G.map((g, i) => { const [x, y] = pt(i, R * val(g)); const [lx, ly] = pt(i, R + 26); return `<circle cx="${x}" cy="${y}" r="4" data-tip="${g.key}: ${fmt1(g.mean)} (${g.n} películas)" style="fill:var(--bombilla)"/><text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="11.5" fill="#cdbfa6">${g.key}</text>`; }).join("")}
+    ${G.map((g, i) => { const [x, y] = pt(i, R * val(g)); const [lx, ly] = pt(i, R + 26); return `<circle cx="${x}" cy="${y}" r="4" data-tip="${g.key}: ${fmt1(g.mean)} (${g.n} películas)" style="fill:var(--bombilla)"/><text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="11.5" style="fill:var(--papel-2)">${g.key}</text>`; }).join("")}
   </svg>`;
 }
 VIEWS.gustos = (v) => {
@@ -906,7 +991,7 @@ VIEWS.recomendaciones = (v) => {
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Para ti</h1>
     <p>Películas que no tienes registradas, ordenadas por la nota que <b>predigo que les darías</b> según tus géneros, directores, países y épocas favoritos. El % es tu afinidad.</p>
-    <p class="dim" style="font-size:12.5px">Probado con tus propias notas (tapando cada película y prediciéndola): el modelo se desvía de media ±1,0 puntos, frente a ±1,3 si adivinara siempre tu media.</p></div></div>
+    <p class="dim" style="font-size:12.5px">Probado con tus propias notas (tapando cada película y prediciéndola): el modelo acierta con un error medio de ±0,7 puntos, frente a ±1,3 si adivinara siempre tu media. Aprende de tus notas y de la nota de IMDb de cada película.</p></div></div>
   <div class="toolbar" style="position:static">
     <div class="chips" id="rg"><button class="chip ${!f.genre ? "on" : ""}" data-g="">Todo</button>${GENEROS.filter((g) => S.cat.some((c) => c.generos.includes(g))).map((g) => `<button class="chip ${f.genre === g ? "on" : ""}" data-g="${g}">${g}</button>`).join("")}</div>
     <div class="seg" id="re">${[["", "Todas"], ["clasicos", "Clásicos"], ["modernas", "1990–2019"], ["recientes", "2020+"]].map(([k, l]) => `<button data-e="${k}" class="${f.era === k ? "on" : ""}">${l}</button>`).join("")}</div>
@@ -963,9 +1048,9 @@ function openRel(key) {
       <div class="links">${misCines().length ? misCines().map((c) => `<a class="ext" href="https://www.filmaffinity.com/es/theater-showtimes.php?id=${c.id}" target="_blank" rel="noopener"><span class="logo" style="background:#2a2a36">${icon("ticket")}</span>${esc(c.nombre)}</a>`).join("") : `<a class="ext" href="#" data-cines><span class="logo" style="background:#2a2a36">${icon("pin")}</span>Elegir mis cines</a>`}</div>`}
       <div class="sub">Más info</div>
       <div class="links">
-        <a class="ext" href="${e.fa ? `https://www.filmaffinity.com/es/film${e.fa}.html` : `https://www.filmaffinity.com/es/search.php?stext=${q}`}" target="_blank" rel="noopener"><span class="logo" style="background:#1d4d8c">FA</span>FilmAffinity</a>
-        <a class="ext" href="https://www.sensacine.com/buscar/?q=${q}" target="_blank" rel="noopener"><span class="logo" style="background:#e30613">SC</span>SensaCine</a>
-        <a class="ext" href="https://www.imdb.com/es-es/find/?q=${encodeURIComponent(e.original || e.titulo)}" target="_blank" rel="noopener"><span class="logo" style="background:#c9a200">IMDb</span>IMDb</a>
+        <a class="ext" href="${e.fa ? `https://www.filmaffinity.com/es/film${e.fa}.html` : `https://www.filmaffinity.com/es/search.php?stext=${q}`}" target="_blank" rel="noopener">${logoWeb("FA")}FilmAffinity</a>
+        <a class="ext" href="https://www.sensacine.com/buscar/?q=${q}" target="_blank" rel="noopener">${logoWeb("SC")}SensaCine</a>
+        <a class="ext" href="https://www.imdb.com/es-es/find/?q=${encodeURIComponent(e.original || e.titulo)}" target="_blank" rel="noopener">${logoWeb("IMDb")}IMDb</a>
         <a class="ext" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.titulo + " tráiler español")}" target="_blank" rel="noopener"><span class="logo" style="background:#c4302b">${icon("play")}</span>Tráiler</a>
       </div>
       <div class="dl-actions"><button class="btn btn-primary" data-relwant="${esc(key)}">${icon("bookmark")}Quiero verla</button><button class="btn" data-relseen="${esc(key)}">${icon("eye")}Ya la vi</button></div>
@@ -1103,7 +1188,7 @@ function openSerie(id) {
           ${rank ? `<div class="dim" style="font-size:12.5px">Puesto ${rank} de ${rated.length} entre tus series</div>` : ""}</div></div>
         ${s.resena ? `<blockquote class="review">${esc(s.resena)}</blockquote>` : ""}
         <div class="sub">Ver en</div>
-        <div class="links">${seriesLinks(s).map((l) => `<a class="ext" href="${esc(l.u)}" target="_blank" rel="noopener"><span class="logo" style="background:${l.c}">${l.l}</span>${l.n}</a>`).join("")}</div>
+        <div class="links">${seriesLinks(s).map((l) => `<a class="ext" href="${esc(l.u)}" target="_blank" rel="noopener">${logoWeb(l.l, l.c)}${l.n}</a>`).join("")}</div>
         <div class="dl-actions"><button class="btn" data-sedit="${s.id}">${icon("edit")}Editar</button><button class="btn btn-ghost btn-danger" data-sdel="${s.id}">${icon("trash")}Eliminar</button></div>
       </div></div>
       ${parecidas.length ? `<div class="sub" style="margin-top:34px">Otras ${esc((s.tipo || "serie").toLowerCase())}s${s.animacion ? " de animación" : ""} que te gustaron</div><div class="strip">${parecidas.map(card).join("")}</div>` : ""}
