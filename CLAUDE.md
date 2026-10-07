@@ -4,7 +4,7 @@ App local para llevar el registro de las películas que veo, con Excel sincroniz
 
 - Fuente de verdad: `data/db.json`. El Excel `Filora.xlsx` se regenera solo en cada cambio (no editarlo mientras la app escribe; si se edita a mano, importarlo desde Ajustes o `python tools/excel.py importar`).
 - El Excel original del usuario (`C:\Users\PC GAMING\Downloads\Películas.xlsx`) NO se toca nunca.
-- Proyecto en `C:\AI\PROYECTOS\pelis` · repo https://github.com/MCIFU/mi-cinemateca
+- Proyecto en `C:\AI\PROYECTOS\pelis` · repo https://github.com/MCIFU/Filora
 - Arrancar: `Iniciar.bat` o `python server.py` → http://localhost:8765
 - Registrar desde el chat: `python tools/pelis.py vista "<título>" <nota> --lugar "<cine o plataforma>" --resena "..."`
   (autocompleta datos y póster con Wikidata, quita de pendientes, hace copia y regenera el Excel).

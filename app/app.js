@@ -150,7 +150,7 @@ async function api(path, opts = {}) {
     if (method === "GET" && (path === "cartelera" || path === "estrenos")) {
       // se actualizan cada día en GitHub: se leen de allí para no depender de un nuevo despliegue
       try {
-        const r = await fetch(`https://raw.githubusercontent.com/MCIFU/mi-cinemateca/main/data/${path}.json`, { cache: "no-cache" });
+        const r = await fetch(`https://raw.githubusercontent.com/MCIFU/Filora/main/data/${path}.json`, { cache: "no-cache" });
         if (r.ok) return await r.json();
       } catch (e) { /* sin conexión con GitHub: copia publicada */ }
     }
