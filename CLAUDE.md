@@ -22,3 +22,4 @@ App local para llevar el registro de las películas que veo, con Excel sincroniz
 - Enlace directo a una ficha: `#/coleccion?ficha=<id>`.
 
 - Cuentas (web): `/api/registro` y `/api/entrar` devuelven una sesión firmada (`lib/cuentas.mjs`, scrypt + HMAC, 180 días). Cada usuario tiene `filora/usuarios/<usuario>/<carpeta aleatoria>/datos.json` en Blob; sin sesión se sirve la colección del dueño. Opcional: variable `AUTH_SECRET` (si no, se genera y guarda en Blob). Pruebas: `npm test`.
+- Privacidad: sin sesión `/api/db` devuelve una colección vacía; `build_static.py` ya no publica `app/data/db.json`; `data/db.json` solo va dentro de la función (`includeFiles`). La cuenta `OWNER_USER` (mcifu) exige el PIN al registrarse y lee/escribe `filora/db.json`. El bot diario ya no hace copia de la colección.

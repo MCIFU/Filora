@@ -26,6 +26,7 @@ export async function resolve(s, c, next) {
 }`));
 process.env.BLOB_READ_WRITE_TOKEN = "falso";
 process.env.EDIT_PIN = "4321";
+process.env.OWNER_USER = "mcifu";
 const { almacen } = await import("./blob-falso.mjs");
 const real = globalThis.fetch;
 globalThis.fetch = async (u, o) => {
@@ -34,7 +35,6 @@ globalThis.fetch = async (u, o) => {
     const v = almacen.get(decodeURIComponent(s.slice(18).split("?")[0]));
     return v == null ? new Response("", { status: 404 }) : new Response(v);
   }
-  if (s.endsWith("/data/db.json")) return new Response(JSON.stringify({ peliculas: [{ id: "p1", titulo: "Origen" }], series: [], pendientes: [] }));
   return real(u, o);
 };
 const { GET, POST, PUT, DELETE } = await import("../api/filora.js");
@@ -77,9 +77,26 @@ assert.equal(r.j.peliculas.length, 0);
 r = await llamar(GET, "db", { token: tokMarta });
 assert.deepEqual(r.j.peliculas.map((p) => [p.titulo, p.nota]), [["Amélie", 9.5]]);
 
-// sin sesión se ve la colección pública, que no cambia
+// sin sesión no se ve ninguna colección
 r = await llamar(GET, "db");
-assert.deepEqual(r.j.peliculas.map((p) => p.titulo), ["Origen"]);
+assert.equal(r.j.peliculas.length, 0, "sin cuenta no se ve nada");
+assert.equal(r.j.estado.privada, true);
+
+// la cuenta del dueño solo se crea con el PIN y recibe su colección de siempre
+r = await llamar(POST, "registro", { cuerpo: { usuario: "MCIFU", clave: "una-clave" } });
+assert.equal(r.status, 403);
+assert.equal(r.j.pedirPin, true);
+r = await llamar(POST, "registro", { cuerpo: { usuario: "MCIFU", clave: "una-clave", pin: "0000" } });
+assert.equal(r.status, 403, "PIN incorrecto");
+r = await llamar(POST, "registro", { cuerpo: { usuario: "MCIFU", clave: "una-clave", pin: "4321" } });
+assert.equal(r.status, 201);
+const tokDueno = r.j.token;
+r = await llamar(GET, "db", { token: tokDueno });
+assert.ok(r.j.peliculas.length > 100, "el dueño ve su colección");
+r = await llamar(POST, "peliculas", { cuerpo: { titulo: "Prueba del dueño", nota: 7 }, token: tokDueno });
+assert.ok(almacen.has("filora/db.json"), "se guarda en la colección del dueño (la que sincroniza el PC)");
+r = await llamar(GET, "db", { token: tokMarta });
+assert.ok(!r.j.peliculas.some((p) => p.titulo === "Prueba del dueño"), "otros no la ven");
 
 // sesión falsa
 r = await llamar(GET, "db", { token: tokMarta.slice(0, -2) + "xx" });

@@ -1,15 +1,20 @@
-// API de Filora en Vercel.
-// - Sin sesión: la colección pública del dueño (lectura); el dueño edita con su PIN.
-// - Con cuenta (usuario y contraseña): cada usuario lee y edita solo su colección.
+// API de Filora en Vercel. Todas las colecciones son privadas:
+// - Sin sesión no se ve ninguna colección (solo cartelera, estrenos y recomendaciones).
+// - Con cuenta (usuario y contraseña) cada usuario lee y edita solo la suya.
+// - La cuenta del dueño (OWNER_USER, por defecto "mcifu") usa su colección de siempre
+//   (filora/db.json, la que sincroniza el PC con el PIN); para crearla hace falta el PIN.
 // Los datos se guardan en Vercel Blob. Las cuentas y colecciones de usuario van en
 // rutas con una parte aleatoria, así que sus direcciones no se pueden adivinar.
 // Rutas (vercel.json): /api/<ruta> -> ?ruta=<ruta>
 import { randomBytes } from "node:crypto";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { head, list, put } from "@vercel/blob";
 import { COLECCIONES, actualizar, borrar, crear, fusionar, pinValido } from "../lib/filora.mjs";
 import { claveValida, crearSesion, hashClave, leerSesion, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
 
 const CLAVE = "filora/db.json";
+const DUENO = (process.env.OWNER_USER || "mcifu").toLowerCase();
 const hayAlmacen = () => !!process.env.BLOB_READ_WRITE_TOKEN;
 
 const json = (data, status = 200) =>
@@ -21,7 +26,9 @@ const leerJSON = async (url) => {
   return r.ok ? r.json() : null;
 };
 
-async function cargar(req) {
+// Colección del dueño: la guardada en Blob o, la primera vez, la copia del repositorio
+// (data/db.json va dentro de la función, no se publica en la web).
+async function cargar() {
   if (hayAlmacen()) {
     try {
       const h = await head(CLAVE);
@@ -31,9 +38,11 @@ async function cargar(req) {
       /* aún no hay nada guardado */
     }
   }
-  const r = await fetch(new URL("/data/db.json", req.url));
-  if (!r.ok) throw new Error("No hay datos iniciales");
-  return r.json();
+  try {
+    return JSON.parse(await readFile(join(process.cwd(), "data", "db.json"), "utf-8"));
+  } catch (e) {
+    return nuevaColeccion();
+  }
 }
 
 const guardar = (db, ruta = CLAVE) =>
@@ -54,9 +63,10 @@ async function leerCuenta(usuario) {
   return blobs[0] ? leerJSON(blobs[0].url) : null;
 }
 
-const rutaDatos = (c) => `filora/usuarios/${c.usuario}/${c.carpeta}/datos.json`;
+const rutaDatos = (c) => (c.dueno ? CLAVE : `filora/usuarios/${c.usuario}/${c.carpeta}/datos.json`);
 
 async function cargarUsuario(c) {
+  if (c.dueno) return cargar();
   try {
     const h = await head(rutaDatos(c));
     return (await leerJSON(h.url)) || nuevaColeccion();
@@ -80,9 +90,14 @@ async function registroOEntrada(req, accion) {
   const cuenta = await leerCuenta(usuario);
   if (accion === "registro") {
     if (cuenta) return json({ error: "Ese usuario ya existe. Prueba con otro o entra con tu contraseña." }, 409);
-    const nueva = { usuario, clave: hashClave(b.clave), carpeta: randomBytes(12).toString("hex"), creado: new Date().toISOString() };
+    const dueno = usuario === DUENO;
+    if (dueno && !pinValido(String(b.pin || ""), process.env.EDIT_PIN)) {
+      await espera(800);
+      return json({ error: "Este usuario es el del dueño: escribe también tu PIN para crearlo.", pedirPin: true }, 403);
+    }
+    const nueva = { usuario, clave: hashClave(b.clave), carpeta: randomBytes(12).toString("hex"), creado: new Date().toISOString(), ...(dueno ? { dueno: true } : {}) };
     await put(`filora/usuarios/${usuario}/cuenta.json`, JSON.stringify(nueva), { access: "public", addRandomSuffix: true, contentType: "application/json" });
-    await guardar(nuevaColeccion(), rutaDatos(nueva));
+    if (!dueno) await guardar(nuevaColeccion(), rutaDatos(nueva));
     return json({ usuario, token: crearSesion(usuario, await secreto()) }, 201);
   }
   if (!cuenta || !verificarClave(b.clave, cuenta.clave)) {
@@ -140,12 +155,11 @@ async function manejar(req) {
       return await operar(req, partes, db, (d) => guardar(d, rutaDatos(cuenta)));
     }
 
-    // ---- colección pública del dueño (lectura libre, edición con PIN)
-    if (req.method === "GET" && partes[0] === "db") {
-      const db = await cargar(req);
-      return json({ ...db, estado: { web: true, edicion: !!process.env.EDIT_PIN && hayAlmacen(), cuentas: hayAlmacen() } });
-    }
+    // ---- sin cuenta: ninguna colección (es privada); el PC del dueño entra con el PIN
     const pinCorrecto = process.env.EDIT_PIN;
+    if (req.method === "GET" && partes[0] === "db" && !req.headers.get("x-pin")) {
+      return json({ ...nuevaColeccion(), estado: { web: true, privada: true, cuentas: hayAlmacen() } });
+    }
     if (!pinCorrecto) return json({ error: "La edición no está activada: falta la variable EDIT_PIN en Vercel." }, 403);
     if (!pinValido(req.headers.get("x-pin"), pinCorrecto)) {
       await espera(800); // frena intentos a ciegas
@@ -153,7 +167,8 @@ async function manejar(req) {
     }
     if (!hayAlmacen()) return json({ error: "Falta conectar el almacenamiento: en Vercel, Storage → Create → Blob." }, 503);
     if (req.method === "POST" && partes[0] === "login") return json({ ok: true });
-    return await operar(req, partes, await cargar(req), (d) => guardar(d));
+    if (req.method === "GET" && partes[0] === "db") return json({ ...(await cargar()), estado: { web: true, edicion: true } });
+    return await operar(req, partes, await cargar(), (d) => guardar(d));
   } catch (e) {
     console.error(e);
     return json({ error: e instanceof Error ? e.message : "Error" }, 500);

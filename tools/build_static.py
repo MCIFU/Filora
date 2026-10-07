@@ -1,6 +1,8 @@
 """Genera la versión web de solo lectura (para Netlify u otro hosting estático).
 
-    python tools/build_static.py   ->  app/data/{db,estrenos,catalogo}.json
+    python tools/build_static.py   ->  app/data/{estrenos,catalogo,cartelera}.json
+
+La colección (data/db.json) NO se publica: es privada y solo la sirve la API a su dueño.
 
 Netlify lo ejecuta en cada despliegue (ver netlify.toml), así la web pública
 siempre muestra lo último que hayas subido a GitHub. No necesita librerías.
@@ -18,16 +20,14 @@ OUT = ROOT / "app" / "data"
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    db = json.loads((ROOT / "data" / "db.json").read_text(encoding="utf-8"))
-    db.pop("estado", None)
-    db.pop("config", None)
+    (OUT / "db.json").unlink(missing_ok=True)
     est = json.loads((ROOT / "data" / "estrenos.json").read_text(encoding="utf-8"))
     cart_path = ROOT / "data" / "cartelera.json"
     cart = json.loads(cart_path.read_text(encoding="utf-8")) if cart_path.exists() else {"cines": []}
-    files = {"db.json": db, "estrenos.json": est, "catalogo.json": load_catalog(), "cartelera.json": cart}
+    files = {"estrenos.json": est, "catalogo.json": load_catalog(), "cartelera.json": cart}
     for name, data in files.items():
         (OUT / name).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"Web estática lista en app/data: {len(db['peliculas'])} películas, "
+    print(f"Web estática lista en app/data (sin colección, es privada): "
           f"{len(est.get('estrenos', []))} estrenos, {len(files['catalogo.json'])} recomendaciones")
 
 

@@ -140,7 +140,8 @@ const setSes = (s) => { try { s ? localStorage.setItem(SES_KEY, JSON.stringify(s
 const ro = () => STATIC && !getPin() && !getSes(); // solo lectura: web publicada sin cuenta ni PIN
 const authHeaders = () => { const ses = getSes(); return ses ? { Authorization: `Bearer ${ses.token}` } : getPin() ? { "X-Pin": getPin() } : {}; };
 document.documentElement.classList.toggle("ro", ro());
-const STATIC_FILES = { db: "data/db.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
+const STATIC_FILES = { estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
+const coleccionVacia = () => ({ peliculas: [], series: [], pendientes: [], borrados: {}, estado: { web: true, privada: true } });
 
 async function api(path, opts = {}) {
   if (STATIC) {
@@ -151,7 +152,8 @@ async function api(path, opts = {}) {
         const r = await fetch("/api/db", { cache: "no-store", headers: authHeaders() });
         if (r.ok) return r.json();
         if (r.status === 401 && getSes()) { setSes(null); document.documentElement.classList.toggle("ro", ro()); toast("Tu sesión ha caducado. Vuelve a entrar", "user"); return api("db"); }
-      } catch (e) { /* sin función: copia estática */ }
+      } catch (e) { /* sin conexión con la API */ }
+      return coleccionVacia(); // las colecciones son privadas: sin cuenta no se publica ninguna
     }
     if (method === "GET" && (path === "cartelera" || path === "estrenos")) {
       // se actualizan cada día en GitHub: se leen de allí para no depender de un nuevo despliegue
@@ -298,7 +300,7 @@ function renderChrome() {
     $("#sideFoot").innerHTML = ses
       ? `<b style="color:var(--gold)">Hola, ${esc(ses.usuario)}</b><br><span class="dim">Tu colección se guarda en tu cuenta y la ves en cualquier dispositivo</span><br><a href="#" data-logout class="dim" style="text-decoration:underline">Salir</a>`
       : ro()
-      ? `<b>Colección de muestra</b><br><span class="dim">Solo lectura${f ? ` · actualizada el ${f}` : ""}</span><br><a href="#" data-login class="dim" style="text-decoration:underline">Crea tu cuenta o entra</a>`
+      ? `<b>Tu colección es privada</b><br><span class="dim">Crea una cuenta o entra para verla y editarla</span><br><a href="#" data-login class="dim" style="text-decoration:underline">Entrar</a>`
       : `<b style="color:var(--gold)">Modo edición</b><br><span class="dim">Los cambios se guardan en la web y llegan a tu PC</span><br><a href="#" data-logout class="dim" style="text-decoration:underline">Salir</a>`;
     const c = $("#cuenta");
     if (c) {
@@ -367,13 +369,18 @@ VIEWS.inicio = (v) => {
     <div class="reels" aria-hidden="true">${tiras.map(tira).join("")}</div>
     <div class="hero-content">
       <h1><span>Filora</span></h1>
-      <p class="hero-lead">${vacia
+      <p class="hero-lead">${vacia && ro()
+        ? `Tu diario de cine privado. Guarda las películas que ves con tu nota, descubre tus gustos y recibe recomendaciones. Mira la cartelera de Gijón sin registrarte.`
+        : vacia
         ? `Tu diario de cine empieza aquí. Añade las películas que has visto con tu nota y Filora aprenderá tus gustos para recomendarte qué ver.`
         : `<b>${fmtInt(pelis.length)}</b> películas, <b>${fmtInt(horas)}</b> horas a oscuras y una nota para cada una. La media va por <b>${fmt2(pr.mu)}</b>.`}</p>
-      <div class="hero-actions">
+      <div class="hero-actions">${ro() ? `
+        <a class="btn btn-primary" href="#" data-login="crear">Crear cuenta</a>
+        <a class="btn" href="#" data-login="entrar">Entrar</a>
+        <a class="btn" href="#/cartelera">Ver la cartelera</a>` : `
         <a class="btn btn-primary rw" href="#/anadir">${vacia ? "Añadir mi primera película" : "Añadir película"}</a>
         <a class="btn" href="#/coleccion">Ver la colección</a>
-        <a class="btn" href="#/recomendaciones">¿Qué veo hoy?</a>
+        <a class="btn" href="#/recomendaciones">¿Qué veo hoy?</a>`}
       </div>
     </div>
   </section>
@@ -1420,13 +1427,13 @@ function openLogin(modo = "entrar") {
       <label class="lbl" for="cPass" style="margin-top:12px">Contraseña</label>
       <input class="input" id="cPass" name="password" type="password" autocomplete="${crear ? "new-password" : "current-password"}" placeholder="${crear ? "Mínimo 6 caracteres" : ""}">
       ${crear ? `<label class="lbl" for="cPass2" style="margin-top:12px">Repite la contraseña</label><input class="input" id="cPass2" type="password" autocomplete="new-password">` : ""}
+      <div id="cPinBox" hidden><label class="lbl" for="cPinIn" style="margin-top:12px">PIN del dueño</label><input class="input" id="cPinIn" type="password" inputmode="numeric" autocomplete="off"></div>
       <p id="cErr" role="alert" style="color:var(--red);min-height:22px;margin:10px 0 6px"></p>
       <button class="btn btn-primary" id="cBtn" style="width:100%;justify-content:center">${icon(crear ? "plus" : "check")}${crear ? "Crear cuenta" : "Entrar"}</button>
     </form>
-    <p class="dim" style="margin:18px 0 0;font-size:13px;text-align:center"><a href="#" id="cPin" style="text-decoration:underline">¿Eres el dueño de la colección pública? Entrar con PIN</a></p></div>`, "narrow");
+    </div>`, "narrow");
   setTimeout(() => $("#cUser").focus(), 60);
   document.querySelectorAll(".cuenta-f [data-modo]").forEach((b) => (b.onclick = () => openLogin(b.dataset.modo)));
-  $("#cPin").onclick = (ev) => { ev.preventDefault(); openPin(); };
   const err = (m) => ($("#cErr").textContent = m);
   ["cUser", "cPass", "cPass2"].forEach((id) => { const el = document.getElementById(id); if (el) el.oninput = () => err(""); });
   $("#cuentaF").onsubmit = async (ev) => {
@@ -1437,8 +1444,10 @@ function openLogin(modo = "entrar") {
     if (crear && clave !== $("#cPass2").value) return err("Las contraseñas no coinciden.");
     const b = $("#cBtn"); b.disabled = true;
     try {
-      const r = await fetch(`/api/${crear ? "registro" : "entrar"}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ usuario, clave }) });
+      const pin = $("#cPinIn").value.trim();
+      const r = await fetch(`/api/${crear ? "registro" : "entrar"}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ usuario, clave, ...(pin ? { pin } : {}) }) });
       const j = await r.json().catch(() => ({}));
+      if (j.pedirPin) { $("#cPinBox").hidden = false; $("#cPinIn").focus(); }
       if (!r.ok) return err(j.error || "No se ha podido conectar. Inténtalo de nuevo.");
       setSes({ usuario: j.usuario, token: j.token });
       try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ }
@@ -1741,7 +1750,7 @@ document.addEventListener("click", async (e) => {
   const t = e.target.closest("[data-open],[data-cat],[data-rel],[data-edit],[data-del],[data-fav],[data-close],[data-action],[data-want],[data-seen],[data-nope],[data-wseen],[data-wdel],[data-relwant],[data-relseen],[data-serie],[data-sedit],[data-sdel],[data-more],[data-cday],[data-ccine],[data-login],[data-logout],[data-cuenta]");
   if (!t) return;
   const d = t.dataset;
-  if (d.login !== undefined) { e.preventDefault(); return openLogin(); }
+  if (d.login !== undefined) { e.preventDefault(); return openLogin(d.login === "crear" ? "crear" : "entrar"); }
   if (d.cuenta !== undefined) { e.preventDefault(); return openCuenta(); }
   if (d.logout !== undefined) { e.preventDefault(); closeModal(); return logout(); }
   if (ro() && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "sedit", "sdel"].some((k) => d[k] !== undefined)) return;
