@@ -4,55 +4,6 @@
   "FilmAffinity (próximos estrenos en España)"
  ],
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
- "cines": [
-  {
-   "id": "ocine-fresnos",
-   "nombre": "Ocine Premium Los Fresnos",
-   "ciudad": "Gijón",
-   "direccion": "C.C. Los Fresnos, C/ Río de Oro 3",
-   "web": "https://www.ocinepremiumlosfresnos.es/",
-   "filmaffinity": "https://www.filmaffinity.com/es/theater-showtimes.php?id=1269",
-   "principal": true,
-   "fa_id": 1269
-  },
-  {
-   "id": "yelmo-ocimax",
-   "nombre": "Yelmo Cines Ocimax Gijón",
-   "ciudad": "Gijón",
-   "direccion": "C.C. Ocimax, La Calzada",
-   "web": "https://yelmocines.es/cartelera/asturias/ocimax-gijon",
-   "filmaffinity": "https://www.filmaffinity.com/es/theater-showtimes.php?id=402",
-   "principal": true,
-   "fa_id": 402
-  },
-  {
-   "id": "yelmo-prados",
-   "nombre": "Yelmo Cines Los Prados",
-   "ciudad": "Oviedo",
-   "direccion": "C.C. Los Prados, C/ Joaquín Costa",
-   "web": "https://yelmocines.es/cartelera/asturias/los-prados",
-   "filmaffinity": "https://www.filmaffinity.com/es/cat_new_th_es.html",
-   "principal": false
-  },
-  {
-   "id": "embajadores-foncalada",
-   "nombre": "Cines Embajadores Foncalada",
-   "ciudad": "Oviedo",
-   "direccion": "C/ General Elorza 45",
-   "web": "https://cinesembajadores.es/oviedo/",
-   "filmaffinity": "https://www.filmaffinity.com/es/cat_new_th_es.html",
-   "principal": false
-  },
-  {
-   "id": "cinesa-principado",
-   "nombre": "Cinesa LUXE Parque Principado",
-   "ciudad": "Oviedo (Siero)",
-   "direccion": "C.C. Parque Principado",
-   "web": "https://www.cinesa.es/cines/parque-principado/",
-   "filmaffinity": "https://www.filmaffinity.com/es/cat_new_th_es.html",
-   "principal": false
-  }
- ],
  "estrenos": [
   {
    "fecha": "2026-10-09",
@@ -609,7 +560,7 @@
    ],
    "pais": "Reino Unido",
    "sinopsis": "Nueva adaptación del clásico literario de Jane Austen \"Sentido y sensibilidad\". Las hermanas Elinor y Marianne Dashwood se ven obligadas a abandonar su finca de Sussex y a mudarse con un pariente lejano, en cuya casa de campo se enfrentarán a problemas…",
-   "poster": "https://pics.filmaffinity.com/sense_and_sensibility-915275870-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/sense_and_sensibility-803718727-mmed.jpg",
    "fa": "892018",
    "destacado": false,
    "ids": {
@@ -890,7 +841,7 @@
    ],
    "pais": "Francia",
    "sinopsis": "A las afueras de un remoto pueblo pesquero vive con su familia la misteriosa Lucy, una niña de once años que tiene visiones y una llamativa melena blanca. Sus dones despiertan una curiosidad que pronto se convierte en recelo entre los vecinos del pueblo.…",
-   "poster": "https://pics.filmaffinity.com/le_mystere_lucy_lost-320132548-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/le_mystere_lucy_lost-951555881-mmed.jpg",
    "fa": "377127",
    "destacado": false
   },
@@ -981,7 +932,7 @@
   },
   {
    "fecha": "2026-11-06",
-   "titulo": "Sanguine (Species)",
+   "titulo": "Sanguine",
    "original": "Sanguineaka",
    "director": "Marion Le Corroller",
    "generos": [
