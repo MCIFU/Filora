@@ -79,26 +79,46 @@ function indiceColeccion() {
 const peliDe = (e) => (e.h ? e.o : e) || null;
 
 function estadisticasPremio(D, mia) {
-  // se cuenta una vez por categoría y año (un premio compartido por varias personas es un solo premio)
+  // Wikidata repite algunos premios (categoría general y su variante «en color», «en blanco y negro»…).
+  // Para no contarlos dos veces: en una película y año, las categorías con los mismos ganadores son una sola,
+  // y a una persona se le cuenta un premio por película y año.
+  const nombres = Object.fromEntries(D.categorias.map((c) => [c.id, corto(c.n).toLowerCase()]));
   const pelis = new Map(), personas = new Map(), porEdicion = new Map();
   for (const [anio, cats] of Object.entries(D.ediciones)) {
-    for (const [cid, L] of Object.entries(cats)) for (const e of L) {
-      const f = peliDe(e), k = anio + "|" + cid;
-      if (f && f.q) {
-        const o = pelis.get(f.q) || { t: f.t || f.n, q: f.q, p: f.p, i: f.i, cg: new Set(), cn: new Set(), anio };
-        o.cn.add(k); if (e.g) o.cg.add(k); if (!o.p && f.p) o.p = f.p;
-        o.g = o.cg.size; o.n = o.cn.size;
-        pelis.set(f.q, o);
-        const ke = f.q + "|" + anio, x = porEdicion.get(ke) || { t: f.t || f.n, anio, c: new Set() };
-        x.c.add(cid); x.n = x.c.size;
-        porEdicion.set(ke, x);
+    const firmas = new Map(); // película -> categoría -> firma de sus ganadores/candidatos
+    for (const [cid, L] of Object.entries(cats)) {
+      if (/cient[ií]fic|t[eé]cnic|honor|gordon|bonner|juvenil|thalberg|humanitar|scientific|technical|honorary/i.test(nombres[cid])) continue; // fuera de los récords
+      const porPeli = new Map();
+      for (const e of L) {
+        const f = peliDe(e);
+        if (!f || !f.q) continue;
+        const x = porPeli.get(f.q) || { f, g: false, gente: new Set(), genteN: new Set() };
+        if (e.g) x.g = true;
+        if (e.h) { (e.g ? x.gente : x.genteN).add(e.q); }
+        porPeli.set(f.q, x);
       }
-      if (e.h) {
+      const variante = /color|blanco y negro|black.and.white|en color/i.test(nombres[cid]);
+      for (const [fq, x] of porPeli) {
+        const m = firmas.get(fq) || { f: x.f, cats: [] };
+        m.cats.push({ cid, variante, g: x.g, gente: [...x.gente].sort().join(","), todos: [...x.gente, ...x.genteN].sort().join(",") });
+        firmas.set(fq, m);
+      }
+      for (const e of L) if (e.h) {
         const o = personas.get(e.q) || { n: e.n, q: e.q, cg: new Set(), cc: new Set() };
+        const k = anio + "|" + ((e.o && e.o.q) || nombres[cid]);
         o.cc.add(k); if (e.g) o.cg.add(k);
         o.g = o.cg.size; o.c = o.cc.size;
         personas.set(e.q, o);
       }
+    }
+    for (const [fq, m] of firmas) {
+      // una variante («en color»…) no cuenta si repite los mismos ganadores que otra categoría de ese año
+      const cuenta = (c, campo) => !c.variante || !c[campo] || !m.cats.some((d) => d !== c && d[campo] === c[campo] && (!d.variante || d.cid < c.cid));
+      const g = m.cats.filter((c) => c.g && cuenta(c, "gente")).length, n = m.cats.filter((c) => cuenta(c, "todos")).length;
+      const f = m.f, o = pelis.get(fq) || { t: f.t || f.n, q: fq, p: f.p, i: f.i, g: 0, n: 0, anio };
+      o.g += g; o.n += n; if (!o.p && f.p) o.p = f.p;
+      pelis.set(fq, o);
+      porEdicion.set(fq + "|" + anio, { t: f.t || f.n, anio, n });
     }
   }
   const top = (m, f, n = 3) => [...m.values()].sort(f).slice(0, n);
@@ -197,7 +217,7 @@ VIEWS.premios = async (v, qs) => {
       ${E.sinGanar[0] && E.sinGanar[0].n > 1 ? rec(E.sinGanar[0].n, "Más candidaturas sin ganar nada", lista(E.sinGanar)) : ""}
       ${E.personaPremios[0] && E.personaPremios[0].g ? rec(E.personaPremios[0].g, "Persona con más premios", E.personaPremios.filter((x) => x.g).map((x) => `<a class="pr-persona" href="#/persona?q=${x.q}">${esc(x.n)}</a>`).join(", ")) : ""}
       ${E.personaCandidaturas[0] ? rec(E.personaCandidaturas[0].c, "Persona con más candidaturas", E.personaCandidaturas.map((x) => `<a class="pr-persona" href="#/persona?q=${x.q}">${esc(x.n)}</a>`).join(", ")) : ""}
-      ${rec(D.desde, "Primer año registrado", `${anios.length} años de historia en Wikidata`)}
+      ${rec(D.desde, "Primer año registrado", `${anios.length} años de historia`)}
     </div></section>
   ${S.db.peliculas.length ? `<section class="section pr-tu">
     <div class="card card-pad"><div class="eyebrow">Tú y ${esc(nombre)}</div><div class="h2" style="margin:6px 0 12px">${notasG.length && notasN.length ? (media(notasG) > media(notasN) ? "Las ganadoras te gustan más que el resto" : "Prefieres a las que no ganaron") : `Has visto ${E.vistas.length} de sus películas`}</div>
