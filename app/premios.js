@@ -114,6 +114,10 @@ function estadisticasPremio(D, mia) {
 const corto = (n) => { const c = n.replace(/^.*?\b(?:a la|al|a los|a las|a)\s+(?=mejor|mejores)/i, ""); return c.charAt(0).toUpperCase() + c.slice(1); };
 const notaChip = (n) => (n == null ? "" : `<span class="pr-nota" style="--c:${scoreColor(n)}">${fmt1(n)}</span>`);
 const enlacePersona = (e) => `<a class="pr-persona" href="#/persona?q=${e.q}">${esc(e.n)}</a>`;
+// foto de una persona (Wikimedia Commons) o sus iniciales
+const fotoPersona = (e, ancho = 300) => e.f
+  ? `<img src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(e.f)}?width=${ancho}" alt="${esc(e.n)}" loading="lazy" referrerpolicy="no-referrer">`
+  : `<div class="ph ph-persona"><b>${esc(e.n.split(" ").filter(Boolean).slice(0, 2).map((x) => x[0]).join(""))}</b></div>`;
 const carteL = (f) => (f && f.p ? `<img src="${esc(f.p)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<div class="ph"><b>${esc(((f && (f.t || f.n)) || "").slice(0, 40))}</b></div>`);
 
 VIEWS.premios = async (v, qs) => {
@@ -145,14 +149,17 @@ VIEWS.premios = async (v, qs) => {
   const filaAnio = (a) => {
     const L = D.ediciones[a][cat.id];
     const gan = L.filter((e) => e.g), nom = L.filter((e) => !e.g);
+    // en las categorías de personas: su foto (enlaza a su página) y la película en texto
+    const imagen = (e, f, m) => e.h ? `<a class="pr-foto" href="#/persona?q=${e.q}">${fotoPersona(e)}</a>` : `<div ${m ? `data-open="${m.id}"` : ""}>${carteL(f)}</div>`;
+    const obra = (e, f, m) => (e.h && f && f.t ? `<div class="pr-s">${m ? `<a href="#" data-open="${m.id}">${esc(f.t)}</a> ${notaChip(m.nota)}` : esc(f.t)}</div>` : "");
     const tarjetaG = (e) => { const f = peliDe(e) || e; const m = mia(f.i, f.t);
-      return `<div class="pr-ganadora"><div class="pr-cartel" ${m ? `data-open="${m.id}"` : ""}>${carteL(f)}<span class="pr-sello">${estatuilla(id)}</span></div>
-        <div class="pr-t">${e.h ? enlacePersona(e) : esc(e.n)}</div>${e.h && f.t ? `<div class="pr-s">${esc(f.t)}</div>` : ""}
-        <div class="pr-g">Ganador${e.h ? "" : "a"} ${m ? `· tu nota ${notaChip(m.nota)}` : "· no la has visto"}</div></div>`; };
+      return `<div class="pr-ganadora ${e.h ? "es-persona" : ""}"><div class="pr-cartel">${imagen(e, f, m)}<span class="pr-sello">${estatuilla(id)}</span></div>
+        <div class="pr-t">${e.h ? enlacePersona(e) : esc(e.n)}</div>${obra(e, f, m)}
+        <div class="pr-g">Ganador${e.h ? "" : "a"} ${e.h ? "" : m ? `· tu nota ${notaChip(m.nota)}` : "· no la has visto"}</div></div>`; };
     return `<div class="pr-anio"><div><div class="pr-y">${a}</div><div class="pr-ed">${conCat.length - conCat.indexOf(a)}.ª entrega en tus datos</div></div>
       <div>${gan.length ? gan.map(tarjetaG).join("") : `<div class="dim" style="padding-top:8px">Sin ganador registrado</div>`}</div>
       <div>${nom.length ? `<div class="pr-lbl">Nominad${cat.persona ? "os" : "as"} · ${nom.length}</div><div class="pr-noms">${nom.map((e) => { const f = peliDe(e) || e; const m = mia(f.i, f.t);
-        return `<div class="pr-nom ${m ? "vista" : ""}"><div class="c" ${m ? `data-open="${m.id}"` : ""}>${carteL(f)}${m ? notaChip(m.nota) : ""}</div><div class="t">${e.h ? enlacePersona(e) : esc(e.n)}</div>${e.h && f.t ? `<div class="s">${esc(f.t)}</div>` : ""}</div>`; }).join("")}</div>` : ""}</div></div>`;
+        return `<div class="pr-nom ${m || e.h ? "vista" : ""} ${e.h ? "es-persona" : ""}"><div class="c">${imagen(e, f, m)}${m && !e.h ? notaChip(m.nota) : ""}</div><div class="t">${e.h ? enlacePersona(e) : esc(e.n)}</div>${e.h && f && f.t ? `<div class="s">${m ? `<a href="#" data-open="${m.id}">${esc(f.t)}</a> ${notaChip(m.nota)}` : esc(f.t)}</div>` : ""}</div>`; }).join("")}</div>` : ""}</div></div>`;
   };
   const media = (L) => (L.length ? mean(L) : null);
   const notasG = ganVistas.map((e) => mia(peliDe(e)?.i, peliDe(e)?.t).nota).filter((x) => x != null);
@@ -213,8 +220,12 @@ async function resolverPersona(nombre) {
   const ents = (await wdApi({ action: "wbgetentities", ids: ids.join("|"), props: "claims" })).entities || {};
   return ids.find((i) => ((ents[i].claims || {}).P31 || []).some((c) => c.mainsnak.datavalue && c.mainsnak.datavalue.value.id === "Q5")) || null;
 }
-const fechaWD = (t) => { if (!t) return null; const m = /([+-]\d+)-(\d\d)-(\d\d)/.exec(t); if (!m) return null; const a = +m[1];
-  return m[2] === "00" ? String(a) : new Date(Date.UTC(a, +m[2] - 1, +m[3] || 1)).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }); };
+const partesFecha = (t) => { const m = /([+-]\d+)-(\d\d)-(\d\d)/.exec(t || ""); return m ? { a: +m[1], m: +m[2], d: +m[3] } : null; };
+const fechaWD = (t) => { const f = partesFecha(t); if (!f) return null;
+  return f.m === 0 ? String(f.a) : new Date(Date.UTC(f.a, f.m - 1, f.d || 1)).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }); };
+const edad = (n, h) => { const a = partesFecha(n); if (!a) return null; const b = h ? partesFecha(h) : (() => { const d = new Date(); return { a: d.getFullYear(), m: d.getMonth() + 1, d: d.getDate() }; })();
+  return b.a - a.a - (b.m < a.m || (b.m === a.m && b.d < a.d) ? 1 : 0); };
+S.persona_ = { rol: "" };
 
 VIEWS.persona = async (v, qs) => {
   v.innerHTML = `<div class="cargando"><span class="bobina"></span>Buscando su ficha…</div>`;
@@ -224,84 +235,126 @@ VIEWS.persona = async (v, qs) => {
   const yo = location.hash;
   let ent;
   try { ent = ((await wdApi({ action: "wbgetentities", ids: q, props: "labels|descriptions|claims|sitelinks", languages: "es|en", sitefilter: "eswiki|enwiki" })).entities || {})[q]; } catch (e) { /* */ }
-  if (!ent || location.hash !== yo) { if (location.hash === yo) v.innerHTML = `<div class="empty"><div class="h2">No se ha podido cargar</div>Comprueba tu conexión.</div>`; return; }
+  if (location.hash !== yo) return;
+  if (!ent) { v.innerHTML = `<div class="empty"><div class="h2">No se ha podido cargar</div>Comprueba tu conexión.</div>`; return; }
   const lab = (e) => (e && e.labels && (e.labels.es || e.labels.en || {}).value) || "";
   const cv = (p) => ((ent.claims || {})[p] || []).filter((c) => c.rank !== "deprecated").map((c) => c.mainsnak.datavalue && c.mainsnak.datavalue.value).filter(Boolean);
   const refs = [...new Set([...cv("P27"), ...cv("P106"), ...cv("P19"), ...cv("P20")].map((x) => x.id))].slice(0, 40);
   const labs = refs.length ? (await wdApi({ action: "wbgetentities", ids: refs.join("|"), props: "labels", languages: "es|en" })).entities || {} : {};
   const nombreP = lab(ent);
   const foto = cv("P18")[0];
-  const nace = fechaWD((cv("P569")[0] || {}).time), muere = fechaWD((cv("P570")[0] || {}).time);
+  const fotoUrl = (w) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(foto)}?width=${w}`;
+  const tn = (cv("P569")[0] || {}).time, tm = (cv("P570")[0] || {}).time;
+  const anios = edad(tn, tm);
   const lugar = (p) => lab(labs[(cv(p)[0] || {}).id]);
   const oficios = [...new Set(cv("P106").map((x) => lab(labs[x.id])).filter(Boolean))].slice(0, 4);
   const paises = [...new Set(cv("P27").map((x) => lab(labs[x.id])).filter(Boolean))].slice(0, 2);
   const titEs = ent.sitelinks && ent.sitelinks.eswiki && ent.sitelinks.eswiki.title;
+  const imdbP = cv("P345")[0];
   v.innerHTML = `
-  <div class="ps-cab">
-    <div class="ps-foto">${foto ? `<img src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(foto)}?width=500" alt="${esc(nombreP)}" referrerpolicy="no-referrer">` : `<div class="ph"><b>${esc(nombreP[0] || "?")}</b></div>`}</div>
-    <div><div class="eyebrow">${esc(oficios.join(" · ") || "Cine")}</div><h1 class="h1">${esc(nombreP)}</h1>
-      <div class="facts">${nace ? `<span>${icon("calendar")}${nace}${lugar("P19") ? `, ${esc(lugar("P19"))}` : ""}</span>` : ""}${muere ? `<span>✝ ${muere}${lugar("P20") ? `, ${esc(lugar("P20"))}` : ""}</span>` : ""}${paises.length ? `<span>${icon("globe")}${esc(paises.join(" · "))}</span>` : ""}</div>
-      <p class="ps-bio muted" id="psBio">${esc((ent.descriptions && (ent.descriptions.es || ent.descriptions.en || {}).value) || "")}</p>
-      <div class="links"><a class="ext" href="https://www.wikidata.org/wiki/${q}" target="_blank" rel="noopener"><span class="logo" style="background:#4b4573">WD</span>Wikidata</a>${titEs ? `<a class="ext" href="https://es.wikipedia.org/wiki/${encodeURIComponent(titEs)}" target="_blank" rel="noopener"><span class="logo" style="background:#4b4573">W</span>Wikipedia</a>` : ""}${cv("P345")[0] ? `<a class="ext" href="https://www.imdb.com/es-es/name/${cv("P345")[0]}/" target="_blank" rel="noopener">${logoWeb("IMDb")}IMDb</a>` : ""}</div>
+  <section class="ps-hero">
+    ${foto ? `<div class="ps-fondo" style="background-image:url('${fotoUrl(600)}')"></div>` : ""}
+    <div class="ps-hero-in">
+      <div class="ps-foto">${foto ? `<img src="${fotoUrl(520)}" alt="${esc(nombreP)}" referrerpolicy="no-referrer">` : `<div class="ph"><b>${esc(nombreP.split(" ").map((x) => x[0]).slice(0, 2).join(""))}</b></div>`}</div>
+      <div class="ps-datos">
+        <div class="eyebrow">${esc(oficios.join(" · ") || "Cine")}</div>
+        <h1 class="ps-nombre">${esc(nombreP)}</h1>
+        <div class="ps-vida">
+          ${tn ? `<span><b>${tm ? "Nació" : "Nace"}</b> ${fechaWD(tn)}${lugar("P19") ? ` · ${esc(lugar("P19"))}` : ""}</span>` : ""}
+          ${tm ? `<span><b>Murió</b> ${fechaWD(tm)}${lugar("P20") ? ` · ${esc(lugar("P20"))}` : ""}${anios != null ? ` · a los ${anios} años` : ""}</span>` : anios != null ? `<span><b>${anios}</b> años</span>` : ""}
+          ${paises.length ? `<span><b>Nacionalidad</b> ${esc(paises.join(" y "))}</span>` : ""}
+        </div>
+        <div class="ps-cifras" id="psCifras"></div>
+        <div class="links">${titEs ? `<a class="ext" href="https://es.wikipedia.org/wiki/${encodeURIComponent(titEs)}" target="_blank" rel="noopener"><span class="logo" style="background:#4b4573">W</span>Wikipedia</a>` : ""}${imdbP ? `<a class="ext" href="https://www.imdb.com/es-es/name/${imdbP}/" target="_blank" rel="noopener">${logoWeb("IMDb")}IMDb</a>` : ""}<a class="ext" href="https://www.filmaffinity.com/es/search.php?stype=director&stext=${encodeURIComponent(nombreP)}" target="_blank" rel="noopener">${logoWeb("FA")}FilmAffinity</a></div>
+      </div>
     </div>
-  </div>
-  <div id="psTuya"></div>
+  </section>
+  <section class="ps-bio-w"><p class="ps-bio" id="psBio">${esc((ent.descriptions && (ent.descriptions.es || ent.descriptions.en || {}).value) || "")}</p></section>
+  <section class="section" id="psConocido"></section>
   <section class="section" id="psPremios"></section>
-  <section class="section">${sectionHead("Filmografía")}<div id="psFilmo"><div class="cargando"><span class="bobina"></span>Cargando sus películas…</div></div></section>`;
-  // biografía de Wikipedia
-  if (titEs) fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(titEs)}`).then((r) => r.json()).then((d) => { const b = $("#psBio"); if (b && d.extract) b.textContent = d.extract; }).catch(() => {});
+  <div id="psTuya"></div>
+  <section class="section" id="psFilmoSec">${sectionHead("Filmografía")}<div id="psFilmo"><div class="cargando"><span class="bobina"></span>Cargando sus películas…</div></div></section>`;
+  const cifras = { peliculas: null, ganados: null, nominaciones: null, tuyas: null };
+  const pintaCifras = () => { const c = $("#psCifras"); if (!c) return;
+    c.innerHTML = [[cifras.peliculas, "películas"], [cifras.ganados, "premios"], [cifras.nominaciones, "nominaciones"], [cifras.tuyas, "en tu colección"]]
+      .filter(([x]) => x != null).map(([x, l]) => `<div><b>${x}</b><span>${l}</span></div>`).join(""); };
+  // biografía (Wikipedia en español)
+  if (titEs) fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(titEs)}`).then((r) => r.json()).then((d) => {
+    const b = $("#psBio"); if (b && d.extract) b.innerHTML = `${esc(d.extract)} <a href="https://es.wikipedia.org/wiki/${encodeURIComponent(titEs)}" target="_blank" rel="noopener" class="dim">Leer más</a>`; }).catch(() => {});
   // premios
   sparqlWD(`SELECT ?premio ?premioLabel ?fecha ?tipo ?obraLabel WHERE {
     { wd:${q} p:P166 ?s . ?s ps:P166 ?premio . BIND("g" AS ?tipo) } UNION { wd:${q} p:P1411 ?s . ?s ps:P1411 ?premio . BIND("n" AS ?tipo) }
     OPTIONAL { ?s pq:P585 ?fecha } OPTIONAL { ?s pq:P1686 ?obra }
     SERVICE wikibase:label { bd:serviceParam wikibase:language "es,en". } }`).then((filas) => {
     const lista = [], visto = new Set();
+    let g = 0, n = 0;
     for (const b of filas) {
-      const n = b.premioLabel.value, fam = FAMILIAS.find(([, , rx]) => rx.test(n.toLowerCase()));
-      if (!fam) continue;
-      const a = b.fecha ? +b.fecha.value.slice(0, 4) : null, k = `${n}|${a}|${b.tipo.value}`;
+      const nom = b.premioLabel.value, fam = FAMILIAS.find(([, , rx]) => rx.test(nom.toLowerCase()));
+      if (/^Q\d+$/.test(nom)) continue;
+      const a = b.fecha ? +b.fecha.value.slice(0, 4) : null, k = `${nom}|${a}|${b.tipo.value}`;
       if (visto.has(k)) continue;
       visto.add(k);
-      lista.push({ f: fam[0], n: n + (b.obraLabel ? ` (${b.obraLabel.value})` : ""), a, g: b.tipo.value === "g" });
+      if (b.tipo.value === "g") g++; else n++;
+      if (fam) lista.push({ f: fam[0], n: nom + (b.obraLabel ? ` (${b.obraLabel.value})` : ""), a, g: b.tipo.value === "g" });
     }
+    cifras.ganados = g; cifras.nominaciones = n + g; pintaCifras();
     const box = $("#psPremios");
     if (box && lista.length) box.innerHTML = sectionHead("Premios") + premiosHTML(lista).replace('<div class="sub">Premios</div>', "");
   }).catch(() => {});
-  // filmografía (dirección e interpretación) y lo que tienes en tu colección
+  // filmografía
   try {
-    const filas = await sparqlWD(`SELECT ?f ?fLabel ?d ?rol ?imdb ?enw WHERE {
+    const filas = await sparqlWD(`SELECT ?f ?fLabel ?d ?rol ?imdb ?enw ?sl WHERE {
       { ?f wdt:P57 wd:${q} . BIND("Dirección" AS ?rol) } UNION { ?f wdt:P161 wd:${q} . BIND("Reparto" AS ?rol) } UNION { ?f wdt:P58 wd:${q} . BIND("Guion" AS ?rol) }
       ?f wdt:P31 ?tipo . VALUES ?tipo { ${[...WD_FILM].map((x) => "wd:" + x).join(" ")} }
       OPTIONAL { ?f wdt:P577 ?d } OPTIONAL { ?f wdt:P345 ?imdb } OPTIONAL { ?enw schema:about ?f; schema:isPartOf <https://en.wikipedia.org/> }
+      OPTIONAL { ?f wikibase:sitelinks ?sl }
       SERVICE wikibase:label { bd:serviceParam wikibase:language "es,en". } }`);
     const pelis = new Map();
     for (const b of filas) {
-      const k = b.f.value, x = pelis.get(k) || { t: b.fLabel.value, anio: null, roles: new Set(), i: b.imdb && b.imdb.value, w: b.enw && decodeURIComponent(b.enw.value.split("/wiki/")[1]).replace(/_/g, " ") };
+      const k = b.f.value, x = pelis.get(k) || { t: b.fLabel.value, anio: null, roles: new Set(), i: b.imdb && b.imdb.value, sl: b.sl ? +b.sl.value : 0,
+        w: b.enw && decodeURIComponent(b.enw.value.split("/wiki/")[1]).replace(/_/g, " ") };
       const a = b.d ? +b.d.value.slice(0, 4) : null;
       if (a && (!x.anio || a < x.anio)) x.anio = a;
       x.roles.add(b.rol.value);
       pelis.set(k, x);
     }
-    const L = [...pelis.values()].filter((x) => !/^Q\d+$/.test(x.t)).sort((a, b) => (b.anio || 0) - (a.anio || 0));
     if (location.hash !== yo) return;
+    const L = [...pelis.values()].filter((x) => !/^Q\d+$/.test(x.t)).sort((a, b) => (b.anio || 0) - (a.anio || 0));
     const mia = indiceColeccion();
-    const tuyas = L.map((x) => ({ x, m: mia(x.i, x.t) })).filter((y) => y.m);
-    const notas = tuyas.map((y) => y.m.nota).filter((n) => n != null);
-    $("#psTuya").innerHTML = tuyas.length ? `<div class="card card-pad ps-tuya"><div><div class="eyebrow">En tu colección</div><div class="h2" style="margin:6px 0 0">${tuyas.length} ${tuyas.length === 1 ? "película" : "películas"}${notas.length ? ` · media ${fmt1(mean(notas))}` : ""}</div></div>
-      <div class="strip">${tuyas.map((y) => pcard(y.m)).join("")}</div></div>` : "";
-    $("#psFilmo").innerHTML = L.length ? `<div class="posters">${L.slice(0, 120).map((x) => { const m = mia(x.i, x.t); return `<div class="pcard ${m ? "" : "ps-no"}" ${m ? `data-open="${m.id}"` : ""}><div class="frame">${x.w ? `<div class="ph" data-w="${esc(x.w)}"><b>${esc(x.t)}</b></div>` : `<div class="ph"><b>${esc(x.t)}</b></div>`}${m ? scoreBadge(m.nota) : ""}</div>
-      <div class="meta"><div class="t">${esc(x.t)}</div><div class="s">${[x.anio, [...x.roles].join(" y ")].filter(Boolean).join(" · ")}</div></div></div>`; }).join("")}</div>` : `<div class="empty">Wikidata no tiene su filmografía.</div>`;
-    // carteles después, sin hacer esperar a la lista
-    const tit = L.slice(0, 120).map((x) => x.w).filter(Boolean).slice(0, 150);
+    for (const x of L) x.m = mia(x.i, x.t);
+    const tuyas = L.filter((x) => x.m);
+    const notas = tuyas.map((x) => x.m.nota).filter((n) => n != null);
+    cifras.peliculas = L.length; cifras.tuyas = tuyas.length; pintaCifras();
+    const tarjeta = (x, grande) => `<div class="pcard ${x.m ? "" : "ps-no"}" ${x.m ? `data-open="${x.m.id}"` : ""}><div class="frame">${x.w ? `<div class="ph" data-w="${esc(x.w)}"><b>${esc(x.t)}</b></div>` : `<div class="ph"><b>${esc(x.t)}</b></div>`}${x.m ? scoreBadge(x.m.nota) : ""}</div>
+      <div class="meta"><div class="t">${esc(x.t)}</div><div class="s">${[x.anio, grande ? null : [...x.roles].join(" · ")].filter(Boolean).join(" · ")}</div></div></div>`;
+    // conocido por: sus películas más populares (en más idiomas de Wikipedia)
+    const conocido = [...L].sort((a, b) => b.sl - a.sl).slice(0, 6);
+    $("#psConocido").innerHTML = conocido.length ? `${sectionHead("Conocido por")}<div class="ps-conocido">${conocido.map((x) => tarjeta(x, true)).join("")}</div>` : "";
+    $("#psTuya").innerHTML = tuyas.length ? `<section class="section">${sectionHead(`En tu colección · ${tuyas.length} ${tuyas.length === 1 ? "película" : "películas"}${notas.length ? ` · media ${fmt1(mean(notas))}` : ""}`)}
+      <div class="strip">${tuyas.map((x) => pcard(x.m)).join("")}</div></section>` : "";
+    const roles = ["Dirección", "Reparto", "Guion"].filter((r) => L.some((x) => x.roles.has(r)));
+    const filmo = () => {
+      const R = S.persona_.rol && roles.includes(S.persona_.rol) ? S.persona_.rol : "";
+      const F = L.filter((x) => !R || x.roles.has(R));
+      const dec = new Map();
+      for (const x of F) { const d = x.anio ? Math.floor(x.anio / 10) * 10 : 0; dec.set(d, [...(dec.get(d) || []), x]); }
+      $("#psFilmo").innerHTML = `${roles.length > 1 ? `<div class="chips" style="margin-bottom:18px"><button class="chip ${!R ? "on" : ""}" data-psrol="">Todo · ${L.length}</button>${roles.map((r) => `<button class="chip ${R === r ? "on" : ""}" data-psrol="${r}">${r} · ${L.filter((x) => x.roles.has(r)).length}</button>`).join("")}</div>` : ""}
+        ${[...dec].map(([d, X]) => `<div class="ps-dec"><div class="ps-dec-t">${d ? `Años ${String(d).slice(2)}` : "Sin fecha"} <span class="dim">${X.length}</span></div><div class="posters">${X.map((x) => tarjeta(x)).join("")}</div></div>`).join("")}`;
+      document.querySelectorAll("[data-psrol]").forEach((b) => (b.onclick = () => { S.persona_.rol = b.dataset.psrol; filmo(); rellenar(); }));
+    };
+    filmo();
+    // carteles después, sin hacer esperar a la página
     const cart = {};
-    for (let i = 0; i < tit.length; i += 50) {
+    const rellenar = () => document.querySelectorAll("#psConocido [data-w], #psFilmo [data-w]").forEach((ph) => { const u = cart[ph.dataset.w]; if (u) ph.outerHTML = `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer">`; });
+    const tit = [...conocido, ...L].map((x) => x.w).filter(Boolean);
+    for (let i = 0; i < Math.min(tit.length, 300); i += 50) {
       try {
-        const d = await wdApi({ action: "query", titles: tit.slice(i, i + 50).join("|"), prop: "pageimages", piprop: "thumbnail", pithumbsize: "300", pilicense: "any", redirects: "1" }, "en.wikipedia.org");
+        const d = await wdApi({ action: "query", titles: [...new Set(tit.slice(i, i + 50))].join("|"), prop: "pageimages", piprop: "thumbnail", pithumbsize: "300", pilicense: "any", redirects: "1" }, "en.wikipedia.org");
         const qq = d.query || {}, atras = Object.fromEntries([...(qq.redirects || []), ...(qq.normalized || [])].map((r) => [r.to, r.from]));
         for (const pg of Object.values(qq.pages || {})) if (pg.thumbnail) cart[atras[pg.title] || pg.title] = pg.thumbnail.source.split("?")[0];
       } catch (e) { /* sin carteles */ }
+      if (location.hash !== yo) return;
+      rellenar();
     }
-    if (location.hash !== yo) return;
-    document.querySelectorAll("#psFilmo [data-w]").forEach((ph) => { const u = cart[ph.dataset.w]; if (u) ph.outerHTML = `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer">`; });
   } catch (e) { const f = $("#psFilmo"); if (f) f.innerHTML = `<div class="empty">No se ha podido cargar la filmografía.</div>`; }
 };

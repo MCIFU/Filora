@@ -15,7 +15,7 @@ concurrency:
 jobs:
   premios:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -23,6 +23,10 @@ jobs:
           python-version: "3.12"
       - name: Descargar ganadores y nominados de Wikidata
         run: python -u tools/premios.py
+      - name: Completar nominados con Wikipedia y fotos
+        run: |
+          pip install beautifulsoup4
+          python -u tools/premios_wiki.py
       - name: Guardar cambios
         run: |
           git config user.name "cartelera-bot"
