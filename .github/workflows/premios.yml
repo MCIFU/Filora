@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: cartelera
+  group: premios
   cancel-in-progress: false
 
 jobs:
