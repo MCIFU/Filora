@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-07",
+ "actualizado": "2026-10-08",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -245,7 +245,8 @@
    ],
    "pais": "Polonia",
    "reparto": "Eryk Kulm, Lambert Wilson, Joséphine de La Baume",
-   "sinopsis": "¿Quién es este joven y valiente pianista? ¿Quién es este compositor polaco que trasciende el poder de la música? ¿Quién es esta estrella que hace que todos los ojos parisinos se vuelvan hacia él? Lo llaman Chopin. Es el centro de todas las conversaciones, la…",
+   "sinopsis": "¿Quién es este joven y valiente pianista? ¿Quién es este compositor polaco que trasciende el poder de la música? ¿Quién…",
+   "duracion": 110,
    "poster": "https://pics.filmaffinity.com/chopin_chopin-213812741-mmed.jpg",
    "fa": "309577",
    "destacado": false
@@ -533,6 +534,20 @@
    "sinopsis": "Un policía infiltrado atropella a una joven y se fuga. El padre de la víctima, un antiguo ultrasur, investiga por su cuenta, chocando con el pasado.",
    "poster": "https://pics.filmaffinity.com/leones_en_invierno-120820250-mmed.jpg",
    "fa": "618609",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Los niños están bien",
+   "original": "Les enfants vont bienaka",
+   "director": "Nathan Ambrosioni",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Una tarde de verano, Suzanne, acompañada de sus dos hijos pequeños, visita de improviso a su hermana Jeanne. Jeanne queda sorprendida. No solo porque no se ven desde hace meses, sino porque Suzanne parece completamente ausente. Al despertar, Jeanne se queda…",
+   "poster": "https://pics.filmaffinity.com/les_enfants_vont_bien-546420515-mmed.jpg",
+   "fa": "495903",
    "destacado": false
   },
   {
@@ -1292,20 +1307,6 @@
    "sinopsis": "Asesinato, chantaje, robo, extorsión… Otro verano más en Hollywood. Es 1977, ocho años después de que Cliff Booth (Brad Pitt) se cruzara con la familia Manson en el Hollywood de 1969 que vimos en Érase una vez en Hollywood.\n\nEn Las nuevas desventuras de Cliff…",
    "poster": "https://pics.filmaffinity.com/the_further_mis_adventures_of_cliff_booth-321792863-mmed.jpg",
    "fa": "630924",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Ahora los suegros son ellos",
-   "original": "Focker In-Law",
-   "director": "John Hamburg",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Diez años después de los últimos eventos, los papeles se invierten y Greg Focker (Ben Stiller) se enfrenta a su mayor reto: ser el suegro. Cuando su hijo Henry anuncia su compromiso, Greg intenta ser el patriarca comprensivo que nunca tuvo, pero la presión…",
-   "poster": "https://pics.filmaffinity.com/focker_in_law-431643787-mmed.jpg",
-   "fa": "580952",
    "destacado": false
   },
   {
