@@ -1015,3 +1015,34 @@ code { background: var(--butaca); padding: 2px 6px; border-radius: 2px; font-siz
   .ps-cifras > div { min-width: 0; flex: 1 1 40%; }
   .ps-conocido { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 }
+
+/* ---------------- página de película (cualquier película) ---------------- */
+.pe-hero { position: relative; overflow: hidden; border-radius: 12px; margin-top: 8px; border: 1px solid var(--linea); background: var(--sala-2); }
+.pe-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(var(--bg-rgb), .25), rgba(var(--bg-rgb), .8) 55%); }
+.pe-hero-in { position: relative; z-index: 1; display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 40px; align-items: end; padding: 36px; }
+.pe-cartel { aspect-ratio: 2 / 3; border-radius: 8px; overflow: hidden; box-shadow: 0 24px 50px -20px #000; background: var(--butaca); }
+.pe-cartel img, .pe-cartel .ph { width: 100%; height: 100%; object-fit: cover; }
+.pe-acciones { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.pe-pred { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-size: 14.5px; color: var(--papel-2); }
+.pe-pred .lbl { font-size: 12.5px; color: var(--papel-3); }
+.pe-equipo { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 18px; }
+.pe-pers { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+.pe-foto { width: 96px; height: 96px; border-radius: 50%; overflow: hidden; background: var(--butaca); display: grid; place-items: center; box-shadow: 0 10px 20px -12px #000; transition: transform .2s; }
+.pe-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.pe-foto b { font: 800 26px var(--display); color: var(--papel-3); }
+.pe-pers:hover .pe-foto { transform: scale(1.05); }
+.pe-n { font-weight: 600; font-size: 14px; line-height: 1.2; }
+.pe-r { font-size: 12px; color: var(--papel-3); }
+.pr-img { display: block; width: 100%; height: 100%; }
+.pcard.ps-no { cursor: pointer; }
+@media (max-width: 760px) {
+  .pe-hero-in { grid-template-columns: 1fr; gap: 18px; padding: 22px; justify-items: center; text-align: center; }
+  .pe-cartel { width: 170px; }
+  .pe-hero .facts, .pe-acciones, .pe-pred, .pe-hero .chips { justify-content: center; }
+  .pe-equipo { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .pe-foto { width: 76px; height: 76px; }
+}
+/* estatuillas con metal: apagadas si no están elegidas o si fue solo nominación */
+.pr-est:not(.on) .estatuilla, .premio:not(.gana) .estatuilla { --e1: #a59ed0; --e2: #716aa0; --e3: #463e78; --e4: #2c2655; }
+.pr-est svg, .pr-est.on svg { opacity: 1; }
+.pr-est:not(.on) svg { opacity: .8; }

@@ -26,6 +26,12 @@ sys.path.insert(0, str(ROOT / "tools"))
 from premios import compactar, es_de_pelicula  # noqa: E402
 
 
+# tipos de Wikidata que cuentan como película o serie (como WD_FILM y WD_TV en app.js)
+OBRAS = {"Q11424", "Q202866", "Q24869", "Q229390", "Q506240", "Q17517379", "Q93204", "Q20650540", "Q226730", "Q1261214", "Q336144",
+         "Q110956863", "Q24862", "Q5398426", "Q1259759", "Q15416", "Q526877", "Q63952888", "Q117467246", "Q3464665", "Q21191270",
+         "Q1366112", "Q581714", "Q7725310", "Q2431196", "Q18011172", "Q130232", "Q645928", "Q1257444", "Q319221", "Q157394"}
+
+
 def api(host, **params):
     params.update(format="json")
     url = f"https://{host}/w/api.php?" + urllib.parse.urlencode(params)
@@ -162,6 +168,7 @@ def entidades(qids):
                 "i": next((v for v in val("P345")), None),
                 "f": next((v for v in val("P18")), None),
                 "w": ((e.get("sitelinks") or {}).get("enwiki") or {}).get("title"),
+                "obra": any(isinstance(v, dict) and v.get("id") in OBRAS for v in val("P31")),
             }
         time.sleep(0.2)
     return out
@@ -190,9 +197,24 @@ def completar(clave, solo_fotos=False):
     cats = D["categorias"]
     ent = entidades([c["id"] for c in cats])
     leidos = {}
+    # artículos compartidos por varias categorías (p. ej. vestuario en blanco y negro / en color):
+    # mezclarían ganadores de unas y otras, así que esas categorías se quedan con Wikidata
+    arts = {c["id"]: (ent.get(c["id"]) or {}).get("w") for c in cats}
+    final = {}
+    titulos = [t for t in arts.values() if t]
+    for i in range(0, len(titulos), 50):
+        d = api("en.wikipedia.org", action="query", titles="|".join(titulos[i:i + 50]), redirects=1).get("query", {})
+        r = {x["from"]: x["to"] for x in d.get("normalized", [])}
+        r2 = {x["from"]: x["to"] for x in d.get("redirects", [])}
+        for t in titulos[i:i + 50]:
+            final[t] = r2.get(r.get(t, t), r.get(t, t))
+    usos = Counter(final.get(t) for t in arts.values() if t)
     for c in ([] if solo_fotos else cats):
-        art = (ent.get(c["id"]) or {}).get("w")
+        art = arts.get(c["id"])
         if not art:
+            continue
+        if usos[final.get(art)] > 1:
+            print(f"  {c['n']}: artículo compartido «{final.get(art)}», se mantiene Wikidata")
             continue
         persona = c["persona"] and not es_de_pelicula(c["n"])
         filas = leer_articulo(art, persona)
@@ -235,6 +257,10 @@ def completar(clave, solo_fotos=False):
                 e["f"] = x["f"]
             if persona and not x.get("h") and q:
                 continue  # en categorías de personas, solo personas
+            if not persona and q and not x.get("obra"):
+                continue  # en categorías de películas, solo películas o series (fuera «One-Reel», géneros…)
+            if not persona and not q:
+                continue  # sin identificar no se puede enlazar ni comprobar
             if f.get("obra"):
                 qo = q_de.get(f["obra"]["w"])
                 xo = info.get(qo, {}) if qo else {}
