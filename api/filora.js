@@ -9,7 +9,7 @@
 import { randomBytes } from "node:crypto";
 import { get, list, put } from "@vercel/blob";
 import { COLECCIONES, actualizar, anotarDemanda, borrar, cinesActivos, crear, fusionar, guardarPreferencias, idsCineValidos, pinValido } from "../lib/filora.mjs";
-import { notasExternas } from "../lib/notas.mjs";
+import { notasExternas, posterImdb } from "../lib/notas.mjs";
 import { claveValida, crearSesion, datosSesion, hashClave, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
 
 const CLAVE = "filora/db.json";
@@ -196,6 +196,13 @@ async function manejar(req) {
       const cache = completo ? "public, s-maxage=86400, stale-while-revalidate=604800" : "public, s-maxage=300";
       return new Response(JSON.stringify(notas), {
         headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": cache, "Access-Control-Allow-Origin": "*" },
+      });
+    }
+    // ---- póster de una película (pública; caché 30 días)
+    if (req.method === "GET" && partes[0] === "poster") {
+      const r = await posterImdb({ imdb: url.searchParams.get("imdb"), titulo: url.searchParams.get("t"), anio: url.searchParams.get("y") }).catch(() => ({}));
+      return new Response(JSON.stringify(r), {
+        headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": r.poster ? "public, s-maxage=2592000" : "public, s-maxage=3600" },
       });
     }
     // ---- cines elegidos (anónimo): alimenta la descarga diaria de sesiones

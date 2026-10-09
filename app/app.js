@@ -766,9 +766,15 @@ function openForm(p = null, preset = {}) {
       } else {
         const body = { ...data, ids: d.ids || {}, poster: d.poster || null, taquilla: {} };
         if (preset._pendiente) body.desdePendiente = preset._pendiente;
-        const r = await api("peliculas", { method: "POST", body });
-        toast(`«${r.titulo}» añadida con un ${fmt1(r.nota)}${STATIC ? "" : " · Excel actualizado"}`);
-        completarDesdeWiki(r).then(refrescarSilencioso);
+        closeModal();
+        toast(`«${body.titulo}» añadida con un ${fmt1(body.nota)}${STATIC ? "" : " · Excel actualizado"}`);
+        try {
+          const r = await api("peliculas", { method: "POST", body: await completarAntes(body) });
+          S.db.peliculas.push(r); S.prof = null;
+          if (body.desdePendiente) S.db.pendientes = S.db.pendientes.filter((x) => x.id !== body.desdePendiente);
+          renderChrome(); render._keep = true; render();
+        } catch (e) { toast(`No se guardó «${body.titulo}»: ${e.message}`, "x"); }
+        return;
       }
       await refreshDB();
       closeModal();
@@ -1658,6 +1664,35 @@ async function wikiBuscar(q) {
     };
   });
 }
+// Póster por IMDb (función de Vercel): el respaldo cuando Wikipedia no tiene cartel
+async function posterWeb(p) {
+  try {
+    const q = new URLSearchParams(p.ids && p.ids.imdb ? { imdb: p.ids.imdb } : { t: p.tituloOriginal || p.titulo, ...(p.anio ? { y: p.anio } : {}) });
+    const r = await fetch(`/api/poster?${q}`, { signal: AbortSignal.timeout(6000) });
+    return r.ok ? r.json() : {};
+  } catch (e) { return {}; }
+}
+// Completa datos y póster ANTES de guardar: una sola escritura y la película entra ya con su cartel
+async function completarAntes(body) {
+  if (!STATIC) return body; // el servidor del PC lo completa él solo
+  const b = { ...body, ids: { ...(body.ids || {}) } };
+  if (!b.ids.wikidata) {
+    try {
+      const m = (await wikiBuscar(b.titulo)).find((r) => !b.anio || !r.anio || Math.abs(r.anio - b.anio) <= 1);
+      if (m) {
+        b.ids = { ...m.ids, ...b.ids };
+        if (!b.poster && m.poster) b.poster = m.poster;
+        for (const k of ["tituloOriginal", "director", "pais", "duracion", "anio"]) if (!b[k] && m[k]) b[k] = m[k];
+        if (!(b.generos || []).length && m.generos.length) b.generos = m.generos;
+      }
+    } catch (e) { /* sin Wikidata */ }
+  }
+  if (!b.poster) {
+    const r = await posterWeb(b);
+    if (r.poster) { b.poster = r.poster; if (r.imdb && !b.ids.imdb) b.ids.imdb = r.imdb; }
+  }
+  return b;
+}
 // Completa en segundo plano lo que falte de una película añadida desde la web
 async function completarDesdeWiki(p) {
   if (!STATIC || (p.ids && p.ids.wikidata)) return;
@@ -1873,17 +1908,20 @@ VIEWS.anadir = (v) => {
     const dup = S.db.peliculas.find((x) => (norm(x.titulo) === norm(datos.titulo) || norm(x.tituloOriginal) === norm(datos.titulo)) && (!datos.anio || !x.anio || Math.abs(x.anio - datos.anio) <= 1));
     if (dup && !confirm(`Ya tienes «${dup.titulo}» (${dup.anio || "s/a"}) con un ${fmt1(dup.nota)}. ¿Añadirla otra vez?`)) return;
     const body = { ...datos, tituloOriginal: elegido ? elegido.tituloOriginal : null, ids: elegido ? elegido.ids : {}, poster: elegido ? elegido.poster : null, taquilla: {}, resena: "", favorita: false, fechaVisto: todayISO() };
-    const btn = $("#xlSave"); btn.disabled = true;
+    // la fila aparece al momento; datos, póster y guardado van detrás
+    const tmp = { ...body, id: `tmp${Date.now()}` };
+    $(".xl-sep").insertAdjacentHTML("afterend", filaXL(tmp));
+    const fila = () => document.querySelector(`tr[data-xl="${tmp.id}"]`);
+    fila().classList.add("xl-guardando");
+    toast(`«${body.titulo}» añadida${body.nota != null ? ` con un ${fmt1(body.nota)}` : ""}`);
+    limpiar();
     try {
-      const p = await api("peliculas", { method: "POST", body });
-      toast(`«${p.titulo}» añadida${p.nota != null ? ` con un ${fmt1(p.nota)}` : ""}`);
+      const p = await api("peliculas", { method: "POST", body: await completarAntes(body) });
       S.db.peliculas.push(p); S.prof = null;
-      $(".xl-sep").insertAdjacentHTML("afterend", filaXL(p));
-      limpiar(); renderChrome();
-      completarDesdeWiki(p).then(() => refrescarFila(p.id));
-      [6000, 15000, 30000].forEach((ms) => setTimeout(() => refrescarFila(p.id), ms)); // el póster llega en unos segundos
-    } catch (e) { toast(e.message, "x"); }
-    btn.disabled = false;
+      const tr = fila(); if (tr) tr.outerHTML = filaXL(p);
+      renderChrome();
+      if (!STATIC) [6000, 15000].forEach((ms) => setTimeout(() => refrescarFila(p.id), ms)); // el PC trae el póster por su cuenta
+    } catch (e) { const tr = fila(); if (tr) tr.remove(); toast(`No se guardó «${body.titulo}»: ${e.message}`, "x"); }
   };
   $("#xlSave").onclick = guardar;
   $$(".xl-new .xl-in").forEach((el) => el.addEventListener("keydown", (ev) => {

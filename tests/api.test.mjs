@@ -92,3 +92,17 @@ console.log("✓ Todas las pruebas de la API pasan");
   assert.equal(idsCineValidos(Array.from({ length: 30 }, (_, i) => i + 1)).length, 12);
   console.log("✓ Preferencias y cines pedidos");
 }
+
+// póster de IMDb: id exacto o el año más cercano, en tamaño de cartel
+{
+  const { elegirPosterImdb } = await import("../lib/notas.mjs");
+  const d = [
+    { id: "tt1", qid: "tvSeries", y: 2023, i: { imageUrl: "https://x/a._V1_.jpg" } },
+    { id: "tt2", qid: "movie", y: 1990, i: { imageUrl: "https://x/b._V1_.jpg" } },
+    { id: "tt3", qid: "movie", y: 2023, i: { imageUrl: "https://x/c._V1_.jpg" } },
+  ];
+  assert.deepEqual(elegirPosterImdb(d, { anio: 2023 }), { poster: "https://x/c._V1_SX342.jpg", imdb: "tt3" });
+  assert.equal(elegirPosterImdb(d, { imdb: "tt2" }).imdb, "tt2");
+  assert.deepEqual(elegirPosterImdb(d, { imdb: "tt9" }), {});
+  console.log("✓ Póster de IMDb");
+}
