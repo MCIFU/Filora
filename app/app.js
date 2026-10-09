@@ -601,6 +601,7 @@ function openFilm(id) {
         <div class="eyebrow">${esc([p.anio, p.pais].filter(Boolean).join(" · "))}</div>
         <h2 style="margin-top:8px">${esc(p.titulo)}</h2>
         ${p.tituloOriginal && norm(p.tituloOriginal) !== norm(p.titulo) ? `<div class="orig">${esc(p.tituloOriginal)}</div>` : ""}
+        ${p.tituloEn && norm(p.tituloEn) !== norm(p.titulo) && norm(p.tituloEn) !== norm(p.tituloOriginal) ? `<div class="orig">${esc(p.tituloEn)} <span class="dim">(inglés)</span></div>` : ""}
         <div class="facts">
           ${p.anio ? `<span>${icon("calendar")}${p.anio}</span>` : ""}
           ${p.duracion ? `<span>${icon("clock")}${Math.floor(p.duracion / 60)} h ${p.duracion % 60} min</span>` : ""}
@@ -1658,7 +1659,7 @@ async function wikiBuscar(q) {
     const dur = cv(e, "P2047")[0];
     const enw = e.sitelinks && e.sitelinks.enwiki && e.sitelinks.enwiki.title;
     return {
-      titulo: lab(e, "es"), tituloOriginal: cv(e, "P1476")[0] || lab(e, "en"), anio: anio ? +anio : null,
+      titulo: lab(e, "es"), tituloOriginal: cv(e, "P1476")[0] || lab(e, "en"), tituloEn: lab(e, "en") || null, anio: anio ? +anio : null,
       duracion: dur ? Math.round(+dur) : null, director: cv(e, "P57").slice(0, 3).map((d) => lab(labs[d])).filter(Boolean).join(" / "),
       pais: lab(labs[cv(e, "P495")[0]]), generos: generos.slice(0, 3), ids: idsExt, poster: posters[enw] || null,
     };
@@ -1682,7 +1683,7 @@ async function completarAntes(body) {
       if (m) {
         b.ids = { ...m.ids, ...b.ids };
         if (!b.poster && m.poster) b.poster = m.poster;
-        for (const k of ["tituloOriginal", "director", "pais", "duracion", "anio"]) if (!b[k] && m[k]) b[k] = m[k];
+        for (const k of ["tituloOriginal", "tituloEn", "director", "pais", "duracion", "anio"]) if (!b[k] && m[k]) b[k] = m[k];
         if (!(b.generos || []).length && m.generos.length) b.generos = m.generos;
       }
     } catch (e) { /* sin Wikidata */ }
@@ -1843,146 +1844,107 @@ function filaXL(p) {
     ${COLS_XL.map(([k, , t]) => `<td class="xl-c-${k}">${celdaXL(p, k, t, false)}</td>`).join("")}
     <td class="xl-act"><button class="icon-btn" data-open="${p.id}" title="Ver ficha">${icon("eye")}</button></td></tr>`;
 }
+const durTxt = (m) => (m > 0 ? `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")} min` : "");
+// Reconoce la película con lo que escribes (título, año y director) y trae lo demás de Wikidata
+async function identificar({ titulo, anio, director }) {
+  let res = [];
+  try { res = await wikiBuscar(titulo); } catch (e) { return null; }
+  const ap = (s) => norm(String(s || "").split(/\s+/).pop());
+  const nota = (r) => (anio && r.anio ? (r.anio === anio ? 3 : Math.abs(r.anio - anio) <= 1 ? 2 : -5) : 0)
+    + (director && r.director && norm(r.director).includes(ap(director)) ? 3 : 0)
+    + (norm(r.titulo) === norm(titulo) || norm(r.tituloOriginal) === norm(titulo) || norm(r.tituloEn) === norm(titulo) ? 1 : 0);
+  return res.map((r) => [nota(r), r]).filter(([n]) => n >= 0).sort((x, y) => y[0] - x[0]).map(([, r]) => r)[0] || null;
+}
 VIEWS.anadir = (v) => {
   if (ro()) { location.hash = "#/inicio"; return; }
-  const recientes = [...S.db.peliculas].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || "")) || (b.anio || 0) - (a.anio || 0) || (b.nota || 0) - (a.nota || 0)).slice(0, 40);
+  const recientes = [...S.db.peliculas].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || ""))).slice(0, 24);
+  const campo = (k, l, extra = "") => `<label class="rg-f rg-${k}"><span>${l}</span><input class="input" id="rg_${k}" autocomplete="off" ${extra}></label>`;
   v.innerHTML = `
-  <div class="page-head"><div><h1 class="h1">Añadir películas</h1>
-    <p>Escribe una fila por película y pulsa <b>Intro</b>. Al teclear el título te propongo la película y relleno el resto (director, país, géneros y póster). Puedes corregir cualquier celda de abajo: se guarda al salir de ella.</p></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-importar>${icon("download")}Importar de Letterboxd, IMDb…</button><button class="btn" id="xlPaste">${icon("upload")}Pegar filas de Excel</button><button class="btn btn-ghost" data-action="add">${icon("plus")}Formulario completo</button></div></div>
-  <div class="card xl-wrap">
-    <table class="xl">
-      <thead><tr><th></th>${COLS_XL.map(([k, l]) => `<th class="xl-c-${k}">${l}</th>`).join("")}<th></th></tr></thead>
-      <tbody>
-        <tr class="xl-new">
-          <td class="xl-poster" id="xlNewPoster"></td>
-          ${COLS_XL.map(([k, l, t]) => `<td class="xl-c-${k}" data-label="${l}"><div class="${k === "titulo" ? "ac" : ""}">${celdaXL(null, k, t, true)}${k === "titulo" ? `<div class="ac-list" id="xlAc" hidden></div>` : ""}</div></td>`).join("")}
-          <td class="xl-act"><button class="btn btn-primary btn-sm" id="xlSave">${icon("check")}<span>Guardar</span></button></td>
-        </tr>
-        <tr class="xl-sep"><td colspan="${COLS_XL.length + 2}">Últimas añadidas</td></tr>
-        ${recientes.map(filaXL).join("")}
-      </tbody>
-    </table>
-  </div>
-  <datalist id="xlLugares">${lugaresLista().map((x) => `<option value="${esc(x)}">`).join("")}</datalist>
-  <datalist id="xlGeneros">${GENEROS.map((x) => `<option value="${esc(x)}">`).join("")}</datalist>`;
+  <div class="page-head"><div><h1 class="h1">Añadir película</h1>
+    <p>Rellena lo que sepas. Con eso reconozco la película y le añado sola el género, el cartel y los títulos en español e inglés.</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-importar>${icon("download")}Importar de Letterboxd, IMDb…</button><button class="btn" id="xlPaste">${icon("upload")}Pegar filas de Excel</button></div></div>
+  <form class="registro" id="rgForm" autocomplete="off">
+    <div class="rg-campos">
+      ${campo("titulo", "Película", 'placeholder="La sociedad de la nieve"')}
+      ${campo("duracion", "Duración (min)", 'inputmode="numeric" placeholder="144"')}
+      ${campo("anio", "Año de estreno", 'inputmode="numeric" placeholder="2023"')}
+      ${campo("nota", "Nota", 'inputmode="decimal" placeholder="0–10"')}
+      ${campo("director", "Director", 'placeholder="J. A. Bayona"')}
+      ${campo("pais", "País", 'placeholder="España"')}
+    </div>
+    <div class="rg-match" id="rgMatch"><div class="rg-vacio">Escribe el título y te digo qué película es.</div></div>
+    <button class="btn btn-primary rg-go" id="rgSave" type="submit">${icon("check")}Añadir a mi colección</button>
+  </form>
+  <h2 class="h2" style="margin:34px 0 16px">Últimas añadidas</h2>
+  <div class="posters" id="rgRecientes">${recientes.map((p) => pcard(p)).join("")}</div>`;
 
-  let elegido = null;
-  const campos = COLS_XL.filter((c) => c[2] !== "tags").map((c) => c[0]);
-  const nuevo = () => Object.fromEntries(campos.map((k) => [k, $(`#xl_${k}`).value]));
-  const limpiar = () => { campos.forEach((k) => { $(`#xl_${k}`).value = ""; }); setTags($("#xlTagsNew"), []); elegido = null; $("#xlNewPoster").innerHTML = ""; $("#xl_titulo").focus(); };
-
-  // autocompletar el título
-  const q = $("#xl_titulo"), list = $("#xlAc");
-  let t, seq = 0, res = [];
-  q.oninput = () => {
-    elegido = null; clearTimeout(t);
+  const F = (k) => $(`#rg_${k}`);
+  const leer = () => ({
+    titulo: F("titulo").value.trim(), duracion: parseInt(F("duracion").value, 10) || null, anio: parseInt(F("anio").value, 10) || null,
+    director: F("director").value.trim() || null, pais: F("pais").value.trim() || null,
+    nota: F("nota").value.trim() ? Math.round(clamp(parseFloat(F("nota").value.replace(",", ".")), 0, 10) * 10) / 10 : null,
+  });
+  let match = null, t, seq = 0;
+  const pintar = (m, d) => {
+    const box = $("#rgMatch");
+    if (!d.titulo) { box.innerHTML = `<div class="rg-vacio">Escribe el título y te digo qué película es.</div>`; return; }
+    if (!m) { box.innerHTML = `<div class="rg-vacio">No la reconozco todavía. Prueba a añadir el año o el director (se guardará igualmente tal cual).</div>`; return; }
+    box.innerHTML = `<div class="rg-mini">${m.poster ? `<img src="${esc(m.poster)}" alt="" referrerpolicy="no-referrer">` : ""}</div>
+      <div class="rg-info"><div class="eyebrow">Es esta</div><div class="rg-t">${esc(m.titulo)}</div>
+      <div class="dim">${esc(m.tituloEn && norm(m.tituloEn) !== norm(m.titulo) ? m.tituloEn : "")}</div>
+      <div class="s">${esc([m.anio, durTxt(d.duracion || m.duracion), m.director, m.pais].filter(Boolean).join(" · "))}</div>
+      <div class="s">${esc((m.generos || []).join(" · "))}</div></div>`;
+  };
+  const buscar = () => {
+    clearTimeout(t);
+    const d = leer();
+    $("#rgSave").disabled = !d.titulo;
     t = setTimeout(async () => {
-      const s = q.value.trim();
-      if (s.length < 2) { list.hidden = true; return; }
+      if (d.titulo.length < 2) { match = null; return pintar(null, d); }
       const my = ++seq;
-      list.hidden = false; list.innerHTML = `<div class="ac-empty">Buscando “${esc(s)}”…</div>`;
-      try { res = await api(`buscar?q=${encodeURIComponent(s)}`); } catch (e) { res = []; }
+      $("#rgMatch").classList.add("cargando");
+      const m = await identificar(d);
       if (my !== seq) return;
-      list.innerHTML = res.length ? res.map((r, i) => `<div class="ac-item" data-i="${i}"><div class="mini">${r.poster ? `<img src="${esc(r.poster)}" referrerpolicy="no-referrer" alt="">` : ""}</div><div><div style="font-weight:600">${esc(r.titulo)} <span class="dim">${r.anio || ""}</span></div><div class="s">${esc(r.director || "")}</div></div></div>`).join("")
-        : `<div class="ac-empty">Sin coincidencias: se guardará como la escribas.</div>`;
-      $$(".ac-item", list).forEach((el) => (el.onmousedown = (ev) => { ev.preventDefault(); elegir(res[+el.dataset.i]); }));
-    }, 350);
+      $("#rgMatch").classList.remove("cargando");
+      match = m; pintar(m, d);
+    }, 450);
   };
-  q.onblur = () => setTimeout(() => (list.hidden = true), 150);
-  const elegir = (r) => {
-    elegido = r;
-    q.value = r.titulo;
-    for (const [k, val] of [["anio", r.anio], ["duracion", r.duracion], ["director", r.director], ["pais", r.pais]]) if (val) $(`#xl_${k}`).value = val;
-    setTags($("#xlTagsNew"), r.generos || []);
-    $("#xlNewPoster").innerHTML = r.poster ? `<img src="${esc(r.poster)}" alt="" referrerpolicy="no-referrer">` : "";
-    list.hidden = true;
-    $("#xl_nota").focus();
-  };
-
-  const guardar = async () => {
-    const d = nuevo();
-    if (!d.titulo.trim()) { $("#xl_titulo").focus(); return toast("Falta el título", "x"); }
-    const datos = Object.fromEntries(campos.map((k) => [k, leerCelda(k, d[k])]));
-    datos.generos = leerTags($("#xlTagsNew"));
-    const dup = S.db.peliculas.find((x) => (norm(x.titulo) === norm(datos.titulo) || norm(x.tituloOriginal) === norm(datos.titulo)) && (!datos.anio || !x.anio || Math.abs(x.anio - datos.anio) <= 1));
-    if (dup && !confirm(`Ya tienes «${dup.titulo}» (${dup.anio || "s/a"}) con un ${fmt1(dup.nota)}. ¿Añadirla otra vez?`)) return;
-    const body = { ...datos, tituloOriginal: elegido ? elegido.tituloOriginal : null, ids: elegido ? elegido.ids : {}, poster: elegido ? elegido.poster : null, taquilla: {}, resena: "", favorita: false, fechaVisto: todayISO() };
-    // la fila aparece al momento; datos, póster y guardado van detrás
+  ["titulo", "anio", "director"].forEach((k) => F(k).addEventListener("input", buscar));
+  F("duracion").addEventListener("input", () => {
+    const d = leer();
+    const s = $(".rg-duracion span"); s.textContent = d.duracion ? `Duración · ${durTxt(d.duracion)}` : "Duración (min)";
+  });
+  $("#rgSave").disabled = true;
+  $("#rgForm").onsubmit = async (ev) => {
+    ev.preventDefault();
+    const d = leer();
+    if (!d.titulo) return F("titulo").focus();
+    const dup = S.db.peliculas.find((x) => (norm(x.titulo) === norm(d.titulo) || norm(x.tituloOriginal) === norm(d.titulo)) && (!d.anio || !x.anio || Math.abs(x.anio - d.anio) <= 1));
+    if (dup && !confirm(`Ya tienes «${dup.titulo}» (${dup.anio || "s/a"}). ¿Añadirla otra vez?`)) return;
+    const m = match;
+    // lo que escribes manda; lo reconocido rellena el resto
+    const body = {
+      titulo: (m && m.titulo) || d.titulo, tituloOriginal: m ? m.tituloOriginal : null, tituloEn: m ? m.tituloEn : null,
+      anio: d.anio || (m && m.anio) || null, duracion: d.duracion || (m && m.duracion) || null,
+      director: d.director || (m && m.director) || null, pais: d.pais || (m && m.pais) || null, nota: d.nota,
+      generos: m ? m.generos : [], ids: m ? m.ids : {}, poster: m ? m.poster : null,
+      taquilla: {}, resena: "", favorita: false, fechaVisto: todayISO(),
+    };
     const tmp = { ...body, id: `tmp${Date.now()}` };
-    $(".xl-sep").insertAdjacentHTML("afterend", filaXL(tmp));
-    const fila = () => document.querySelector(`tr[data-xl="${tmp.id}"]`);
-    fila().classList.add("xl-guardando");
+    $("#rgRecientes").insertAdjacentHTML("afterbegin", pcard(tmp));
+    const card = () => document.querySelector(`#rgRecientes [data-open="${tmp.id}"]`);
+    card().classList.add("xl-guardando");
     toast(`«${body.titulo}» añadida${body.nota != null ? ` con un ${fmt1(body.nota)}` : ""}`);
-    limpiar();
+    $("#rgForm").reset(); match = null; pintar(null, { titulo: "" }); $("#rgSave").disabled = true; $(".rg-duracion span").textContent = "Duración (min)"; F("titulo").focus();
     try {
       const p = await api("peliculas", { method: "POST", body: await completarAntes(body) });
       S.db.peliculas.push(p); S.prof = null;
-      const tr = fila(); if (tr) tr.outerHTML = filaXL(p);
+      const c = card(); if (c) c.outerHTML = pcard(p);
       renderChrome();
-      if (!STATIC) [6000, 15000].forEach((ms) => setTimeout(() => refrescarFila(p.id), ms)); // el PC trae el póster por su cuenta
-    } catch (e) { const tr = fila(); if (tr) tr.remove(); toast(`No se guardó «${body.titulo}»: ${e.message}`, "x"); }
-  };
-  $("#xlSave").onclick = guardar;
-  $$(".xl-new .xl-in").forEach((el) => el.addEventListener("keydown", (ev) => {
-    if (ev.key === "Enter" && !(el.id === "xl_titulo" && !list.hidden && res.length)) { ev.preventDefault(); guardar(); }
-    if (ev.key === "Enter" && el.id === "xl_titulo" && !list.hidden && res.length) { ev.preventDefault(); elegir(res[0]); }
-  }));
-
-  // edición directa de las filas existentes (se guarda al salir de la celda)
-  // etiquetas de género: añadir con Intro, coma o eligiendo de la lista; quitar con × o retroceso
-  const guardarTags = async (c) => {
-    const tr = c.closest("tr[data-xl]");
-    if (!tr) return;
-    try {
-      const p = await api(`peliculas/${tr.dataset.xl}`, { method: "PUT", body: { generos: leerTags(c) } });
-      const i = S.db.peliculas.findIndex((x) => x.id === tr.dataset.xl); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...p };
-      S.prof = null;
-    } catch (e) { toast(e.message, "x"); }
-  };
-  const ponerTag = (inp, texto) => {
-    const c = inp.closest(".tags");
-    const g = parseGeneros(texto).filter((x) => !leerTags(c).includes(x));
-    inp.value = "";
-    if (!g.length) return false;
-    inp.insertAdjacentHTML("beforebegin", g.map(tagHTML).join(""));
-    inp.placeholder = "+";
-    guardarTags(c);
-    return true;
-  };
-  v.onclick = (ev) => {
-    const x = ev.target.closest(".tag-x");
-    if (x) { const c = x.closest(".tags"); x.parentElement.remove(); guardarTags(c); $(".tag-in", c).focus(); return; }
-    const c = ev.target.closest(".tags");
-    if (c && ev.target === c) $(".tag-in", c).focus();
-  };
-  v.oninput = (ev) => {
-    const inp = ev.target.closest(".tag-in");
-    if (inp && GENEROS.some((g) => norm(g) === norm(inp.value))) ponerTag(inp, inp.value);
-  };
-  v.onkeydown = (ev) => {
-    const inp = ev.target.closest(".tag-in");
-    if (!inp) return;
-    if ((ev.key === "Enter" || ev.key === "," || ev.key === "Tab") && inp.value.trim()) { ev.preventDefault(); ponerTag(inp, inp.value); return; }
-    if (ev.key === "Enter" && inp.closest(".xl-new")) { ev.preventDefault(); guardar(); return; }
-    if (ev.key === "Backspace" && !inp.value) { const c = inp.closest(".tags"); const t = $$(".tag", c).pop(); if (t) { t.remove(); guardarTags(c); } }
-  };
-  v.onchange = async (ev) => {
-    const inp = ev.target.closest("tr[data-xl] .xl-in");
-    if (!inp) return;
-    const tr = inp.closest("tr"); const id = tr.dataset.xl; const k = inp.dataset.k;
-    const val = leerCelda(k, inp.value);
-    if (k === "titulo" && !val) { toast("El título no puede quedar vacío", "x"); return; }
-    try {
-      const p = await api(`peliculas/${id}`, { method: "PUT", body: { [k]: val } });
-      const i = S.db.peliculas.findIndex((x) => x.id === id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...p };
-      S.prof = null;
-      inp.value = valorCelda(p, k);
-      inp.classList.add("ok"); setTimeout(() => inp.classList.remove("ok"), 900);
-    } catch (e) { toast(e.message, "x"); }
+    } catch (e) { const c = card(); if (c) c.remove(); toast(`No se guardó «${body.titulo}»: ${e.message}`, "x"); }
   };
   $("#xlPaste").onclick = openPegar;
-  setTimeout(() => $("#xl_titulo").focus(), 80);
+  setTimeout(() => F("titulo").focus(), 80);
 };
 // Trae el póster y los datos que se completan solos tras añadir una película
 async function refrescarFila(id) {
