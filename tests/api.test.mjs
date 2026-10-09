@@ -114,3 +114,11 @@ console.log("✓ Todas las pruebas de la API pasan");
   assert.deepEqual(r, [{ imdb: "tt1", titulo: "Peli", anio: 2012, reparto: "A, B", poster: "https://x/a._V1_SX342.jpg" }]);
   console.log("✓ Buscador de IMDb");
 }
+
+// taquilla de Box Office Mojo
+{
+  const { leerTaquilla } = await import("../lib/notas.mjs");
+  const h = "<td>Domestic Opening</td><td><span>$141,067,634</span></td> <th>All Releases</th> Domestic (33%) <span>$293,144,686</span> International (67%) $595,731,065 Worldwide <b>$888,875,751</b> Budget $120,000,000";
+  assert.deepEqual(leerTaquilla(h), { domestica: 293144686, internacional: 595731065, mundial: 888875751, apertura: 141067634, presupuesto: 120000000 });
+  console.log("✓ Taquilla");
+}

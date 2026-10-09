@@ -593,48 +593,101 @@ function openFilm(id) {
   const rank = [...pr.P].sort((a, b) => b.nota - a.nota).findIndex((x) => x.id === p.id) + 1;
   const pct = rank ? Math.round((1 - (rank - 1) / pr.N) * 100) : null;
   const visto = p.fechaVisto ? `Vista el ${new Date(p.fechaVisto + "T12:00").toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}${p.lugar ? ` · ${p.lugar}` : ""}` : p.lugar ? `Vista en ${p.lugar}` : null;
+  const credito = (l, v) => (v ? `<div><dt>${l}</dt><dd>${v}</dd></div>` : "");
   modal(`
     ${p.poster ? `<div class="detail-backdrop"><img src="${esc(p.poster)}" alt="" referrerpolicy="no-referrer"></div>` : ""}
-    <div class="sheet-body"><div class="detail">
-      <div><div class="poster">${posterHTML(p)}</div></div>
-      <div>
-        <div class="eyebrow">${esc([p.anio, p.pais].filter(Boolean).join(" · "))}</div>
-        <h2 style="margin-top:8px">${esc(p.titulo)}</h2>
-        ${p.tituloOriginal && norm(p.tituloOriginal) !== norm(p.titulo) ? `<div class="orig">${esc(p.tituloOriginal)}</div>` : ""}
-        ${p.tituloEn && norm(p.tituloEn) !== norm(p.titulo) && norm(p.tituloEn) !== norm(p.tituloOriginal) ? `<div class="orig">${esc(p.tituloEn)} <span class="dim">(inglés)</span></div>` : ""}
-        <div class="facts">
-          ${p.anio ? `<span>${icon("calendar")}${p.anio}</span>` : ""}
-          ${p.duracion ? `<span>${icon("clock")}${Math.floor(p.duracion / 60)} h ${p.duracion % 60} min</span>` : ""}
-          ${p.pais ? `<span>${icon("globe")}${esc(p.pais)}</span>` : ""}
-          ${p.director ? `<span>${icon("user")}${splitDir(p.director).map((d) => `<a href="#/persona?n=${encodeURIComponent(d)}" data-close title="Ver su ficha" style="text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px">${esc(d)}</a>`).join(", ")}</span>` : ""}
+    <div class="sheet-body"><div class="detail fx">
+      <aside class="fx-side">
+        <div class="poster">${posterHTML(p)}</div>
+        <dl class="fx-cred">
+          ${credito("Dirección", p.director ? splitDir(p.director).map((d) => `<a href="#/persona?n=${encodeURIComponent(d)}" data-close>${esc(d)}</a>`).join("<br>") : "")}
+          ${credito("Duración", p.duracion ? `${Math.floor(p.duracion / 60)} h ${String(p.duracion % 60).padStart(2, "0")} min <span class="dim">· ${p.duracion} min</span>` : "")}
+          ${credito("Estreno", p.anio || "")}
+          ${credito("País", esc(p.pais || ""))}
+          ${credito("Género", (p.generos || []).map((g) => `<a href="#/coleccion?genre=${encodeURIComponent(g)}" data-close>${esc(g)}</a>`).join(" · "))}
+          ${credito("Vista", visto ? esc(visto.replace(/^Vista (el|en) /, "")) : "")}
+        </dl>
+        <div class="fx-acts">
+          <button class="btn btn-sm" data-edit="${p.id}">${icon("edit")}Editar</button>
+          <button class="btn btn-sm" data-fav="${p.id}">${icon("star", p.favorita)}${p.favorita ? "Quitar favorita" : "Favorita"}</button>
+          <button class="btn btn-sm btn-ghost btn-danger" data-del="${p.id}" title="Eliminar">${icon("trash")}</button>
         </div>
-        <div class="chips">${(p.generos || []).map((g) => `<a class="chip" href="#/coleccion?genre=${encodeURIComponent(g)}" data-close>${esc(g)}</a>`).join("")}${p.favorita ? `<span class="chip gold">★ Favorita</span>` : ""}</div>
-        <div class="myscore">${scoreBadge(p.nota, "lg")}<div><div class="lbl">Tu nota</div><div class="verdict">${veredicto(p.nota)}</div>
-          ${pct ? `<div class="dim" style="font-size:12.5px">Puesto ${rank} de ${pr.N} · mejor que el ${Math.max(0, pct - 1)}% de lo que has visto</div>` : ""}</div></div>
-        ${p.nota != null && notasWebDe(p).length ? `<div class="final-ficha">${scoreBadge(notaFinal(p))}<div><div class="lbl">Nota final</div>
-          <div class="dim">Mitad tu nota (${fmt1(p.nota)}) y mitad la media de las webs (${fmt1(mean(notasWebDe(p).map((x) => x[1])))}): ${esc(notasWebDe(p).map(([n, v]) => `${n} ${fmt1(v)}`).join(" · "))}</div></div></div>` : ""}
-        ${visto ? `<div class="muted" style="margin:-6px 0 14px;font-size:13px">${icon("ticket")} ${esc(visto)}</div>` : ""}
+      </aside>
+      <div class="fx-main">
+        <h2>${esc(p.titulo)}</h2>
+        ${p.tituloOriginal && norm(p.tituloOriginal) !== norm(p.titulo) ? `<div class="orig">${esc(p.tituloOriginal)}</div>` : ""}
+        ${p.tituloEn && norm(p.tituloEn) !== norm(p.titulo) && norm(p.tituloEn) !== norm(p.tituloOriginal) ? `<div class="orig">${esc(p.tituloEn)} <span class="dim">· en inglés</span></div>` : ""}
+        <div class="fx-notas">
+          <div class="myscore">${scoreBadge(p.nota, "lg")}<div><div class="lbl">Tu nota${p.favorita ? ` · <span style="color:var(--gold)">★ favorita</span>` : ""}</div><div class="verdict">${veredicto(p.nota)}</div>
+            ${pct ? `<div class="dim" style="font-size:12.5px">Puesto ${rank} de ${pr.N} · mejor que el ${Math.max(0, pct - 1)}% de lo que has visto</div>` : ""}</div></div>
+          ${p.nota != null && notasWebDe(p).length ? `<div class="final-ficha">${scoreBadge(notaFinal(p))}<div><div class="lbl">Nota final</div>
+            <div class="dim">Mitad tu nota y mitad la media de las webs (${fmt1(mean(notasWebDe(p).map((x) => x[1])))})</div></div></div>` : ""}
+        </div>
         ${p.resena ? `<blockquote class="review">${esc(p.resena)}</blockquote>` : ""}
+        <section id="fReparto" class="fx-sec" hidden></section>
+        <div id="fExtras" class="extras-ficha"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando IMDb, FilmAffinity, Letterboxd, Rotten Tomatoes y SensaCine…</div></div>
+        <section id="fTaquilla" class="fx-sec">${taquillaHTML(p)}</section>
         <div class="sub">Ver en</div>
         ${linksHTML(p)}
-        <div id="fExtras" class="extras-ficha"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando IMDb, FilmAffinity, Letterboxd, Rotten Tomatoes y SensaCine…</div></div>
-        ${t.mundial || p.presupuesto ? `<div class="sub">Taquilla${(p.ids || {}).imdb ? ` · <a href="https://www.boxofficemojo.com/title/${p.ids.imdb}/" target="_blank" rel="noopener" style="text-decoration:underline">Box Office Mojo</a>` : ""}</div><div class="boxoffice">
-          ${p.presupuesto ? `<div><span>Presupuesto</span><b>${money(p.presupuesto)}</b></div>` : ""}
-          ${t.apertura ? `<div><span>Estreno EE.UU.</span><b>${money(t.apertura)}</b></div>` : ""}
-          ${t.domestica ? `<div><span>EE.UU.</span><b>${money(t.domestica)}</b></div>` : ""}
-          ${t.internacional ? `<div><span>Internacional</span><b>${money(t.internacional)}</b></div>` : ""}
-          ${t.mundial ? `<div><span>Mundial</span><b style="color:var(--gold)">${money(t.mundial)}</b></div>` : ""}
-          ${p.presupuesto && t.mundial ? `<div><span>Rentabilidad</span><b>${fmt1(t.mundial / p.presupuesto)}x</b></div>` : ""}
-        </div>` : ""}
-        <div class="dl-actions">
-          <button class="btn" data-edit="${p.id}">${icon("edit")}Editar</button>
-          <button class="btn" data-fav="${p.id}">${icon("star", p.favorita)}${p.favorita ? "Quitar de favoritas" : "Marcar favorita"}</button>
-          <button class="btn btn-ghost btn-danger" data-del="${p.id}">${icon("trash")}Eliminar</button>
-        </div>
       </div>
     </div>
     ${similares.length ? `<div class="sub" style="margin-top:34px">Del mismo director en tu colección</div><div class="strip">${similares.map((x) => pcard(x)).join("")}</div>` : ""}
-    </div>`);  if (typeof cargarExtras === "function") cargarExtras(p);
+    </div>`);
+  if (typeof cargarExtras === "function") cargarExtras(p);
+  cargarReparto(p);
+  cargarTaquilla(p);
+}
+// Taquilla: barra EE.UU. + resto del mundo, con el presupuesto marcado
+function taquillaHTML(p) {
+  const t = p.taquilla || {};
+  if (!t.mundial && !p.presupuesto) return "";
+  const tot = Math.max(t.mundial || 0, p.presupuesto || 0, 1);
+  const dom = t.domestica || 0, int = t.internacional || Math.max(0, (t.mundial || 0) - dom);
+  const pc = (x) => `${(100 * x / tot).toFixed(1)}%`;
+  return `<div class="sub">Taquilla${(p.ids || {}).imdb ? ` · <a href="https://www.boxofficemojo.com/title/${p.ids.imdb}/" target="_blank" rel="noopener">Box Office Mojo</a>` : ""}</div>
+    ${t.mundial ? `<div class="tq-total"><b>${money(t.mundial)}</b><span>en todo el mundo${p.presupuesto ? ` · ${fmt1(t.mundial / p.presupuesto)} veces su presupuesto` : ""}</span></div>
+    <div class="tq-barra" role="img" aria-label="Reparto de la taquilla">${dom ? `<i class="tq-dom" style="width:${pc(dom)}"></i>` : ""}${int ? `<i class="tq-int" style="width:${pc(int)}"></i>` : ""}${p.presupuesto ? `<em style="left:${pc(p.presupuesto)}" title="Presupuesto"></em>` : ""}</div>` : ""}
+    <div class="boxoffice">
+      ${dom ? `<div class="k-dom"><span>EE. UU.</span><b>${money(dom)}</b></div>` : ""}
+      ${int ? `<div class="k-int"><span>Resto del mundo</span><b>${money(int)}</b></div>` : ""}
+      ${t.apertura ? `<div><span>Primer fin de semana</span><b>${money(t.apertura)}</b></div>` : ""}
+      ${p.presupuesto ? `<div class="k-pre"><span>Presupuesto</span><b>${money(p.presupuesto)}</b></div>` : ""}
+    </div>`;
+}
+// Si aún no se consultó, la taquilla se pide una vez a Box Office Mojo y se guarda en la película
+async function cargarTaquilla(p) {
+  const imdb = (p.ids || {}).imdb;
+  if (!STATIC || ro() || !imdb || (p.taquilla || {}).consultado) return;
+  try {
+    const r = await (await fetch(`/api/taquilla?imdb=${imdb}`)).json();
+    const { presupuesto, ...taq } = r || {};
+    const cambios = { taquilla: { ...(p.taquilla || {}), ...taq, fuente: "boxofficemojo", consultado: todayISO() }, ...(presupuesto ? { presupuesto } : {}) };
+    const n = await api(`peliculas/${p.id}`, { method: "PUT", body: cambios });
+    const i = S.db.peliculas.findIndex((x) => x.id === p.id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...n };
+    const box = document.getElementById("fTaquilla");
+    if (box) box.innerHTML = taquillaHTML({ ...p, ...cambios });
+  } catch (e) { /* sin conexión: se intentará otra vez al abrirla */ }
+}
+// Reparto con fotos (Wikidata): el guardado o, si no hay, el de su ficha en Wikidata
+async function cargarReparto(p) {
+  const box = document.getElementById("fReparto");
+  if (!box || typeof entidadesWD !== "function") return;
+  let lista = Array.isArray(p.reparto) ? p.reparto : [];
+  const q = (p.ids || {}).wikidata;
+  try {
+    if (!lista.length && q) {
+      const e = (await entidadesWD([q], "claims"))[q];
+      const qs = valores(e, "P161").map((v) => v.id).slice(0, 12);
+      const L = await entidadesWD(qs, "labels");
+      lista = qs.map((x) => ({ n: etiqueta(L[x]), q: x })).filter((x) => x.n);
+    }
+    if (!lista.length || !document.body.contains(box)) return;
+    box.hidden = false;
+    box.innerHTML = `<div class="sub">Reparto</div><div class="fx-reparto">${lista.slice(0, 12).map((x) => `<a class="pe-pers" href="#/persona?${x.q ? `q=${x.q}` : `n=${encodeURIComponent(x.n)}`}" data-close><span class="pe-foto" ${x.q ? `data-pq="${x.q}"` : ""}><b>${esc(x.n.split(" ").map((w) => w[0]).slice(0, 2).join(""))}</b></span><span class="pe-n">${esc(x.n)}</span></a>`).join("")}</div>`;
+    const qs = lista.map((x) => x.q).filter(Boolean);
+    const F = await entidadesWD(qs, "claims");
+    for (const el of box.querySelectorAll(".pe-foto[data-pq]")) { const f = valores(F[el.dataset.pq], "P18")[0]; if (f) el.innerHTML = `<img src="${fotoCommons(f, 200)}" alt="" loading="lazy" referrerpolicy="no-referrer">`; }
+  } catch (e) { /* sin Wikidata: sin reparto */ }
 }
 
 // ---------------------------------------------------------------- Modal genérico
@@ -1644,8 +1697,9 @@ async function wikiDesdeQ(ids) {
   const esPeli = (e) => { const t = cv(e, "P31"); return t.some((x) => WD_FILM.has(x)) || (cv(e, "P345").some((x) => String(x).startsWith("tt")) && !t.some((x) => WD_TV.has(x)) && cv(e, "P57").length > 0); };
   const pelis = ids.map((i) => ents[i]).filter((e) => e && !e.missing && esPeli(e)).slice(0, 8);
   if (!pelis.length) return [];
-  const refs = [...new Set(pelis.flatMap((e) => [...cv(e, "P57").slice(0, 3), ...cv(e, "P495").slice(0, 1), ...cv(e, "P136")]))];
-  const labs = refs.length ? (await wdApi({ action: "wbgetentities", ids: refs.slice(0, 50).join("|"), props: "labels", languages: "es|en" })).entities || {} : {};
+  const refs = [...new Set(pelis.flatMap((e) => [...cv(e, "P57").slice(0, 3), ...cv(e, "P495").slice(0, 1), ...cv(e, "P136"), ...cv(e, "P161").slice(0, 10)]))];
+  const labs = {};
+  for (let i = 0; i < refs.length; i += 50) Object.assign(labs, (await wdApi({ action: "wbgetentities", ids: refs.slice(i, i + 50).join("|"), props: "labels", languages: "es|en" })).entities || {});
   const lab = (e, l = "es") => (e && e.labels && ((e.labels[l] || e.labels.en || {}).value)) || "";
   const titulos = pelis.map((e) => e.sitelinks && e.sitelinks.enwiki && e.sitelinks.enwiki.title).filter(Boolean);
   const posters = {};
@@ -1670,7 +1724,8 @@ async function wikiDesdeQ(ids) {
     return {
       titulo: lab(e, "es"), tituloOriginal: cv(e, "P1476")[0] || lab(e, "en"), tituloEn: lab(e, "en") || null, anio: anio ? +anio : null,
       duracion: dur ? Math.round(+dur) : null, director: cv(e, "P57").slice(0, 3).map((d) => lab(labs[d])).filter(Boolean).join(" / "),
-      pais: lab(labs[cv(e, "P495")[0]]), generos: generos.slice(0, 3), ids: idsExt, poster: posters[enw] || null,
+      pais: lab(labs[cv(e, "P495")[0]]), generos: generos.slice(0, 3), ids: idsExt,
+      reparto: cv(e, "P161").slice(0, 10).map((q) => ({ n: lab(labs[q]), q })).filter((x) => x.n), poster: posters[enw] || null,
     };
   });
 }
@@ -1694,12 +1749,20 @@ async function completarAntes(body) {
         if (!b.poster && m.poster) b.poster = m.poster;
         for (const k of ["tituloOriginal", "tituloEn", "director", "pais", "duracion", "anio"]) if (!b[k] && m[k]) b[k] = m[k];
         if (!(b.generos || []).length && m.generos.length) b.generos = m.generos;
+        if (!(b.reparto || []).length && (m.reparto || []).length) b.reparto = m.reparto;
       }
     } catch (e) { /* sin Wikidata */ }
   }
   if (!b.poster) {
     const r = await posterWeb(b);
     if (r.poster) { b.poster = r.poster; if (r.imdb && !b.ids.imdb) b.ids.imdb = r.imdb; }
+  }
+  if (b.ids.imdb && !(b.taquilla || {}).consultado) {
+    try {
+      const { presupuesto, ...taq } = await (await fetch(`/api/taquilla?imdb=${b.ids.imdb}`, { signal: AbortSignal.timeout(9000) })).json();
+      b.taquilla = { ...(b.taquilla || {}), ...taq, fuente: "boxofficemojo", consultado: todayISO() };
+      if (presupuesto) b.presupuesto = presupuesto;
+    } catch (e) { /* se consultará al abrir la ficha */ }
   }
   return b;
 }
@@ -1888,7 +1951,7 @@ VIEWS.buscar = (v, qs) => {
     const vistas = new Set(mias.map((p) => p.ids && p.ids.wikidata).filter(Boolean));
     const lista = pelis.map((r) => [puntuar(r, { titulo: q }), r]).sort((a, b) => b[0] - a[0]).map(([, r]) => r).filter((r) => !vistas.has(r.ids.wikidata)).slice(0, 12);
     const htmlPelis = lista.length ? `<div class="posters">${lista.map((r) => `<a class="pcard" ${r.ids.wikidata ? `href="#/pelicula?q=${r.ids.wikidata}"` : `href="https://www.imdb.com/title/${r.ids.imdb}/" target="_blank" rel="noopener"`}><div class="frame">${posterHTML(r)}</div>
-      <div class="meta"><div class="t">${esc(r.titulo)}</div><div class="s">${esc([r.anio, splitDir(r.director || "")[0] || r.reparto].filter(Boolean).join(" · "))}</div></div></a>`).join("")}</div>` : "";
+      <div class="meta"><div class="t">${esc(r.titulo)}</div><div class="s">${esc([r.anio, splitDir(r.director || "")[0] || (r.reparto || []).map((x) => x.n).slice(0, 2).join(", ")].filter(Boolean).join(" · "))}</div></div></a>`).join("")}</div>` : "";
     const htmlPers = pers.length ? `<div class="bq-pers">${pers.map((x) => `<a class="pe-pers" href="#/persona?q=${x.q}"><span class="pe-foto">${x.foto ? `<img src="${fotoWiki(x.foto)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<b>${esc(x.nombre.split(" ").map((w) => w[0]).slice(0, 2).join(""))}</b>`}</span><span class="pe-n">${esc(x.nombre)}</span><span class="pe-r">${esc(x.desc)}</span></a>`).join("")}</div>` : "";
     out.innerHTML = seccion(`En tu colección · ${mias.length}`, htmlMias) + seccion("Personas", htmlPers) + seccion("Películas", htmlPelis)
       || `<div class="empty">No encuentro nada con «${esc(q)}».</div>`;
@@ -1914,7 +1977,7 @@ async function candidatosPeli(titulo) {
   im.forEach((x, i) => {
     const r = porImdb.get(x.imdb);
     if (r) { r.rangoImdb = i; if (!r.poster) r.poster = x.poster; if (!r.tituloEn) r.tituloEn = x.titulo; }
-    else todos.push({ titulo: x.titulo, tituloEn: x.titulo, tituloOriginal: x.titulo, anio: x.anio, duracion: null, director: "", pais: "", generos: [], ids: { imdb: x.imdb }, poster: x.poster, reparto: x.reparto, rangoImdb: i });
+    else todos.push({ titulo: x.titulo, tituloEn: x.titulo, tituloOriginal: x.titulo, anio: x.anio, duracion: null, director: "", pais: "", generos: [], ids: { imdb: x.imdb }, poster: x.poster, reparto: x.reparto ? x.reparto.split(", ").map((n) => ({ n })) : [], rangoImdb: i });
   });
   return todos;
 }
@@ -2013,7 +2076,7 @@ VIEWS.anadir = (v) => {
       titulo: (m && m.titulo) || d.titulo, tituloOriginal: m ? m.tituloOriginal : null, tituloEn: m ? m.tituloEn : null,
       anio: d.anio || (m && m.anio) || null, duracion: d.duracion || (m && m.duracion) || null,
       director: d.director || (m && m.director) || null, pais: d.pais || (m && m.pais) || null, nota: d.nota,
-      generos: m ? m.generos : [], ids: m ? m.ids : {}, poster: m ? m.poster : null,
+      generos: m ? m.generos : [], ids: m ? m.ids : {}, poster: m ? m.poster : null, reparto: m ? m.reparto || [] : [],
       taquilla: {}, resena: "", favorita: false, fechaVisto: todayISO(),
     };
     const tmp = { ...body, id: `tmp${Date.now()}` };

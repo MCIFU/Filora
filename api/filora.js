@@ -9,7 +9,7 @@
 import { randomBytes } from "node:crypto";
 import { get, list, put } from "@vercel/blob";
 import { COLECCIONES, actualizar, anotarDemanda, borrar, cinesActivos, crear, fusionar, guardarPreferencias, idsCineValidos, pinValido } from "../lib/filora.mjs";
-import { buscarImdb, notasExternas, posterImdb } from "../lib/notas.mjs";
+import { buscarImdb, notasExternas, posterImdb, taquillaImdb } from "../lib/notas.mjs";
 import { claveValida, crearSesion, datosSesion, hashClave, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
 
 const CLAVE = "filora/db.json";
@@ -202,6 +202,11 @@ async function manejar(req) {
     if (req.method === "GET" && partes[0] === "imdb") {
       const r = await buscarImdb(url.searchParams.get("q")).catch(() => []);
       return new Response(JSON.stringify(r), { headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, s-maxage=86400" } });
+    }
+    // ---- taquilla de una película (Box Office Mojo; caché 7 días)
+    if (req.method === "GET" && partes[0] === "taquilla") {
+      const r = await taquillaImdb(url.searchParams.get("imdb")).catch(() => null);
+      return new Response(JSON.stringify(r || {}), { headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": r ? "public, s-maxage=604800" : "no-store" } });
     }
     // ---- póster de una película (pública; caché 30 días)
     if (req.method === "GET" && partes[0] === "poster") {

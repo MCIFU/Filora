@@ -1089,3 +1089,46 @@ a.pcard { color: inherit; text-decoration: none; }
 .icon-btn.buscar { display: grid; place-items: center; }
 .rg-f .input.auto { background: #f0fbf3; border-style: dashed; }
 a.icon-btn { color: inherit; }
+
+/* Ficha de película: créditos a la izquierda, notas y datos a la derecha */
+.fx { grid-template-columns: 280px minmax(0, 1fr); gap: 40px; }
+.fx-side { display: grid; gap: 22px; align-content: start; }
+.fx-cred { margin: 0; display: grid; gap: 12px; border-top: 1px solid var(--linea-2); padding-top: 16px; }
+.fx-cred > div { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.fx-cred dt { font: 600 15px/1.2 var(--creditos); letter-spacing: .1em; text-transform: uppercase; color: var(--papel-3); }
+.fx-cred dd { margin: 0; font: 500 19px/1.25 var(--creditos); letter-spacing: .03em; color: var(--papel); }
+.fx-cred dd .dim { color: var(--papel-3); }
+.fx-cred a { text-decoration: underline; text-decoration-color: var(--linea-2); text-underline-offset: 3px; }
+.fx-cred a:hover { color: var(--bombilla); }
+.fx-acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.fx-main h2 { margin-top: 4px; }
+.fx-notas { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 16px; align-items: stretch; margin: 24px 0 8px; }
+.fx-notas .myscore { margin: 0; padding: 16px 0; }
+.fx-notas .final-ficha { margin: 0; align-self: center; }
+.fx-notas > :only-child { grid-column: 1 / -1; }
+.fx-sec[hidden] { display: none; }
+.fx-reparto { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 18px 10px; }
+.fx-reparto .pe-foto { width: 76px; height: 76px; }
+.fx-reparto .pe-foto b { font-size: 20px; }
+.fx-reparto .pe-n { font-size: 13px; line-height: 1.25; }
+.tq-total { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 10px; }
+.tq-total b { font: 800 40px/1 var(--display); color: var(--gold, var(--bombilla)); font-variant-numeric: tabular-nums; }
+.tq-total span { color: var(--papel-3); font-size: 14px; }
+.tq-barra { position: relative; display: flex; height: 14px; background: var(--linea-2); margin-bottom: 18px; }
+.tq-barra i { display: block; height: 100%; }
+.tq-dom, .k-dom { --c: var(--telon); } .tq-int, .k-int { --c: var(--bombilla); }
+.tq-barra i { background: var(--c); }
+.tq-barra em { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--papel); }
+.boxoffice .k-dom, .boxoffice .k-int { border-left-color: var(--c); }
+.boxoffice .k-pre { border-left-style: dashed; }
+@media (max-width: 760px) {
+  .fx { grid-template-columns: 1fr; gap: 26px; }
+  .fx-side { grid-template-columns: 130px minmax(0, 1fr); gap: 16px; }
+  .fx-side .poster { grid-row: span 2; }
+  .fx-cred { border-top: 0; padding-top: 0; gap: 8px; }
+  .fx-cred > div { grid-template-columns: 1fr; gap: 0; }
+  .fx-cred dd { font-size: 17px; }
+  .fx-side .fx-acts { grid-column: 1 / -1; }
+  .fx-main { order: -1; }
+  .fx-notas { grid-template-columns: 1fr; }
+}
