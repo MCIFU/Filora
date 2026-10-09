@@ -1,210 +1,10 @@
 {
- "actualizado": "2026-10-08",
+ "actualizado": "2026-10-09",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
  "estrenos": [
-  {
-   "fecha": "2026-10-09",
-   "titulo": "Ceniza en la boca",
-   "original": "Ceniza en la boca",
-   "director": "Diego Luna",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "México",
-   "reparto": "Anna Díaz, Adriana Paz, Irene Escolar",
-   "sinopsis": "Lucila (Anna Díaz), una joven de 21 años, intenta encontrar su lugar en el mundo frente a la presión familiar, la…",
-   "duracion": 97,
-   "poster": "https://pics.filmaffinity.com/ceniza_en_la_boca-859618471-mmed.jpg",
-   "fa": "503965",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "Doraemon: Aventuras en el mundo del arte",
-   "original": "Eiga Doraemon Nobita no Esekai Monogatariaka",
-   "director": "Yukiyo Teramoto",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Japón",
-   "reparto": "Movie card actions, Loading...",
-   "sinopsis": "Doraemon, Nobita y sus amigos entran dentro de una pintura que los transporta a Artelia, un mundo ilustrado inspirado en…",
-   "duracion": 105,
-   "poster": "https://pics.filmaffinity.com/eiga_doraemon_nobita_no_esekai_monogatari-306990557-mmed.jpg",
-   "fa": "253341",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "El precio de la red",
-   "original": "The Social Reckoning",
-   "director": "Aaron Sorkin",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Mikey Madison, Jeremy Allen White, Jeremy Strong",
-   "sinopsis": "Descrita como una 'pieza complementaria' de 'La red social', la nueva película se centra en los acontecimientos que…",
-   "duracion": 112,
-   "poster": "https://pics.filmaffinity.com/the_social_reckoning-728059636-mmed.jpg",
-   "fa": "279550",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q136387857",
-    "imdb": "tt37510326",
-    "filmaffinity": "279550",
-    "rt": "m/the_social_reckoning",
-    "letterboxd": "the-social-reckoning",
-    "tmdb": "1281331",
-    "allocine": "1000026649"
-   }
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "El árbol muy muy lejano",
-   "original": "The Magic Faraway Tree",
-   "director": "Ben Gregor",
-   "generos": [
-    "Aventura"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Claire Foy, Andrew Garfield, Rebecca Ferguson",
-   "sinopsis": "Polly, Tim, y sus tres hijos son una familia moderna que se ve obligada a mudarse a la remota campiña inglesa. Poco…",
-   "duracion": 110,
-   "poster": "https://pics.filmaffinity.com/the_magic_faraway_tree-966140960-mmed.jpg",
-   "fa": "976447",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q126930033",
-    "imdb": "tt7734244",
-    "filmaffinity": "976447",
-    "rt": "m/the_magic_faraway_tree",
-    "letterboxd": "the-magic-faraway-tree",
-    "tmdb": "1140521",
-    "allocine": "234819"
-   }
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "Escape Room 2",
-   "original": "Escape Room 2",
-   "director": "Hèctor Claramunt",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "reparto": "Joel Joan, Iván Massagué, Mònica Pérez",
-   "sinopsis": "Cinco años después, Edu, Marina, Viky y Rai vuelven a coincidir misteriosamente en un nuevo local de moda situado en lo…",
-   "duracion": 88,
-   "poster": "https://pics.filmaffinity.com/escape_room_2-691857156-mmed.jpg",
-   "fa": "903140",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "La otra madre",
-   "director": "Rob Savage",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Jessica Chastain, Jay Duplass, Arabella Olivia Clark",
-   "sinopsis": "Bela, una niña de 8 años que vive en un hogar tenso por el matrimonio problemático de sus padres, ve cómo su vida se ve…",
-   "duracion": 93,
-   "poster": "https://pics.filmaffinity.com/other_mommy-415529498-mmed.jpg",
-   "fa": "301992",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "La vida de una mujer",
-   "original": "La vie d'une femmeaka",
-   "director": "Charline Bourgeois-Tacquet",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Francia",
-   "reparto": "Léa Drucker, Mélanie Thierry, Charles Berling",
-   "sinopsis": "Gabrielle, de 55 años, se entrega a su trabajo en cuerpo y alma. Como cirujana y jefa de departamento del hospital, está…",
-   "duracion": 98,
-   "poster": "https://pics.filmaffinity.com/la_vie_d_une_femme-885092719-mmed.jpg",
-   "fa": "172492",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "Las ciegas hormigas",
-   "original": "Inurri itsuak",
-   "director": "Igor Legarreta",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "España",
-   "reparto": "Urko Olazabal, Itziar Ituño, Josean Bengoetxea",
-   "sinopsis": "Vizcaya, 1930. Un duro temporal hace encallar un barco inglés con toneladas de carbón en su interior. Durante la noche,…",
-   "duracion": 101,
-   "poster": "https://pics.filmaffinity.com/inurri_itsuak-598230121-mmed.jpg",
-   "fa": "369667",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "Mascotas al rescate",
-   "original": "Falcon Expressaka",
-   "director": "Benoît Daffis / Jean-Christian Tassy",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Francia",
-   "reparto": "Movie card actions, Loading...",
-   "sinopsis": "Cuando un tren de alta velocidad queda fuera de control, un grupo de mascotas atrapadas deberá unirse para evitar el…",
-   "duracion": 99,
-   "poster": "https://pics.filmaffinity.com/falcon_express-879360787-mmed.jpg",
-   "fa": "392961",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "Naza",
-   "director": "Yuval Abraham / Rachel Szor",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Yuval Abraham",
-   "sinopsis": "Rodada por la noche en los tejados de Tel Aviv, la película revela con todo detalle los mecanismos que hay detrás del…",
-   "duracion": 80,
-   "poster": "https://pics.filmaffinity.com/naza-969777841-mmed.jpg",
-   "fa": "105520",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-09",
-   "titulo": "Su propio infierno",
-   "original": "Her Private Hell",
-   "director": "Nicolas Winding Refn",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Dinamarca",
-   "reparto": "Sophie Thatcher, Charles Melton, Kristine Froseth",
-   "sinopsis": "Cuando una misteriosa niebla envuelve una metrópolis futurista, liberando a una presencia esquiva y letal, una…",
-   "duracion": 107,
-   "poster": "https://pics.filmaffinity.com/her_private_hell-395018843-mmed.jpg",
-   "fa": "120455",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q134430061",
-    "imdb": "tt36629665",
-    "rt": "m/her_private_hell",
-    "letterboxd": "her-private-hell-2026",
-    "tmdb": "1469342",
-    "allocine": "1000023438"
-   }
-  },
   {
    "fecha": "2026-10-16",
    "titulo": "Boiúna: La leyenda del Amazonas",
@@ -230,7 +30,9 @@
     "Animación"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "El aspirante a campeón de carreras Rayo McQueen parece que está a punto de conseguir el éxito, la fama y todo lo que había soñado, hasta que por error toma un desvío inesperado en la polvorienta y solitaria Ruta 66. Su actitud arrogante se desvanece cuando…",
+   "reparto": "Owen Wilson, Paul Newman, Bonnie Hunt",
+   "sinopsis": "El aspirante a campeón de carreras Rayo McQueen parece que está a punto de conseguir el éxito, la fama y todo lo que…",
+   "duracion": 116,
    "poster": "https://pics.filmaffinity.com/cars-239233988-mmed.jpg",
    "fa": "835259",
    "destacado": false
@@ -276,7 +78,8 @@
     "Animación"
    ],
    "pais": "Corea del Sur",
-   "sinopsis": "El padre Park es un médico convertido en sacerdote que fue excomulgado por realizar exorcismos para una iglesia que negaba la existencia de males sobrenaturales. Cuando su viejo amigo, un monje de un templo secreto y lleno de magia, lo llama para proteger a…",
+   "sinopsis": "El padre Park, un médico convertido en sacerdote, fue excomulgado por realizar exorcismos en una iglesia que se negaba a…",
+   "duracion": 85,
    "poster": "https://pics.filmaffinity.com/toemalog-481527554-mmed.jpg",
    "fa": "312633",
    "destacado": false
@@ -346,7 +149,9 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "En el verano de 1936, Federico García Lorca y el joven Juan Ramírez de Lucas proyectaban abandonar España y empezar una nueva vida lejos de una sociedad que les obligaba a vivir su relación en secreto. Aquel viaje nunca llegó a producirse. Semanas después,…",
+   "reparto": "Álvaro Morte, Francesco Carril, Joaquín Notario",
+   "sinopsis": "En el verano de 1936, Federico García Lorca y el joven Juan Ramírez de Lucas proyectaban abandonar España y empezar una…",
+   "duracion": 88,
    "poster": "https://pics.filmaffinity.com/la_voz_quebrada-399557131-mmed.jpg",
    "fa": "209641",
    "destacado": false
@@ -360,7 +165,8 @@
     "Animación"
    ],
    "pais": "Alemania",
-   "sinopsis": "Mia, una estudiante expulsada, y su rata mascota Quentin llegan a la Academia Rotwood, donde ella es la única humana entre sus compañeros monstruosos. Debido al odio del director Van Vlad hacia los humanos, Mia deberá formar equipo con los monstruos para…",
+   "sinopsis": "Mia, una estudiante expulsada, y su rata mascota Quentin llegan a la Academia Rotwood, donde ella es la única humana…",
+   "duracion": 81,
    "poster": "https://pics.filmaffinity.com/monster_mia-511572125-mmed.jpg",
    "fa": "960631",
    "destacado": false
@@ -374,7 +180,9 @@
     "Thriller"
    ],
    "pais": "Finlandia",
-   "sinopsis": "Ansiosos por formar una familia, Saga y su marido británico, Jon, se mudan a la casa aislada en lo profundo del bosque finlandés donde Saga pasó gran parte de su infancia. Pero en cuanto nace su bebé, a pesar de las palabras tranquilizadoras de todos a su…",
+   "reparto": "Seidi Haarla, Rupert Grint, Pamela Tola",
+   "sinopsis": "Ansiosos por formar una familia, Saga y su marido británico, Jon, se mudan a la casa aislada en lo profundo del bosque…",
+   "duracion": 92,
    "poster": "https://pics.filmaffinity.com/yon_lapsi-430436691-mmed.jpg",
    "fa": "693711",
    "destacado": false
@@ -388,7 +196,9 @@
     "Documental"
    ],
    "pais": "Suecia",
-   "sinopsis": "Documental que narra la historia de amistad entre una cineasta de origen palestino y un atleta de Parkour en Gaza. En su incesante búsqueda de un recuerdo que refuerce su sentimiento de pertenencia, Areeb se cruza con Ahmad. La nostalgia se cruza con la…",
+   "reparto": "Areeb Zuaiter, Ahmad Matar, Ibrahim Maher",
+   "sinopsis": "Documental que narra la historia de amistad entre una cineasta de origen palestino y un atleta de Parkour en Gaza. En su…",
+   "duracion": 89,
    "poster": "https://pics.filmaffinity.com/yalla_parkour-152648024-mmed.jpg",
    "fa": "377115",
    "destacado": false
@@ -467,7 +277,8 @@
    ],
    "pais": "España",
    "reparto": "José Mota, Karra Elejalde, Pablo Cabello",
-   "sinopsis": "1905. La feliz infancia de Michi, un niño de siete años finaliza bruscamente con la violenta muerte de su padre, un artista ambulante que ha enseñado al pequeño a ver la magia y el humor en cada rincón de la vida. Pasados los años, Michi se ha convertido en…",
+   "sinopsis": "1905. La feliz infancia de Michi, un niño de siete años finaliza bruscamente con la violenta muerte de su padre, un…",
+   "duracion": 98,
    "poster": "https://pics.filmaffinity.com/arriba_tutto-516999941-mmed.jpg",
    "fa": "232354",
    "destacado": false
@@ -495,7 +306,8 @@
     "Terror"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "El meteórico ascenso de Matt Hagen, desde chico de la calle en Gotham hasta protagonista de Hollywood, se ve trágicamente truncado cuando las acciones de un jefe del crimen local lo dejan horriblemente desfigurado. Abandonado por su equipo y sin nada que…",
+   "reparto": "Tom Rhys Harries, Naomi Ackie, David Dencik",
+   "sinopsis": "El meteórico ascenso de Matt Hagen, desde chico de la calle en Gotham hasta protagonista de Hollywood, se ve…",
    "poster": "https://pics.filmaffinity.com/clayface-275927409-mmed.jpg",
    "fa": "514364",
    "destacado": true,
@@ -531,7 +343,8 @@
     "Thriller"
    ],
    "pais": "España",
-   "sinopsis": "Un policía infiltrado atropella a una joven y se fuga. El padre de la víctima, un antiguo ultrasur, investiga por su cuenta, chocando con el pasado.",
+   "reparto": "Luis Zahera, Roberto Álamo, Luis Callejo",
+   "sinopsis": "Un policía infiltrado atropella a una joven y se fuga. El padre de la víctima, un antiguo ultrasur, investiga por su cuenta, chocando con el pasado…",
    "poster": "https://pics.filmaffinity.com/leones_en_invierno-120820250-mmed.jpg",
    "fa": "618609",
    "destacado": false
@@ -1307,6 +1120,160 @@
    "sinopsis": "Asesinato, chantaje, robo, extorsión… Otro verano más en Hollywood. Es 1977, ocho años después de que Cliff Booth (Brad Pitt) se cruzara con la familia Manson en el Hollywood de 1969 que vimos en Érase una vez en Hollywood.\n\nEn Las nuevas desventuras de Cliff…",
    "poster": "https://pics.filmaffinity.com/the_further_mis_adventures_of_cliff_booth-321792863-mmed.jpg",
    "fa": "630924",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Ahora los suegros son ellos",
+   "original": "Focker In-Law",
+   "director": "John Hamburg",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Diez años después de los últimos eventos, los papeles se invierten y Greg Focker (Ben Stiller) se enfrenta a su mayor reto: ser el suegro. Cuando su hijo Henry anuncia su compromiso, Greg intenta ser el patriarca comprensivo que nunca tuvo, pero la presión…",
+   "poster": "https://pics.filmaffinity.com/focker_in_law-431643787-mmed.jpg",
+   "fa": "580952",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "El director",
+   "original": "El director",
+   "director": "Dani de la Orden",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "sinopsis": "Tras más de dos décadas cubriendo guerras y conflictos, el corresponsal David Jiménez es nombrado director de uno de los principales diarios del país. Su defensa de un periodismo riguroso choca desde el principio con los intereses ocultos del diario,…",
+   "poster": "https://pics.filmaffinity.com/el_director-423286297-mmed.jpg",
+   "fa": "247502",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Hechizo: Bienvenidos a Hexe",
+   "original": "Hexed",
+   "director": "Fawn Veerasunthorn / Josie Trinidad",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Billie, una adolescente impulsiva y poco convencional, desata accidentalmente unos poderes mágicos secretos y sale disparada de los suburbios hacia un reino mágico llamado Hexe, donde la reciben Ms. Quill y Elias Quire. A medida que se desarrolla el viaje de…",
+   "poster": "https://pics.filmaffinity.com/hexed-338259449-mmed.jpg",
+   "fa": "992434",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Hermanas",
+   "original": "Hermanas",
+   "director": "Ione Hernández Sáenz",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "sinopsis": "Chelo es una mujer que quiere divorciarse de su marido Javier y construir una vida lejos de una relación que ya está acabada. Marta es una periodista que no puede llegar a todo con un pasado que arrastra y a veces duele. Lo que ellas no saben aún es que aquel…",
+   "poster": "https://pics.filmaffinity.com/hermanas-377583177-mmed.jpg",
+   "fa": "875260",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "La libertad doble",
+   "original": "La libertad dobleaka",
+   "director": "Lisandro Alonso",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Argentina",
+   "sinopsis": "Misael vive como leñador independiente en el bosque, disfrutando de su libertad solitaria. Cuando debe cuidar a su hermana mayor, su pacífica existencia da un vuelco y los cimientos de una vida cuidadosamente construida comienzan a desmoronarse.",
+   "poster": "https://pics.filmaffinity.com/la_libertad_doble-427301748-mmed.jpg",
+   "fa": "455408",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "La maleta de Álex",
+   "original": "La maleta de Álexaka",
+   "director": "Alejandro Cortés Calahorra",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "España",
+   "sinopsis": "Diez años después de la muerte de Álex Angulo, Dodó, la hija que el actor adoptó en China, regresa desde Taiwán para conocer quién fue realmente su padre. Con su maleta secreta, recorre Bilbao y Madrid reencontrándose con familiares, amigos y profesionales…",
+   "poster": "https://pics.filmaffinity.com/la_maleta_de_alex-475257961-mmed.jpg",
+   "fa": "818262",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Mailin",
+   "original": "Mailin",
+   "director": "María Silvia Esteve",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "Argentina",
+   "sinopsis": "Mailin le cuenta a su hija un cuento antes de dormir. Es un cuento de hadas que pronto se vuelve oscuro, sobre una niña nacida del amor verdadero y una bestia que devoró su infancia. Para que su hija tenga la infancia que ella nunca tuvo, Mailin debe…",
+   "poster": "https://pics.filmaffinity.com/mailin-752631896-mmed.jpg",
+   "fa": "623848",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Oro sin ley",
+   "original": "The Weight",
+   "director": "Padraic McKinley",
+   "generos": [
+    "Aventura"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Oregón, 1933. Samuel Murphy (Ethan Hawke) es separado de su hija y enviado a un campo de trabajo. Un día, el alcaide Clancy (Russell Crowe) le ofrece la posibilidad de liberarlo si consigue pasar oro de contrabando a través de una peligrosa senda salvaje.…",
+   "poster": "https://pics.filmaffinity.com/the_weight-347679642-mmed.jpg",
+   "fa": "796217",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Un hombre en un puente",
+   "original": "Un hombre en un puente",
+   "director": "David Martín de los Santos",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "sinopsis": "Un hombre en un puente narra la historia de Andrés (Roger Casamajor), un hombre de mediana edad que, sin tener a dónde ir, regresa a su pueblo natal en busca de refugio. Allí se reencuentra con tres figuras clave de su pasado: Lucía (Belén Cuesta), su novia…",
+   "poster": "https://pics.filmaffinity.com/un_hombre_en_un_puente-195220003-mmed.jpg",
+   "fa": "521359",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Burundanga",
+   "original": "Burundanga",
+   "director": "José Corbacho",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España",
+   "sinopsis": "Berta descubre que está embarazada y no sabe qué hacer, porque duda del amor de su pareja, Manel. Aconsejada por su amiga Sílvia, decide administrarle burundanga, la llamada droga de la verdad. Pero cuando empieza a hacer efecto, Manel confiesa algo mucho más…",
+   "poster": "https://pics.filmaffinity.com/burundanga-291687803-mmed.jpg",
+   "fa": "774585",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Noche de paz 2",
+   "original": "Violent Night 2",
+   "director": "Tommy Wirkola",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Continuación de \"Noche de paz\" (2022). El no tan simpático Papá Noel vuelve a enfundarse su traje para medirse con un despiadado gánster que se dedica a aterrorizar a las tiendas del centro comercial Silver Bell. Pero Santa Claus olvida el verdadero…",
+   "poster": "https://pics.filmaffinity.com/violent_night_2-783079018-mmed.jpg",
+   "fa": "808270",
    "destacado": false
   },
   {
