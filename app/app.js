@@ -634,8 +634,30 @@ function openFilm(id) {
     ${similares.length ? `<div class="sub" style="margin-top:34px">Del mismo director en tu colección</div><div class="strip">${similares.map((x) => pcard(x)).join("")}</div>` : ""}
     </div>`);
   if (typeof cargarExtras === "function") cargarExtras(p);
-  cargarReparto(p);
-  cargarTaquilla(p);
+  completarFicha(p).then((n) => { if (n) { cargarReparto(n); cargarTaquilla(n); } else { cargarReparto(p); cargarTaquilla(p); } });
+}
+// Películas añadidas antes (o sin reconocer): al abrir la ficha se buscan y se rellena lo que falte
+async function completarFicha(p, forzar = false) {
+  const falta = !p.poster || !(p.generos || []).length || !(p.ids || {}).wikidata || !(p.reparto || []).length || !p.tituloEn;
+  if (!STATIC || ro() || (!falta && !forzar) || (p.completado && !forzar)) return null;
+  try {
+    const m = await identificar({ titulo: p.tituloOriginal || p.titulo, anio: p.anio, director: p.director, duracion: p.duracion })
+      || (p.tituloOriginal && p.tituloOriginal !== p.titulo ? await identificar({ titulo: p.titulo, anio: p.anio, director: p.director, duracion: p.duracion }) : null);
+    const c = m && m.ids.wikidata ? { completado: todayISO() } : {};
+    if (m) {
+      c.ids = { ...m.ids, ...(p.ids || {}) };
+      for (const k of ["poster", "tituloOriginal", "tituloEn", "director", "pais", "duracion", "anio"]) if (!p[k] && m[k]) c[k] = m[k];
+      if (!(p.generos || []).length && (m.generos || []).length) c.generos = m.generos;
+      if (!(p.reparto || []).length && (m.reparto || []).length) c.reparto = m.reparto;
+    }
+    if (!(c.poster || p.poster)) { const r = await posterWeb({ ...p, ...c }); if (r.poster) { c.poster = r.poster; c.ids = { ...(c.ids || p.ids || {}), imdb: (c.ids || p.ids || {}).imdb || r.imdb }; } }
+    if (c.ids && JSON.stringify(c.ids) === JSON.stringify(p.ids || {})) delete c.ids;
+    if (!Object.keys(c).length) return null;
+    const n = await api(`peliculas/${p.id}`, { method: "PUT", body: c });
+    const i = S.db.peliculas.findIndex((x) => x.id === p.id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...n };
+    if (Object.keys(c).some((k) => k !== "completado" && k !== "ids") && !$("#modal").hidden && document.getElementById("fReparto")) { openFilm(p.id); toast("Ficha completada"); return null; }
+    return S.db.peliculas[i];
+  } catch (e) { return null; }
 }
 // Taquilla: barra EE.UU. + resto del mundo, con el presupuesto marcado
 function taquillaHTML(p) {
