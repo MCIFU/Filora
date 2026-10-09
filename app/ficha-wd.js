@@ -74,10 +74,18 @@ async function filmografiaRapida(q) {
 
 // ---------------------------------------------------------------- página de una película
 VIEWS.pelicula = async (v, qs) => {
-  const q = qs.get("q");
-  if (!/^Q\d+$/.test(q || "")) { v.innerHTML = `<div class="empty"><div class="h2">Película no encontrada</div></div>`; return; }
   v.innerHTML = `<div class="cargando"><span class="bobina"></span>Abriendo la ficha…</div>`;
   const yo = location.hash;
+  let q = qs.get("q");
+  const tt = qs.get("imdb");
+  if (!q && tt) {
+    const mia0 = S.db.peliculas.find((p) => p.ids && p.ids.imdb === tt);
+    if (mia0) { location.hash = "#/coleccion"; setTimeout(() => openFilm(mia0.id), 50); return; }
+    try { q = await qPorImdb(tt); } catch (e) { /* sin Wikidata */ }
+    if (location.hash !== yo) return;
+    if (!q) { v.innerHTML = `<div class="empty"><div class="h2">No he podido abrir su ficha</div>Wikidata no responde ahora mismo. <a href="https://www.imdb.com/es-es/title/${esc(tt)}/" target="_blank" rel="noopener" style="text-decoration:underline">Verla en IMDb</a></div>`; return; }
+  }
+  if (!/^Q\d+$/.test(q || "")) { v.innerHTML = `<div class="empty"><div class="h2">Película no encontrada</div></div>`; return; }
   const e = (await entidadesWD([q], "labels|descriptions|claims|sitelinks", "enwiki|eswiki"))[q];
   if (location.hash !== yo) return;
   if (!e) { v.innerHTML = `<div class="empty"><div class="h2">No se ha podido cargar</div>Comprueba tu conexión.</div>`; return; }
@@ -102,7 +110,11 @@ VIEWS.pelicula = async (v, qs) => {
   const persona = (x, papel) => { const r = refs[x]; if (!r) return "";
     return `<a class="pe-pers" href="#/persona?q=${x}"><span class="pe-foto" data-pq="${x}"><b>${esc(etiqueta(r).split(" ").map((w) => w[0]).slice(0, 2).join(""))}</b></span><span class="pe-n">${esc(etiqueta(r))}</span>${papel ? `<span class="pe-r">${papel}</span>` : ""}</a>`; };
   peli.poster = enw ? (await cartelesWiki([enw]))[enw] || null : null;
+  if (!peli.poster && STATIC) peli.poster = (await posterWeb(peli)).poster || null;
   if (location.hash !== yo) return;
+  const credito = (l, val) => (val ? `<div><dt>${l}</dt><dd>${val}</dd></div>` : "");
+  const gente = (L) => L.map((x) => refs[x] ? `<a href="#/persona?q=${x}">${esc(etiqueta(refs[x]))}</a>` : "").filter(Boolean).join("<br>");
+  const idiomas = idsDe(e, "P364").map((x) => etiqueta(refs[x])).filter(Boolean);
   v.innerHTML = `
   <section class="pe-hero">
     ${peli.poster ? `<div class="ps-fondo" style="background-image:url('${esc(peli.poster)}')"></div>` : ""}
@@ -112,7 +124,7 @@ VIEWS.pelicula = async (v, qs) => {
         <div class="eyebrow">${esc([anio, pais.join(" · ")].filter(Boolean).join(" · "))}</div>
         <h1 class="ps-nombre">${esc(titulo)}</h1>
         ${original && norm(original) !== norm(titulo) ? `<div class="orig" style="margin:-8px 0 12px">${esc(original)}</div>` : ""}
-        <div class="facts">${anio ? `<span>${icon("calendar")}${anio}</span>` : ""}${peli.duracion ? `<span>${icon("clock")}${Math.floor(peli.duracion / 60)} h ${peli.duracion % 60} min</span>` : ""}
+        <div class="facts">${peli.duracion ? `<span>${icon("clock")}${Math.floor(peli.duracion / 60)} h ${String(peli.duracion % 60).padStart(2, "0")} min</span>` : ""}
           ${dirs.length ? `<span>${icon("user")}${dirs.map((x) => `<a href="#/persona?q=${x}" class="pr-persona">${esc(etiqueta(refs[x]))}</a>`).join(", ")}</span>` : ""}</div>
         ${peli.generos.length ? `<div class="chips" style="margin:6px 0 16px">${peli.generos.map((g) => `<span class="chip">${esc(g)}</span>`).join("")}</div>` : ""}
         <div class="pe-acciones">
@@ -123,11 +135,27 @@ VIEWS.pelicula = async (v, qs) => {
       </div>
     </div>
   </section>
-  <section class="ps-bio-w"><p class="ps-bio" id="peSin">${esc((e.descriptions && (e.descriptions.es || e.descriptions.en || {}).value) || "")}</p></section>
-  <div id="fExtras" class="extras-ficha section"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando…</div></div>
-  <div class="sub" style="margin-top:22px">Ver en</div>${linksHTML(peli)}
-  ${dirs.length || reparto.length ? `<section class="section">${sectionHead("Equipo y reparto")}<div class="pe-equipo">
-    ${dirs.map((x) => persona(x, "Dirección")).join("")}${guion.map((x) => persona(x, "Guion")).join("")}${musica.map((x) => persona(x, "Música")).join("")}${reparto.map((x) => persona(x, "")).join("")}</div></section>` : ""}`;
+  <div class="pe-cuerpo">
+    <div class="pe-main">
+      <section><div class="sub">Sinopsis</div><p class="ps-bio pe-sin" id="peSin">${esc((e.descriptions && (e.descriptions.es || e.descriptions.en || {}).value) || "")}</p></section>
+      <div id="fExtras" class="extras-ficha"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando…</div></div>
+      ${reparto.length ? `<section><div class="sub">Reparto</div><div class="fx-reparto">${reparto.map((x) => persona(x, "")).join("")}</div></section>` : ""}
+    </div>
+    <aside class="pe-aside">
+      <dl class="fx-cred">
+        ${credito("Dirección", gente(dirs))}${credito("Guion", gente(guion))}${credito("Música", gente(musica))}
+        ${credito("Duración", peli.duracion ? `${Math.floor(peli.duracion / 60)} h ${String(peli.duracion % 60).padStart(2, "0")} min` : "")}
+        ${credito("Estreno", anio || "")}${credito("País", esc(pais.join(", ")))}${credito("Idioma", esc(idiomas.slice(0, 3).join(", ")))}
+        ${credito("Género", esc(peli.generos.join(" · ")))}
+      </dl>
+      <section id="peTaquilla"></section>
+      <div class="sub">Ver en</div>${linksHTML(peli)}
+    </aside>
+  </div>`;
+  if (ids.imdb && STATIC) fetch(`/api/taquilla?imdb=${ids.imdb}`).then((r) => r.json()).then((r) => {
+    const { presupuesto, ...t } = r || {}; const box = $("#peTaquilla");
+    if (box && (t.mundial || presupuesto)) box.innerHTML = taquillaHTML({ ids, taquilla: t, presupuesto });
+  }).catch(() => {});
   // sinopsis de Wikipedia
   const tw = esw ? ["es", esw] : enw ? ["en", enw] : null;
   if (tw) fetch(`https://${tw[0]}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(tw[1])}`).then((r) => r.json()).then((d) => { const b = $("#peSin"); if (b && d.extract) b.textContent = d.extract; }).catch(() => {});

@@ -9,7 +9,7 @@
 import { randomBytes } from "node:crypto";
 import { get, list, put } from "@vercel/blob";
 import { COLECCIONES, actualizar, anotarDemanda, borrar, cinesActivos, crear, fusionar, guardarPreferencias, idsCineValidos, pinValido } from "../lib/filora.mjs";
-import { buscarImdb, notasExternas, posterImdb, taquillaImdb } from "../lib/notas.mjs";
+import { buscarImdb, buscarTodoImdb, notasExternas, posterImdb, taquillaImdb } from "../lib/notas.mjs";
 import { claveValida, crearSesion, datosSesion, hashClave, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
 
 const CLAVE = "filora/db.json";
@@ -200,7 +200,8 @@ async function manejar(req) {
     }
     // ---- buscador de películas en IMDb (público; caché 1 día)
     if (req.method === "GET" && partes[0] === "imdb") {
-      const r = await buscarImdb(url.searchParams.get("q")).catch(() => []);
+      const todo = url.searchParams.get("todo");
+      const r = await (todo ? buscarTodoImdb(url.searchParams.get("q")) : buscarImdb(url.searchParams.get("q"))).catch(() => (todo ? { pelis: [], personas: [] } : []));
       return new Response(JSON.stringify(r), { headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, s-maxage=86400" } });
     }
     // ---- taquilla de una película (Box Office Mojo; caché 7 días)

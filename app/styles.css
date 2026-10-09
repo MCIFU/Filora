@@ -1132,3 +1132,29 @@ a.icon-btn { color: inherit; }
   .fx-main { order: -1; }
   .fx-notas { grid-template-columns: 1fr; }
 }
+
+/* Página de película: dos columnas */
+.pe-cuerpo { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; margin-top: 30px; align-items: start; }
+.pe-main { display: grid; gap: 8px; min-width: 0; }
+.pe-sin { margin-top: 0; font-size: 16px; }
+.pe-aside { display: grid; gap: 4px; min-width: 0; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 80px); }
+.pe-aside .fx-cred { border-top: 0; padding-top: 6px; }
+.pe-aside .tq-total b { font-size: 32px; }
+.pe-aside .boxoffice { grid-template-columns: 1fr 1fr; }
+.pe-aside .boxoffice b { font-size: 22px; }
+/* Persona: trayectoria */
+.ps-tray { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 2px; align-items: end; height: 120px; border-bottom: 1px solid var(--linea-2); }
+.ps-ta { position: relative; height: 100%; display: flex; align-items: flex-end; }
+.ps-ta i { position: absolute; left: 0; right: 0; bottom: 0; background: var(--linea-2); min-height: 0; }
+.ps-ta i.m { background: var(--bombilla); }
+.ps-ta:hover i:not(.m) { background: var(--papel-3); }
+.ps-tray-ej { position: relative; height: 22px; font: 500 15px/22px var(--creditos); color: var(--papel-3); }
+.ps-tray-ej span { position: absolute; transform: translateX(-50%); }
+.ps-tray-ley { display: flex; gap: 18px; font-size: 13px; color: var(--papel-3); margin-top: 6px; }
+.ps-tray-ley i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; background: var(--linea-2); }
+.ps-tray-ley i.m { background: var(--bombilla); }
+@media (max-width: 860px) {
+  .pe-cuerpo { grid-template-columns: 1fr; gap: 26px; }
+  .pe-aside { position: static; }
+  .ps-tray { height: 80px; gap: 1px; }
+}

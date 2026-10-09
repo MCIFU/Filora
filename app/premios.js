@@ -257,6 +257,7 @@ S.persona_ = { rol: "" };
 VIEWS.persona = async (v, qs) => {
   v.innerHTML = `<div class="cargando"><span class="bobina"></span>Buscando su ficha…</div>`;
   let q = qs.get("q");
+  try { if (!q && qs.get("imdb")) q = await qPorImdb(qs.get("imdb")); } catch (e) { /* sin Wikidata */ }
   try { if (!q && qs.get("n")) q = await resolverPersona(qs.get("n")); } catch (e) { /* sin conexión */ }
   if (!q) { v.innerHTML = `<div class="empty"><div class="h2">No encuentro a ${esc(qs.get("n") || "esta persona")}</div>Puede que Wikidata no la tenga registrada.</div>`; return; }
   const yo = location.hash;
@@ -269,8 +270,11 @@ VIEWS.persona = async (v, qs) => {
   const refs = [...new Set([...cv("P27"), ...cv("P106"), ...cv("P19"), ...cv("P20")].map((x) => x.id))].slice(0, 40);
   const labs = refs.length ? (await wdApi({ action: "wbgetentities", ids: refs.join("|"), props: "labels", languages: "es|en" })).entities || {} : {};
   const nombreP = lab(ent);
-  const foto = cv("P18")[0];
-  const fotoUrl = (w) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(foto)}?width=${w}`;
+  let foto = cv("P18")[0];
+  const imdbFoto = !foto && cv("P345")[0] && typeof buscarWeb === "function" ? ((await buscarWeb(cv("P345")[0])).personas[0] || {}).foto : null;
+  if (location.hash !== yo) return;
+  const fotoUrl = (w) => imdbFoto ? imdbFoto.replace("UX240", `UX${w}`) : `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(foto)}?width=${w}`;
+  if (imdbFoto) foto = imdbFoto;
   const tn = (cv("P569")[0] || {}).time, tm = (cv("P570")[0] || {}).time;
   const anios = edad(tn, tm);
   const lugar = (p) => lab(labs[(cv(p)[0] || {}).id]);
@@ -298,6 +302,7 @@ VIEWS.persona = async (v, qs) => {
   </section>
   <section class="ps-bio-w"><p class="ps-bio" id="psBio">${esc((ent.descriptions && (ent.descriptions.es || ent.descriptions.en || {}).value) || "")}</p></section>
   <section class="section" id="psConocido"></section>
+  <section class="section" id="psTray"></section>
   <section class="section" id="psPremios"></section>
   <div id="psTuya"></div>
   <section class="section" id="psFilmoSec">${sectionHead("Filmografía")}<div id="psFilmo"><div class="cargando"><span class="bobina"></span>Cargando sus películas…</div></div></section>`;
@@ -337,7 +342,19 @@ VIEWS.persona = async (v, qs) => {
     const tuyas = L.filter((x) => x.m);
     const notas = tuyas.map((x) => x.m.nota).filter((n) => n != null);
     cifras.peliculas = L.length; cifras.tuyas = tuyas.length; pintaCifras();
-    const tarjeta = (x, grande) => `<div class="pcard ${x.m ? "" : "ps-no"}" ${x.m ? `data-open="${x.m.id}"` : `onclick="location.hash='#/pelicula?q=${x.q}'"`}><div class="frame">${x.w ? `<div class="ph" data-w="${esc(x.w)}"><b>${esc(x.t)}</b></div>` : `<div class="ph"><b>${esc(x.t)}</b></div>`}${x.m ? scoreBadge(x.m.nota) : ""}</div>
+    // trayectoria: películas por año (las tuyas resaltadas)
+    const conA = L.filter((x) => x.anio && x.anio <= new Date().getFullYear() + 3);
+    if (conA.length >= 8) {
+      const a0 = Math.min(...conA.map((x) => x.anio)), a1 = Math.max(...conA.map((x) => x.anio));
+      const por = new Map(); for (const x of conA) { const c = por.get(x.anio) || { n: 0, m: 0 }; c.n++; if (x.m) c.m++; por.set(x.anio, c); }
+      const max = Math.max(...[...por.values()].map((c) => c.n));
+      const cols = []; for (let a = a0; a <= a1; a++) cols.push([a, por.get(a) || { n: 0, m: 0 }]);
+      const marcas = cols.filter(([a]) => a % 10 === 0 || a === a0 || a === a1).map(([a]) => a);
+      $("#psTray").innerHTML = `${sectionHead("Trayectoria")}<div class="ps-tray" style="--n:${cols.length}">${cols.map(([a, c]) => `<div class="ps-ta" title="${a}: ${c.n} ${c.n === 1 ? "película" : "películas"}${c.m ? ` · ${c.m} en tu colección` : ""}"><i style="height:${(100 * c.n / max).toFixed(0)}%"></i>${c.m ? `<i class="m" style="height:${(100 * c.m / max).toFixed(0)}%"></i>` : ""}</div>`).join("")}</div>
+        <div class="ps-tray-ej">${marcas.map((a) => `<span style="left:${(100 * (a - a0 + 0.5) / cols.length).toFixed(2)}%">${a}</span>`).join("")}</div>
+        <div class="ps-tray-ley"><span><i></i>Sus películas</span>${tuyas.length ? `<span><i class="m"></i>Las que has visto</span>` : ""}</div>`;
+    }
+    const tarjeta = (x, grande) => `<div class="pcard ${x.m ? "" : "ps-no"}" ${x.m ? `data-open="${x.m.id}"` : `onclick="location.hash='#/pelicula?q=${x.q}'"`}><div class="frame"><div class="ph" data-fq="${x.q}"><b>${esc(x.t)}</b></div>${x.m ? scoreBadge(x.m.nota) : ""}</div>
       <div class="meta"><div class="t">${esc(x.t)}</div><div class="s">${[x.anio, grande ? null : [...x.roles].join(" · ")].filter(Boolean).join(" · ")}</div></div></div>`;
     // conocido por: sus películas más populares (en más idiomas de Wikipedia)
     const conocido = [...L].sort((a, b) => b.sl - a.sl).slice(0, 6);
@@ -357,11 +374,19 @@ VIEWS.persona = async (v, qs) => {
     filmo();
     // carteles después, sin hacer esperar a la página
     const cart = {};
-    const rellenar = () => document.querySelectorAll("#psConocido [data-w], #psFilmo [data-w]").forEach((ph) => { const u = cart[ph.dataset.w]; if (u) ph.outerHTML = `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer">`; });
-    // carteles en paralelo (los primeros 300)
+    const rellenar = () => document.querySelectorAll("#psConocido [data-fq], #psFilmo [data-fq]").forEach((ph) => { const u = cart[ph.dataset.fq]; if (u) ph.outerHTML = `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML=this.dataset.ph" data-ph="${esc(ph.outerHTML)}">`; });
+    // carteles: Wikipedia en lote y, para los que falten, IMDb (las más conocidas primero)
     const lote = await cartelesWiki([...conocido, ...L].map((x) => x.w).filter(Boolean).slice(0, 300));
-    Object.assign(cart, lote);
+    for (const x of L) if (x.w && lote[x.w]) cart[x.q] = lote[x.w];
     if (location.hash !== yo) return;
     rellenar();
+    if (STATIC && typeof posterWeb === "function") {
+      const faltan = [...conocido, ...[...L].sort((a, b) => b.sl - a.sl)].filter((x, i, A) => !cart[x.q] && x.i && A.indexOf(x) === i).slice(0, 40);
+      for (let i = 0; i < faltan.length; i += 8) {
+        await Promise.all(faltan.slice(i, i + 8).map(async (x) => { const r = await posterWeb({ ids: { imdb: x.i } }); if (r.poster) cart[x.q] = r.poster; }));
+        if (location.hash !== yo) return;
+        rellenar();
+      }
+    }
   } catch (e) { const f = $("#psFilmo"); if (f) f.innerHTML = `<div class="empty">No se ha podido cargar la filmografía.</div>`; }
 };
