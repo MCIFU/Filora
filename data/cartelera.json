@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-09T11:43",
+ "actualizado": "2026-10-09T19:21",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -5580,16 +5580,6 @@
           "hora": "16:00",
           "sala": "Sala 9",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62642&peli=10725&sala=9"
-         },
-         {
-          "hora": "18:15",
-          "sala": "Sala 9",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62643&peli=10725&sala=9"
-         },
-         {
-          "hora": "20:30",
-          "sala": "Sala 9",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62644&peli=10725&sala=9"
          }
         ]
        }
@@ -5828,6 +5818,11 @@
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62480&peli=10761&sala=3"
          },
          {
+          "hora": "20:00",
+          "sala": "Sala 8",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62720&peli=10761&sala=8"
+         },
+         {
           "hora": "21:00",
           "sala": "Sala 3",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62481&peli=10761&sala=3"
@@ -5838,6 +5833,11 @@
           "hora": "18:00",
           "sala": "Sala 3",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62483&peli=10761&sala=3"
+         },
+         {
+          "hora": "18:30",
+          "sala": "Sala 9",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62721&peli=10761&sala=9"
          },
          {
           "hora": "21:00",
@@ -5899,11 +5899,6 @@
           "hora": "18:00",
           "sala": "Sala 8",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62610&peli=10508&sala=8"
-         },
-         {
-          "hora": "20:00",
-          "sala": "Sala 8",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62611&peli=10508&sala=8"
          },
          {
           "hora": "22:45",
@@ -6272,13 +6267,6 @@
           "hora": "22:00",
           "sala": "Sala 8",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62608&peli=10410&sala=8"
-         }
-        ],
-        "2026-10-10": [
-         {
-          "hora": "22:00",
-          "sala": "Sala 8",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62612&peli=10410&sala=8"
          }
         ],
         "2026-10-11": [

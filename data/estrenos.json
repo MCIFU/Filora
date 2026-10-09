@@ -6,6 +6,22 @@
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
  "estrenos": [
   {
+   "fecha": "2026-10-15",
+   "titulo": "La voz quebrada",
+   "original": "La voz quebrada",
+   "director": "Manuel Menchón",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "reparto": "Álvaro Morte, Francesco Carril, Joaquín Notario",
+   "sinopsis": "En el verano de 1936, Federico García Lorca y el joven Juan Ramírez de Lucas proyectaban abandonar España y empezar una…",
+   "duracion": 88,
+   "poster": "https://pics.filmaffinity.com/la_voz_quebrada-399557131-mmed.jpg",
+   "fa": "209641",
+   "destacado": false
+  },
+  {
    "fecha": "2026-10-16",
    "titulo": "Boiúna: La leyenda del Amazonas",
    "original": "Beware Boiúna",
@@ -138,22 +154,6 @@
    "sinopsis": "Laura y Nacho se han conocido en un vuelo, pero una vez que recojan sus maletas, su breve encuentro habrá terminado…",
    "poster": "https://pics.filmaffinity.com/la_maleta-188790900-mmed.jpg",
    "fa": "331187",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "La voz quebrada",
-   "original": "La voz quebrada",
-   "director": "Manuel Menchón",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Álvaro Morte, Francesco Carril, Joaquín Notario",
-   "sinopsis": "En el verano de 1936, Federico García Lorca y el joven Juan Ramírez de Lucas proyectaban abandonar España y empezar una…",
-   "duracion": 88,
-   "poster": "https://pics.filmaffinity.com/la_voz_quebrada-399557131-mmed.jpg",
-   "fa": "209641",
    "destacado": false
   },
   {
@@ -429,7 +429,7 @@
   },
   {
    "fecha": "2026-10-23",
-   "titulo": "Wildwood",
+   "titulo": "Wildwood: El bosque salvaje",
    "original": "Wildwood",
    "director": "Travis Knight",
    "generos": [
