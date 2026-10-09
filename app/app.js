@@ -367,7 +367,7 @@ const navItems = () => NAV.filter((n) => !(STATIC && n[0] === "ajustes") && !(ro
 function route() {
   const h = location.hash.replace(/^#\/?/, "");
   const [name, qs] = h.split("?");
-  return { name: navItems().some((n) => n[0] === name) || name === "persona" || name === "pelicula" ? name : "inicio", qs: new URLSearchParams(qs || "") };
+  return { name: navItems().some((n) => n[0] === name) || name === "persona" || name === "pelicula" || name === "buscar" ? name : "inicio", qs: new URLSearchParams(qs || "") };
 }
 function renderChrome() {
   const r = route().name;
@@ -1627,7 +1627,16 @@ async function wdApi(params, host = "www.wikidata.org") {
 }
 async function wikiBuscar(q) {
   const s = await wdApi({ action: "wbsearchentities", search: q, language: "es", uselang: "es", type: "item", limit: "12" });
-  const ids = (s.search || []).map((x) => x.id);
+  return wikiDesdeQ((s.search || []).map((x) => x.id));
+}
+// Películas de Wikidata con sus ids de IMDb (tt…): así se cruza lo que reconoce IMDb
+async function wikiPorImdb(tts) {
+  tts = tts.filter((t) => /^tt\d+$/.test(t)).slice(0, 6);
+  if (!tts.length) return [];
+  const s = await wdApi({ action: "query", list: "search", srsearch: `haswbstatement:${tts.map((t) => `P345=${t}`).join("|")}`, srlimit: "10" });
+  return wikiDesdeQ(((s.query || {}).search || []).map((x) => x.title));
+}
+async function wikiDesdeQ(ids) {
   if (!ids.length) return [];
   const ents = (await wdApi({ action: "wbgetentities", ids: ids.join("|"), props: "claims|labels|sitelinks", languages: "es|en", sitefilter: "enwiki" })).entities || {};
   const cv = (e, p) => ((e.claims || {})[p] || []).filter((c) => c.rank !== "deprecated").map((c) => c.mainsnak && c.mainsnak.datavalue && c.mainsnak.datavalue.value)
@@ -1844,16 +1853,84 @@ function filaXL(p) {
     ${COLS_XL.map(([k, , t]) => `<td class="xl-c-${k}">${celdaXL(p, k, t, false)}</td>`).join("")}
     <td class="xl-act"><button class="icon-btn" data-open="${p.id}" title="Ver ficha">${icon("eye")}</button></td></tr>`;
 }
+// ---------------------------------------------------------------- Buscador: películas, personas y tu colección
+async function personasBuscar(q) {
+  const s = await wdApi({ action: "wbsearchentities", search: q, language: "es", uselang: "es", type: "item", limit: "15" });
+  const ids = (s.search || []).map((x) => x.id);
+  if (!ids.length) return [];
+  const E = (await wdApi({ action: "wbgetentities", ids: ids.join("|"), props: "claims", languages: "es" })).entities || {};
+  const humano = (q) => (((E[q] || {}).claims || {}).P31 || []).some((c) => c.mainsnak && c.mainsnak.datavalue && c.mainsnak.datavalue.value.id === "Q5");
+  return (s.search || []).filter((x) => humano(x.id)).slice(0, 8).map((x) => {
+    const f = ((((E[x.id] || {}).claims || {}).P18 || [])[0] || {}).mainsnak;
+    return { q: x.id, nombre: x.label, desc: x.description || "", foto: f && f.datavalue ? f.datavalue.value : null };
+  });
+}
+const fotoWiki = (f, w = 160) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=${w}`;
+VIEWS.buscar = (v, qs) => {
+  const q0 = qs.get("q") || "";
+  v.innerHTML = `<div class="page-head"><div><h1 class="h1">Buscar</h1><p>Películas, directores, actores y actrices. También busca en tu colección.</p></div></div>
+    <label class="search bq-caja">${icon("search")}<input class="input" id="bq" placeholder="Crepúsculo, Bayona, Penélope Cruz…" value="${esc(q0)}" autocomplete="off"></label>
+    <div id="bqRes"></div>`;
+  const inp = $("#bq"), out = $("#bqRes");
+  let t, seq = 0;
+  const seccion = (titulo, html) => (html ? `<h2 class="h2 bq-h">${titulo}</h2>${html}` : "");
+  const buscar = async () => {
+    const q = inp.value.trim();
+    history.replaceState(null, "", `#/buscar${q ? `?q=${encodeURIComponent(q)}` : ""}`);
+    if (q.length < 2) { out.innerHTML = ""; return; }
+    const my = ++seq;
+    const nq = palabras(q);
+    const mias = S.db.peliculas.filter((p) => [p.titulo, p.tituloOriginal, p.tituloEn, p.director, p.pais].some((x) => x && [...nq].every((w) => palabras(x).has(w) || norm(x).includes(norm(w))))).slice(0, 24);
+    const htmlMias = mias.length ? `<div class="posters">${mias.map((p) => pcard(p)).join("")}</div>` : "";
+    out.innerHTML = seccion(`En tu colección · ${mias.length}`, htmlMias) + `<div class="bq-cargando">Buscando películas y personas…</div>`;
+    const [pelis, pers] = await Promise.all([candidatosPeli(q).catch(() => []), personasBuscar(q).catch(() => [])]);
+    if (my !== seq) return;
+    const vistas = new Set(mias.map((p) => p.ids && p.ids.wikidata).filter(Boolean));
+    const lista = pelis.map((r) => [puntuar(r, { titulo: q }), r]).sort((a, b) => b[0] - a[0]).map(([, r]) => r).filter((r) => !vistas.has(r.ids.wikidata)).slice(0, 12);
+    const htmlPelis = lista.length ? `<div class="posters">${lista.map((r) => `<a class="pcard" ${r.ids.wikidata ? `href="#/pelicula?q=${r.ids.wikidata}"` : `href="https://www.imdb.com/title/${r.ids.imdb}/" target="_blank" rel="noopener"`}><div class="frame">${posterHTML(r)}</div>
+      <div class="meta"><div class="t">${esc(r.titulo)}</div><div class="s">${esc([r.anio, splitDir(r.director || "")[0] || r.reparto].filter(Boolean).join(" · "))}</div></div></a>`).join("")}</div>` : "";
+    const htmlPers = pers.length ? `<div class="bq-pers">${pers.map((x) => `<a class="pe-pers" href="#/persona?q=${x.q}"><span class="pe-foto">${x.foto ? `<img src="${fotoWiki(x.foto)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<b>${esc(x.nombre.split(" ").map((w) => w[0]).slice(0, 2).join(""))}</b>`}</span><span class="pe-n">${esc(x.nombre)}</span><span class="pe-r">${esc(x.desc)}</span></a>`).join("")}</div>` : "";
+    out.innerHTML = seccion(`En tu colección · ${mias.length}`, htmlMias) + seccion("Personas", htmlPers) + seccion("Películas", htmlPelis)
+      || `<div class="empty">No encuentro nada con «${esc(q)}».</div>`;
+  };
+  inp.oninput = () => { clearTimeout(t); t = setTimeout(buscar, 400); };
+  if (q0) buscar();
+  setTimeout(() => inp.focus(), 60);
+};
 const durTxt = (m) => (m > 0 ? `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")} min` : "");
-// Reconoce la película con lo que escribes (título, año y director) y trae lo demás de Wikidata
-async function identificar({ titulo, anio, director }) {
-  let res = [];
-  try { res = await wikiBuscar(titulo); } catch (e) { return null; }
-  const ap = (s) => norm(String(s || "").split(/\s+/).pop());
-  const nota = (r) => (anio && r.anio ? (r.anio === anio ? 3 : Math.abs(r.anio - anio) <= 1 ? 2 : -5) : 0)
-    + (director && r.director && norm(r.director).includes(ap(director)) ? 3 : 0)
-    + (norm(r.titulo) === norm(titulo) || norm(r.tituloOriginal) === norm(titulo) || norm(r.tituloEn) === norm(titulo) ? 1 : 0);
-  return res.map((r) => [nota(r), r]).filter(([n]) => n >= 0).sort((x, y) => y[0] - x[0]).map(([, r]) => r)[0] || null;
+async function imdbBuscar(q) {
+  if (!STATIC) return [];
+  try { const r = await fetch(`/api/imdb?q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(6000) }); return r.ok ? r.json() : []; } catch (e) { return []; }
+}
+const palabras = (t) => new Set(String(t || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !["la", "el", "los", "las", "de", "del", "the", "of", "y", "and", "a"].includes(w)));
+function parecido(a, b) { const A = palabras(a), B = palabras(b); if (!A.size || !B.size) return 0; let n = 0; for (const w of A) if (B.has(w)) n++; return n / A.size; }
+// Candidatos de Wikidata (título exacto) e IMDb (entiende títulos aproximados en español), cruzados por id de IMDb
+async function candidatosPeli(titulo) {
+  const [wd, im] = await Promise.all([wikiBuscar(titulo).catch(() => []), imdbBuscar(titulo)]);
+  const tengo = new Set(wd.map((r) => r.ids.imdb).filter(Boolean));
+  const extra = await wikiPorImdb(im.map((x) => x.imdb).filter((t) => !tengo.has(t))).catch(() => []);
+  const todos = [...wd, ...extra];
+  const porImdb = new Map(todos.filter((r) => r.ids.imdb).map((r) => [r.ids.imdb, r]));
+  im.forEach((x, i) => {
+    const r = porImdb.get(x.imdb);
+    if (r) { r.rangoImdb = i; if (!r.poster) r.poster = x.poster; if (!r.tituloEn) r.tituloEn = x.titulo; }
+    else todos.push({ titulo: x.titulo, tituloEn: x.titulo, tituloOriginal: x.titulo, anio: x.anio, duracion: null, director: "", pais: "", generos: [], ids: { imdb: x.imdb }, poster: x.poster, reparto: x.reparto, rangoImdb: i });
+  });
+  return todos;
+}
+// Reconoce la película con todo lo que escribes: título (aunque no sea exacto), año, director y duración
+function puntuar(r, { titulo, anio, director, duracion }) {
+  let p = Math.max(parecido(titulo, r.titulo), parecido(titulo, r.tituloEn), parecido(titulo, r.tituloOriginal)) * 3;
+  if (r.rangoImdb != null) p += Math.max(0, 2 - r.rangoImdb * 0.5);
+  if (anio && r.anio) p += r.anio === anio ? 4 : Math.abs(r.anio - anio) <= 1 ? 2 : -4;
+  if (director && r.director) { const ap = palabras(director); p += [...palabras(r.director)].some((w) => ap.has(w)) ? 4 : -2; }
+  if (duracion && r.duracion) p += Math.abs(r.duracion - duracion) <= 5 ? 2 : -1;
+  return p;
+}
+async function identificar(d) {
+  const c = await candidatosPeli(d.titulo);
+  const orden = c.map((r) => [puntuar(r, d), r]).sort((x, y) => y[0] - x[0]);
+  return orden.length && orden[0][0] > 0.5 ? orden[0][1] : null;
 }
 VIEWS.anadir = (v) => {
   if (ro()) { location.hash = "#/inicio"; return; }
@@ -1907,9 +1984,18 @@ VIEWS.anadir = (v) => {
       if (my !== seq) return;
       $("#rgMatch").classList.remove("cargando");
       match = m; pintar(m, d);
+      if (m) for (const k of ["anio", "duracion", "director", "pais"]) {
+        const el = F(k);
+        if ((!el.value.trim() || el.classList.contains("auto")) && m[k]) { el.value = m[k]; el.classList.add("auto"); }
+      }
+      if (m && m.duracion) $(".rg-duracion span").textContent = `Duración · ${durTxt(parseInt(F("duracion").value, 10))}`;
     }, 450);
   };
-  ["titulo", "anio", "director"].forEach((k) => F(k).addEventListener("input", buscar));
+  ["titulo", "anio", "director", "duracion"].forEach((k) => F(k).addEventListener("input", () => {
+    F(k).classList.remove("auto");
+    if (k === "titulo") $$(".rg-f .auto").forEach((el) => { el.value = ""; el.classList.remove("auto"); }); // otra película: fuera lo rellenado
+    buscar();
+  }));
   F("duracion").addEventListener("input", () => {
     const d = leer();
     const s = $(".rg-duracion span"); s.textContent = d.duracion ? `Duración · ${durTxt(d.duracion)}` : "Duración (min)";
@@ -1935,7 +2021,7 @@ VIEWS.anadir = (v) => {
     const card = () => document.querySelector(`#rgRecientes [data-open="${tmp.id}"]`);
     card().classList.add("xl-guardando");
     toast(`«${body.titulo}» añadida${body.nota != null ? ` con un ${fmt1(body.nota)}` : ""}`);
-    $("#rgForm").reset(); match = null; pintar(null, { titulo: "" }); $("#rgSave").disabled = true; $(".rg-duracion span").textContent = "Duración (min)"; F("titulo").focus();
+    $("#rgForm").reset(); $$(".rg-f .auto").forEach((el) => el.classList.remove("auto")); match = null; pintar(null, { titulo: "" }); $("#rgSave").disabled = true; $(".rg-duracion span").textContent = "Duración (min)"; F("titulo").focus();
     try {
       const p = await api("peliculas", { method: "POST", body: await completarAntes(body) });
       S.db.peliculas.push(p); S.prof = null;

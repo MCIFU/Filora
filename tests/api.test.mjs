@@ -106,3 +106,11 @@ console.log("✓ Todas las pruebas de la API pasan");
   assert.deepEqual(elegirPosterImdb(d, { imdb: "tt9" }), {});
   console.log("✓ Póster de IMDb");
 }
+
+// buscador de IMDb: solo películas y póster en tamaño de cartel
+{
+  const { limpiarImdb } = await import("../lib/notas.mjs");
+  const r = limpiarImdb([{ id: "nm1", l: "Persona" }, { id: "tt2", qid: "tvSeries", l: "Serie" }, { id: "tt1", qid: "movie", l: "Peli", y: 2012, s: "A, B", i: { imageUrl: "https://x/a._V1_.jpg" } }]);
+  assert.deepEqual(r, [{ imdb: "tt1", titulo: "Peli", anio: 2012, reparto: "A, B", poster: "https://x/a._V1_SX342.jpg" }]);
+  console.log("✓ Buscador de IMDb");
+}
