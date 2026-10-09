@@ -97,7 +97,7 @@ async function premiosDe(p) {
     { wd:${q} p:P166 ?s . ?s ps:P166 ?premio . BIND("g" AS ?tipo) } UNION { wd:${q} p:P1411 ?s . ?s ps:P1411 ?premio . BIND("n" AS ?tipo) }
     OPTIONAL { ?s pq:P585 ?fecha }
     SERVICE wikibase:label { bd:serviceParam wikibase:language "es,en". } }`;
-  const r = await fetch("https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql));
+  const r = await wmFetch("https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql));
   if (!r.ok) return null;
   const filas = (await r.json()).results.bindings;
   const lista = [];
@@ -256,7 +256,7 @@ async function completarLote(pelis, avance) {
       OPTIONAL { ?item wdt:P136 ?g . ?g rdfs:label ?genLabel FILTER(lang(?genLabel) IN ("es","en")) }
     } GROUP BY ?imdb ?item ?enwiki ?fa ?rt ?lb ?tmdb ?ac ?dur ?pais ?paisLabel`;
     try {
-      const r = await fetch("https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql));
+      const r = await wmFetch("https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql));
       const filas = (await r.json()).results.bindings;
       const porImdb = {};
       for (const b of filas) if (!porImdb[b.imdb.value]) porImdb[b.imdb.value] = b;

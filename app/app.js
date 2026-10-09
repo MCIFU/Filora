@@ -185,6 +185,7 @@ async function loadAll() {
   const [db, est, cat, cart] = await Promise.all([api("db"), api("estrenos"), api("catalogo"), api("cartelera").catch(() => ({ cines: [] }))]);
   S.db = db; S.est = est; S.cat = cat; S.cartTodo = cart; S.prof = null;
   filtrarCartelera(); avisarDemanda();
+  if (!ro()) setTimeout(() => calcularAvisos().catch(() => {}), 2500);
   if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500);
   if (typeof completarNotasWeb === "function") setTimeout(completarNotasWeb, 8000);
 }
@@ -359,6 +360,7 @@ const NAV = [
   ["recomendaciones", "Para ti", "target"],
   ["gustos", "Mis gustos", "spark"],
   ["estadisticas", "Estadísticas", "chart"],
+  ["anio", "Tu año en cine", "star"],
   ["pendientes", "Pendientes", "bookmark"],
   ["series", "Series", "tv"],
   ["ajustes", "Ajustes", "settings"],
@@ -491,6 +493,7 @@ VIEWS.inicio = (v) => {
     </div>
   </section>
 
+  <div id="avisosInicio">${avisosInicioHTML()}</div>
   ${hoyHTML()}
 
   ${vacia ? "" : `<section class="section">${sectionHead("El Olimpo", "#/coleccion?min=9", `Las ${pr.P.filter((p) => p.nota >= 9).length} con un 9 o más`)}
@@ -544,7 +547,7 @@ VIEWS.coleccion = (v, qs) => {
   const gC = count((p) => p.generos || []), cC = count((p) => p.pais), sC = count((p) => p.saga), dC = count((p) => (p.anio ? Math.floor(p.anio / 10) * 10 : null));
   const c = S.coll;
   v.innerHTML = `
-  <div class="page-head"><div><h1 class="h1">Mis películas</h1></div></div>
+  <div class="page-head"><div><h1 class="h1">Mis películas</h1></div>${STATIC && !ro() ? `<div id="completarBox">${botonCompletar()}</div>` : ""}</div>
   <div class="toolbar">
     <label class="search">${icon("search")}<input class="input" id="fq" placeholder="Buscar película o director" value="${esc(c.q)}"></label>
     <select class="select" id="fgenre">${opt([...gC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.genre, "Todos los géneros")}</select>
@@ -555,6 +558,7 @@ VIEWS.coleccion = (v, qs) => {
     <div class="seg"><button data-mode="grid" class="${c.mode === "grid" ? "on" : ""}" title="Carátulas">${icon("grid")}</button><button data-mode="list" class="${c.mode === "list" ? "on" : ""}" title="Lista">${icon("list")}</button></div>
   </div>
   <div id="collRes"></div>`;
+  pintarCompletar();
   const draw = () => {
     const L = filtered();
     const shown = L.slice(0, c.limit);
@@ -636,14 +640,180 @@ function openFilm(id) {
   if (typeof cargarExtras === "function") cargarExtras(p);
   completarFicha(p).then((n) => { if (n) { cargarReparto(n); cargarTaquilla(n); } else { cargarReparto(p); cargarTaquilla(p); } });
 }
+// ---------------------------------------------------------------- Avisos de pendientes: cartelera, estreno o plataforma
+S.avisos = null;
+const PLAT_DIAS = 1;
+function mismaPeli(w, titulo, original, anio) {
+  const t = [norm(w.titulo), norm(w.tituloOriginal)].filter(Boolean);
+  return t.some((x) => x === norm(titulo) || (original && x === norm(original))) && (!w.anio || !anio || Math.abs(w.anio - anio) <= 1);
+}
+async function plataformasDe(w) {
+  const k = `filora.plat.${w.id}`;
+  try { const c = JSON.parse(localStorage.getItem(k) || "null"); if (c && reciente(c.d, PLAT_DIAS)) return c.l; } catch (e) { /* */ }
+  const r = await fetch(`/api/plataformas?t=${encodeURIComponent(w.titulo)}${w.anio ? `&y=${w.anio}` : ""}`);
+  if (!r.ok) throw new Error("sin JustWatch");
+  const l = await r.json();
+  try { localStorage.setItem(k, JSON.stringify({ d: new Date().toISOString(), l })); } catch (e) { /* */ }
+  return l;
+}
+async function calcularAvisos() {
+  const W = S.db.pendientes || [];
+  if (!W.length) { S.avisos = new Map(); return; }
+  const out = new Map(), add = (id, a) => out.set(id, [...(out.get(id) || []), a]);
+  const hoy = todayISO();
+  for (const w of W) {
+    const cines = ((S.cart && S.cart.cines) || []).filter((c) => (c.peliculas || []).some((p) => mismaPeli(w, p.titulo, p.original, p.anio)));
+    if (cines.length) add(w.id, { tipo: "cine", txt: `En cartelera en ${cines.map((c) => c.nombre).slice(0, 2).join(" y ")}` });
+    const e = ((S.est && S.est.estrenos) || []).find((x) => x.fecha >= hoy && mismaPeli(w, x.titulo, x.original, +x.fecha.slice(0, 4)));
+    if (e) add(w.id, { tipo: "estreno", txt: `Se estrena el ${new Date(e.fecha + "T12:00").toLocaleDateString("es-ES", { day: "numeric", month: "long" })}` });
+  }
+  S.avisos = out; pintarAvisos();
+  if (!STATIC) return;
+  const cola = W.slice(0, 60);
+  for (let i = 0; i < cola.length; i += 4) {
+    await Promise.all(cola.slice(i, i + 4).map(async (w) => {
+      try {
+        const l = (await plataformasDe(w)).filter((x) => x.tipo === "suscripcion" || x.tipo === "gratis");
+        if (l.length) add(w.id, { tipo: "plataforma", txt: `En ${[...new Set(l.map((x) => x.plataforma))].slice(0, 3).join(", ")}` });
+      } catch (e) { /* sin JustWatch: solo cartelera y estrenos */ }
+    }));
+  }
+  S.avisos = out; pintarAvisos(); avisarNovedades();
+}
+// Toast la primera vez que aparece cada aviso
+function avisarNovedades() {
+  const k = "filora.avisos.vistos";
+  let vistos; try { vistos = new Set(JSON.parse(localStorage.getItem(k) || "[]")); } catch (e) { vistos = new Set(); }
+  const nuevos = [];
+  for (const [id, L] of S.avisos) for (const a of L) { const c = `${id}|${a.tipo}|${a.txt}`; if (!vistos.has(c)) { nuevos.push([id, a]); vistos.add(c); } }
+  try { localStorage.setItem(k, JSON.stringify([...vistos].slice(-500))); } catch (e) { /* */ }
+  const ahora = nuevos.filter(([, a]) => a.tipo !== "estreno");
+  if (!ahora.length) return;
+  const w = S.db.pendientes.find((x) => x.id === ahora[0][0]);
+  toast(ahora.length === 1 && w ? `«${w.titulo}» de tus pendientes: ${ahora[0][1].txt.toLowerCase()}` : `${ahora.length} pendientes ya se pueden ver`, "bookmark");
+}
+const avisoChip = (a) => `<span class="aviso aviso-${a.tipo}">${icon(a.tipo === "cine" ? "ticket" : a.tipo === "estreno" ? "calendar" : "tv")}${esc(a.txt)}</span>`;
+function avisosInicioHTML() {
+  if (!S.avisos || !S.avisos.size) return "";
+  const L = [...S.avisos].map(([id, a]) => [S.db.pendientes.find((w) => w.id === id), a]).filter(([w]) => w);
+  const ya = L.filter(([, a]) => a.some((x) => x.tipo !== "estreno"));
+  if (!L.length) return "";
+  return `<section class="section avisos-ini">${sectionHead(ya.length ? `${ya.length} ${ya.length === 1 ? "pendiente ya se puede ver" : "pendientes ya se pueden ver"}` : "Tus pendientes llegan pronto", "#/pendientes", "Ver pendientes")}
+    <div class="avisos-l">${L.slice(0, 6).map(([w, a]) => `<a class="aviso-fila" href="#/pendientes"><b>${esc(w.titulo)}</b>${a.map(avisoChip).join("")}</a>`).join("")}</div></section>`;
+}
+function pintarAvisos() {
+  const ini = document.getElementById("avisosInicio");
+  if (ini) ini.innerHTML = avisosInicioHTML();
+  for (const el of document.querySelectorAll("[data-avisos]")) el.innerHTML = ((S.avisos && S.avisos.get(el.dataset.avisos)) || []).map(avisoChip).join("");
+}
+
+// ---------------------------------------------------------------- Tu año en cine
+const fechaDe = (p) => p.fechaVisto || String(p["añadido"] || "").slice(0, 10) || null;
+function resumenAnio(P, y) {
+  const L = P.filter((p) => String(fechaDe(p) || "").startsWith(String(y)));
+  const conNota = L.filter((p) => p.nota != null);
+  const meses = Array.from({ length: 12 }, (_, i) => L.filter((p) => +fechaDe(p).slice(5, 7) === i + 1));
+  const cuenta = (fn) => { const m = new Map(); for (const p of L) for (const k of [].concat(fn(p) || [])) if (k) m.set(k, [...(m.get(k) || []), p]); return [...m].sort((a, b) => b[1].length - a[1].length || mean(b[1].map((x) => x.nota || 0)) - mean(a[1].map((x) => x.nota || 0))); };
+  const cines = new Set(misCines().map((c) => norm(c.nombre)));
+  const enCine = (p) => p.lugar && (cines.has(norm(p.lugar)) || /cine|ocine|yelmo|kinepolis|cinesa|odeon|mk2|renoir|verdi|golem/i.test(p.lugar));
+  return {
+    y, L, n: L.length, horas: L.reduce((t, p) => t + (p.duracion || 0), 0) / 60, media: conNota.length ? mean(conNota.map((p) => p.nota)) : null,
+    meses, mejor: [...conNota].sort((a, b) => b.nota - a.nota)[0], peor: [...conNota].sort((a, b) => a.nota - b.nota)[0],
+    top: [...conNota].sort((a, b) => b.nota - a.nota).slice(0, 5),
+    directores: cuenta((p) => splitDir(p.director)), generos: cuenta((p) => p.generos), paises: cuenta((p) => p.pais),
+    cine: L.filter(enCine).length, casa: L.filter((p) => p.lugar && !enCine(p)).length,
+    taquilla: [...L].filter((p) => (p.taquilla || {}).mundial).sort((a, b) => b.taquilla.mundial - a.taquilla.mundial)[0],
+    larga: [...L].filter((p) => p.duracion).sort((a, b) => b.duracion - a.duracion)[0],
+  };
+}
+VIEWS.anio = (v, qs) => {
+  const P = S.db.peliculas;
+  const anios = [...new Set(P.map(fechaDe).filter(Boolean).map((f) => +f.slice(0, 4)))].filter((a) => a > 1900).sort((a, b) => b - a);
+  if (!anios.length) { v.innerHTML = `<div class="page-head"><div><h1 class="h1">Tu año en cine</h1></div></div><div class="empty"><div class="h2">Aún no hay películas con fecha</div>Cuando registres películas con el día en que las viste, aquí tendrás tu resumen de cada año.</div>`; return; }
+  const y = anios.includes(+qs.get("a")) ? +qs.get("a") : anios[0];
+  const R = resumenAnio(P, y), A = anios.includes(y - 1) ? resumenAnio(P, y - 1) : null;
+  const maxMes = Math.max(1, ...R.meses.map((m) => m.length));
+  const mesTop = R.meses.map((m, i) => [i, m.length]).sort((a, b) => b[1] - a[1])[0];
+  const dif = A ? R.n - A.n : null;
+  const peli = (p, etiqueta) => p ? `<div class="an-peli" data-open="${p.id}"><div class="an-cartel">${posterHTML(p)}</div><div><div class="lbl">${etiqueta}</div><div class="an-t">${esc(p.titulo)}</div><div class="dim">${esc([p.anio, splitDir(p.director)[0]].filter(Boolean).join(" · "))}</div>${p.nota != null ? scoreBadge(p.nota) : ""}</div></div>` : "";
+  const ranking = (L, titulo, enlace) => L.length ? `<div class="an-rank"><div class="sub">${titulo}</div><ol>${L.slice(0, 5).map(([k, X]) => `<li><span>${enlace ? enlace(k) : esc(k)}</span><b>${X.length}</b></li>`).join("")}</ol></div>` : "";
+  v.innerHTML = `
+  <div class="page-head"><div><h1 class="h1">Tu año en cine</h1></div>
+    <div class="chips">${anios.slice(0, 8).map((a) => `<a class="chip ${a === y ? "on" : ""}" href="#/anio?a=${a}">${a}</a>`).join("")}</div></div>
+  <section class="an-hero">
+    <div class="an-anio">${y}</div>
+    <div class="an-cifras">
+      <div><b>${R.n}</b><span>${R.n === 1 ? "película" : "películas"}${dif != null ? ` · <em class="${dif >= 0 ? "sube" : "baja"}">${dif >= 0 ? "+" : ""}${dif} que en ${y - 1}</em>` : ""}</span></div>
+      <div><b>${Math.round(R.horas)}</b><span>horas delante de la pantalla${R.horas >= 24 ? ` · ${fmt1(R.horas / 24)} días seguidos` : ""}</span></div>
+      <div><b>${R.media != null ? fmt1(R.media) : "–"}</b><span>tu nota media${A && A.media != null && R.media != null ? ` · ${R.media >= A.media ? "más generoso" : "más exigente"} que en ${y - 1} (${fmt1(A.media)})` : ""}</span></div>
+      ${R.cine + R.casa ? `<div><b>${R.cine}</b><span>en el cine y ${R.casa} en casa</span></div>` : ""}
+    </div>
+  </section>
+  <section class="section an-meses-w"><div class="sub">Mes a mes${mesTop[1] ? ` · tu mes más cinéfilo fue ${MESES[mesTop[0]]} (${mesTop[1]})` : ""}</div>
+    <div class="an-meses">${R.meses.map((m, i) => `<div class="an-mes ${i === mesTop[0] && m.length ? "top" : ""}" title="${MESES[i]}: ${m.length}"><b>${m.length || ""}</b><i style="height:${(100 * m.length / maxMes).toFixed(0)}%"></i><span>${MESES[i].slice(0, 3)}</span></div>`).join("")}</div></section>
+  <section class="section an-dos">${peli(R.mejor, "La mejor del año")}${R.peor && R.peor !== R.mejor ? peli(R.peor, "La que menos te gustó") : ""}</section>
+  ${R.top.length >= 3 ? `<section class="section">${sectionHead(`Tus ${R.top.length} mejores de ${y}`)}<div class="posters">${R.top.map((p) => pcard(p)).join("")}</div></section>` : ""}
+  <section class="section an-rankings">
+    ${ranking(R.directores, "Directores", (d) => `<a href="#/persona?n=${encodeURIComponent(d)}">${esc(d)}</a>`)}
+    ${ranking(R.generos, "Géneros", (g) => `<a href="#/coleccion?genre=${encodeURIComponent(g)}">${esc(g)}</a>`)}
+    ${ranking(R.paises, "Países")}
+  </section>
+  <section class="section an-dos">${peli(R.taquilla, `La más taquillera · ${R.taquilla ? money(R.taquilla.taquilla.mundial) : ""}`)}${peli(R.larga, `La más larga · ${R.larga ? durTxt(R.larga.duracion) : ""}`)}</section>`;
+};
+// ---------------------------------------------------------------- Completar la colección entera, poco a poco
+S.completando = null;
+function botonCompletar() {
+  if (S.completando) return progresoCompletar();
+  const n = S.db.peliculas.filter((p) => faltaDatos(p) || faltaTaquilla(p)).length;
+  return n ? `<button class="btn" id="completarGo" title="Busca cartel, géneros, reparto, títulos y taquilla de las que no los tienen">${icon("refresh")}Completar mi colección · ${n}</button>` : "";
+}
+function progresoCompletar() {
+  const c = S.completando;
+  return `<div class="completar"><div class="completar-t"><b>Completando ${c.hechas} de ${c.total}</b><span>${esc(c.actual || "")}</span></div>
+    <div class="completar-barra"><i style="width:${(100 * c.hechas / c.total).toFixed(1)}%"></i></div><button class="btn btn-sm btn-ghost" id="completarStop">Detener</button></div>`;
+}
+function pintarCompletar() {
+  const box = document.getElementById("completarBox");
+  if (!box) return;
+  box.innerHTML = botonCompletar();
+  const go = document.getElementById("completarGo"), stop = document.getElementById("completarStop");
+  if (go) go.onclick = completarColeccion;
+  if (stop) stop.onclick = () => { if (S.completando) S.completando.parar = true; };
+}
+async function completarColeccion() {
+  if (S.completando) return;
+  const cola = S.db.peliculas.filter((p) => faltaDatos(p) || faltaTaquilla(p)).map((p) => p.id);
+  S.completando = { total: cola.length, hechas: 0, mejoradas: 0, actual: "", parar: false };
+  pintarCompletar();
+  for (const id of cola) {
+    const c = S.completando;
+    if (c.parar) break;
+    let p = S.db.peliculas.find((x) => x.id === id);
+    if (!p) { c.hechas++; continue; }
+    c.actual = p.titulo; pintarCompletar();
+    const antes = JSON.stringify(p);
+    if (faltaDatos(p)) { await completarFicha(p); p = S.db.peliculas.find((x) => x.id === id) || p; }
+    if (faltaTaquilla(p)) await cargarTaquilla(p);
+    if (JSON.stringify(S.db.peliculas.find((x) => x.id === id)) !== antes) c.mejoradas++;
+    c.hechas++; pintarCompletar();
+    await new Promise((r) => setTimeout(r, 1200)); // sin saturar Wikidata ni Box Office Mojo
+  }
+  const c = S.completando;
+  S.completando = null; S.prof = null;
+  toast(`${c.mejoradas} ${c.mejoradas === 1 ? "película completada" : "películas completadas"}${c.parar ? " (detenido)" : ""}`);
+  if (route().name === "coleccion") { render._keep = true; render(); } else pintarCompletar();
+}
 // Películas añadidas antes (o sin reconocer): al abrir la ficha se buscan y se rellena lo que falte
+const reciente = (d, dias) => d && Date.now() - Date.parse(d) < dias * 864e5;
+const faltaDatos = (p) => !p.completado && !reciente(p.intento, 30) && (!p.poster || !(p.generos || []).length || !(p.ids || {}).wikidata || !(p.reparto || []).length || !p.tituloEn);
+const faltaTaquilla = (p) => !!(p.ids || {}).imdb && !(p.taquilla || {}).consultado;
 async function completarFicha(p, forzar = false) {
-  const falta = !p.poster || !(p.generos || []).length || !(p.ids || {}).wikidata || !(p.reparto || []).length || !p.tituloEn;
+  const falta = faltaDatos(p);
   if (!STATIC || ro() || (!falta && !forzar) || (p.completado && !forzar)) return null;
   try {
     const m = await identificar({ titulo: p.tituloOriginal || p.titulo, anio: p.anio, director: p.director, duracion: p.duracion })
       || (p.tituloOriginal && p.tituloOriginal !== p.titulo ? await identificar({ titulo: p.titulo, anio: p.anio, director: p.director, duracion: p.duracion }) : null);
-    const c = m && m.ids.wikidata ? { completado: todayISO() } : {};
+    const c = m && m.ids.wikidata ? { completado: todayISO() } : { intento: todayISO() }; // sin Wikidata: se reintenta en 30 días
     if (m) {
       c.ids = { ...m.ids, ...(p.ids || {}) };
       for (const k of ["poster", "tituloOriginal", "tituloEn", "director", "pais", "duracion", "anio"]) if (!p[k] && m[k]) c[k] = m[k];
@@ -655,7 +825,7 @@ async function completarFicha(p, forzar = false) {
     if (!Object.keys(c).length) return null;
     const n = await api(`peliculas/${p.id}`, { method: "PUT", body: c });
     const i = S.db.peliculas.findIndex((x) => x.id === p.id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...n };
-    if (Object.keys(c).some((k) => k !== "completado" && k !== "ids") && !$("#modal").hidden && document.getElementById("fReparto")) { openFilm(p.id); toast("Ficha completada"); return null; }
+    if (Object.keys(c).some((k) => !["completado", "intento", "ids"].includes(k)) && !$("#modal").hidden && document.getElementById("fReparto")) { openFilm(p.id); toast("Ficha completada"); return null; }
     return S.db.peliculas[i];
   } catch (e) { return null; }
 }
@@ -1266,7 +1436,7 @@ VIEWS.pendientes = (v) => {
   <div class="card card-pad rw" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">
     <input class="input" id="wT" placeholder="Título" style="flex:2 1 220px"><input class="input" id="wY" placeholder="Año" type="number" style="flex:0 1 110px"><input class="input" id="wM" placeholder="¿Por qué? (quién te la recomendó…)" style="flex:2 1 220px">
     <button class="btn btn-primary" id="wAdd">${icon("plus")}Añadir</button></div>
-  ${W.length ? `<div class="wl">${W.map((w) => `<div class="card"><div style="min-width:0"><div class="t">${esc(w.titulo)} <span class="dim">${w.anio || ""}</span></div><div class="s">${esc(w.motivo || "")}</div></div>
+  ${W.length ? `<div class="wl">${W.map((w) => `<div class="card"><div style="min-width:0"><div class="t">${esc(w.titulo)} <span class="dim">${w.anio || ""}</span></div><div class="s">${esc(w.motivo || "")}</div><div class="avisos" data-avisos="${w.id}">${((S.avisos && S.avisos.get(w.id)) || []).map(avisoChip).join("")}</div></div>
     <div style="display:flex;gap:6px"><button class="btn btn-sm" data-wseen="${w.id}">${icon("eye")}La he visto</button><button class="icon-btn" data-wdel="${w.id}" title="Quitar">${icon("x")}</button></div></div>`).join("")}</div>`
     : `<div class="empty"><div class="h2">No tienes pendientes</div>Añade desde <a href="#/recomendaciones" style="color:var(--gold)">Para ti</a> o <a href="#/estrenos" style="color:var(--gold)">Estrenos</a>.</div>`}`;
   $("#wAdd").onclick = async () => {
@@ -1695,9 +1865,16 @@ const WD_GEN = [[/superh[ée]ro|superhero/, "Superhéroes"], [/terror|horror|sla
   [/rom[áa]n|romance|romantic/, "Romance"], [/musical/, "Musical"], [/b[ée]lic|guerra|war film/, "Bélico"], [/western|w[ée]stern|del oeste/, "Western"],
   [/misterio|mystery|detectiv/, "Misterio"], [/biogr/, "Biográfico"], [/hist[óo]ric|period/, "Histórico"], [/famil|infantil|children/, "Familiar"],
   [/crim|polic|g[áa]ngster|noir|heist|atracos/, "Crimen"], [/drama/, "Drama"]];
+// Wikidata y Wikipedia: en la web, a través de Vercel (caché de una semana); si falla, directo
+async function wmFetch(url) {
+  if (STATIC) {
+    try { const r = await fetch(`/api/wm?u=${encodeURIComponent(url)}`); if (r.ok) return r; } catch (e) { /* directo */ }
+  }
+  return fetch(url);
+}
 async function wdApi(params, host = "www.wikidata.org") {
   const u = `https://${host}/w/api.php?` + new URLSearchParams({ ...params, format: "json", origin: "*" });
-  const r = await fetch(u);
+  const r = await wmFetch(u);
   return r.json();
 }
 async function wikiBuscar(q) {
@@ -1725,12 +1902,12 @@ async function wikiDesdeQ(ids) {
   const lab = (e, l = "es") => (e && e.labels && ((e.labels[l] || e.labels.en || {}).value)) || "";
   const titulos = pelis.map((e) => e.sitelinks && e.sitelinks.enwiki && e.sitelinks.enwiki.title).filter(Boolean);
   const posters = {};
-  if (titulos.length) {
+  if (titulos.length) try { // si Wikipedia no responde, se sigue sin carteles (los pone IMDb)
     const d = await wdApi({ action: "query", titles: titulos.join("|"), prop: "pageimages", piprop: "thumbnail", pithumbsize: "342", pilicense: "any", redirects: "1" }, "en.wikipedia.org");
     const q2 = d.query || {};
     const back = Object.fromEntries([...(q2.redirects || []), ...(q2.normalized || [])].map((r) => [r.to, r.from]));
     for (const p of Object.values(q2.pages || {})) if (p.thumbnail) posters[back[p.title] || p.title] = p.thumbnail.source.split("?")[0];
-  }
+  } catch (e) { /* sin carteles de Wikipedia */ }
   return pelis.map((e) => {
     const años = {};
     for (const t of cv(e, "P577")) { const m = /[+-](\d{4})/.exec(t); if (m) años[m[1]] = (años[m[1]] || 0) + 1; }

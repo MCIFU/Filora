@@ -9,6 +9,8 @@
 import { randomBytes } from "node:crypto";
 import { get, list, put } from "@vercel/blob";
 import { COLECCIONES, actualizar, anotarDemanda, borrar, cinesActivos, crear, fusionar, guardarPreferencias, idsCineValidos, pinValido } from "../lib/filora.mjs";
+import { leerWikimedia } from "../lib/wm.mjs";
+import { plataformas } from "../lib/plataformas.mjs";
 import { buscarImdb, buscarTodoImdb, notasExternas, posterImdb, taquillaImdb } from "../lib/notas.mjs";
 import { claveValida, crearSesion, datosSesion, hashClave, normalizarUsuario, nuevaColeccion, verificarClave } from "../lib/cuentas.mjs";
 
@@ -197,6 +199,17 @@ async function manejar(req) {
       return new Response(JSON.stringify(notas), {
         headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": cache, "Access-Control-Allow-Origin": "*" },
       });
+    }
+    // ---- dónde verla en España (JustWatch; caché 1 día)
+    if (req.method === "GET" && partes[0] === "plataformas") {
+      const r = await plataformas(url.searchParams.get("t"), url.searchParams.get("y")).catch(() => null);
+      return new Response(JSON.stringify(r || []), { headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": r ? "public, s-maxage=86400" : "no-store" } });
+    }
+    // ---- Wikidata y Wikipedia a través de Vercel (caché 7 días; si Wikimedia falla, no se guarda)
+    if (req.method === "GET" && partes[0] === "wm") {
+      const r = await leerWikimedia(url.searchParams.get("u") || "").catch(() => ({ status: 502, body: "{}" }));
+      return new Response(r.body, { status: r.status, headers: { "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": r.status === 200 ? "public, s-maxage=604800, stale-while-revalidate=2592000" : "no-store" } });
     }
     // ---- buscador de películas en IMDb (público; caché 1 día)
     if (req.method === "GET" && partes[0] === "imdb") {

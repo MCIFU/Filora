@@ -236,7 +236,7 @@ VIEWS.premios = async (v, qs) => {
 
 // ---------------------------------------------------------------- Persona (director, intérprete…)
 async function sparqlWD(q) {
-  const r = await fetch("https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(q));
+  const r = await wmFetch("https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(q));
   if (!r.ok) throw new Error("Wikidata no responde");
   return (await r.json()).results.bindings;
 }
@@ -311,7 +311,7 @@ VIEWS.persona = async (v, qs) => {
     c.innerHTML = [[cifras.peliculas, "películas"], [cifras.ganados, "premios"], [cifras.nominaciones, "nominaciones"], [cifras.tuyas, "en tu colección"]]
       .filter(([x]) => x != null).map(([x, l]) => `<div><b>${x}</b><span>${l}</span></div>`).join(""); };
   // biografía (Wikipedia en español)
-  if (titEs) fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(titEs)}`).then((r) => r.json()).then((d) => {
+  if (titEs) wmFetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(titEs)}`).then((r) => r.json()).then((d) => {
     const b = $("#psBio"); if (b && d.extract) b.innerHTML = `${esc(d.extract)} <a href="https://es.wikipedia.org/wiki/${encodeURIComponent(titEs)}" target="_blank" rel="noopener" class="dim">Leer más</a>`; }).catch(() => {});
   // premios
   sparqlWD(`SELECT ?premio ?premioLabel ?fecha ?tipo ?obraLabel WHERE {

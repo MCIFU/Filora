@@ -122,3 +122,28 @@ console.log("✓ Todas las pruebas de la API pasan");
   assert.deepEqual(leerTaquilla(h), { domestica: 293144686, internacional: 595731065, mundial: 888875751, apertura: 141067634, presupuesto: 120000000 });
   console.log("✓ Taquilla");
 }
+
+// pasarela a Wikimedia: solo lectura y solo Wikidata/Wikipedia
+{
+  const { urlPermitida } = await import("../lib/wm.mjs");
+  assert.ok(urlPermitida("https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q1"));
+  assert.ok(urlPermitida("https://query.wikidata.org/sparql?query=SELECT"));
+  assert.ok(urlPermitida("https://es.wikipedia.org/api/rest_v1/page/summary/Madrid"));
+  assert.equal(urlPermitida("https://www.wikidata.org/w/api.php?action=wbeditentity"), null);
+  assert.equal(urlPermitida("https://evil.com/w/api.php?action=query"), null);
+  assert.equal(urlPermitida("http://www.wikidata.org/w/api.php?action=query"), null);
+  assert.equal(urlPermitida("https://www.wikidata.org.evil.com/w/api.php?action=query"), null);
+  console.log("✓ Pasarela a Wikimedia");
+}
+
+// plataformas (JustWatch): elige la película del año correcto y agrupa ofertas
+{
+  const { elegirOfertas } = await import("../lib/plataformas.mjs");
+  const edges = [
+    { node: { content: { title: "Dune", originalReleaseYear: 1984 }, offers: [{ monetizationType: "RENT", package: { clearName: "Rakuten TV" } }] } },
+    { node: { content: { title: "Dune", originalReleaseYear: 2021 }, offers: [{ monetizationType: "BUY", package: { clearName: "Apple TV Store" } }, { monetizationType: "FLATRATE", package: { clearName: "Netflix" } }, { monetizationType: "FLATRATE", package: { clearName: "Netflix Standard with Ads" } }] } },
+  ];
+  assert.deepEqual(elegirOfertas(edges, { titulo: "Dune", anio: 2021 }), [{ plataforma: "Netflix", tipo: "suscripcion" }, { plataforma: "Apple TV Store", tipo: "compra" }]);
+  assert.deepEqual(elegirOfertas(edges, { titulo: "Dune", anio: 1999 }), []);
+  console.log("✓ Plataformas");
+}

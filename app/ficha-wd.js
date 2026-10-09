@@ -158,7 +158,7 @@ VIEWS.pelicula = async (v, qs) => {
   }).catch(() => {});
   // sinopsis de Wikipedia
   const tw = esw ? ["es", esw] : enw ? ["en", enw] : null;
-  if (tw) fetch(`https://${tw[0]}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(tw[1])}`).then((r) => r.json()).then((d) => { const b = $("#peSin"); if (b && d.extract) b.textContent = d.extract; }).catch(() => {});
+  if (tw) wmFetch(`https://${tw[0]}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(tw[1])}`).then((r) => r.json()).then((d) => { const b = $("#peSin"); if (b && d.extract) b.textContent = d.extract; }).catch(() => {});
   // predicción y notas/premios
   if (!mia && S.db.peliculas.length) {
     if (!peli.imdbNota && ids.imdb) try { const r = await notaIMDb(ids.imdb); if (r) peli.imdbNota = [r.v, r.n]; } catch (er) { /* */ }

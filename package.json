@@ -3,13 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/api.test.mjs && node tests/cuentas.test.mjs"
+    "test": "node tests/api.test.mjs && node tests/cuentas.test.mjs",
+    "test:web": "node tests/web.test.mjs"
   },
   "dependencies": {
     "@netlify/blobs": "^11.1.1",
     "@vercel/blob": "^2.8.1"
   },
   "devDependencies": {
-    "@netlify/functions": "^6.0.0"
+    "@netlify/functions": "^6.0.0",
+    "playwright": "^1.56.1"
   }
 }
