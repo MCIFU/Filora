@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-10T11:01",
+ "actualizado": "2026-10-10T18:19",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -528,11 +528,6 @@
        "dias": {
         "2026-10-10": [
          {
-          "hora": "12:30",
-          "sala": "Sala 4",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57576"
-         },
-         {
           "hora": "15:45",
           "sala": "Sala 4",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57509"
@@ -601,11 +596,6 @@
        "nombre": "El precio de la red",
        "dias": {
         "2026-10-10": [
-         {
-          "hora": "12:30",
-          "sala": "Sala 2",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57582"
-         },
          {
           "hora": "16:25",
           "sala": "Sala 5",
@@ -722,16 +712,6 @@
        "dias": {
         "2026-10-10": [
          {
-          "hora": "12:10",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57580"
-         },
-         {
-          "hora": "15:00",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57583"
-         },
-         {
           "hora": "17:20",
           "sala": "Sala 10",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57585"
@@ -794,11 +774,6 @@
        "nombre": "Mascotas al rescate",
        "dias": {
         "2026-10-10": [
-         {
-          "hora": "12:10",
-          "sala": "Sala 9",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57581"
-         },
          {
           "hora": "15:40",
           "sala": "Sala 9",
@@ -890,13 +865,6 @@
       {
        "nombre": "Naza (VIP Bed) (VOSE)",
        "dias": {
-        "2026-10-10": [
-         {
-          "hora": "12:00",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57785"
-         }
-        ],
         "2026-10-11": [
          {
           "hora": "12:00",
@@ -1089,11 +1057,6 @@
        "dias": {
         "2026-10-10": [
          {
-          "hora": "12:15",
-          "sala": "Sala 1 XL",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57574"
-         },
-         {
           "hora": "16:45",
           "sala": "Sala 6",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57556"
@@ -1194,11 +1157,6 @@
        "nombre": "La Bola Negra (VIP Bed)",
        "dias": {
         "2026-10-10": [
-         {
-          "hora": "14:00",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57575"
-         },
          {
           "hora": "17:15",
           "sala": "Sala 3",
@@ -1336,16 +1294,6 @@
        "dias": {
         "2026-10-10": [
          {
-          "hora": "12:00",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57578"
-         },
-         {
-          "hora": "14:20",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57584"
-         },
-         {
           "hora": "16:40",
           "sala": "Sala 8",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57555"
@@ -1407,13 +1355,6 @@
       {
        "nombre": "Vengadores: Endgame (Re-estreno)",
        "dias": {
-        "2026-10-10": [
-         {
-          "hora": "12:00",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57577"
-         }
-        ],
         "2026-10-11": [
          {
           "hora": "12:00",
@@ -1454,11 +1395,6 @@
        "nombre": "Resident Evil",
        "dias": {
         "2026-10-10": [
-         {
-          "hora": "14:20",
-          "sala": "Sala 5",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57586"
-         },
          {
           "hora": "22:40",
           "sala": "Sala 2",
@@ -1608,13 +1544,6 @@
       {
        "nombre": "La odisea",
        "dias": {
-        "2026-10-10": [
-         {
-          "hora": "12:00",
-          "sala": "Sala 7",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57799"
-         }
-        ],
         "2026-10-11": [
          {
           "hora": "12:00",
