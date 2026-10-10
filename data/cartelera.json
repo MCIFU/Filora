@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-09T23:53",
+ "actualizado": "2026-10-10T11:01",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -480,13 +480,20 @@
      "anio": 2026,
      "pais": "Estados Unidos",
      "director": "Rob Savage",
-     "reparto": "Jessica Chastain, Jay Duplass, Arabella Olivia Clark",
+     "reparto": "Jessica Chastain, Arabella Olivia Clark, Jay Duplass",
      "poster": "https://pics.filmaffinity.com/other_mommy-415529498-mmed.jpg",
      "sinopsis": "Bela, una niña de 8 años que vive en un hogar tenso por el matrimonio problemático de sus padres, ve cómo su vida se ve trastornada por una entidad siniestra a la que llama Otra Mamá. Cuando esta presencia malévola emerge de su armario preguntando: \"¿Puedo…",
      "versiones": [
       {
        "nombre": "La otra madre",
        "dias": {
+        "2026-10-10": [
+         {
+          "hora": "20:30",
+          "sala": "Sala 7",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57827"
+         }
+        ],
         "2026-10-12": [
          {
           "hora": "12:30",
@@ -513,78 +520,12 @@
           "sala": "Sala 6",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57501"
          }
-        ],
-        "2026-10-13": [
-         {
-          "hora": "15:45",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57701"
-         },
-         {
-          "hora": "18:00",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57709"
-         },
-         {
-          "hora": "20:15",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57716"
-         },
-         {
-          "hora": "22:30",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57724"
-         }
-        ],
-        "2026-10-14": [
-         {
-          "hora": "15:45",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57727"
-         },
-         {
-          "hora": "18:00",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57746"
-         },
-         {
-          "hora": "20:15",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57759"
-         },
-         {
-          "hora": "22:30",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57773"
-         }
         ]
        }
       },
       {
        "nombre": "La otra madre (VIP Bed)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "15:45",
-          "sala": "Sala 4",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57497"
-         },
-         {
-          "hora": "18:00",
-          "sala": "Sala 4",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57498"
-         },
-         {
-          "hora": "20:15",
-          "sala": "Sala 4",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57499"
-         },
-         {
-          "hora": "22:30",
-          "sala": "Sala 4",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57508"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "12:30",
@@ -659,23 +600,6 @@
       {
        "nombre": "El precio de la red",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:25",
-          "sala": "Sala 5",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57532"
-         },
-         {
-          "hora": "19:15",
-          "sala": "Sala 5",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57533"
-         },
-         {
-          "hora": "22:05",
-          "sala": "Sala 5",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57534"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "12:30",
@@ -718,6 +642,23 @@
           "hora": "22:05",
           "sala": "Sala 5",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57676"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:35",
+          "sala": "Sala 7",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57627"
+         },
+         {
+          "hora": "19:15",
+          "sala": "Sala 7",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57655"
+         },
+         {
+          "hora": "22:05",
+          "sala": "Sala 7",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57677"
          }
         ]
        }
@@ -779,13 +720,6 @@
       {
        "nombre": "El árbol muy muy lejano",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:00",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57549"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "12:10",
@@ -819,6 +753,23 @@
           "sala": "Sala 10",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57638"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "12:10",
+          "sala": "Sala 10",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57592"
+         },
+         {
+          "hora": "16:20",
+          "sala": "Sala 5",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57698"
+         },
+         {
+          "hora": "22:20",
+          "sala": "Sala 5",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57696"
+         }
         ]
        }
       }
@@ -842,18 +793,6 @@
       {
        "nombre": "Mascotas al rescate",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "15:50",
-          "sala": "Sala 9",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57538"
-         },
-         {
-          "hora": "17:50",
-          "sala": "Sala 9",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57539"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "12:10",
@@ -887,6 +826,18 @@
           "sala": "Sala 9",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57641"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "12:10",
+          "sala": "Sala 9",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57594"
+         },
+         {
+          "hora": "17:50",
+          "sala": "Sala 9",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57642"
+         }
         ]
        }
       }
@@ -908,18 +859,6 @@
       {
        "nombre": "Naza (VOSE)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:20",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57784"
-         },
-         {
-          "hora": "22:55",
-          "sala": "Sala 7",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57783"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "22:45",
@@ -932,6 +871,18 @@
           "hora": "21:00",
           "sala": "Sala 7",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57787"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "12:00",
+          "sala": "Sala 2",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57789"
+         },
+         {
+          "hora": "15:20",
+          "sala": "Sala 10",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57790"
          }
         ]
        }
@@ -974,23 +925,6 @@
       {
        "nombre": "Verity. La sombra de un engaño",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:20",
-          "sala": "Sala 2",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57545"
-         },
-         {
-          "hora": "19:35",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57543"
-         },
-         {
-          "hora": "22:15",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57527"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:20",
@@ -1024,6 +958,18 @@
           "sala": "Sala 10",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57679"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:30",
+          "sala": "Sala 10",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57658"
+         },
+         {
+          "hora": "22:15",
+          "sala": "Sala 10",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57680"
+         }
         ]
        }
       },
@@ -1035,20 +981,6 @@
           "hora": "16:20",
           "sala": "Sala 3",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57693"
-         }
-        ],
-        "2026-10-13": [
-         {
-          "hora": "16:20",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57703"
-         }
-        ],
-        "2026-10-14": [
-         {
-          "hora": "16:20",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57731"
          }
         ]
        }
@@ -1072,18 +1004,6 @@
       {
        "nombre": "Digger",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "19:10",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57535"
-         },
-         {
-          "hora": "22:00",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57531"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "19:10",
@@ -1106,6 +1026,18 @@
           "hora": "22:00",
           "sala": "Sala 8",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57673"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:10",
+          "sala": "Sala 8",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57652"
+         },
+         {
+          "hora": "22:00",
+          "sala": "Sala 8",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57674"
          }
         ]
        }
@@ -1155,33 +1087,6 @@
       {
        "nombre": "La Bola Negra",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:45",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57516"
-         },
-         {
-          "hora": "18:15",
-          "sala": "Sala 1 XL",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57390"
-         },
-         {
-          "hora": "19:00",
-          "sala": "Sala 2",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57522"
-         },
-         {
-          "hora": "20:00",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57524"
-         },
-         {
-          "hora": "21:45",
-          "sala": "Sala 1 XL",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57391"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "12:15",
@@ -1245,24 +1150,49 @@
           "sala": "Sala 1 XL",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57381"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "12:15",
+          "sala": "Sala 1 XL",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57596"
+         },
+         {
+          "hora": "14:00",
+          "sala": "Sala 2",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57689"
+         },
+         {
+          "hora": "17:15",
+          "sala": "Sala 2",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57690"
+         },
+         {
+          "hora": "18:15",
+          "sala": "Sala 1 XL",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57382"
+         },
+         {
+          "hora": "18:50",
+          "sala": "Sala 5",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57695"
+         },
+         {
+          "hora": "20:40",
+          "sala": "Sala 2",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57691"
+         },
+         {
+          "hora": "21:45",
+          "sala": "Sala 1 XL",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57383"
+         }
         ]
        }
       },
       {
        "nombre": "La Bola Negra (VIP Bed)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:15",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57519"
-         },
-         {
-          "hora": "20:40",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57526"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "14:00",
@@ -1296,6 +1226,18 @@
           "sala": "Sala 3",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57667"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:45",
+          "sala": "Sala 4",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57633"
+         },
+         {
+          "hora": "20:00",
+          "sala": "Sala 4",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57664"
+         }
         ]
        }
       }
@@ -1319,23 +1261,6 @@
       {
        "nombre": "En el corazón de la bestia",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 1 XL",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57537"
-         },
-         {
-          "hora": "19:50",
-          "sala": "Sala 9",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57523"
-         },
-         {
-          "hora": "22:25",
-          "sala": "Sala 9",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57528"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:00",
@@ -1368,6 +1293,23 @@
           "hora": "22:25",
           "sala": "Sala 9",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57682"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 1 XL",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57618"
+         },
+         {
+          "hora": "19:50",
+          "sala": "Sala 9",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57661"
+         },
+         {
+          "hora": "22:25",
+          "sala": "Sala 9",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57683"
          }
         ]
        }
@@ -1424,6 +1366,23 @@
           "hora": "16:40",
           "sala": "Sala 8",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57629"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "12:00",
+          "sala": "Sala 8",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57590"
+         },
+         {
+          "hora": "14:20",
+          "sala": "Sala 8",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57608"
+         },
+         {
+          "hora": "16:40",
+          "sala": "Sala 8",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57630"
          }
         ]
        }
@@ -1494,13 +1453,6 @@
       {
        "nombre": "Resident Evil",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "22:40",
-          "sala": "Sala 2",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57546"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "14:20",
@@ -1524,6 +1476,13 @@
           "sala": "Sala 2",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57686"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "14:20",
+          "sala": "Sala 7",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57610"
+         }
         ]
        }
       },
@@ -1535,20 +1494,6 @@
           "hora": "21:55",
           "sala": "Sala 3",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57694"
-         }
-        ],
-        "2026-10-13": [
-         {
-          "hora": "21:55",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57718"
-         }
-        ],
-        "2026-10-14": [
-         {
-          "hora": "22:40",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57780"
          }
         ]
        }
@@ -1573,13 +1518,6 @@
       {
        "nombre": "Coyote vs. Acme",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:30",
-          "sala": "Sala 7",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57540"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:10",
@@ -1592,6 +1530,13 @@
           "hora": "18:30",
           "sala": "Sala 7",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57645"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:10",
+          "sala": "Sala 10",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57697"
          }
         ]
        }
@@ -1616,13 +1561,6 @@
       {
        "nombre": "Tadeo Jones y la lámpara maravillosa",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 7",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57542"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "15:50",
@@ -1635,6 +1573,18 @@
           "hora": "16:00",
           "sala": "Sala 7",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57620"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "12:15",
+          "sala": "Sala 5",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57598"
+         },
+         {
+          "hora": "15:30",
+          "sala": "Sala 9",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57700"
          }
         ]
        }
@@ -2146,30 +2096,13 @@
      "anio": 2026,
      "pais": "Estados Unidos",
      "director": "Rob Savage",
-     "reparto": "Jessica Chastain, Jay Duplass, Arabella Olivia Clark",
+     "reparto": "Jessica Chastain, Arabella Olivia Clark, Jay Duplass",
      "poster": "https://pics.filmaffinity.com/other_mommy-415529498-mmed.jpg",
      "sinopsis": "Bela, una niña de 8 años que vive en un hogar tenso por el matrimonio problemático de sus padres, ve cómo su vida se ve trastornada por una entidad siniestra a la que llama Otra Mamá. Cuando esta presencia malévola emerge de su armario preguntando: \"¿Puedo…",
      "versiones": [
       {
        "nombre": "La otra madre (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36138%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "20:05",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36139%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:10",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36140%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:00",
@@ -2213,19 +2146,34 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36146%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36297%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "18:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36149%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "20:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36148%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36147%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       },
       {
        "nombre": "La otra madre (Digital) (VOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36293%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:00",
@@ -2238,6 +2186,13 @@
           "hora": "17:00",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36249%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36327%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -2260,23 +2215,6 @@
       {
        "nombre": "El precio de la red (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36272%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "19:25",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36273%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36289%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:45",
@@ -2310,19 +2248,29 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36255%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36305%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "19:10",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36321%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36322%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       },
       {
        "nombre": "El precio de la red (Digital) (VOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "21:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36295%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "21:15",
@@ -2335,6 +2283,13 @@
           "hora": "21:15",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36247%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "21:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36329%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -2358,18 +2313,6 @@
       {
        "nombre": "Las ciegas hormigas (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "20:10",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36266%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36267%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "20:10",
@@ -2393,19 +2336,24 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36263%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "20:10",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36298%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36299%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       },
       {
        "nombre": "Las ciegas hormigas (Digital) (VOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36279%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:00",
@@ -2418,6 +2366,13 @@
           "hora": "18:00",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36245%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "18:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36311%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -2441,18 +2396,6 @@
       {
        "nombre": "El árbol muy muy lejano (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36268%2Fel-arbol-muy-muy-lejano%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "21:50",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36269%2Fel-arbol-muy-muy-lejano%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:00",
@@ -2476,6 +2419,18 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36261%2Fel-arbol-muy-muy-lejano%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36300%2Fel-arbol-muy-muy-lejano%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "21:50",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36301%2Fel-arbol-muy-muy-lejano%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       }
@@ -2497,13 +2452,6 @@
       {
        "nombre": "Naza (Digital) (VOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "19:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36294%2Fnaza%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "19:15",
@@ -2516,6 +2464,13 @@
           "hora": "19:15",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36248%2Fnaza%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36328%2Fnaza%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -2540,13 +2495,6 @@
       {
        "nombre": "Mascotas al rescate (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "19:45",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36296%2Fmascotas-al-rescate%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "19:45",
@@ -2559,6 +2507,13 @@
           "hora": "19:45",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36246%2Fmascotas-al-rescate%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36330%2Fmascotas-al-rescate%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -2582,23 +2537,6 @@
       {
        "nombre": "Verity. La sombra de un engaño (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36287%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "19:55",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36288%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36274%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:45",
@@ -2631,6 +2569,23 @@
           "hora": "21:30",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36235%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36319%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "19:10",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36320%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "21:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36306%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -2666,13 +2621,6 @@
       {
        "nombre": "Digger (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "19:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36284%2Fdigger%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "19:15",
@@ -2685,6 +2633,13 @@
           "hora": "19:15",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36240%2Fdigger%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36316%2Fdigger%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -2720,33 +2675,6 @@
       {
        "nombre": "La bola negra (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36124%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "18:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36292%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "19:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36290%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "20:25",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36125%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "21:45",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36291%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:20",
@@ -2810,6 +2738,38 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36252%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:20",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36324%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "17:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36131%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "18:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36326%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "19:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36323%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "20:25",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36130%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "21:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36325%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       }
@@ -2833,23 +2793,6 @@
       {
        "nombre": "En el corazón de la bestia (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36282%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "19:45",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36283%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:10",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36281%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:30",
@@ -2883,6 +2826,23 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36243%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36314%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "19:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36315%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:10",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36313%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       }
@@ -2906,13 +2866,6 @@
       {
        "nombre": "La isla olvidada (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36280%2Fla-isla-olvidada%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:00",
@@ -2925,6 +2878,13 @@
           "hora": "16:00",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36244%2Fla-isla-olvidada%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36312%2Fla-isla-olvidada%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -2947,23 +2907,6 @@
       {
        "nombre": "Resident Evil (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36275%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "20:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36270%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:25",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36271%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:15",
@@ -2997,6 +2940,23 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36259%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "18:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36307%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "20:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36302%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:25",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36303%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       }
@@ -3020,18 +2980,6 @@
       {
        "nombre": "Coyote vs. Acme (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36278%2Fcoyote-vs-acme%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "19:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36277%2Fcoyote-vs-acme%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:15",
@@ -3054,6 +3002,18 @@
           "hora": "19:30",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36232%2Fcoyote-vs-acme%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36310%2Fcoyote-vs-acme%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "19:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36309%2Fcoyote-vs-acme%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -3164,13 +3124,6 @@
       {
        "nombre": "Tadeo Jones y la lámpara maravillosa (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36276%2Ftadeo-jones-y-la-lampara-maravillosa%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:10",
@@ -3193,6 +3146,18 @@
           "hora": "17:00",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36233%2Ftadeo-jones-y-la-lampara-maravillosa%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:10",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36304%2Ftadeo-jones-y-la-lampara-maravillosa%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "17:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36308%2Ftadeo-jones-y-la-lampara-maravillosa%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -3257,13 +3222,6 @@
       {
        "nombre": "Insidious: Fuera del más allá (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "22:35",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36286%2Finsidious-fuera-del-mas-alla%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "22:35",
@@ -3276,6 +3234,13 @@
           "hora": "22:35",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36238%2Finsidious-fuera-del-mas-alla%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "22:35",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36318%2Finsidious-fuera-del-mas-alla%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -3299,13 +3264,6 @@
       {
        "nombre": "La odisea (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "21:40",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36285%2Fla-odisea%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "21:40",
@@ -3318,6 +3276,13 @@
           "hora": "21:40",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36239%2Fla-odisea%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "21:40",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36317%2Fla-odisea%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -3846,13 +3811,6 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F34880%2Falways-lalisa%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
-        ],
-        "2026-10-14": [
-         {
-          "hora": "20:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F34881%2Falways-lalisa%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
         ]
        }
       }
@@ -3874,23 +3832,6 @@
       {
        "nombre": "El precio de la red (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:20",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35786%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "19:55",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35796%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:20",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35795%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:20",
@@ -3924,19 +3865,29 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35715%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:20",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35765%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "19:55",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35764%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:20",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35773%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       },
       {
        "nombre": "El precio de la red (Digital) (VOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "19:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35791%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "19:00",
@@ -3949,6 +3900,13 @@
           "hora": "19:00",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35708%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35770%2Fel-precio-de-la-red%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -3964,30 +3922,13 @@
      "anio": 2026,
      "pais": "Estados Unidos",
      "director": "Rob Savage",
-     "reparto": "Jessica Chastain, Jay Duplass, Arabella Olivia Clark",
+     "reparto": "Jessica Chastain, Arabella Olivia Clark, Jay Duplass",
      "poster": "https://pics.filmaffinity.com/other_mommy-415529498-mmed.jpg",
      "sinopsis": "Bela, una niña de 8 años que vive en un hogar tenso por el matrimonio problemático de sus padres, ve cómo su vida se ve trastornada por una entidad siniestra a la que llama Otra Mamá. Cuando esta presencia malévola emerge de su armario preguntando: \"¿Puedo…",
      "versiones": [
       {
        "nombre": "La otra madre (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35611%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "20:05",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35612%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:10",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35613%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:00",
@@ -4021,19 +3962,29 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35619%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "18:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35622%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "20:05",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35621%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:10",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35620%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       },
       {
        "nombre": "La otra madre (Digital) (VOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "21:25",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35790%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "21:25",
@@ -4046,6 +3997,13 @@
           "hora": "21:25",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35709%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "21:25",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35769%2Fla-otra-madre%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -4069,18 +4027,6 @@
       {
        "nombre": "Las ciegas hormigas (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:10",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35794%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:35",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35792%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:10",
@@ -4104,19 +4050,24 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35707%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "18:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35772%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:35",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35771%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       },
       {
        "nombre": "Las ciegas hormigas (Digital) (VOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "20:20",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35793%2Flas-ciegas-hormigas%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "20:20",
@@ -4153,13 +4104,6 @@
       {
        "nombre": "Su propio infierno (Digital) (VOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "22:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35787%2Fsu-propio-infierno%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "22:15",
@@ -4172,6 +4116,13 @@
           "hora": "22:15",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35712%2Fsu-propio-infierno%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "22:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35766%2Fsu-propio-infierno%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -4194,13 +4145,6 @@
       {
        "nombre": "Naza (Digital) (VOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "20:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35788%2Fnaza%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:15",
@@ -4213,6 +4157,13 @@
           "hora": "20:30",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35711%2Fnaza%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "20:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35767%2Fnaza%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -4237,13 +4188,6 @@
       {
        "nombre": "Mascotas al rescate (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35789%2Fmascotas-al-rescate%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:00",
@@ -4256,6 +4200,13 @@
           "hora": "18:15",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35710%2Fmascotas-al-rescate%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "18:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35768%2Fmascotas-al-rescate%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -4306,23 +4257,6 @@
       {
        "nombre": "Verity. La sombra de un engaño (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35783%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "20:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35782%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35784%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:30",
@@ -4355,6 +4289,23 @@
           "hora": "22:30",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35691%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35762%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "20:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35761%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35763%2Fverity-la-sombra-de-un-engano%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -4390,13 +4341,6 @@
       {
        "nombre": "Digger (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "19:05",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35775%2Fdigger%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "19:05",
@@ -4409,6 +4353,13 @@
           "hora": "19:05",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35685%2Fdigger%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:05",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35748%2Fdigger%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -4444,33 +4395,6 @@
       {
        "nombre": "La bola negra (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:15",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35632%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "18:35",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35781%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "19:30",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35780%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "20:25",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35633%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "21:45",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35779%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:20",
@@ -4534,6 +4458,38 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35701%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:20",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35760%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "17:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35639%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "18:35",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35759%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "19:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35758%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "20:25",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35638%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "21:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35757%2Fla-bola-negra%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       }
@@ -4557,23 +4513,6 @@
       {
        "nombre": "En el corazón de la bestia (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:25",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35802%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "19:45",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35800%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35801%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:25",
@@ -4606,6 +4545,23 @@
           "hora": "22:00",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35681%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:25",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35749%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "19:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35751%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35750%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -4642,13 +4598,6 @@
       {
        "nombre": "La isla olvidada (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:05",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35799%2Fla-isla-olvidada%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:45",
@@ -4661,6 +4610,13 @@
           "hora": "16:45",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35678%2Fla-isla-olvidada%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35752%2Fla-isla-olvidada%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -4683,23 +4639,6 @@
       {
        "nombre": "Resident Evil (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:00",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35798%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "20:45",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35778%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:45",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35777%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "20:45",
@@ -4722,6 +4661,18 @@
           "hora": "22:45",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35671%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "20:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35745%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35755%2Fresident-evil%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -4746,13 +4697,6 @@
       {
        "nombre": "Coyote vs. Acme (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:25",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35776%2Fcoyote-vs-acme%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:25",
@@ -4765,6 +4709,13 @@
           "hora": "18:25",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35673%2Fcoyote-vs-acme%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "18:25",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35754%2Fcoyote-vs-acme%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -4831,6 +4782,13 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35677%2Fpracticamente-magia-2%3Fmode%3Dwidget%26change%3D0"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:25",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35753%2Fpracticamente-magia-2%3Fmode%3Dwidget%26change%3D0"
+         }
         ]
        }
       }
@@ -4854,13 +4812,6 @@
       {
        "nombre": "Tadeo Jones y la lámpara maravillosa (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:05",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35797%2Ftadeo-jones-y-la-lampara-maravillosa%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:30",
@@ -4873,6 +4824,13 @@
           "hora": "16:30",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35704%2Ftadeo-jones-y-la-lampara-maravillosa%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35756%2Ftadeo-jones-y-la-lampara-maravillosa%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -4930,13 +4888,6 @@
       {
        "nombre": "Insidious: Fuera del más allá (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "22:40",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35774%2Finsidious-fuera-del-mas-alla%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "22:40",
@@ -4949,6 +4900,13 @@
           "hora": "22:40",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35688%2Finsidious-fuera-del-mas-alla%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "22:40",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35747%2Finsidious-fuera-del-mas-alla%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -4972,13 +4930,6 @@
       {
        "nombre": "La odisea (Digital)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "21:40",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35785%2Fla-odisea%3Fmode%3Dwidget%26change%3D0"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "21:40",
@@ -4991,6 +4942,13 @@
           "hora": "21:40",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35689%2Fla-odisea%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "21:40",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F35746%2Fla-odisea%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -5305,25 +5263,13 @@
      "anio": 2026,
      "pais": "Estados Unidos",
      "director": "Rob Savage",
-     "reparto": "Jessica Chastain, Jay Duplass, Arabella Olivia Clark",
+     "reparto": "Jessica Chastain, Arabella Olivia Clark, Jay Duplass",
      "poster": "https://pics.filmaffinity.com/other_mommy-415529498-mmed.jpg",
      "sinopsis": "Bela, una niña de 8 años que vive en un hogar tenso por el matrimonio problemático de sus padres, ve cómo su vida se ve trastornada por una entidad siniestra a la que llama Otra Mamá. Cuando esta presencia malévola emerge de su armario preguntando: \"¿Puedo…",
      "versiones": [
       {
        "nombre": "La otra madre",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "19:45",
-          "sala": "Sala 7",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62576&peli=10695&sala=7"
-         },
-         {
-          "hora": "21:45",
-          "sala": "Sala 7",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62579&peli=10695&sala=7"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "19:45",
@@ -5347,24 +5293,24 @@
           "sala": "Sala 7",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62587&peli=10695&sala=7"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:45",
+          "sala": "Sala 7",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62590&peli=10695&sala=7"
+         },
+         {
+          "hora": "21:45",
+          "sala": "Sala 7",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62591&peli=10695&sala=7"
+         }
         ]
        }
       },
       {
        "nombre": "La otra madre (ATMOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:00",
-          "sala": "Sala 5",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62521&peli=10883&sala=5"
-         },
-         {
-          "hora": "22:30",
-          "sala": "Sala 5",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62524&peli=10883&sala=5"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:00",
@@ -5388,6 +5334,18 @@
           "sala": "Sala 5",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62531&peli=10883&sala=5"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:00",
+          "sala": "Sala 5",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62532&peli=10883&sala=5"
+         },
+         {
+          "hora": "22:30",
+          "sala": "Sala 5",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62534&peli=10883&sala=5"
+         }
         ]
        }
       }
@@ -5409,23 +5367,6 @@
       {
        "nombre": "El precio de la red",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:15",
-          "sala": "Sala 2",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62448&peli=10842&sala=2"
-         },
-         {
-          "hora": "20:30",
-          "sala": "Sala 2",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62449&peli=10842&sala=2"
-         },
-         {
-          "hora": "22:45",
-          "sala": "Sala 2",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62450&peli=10842&sala=2"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:15",
@@ -5458,6 +5399,23 @@
           "hora": "22:45",
           "sala": "Sala 2",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62458&peli=10842&sala=2"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "18:15",
+          "sala": "Sala 2",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62460&peli=10842&sala=2"
+         },
+         {
+          "hora": "20:30",
+          "sala": "Sala 2",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62461&peli=10842&sala=2"
+         },
+         {
+          "hora": "22:45",
+          "sala": "Sala 2",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62462&peli=10842&sala=2"
          }
         ]
        }
@@ -5494,13 +5452,6 @@
       {
        "nombre": "Mascotas al rescate",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:30",
-          "sala": "Sala 2",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62447&peli=10895&sala=2"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:30",
@@ -5518,6 +5469,13 @@
           "hora": "16:30",
           "sala": "Sala 2",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62455&peli=10895&sala=2"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:30",
+          "sala": "Sala 2",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62459&peli=10895&sala=2"
          }
         ]
        }
@@ -5541,23 +5499,6 @@
       {
        "nombre": "Verity. La sombra de un engaño",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 9",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62634&peli=10725&sala=9"
-         },
-         {
-          "hora": "18:15",
-          "sala": "Sala 9",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62635&peli=10725&sala=9"
-         },
-         {
-          "hora": "20:30",
-          "sala": "Sala 9",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62636&peli=10725&sala=9"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:00",
@@ -5580,6 +5521,23 @@
           "hora": "16:00",
           "sala": "Sala 9",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62642&peli=10725&sala=9"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 9",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62646&peli=10725&sala=9"
+         },
+         {
+          "hora": "18:15",
+          "sala": "Sala 9",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62647&peli=10725&sala=9"
+         },
+         {
+          "hora": "20:30",
+          "sala": "Sala 9",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62648&peli=10725&sala=9"
          }
         ]
        }
@@ -5604,13 +5562,6 @@
       {
        "nombre": "La leyenda de la ballena cantora",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 7",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62578&peli=10851&sala=7"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:00",
@@ -5628,6 +5579,13 @@
           "hora": "16:00",
           "sala": "Sala 7",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62584&peli=10851&sala=7"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 7",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62588&peli=10851&sala=7"
          }
         ]
        }
@@ -5651,13 +5609,6 @@
       {
        "nombre": "DIGGER",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62545&peli=10693&sala=6"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:00",
@@ -5675,6 +5626,13 @@
           "hora": "16:00",
           "sala": "Sala 6",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62553&peli=10693&sala=6"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 6",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62557&peli=10693&sala=6"
          }
         ]
        }
@@ -5698,38 +5656,6 @@
       {
        "nombre": "La Bola Negra (ATMOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 4",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62498&peli=10840&sala=4"
-         },
-         {
-          "hora": "17:00",
-          "sala": "Sala 1",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62426&peli=10840&sala=1"
-         },
-         {
-          "hora": "19:00",
-          "sala": "Sala 4",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62499&peli=10840&sala=4"
-         },
-         {
-          "hora": "20:00",
-          "sala": "Sala 1",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62427&peli=10840&sala=1"
-         },
-         {
-          "hora": "22:00",
-          "sala": "Sala 4",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62501&peli=10840&sala=4"
-         },
-         {
-          "hora": "23:00",
-          "sala": "Sala 1",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62446&peli=10840&sala=1"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:00",
@@ -5793,24 +5719,39 @@
           "sala": "Sala 4",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62507&peli=10840&sala=4"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 4",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62508&peli=10840&sala=4"
+         },
+         {
+          "hora": "17:00",
+          "sala": "Sala 1",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62432&peli=10840&sala=1"
+         },
+         {
+          "hora": "19:00",
+          "sala": "Sala 4",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62509&peli=10840&sala=4"
+         },
+         {
+          "hora": "20:00",
+          "sala": "Sala 1",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62433&peli=10840&sala=1"
+         },
+         {
+          "hora": "22:00",
+          "sala": "Sala 4",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62510&peli=10840&sala=4"
+         }
         ]
        }
       },
       {
        "nombre": "La Bola Negra",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:00",
-          "sala": "Sala 3",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62477&peli=10761&sala=3"
-         },
-         {
-          "hora": "21:00",
-          "sala": "Sala 3",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62478&peli=10761&sala=3"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:00",
@@ -5844,6 +5785,18 @@
           "sala": "Sala 3",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62484&peli=10761&sala=3"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "18:00",
+          "sala": "Sala 3",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62486&peli=10761&sala=3"
+         },
+         {
+          "hora": "21:00",
+          "sala": "Sala 3",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62487&peli=10761&sala=3"
+         }
         ]
        }
       }
@@ -5867,28 +5820,6 @@
       {
        "nombre": "En el corazón de la bestia",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 8",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62605&peli=10508&sala=8"
-         },
-         {
-          "hora": "18:00",
-          "sala": "Sala 8",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62606&peli=10508&sala=8"
-         },
-         {
-          "hora": "20:00",
-          "sala": "Sala 8",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62607&peli=10508&sala=8"
-         },
-         {
-          "hora": "22:45",
-          "sala": "Sala 9",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62637&peli=10508&sala=9"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:00",
@@ -5927,6 +5858,28 @@
           "sala": "Sala 9",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62645&peli=10508&sala=9"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 8",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62617&peli=10508&sala=8"
+         },
+         {
+          "hora": "18:00",
+          "sala": "Sala 8",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62618&peli=10508&sala=8"
+         },
+         {
+          "hora": "20:00",
+          "sala": "Sala 8",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62619&peli=10508&sala=8"
+         },
+         {
+          "hora": "22:45",
+          "sala": "Sala 9",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62649&peli=10508&sala=9"
+         }
         ]
        }
       },
@@ -5962,13 +5915,6 @@
       {
        "nombre": "La isla olvidada",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "18:30",
-          "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62546&peli=10506&sala=6"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "18:30",
@@ -5981,6 +5927,13 @@
           "hora": "18:30",
           "sala": "Sala 6",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62554&peli=10506&sala=6"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "18:30",
+          "sala": "Sala 6",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62558&peli=10506&sala=6"
          }
         ]
        }
@@ -6017,13 +5970,6 @@
       {
        "nombre": "Vengadores: Endgame (ATMOS)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "19:00",
-          "sala": "Sala 5",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62525&peli=10713&sala=5"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "19:00",
@@ -6036,6 +5982,13 @@
           "hora": "19:00",
           "sala": "Sala 5",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62530&peli=10713&sala=5"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:00",
+          "sala": "Sala 5",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62533&peli=10713&sala=5"
          }
         ]
        }
@@ -6058,18 +6011,6 @@
       {
        "nombre": "Resident Evil",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "20:45",
-          "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62547&peli=10502&sala=6"
-         },
-         {
-          "hora": "22:45",
-          "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62548&peli=10502&sala=6"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "20:45",
@@ -6092,6 +6033,18 @@
           "hora": "22:45",
           "sala": "Sala 6",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62556&peli=10502&sala=6"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "20:45",
+          "sala": "Sala 6",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62559&peli=10502&sala=6"
+         },
+         {
+          "hora": "22:45",
+          "sala": "Sala 6",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62560&peli=10502&sala=6"
          }
         ]
        }
@@ -6116,13 +6069,6 @@
       {
        "nombre": "Coyote vs Acme",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:45",
-          "sala": "Sala 7",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62577&peli=10504&sala=7"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:45",
@@ -6135,6 +6081,13 @@
           "hora": "17:45",
           "sala": "Sala 7",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62585&peli=10504&sala=7"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:45",
+          "sala": "Sala 7",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62589&peli=10504&sala=7"
          }
         ]
        }
@@ -6159,13 +6112,6 @@
       {
        "nombre": "Tadeo Jones y la lámpara maravillosa",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 3",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62476&peli=10500&sala=3"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:00",
@@ -6183,6 +6129,13 @@
           "hora": "16:00",
           "sala": "Sala 3",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62482&peli=10500&sala=3"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 3",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62485&peli=10500&sala=3"
          }
         ]
        }
@@ -6262,18 +6215,18 @@
       {
        "nombre": "La Odisea",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "22:00",
-          "sala": "Sala 8",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62608&peli=10410&sala=8"
-         }
-        ],
         "2026-10-11": [
          {
           "hora": "22:00",
           "sala": "Sala 8",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62616&peli=10410&sala=8"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "22:00",
+          "sala": "Sala 8",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62620&peli=10410&sala=8"
          }
         ]
        }
@@ -6454,47 +6407,6 @@
     },
     {
      "generos": [
-      "Thriller",
-      "Acción",
-      "Drama"
-     ],
-     "fa": "867136",
-     "titulo": "En la zona gris",
-     "anio": 2026,
-     "pais": "Reino Unido",
-     "director": "Guy Ritchie",
-     "reparto": "Jake Gyllenhaal, Henry Cavill, Eiza González",
-     "poster": "https://pics.filmaffinity.com/in_the_grey-165473531-mmed.jpg",
-     "sinopsis": "Un equipo encubierto de agentes de élite viven en la sombra, tan cómodos manejando el poder y la influencia como armas automáticas y explosivos de gran potencia. Cuando un déspota roba una fortuna de mil millones de dólares, son enviados a recuperarla en lo…",
-     "versiones": [
-      {
-       "nombre": "EN LA ZONA GRIS",
-       "dias": {
-        "2026-10-09": [
-         {
-          "hora": "20:00",
-          "sala": "SALA",
-          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1837&cine=TEATROPRENDESCANDAS"
-         }
-        ],
-        "2026-10-11": [
-         {
-          "hora": "20:00",
-          "sala": "SALA",
-          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1837&cine=TEATROPRENDESCANDAS"
-         },
-         {
-          "hora": "23:00",
-          "sala": "SALA",
-          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1837&cine=TEATROPRENDESCANDAS"
-         }
-        ]
-       }
-      }
-     ]
-    },
-    {
-     "generos": [
       "Animación",
       "Aventura",
       "Comedia"
@@ -6530,6 +6442,47 @@
           "hora": "17:30",
           "sala": "SALA",
           "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1834&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Thriller",
+      "Acción",
+      "Drama"
+     ],
+     "fa": "867136",
+     "titulo": "En la zona gris",
+     "anio": 2026,
+     "pais": "Reino Unido",
+     "director": "Guy Ritchie",
+     "reparto": "Jake Gyllenhaal, Henry Cavill, Eiza González",
+     "poster": "https://pics.filmaffinity.com/in_the_grey-165473531-mmed.jpg",
+     "sinopsis": "Un equipo encubierto de agentes de élite viven en la sombra, tan cómodos manejando el poder y la influencia como armas automáticas y explosivos de gran potencia. Cuando un déspota roba una fortuna de mil millones de dólares, son enviados a recuperarla en lo…",
+     "versiones": [
+      {
+       "nombre": "EN LA ZONA GRIS",
+       "dias": {
+        "2026-10-11": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1837&cine=TEATROPRENDESCANDAS"
+         },
+         {
+          "hora": "23:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1837&cine=TEATROPRENDESCANDAS"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1837&cine=TEATROPRENDESCANDAS"
          }
         ]
        }
@@ -6638,6 +6591,13 @@
           "sala": "SALA",
           "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1841&cine=TEATROPRENDESCANDAS"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:30",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1841&cine=TEATROPRENDESCANDAS"
+         }
         ]
        }
       }
@@ -6722,18 +6682,6 @@
       {
        "nombre": "NAZA (VOSE)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "17:45",
-          "sala": "Sala 2",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdnaza/18587/"
-         },
-         {
-          "hora": "23:00",
-          "sala": "Sala 4",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdnaza/18596/"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "17:45",
@@ -6751,6 +6699,13 @@
           "hora": "18:50",
           "sala": "Sala 2",
           "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdnaza/18623/"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:45",
+          "sala": "Sala 2",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdnaza/18635/"
          }
         ]
        }
@@ -6773,13 +6728,6 @@
       {
        "nombre": "CENIZA EN LA BOCA",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 3",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdceniza-en-la-boca/18590/"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:10",
@@ -6797,6 +6745,13 @@
           "hora": "12:00",
           "sala": "Sala 2",
           "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdceniza-en-la-boca/18582/"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdceniza-en-la-boca/18638/"
          }
         ]
        }
@@ -6819,11 +6774,11 @@
       {
        "nombre": "LA VIDA DE UNA MUJER",
        "dias": {
-        "2026-10-09": [
+        "2026-10-10": [
          {
-          "hora": "20:20",
+          "hora": "20:15",
           "sala": "Sala 3",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-vida-de-una-mujer/18592/"
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-vida-de-una-mujer/18612/"
          }
         ],
         "2026-10-11": [
@@ -6883,13 +6838,6 @@
       {
        "nombre": "DIGGER (VOSE)",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "22:30",
-          "sala": "Sala 3",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hddigger/18685/"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "22:30",
@@ -6902,6 +6850,18 @@
           "hora": "22:30",
           "sala": "Sala 3",
           "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hddigger/18688/"
+         }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "19:55",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hddigger/18640/"
+         },
+         {
+          "hora": "22:30",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hddigger/18690/"
          }
         ]
        }
@@ -6944,38 +6904,6 @@
       {
        "nombre": "LA BOLA NEGRA",
        "dias": {
-        "2026-10-09": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 1",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18584/"
-         },
-         {
-          "hora": "17:00",
-          "sala": "Sala 4",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18594/"
-         },
-         {
-          "hora": "19:00",
-          "sala": "Sala 1",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18421/"
-         },
-         {
-          "hora": "19:20",
-          "sala": "Sala 2",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18588/"
-         },
-         {
-          "hora": "20:00",
-          "sala": "Sala 4",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18595/"
-         },
-         {
-          "hora": "22:30",
-          "sala": "Sala 1",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18585/"
-         }
-        ],
         "2026-10-10": [
          {
           "hora": "16:30",
@@ -7044,6 +6972,28 @@
           "sala": "Sala 1",
           "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18620/"
          }
+        ],
+        "2026-10-12": [
+         {
+          "hora": "17:00",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18642/"
+         },
+         {
+          "hora": "19:00",
+          "sala": "Sala 1",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18632/"
+         },
+         {
+          "hora": "19:20",
+          "sala": "Sala 2",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18636/"
+         },
+         {
+          "hora": "20:00",
+          "sala": "Sala 4",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdla-bola-negra/18643/"
+         }
         ]
        }
       }
@@ -7065,11 +7015,11 @@
       {
        "nombre": "CINE   COLOQUIO. EL SER QUERIDO",
        "dias": {
-        "2026-10-09": [
+        "2026-10-13": [
          {
-          "hora": "22:20",
-          "sala": "Sala 2",
-          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdcine---coloquio.-el-ser-querido/18589/"
+          "hora": "20:10",
+          "sala": "Sala 3",
+          "url": "https://www.reservaentradas.com/entrada/oviedo/cineembajadoresfoncalada/hdcine---coloquio.-el-ser-querido/18652/"
          }
         ]
        }
