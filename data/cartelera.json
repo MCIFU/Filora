@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-11T11:18",
+ "actualizado": "2026-10-11T18:42",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -543,11 +543,6 @@
        "dias": {
         "2026-10-11": [
          {
-          "hora": "12:30",
-          "sala": "Sala 4",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57601"
-         },
-         {
           "hora": "15:45",
           "sala": "Sala 4",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57502"
@@ -589,11 +584,6 @@
        "nombre": "El precio de la red",
        "dias": {
         "2026-10-11": [
-         {
-          "hora": "12:30",
-          "sala": "Sala 2",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57603"
-         },
          {
           "hora": "16:25",
           "sala": "Sala 5",
@@ -686,16 +676,6 @@
        "dias": {
         "2026-10-11": [
          {
-          "hora": "12:10",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57591"
-         },
-         {
-          "hora": "15:00",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57611"
-         },
-         {
           "hora": "17:20",
           "sala": "Sala 10",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57638"
@@ -753,11 +733,6 @@
        "nombre": "Mascotas al rescate",
        "dias": {
         "2026-10-11": [
-         {
-          "hora": "12:10",
-          "sala": "Sala 9",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57593"
-         },
          {
           "hora": "15:40",
           "sala": "Sala 9",
@@ -832,18 +807,6 @@
           "hora": "17:20",
           "sala": "Sala 8",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57791"
-         }
-        ]
-       }
-      },
-      {
-       "nombre": "Naza (VIP Bed) (VOSE)",
-       "dias": {
-        "2026-10-11": [
-         {
-          "hora": "12:00",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57788"
          }
         ]
        }
@@ -1019,11 +982,6 @@
        "dias": {
         "2026-10-11": [
          {
-          "hora": "12:15",
-          "sala": "Sala 1 XL",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57595"
-         },
-         {
           "hora": "16:45",
           "sala": "Sala 6",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57632"
@@ -1119,11 +1077,6 @@
        "nombre": "La Bola Negra (VIP Bed)",
        "dias": {
         "2026-10-11": [
-         {
-          "hora": "14:00",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57605"
-         },
          {
           "hora": "17:15",
           "sala": "Sala 3",
@@ -1256,16 +1209,6 @@
        "dias": {
         "2026-10-11": [
          {
-          "hora": "12:00",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57589"
-         },
-         {
-          "hora": "14:20",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57607"
-         },
-         {
           "hora": "16:40",
           "sala": "Sala 8",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57629"
@@ -1308,18 +1251,6 @@
      "sinopsis": "Después de los eventos devastadores de 'Avengers: Infinity War', el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deberán reunirse una vez más para intentar deshacer sus…",
      "versiones": [
       {
-       "nombre": "Vengadores: Endgame (Re-estreno)",
-       "dias": {
-        "2026-10-11": [
-         {
-          "hora": "12:00",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57587"
-         }
-        ]
-       }
-      },
-      {
        "nombre": "Vengadores: Endgame (Re-estreno) (VIP Bed)",
        "dias": {
         "2026-10-12": [
@@ -1350,11 +1281,6 @@
        "nombre": "Resident Evil",
        "dias": {
         "2026-10-11": [
-         {
-          "hora": "14:20",
-          "sala": "Sala 5",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57609"
-         },
          {
           "hora": "22:40",
           "sala": "Sala 2",
@@ -1462,34 +1388,6 @@
           "hora": "15:30",
           "sala": "Sala 9",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57700"
-         }
-        ]
-       }
-      }
-     ]
-    },
-    {
-     "generos": [
-      "Aventura",
-      "Fantasía"
-     ],
-     "fa": "546833",
-     "titulo": "La odisea",
-     "anio": 2026,
-     "pais": "Reino Unido",
-     "director": "Christopher Nolan",
-     "reparto": "Matt Damon, Tom Holland, Anne Hathaway",
-     "poster": "https://pics.filmaffinity.com/the_odyssey-225588139-mmed.jpg",
-     "sinopsis": "Tras la guerra de Troya, el legendario Odiseo emprende el largo y peligroso regreso a su hogar en Ítaca, donde su esposa Penélope y su hijo Telémaco lo esperan desde hace mucho tiempo mientras resguardan el reino de los numerosos pretendientes que acechan el…",
-     "versiones": [
-      {
-       "nombre": "La odisea",
-       "dias": {
-        "2026-10-11": [
-         {
-          "hora": "12:00",
-          "sala": "Sala 7",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57798"
          }
         ]
        }
@@ -4910,11 +4808,6 @@
           "hora": "17:00",
           "sala": "Sala 5",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62529&peli=10883&sala=5"
-         },
-         {
-          "hora": "22:30",
-          "sala": "Sala 5",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62531&peli=10883&sala=5"
          }
         ],
         "2026-10-12": [
@@ -4922,11 +4815,6 @@
           "hora": "17:00",
           "sala": "Sala 5",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62532&peli=10883&sala=5"
-         },
-         {
-          "hora": "22:30",
-          "sala": "Sala 5",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62534&peli=10883&sala=5"
          }
         ],
         "2026-10-13": [
@@ -4973,16 +4861,6 @@
           "hora": "18:15",
           "sala": "Sala 2",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62460&peli=10842&sala=2"
-         },
-         {
-          "hora": "20:30",
-          "sala": "Sala 2",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62461&peli=10842&sala=2"
-         },
-         {
-          "hora": "22:45",
-          "sala": "Sala 2",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62462&peli=10842&sala=2"
          }
         ],
         "2026-10-13": [
@@ -5198,18 +5076,13 @@
           "hora": "12:15",
           "sala": "Sala 6",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62573&peli=10693&sala=6"
-         },
-         {
-          "hora": "16:00",
-          "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62553&peli=10693&sala=6"
          }
         ],
         "2026-10-12": [
          {
-          "hora": "16:00",
+          "hora": "22:45",
           "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62557&peli=10693&sala=6"
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62560&peli=10693&sala=6"
          }
         ],
         "2026-10-13": [
@@ -5270,6 +5143,11 @@
           "hora": "22:00",
           "sala": "Sala 4",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62507&peli=10840&sala=4"
+         },
+         {
+          "hora": "22:30",
+          "sala": "Sala 5",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62724&peli=10840&sala=5"
          }
         ],
         "2026-10-12": [
@@ -5333,6 +5211,11 @@
        "dias": {
         "2026-10-11": [
          {
+          "hora": "17:45",
+          "sala": "Sala 6",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62726&peli=10761&sala=6"
+         },
+         {
           "hora": "18:00",
           "sala": "Sala 3",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62483&peli=10761&sala=3"
@@ -5355,9 +5238,19 @@
         ],
         "2026-10-12": [
          {
+          "hora": "17:45",
+          "sala": "Sala 6",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62729&peli=10761&sala=6"
+         },
+         {
           "hora": "18:00",
           "sala": "Sala 3",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62486&peli=10761&sala=3"
+         },
+         {
+          "hora": "20:30",
+          "sala": "Sala 2",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62723&peli=10761&sala=2"
          },
          {
           "hora": "21:00",
@@ -5401,11 +5294,6 @@
        "dias": {
         "2026-10-11": [
          {
-          "hora": "16:00",
-          "sala": "Sala 8",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62613&peli=10508&sala=8"
-         },
-         {
           "hora": "18:00",
           "sala": "Sala 8",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62614&peli=10508&sala=8"
@@ -5422,11 +5310,6 @@
          }
         ],
         "2026-10-12": [
-         {
-          "hora": "16:00",
-          "sala": "Sala 8",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62617&peli=10508&sala=8"
-         },
          {
           "hora": "18:00",
           "sala": "Sala 8",
@@ -5483,61 +5366,6 @@
     },
     {
      "generos": [
-      "Animación",
-      "Aventura",
-      "Comedia"
-     ],
-     "fa": "507872",
-     "titulo": "La isla olvidada",
-     "anio": 2026,
-     "pais": "Estados Unidos",
-     "director": "Joel Crawford / Januel Mercado",
-     "reparto": "H.E.R., Liza Soberano, Dave Franco",
-     "poster": "https://pics.filmaffinity.com/forgotten_island-114935156-mmed.jpg",
-     "sinopsis": "Dos amigas se quedan varadas en el místico mundo de Nakali, donde su único escape podría costarles su vida compartida de recuerdos.",
-     "versiones": [
-      {
-       "nombre": "La isla olvidada",
-       "dias": {
-        "2026-10-11": [
-         {
-          "hora": "18:30",
-          "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62554&peli=10506&sala=6"
-         }
-        ],
-        "2026-10-12": [
-         {
-          "hora": "18:30",
-          "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62558&peli=10506&sala=6"
-         }
-        ],
-        "2026-10-13": [
-         {
-          "hora": "18:30",
-          "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62562&peli=10506&sala=6"
-         }
-        ]
-       }
-      },
-      {
-       "nombre": "La isla olvidada (ATMOS)",
-       "dias": {
-        "2026-10-11": [
-         {
-          "hora": "12:15",
-          "sala": "Sala 4",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62520&peli=10631&sala=4"
-         }
-        ]
-       }
-      }
-     ]
-    },
-    {
-     "generos": [
       "Ciencia ficción",
       "Fantasía",
       "Acción"
@@ -5581,6 +5409,54 @@
     },
     {
      "generos": [
+      "Animación",
+      "Aventura",
+      "Comedia"
+     ],
+     "fa": "507872",
+     "titulo": "La isla olvidada",
+     "anio": 2026,
+     "pais": "Estados Unidos",
+     "director": "Joel Crawford / Januel Mercado",
+     "reparto": "H.E.R., Liza Soberano, Dave Franco",
+     "poster": "https://pics.filmaffinity.com/forgotten_island-114935156-mmed.jpg",
+     "sinopsis": "Dos amigas se quedan varadas en el místico mundo de Nakali, donde su único escape podría costarles su vida compartida de recuerdos.",
+     "versiones": [
+      {
+       "nombre": "La isla olvidada",
+       "dias": {
+        "2026-10-12": [
+         {
+          "hora": "16:00",
+          "sala": "Sala 8",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62727&peli=10506&sala=8"
+         }
+        ],
+        "2026-10-13": [
+         {
+          "hora": "18:30",
+          "sala": "Sala 6",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62562&peli=10506&sala=6"
+         }
+        ]
+       }
+      },
+      {
+       "nombre": "La isla olvidada (ATMOS)",
+       "dias": {
+        "2026-10-11": [
+         {
+          "hora": "12:15",
+          "sala": "Sala 4",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62520&peli=10631&sala=4"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
       "Terror"
      ],
      "fa": "579353",
@@ -5597,6 +5473,11 @@
        "dias": {
         "2026-10-11": [
          {
+          "hora": "16:00",
+          "sala": "Sala 6",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62725&peli=10502&sala=6"
+         },
+         {
           "hora": "20:45",
           "sala": "Sala 6",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62555&peli=10502&sala=6"
@@ -5609,14 +5490,14 @@
         ],
         "2026-10-12": [
          {
+          "hora": "16:00",
+          "sala": "Sala 6",
+          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62728&peli=10502&sala=6"
+         },
+         {
           "hora": "20:45",
           "sala": "Sala 6",
           "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62559&peli=10502&sala=6"
-         },
-         {
-          "hora": "22:45",
-          "sala": "Sala 6",
-          "url": "https://tickets.ocinepremiumlosfresnos.es/compra/show_numerada_confirmation.php?plan=62560&peli=10502&sala=6"
          }
         ],
         "2026-10-13": [
