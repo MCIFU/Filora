@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-12T12:54",
+ "actualizado": "2026-10-12T22:00",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -489,11 +489,6 @@
        "dias": {
         "2026-10-12": [
          {
-          "hora": "12:30",
-          "sala": "Sala 6",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57602"
-         },
-         {
           "hora": "15:40",
           "sala": "Sala 6",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57506"
@@ -639,18 +634,6 @@
          }
         ]
        }
-      },
-      {
-       "nombre": "El precio de la red (VIP Bed)",
-       "dias": {
-        "2026-10-12": [
-         {
-          "hora": "12:30",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57692"
-         }
-        ]
-       }
       }
      ]
     },
@@ -672,11 +655,6 @@
        "nombre": "El árbol muy muy lejano",
        "dias": {
         "2026-10-12": [
-         {
-          "hora": "12:10",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57592"
-         },
          {
           "hora": "16:20",
           "sala": "Sala 5",
@@ -736,11 +714,6 @@
        "dias": {
         "2026-10-12": [
          {
-          "hora": "12:10",
-          "sala": "Sala 9",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57594"
-         },
-         {
           "hora": "17:50",
           "sala": "Sala 9",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57642"
@@ -780,18 +753,6 @@
       {
        "nombre": "Naza (VOSE)",
        "dias": {
-        "2026-10-12": [
-         {
-          "hora": "12:00",
-          "sala": "Sala 2",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57789"
-         },
-         {
-          "hora": "15:20",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57790"
-         }
-        ],
         "2026-10-13": [
          {
           "hora": "17:20",
@@ -982,16 +943,6 @@
        "nombre": "La Bola Negra",
        "dias": {
         "2026-10-12": [
-         {
-          "hora": "12:15",
-          "sala": "Sala 1 XL",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57596"
-         },
-         {
-          "hora": "14:00",
-          "sala": "Sala 2",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57689"
-         },
          {
           "hora": "17:15",
           "sala": "Sala 2",
@@ -1215,48 +1166,9 @@
        "dias": {
         "2026-10-12": [
          {
-          "hora": "12:00",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57590"
-         },
-         {
-          "hora": "14:20",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57608"
-         },
-         {
           "hora": "16:40",
           "sala": "Sala 8",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57630"
-         }
-        ]
-       }
-      }
-     ]
-    },
-    {
-     "generos": [
-      "Ciencia ficción",
-      "Fantasía",
-      "Acción"
-     ],
-     "fa": "993884",
-     "titulo": "Vengadores: Endgame",
-     "anio": 2019,
-     "pais": "Estados Unidos",
-     "director": "Anthony Russo / Joe Russo",
-     "reparto": "Robert Downey Jr., Chris Evans, Mark Ruffalo",
-     "poster": "https://pics.filmaffinity.com/avengers_endgame-911400388-mmed.jpg",
-     "sinopsis": "Después de los eventos devastadores de 'Avengers: Infinity War', el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deberán reunirse una vez más para intentar deshacer sus…",
-     "versiones": [
-      {
-       "nombre": "Vengadores: Endgame (Re-estreno) (VIP Bed)",
-       "dias": {
-        "2026-10-12": [
-         {
-          "hora": "12:00",
-          "sala": "Sala 4",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57588"
          }
         ]
        }
@@ -1305,13 +1217,6 @@
       {
        "nombre": "Resident Evil",
        "dias": {
-        "2026-10-12": [
-         {
-          "hora": "14:20",
-          "sala": "Sala 7",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57610"
-         }
-        ],
         "2026-10-14": [
          {
           "hora": "17:00",
@@ -1346,40 +1251,6 @@
           "hora": "17:10",
           "sala": "Sala 10",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57697"
-         }
-        ]
-       }
-      }
-     ]
-    },
-    {
-     "generos": [
-      "Animación",
-      "Aventura",
-      "Comedia"
-     ],
-     "fa": "877615",
-     "titulo": "Tadeo Jones y la lámpara maravillosa",
-     "anio": 2026,
-     "pais": "España",
-     "director": "Enrique Gato",
-     "reparto": "Óscar Barberán, Michelle Jenner, Petra Martínez",
-     "poster": "https://pics.filmaffinity.com/tadeo_jones_y_la_lampara_maravillosa-926350379-mmed.jpg",
-     "sinopsis": "Cuarta entrega de la saga 'Tadeo Jones'. Tadeo y Sara son ahora padres de Olimpia (Oli), una adorable e intrépida niña de dos años. Y Momia no lleva nada bien haber dejado de ser el centro de atención. Mientras están de vacaciones en Londres, Sara sigue la…",
-     "versiones": [
-      {
-       "nombre": "Tadeo Jones y la lámpara maravillosa",
-       "dias": {
-        "2026-10-12": [
-         {
-          "hora": "12:15",
-          "sala": "Sala 5",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57598"
-         },
-         {
-          "hora": "15:30",
-          "sala": "Sala 9",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57700"
          }
         ]
        }
