@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-11",
+ "actualizado": "2026-10-12",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -152,6 +152,7 @@
    "pais": "España",
    "reparto": "Lucía Caraballo, Alejandro Speitzer, Leonor Watling",
    "sinopsis": "Laura y Nacho se han conocido en un vuelo, pero una vez que recojan sus maletas, su breve encuentro habrá terminado…",
+   "duracion": 107,
    "poster": "https://pics.filmaffinity.com/la_maleta-188790900-mmed.jpg",
    "fa": "331187",
    "destacado": false
