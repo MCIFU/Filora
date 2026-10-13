@@ -274,12 +274,21 @@ function afinidades(pr, it) {
   let dir = null;
   for (const d of splitDir(it.director)) { const a = pr.directors.get(d); if (a && a.n && (!dir || a.adj > dir.adj)) dir = a; }
   const dec = it.anio ? pr.decades.get(Math.floor(it.anio / 10) * 10) : null;
-  return { g: ws ? gs / ws : 0, d: dir ? dir.adj : 0, e: dec && dec.n ? dec.adj : 0, best, worst, dir, dec };
+  const pais = it.pais ? pr.countries.get(it.pais) : null;
+  return { g: ws ? gs / ws : 0, d: dir ? dir.adj : 0, e: dec && dec.n ? dec.adj : 0, c: pais && pais.n ? pais.adj : 0, best, worst, dir, dec, pais };
+}
+// media de FilmAffinity y Letterboxd (sobre 10) de una película, si la tenemos
+function notaCritica(it) {
+  const w = it.notasWeb || {}, v = [];
+  if (w.fa) v.push(w.fa[0]);
+  if (w.lb) v.push(w.lb[0] * 2);
+  return v.length ? mean(v) : null;
 }
 function vectorPrediccion(pr, it, f = afinidades(pr, it)) {
-  const r = notaImdb(it);
+  const r = notaImdb(it), c = notaCritica(it);
   const q = r ? r[0] - pr.imdbMedia : 0, h = r ? 1 : 0, v = r && r[1] ? Math.log10(r[1]) - 5 : 0;
-  return [1, f.g, f.d, f.e, q, h, v * h];
+  const wq = c != null ? c - pr.criticaMedia : 0, wh = c != null ? 1 : 0;
+  return [1, f.g, f.d, f.e, f.c, q, h, v * h, wq, wh];
 }
 // perfil sin una película (para entrenar sin que cada una «se vea» a sí misma)
 function sinPelicula(pr, p) {
@@ -294,7 +303,7 @@ function sinPelicula(pr, p) {
     return out;
   };
   return { ...pr, genres: quita(pr.genres, p.generos || [], 6), directors: quita(pr.directors, splitDir(p.director), 2),
-    decades: quita(pr.decades, p.anio ? [Math.floor(p.anio / 10) * 10] : [], 6) };
+    decades: quita(pr.decades, p.anio ? [Math.floor(p.anio / 10) * 10] : [], 6), countries: quita(pr.countries, [p.pais], 6) };
 }
 function resolver(A, b) {
   const n = b.length, M = A.map((r, i) => [...r, b[i]]);
@@ -308,17 +317,40 @@ function resolver(A, b) {
   for (let i = n - 1; i >= 0; i--) { let t = M[i][n]; for (let k = i + 1; k < n; k++) t -= M[i][k] * x[k]; x[i] = t / M[i][i]; }
   return x;
 }
-function entrenarModelo(pr) {
-  const conImdb = pr.P.filter((p) => notaImdb(p));
-  pr.imdbMedia = conImdb.length ? mean(conImdb.map((p) => notaImdb(p)[0])) : 7;
-  if (pr.N < 30) return null; // con pocas notas, pesos fijos
-  const X = pr.P.map((p) => vectorPrediccion(sinPelicula(pr, p), p)), y = pr.P.map((p) => p.nota);
+function ridge(X, y, lambda) {
   const k = X[0].length, A = Array.from({ length: k }, () => Array(k).fill(0)), b = Array(k).fill(0);
   X.forEach((x, i) => { for (let a = 0; a < k; a++) { b[a] += x[a] * y[i]; for (let c = 0; c < k; c++) A[a][c] += x[a] * x[c]; } });
-  for (let a = 1; a < k; a++) A[a][a] += 3; // ridge: evita pesos exagerados
+  for (let a = 1; a < k; a++) A[a][a] += lambda; // ridge: evita pesos exagerados
   const w = resolver(A, b);
   return w.every(Number.isFinite) ? w : null;
 }
+// Entrena con tus notas y elige la regularización probándolo (validación cruzada en 5 partes):
+// guarda el error medio real (pr.cv) para decir cuánto se fía la predicción y calcular la afinidad.
+function entrenarModelo(pr) {
+  const conImdb = pr.P.filter((p) => notaImdb(p)), conCrit = pr.P.filter((p) => notaCritica(p) != null);
+  pr.imdbMedia = conImdb.length ? mean(conImdb.map((p) => notaImdb(p)[0])) : 7;
+  pr.criticaMedia = conCrit.length ? mean(conCrit.map(notaCritica)) : 7;
+  const orden = [...pr.P.map((p) => p.nota)].sort((a, b) => a - b);
+  pr.umbral = Math.max(6, orden[Math.floor(orden.length * 0.6)] ?? pr.mu); // «te gusta»: por encima de tu percentil 60
+  if (pr.N < 30) { pr.cv = { mae: 1.1, rmse: 1.4 }; return null; } // con pocas notas, pesos fijos
+  const X = pr.P.map((p) => vectorPrediccion(sinPelicula(pr, p), p)), y = pr.P.map((p) => p.nota);
+  let mejor = null;
+  for (const lambda of [1, 3, 10, 30]) {
+    let ae = 0, se = 0;
+    for (let f = 0; f < 5; f++) {
+      const tr = X.map((_, i) => i).filter((i) => i % 5 !== f), te = X.map((_, i) => i).filter((i) => i % 5 === f);
+      const w = ridge(tr.map((i) => X[i]), tr.map((i) => y[i]), lambda);
+      if (!w) { ae = Infinity; break; }
+      for (const i of te) { const e = clamp(X[i].reduce((t, x, j) => t + x * w[j], 0), 0, 10) - y[i]; ae += Math.abs(e); se += e * e; }
+    }
+    if (!mejor || ae < mejor.ae) mejor = { lambda, ae, mae: ae / X.length, rmse: Math.sqrt(se / X.length) };
+  }
+  const azar = mean(y.map((v) => Math.abs(v - pr.mu)));
+  pr.cv = { mae: mejor.mae, rmse: mejor.rmse, lambda: mejor.lambda, azar };
+  return ridge(X, y, mejor.lambda);
+}
+// Φ: probabilidad normal acumulada (para pasar de «nota prevista ± error» a «probabilidad de que te guste»)
+function phi(z) { const t = 1 / (1 + 0.2316419 * Math.abs(z)); const d = 0.3989423 * Math.exp(-z * z / 2); const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274)))); return z > 0 ? 1 - p : p; }
 
 // predicción de nota + motivos para una película que no has visto
 function predict(item) {
@@ -341,26 +373,39 @@ function predict(item) {
   if (f.dir && f.dir.adj < -0.4) why.push(`${f.dir.key} no te ha convencido (media ${fmt1(f.dir.mean)})`);
   if (r && r[0] < 6) why.push(`El público de IMDb la suspende (${fmt1(r[0])})`);
   if (f.worst && f.worst.adj < -0.35 && f.worst !== f.best) why.push(`Ojo: ${frase(f.worst.key)} te suele costar (media ${fmt1(f.worst.mean)})`);
+  if (f.pais && f.pais.adj > 0.35 && f.pais.n >= 5) why.push(`El cine de ${f.pais.key} te suele gustar (media ${fmt1(f.pais.mean)})`);
+  const crit = notaCritica(item);
+  if (crit != null && crit >= 7.8) why.push(`Muy bien valorada en FilmAffinity y Letterboxd (${fmt1(crit)})`);
   if (f.dec && f.dec.adj > 0.45) why.push(`Los años ${String(f.dec.key).slice(2)} son una de tus décadas fuertes`);
   if (item.prestigio >= 8.8 && !(r && r[0] >= 8)) why.push("Imprescindible según crítica y público");
   // estrenos con poca información: menos confianza, se acercan a tu media
   if (!item.director && !r && !item.prestigio) s = pr.mu + (s - pr.mu) * 0.7;
   s = clamp(s, 0, 10);
-  return { nota: s, pct: clamp(Math.round(50 + 46 * Math.tanh((s - pr.mu) / 2.3)), 3, 97), why: why.slice(0, 3) };
+  // afinidad = probabilidad de que le des al menos tu «me gusta» (pr.umbral), con el error real del modelo
+  const sigma = Math.max(0.6, (pr.cv && pr.cv.rmse) || 1.2) * (!item.director && !r ? 1.3 : 1);
+  return { nota: s, pct: clamp(Math.round(100 * phi((s - pr.umbral) / sigma)), 2, 98), why: why.slice(0, 3) };
 }
 
+// ---------------------------------------------------------------- páginas con pestañas
+const SUB = {};
+function conPestanas(v, ruta, tabs, qs) {
+  const t = tabs.some(([k]) => k === qs.get("t")) ? qs.get("t") : tabs[0][0];
+  v.innerHTML = `<nav class="pestanas" aria-label="Apartados">${tabs.map(([k, l, ic]) => `<a class="${k === t ? "on" : ""}" href="#/${ruta}${k === tabs[0][0] ? "" : `?t=${k}`}">${icon(ic)}${l}</a>`).join("")}</nav><div id="subv"></div>`;
+  SUB[t]($("#subv"), qs);
+}
+const VIEWS_PESTANAS = {
+  cartelera: [["cartelera", "En cines ahora", "ticket"], ["estrenos", "Próximos estrenos", "calendar"]],
+  estadisticas: [["resumen", "Resumen", "chart"], ["gustos", "Mis gustos", "spark"], ["anio", "Tu año en cine", "star"]],
+};
 // ---------------------------------------------------------------- navegación
 const NAV = [
   ["inicio", "Inicio", "home"],
   ["anadir", "Añadir películas", "plus"],
-  ["cartelera", "Cartelera", "ticket"],
+  ["cartelera", "Cartelera y estrenos", "ticket"],
   ["coleccion", "Colección", "film"],
-  ["estrenos", "Estrenos", "calendar"],
   ["premios", "Premios", "trophy"],
   ["recomendaciones", "Para ti", "target"],
-  ["gustos", "Mis gustos", "spark"],
   ["estadisticas", "Estadísticas", "chart"],
-  ["anio", "Tu año en cine", "star"],
   ["pendientes", "Pendientes", "bookmark"],
   ["series", "Series", "tv"],
   ["ajustes", "Ajustes", "settings"],
@@ -369,7 +414,7 @@ const navItems = () => NAV.filter((n) => !(STATIC && n[0] === "ajustes") && !(ro
 function route() {
   const h = location.hash.replace(/^#\/?/, "");
   const [name, qs] = h.split("?");
-  return { name: navItems().some((n) => n[0] === name) || name === "persona" || name === "pelicula" || name === "buscar" ? name : "inicio", qs: new URLSearchParams(qs || "") };
+  return { name: navItems().some((n) => n[0] === name) || ["persona", "pelicula", "buscar", "estrenos", "gustos", "anio"].includes(name) ? name : "inicio", qs: new URLSearchParams(qs || "") };
 }
 function renderChrome() {
   const r = route().name;
@@ -506,10 +551,10 @@ VIEWS.inicio = (v) => {
   <section class="section">${sectionHead("Podrían gustarte", "#/recomendaciones", "Todas las recomendaciones")}
     <div class="strip">${recs.map((r) => pcard(r, { match: r.m.pct, cat: r._i })).join("")}</div></section>
 
-  ${prox.length ? `<section class="section">${sectionHead("Próximos estrenos", "#/estrenos", "Calendario completo")}
+  ${prox.length ? `<section class="section">${sectionHead("Próximos estrenos", "#/cartelera?t=estrenos", "Calendario completo")}
     <div class="rels">${prox.map(relCard).join("")}</div></section>` : ""}
 
-  ${vacia ? "" : `<section class="section">${sectionHead("Cómo ves el cine", "#/gustos", "Tu perfil completo")}
+  ${vacia ? "" : `<section class="section">${sectionHead("Cómo ves el cine", "#/estadisticas?t=gustos", "Tu perfil completo")}
     <div class="insights">${insights().slice(0, 3).map(insightCard).join("")}</div></section>`}`;
 };
 
@@ -742,7 +787,7 @@ function resumenAnio(P, y) {
     larga: [...L].filter((p) => p.duracion).sort((a, b) => b.duracion - a.duracion)[0],
   };
 }
-VIEWS.anio = (v, qs) => {
+SUB.anio = (v, qs) => {
   const P = S.db.peliculas;
   const anios = [...new Set(P.map(fechaDe).filter(Boolean).map((f) => +f.slice(0, 4)))].filter((a) => a > 1900).sort((a, b) => b - a);
   if (!anios.length) { v.innerHTML = `<div class="page-head"><div><h1 class="h1">Tu año en cine</h1></div></div><div class="empty"><div class="h2">Aún no hay películas con fecha</div>Cuando registres películas con el día en que las viste, aquí tendrás tu resumen de cada año.</div>`; return; }
@@ -755,7 +800,7 @@ VIEWS.anio = (v, qs) => {
   const ranking = (L, titulo, enlace) => L.length ? `<div class="an-rank"><div class="sub">${titulo}</div><ol>${L.slice(0, 5).map(([k, X]) => `<li><span>${enlace ? enlace(k) : esc(k)}</span><b>${X.length}</b></li>`).join("")}</ol></div>` : "";
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Tu año en cine</h1></div>
-    <div class="chips">${anios.slice(0, 8).map((a) => `<a class="chip ${a === y ? "on" : ""}" href="#/anio?a=${a}">${a}</a>`).join("")}</div></div>
+    <div class="chips">${anios.slice(0, 8).map((a) => `<a class="chip ${a === y ? "on" : ""}" href="#/estadisticas?t=anio&a=${a}">${a}</a>`).join("")}</div></div>
   <section class="an-hero">
     <div class="an-anio">${y}</div>
     <div class="an-cifras">
@@ -1138,7 +1183,7 @@ function scatter(P, fx, lx, domain, opts = {}) {
       : `<line x1="${X(x0)}" y1="${Y(a + b * x0)}" x2="${X(x1)}" y2="${Y(a + b * x1)}" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6" style="stroke:var(--papel)"/>`}
   </svg>`;
 }
-VIEWS.estadisticas = (v) => {
+SUB.resumen = (v) => {
   const pr = profile();
   const P = pr.P;
   if (P.length < 2) {
@@ -1173,42 +1218,45 @@ VIEWS.estadisticas = (v) => {
   const conTaq = P.filter((p) => (p.taquilla || {}).mundial > 1e6);
   const porAnio = {};
   for (const p of all) if (p.añadido && /^\d{4}/.test(p.añadido) && ["app", "web", "imdb", "letterboxd", "csv"].includes(p.origen)) porAnio[p.añadido.slice(0, 4)] = (porAnio[p.añadido.slice(0, 4)] || 0) + 1;
+  const pliegue = (id, titulo, cap, html, abierto = false) => html ? `<details class="pliegue" id="pl_${id}" ${abierto ? "open" : ""}><summary><span class="pl-t">${titulo}</span><span class="pl-c">${cap}</span></summary><div class="pl-cuerpo">${html}</div></details>` : "";
+  const ordenG = S.est_g || "n";
+  const barrasG = () => hbars([...G].sort((a, b) => (ordenG === "n" ? b.n - a.n : b.mean - a.mean)).map((g) => ({ label: g.key, value: ordenG === "n" ? g.n : g.mean, color: scoreColor(g.mean), right: `${g.n} ${scoreBadge(g.mean)}`, tip: `${g.key}: ${g.n} películas, media ${fmt1(g.mean)}`, href: `#/coleccion?genre=${encodeURIComponent(g.key)}` })), ordenG === "n" ? {} : { max: 10 });
   v.innerHTML = `
-  <div class="page-head"><div><h1 class="h1">Tus números</h1><p>Todo lo que dice tu colección, calculado en directo. Pasa el ratón por los gráficos para ver el detalle.</p></div></div>
-  <div class="kpis">
-    <div class="card kpi"><div class="l">Películas</div><div class="v">${fmtInt(all.length)}</div><div class="s">${S.db.series.length} series aparte</div></div>
-    <div class="card kpi"><div class="l">Horas de cine</div><div class="v">${fmtInt(horas)}</div><div class="s">${fmt1(horas / 24)} días seguidos</div></div>
-    <div class="card kpi"><div class="l">Nota media</div><div class="v">${fmt2(pr.mu)}</div><div class="s">mediana ${fmt1([...P].sort((a, b) => a.nota - b.nota)[Math.floor(P.length / 2)].nota)}</div></div>
-    <div class="card kpi"><div class="l">Obras maestras</div><div class="v">${P.filter((p) => p.nota >= 9).length}</div><div class="s">con 9 o más</div></div>
-    <div class="card kpi"><div class="l">Suspensos</div><div class="v">${P.filter((p) => p.nota < 5).length}</div><div class="s">${Math.round((100 * P.filter((p) => p.nota < 5).length) / P.length)}% del total</div></div>
-    <div class="card kpi"><div class="l">La más larga</div><div class="v">${longest ? longest.duracion : "–"}′</div><div class="s">${esc(longest?.titulo || "")}</div></div>
-    ${corr != null ? `<div class="card kpi"><div class="l">Sintonía con IMDb</div><div class="v">${Math.round(coincide * 100)}%</div><div class="s">a menos de 1 punto · ${media_dif >= 0 ? "pones " + fmt1(media_dif) + " más" : "pones " + fmt1(-media_dif) + " menos"} de media</div></div>` : ""}
-    <div class="card kpi"><div class="l">La más antigua</div><div class="v">${oldest?.anio || "–"}</div><div class="s">${esc(oldest?.titulo || "")}</div></div>
+  <div class="page-head"><div><h1 class="h1">Tus números</h1><p>Abre cada apartado para ver su gráfico. Pasa el ratón (o toca) por las barras y los puntos para ver el detalle; pulsa en ellos para ir a esas películas.</p></div></div>
+  <div class="kpis kpis-4">
+    <div class="kpi2"><b>${fmtInt(all.length)}</b><span>películas</span></div>
+    <div class="kpi2"><b>${fmtInt(horas)}</b><span>horas de cine · ${fmt1(horas / 24)} días</span></div>
+    <div class="kpi2"><b>${fmt2(pr.mu)}</b><span>tu nota media</span></div>
+    <div class="kpi2"><b>${P.filter((p) => p.nota >= 9).length}</b><span>con un 9 o más</span></div>
   </div>
-  <div class="charts section" style="margin-top:22px">
-    <div class="card chart"><h3>Cómo puntúas</h3><div class="cap">Reparto de tus notas de 0 a 10</div>${histogram(P)}</div>
-    <div class="card chart"><h3>Por décadas</h3><div class="cap">Cuántas has visto de cada época y qué nota les das</div>${decadeChart(pr)}</div>
-    <div class="card chart"><h3>Géneros</h3><div class="cap">Nº de películas · color según tu nota media (clic para filtrar)</div>
-      ${hbars(G.map((g) => ({ label: g.key, value: g.n, color: scoreColor(g.mean), right: `${g.n} ${scoreBadge(g.mean)}`, tip: `${g.key}: ${g.n} películas, media ${fmt1(g.mean)}`, href: `#/coleccion?genre=${encodeURIComponent(g.key)}` })))}</div>
-    <div class="card chart"><h3>Países</h3><div class="cap">Top 10 por número de películas</div>
-      ${hbars(C.map((g) => ({ label: g.key, value: g.n, color: scoreColor(g.mean), right: `${g.n} ${scoreBadge(g.mean)}`, tip: `${g.key}: media ${fmt1(g.mean)}`, href: `#/coleccion?country=${encodeURIComponent(g.key)}` })))}
-      <div class="sub">Tus directores (mín. 3 películas)</div>
-      <table class="tbl"><tbody>${Dir.slice(0, 8).map((d) => `<tr class="click" onclick="location.hash='#/coleccion?q=${encodeURIComponent(d.key)}'"><td>${esc(d.key)}</td><td class="r dim">${d.n}</td><td class="r">${scoreBadge(d.mean)}</td></tr>`).join("")}</tbody></table></div>
-    ${conI.length >= 10 ? `<div class="card chart"><h3>Tú frente al público</h3><div class="cap">Nota de IMDb frente a la tuya · sobre la línea, te gustó más que a la media${corr != null ? ` · correlación ${fmt2(corr)}` : ""}</div>${scatter(conI, (p) => notaImdb(p)[0], () => [4, 5, 6, 7, 8, 9], [3.5, 9.5], { diagonal: true })}</div>
-    <div class="card chart"><h3>Donde vas a tu aire</h3><div class="cap">Las que más defiendes y las que menos, comparadas con IMDb</div>
-      <div class="sub" style="margin-top:4px">Las defiendes más que nadie</div><table class="tbl"><thead><tr><th>Película</th><th class="r">IMDb</th><th class="r">Tú</th><th class="r">Dif.</th></tr></thead><tbody>${defiendes.map(filaDif).join("")}</tbody></table>
-      <div class="sub">Vas contra corriente</div><table class="tbl"><tbody>${contra.map(filaDif).join("")}</tbody></table></div>` : ""}
-    <div class="card chart"><h3>¿Te gustan más las largas?</h3><div class="cap">Duración (min) frente a tu nota · la línea es la tendencia</div>${scatter(P, (p) => p.duracion, () => [80, 100, 120, 140, 160, 180, 200], [70, 210])}</div>
-    <div class="card chart"><h3>¿Antiguas o modernas?</h3><div class="cap">Año de estreno frente a tu nota</div>${scatter(P, (p) => p.anio, () => [1940, 1960, 1980, 2000, 2020], [1935, 2027])}</div>
-    ${conTaq.length >= 15 ? `<div class="card chart"><h3>¿Te van los taquillazos?</h3><div class="cap">Recaudación mundial (escala logarítmica, en millones de $) frente a tu nota</div>${scatter(conTaq, (p) => Math.log10(p.taquilla.mundial / 1e6), () => [0, 1, 2, 3], [-0.2, 3.4], { etq: (t) => ["1", "10", "100", "1.000"][t] })}</div>` : ""}
-    ${Object.keys(porAnio).length >= 2 ? `<div class="card chart"><h3>Tu ritmo</h3><div class="cap">Películas añadidas cada año desde que usas Filora</div>${hbars(Object.entries(porAnio).sort().map(([a, n]) => ({ label: a, value: n })))}</div>` : ""}
-    ${ucm.length >= 3 ? `<div class="card chart"><h3>Universo Marvel por fases</h3><div class="cap">Tu nota media en cada fase del UCM</div>
-      ${hbars(fases.map((f) => ({ label: f.f.replace(/ · .*/, ""), value: mean(f.L.map((p) => p.nota)), color: scoreColor(mean(f.L.map((p) => p.nota))), right: fmt1(mean(f.L.map((p) => p.nota))), tip: f.f })), { max: 10 })}
-      <p class="dim" style="font-size:12.5px;margin-top:14px">${ucm.length} películas del UCM vistas · media ${fmt1(mean(ucm.map((p) => p.nota)))}</p></div>` : ""}
-    ${taq.length ? `<div class="card chart w12"><h3>Las más taquilleras que has visto</h3><div class="cap">Recaudación mundial y tu nota</div>
-      <table class="tbl"><thead><tr><th>Película</th><th class="r">Año</th><th class="r">Mundial</th><th class="r">Tu nota</th></tr></thead><tbody>
-      ${taq.map((p) => `<tr class="click" data-open="${p.id}"><td>${esc(p.titulo)}</td><td class="r dim">${p.anio}</td><td class="r">${money(p.taquilla.mundial)}</td><td class="r">${scoreBadge(p.nota)}</td></tr>`).join("")}</tbody></table></div>` : ""}
+  <div class="pliegues">
+    ${pliegue("notas", "Cómo puntúas", "Cuántas películas tienen cada nota", histogram(P), true)}
+    ${pliegue("generos", "Géneros", `${G.length} géneros · el color es tu nota media`, `<div class="seg pl-seg" id="ordG"><button data-o="n" class="${ordenG === "n" ? "on" : ""}">Más vistos</button><button data-o="m" class="${ordenG === "m" ? "on" : ""}">Mejor nota</button></div><div id="barG">${barrasG()}</div>`, true)}
+    ${pliegue("decadas", "Por décadas", "Cuántas de cada época y qué nota les das", decadeChart(pr))}
+    ${pliegue("directores", "Tus directores", "Con 3 películas o más", `<table class="tbl"><thead><tr><th>Director</th><th class="r">Películas</th><th class="r">Media</th></tr></thead><tbody>${Dir.slice(0, 15).map((d) => `<tr class="click" onclick="location.hash='#/persona?n=${encodeURIComponent(d.key)}'"><td>${esc(d.key)}</td><td class="r dim">${d.n}</td><td class="r">${scoreBadge(d.mean)}</td></tr>`).join("")}</tbody></table>`)}
+    ${pliegue("paises", "Países", "Los 10 que más ves", hbars(C.map((g) => ({ label: g.key, value: g.n, color: scoreColor(g.mean), right: `${g.n} ${scoreBadge(g.mean)}`, tip: `${g.key}: media ${fmt1(g.mean)}`, href: `#/coleccion?country=${encodeURIComponent(g.key)}` }))))}
+    ${conI.length >= 10 ? pliegue("publico", "Tú frente al público", `Coincides con IMDb (±1 punto) en el ${Math.round(coincide * 100)} % · ${media_dif >= 0 ? `pones ${fmt1(media_dif)} más` : `pones ${fmt1(-media_dif)} menos`} de media`,
+      `${scatter(conI, (p) => notaImdb(p)[0], () => [4, 5, 6, 7, 8, 9], [3.5, 9.5], { diagonal: true })}
+      <div class="pl-dos"><div><div class="sub">Las defiendes más que nadie</div><table class="tbl"><thead><tr><th>Película</th><th class="r">IMDb</th><th class="r">Tú</th><th class="r">Dif.</th></tr></thead><tbody>${defiendes.map(filaDif).join("")}</tbody></table></div>
+      <div><div class="sub">Vas contra corriente</div><table class="tbl"><thead><tr><th>Película</th><th class="r">IMDb</th><th class="r">Tú</th><th class="r">Dif.</th></tr></thead><tbody>${contra.map(filaDif).join("")}</tbody></table></div></div>`) : ""}
+    ${pliegue("duracion", "¿Largas o cortas?", "Duración frente a tu nota · la línea es la tendencia", scatter(P, (p) => p.duracion, () => [80, 100, 120, 140, 160, 180, 200], [70, 210]))}
+    ${pliegue("epoca", "¿Antiguas o modernas?", "Año de estreno frente a tu nota", scatter(P, (p) => p.anio, () => [1940, 1960, 1980, 2000, 2020], [1935, 2027]))}
+    ${conTaq.length >= 15 ? pliegue("taquilla", "Taquilla", "Recaudación frente a tu nota y las más taquilleras que has visto", `${scatter(conTaq, (p) => Math.log10(p.taquilla.mundial / 1e6), () => [0, 1, 2, 3], [-0.2, 3.4], { etq: (t) => ["1 M$", "10 M$", "100 M$", "1.000 M$"][t] })}
+      <table class="tbl"><thead><tr><th>Película</th><th class="r">Año</th><th class="r">Mundial</th><th class="r">Tu nota</th></tr></thead><tbody>${taq.map((p) => `<tr class="click" data-open="${p.id}"><td>${esc(p.titulo)}</td><td class="r dim">${p.anio}</td><td class="r">${money(p.taquilla.mundial)}</td><td class="r">${scoreBadge(p.nota)}</td></tr>`).join("")}</tbody></table>`) : ""}
+    ${Object.keys(porAnio).length >= 2 ? pliegue("ritmo", "Tu ritmo", "Películas añadidas cada año", hbars(Object.entries(porAnio).sort().map(([a, n]) => ({ label: a, value: n })))) : ""}
+    ${ucm.length >= 3 ? pliegue("ucm", "Universo Marvel", `${ucm.length} películas · media ${fmt1(mean(ucm.map((p) => p.nota)))}`, hbars(fases.map((f) => ({ label: f.f.replace(/ · .*/, ""), value: mean(f.L.map((p) => p.nota)), color: scoreColor(mean(f.L.map((p) => p.nota))), right: fmt1(mean(f.L.map((p) => p.nota))), tip: f.f })), { max: 10 })) : ""}
+    ${pliegue("curiosidades", "Curiosidades", "Récords de tu colección", `<div class="curios">
+      ${longest ? `<div data-open="${longest.id}"><span>La más larga</span><b>${durTxt(longest.duracion)}</b><em>${esc(longest.titulo)}</em></div>` : ""}
+      ${oldest ? `<div data-open="${oldest.id}"><span>La más antigua</span><b>${oldest.anio}</b><em>${esc(oldest.titulo)}</em></div>` : ""}
+      <div><span>Suspensos</span><b>${P.filter((p) => p.nota < 5).length}</b><em>${Math.round((100 * P.filter((p) => p.nota < 5).length) / P.length)} % de las que has visto</em></div>
+      <div><span>Mediana de tus notas</span><b>${fmt1([...P].sort((a, b) => a.nota - b.nota)[Math.floor(P.length / 2)].nota)}</b><em>la mitad está por encima</em></div>
+      <div><span>Series</span><b>${S.db.series.length}</b><em>aparte de las películas</em></div></div>`)}
   </div>`;
+  // recordar qué apartados abres
+  let abiertos; try { abiertos = JSON.parse(localStorage.getItem("filora.pliegues") || "null"); } catch (e) { abiertos = null; }
+  if (abiertos) $$(".pliegue", v).forEach((d) => (d.open = abiertos.includes(d.id)));
+  $$(".pliegue", v).forEach((d) => d.addEventListener("toggle", () => { try { localStorage.setItem("filora.pliegues", JSON.stringify($$(".pliegue[open]", v).map((x) => x.id))); } catch (e) { /* */ } }));
+  $$("#ordG button", v).forEach((b) => (b.onclick = (ev) => { ev.preventDefault(); S.est_g = b.dataset.o; $$("#ordG button", v).forEach((x) => x.classList.toggle("on", x === b)); const ord = S.est_g; $("#barG").innerHTML = hbars([...G].sort((a, c) => (ord === "n" ? c.n - a.n : c.mean - a.mean)).map((g) => ({ label: g.key, value: ord === "n" ? g.n : g.mean, color: scoreColor(g.mean), right: `${g.n} ${scoreBadge(g.mean)}`, tip: `${g.key}: ${g.n} películas, media ${fmt1(g.mean)}`, href: `#/coleccion?genre=${encodeURIComponent(g.key)}` })), ord === "n" ? {} : { max: 10 }); }));
 };
 
 // ---------------------------------------------------------------- Mis gustos
@@ -1275,7 +1323,7 @@ function radar(pr) {
     ${G.map((g, i) => { const [x, y] = pt(i, R * val(g)); const [lx, ly] = pt(i, R + 26); return `<circle cx="${x}" cy="${y}" r="4" data-tip="${g.key}: ${fmt1(g.mean)} (${g.n} películas)" style="fill:var(--bombilla)"/><text x="${lx}" y="${ly + 4}" text-anchor="middle" font-size="11.5" style="fill:var(--papel-2)">${g.key}</text>`; }).join("")}
   </svg>`;
 }
-VIEWS.gustos = (v) => {
+SUB.gustos = (v) => {
   const pr = profile();
   const G = [...pr.genres.values()].filter((g) => g.n >= 8).sort((a, b) => b.adj - a.adj);
   const dirs = [...pr.directors.values()].filter((d) => d.n >= 3).sort((a, b) => b.adj - a.adj);
@@ -1291,12 +1339,13 @@ VIEWS.gustos = (v) => {
         <div><div class="sub" style="margin-top:0">Te cuesta</div>${G.slice(-5).reverse().map((g) => `<div class="hbar" style="grid-template-columns:1fr 50px"><span class="n">${g.key}</span><span class="v">${scoreBadge(g.mean)}</span></div>`).join("")}</div>
       </div></div>
   </div>
-  <section class="section">${sectionHead("Lo que dicen tus notas")}<div class="insights">${insights().map(insightCard).join("")}</div></section>
+  <section class="section">${sectionHead("Lo que dicen tus notas")}<div class="insights">${insights().slice(0, 4).map(insightCard).join("")}</div>
+    ${insights().length > 4 ? `<details class="pliegue" style="margin-top:12px"><summary><span class="pl-t">${insights().length - 4} conclusiones más</span><span class="pl-c">Décadas, duración, sagas, cine español…</span></summary><div class="pl-cuerpo"><div class="insights">${insights().slice(4).map(insightCard).join("")}</div></div></details>` : ""}</section>
   ${seriesInsights().length ? `<section class="section">${sectionHead("Y en series…", "#/series", "Ver tus series")}<div class="insights">${seriesInsights().map(insightCard).join("")}</div></section>` : ""}
-  <section class="section">${sectionHead("Tus directores")}
-    <div class="card card-pad"><table class="tbl"><thead><tr><th>Director</th><th class="r">Películas</th><th class="r">Nota media</th><th>Mejor</th><th>Peor</th></tr></thead><tbody>
+  <section class="section"><details class="pliegue"><summary><span class="pl-t">Tus directores</span><span class="pl-c">Los ${Math.min(25, dirs.length)} con más peso en tus gustos · pulsa uno para ver su ficha</span></summary>
+    <div class="pl-cuerpo"><table class="tbl"><thead><tr><th>Director</th><th class="r">Películas</th><th class="r">Nota media</th><th>Mejor</th><th>Peor</th></tr></thead><tbody>
     ${dirs.slice(0, 25).map((d) => { const s = [...d.items].sort((a, b) => b.nota - a.nota); return `<tr class="click" onclick="location.hash='#/persona?n=${encodeURIComponent(d.key)}'"><td><b>${esc(d.key)}</b></td><td class="r dim">${d.n}</td><td class="r">${scoreBadge(d.mean)}</td><td class="muted">${esc(s[0].titulo)} <span class="dim">${fmt1(s[0].nota)}</span></td><td class="muted">${esc(s[s.length - 1].titulo)} <span class="dim">${fmt1(s[s.length - 1].nota)}</span></td></tr>`; }).join("")}
-    </tbody></table></div></section>`;
+    </tbody></table></div></details></section>`;
 };
 
 // ---------------------------------------------------------------- Recomendaciones
@@ -1351,20 +1400,83 @@ function recCard(r) {
       </div>
     </div></div>`;
 }
+// enlace a la ficha de cualquier película (catálogo, Wikidata, IMDb o FilmAffinity)
+const fichaDe = (c) => c.ids && c.ids.wikidata ? `#/pelicula?q=${c.ids.wikidata}` : c.ids && c.ids.imdb ? `#/pelicula?imdb=${c.ids.imdb}` : c.fa ? `#/pelicula?fa=${c.fa}` : `#/buscar?q=${encodeURIComponent(c.titulo)}`;
+const gustaraTxt = (pct) => `${pct} % de que te guste`;
+function recMini(r, acciones = true) {
+  const i = notaImdb(r);
+  return `<article class="rm">
+    <a class="rm-cartel" href="${fichaDe(r)}">${posterHTML(r)}<span class="rm-pct" style="--p:${r.m.pct}">${r.m.pct}%</span></a>
+    <a class="rm-t" href="${fichaDe(r)}">${esc(r.titulo)}</a>
+    <div class="rm-s">${esc([r.anio, splitDir(r.director)[0]].filter(Boolean).join(" · "))}</div>
+    <div class="rm-n">${scoreBadge(r.m.nota)}<span>te daría${i ? ` · IMDb ${fmt1(i[0])}` : ""}</span></div>
+    ${r.m.why[0] ? `<div class="rm-why">${esc(r.m.why[0])}</div>` : ""}
+    ${acciones && r._i != null && !ro() ? `<div class="rm-acc">${r.pend ? `<span class="chip gold">En pendientes</span>` : `<button class="icon-btn" data-want="${r._i}" title="Guardar en pendientes">${icon("bookmark")}</button>`}<button class="icon-btn" data-seen="${r._i}" title="Ya la he visto">${icon("eye")}</button><button class="icon-btn" data-nope="${r._i}" title="No me interesa">${icon("eyeoff")}</button></div>` : ""}
+  </article>`;
+}
+// Más películas de tus directores favoritos (Wikidata), que no estén en el catálogo ni vistas
+async function recsDirectores() {
+  const k = "recsdir." + S.db.peliculas.length;
+  const hit = typeof cacheLeer === "function" ? cacheLeer(k, 3) : null;
+  if (hit) return hit;
+  const pr = profile(), seen = seenSet();
+  const dirs = [...pr.directors.values()].filter((d) => d.n >= 3 && d.adj > 0.2).sort((a, b) => b.adj - a.adj).slice(0, 8);
+  const out = [];
+  for (const d of dirs) {
+    try {
+      const q = await resolverPersona(d.key);
+      if (!q) continue;
+      const L = await filmografiaRapida(q);
+      for (const x of L.filter((x) => [...(x.roles || [])].includes("Dirección") && x.anio && x.anio <= new Date().getFullYear() && !isSeen({ titulo: x.t, anio: x.anio }, seen)).slice(0, 6))
+        out.push({ titulo: x.t, anio: x.anio, director: d.key, ids: { wikidata: x.q, ...(x.i ? { imdb: x.i } : {}) }, w: x.w, sl: x.sl });
+    } catch (e) { /* ese director no se encuentra */ }
+  }
+  if (typeof cacheGuardar === "function") cacheGuardar(k, out);
+  return out;
+}
 VIEWS.recomendaciones = (v) => {
   const f = S.recs;
+  const pr = profile();
+  if (pr.modelo === undefined) pr.modelo = entrenarModelo(pr);
+  const enCines = () => [...carteleraIdx().values()].map((p) => ({ ...p, info: infoCartelera(p) })).filter((p) => !p.info.vista && p.info.m.pct >= 55)
+    .sort((a, b) => b.info.m.pct - a.info.m.pct).slice(0, 6).map((p) => ({ titulo: p.titulo, anio: p.anio, director: p.director, poster: p.poster, generos: p.info.generos, fa: p.fa, m: p.info.m }));
   const draw = () => {
     const L = topRecs(60, f);
-    $("#recRes").innerHTML = L.length ? `<div class="recs">${L.map(recCard).join("")}</div>` : `<div class="empty"><div class="h2">Sin recomendaciones con ese filtro</div></div>`;
+    const hoy = L.find((r) => !r.pend) || L[0];
+    const top = L.filter((r) => r !== hoy && r.m.pct >= 70).slice(0, 12);
+    const resto = L.filter((r) => r !== hoy && !top.includes(r)).slice(0, 18);
+    const cines = enCines();
+    $("#recRes").innerHTML = !L.length ? `<div class="empty"><div class="h2">Sin recomendaciones con ese filtro</div></div>` : `
+      ${hoy ? `<section class="rec-hoy">
+        <a class="rec-hoy-cartel" href="${fichaDe(hoy)}">${posterHTML(hoy)}</a>
+        <div><div class="eyebrow">Tu película para hoy</div><a class="rec-hoy-t" href="${fichaDe(hoy)}">${esc(hoy.titulo)}</a>
+          <div class="dim">${esc([hoy.anio, hoy.director, hoy.pais].filter(Boolean).join(" · "))}</div>
+          <div class="rec-hoy-n">${scoreBadge(hoy.m.nota, "lg")}<div><b>${gustaraTxt(hoy.m.pct)}</b><span>Nota que predigo que le darías</span></div></div>
+          <ul class="rec-hoy-why">${hoy.m.why.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>
+          <div class="pe-acciones"><a class="btn btn-primary" href="${fichaDe(hoy)}">Ver ficha</a>${!ro() && !hoy.pend ? `<button class="btn" data-want="${hoy._i}">${icon("bookmark")}Guardar en pendientes</button>` : ""}<a class="btn btn-ghost" href="https://www.justwatch.com/es/buscar?q=${encodeURIComponent(hoy.titulo)}" target="_blank" rel="noopener">${icon("play")}Dónde verla</a></div>
+        </div></section>` : ""}
+      ${top.length ? `<section class="section">${sectionHead("Te van a encantar")}<div class="rms">${top.map((r) => recMini(r)).join("")}</div></section>` : ""}
+      ${!f.genre && !f.era ? `<section class="section" id="recDir">${sectionHead("Más de tus directores favoritos")}<div class="dim cargando-mini">Buscando en sus filmografías…</div></section>` : ""}
+      ${cines.length && !f.genre && !f.era ? `<section class="section">${sectionHead("En tus cines y te encajan", "#/cartelera", "Ver sesiones")}<div class="rms">${cines.map((r) => recMini(r, false)).join("")}</div></section>` : ""}
+      ${resto.length ? `<details class="section rec-mas"><summary>${sectionHead(`Otras ${resto.length} que pueden gustarte`)}</summary><div class="rms">${resto.map((r) => recMini(r)).join("")}</div></details>` : ""}`;
+    if (!f.genre && !f.era) recsDirectores().then(async (L) => {
+      const box = $("#recDir"); if (!box) return;
+      const X = L.map((x) => ({ ...x, m: predict(x) })).filter((x) => x.m.pct >= 45).sort((a, b) => b.m.nota - a.m.nota).filter(diversify(2)).slice(0, 12);
+      if (!X.length) { box.remove(); return; }
+      const cart = typeof cartelesWiki === "function" ? await cartelesWiki(X.map((x) => x.w).filter(Boolean)) : {};
+      for (const x of X) x.poster = cart[x.w] || null;
+      box.innerHTML = `${sectionHead("Más de tus directores favoritos")}<div class="rms">${X.map((r) => recMini(r, false)).join("")}</div>`;
+    }).catch(() => { const box = $("#recDir"); if (box) box.remove(); });
   };
+  const cv = pr.cv;
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Para ti</h1>
-    <p>Películas que no tienes registradas, ordenadas por la nota que <b>predigo que les darías</b> según tus géneros, directores, países y épocas favoritos. El % es tu afinidad.</p>
-    <p class="dim" style="font-size:12.5px">Probado con tus propias notas (tapando cada película y prediciéndola): el modelo acierta con un error medio de ±0,7 puntos, frente a ±1,3 si adivinara siempre tu media. Aprende de tus notas y de la nota de IMDb de cada película.</p></div></div>
-  <div class="toolbar" style="position:static">
-    <div class="chips" id="rg"><button class="chip ${!f.genre ? "on" : ""}" data-g="">Todo</button>${GENEROS.filter((g) => S.cat.some((c) => c.generos.includes(g))).map((g) => `<button class="chip ${f.genre === g ? "on" : ""}" data-g="${g}">${g}</button>`).join("")}</div>
+    <p>Películas que no has visto, elegidas por lo que de verdad te gusta: tus géneros, directores, países y épocas, y lo que dicen IMDb, FilmAffinity y Letterboxd. El % es la probabilidad de que le des un ${fmt1(pr.umbral)} o más.</p>
+    ${cv && cv.azar ? `<p class="dim" style="font-size:12.5px">Probado con tus ${pr.N} notas: acierta con un error medio de ±${fmt1(cv.mae)} puntos (adivinando tu media fallaría ±${fmt1(cv.azar)}).</p>` : ""}</div></div>
+  <details class="filtros-rec" ${f.genre || f.era ? "open" : ""}><summary>${icon("spark")}Filtrar por género o época${f.genre || f.era ? ` · ${[f.genre, { clasicos: "clásicos", modernas: "1990–2019", recientes: "2020+" }[f.era]].filter(Boolean).join(", ")}` : ""}</summary>
+    <div class="chips" id="rg"><button class="chip ${!f.genre ? "on" : ""}" data-g="">Todos los géneros</button>${GENEROS.filter((g) => S.cat.some((c) => c.generos.includes(g))).map((g) => `<button class="chip ${f.genre === g ? "on" : ""}" data-g="${g}">${g}</button>`).join("")}</div>
     <div class="seg" id="re">${[["", "Todas"], ["clasicos", "Clásicos"], ["modernas", "1990–2019"], ["recientes", "2020+"]].map(([k, l]) => `<button data-e="${k}" class="${f.era === k ? "on" : ""}">${l}</button>`).join("")}</div>
-  </div>
+  </details>
   <div id="recRes"></div>`;
   $$("#rg .chip", v).forEach((b) => (b.onclick = () => { f.genre = b.dataset.g; $$("#rg .chip", v).forEach((x) => x.classList.toggle("on", x === b)); draw(); }));
   $$("#re button", v).forEach((b) => (b.onclick = () => { f.era = b.dataset.e; $$("#re button", v).forEach((x) => x.classList.toggle("on", x === b)); draw(); }));
@@ -1392,7 +1504,7 @@ function upcoming() { const t = addDays(todayISO(), -6); return (S.est.estrenos 
 function relCard(e) {
   const m = e.m || predict(e);
   const seen = isSeen({ titulo: e.titulo, anio: +e.fecha.slice(0, 4), original: e.original, fecha: e.fecha }, seenSet());
-  return `<div class="card rel rel2" data-rel="${esc(e.fecha + "|" + e.titulo)}" style="cursor:pointer">
+  return `<div class="card rel rel2" ${e.fa ? `onclick="location.hash='#/pelicula?fa=${e.fa}'"` : `data-rel="${esc(e.fecha + "|" + e.titulo)}"`} style="cursor:pointer">
     <div class="frame">${posterHTML({ ...e, anio: e.fecha.slice(0, 4) })}</div>
     <div class="rel-cuerpo">
       <div class="cfilm-head"><div style="min-width:0"><div class="rel-fecha">${diaSemana(e.fecha)} ${fechaLarga(e.fecha)}${e.provisional ? " · provisional" : ""}</div>
@@ -1430,7 +1542,7 @@ function openRel(key) {
       <div class="dl-actions"><button class="btn btn-primary" data-relwant="${esc(key)}">${icon("bookmark")}Guardar en pendientes</button>${e.fa ? `<a class="btn" href="#/pelicula?fa=${e.fa}" data-close>Ficha completa</a>` : ""}${e.fecha <= todayISO() ? `<button class="btn" data-relseen="${esc(key)}">${icon("eye")}Ya la vi</button>` : ""}</div>
     </div></div></div>`);
 }
-VIEWS.estrenos = (v) => {
+SUB.estrenos = (v) => {
   const st = S.est_;
   const all = upcoming().map((e) => ({ ...e, m: predict(e) }));
   const filt = (L) => st.filter === "parami" ? L.filter((e) => e.m.pct >= 62) : st.filter === "destacados" ? L.filter((e) => e.destacado) : L;
@@ -1459,7 +1571,7 @@ VIEWS.estrenos = (v) => {
     const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
     const byDay = {};
     filt((S.est.estrenos || []).map((e) => ({ ...e, m: predict(e) }))).forEach((e) => (byDay[e.fecha] = byDay[e.fecha] || []).push(e));
-    const shift = (n) => { const d = new Date(yy, mm - 1 + n, 1); st.month = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`; render._keep = true; VIEWS.estrenos(v); };
+    const shift = (n) => { const d = new Date(yy, mm - 1 + n, 1); st.month = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`; render._keep = true; SUB.estrenos(v); };
     body.innerHTML = `<div class="section-head" style="margin-top:6px"><div class="cal-nav"><button class="icon-btn" id="cPrev">${icon("left")}</button><h2 class="h2">${MESES[mm - 1]} ${yy}</h2><button class="icon-btn" id="cNext">${icon("right")}</button></div>
       <div class="legend"><span><i style="background:var(--gold)"></i>Destacado</span><span><i style="background:var(--green)"></i>Encaja contigo</span></div></div>
       <div class="cal">${["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"].map((d) => `<div class="dow">${d}</div>`).join("")}
@@ -1481,12 +1593,12 @@ VIEWS.estrenos = (v) => {
       <div class="rels">${g.items.sort((a, b) => (b.destacado ? 1 : 0) - (a.destacado ? 1 : 0) || b.m.pct - a.m.pct).map(relCard).join("")}</div></div>`).join("")
       : `<div class="empty"><div class="h2">Sin estrenos con ese filtro</div></div>`;
   }
-  $$("#estMode button", v).forEach((b) => (b.onclick = () => { st.mode = b.dataset.m; render._keep = true; VIEWS.estrenos(v); }));
-  $$("#estF button", v).forEach((b) => (b.onclick = () => { st.filter = b.dataset.f; render._keep = true; VIEWS.estrenos(v); }));
+  $$("#estMode button", v).forEach((b) => (b.onclick = () => { st.mode = b.dataset.m; render._keep = true; SUB.estrenos(v); }));
+  $$("#estF button", v).forEach((b) => (b.onclick = () => { st.filter = b.dataset.f; render._keep = true; SUB.estrenos(v); }));
   const up = $("#estUpd");
   if (up) up.onclick = async () => {
     up.disabled = true; up.innerHTML = `${icon("refresh")}Actualizando…`;
-    try { const r = await api("estrenos/actualizar", { method: "POST" }); S.est = await api("estrenos"); toast(`${r.estrenos} estrenos actualizados`); VIEWS.estrenos(v); }
+    try { const r = await api("estrenos/actualizar", { method: "POST" }); S.est = await api("estrenos"); toast(`${r.estrenos} estrenos actualizados`); SUB.estrenos(v); }
     catch (e) { toast(e.message, "x"); up.disabled = false; }
   };
 };
@@ -1500,10 +1612,11 @@ VIEWS.pendientes = (v) => {
     ["plataforma", "En plataformas", (w) => tieneAviso(w, "plataforma")], ["estreno", "Próximos estrenos", (w) => tieneAviso(w, "estreno")]];
   const f = filtros.find((x) => x[0] === S.pend_.f) || filtros[0];
   const L = W.filter(f[2]);
+  const enlace = (w) => w.ids && w.ids.wikidata ? `#/pelicula?q=${w.ids.wikidata}` : w.ids && w.ids.imdb ? `#/pelicula?imdb=${w.ids.imdb}` : w.ids && w.ids.filmaffinity ? `#/pelicula?fa=${w.ids.filmaffinity}` : `#/buscar?q=${encodeURIComponent(w.titulo)}`;
   const tarjeta = (w) => `<article class="pd">
-    <a class="pd-cartel" href="${w.ids && w.ids.imdb ? `#/pelicula?imdb=${w.ids.imdb}` : w.ids && w.ids.filmaffinity && w.estreno ? `#/pelicula?fa=${w.ids.filmaffinity}` : `#/buscar?q=${encodeURIComponent(w.titulo)}`}" data-pq-pend="${w.id}">${posterHTML(w)}</a>
+    <a class="pd-cartel" href="${enlace(w)}" data-pq-pend="${w.id}">${posterHTML(w)}</a>
     <div class="pd-info">
-      <div class="pd-t">${esc(w.titulo)}${w.anio ? ` <span class="dim">${w.anio}</span>` : ""}</div>
+      <a class="pd-t" href="${enlace(w)}">${esc(w.titulo)}${w.anio ? ` <span class="dim">${w.anio}</span>` : ""}</a>
       ${w.motivo && !/^(se estrena|estreno en cines|próximamente)/i.test(w.motivo) ? `<div class="pd-m">${esc(w.motivo)}</div>` : ""}
       ${w.estreno && w.estreno > todayISO() && !tieneAviso(w, "estreno") ? `<div class="avisos"><span class="aviso aviso-estreno">${icon("calendar")}Se estrena el ${esc(fechaLarga(w.estreno))} ${w.estreno.slice(0, 4)} · ${faltaPara(w.estreno)}</span></div>` : ""}
       <div class="avisos" data-avisos="${w.id}">${((S.avisos && S.avisos.get(w.id)) || []).map(avisoChip).join("")}</div>
@@ -1516,7 +1629,7 @@ VIEWS.pendientes = (v) => {
     <input class="input" id="wM" placeholder="¿Quién te la recomendó? (opcional)"><button class="btn btn-primary">${icon("plus")}Añadir</button></form>
   ${W.length ? `<div class="chips pd-filtros">${filtros.map(([k, n, fn]) => { const c = W.filter(fn).length; return c || !k ? `<button class="chip ${f[0] === k ? "on" : ""}" data-pf="${k}">${n} · ${c}</button>` : ""; }).join("")}</div>
     <div class="pd-grid">${L.map(tarjeta).join("")}</div>`
-    : `<div class="empty"><div class="h2">No tienes pendientes</div>Añade desde <a href="#/recomendaciones" style="color:var(--gold)">Para ti</a>, <a href="#/estrenos" style="color:var(--gold)">Estrenos</a> o el <a href="#/buscar" style="color:var(--gold)">buscador</a>.</div>`}`;
+    : `<div class="empty"><div class="h2">No tienes pendientes</div>Añade desde <a href="#/recomendaciones" style="color:var(--gold)">Para ti</a>, <a href="#/cartelera?t=estrenos" style="color:var(--gold)">Estrenos</a> o el <a href="#/buscar" style="color:var(--gold)">buscador</a>.</div>`}`;
   $$("[data-pf]", v).forEach((b) => (b.onclick = () => { S.pend_.f = b.dataset.pf; VIEWS.pendientes(v); }));
   $("#wForm").onsubmit = async (ev) => {
     ev.preventDefault();
@@ -1873,10 +1986,10 @@ function carteleraCard(p, dia, cineId) {
   const i = p.info;
   const g = i.generos.length ? i.generos : ["Drama"];
   return `<div class="card cfilm">
-    <div class="frame" ${i.estreno ? `data-rel="${esc(i.estreno.fecha + "|" + i.estreno.titulo)}"` : ""}>${posterHTML({ titulo: p.titulo, anio: p.anio, poster: p.poster, generos: g })}</div>
+    <a class="frame" href="${i.vista ? `#/coleccion?ficha=${i.vista.id}` : p.fa ? `#/pelicula?fa=${p.fa}` : `#/buscar?q=${encodeURIComponent(p.titulo)}`}">${posterHTML({ titulo: p.titulo, anio: p.anio, poster: p.poster, generos: g })}</a>
     <div style="min-width:0">
       <div class="cfilm-head">
-        <div style="min-width:0"><div class="t">${esc(p.titulo)}</div><div class="s">${esc([p.director, p.pais].filter(Boolean).join(" · ") || "—")}</div></div>
+        <div style="min-width:0"><a class="t" href="${i.vista ? `#/coleccion?ficha=${i.vista.id}` : p.fa ? `#/pelicula?fa=${p.fa}` : `#/buscar?q=${encodeURIComponent(p.titulo)}`}">${esc(p.titulo)}</a><div class="s">${esc([p.director, p.pais].filter(Boolean).join(" · ") || "—")}</div></div>
         ${i.vista ? `<span class="chip on" title="Ya la tienes en tu colección">${icon("check")}Vista · ${fmt1(i.vista.nota)}</span>` : matchTag(i.m.pct)}
       </div>
       ${i.generos.length ? `<div class="chips" style="margin:8px 0 2px">${i.generos.slice(0, 3).map((x) => `<span class="chip">${x}</span>`).join("")}</div>` : ""}
@@ -1893,7 +2006,7 @@ function hoyHTML() {
   return `<section class="section">${sectionHead(titulo, "#/cartelera", "Todas las sesiones")}
     <div class="cfilms cartel-fija">${L.map((p) => carteleraCard(p, dias[0], "")).join("")}</div></section>`;
 }
-VIEWS.cartelera = (v) => {
+SUB.cartelera = (v) => {
   const st = S.cart_;
   const dias = diasCartelera();
   if (!st.dia || !dias.includes(st.dia)) st.dia = dias[0];
@@ -1935,7 +2048,7 @@ VIEWS.cartelera = (v) => {
   const up = $("#cartUpd");
   if (up) up.onclick = async () => {
     up.disabled = true; up.innerHTML = `${icon("refresh")}Descargando… (1-2 min)`;
-    try { await api("estrenos/actualizar", { method: "POST" }); await loadAll(); toast("Cartelera y estrenos actualizados"); VIEWS.cartelera(v); }
+    try { await api("estrenos/actualizar", { method: "POST" }); await loadAll(); toast("Cartelera y estrenos actualizados"); SUB.cartelera(v); }
     catch (err) { toast(err.message, "x"); up.disabled = false; }
   };
 };
@@ -2088,6 +2201,14 @@ async function completarAntes(body) {
   if (!b.poster) {
     const r = await posterWeb(b);
     if (r.poster) { b.poster = r.poster; if (r.imdb && !b.ids.imdb) b.ids.imdb = r.imdb; }
+  }
+  // notas de las webs ya consultadas (p. ej. al ver su ficha antes de añadirla): la nota final sale completa al momento
+  if (!b.notasWeb && typeof cacheLeer === "function") {
+    const n = cacheLeer("notas." + (b.ids.imdb || b.ids.wikidata || norm(b.titulo)), 30);
+    if (n) {
+      b.notasWeb = { ...(n.fa ? { fa: [n.fa.v, n.fa.n] } : {}), ...(n.lb ? { lb: [n.lb.v, n.lb.n] } : {}), ...(n.sc ? { sc: n.sc } : {}), t: todayISO() };
+      if (n.imdb && !b.imdbNota) b.imdbNota = [n.imdb.v, n.imdb.n];
+    }
   }
   if (b.ids.imdb && !(b.taquilla || {}).consultado) {
     try {
@@ -2538,8 +2659,8 @@ document.addEventListener("click", async (e) => {
   if (d.logout !== undefined) { e.preventDefault(); closeModal(); return logout(); }
   if (ro() && ["action", "edit", "del", "fav", "want", "seen", "relwant", "relseen", "wseen", "wdel", "sedit", "sdel"].some((k) => d[k] !== undefined)) return;
   if (d.more !== undefined) { e.preventDefault(); return openMore(); }
-  if (d.cday) { S.cart_.dia = d.cday; render._keep = true; return VIEWS.cartelera($("#view")); }
-  if (d.ccine !== undefined) { S.cart_.cine = d.ccine; render._keep = true; return VIEWS.cartelera($("#view")); }
+  if (d.cday) { S.cart_.dia = d.cday; render._keep = true; return render(); }
+  if (d.ccine !== undefined) { S.cart_.cine = d.ccine; render._keep = true; return render(); }
   if (d.close !== undefined) { if (t.tagName !== "A" || t.getAttribute("href") === "#") e.preventDefault(); closeModal(); return; }
   if (d.action === "add") return openForm();
   if (d.open) return openFilm(d.open);
@@ -2657,3 +2778,9 @@ addEventListener("visibilitychange", () => { if (document.visibilityState === "h
       : `<div class="empty"><div class="h2">No puedo conectar con la app</div>Arranca el servidor con <code>Iniciar.bat</code> (o <code>python server.py</code>) y recarga.<br><span class="dim">${esc(e.message)}</span></div>`;
   }
 })();
+// Cartelera y Estadísticas agrupan varias páginas en pestañas; las rutas antiguas siguen funcionando
+VIEWS.cartelera = (v, qs) => conPestanas(v, "cartelera", VIEWS_PESTANAS.cartelera, qs);
+VIEWS.estadisticas = (v, qs) => conPestanas(v, "estadisticas", VIEWS_PESTANAS.estadisticas, qs);
+VIEWS.estrenos = () => location.replace("#/cartelera?t=estrenos");
+VIEWS.gustos = () => location.replace("#/estadisticas?t=gustos");
+VIEWS.anio = (v, qs) => location.replace(`#/estadisticas?t=anio${qs.get("a") ? `&a=${qs.get("a")}` : ""}`);

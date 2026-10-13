@@ -42,6 +42,15 @@ async function notasDe(p) {
   return out;
 }
 const votos = (n) => (n == null ? "" : n >= 1e6 ? `${fmt1(n / 1e6)} M votos` : n >= 1e3 ? `${fmtInt(n / 1e3)} mil votos` : `${fmtInt(n)} votos`);
+// media de las webs sobre 10 (como la nota final, pero sin tu nota): IMDb, FilmAffinity, Letterboxd×2, SensaCine×2
+function mediaWebs(n) {
+  const v = [];
+  if (n.imdb) v.push(n.imdb.v);
+  if (n.fa) v.push(n.fa.v);
+  if (n.lb) v.push(n.lb.v * 2);
+  if (n.sc) { const x = [n.sc.prensa, n.sc.usuarios].filter((y) => y != null); if (x.length) v.push(mean(x) * 2); }
+  return v.length ? { v: Math.round(mean(v) * 10) / 10, n: v.length } : null;
+}
 function notasHTML(p, n) {
   const L = Object.fromEntries(extLinks(p).map((l) => [l.n, l]));
   const t = (web, nota, escala, pie) => {
@@ -54,7 +63,9 @@ function notasHTML(p, n) {
   if (n.fa) tiles.push(t("FilmAffinity", fmt1(n.fa.v), 10, votos(n.fa.n)));
   if (n.lb) tiles.push(t("Letterboxd", n.lb.v.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }), 5, votos(n.lb.n)));
   if (n.sc) tiles.push(t("SensaCine", fmt1(n.sc.prensa ?? n.sc.usuarios), 5, n.sc.prensa != null ? `Prensa${n.sc.usuarios != null ? ` · usuarios ${fmt1(n.sc.usuarios)}` : ""}` : "Usuarios"));
-  return tiles.length ? `<div class="sub">Notas en otras webs</div><div class="notas-ext">${tiles.join("")}</div>` : "";
+  if (!tiles.length) return "";
+  const m = p.nota == null ? mediaWebs(n) : null; // aún no la has visto: su nota es la media de las webs
+  return `<div class="sub">Notas en otras webs</div>${m ? `<div class="media-webs">${scoreBadge(m.v, "lg")}<div><div class="lbl">Nota de las webs</div><div class="dim">Media de ${m.n} ${m.n === 1 ? "web" : "webs"} sobre 10. Cuando la veas y le pongas tu nota, la nota final será mitad tuya y mitad de las webs.</div></div></div>` : ""}<div class="notas-ext">${tiles.join("")}</div>`;
 }
 
 // ---------------------------------------------------------------- premios (Wikidata)
@@ -136,7 +147,7 @@ function premiosHTML(lista) {
 async function cargarExtras(p) {
   const box = document.getElementById("fExtras");
   if (!box) return;
-  const [n, pr] = await Promise.all([notasDe(p).catch(() => ({})), premiosDe(p).catch(() => null)]);
+  const [n, pr] = await Promise.all([p.futura ? {} : notasDe(p).catch(() => ({})), premiosDe(p).catch(() => null)]); // sin estrenar: sin notas
   if (!document.body.contains(box)) return;
   const html = notasHTML(p, n || {}) + premiosHTML(pr);
   box.innerHTML = html;

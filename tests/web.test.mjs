@@ -32,6 +32,11 @@ const db0 = () => ({
 });
 const ESTRENOS = [{ fecha: `${anio + 1}-12-17`, titulo: "Vengadores: Doomsday", original: "Avengers: Doomsday", director: "Anthony Russo, Joe Russo", generos: ["Acción"], pais: "Estados Unidos",
   reparto: "Robert Downey Jr., Chris Hemsworth", sinopsis: "Los Vengadores se enfrentan a Doctor Doom.", fa: 777, poster: POSTER }];
+const CATALOGO = [
+  { titulo: "El laberinto del fauno", tituloOriginal: "El laberinto del fauno", anio: 2006, director: "Guillermo del Toro", pais: "España", generos: ["Drama", "Fantasía"], prestigio: 9.0, imdb: [8.2, 700000], ids: { wikidata: "Q50", imdb: "tt0457430" }, poster: POSTER },
+  { titulo: "Mar adentro", tituloOriginal: "Mar adentro", anio: 2004, director: "Alejandro Amenábar", pais: "España", generos: ["Drama"], prestigio: 8.6, imdb: [8.0, 90000], ids: { wikidata: "Q51" }, poster: POSTER },
+  { titulo: "Torrente 5", tituloOriginal: "Torrente 5", anio: 2014, director: "Santiago Segura", pais: "España", generos: ["Comedia"], prestigio: 5.5, imdb: [4.6, 9000], ids: { wikidata: "Q52" }, poster: POSTER },
+];
 const CARTELERA = { actualizado: hoy, cines: [{ id: "402", nombre: "Yelmo Ocimax", peliculas: [{ titulo: "Dune: Parte Tres", anio: 2026, versiones: [] }] }] };
 const IMDB = { pelis: [{ imdb: "tt1673434", titulo: "The Twilight Saga: Breaking Dawn - Part 2", anio: 2012, reparto: "Kristen Stewart, Robert Pattinson", poster: POSTER }],
   personas: [{ imdb: "nm1291105", nombre: "J.A. Bayona", desc: "Dirección · Society of the Snow (2023)", foto: POSTER }] };
@@ -40,7 +45,7 @@ const cl = (o) => Object.fromEntries(Object.entries(o).map(([p, vs]) => [p, vs.m
 const L = (t) => ({ es: { value: t }, en: { value: t } });
 const WD = {
   Q1: { labels: { es: { value: "Crepúsculo: Amanecer parte 2" }, en: { value: "The Twilight Saga: Breaking Dawn – Part 2" } }, sitelinks: { enwiki: { title: "The Twilight Saga: Breaking Dawn – Part 2" } },
-    claims: cl({ P31: ["Q11424"], P57: ["Q2"], P161: ["Q3", "Q4"], P495: ["Q5"], P136: ["Q6"], P345: ["tt1673434"], P577: [{ time: "+2012-11-16T00:00:00Z" }], P2047: [{ amount: "+115" }] }) },
+    claims: cl({ P31: ["Q11424"], P57: ["Q2"], P161: ["Q3", "Q4"], P495: ["Q5"], P136: ["Q6"], P345: ["tt1673434"], P480: ["400700"], P577: [{ time: "+2012-11-16T00:00:00Z" }], P2047: [{ amount: "+115" }] }) },
   Q2: { labels: L("Bill Condon"), claims: cl({ P31: ["Q5"], P345: ["nm0174374"], P569: [{ time: "+1955-10-22T00:00:00Z" }], P106: ["Q7"] }) },
   Q3: { labels: L("Kristen Stewart") }, Q4: { labels: L("Robert Pattinson") }, Q5: { labels: L("Estados Unidos") },
   Q20: { labels: L("Lo imposible"), sitelinks: { eswiki: { title: "Lo imposible" } },
@@ -64,7 +69,7 @@ async function preparar(pagina, estado) {
   await pagina.route("https://es.wikipedia.org/w/api.php**", (r) => r.fulfill({ json: { query: { pages: { 1: { extract: "Lo imposible es una película de 2012.\n\n== Argumento ==\nUna familia pasa las vacaciones de Navidad en Tailandia cuando el tsunami de 2004 arrasa la costa y los separa. María, malherida, y su hijo mayor luchan por sobrevivir mientras el padre busca al resto.\n\n== Reparto ==\nNaomi Watts" } } } } }));
   await pagina.route("https://query.wikidata.org/**", (r) => r.fulfill({ json: { results: { bindings: [] } } }));
   await pagina.route(`${BASE}/data/**`, (r) => { const u = r.request().url();
-    r.fulfill({ json: /cartelera/.test(u) ? CARTELERA : /estrenos/.test(u) ? { estrenos: ESTRENOS } : /catalogo/.test(u) ? [] : /cines_es/.test(u) ? [{ id: 402, nombre: "Yelmo Ocimax", ciudad: "Gijón" }] : {} }); });
+    r.fulfill({ json: /cartelera/.test(u) ? CARTELERA : /estrenos/.test(u) ? { estrenos: ESTRENOS } : /catalogo/.test(u) ? CATALOGO : /cines_es/.test(u) ? [{ id: 402, nombre: "Yelmo Ocimax", ciudad: "Gijón" }] : {} }); });
   await pagina.route(`${BASE}/api/**`, (r) => {
     const u = new URL(r.request().url()), q = u.searchParams, m = r.request().method(), ruta = u.pathname.slice(5);
     if (ruta === "wm") return r.fulfill({ status: 502, body: "{}" }); // la pasarela «falla»: se usa Wikidata directo
@@ -76,7 +81,7 @@ async function preparar(pagina, estado) {
     if (ruta === "poster") return r.fulfill({ json: { poster: POSTER, imdb: q.get("imdb") || "tt1673434" } });
     if (ruta === "taquilla") return r.fulfill({ json: { mundial: 888875751, domestica: 293144686, internacional: 595731065, presupuesto: 120000000 } });
     if (ruta === "plataformas") return r.fulfill({ json: /sociedad/i.test(q.get("t")) ? [{ plataforma: "Netflix", tipo: "suscripcion" }] : [] });
-    if (ruta === "notas") return r.fulfill({ json: {} });
+    if (ruta === "notas") return r.fulfill({ json: q.get("fa") === "400700" ? { fa: { v: 5.3, n: 40000 }, lb: { v: 2.9, n: 90000 } } : {} });
     if (ruta === "demanda") return r.fulfill({ json: { ok: true } });
     if (ruta === "db") return estado.lento ? setTimeout(() => r.fulfill({ json: estado.db }), 3000) : r.fulfill({ json: estado.db });
     if (ruta === "peliculas" && m === "POST") { const b = JSON.parse(r.request().postData()); estado.post = b; const p = { ...b, id: "p9", "añadido": new Date().toISOString() }; estado.db.peliculas.push(p); return r.fulfill({ json: p }); }
@@ -227,6 +232,41 @@ await prueba("Arranque instantáneo con la copia guardada", async (p, e) => {
   assert.ok(Date.now() - t0 < 1500, `${Date.now() - t0} ms`);
 });
 
+await prueba("Para ti: película para hoy y bloques que abren su ficha, ordenados por lo que te gustará", async (p) => {
+  await ir(p, "#/recomendaciones");
+  await p.waitForSelector(".rec-hoy", { timeout: 8000 });
+  const hoy = await p.textContent(".rec-hoy-t");
+  assert.doesNotMatch(hoy, /Torrente/, "la peor no es la de hoy");
+  assert.match(await p.getAttribute(".rec-hoy-t", "href"), /#\/pelicula\?q=Q5[01]/);
+  assert.match(await p.textContent(".rec-hoy"), /% de que te guste/);
+});
+
+await prueba("Película no vista ya estrenada: nota de las webs (sin la tuya)", async (p) => {
+  await ir(p, "#/pelicula?q=Q1");
+  await p.waitForSelector(".media-webs", { timeout: 8000 });
+  assert.match(await p.textContent(".media-webs"), /5,6/, "media de FilmAffinity 5,3 y Letterboxd 2,9×2");
+});
+
+await prueba("Cartelera con pestaña de estrenos; los estrenos y las sesiones abren su ficha", async (p) => {
+  await ir(p, "#/estrenos");
+  await p.waitForSelector(".pestanas a.on", { timeout: 8000 });
+  assert.match(await p.textContent(".pestanas a.on"), /Próximos estrenos/);
+  await p.click(".rel2");
+  await p.waitForSelector(".px-cuenta", { timeout: 8000 });
+  await ir(p, "#/cartelera");
+  await p.waitForSelector(".pestanas", { timeout: 8000 });
+});
+
+await prueba("Estadísticas: pestañas con Mis gustos y Tu año, y apartados desplegables", async (p) => {
+  await ir(p, "#/estadisticas");
+  await p.waitForSelector(".pliegue", { timeout: 8000 });
+  assert.ok(await p.$("#pl_notas[open]"));
+  await p.click("#pl_decadas summary");
+  assert.ok(await p.$("#pl_decadas[open]"));
+  await ir(p, "#/gustos");
+  await p.waitForFunction(() => /Mis gustos/.test(document.querySelector(".pestanas a.on")?.textContent || ""), null, { timeout: 8000 });
+});
+
 await prueba("Tu año en cine", async (p) => {
   await ir(p, "#/anio");
   await p.waitForSelector(".an-hero", { timeout: 8000 });
@@ -246,6 +286,7 @@ await prueba("Pendientes: avisa si está en tus cines o en una plataforma, con c
   await p.click('[data-pf="plataforma"]');
   assert.equal(await p.$$eval(".pd", (x) => x.length), 1);
   assert.match(await p.textContent(".pd-grid"), /sociedad de la nieve/i);
+  assert.ok(await p.$('.pd-grid a.pd-t[href^="#/pelicula"]'), "el título abre su ficha");
 });
 
 await prueba("Completar mi colección", async (p, e) => {

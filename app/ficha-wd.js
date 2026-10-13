@@ -76,6 +76,7 @@ async function filmografiaRapida(q) {
 const estrenoDe = (titulo, original, anio) => ((S.est && S.est.estrenos) || []).find((e) => [norm(e.titulo), norm(e.original)].some((x) => x && (x === norm(titulo) || x === norm(original))) && (!anio || Math.abs(+e.fecha.slice(0, 4) - anio) <= 1));
 function paginaProxima(v, f) {
   const fecha = f.fecha && f.fecha > todayISO() ? f.fecha : null;
+  const estrenada = !fecha && ((f.enCines && f.enCines.length) || (f.fecha && f.fecha <= todayISO()) || (f.anio && f.anio < new Date().getFullYear()));
   const yaPend = S.db.pendientes.find((w) => norm(w.titulo) === norm(f.titulo) || (f.original && norm(w.tituloOriginal) === norm(f.original)));
   const reparto = Array.isArray(f.reparto) ? f.reparto.map((x) => x.n || x) : String(f.reparto || "").split(/,\s*/).filter(Boolean);
   const peli = { titulo: f.titulo, tituloOriginal: f.original || f.titulo, anio: f.anio || (fecha ? +fecha.slice(0, 4) : null), director: f.director || "", pais: f.pais || "", generos: f.generos || [], duracion: f.duracion || null, poster: f.poster || null, ids: f.ids || {} };
@@ -87,12 +88,12 @@ function paginaProxima(v, f) {
     <div class="pe-hero-in">
       <div class="pe-cartel">${posterHTML(peli)}</div>
       <div>
-        <div class="eyebrow">Próximamente${peli.pais ? ` · ${esc(peli.pais)}` : ""}</div>
+        <div class="eyebrow">${estrenada ? (f.enCines && f.enCines.length ? "En cines" : "Estrenada") : "Próximamente"}${peli.pais ? ` · ${esc(peli.pais)}` : ""}</div>
         <h1 class="ps-nombre">${esc(peli.titulo)}</h1>
         ${f.original && norm(f.original) !== norm(f.titulo) ? `<div class="orig" style="margin:-8px 0 12px">${esc(f.original)}</div>` : ""}
-        <div class="px-cuenta"><b>${fecha ? `${fechaLarga(fecha)} ${fecha.slice(0, 4)}` : peli.anio ? `En ${peli.anio}` : "Sin fecha"}</b><span>${fecha ? `Estreno en cines en España · ${faltaPara(fecha)}` : "Fecha de estreno aún sin confirmar"}</span></div>
+        ${estrenada ? (f.enCines && f.enCines.length ? `<div class="px-cuenta en-cines"><b>En cartelera</b><span>${esc(f.enCines.slice(0, 3).join(" · "))} · <a href="#/cartelera">ver sesiones</a></span></div>` : "") : `<div class="px-cuenta"><b>${fecha ? `${fechaLarga(fecha)} ${fecha.slice(0, 4)}` : peli.anio ? `En ${peli.anio}` : "Sin fecha"}</b><span>${fecha ? `Estreno en cines en España · ${faltaPara(fecha)}` : "Fecha de estreno aún sin confirmar"}</span></div>`}
         ${peli.generos.length ? `<div class="chips" style="margin:6px 0 16px">${peli.generos.map((g) => `<span class="chip">${esc(g)}</span>`).join("")}</div>` : ""}
-        <div class="pe-acciones">${ro() ? "" : yaPend ? `<a class="btn" href="#/pendientes">${icon("bookmark")}Ya está en tus pendientes</a>` : `<button class="btn btn-primary" id="pxPend">${icon("bookmark")}Guardar en pendientes</button>`}</div>
+        <div class="pe-acciones">${ro() ? "" : `${estrenada ? `<button class="btn btn-primary" id="pxVista">${icon("plus")}La he visto</button>` : ""}${yaPend ? `<a class="btn" href="#/pendientes">${icon("bookmark")}Ya está en tus pendientes</a>` : `<button class="btn ${estrenada ? "" : "btn-primary"}" id="pxPend">${icon("bookmark")}Guardar en pendientes</button>`}`}</div>
         ${m ? `<div class="pe-pred">${matchTag(m.pct)}<div><div class="lbl">Te encajaría</div><div>Predicción: <b>${fmt1(m.nota)}</b>${m.why.length ? ` · ${esc(m.why[0])}` : ""}</div></div></div>` : ""}
       </div>
     </div>
@@ -101,6 +102,7 @@ function paginaProxima(v, f) {
     <div class="pe-main">
       ${f.sinopsis ? `<section><div class="sub">Sinopsis</div><p class="ps-bio pe-sin">${esc(f.sinopsis)}</p></section>` : ""}
       <section>${trailerHTML(peli)}</section>
+      ${estrenada ? `<div id="fExtras" class="extras-ficha"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando…</div></div>` : ""}
       ${reparto.length ? `<section><div class="sub">Reparto</div><div class="fx-reparto">${reparto.slice(0, 12).map((n) => `<a class="pe-pers" href="#/persona?n=${encodeURIComponent(n)}"><span class="pe-foto"><b>${esc(n.split(" ").map((w) => w[0]).slice(0, 2).join(""))}</b></span><span class="pe-n">${esc(n)}</span></a>`).join("")}</div></section>` : ""}
     </div>
     <aside class="pe-aside">
@@ -112,6 +114,9 @@ function paginaProxima(v, f) {
       <div class="sub">Ver en</div>${linksHTML(peli)}
     </aside>
   </div>`;
+  if (estrenada) cargarExtras(peli);
+  const vb = $("#pxVista");
+  if (vb) vb.onclick = () => openForm(null, { ...peli });
   const b = $("#pxPend");
   if (b) b.onclick = async () => { b.disabled = true; await addPending({ ...peli, original: f.original, fecha }, fecha ? `Se estrena el ${fechaLarga(fecha)} ${fecha.slice(0, 4)}` : "Próximamente"); VIEWS.pelicula(v, new URLSearchParams(location.hash.split("?")[1] || "")); };
 }
@@ -120,8 +125,10 @@ function paginaProxima(v, f) {
 VIEWS.pelicula = async (v, qs) => {
   // estreno de la lista de FilmAffinity
   if (qs.get("fa")) {
-    const e = ((S.est && S.est.estrenos) || []).find((x) => String(x.fa) === qs.get("fa"));
-    if (e) return paginaProxima(v, { ...e, ids: { filmaffinity: String(e.fa) } });
+    const fa = qs.get("fa");
+    const e = ((S.est && S.est.estrenos) || []).find((x) => String(x.fa) === fa);
+    const c = typeof carteleraIdx === "function" ? carteleraIdx().get(fa) || carteleraIdx().get(+fa) : null;
+    if (e || c) return paginaProxima(v, { ...(c || {}), ...(e || {}), enCines: c ? c.cines.map((x) => x.nombre) : null, ids: { filmaffinity: String(fa) } });
   }
   v.innerHTML = `<div class="cargando"><span class="bobina"></span>Abriendo la ficha…</div>`;
   const yo = location.hash;
@@ -224,7 +231,7 @@ VIEWS.pelicula = async (v, qs) => {
     const m = predict(peli), box = $("#pePred");
     if (box) box.innerHTML = `${matchTag(m.pct)}<div><div class="lbl">Te encajaría</div><div>Predicción: <b>${fmt1(m.nota)}</b>${m.why.length ? ` · ${esc(m.why[0])}` : ""}</div></div>`;
   }
-  cargarExtras(peli);
+  cargarExtras({ ...peli, futura });
   // fotos del equipo
   entidadesWD([...dirs, ...guion, ...musica, ...reparto], "claims", "enwiki").then((F) => {
     for (const el of document.querySelectorAll(".pe-foto[data-pq]")) { const f = valores(F[el.dataset.pq], "P18")[0]; if (f) el.innerHTML = `<img src="${fotoCommons(f, 200)}" alt="" loading="lazy" referrerpolicy="no-referrer">`; }
