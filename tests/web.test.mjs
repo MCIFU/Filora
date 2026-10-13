@@ -30,6 +30,8 @@ const db0 = () => ({
   preferencias: { cines: [{ id: 402, nombre: "Yelmo Ocimax", ciudad: "Gijón" }] },
   estado: { web: true, edicion: true },
 });
+const ESTRENOS = [{ fecha: `${anio + 1}-12-17`, titulo: "Vengadores: Doomsday", original: "Avengers: Doomsday", director: "Anthony Russo, Joe Russo", generos: ["Acción"], pais: "Estados Unidos",
+  reparto: "Robert Downey Jr., Chris Hemsworth", sinopsis: "Los Vengadores se enfrentan a Doctor Doom.", fa: 777, poster: POSTER }];
 const CARTELERA = { actualizado: hoy, cines: [{ id: "402", nombre: "Yelmo Ocimax", peliculas: [{ titulo: "Dune: Parte Tres", anio: 2026, versiones: [] }] }] };
 const IMDB = { pelis: [{ imdb: "tt1673434", titulo: "The Twilight Saga: Breaking Dawn - Part 2", anio: 2012, reparto: "Kristen Stewart, Robert Pattinson", poster: POSTER }],
   personas: [{ imdb: "nm1291105", nombre: "J.A. Bayona", desc: "Dirección · Society of the Snow (2023)", foto: POSTER }] };
@@ -62,21 +64,23 @@ async function preparar(pagina, estado) {
   await pagina.route("https://es.wikipedia.org/w/api.php**", (r) => r.fulfill({ json: { query: { pages: { 1: { extract: "Lo imposible es una película de 2012.\n\n== Argumento ==\nUna familia pasa las vacaciones de Navidad en Tailandia cuando el tsunami de 2004 arrasa la costa y los separa. María, malherida, y su hijo mayor luchan por sobrevivir mientras el padre busca al resto.\n\n== Reparto ==\nNaomi Watts" } } } } }));
   await pagina.route("https://query.wikidata.org/**", (r) => r.fulfill({ json: { results: { bindings: [] } } }));
   await pagina.route(`${BASE}/data/**`, (r) => { const u = r.request().url();
-    r.fulfill({ json: /cartelera/.test(u) ? CARTELERA : /estrenos/.test(u) ? { estrenos: [] } : /catalogo/.test(u) ? [] : /cines_es/.test(u) ? [{ id: 402, nombre: "Yelmo Ocimax", ciudad: "Gijón" }] : {} }); });
+    r.fulfill({ json: /cartelera/.test(u) ? CARTELERA : /estrenos/.test(u) ? { estrenos: ESTRENOS } : /catalogo/.test(u) ? [] : /cines_es/.test(u) ? [{ id: 402, nombre: "Yelmo Ocimax", ciudad: "Gijón" }] : {} }); });
   await pagina.route(`${BASE}/api/**`, (r) => {
     const u = new URL(r.request().url()), q = u.searchParams, m = r.request().method(), ruta = u.pathname.slice(5);
     if (ruta === "wm") return r.fulfill({ status: 502, body: "{}" }); // la pasarela «falla»: se usa Wikidata directo
     if (ruta === "imdb" && /resident/i.test(q.get("q"))) return r.fulfill({ json: [
       { imdb: "tt35538033", titulo: "Resident Evil", anio: anio + 1, reparto: "Austin Abrams", poster: POSTER + "#2026" },
       { imdb: "tt0120804", titulo: "Resident Evil", anio: 2002, reparto: "Milla Jovovich, Michelle Rodriguez", poster: POSTER + "#2002" }] });
+    if (ruta === "imdb" && q.get("q") === "tt99999") return r.fulfill({ json: { pelis: [{ imdb: "tt99999", titulo: "Avengers: Doomsday", anio: anio + 1, reparto: "Robert Downey Jr.", poster: POSTER }], personas: [] } });
     if (ruta === "imdb") return r.fulfill({ json: q.get("todo") ? IMDB : IMDB.pelis });
     if (ruta === "poster") return r.fulfill({ json: { poster: POSTER, imdb: q.get("imdb") || "tt1673434" } });
     if (ruta === "taquilla") return r.fulfill({ json: { mundial: 888875751, domestica: 293144686, internacional: 595731065, presupuesto: 120000000 } });
     if (ruta === "plataformas") return r.fulfill({ json: /sociedad/i.test(q.get("t")) ? [{ plataforma: "Netflix", tipo: "suscripcion" }] : [] });
     if (ruta === "notas") return r.fulfill({ json: {} });
     if (ruta === "demanda") return r.fulfill({ json: { ok: true } });
-    if (ruta === "db") return r.fulfill({ json: estado.db });
+    if (ruta === "db") return estado.lento ? setTimeout(() => r.fulfill({ json: estado.db }), 3000) : r.fulfill({ json: estado.db });
     if (ruta === "peliculas" && m === "POST") { const b = JSON.parse(r.request().postData()); estado.post = b; const p = { ...b, id: "p9", "añadido": new Date().toISOString() }; estado.db.peliculas.push(p); return r.fulfill({ json: p }); }
+    if (ruta === "pendientes" && m === "POST") { const w = { ...JSON.parse(r.request().postData()), id: "w" + (estado.db.pendientes.length + 9) }; estado.db.pendientes.push(w); return r.fulfill({ json: w }); }
     if (ruta.startsWith("pendientes/") && m === "PUT") { const id = ruta.split("/")[1], w = estado.db.pendientes.find((x) => x.id === id); Object.assign(w, JSON.parse(r.request().postData())); return r.fulfill({ json: w }); }
     if (ruta.startsWith("peliculas/") && m === "PUT") { const id = ruta.split("/")[1], b = JSON.parse(r.request().postData()); estado.puts.push([id, b]);
       const p = estado.db.peliculas.find((x) => x.id === id); Object.assign(p, b); return r.fulfill({ json: p }); }
@@ -190,6 +194,39 @@ await prueba("Página de persona (desde el id de IMDb)", async (p) => {
   assert.ok(await p.$(".ps-foto img"), "foto (de IMDb si Wikidata no tiene)");
 });
 
+await prueba("Película sin estrenar (FilmAffinity): página con cuenta atrás y guardar en pendientes", async (p, e) => {
+  await ir(p, "#/pelicula?fa=777");
+  await p.waitForSelector(".px-cuenta", { timeout: 8000 });
+  assert.match(await p.textContent(".px-cuenta"), new RegExp(`17 de diciembre ${anio + 1}`));
+  assert.match(await p.textContent(".pe-main"), /Doctor Doom/);
+  assert.ok(!(await p.$("#peVista")), "sin «La he visto»");
+  await p.click("#pxPend");
+  await p.waitForFunction(() => /Ya está en tus pendientes/.test(document.querySelector(".pe-acciones")?.textContent || ""), null, { timeout: 8000 });
+  const w = e.db.pendientes.at(-1);
+  assert.equal(w.estreno, `${anio + 1}-12-17`);
+  assert.ok(w.poster);
+  await ir(p, "#/pendientes");
+  await p.waitForSelector(".pd .aviso-estreno", { timeout: 8000 });
+});
+
+await prueba("Película anunciada que Wikidata no tiene (desde el buscador)", async (p) => {
+  await ir(p, "#/pelicula?imdb=tt99999");
+  await p.waitForSelector(".px-cuenta", { timeout: 8000 });
+  assert.match(await p.textContent("h1"), /Vengadores: Doomsday/, "cruza con el estreno de FilmAffinity");
+  assert.ok(await p.$("#pxPend"));
+});
+
+await prueba("Arranque instantáneo con la copia guardada", async (p, e) => {
+  await ir(p, "#/coleccion");
+  await p.waitForSelector(".pcard", { timeout: 8000 });
+  await p.evaluate(() => document.dispatchEvent(new Event("visibilitychange")));
+  e.lento = true;
+  const t0 = Date.now();
+  await p.reload();
+  await p.waitForSelector(".pcard", { timeout: 8000 });
+  assert.ok(Date.now() - t0 < 1500, `${Date.now() - t0} ms`);
+});
+
 await prueba("Tu año en cine", async (p) => {
   await ir(p, "#/anio");
   await p.waitForSelector(".an-hero", { timeout: 8000 });
@@ -218,6 +255,15 @@ await prueba("Completar mi colección", async (p, e) => {
   await p.waitForFunction(() => !document.querySelector(".completar") && !document.querySelector("#completarGo"), null, { timeout: 20000 });
   const pel = e.db.peliculas.find((x) => x.id === "p22");
   assert.ok(pel.poster && pel.reparto && pel.taquilla.consultado);
+});
+
+await prueba("Todas las secciones abren sin errores", async (p) => {
+  for (const h of ["#/inicio", "#/coleccion", "#/estrenos", "#/cartelera", "#/recomendaciones", "#/gustos", "#/estadisticas", "#/series", "#/premios"]) {
+    await ir(p, h);
+    await p.waitForTimeout(700);
+    assert.ok(!(await p.$(".cargando .bobina")) || h === "#/premios", `${h} se queda cargando`);
+    if (process.env.CAPTURAS) await p.screenshot({ path: join(process.env.CAPTURAS, "sec_" + h.slice(2) + ".png"), fullPage: true });
+  }
 });
 
 await prueba("Móvil: añadir y ficha sin desbordar el ancho", async (p) => {

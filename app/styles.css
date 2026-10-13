@@ -1264,3 +1264,15 @@ a.icon-btn { color: inherit; }
 .pd-m { font-size: 13px; color: var(--papel-3); font-style: italic; }
 .pd-acc { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
 @media (max-width: 700px) { .pd-nueva { grid-template-columns: minmax(0, 1fr) 90px; } .pd-nueva #wM, .pd-nueva .btn { grid-column: 1 / -1; } .pd-grid { grid-template-columns: 1fr; } .pd { grid-template-columns: 80px minmax(0, 1fr); } }
+
+/* Películas sin estrenar */
+.px-cuenta { display: inline-grid; gap: 4px; margin: 4px 0 18px; padding: 12px 18px; border-left: 3px solid var(--telon); background: rgba(var(--bg-rgb), .45); backdrop-filter: blur(6px); }
+.px-cuenta b { font: 800 clamp(22px, 2.6vw, 30px)/1 var(--display); text-transform: uppercase; }
+.px-cuenta span { font-size: 13.5px; color: var(--papel-2); }
+.pronto { position: absolute; left: 0; top: 10px; padding: 4px 9px; background: var(--telon); color: #fff; font: 700 14px/1 var(--creditos); letter-spacing: .08em; text-transform: uppercase; }
+.frame { position: relative; }
+
+/* Fluidez: las carátulas fuera de pantalla no se pintan hasta acercarse (colecciones de cientos) */
+.posters > .pcard, .pd-grid > .pd, .list > .row { content-visibility: auto; contain-intrinsic-size: auto 320px; }
+.list > .row { contain-intrinsic-size: auto 64px; }
+.pd-grid > .pd { contain-intrinsic-size: auto 170px; }

@@ -72,8 +72,57 @@ async function filmografiaRapida(q) {
   return L;
 }
 
+// ---------------------------------------------------------------- película aún sin estrenar (FilmAffinity o IMDb)
+const estrenoDe = (titulo, original, anio) => ((S.est && S.est.estrenos) || []).find((e) => [norm(e.titulo), norm(e.original)].some((x) => x && (x === norm(titulo) || x === norm(original))) && (!anio || Math.abs(+e.fecha.slice(0, 4) - anio) <= 1));
+function paginaProxima(v, f) {
+  const fecha = f.fecha && f.fecha > todayISO() ? f.fecha : null;
+  const yaPend = S.db.pendientes.find((w) => norm(w.titulo) === norm(f.titulo) || (f.original && norm(w.tituloOriginal) === norm(f.original)));
+  const reparto = Array.isArray(f.reparto) ? f.reparto.map((x) => x.n || x) : String(f.reparto || "").split(/,\s*/).filter(Boolean);
+  const peli = { titulo: f.titulo, tituloOriginal: f.original || f.titulo, anio: f.anio || (fecha ? +fecha.slice(0, 4) : null), director: f.director || "", pais: f.pais || "", generos: f.generos || [], duracion: f.duracion || null, poster: f.poster || null, ids: f.ids || {} };
+  const m = S.db.peliculas.length ? predict({ ...peli, reparto: reparto.join(", "), fecha: fecha || "" }) : null;
+  const credito = (l, val) => (val ? `<div><dt>${l}</dt><dd>${val}</dd></div>` : "");
+  v.innerHTML = `
+  <section class="pe-hero">
+    ${peli.poster ? `<div class="ps-fondo" style="background-image:url('${esc(peli.poster)}')"></div>` : ""}
+    <div class="pe-hero-in">
+      <div class="pe-cartel">${posterHTML(peli)}</div>
+      <div>
+        <div class="eyebrow">Próximamente${peli.pais ? ` · ${esc(peli.pais)}` : ""}</div>
+        <h1 class="ps-nombre">${esc(peli.titulo)}</h1>
+        ${f.original && norm(f.original) !== norm(f.titulo) ? `<div class="orig" style="margin:-8px 0 12px">${esc(f.original)}</div>` : ""}
+        <div class="px-cuenta"><b>${fecha ? `${fechaLarga(fecha)} ${fecha.slice(0, 4)}` : peli.anio ? `En ${peli.anio}` : "Sin fecha"}</b><span>${fecha ? `Estreno en cines en España · ${faltaPara(fecha)}` : "Fecha de estreno aún sin confirmar"}</span></div>
+        ${peli.generos.length ? `<div class="chips" style="margin:6px 0 16px">${peli.generos.map((g) => `<span class="chip">${esc(g)}</span>`).join("")}</div>` : ""}
+        <div class="pe-acciones">${ro() ? "" : yaPend ? `<a class="btn" href="#/pendientes">${icon("bookmark")}Ya está en tus pendientes</a>` : `<button class="btn btn-primary" id="pxPend">${icon("bookmark")}Guardar en pendientes</button>`}</div>
+        ${m ? `<div class="pe-pred">${matchTag(m.pct)}<div><div class="lbl">Te encajaría</div><div>Predicción: <b>${fmt1(m.nota)}</b>${m.why.length ? ` · ${esc(m.why[0])}` : ""}</div></div></div>` : ""}
+      </div>
+    </div>
+  </section>
+  <div class="pe-cuerpo">
+    <div class="pe-main">
+      ${f.sinopsis ? `<section><div class="sub">Sinopsis</div><p class="ps-bio pe-sin">${esc(f.sinopsis)}</p></section>` : ""}
+      <section>${trailerHTML(peli)}</section>
+      ${reparto.length ? `<section><div class="sub">Reparto</div><div class="fx-reparto">${reparto.slice(0, 12).map((n) => `<a class="pe-pers" href="#/persona?n=${encodeURIComponent(n)}"><span class="pe-foto"><b>${esc(n.split(" ").map((w) => w[0]).slice(0, 2).join(""))}</b></span><span class="pe-n">${esc(n)}</span></a>`).join("")}</div></section>` : ""}
+    </div>
+    <aside class="pe-aside">
+      <dl class="fx-cred">
+        ${credito("Dirección", peli.director ? splitDir(peli.director).map((d) => `<a href="#/persona?n=${encodeURIComponent(d)}">${esc(d)}</a>`).join("<br>") : "")}
+        ${credito("Duración", peli.duracion ? durTxt(peli.duracion) : "")}${credito("Estreno", fecha ? `${fechaLarga(fecha)} ${fecha.slice(0, 4)}` : peli.anio || "")}
+        ${credito("País", esc(peli.pais))}${credito("Género", esc(peli.generos.join(" · ")))}
+      </dl>
+      <div class="sub">Ver en</div>${linksHTML(peli)}
+    </aside>
+  </div>`;
+  const b = $("#pxPend");
+  if (b) b.onclick = async () => { b.disabled = true; await addPending({ ...peli, original: f.original, fecha }, fecha ? `Se estrena el ${fechaLarga(fecha)} ${fecha.slice(0, 4)}` : "Próximamente"); VIEWS.pelicula(v, new URLSearchParams(location.hash.split("?")[1] || "")); };
+}
+
 // ---------------------------------------------------------------- página de una película
 VIEWS.pelicula = async (v, qs) => {
+  // estreno de la lista de FilmAffinity
+  if (qs.get("fa")) {
+    const e = ((S.est && S.est.estrenos) || []).find((x) => String(x.fa) === qs.get("fa"));
+    if (e) return paginaProxima(v, { ...e, ids: { filmaffinity: String(e.fa) } });
+  }
   v.innerHTML = `<div class="cargando"><span class="bobina"></span>Abriendo la ficha…</div>`;
   const yo = location.hash;
   let q = qs.get("q");
@@ -83,7 +132,14 @@ VIEWS.pelicula = async (v, qs) => {
     if (mia0) { location.hash = "#/coleccion"; setTimeout(() => openFilm(mia0.id), 50); return; }
     try { q = await qPorImdb(tt); } catch (e) { /* sin Wikidata */ }
     if (location.hash !== yo) return;
-    if (!q) { v.innerHTML = `<div class="empty"><div class="h2">No he podido abrir su ficha</div>Wikidata no responde ahora mismo. <a href="https://www.imdb.com/es-es/title/${esc(tt)}/" target="_blank" rel="noopener" style="text-decoration:underline">Verla en IMDb</a></div>`; return; }
+    if (!q) {
+      // sin ficha en Wikidata (lo normal en películas anunciadas): página con lo que saben IMDb y FilmAffinity
+      const r = typeof buscarWeb === "function" ? (await buscarWeb(tt)).pelis.find((x) => x.imdb === tt) : null;
+      if (location.hash !== yo) return;
+      if (r) { const e = estrenoDe(r.titulo, r.titulo, r.anio) || {};
+        return paginaProxima(v, { ...e, titulo: e.titulo || r.titulo, original: e.original || r.titulo, anio: r.anio, poster: e.poster || r.poster, reparto: e.reparto || r.reparto, ids: { imdb: tt, ...(e.fa ? { filmaffinity: String(e.fa) } : {}) } }); }
+      v.innerHTML = `<div class="empty"><div class="h2">No he podido abrir su ficha</div><a href="https://www.imdb.com/es-es/title/${esc(tt)}/" target="_blank" rel="noopener" style="text-decoration:underline">Verla en IMDb</a></div>`; return;
+    }
   }
   if (!/^Q\d+$/.test(q || "")) { v.innerHTML = `<div class="empty"><div class="h2">Película no encontrada</div></div>`; return; }
   const e = (await entidadesWD([q], "labels|descriptions|claims|sitelinks", "enwiki|eswiki"))[q];
@@ -97,6 +153,8 @@ VIEWS.pelicula = async (v, qs) => {
   if (location.hash !== yo) return;
   const titulo = etiqueta(e), original = (valores(e, "P1476")[0] || {}).text;
   const anio = anioDe(e), dur = valores(e, "P2047")[0];
+  const fechas = valores(e, "P577").map((x) => (/^\+(\d{4}-\d\d-\d\d)/.exec(x.time || "") || [])[1]).filter((x) => x && !x.endsWith("-00")).sort();
+  const futura = (fechas[0] && fechas[0] > todayISO()) || (anio && anio > new Date().getFullYear()) || (!fechas.length && !anio);
   const P = { imdb: "P345", filmaffinity: "P480", rt: "P1258", letterboxd: "P6127", tmdb: "P4947", allocine: "P1265" };
   const ids = { wikidata: q };
   for (const [k, p] of Object.entries(P)) { const x = valores(e, p)[0]; if (x) ids[k] = String(x); }
@@ -126,10 +184,11 @@ VIEWS.pelicula = async (v, qs) => {
         ${original && norm(original) !== norm(titulo) ? `<div class="orig" style="margin:-8px 0 12px">${esc(original)}</div>` : ""}
         <div class="facts">${peli.duracion ? `<span>${icon("clock")}${Math.floor(peli.duracion / 60)} h ${String(peli.duracion % 60).padStart(2, "0")} min</span>` : ""}
           ${dirs.length ? `<span>${icon("user")}${dirs.map((x) => `<a href="#/persona?q=${x}" class="pr-persona">${esc(etiqueta(refs[x]))}</a>`).join(", ")}</span>` : ""}</div>
+        ${futura ? `<div class="px-cuenta"><b>${fechas[0] && fechas[0] > todayISO() ? `${fechaLarga(fechas[0])} ${fechas[0].slice(0, 4)}` : anio ? `En ${anio}` : "Sin fecha"}</b><span>${fechas[0] && fechas[0] > todayISO() ? `Estreno · ${faltaPara(fechas[0])}` : "Fecha de estreno aún sin confirmar"}</span></div>` : ""}
         ${peli.generos.length ? `<div class="chips" style="margin:6px 0 16px">${peli.generos.map((g) => `<span class="chip">${esc(g)}</span>`).join("")}</div>` : ""}
         <div class="pe-acciones">
           ${mia ? `<button class="btn btn-primary" data-open="${mia.id}">${icon("check")}La has visto · ${fmt1(mia.nota)} · abrir tu ficha</button>`
-            : ro() ? "" : `<button class="btn btn-primary" id="peVista">${icon("plus")}La he visto</button><button class="btn" id="pePend">${icon("bookmark")}A pendientes</button>`}
+            : ro() ? "" : futura ? `<button class="btn btn-primary" id="pePend">${icon("bookmark")}Guardar en pendientes</button>` : `<button class="btn btn-primary" id="peVista">${icon("plus")}La he visto</button><button class="btn" id="pePend">${icon("bookmark")}A pendientes</button>`}
         </div>
         ${!mia ? `<div class="pe-pred" id="pePred"></div>` : ""}
       </div>
@@ -172,5 +231,5 @@ VIEWS.pelicula = async (v, qs) => {
   });
   const vista = $("#peVista"), pend = $("#pePend");
   if (vista) vista.onclick = () => openForm(null, { ...peli, poster: peli.poster });
-  if (pend) pend.onclick = async () => { pend.disabled = true; await addPending(peli, "Desde su ficha"); };
+  if (pend) pend.onclick = async () => { pend.disabled = true; await addPending({ ...peli, fecha: futura && fechas[0] > todayISO() ? fechas[0] : null }, futura ? "Próximamente" : "Desde su ficha"); pend.innerHTML = `${icon("check")}En tus pendientes`; };
 };

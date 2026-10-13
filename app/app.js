@@ -99,7 +99,7 @@ function posterHTML(item, big = false) {
   const h = GEN_HUE[g] ?? 40;
   const ph = `<div class="ph" style="--h:${h}"><b>${esc(item.titulo)}</b><span>${esc(item.anio || "")}</span></div>`;
   if (!item.poster) return ph;
-  return `<img src="${esc(item.poster)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML=this.nextElementSibling.innerHTML"><template>${ph}</template>`;
+  return `<img src="${esc(item.poster)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.outerHTML=this.nextElementSibling.innerHTML"><template>${ph}</template>`;
 }
 
 // enlaces a tus webs de referencia
@@ -642,6 +642,17 @@ function openFilm(id) {
   if (typeof cargarExtras === "function") cargarExtras(p);
   cargarTrama(p);
   completarFicha(p).then((n) => { if (n) { cargarReparto(n); cargarTaquilla(n); } else { cargarReparto(p); cargarTaquilla(p); } });
+}
+// Cuánto falta para un estreno: «faltan 3 días», «faltan 2 meses», «falta más de un año»
+function faltaPara(fecha) {
+  if (!fecha) return "";
+  const d = Math.round((Date.parse(fecha + "T12:00") - Date.parse(todayISO() + "T12:00")) / 864e5);
+  if (d < 0) return "ya estrenada";
+  if (d === 0) return "se estrena hoy";
+  if (d === 1) return "se estrena mañana";
+  if (d < 45) return `faltan ${d} días`;
+  if (d < 365) return `faltan ${Math.round(d / 30.4)} meses`;
+  return "falta más de un año";
 }
 // ---------------------------------------------------------------- Avisos de pendientes: cartelera, estreno o plataforma
 S.avisos = null;
@@ -1416,7 +1427,7 @@ function openRel(key) {
         <a class="ext" href="https://www.imdb.com/es-es/find/?q=${encodeURIComponent(e.original || e.titulo)}" target="_blank" rel="noopener">${logoWeb("IMDb")}IMDb</a>
         <a class="ext" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.titulo + " tráiler español")}" target="_blank" rel="noopener"><span class="logo" style="background:#c4302b">${icon("play")}</span>Tráiler</a>
       </div>
-      <div class="dl-actions"><button class="btn btn-primary" data-relwant="${esc(key)}">${icon("bookmark")}Quiero verla</button><button class="btn" data-relseen="${esc(key)}">${icon("eye")}Ya la vi</button></div>
+      <div class="dl-actions"><button class="btn btn-primary" data-relwant="${esc(key)}">${icon("bookmark")}Guardar en pendientes</button>${e.fa ? `<a class="btn" href="#/pelicula?fa=${e.fa}" data-close>Ficha completa</a>` : ""}${e.fecha <= todayISO() ? `<button class="btn" data-relseen="${esc(key)}">${icon("eye")}Ya la vi</button>` : ""}</div>
     </div></div></div>`);
 }
 VIEWS.estrenos = (v) => {
@@ -1490,12 +1501,13 @@ VIEWS.pendientes = (v) => {
   const f = filtros.find((x) => x[0] === S.pend_.f) || filtros[0];
   const L = W.filter(f[2]);
   const tarjeta = (w) => `<article class="pd">
-    <a class="pd-cartel" href="${w.ids && w.ids.imdb ? `#/pelicula?imdb=${w.ids.imdb}` : `#/buscar?q=${encodeURIComponent(w.titulo)}`}" data-pq-pend="${w.id}">${posterHTML(w)}</a>
+    <a class="pd-cartel" href="${w.ids && w.ids.imdb ? `#/pelicula?imdb=${w.ids.imdb}` : w.ids && w.ids.filmaffinity && w.estreno ? `#/pelicula?fa=${w.ids.filmaffinity}` : `#/buscar?q=${encodeURIComponent(w.titulo)}`}" data-pq-pend="${w.id}">${posterHTML(w)}</a>
     <div class="pd-info">
       <div class="pd-t">${esc(w.titulo)}${w.anio ? ` <span class="dim">${w.anio}</span>` : ""}</div>
-      ${w.motivo ? `<div class="pd-m">${esc(w.motivo)}</div>` : ""}
+      ${w.motivo && !/^(se estrena|estreno en cines|próximamente)/i.test(w.motivo) ? `<div class="pd-m">${esc(w.motivo)}</div>` : ""}
+      ${w.estreno && w.estreno > todayISO() && !tieneAviso(w, "estreno") ? `<div class="avisos"><span class="aviso aviso-estreno">${icon("calendar")}Se estrena el ${esc(fechaLarga(w.estreno))} ${w.estreno.slice(0, 4)} · ${faltaPara(w.estreno)}</span></div>` : ""}
       <div class="avisos" data-avisos="${w.id}">${((S.avisos && S.avisos.get(w.id)) || []).map(avisoChip).join("")}</div>
-      <div class="pd-acc"><button class="btn btn-sm btn-primary" data-wseen="${w.id}">${icon("eye")}La he visto</button><button class="icon-btn" data-wdel="${w.id}" title="Quitar de pendientes">${icon("x")}</button></div>
+      <div class="pd-acc">${w.estreno && w.estreno > todayISO() ? "" : `<button class="btn btn-sm btn-primary" data-wseen="${w.id}">${icon("eye")}La he visto</button>`}<button class="icon-btn" data-wdel="${w.id}" title="Quitar de pendientes">${icon("x")}</button></div>
     </div></article>`;
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Pendientes</h1><p>${W.length ? `${W.length} ${W.length === 1 ? "película" : "películas"} por ver${W.filter((w) => tieneAviso(w)).length ? ` · <b>${W.filter((w) => tieneAviso(w)).length} ya se pueden ver</b>` : ""}.` : "Lo que quieres ver."} Te aviso cuando lleguen a tus cines o a una plataforma.</p></div></div>
@@ -1528,7 +1540,8 @@ async function cartelesPendientes() {
   }
 }
 async function addPending(item, motivo) {
-  await api("pendientes", { method: "POST", body: { titulo: item.titulo, anio: item.anio || null, motivo, tituloOriginal: item.tituloOriginal || item.original || null } });
+  await api("pendientes", { method: "POST", body: { titulo: item.titulo, anio: item.anio || null, motivo, tituloOriginal: item.tituloOriginal || item.original || null,
+    poster: item.poster || null, ids: item.ids || (item.fa ? { filmaffinity: String(item.fa) } : {}), estreno: item.fecha || item.estreno || null } });
   await refreshDB();
   toast(`«${item.titulo}» a pendientes`, "bookmark");
 }
@@ -2189,6 +2202,7 @@ function openPin() {
   };
 }
 async function logout() {
+  try { for (const k of Object.keys(localStorage)) if (k.startsWith("filora.copia.")) localStorage.removeItem(k); } catch (e) { /* */ }
   setSes(null);
   try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ }
   document.documentElement.classList.toggle("ro", ro());
@@ -2274,7 +2288,7 @@ VIEWS.buscar = (v, qs) => {
     if (web) {
       const pers = web.personas.length ? `<div class="bq-pers">${web.personas.map((x) => `<a class="pe-pers" href="#/persona?imdb=${x.imdb}&n=${encodeURIComponent(x.nombre)}"><span class="pe-foto">${x.foto ? `<img src="${esc(x.foto)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<b>${inicialesDe(x.nombre)}</b>`}</span><span class="pe-n">${esc(x.nombre)}</span><span class="pe-r">${esc(x.desc)}</span></a>`).join("")}</div>` : "";
       const pelis = web.pelis.length ? `<div class="posters">${web.pelis.map((r) => { const m = tengo.get(r.imdb);
-        return m ? pcard(m) : `<a class="pcard" href="#/pelicula?imdb=${r.imdb}"><div class="frame">${posterHTML(r)}</div><div class="meta"><div class="t">${esc(r.titulo)}</div><div class="s">${esc([r.anio, r.reparto].filter(Boolean).join(" · "))}</div></div></a>`; }).join("")}</div>` : "";
+        return m ? pcard(m) : `<a class="pcard" href="#/pelicula?imdb=${r.imdb}"><div class="frame">${posterHTML(r)}${r.anio && r.anio > new Date().getFullYear() ? `<span class="pronto">Próximamente</span>` : ""}</div><div class="meta"><div class="t">${esc(r.titulo)}</div><div class="s">${esc([r.anio, r.reparto].filter(Boolean).join(" · "))}</div></div></a>`; }).join("")}</div>` : "";
       resto = seccion("Personas", pers) + seccion("Películas", pelis);
       if (!resto && !M.length) resto = `<div class="empty">No encuentro nada con «${esc(q)}».</div>`;
     }
@@ -2606,9 +2620,36 @@ if ("serviceWorker" in navigator && location.protocol === "https:") {
 }
 
 // ---------------------------------------------------------------- arranque
+// Arranque instantáneo: se pinta con la última copia guardada en este navegador y se actualiza por detrás.
+const COPIA_KEY = () => `filora.copia.${(getSes() || {}).usuario || (getPin() ? "pin" : "anon")}`;
+function guardarCopia() {
+  if (!STATIC || !S.db) return;
+  try { localStorage.setItem(COPIA_KEY(), JSON.stringify({ t: Date.now(), db: S.db, est: S.est, cat: S.cat, cart: S.cartTodo })); }
+  catch (e) { try { localStorage.removeItem(COPIA_KEY()); } catch (e2) { /* sin sitio */ } }
+}
+function leerCopia() {
+  if (!STATIC) return null;
+  try { const c = JSON.parse(localStorage.getItem(COPIA_KEY()) || "null"); return c && Date.now() - c.t < 30 * 864e5 && c.db && c.est && c.cat ? c : null; } catch (e) { return null; }
+}
+addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") guardarCopia(); });
 (async function init() {
+  const copia = leerCopia();
+  if (copia) {
+    S.db = copia.db; S.est = copia.est; S.cat = copia.cat; S.cartTodo = copia.cart || { cines: [] }; S.prof = null;
+    filtrarCartelera();
+    render();
+    try {
+      const antes = JSON.stringify(S.db);
+      await loadAll();
+      guardarCopia();
+      const escribiendo = document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+      if (JSON.stringify(S.db) !== antes && $("#modal").hidden && !escribiendo) { render._keep = true; render(); }
+    } catch (e) { /* sin conexión: se queda la copia */ }
+    return;
+  }
   try {
     await loadAll();
+    guardarCopia();
     render();
   } catch (e) {
     $("#view").innerHTML = STATIC
