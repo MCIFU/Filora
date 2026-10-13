@@ -1348,3 +1348,51 @@ a.icon-btn { color: inherit; }
 .pestanas { margin: 4px 0 30px; }
 #subv > .page-head:first-child { margin-top: 0; }
 .pl-cuerpo svg { max-width: 820px; max-height: 360px; display: block; margin: 0 auto; }
+
+/* Colección: panel lateral con Películas/Series y filtros */
+.col { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 32px; align-items: start; }
+.col-lado { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 78px); display: grid; gap: 14px; max-height: calc(100vh - 100px); overflow-y: auto; scrollbar-width: thin; padding-right: 4px; }
+.col-pest { display: grid; gap: 4px; }
+.col-pest a { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 6px; font-weight: 700; font-size: 15px; color: var(--papel-2); transition: background .15s; }
+.col-pest a small { margin-left: auto; font-weight: 500; color: var(--papel-3); font-variant-numeric: tabular-nums; }
+.col-pest a:hover { background: var(--sala-2); }
+.col-pest a.on { background: var(--sala-2); color: var(--papel); box-shadow: inset 3px 0 var(--telon); }
+.col-pest .i { width: 18px; height: 18px; }
+.col-filtros { border-top: 1px solid var(--linea); padding-top: 6px; }
+.col-filtros > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 8px 0; font: 700 18px/1 var(--creditos); letter-spacing: .08em; text-transform: uppercase; color: var(--papel-3); }
+.col-filtros > summary::-webkit-details-marker { display: none; }
+.col-filtros > summary span { color: var(--bombilla); }
+.cl-grupo { display: grid; gap: 4px; margin: 10px 0 14px; }
+.cl-grupo h4 { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 6px; font: 700 15px/1 var(--creditos); letter-spacing: .08em; text-transform: uppercase; color: var(--papel-3); }
+.cl-grupo h4 b { font: 600 13px/1 var(--texto); letter-spacing: 0; text-transform: none; color: var(--bombilla); }
+.cl-check { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 9px; align-items: center; padding: 5px 6px; border-radius: 4px; font-size: 14px; cursor: pointer; color: var(--papel-2); }
+.cl-check:hover { background: var(--sala-2); color: var(--papel); }
+.cl-check input { width: 16px; height: 16px; accent-color: var(--bombilla); margin: 0; }
+.cl-check small { color: var(--papel-3); font-variant-numeric: tabular-nums; }
+.cl-check:has(input:checked) { color: var(--papel); font-weight: 600; }
+.cl-mas > summary { cursor: pointer; font-size: 13px; color: var(--bombilla); padding: 4px 6px; list-style: none; }
+.cl-mas > summary::-webkit-details-marker { display: none; }
+.cl-mas[open] > summary { display: none; }
+.cl-grupo input[type=range] { width: 100%; accent-color: var(--bombilla); }
+.cl-ndx { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--papel-3); }
+.cl-decadas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+.cl-decadas button { padding: 7px 0; border: 1px solid var(--linea); border-radius: 4px; font: 600 15px/1 var(--creditos); color: var(--papel-2); background: transparent; cursor: pointer; }
+.cl-decadas button:hover { border-color: var(--bombilla); }
+.cl-decadas button.on { background: var(--bombilla); border-color: var(--bombilla); color: #fff; }
+.cl-grupo .select { width: 100%; }
+.cl-fav { margin-bottom: 10px; }
+.col-main { min-width: 0; display: grid; gap: 14px; align-content: start; }
+.col-barra { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
+.col-barra .search .input { height: 48px; font-size: 15.5px; }
+.cl-activos { margin-top: -4px; }
+.cl-quita { cursor: pointer; }
+@media (max-width: 860px) {
+  .col { grid-template-columns: 1fr; gap: 14px; }
+  .col-lado { position: static; max-height: none; overflow: visible; padding: 0; }
+  .col-pest { grid-template-columns: 1fr 1fr; }
+  .col-filtros { border: 1px solid var(--linea); border-radius: 6px; padding: 4px 14px; }
+  .col-barra { grid-template-columns: minmax(0, 1fr) auto; }
+  .col-barra .search { grid-column: 1 / -1; }
+}
+.col-barra .search .input { padding-left: 46px; }
+.col-barra .search .i { left: 14px; width: 20px; height: 20px; }

@@ -267,6 +267,28 @@ await prueba("Estadísticas: pestañas con Mis gustos y Tu año, y apartados des
   await p.waitForFunction(() => /Mis gustos/.test(document.querySelector(".pestanas a.on")?.textContent || ""), null, { timeout: 8000 });
 });
 
+await prueba("Colección: panel lateral con Películas y Series, filtros y buscador", async (p, e) => {
+  e.db.series.push({ id: "s1", titulo: "Breaking Bad", anios: "2008–2013", tipo: "Serie", pais: "Estados Unidos", nota: 9.5 }, { id: "s2", titulo: "Planeta Tierra", anios: "2006", tipo: "Documental", pais: "Reino Unido", nota: 9 });
+  e.db.peliculas[1].generos = ["Terror"];
+  await ir(p, "#/coleccion");
+  await p.waitForSelector(".col-pest a.on", { timeout: 8000 });
+  assert.match(await p.textContent(".col-pest a.on"), /Películas\s*2/);
+  assert.equal(await p.$$eval("#collRes .pcard", (x) => x.length), 2);
+  await p.check('[data-g="Terror"]');
+  assert.equal(await p.$$eval("#collRes .pcard", (x) => x.length), 1);
+  await p.click('[data-quita="g"]');
+  assert.equal(await p.$$eval("#collRes .pcard", (x) => x.length), 2);
+  await p.evaluate(() => { const r = document.querySelector("#fmin"); r.value = "8"; r.dispatchEvent(new Event("input")); });
+  assert.equal(await p.$$eval("#collRes .pcard", (x) => x.length), 1, "nota final mínima");
+  await p.click('.col-pest a[href="#/coleccion?t=series"]');
+  await p.waitForSelector('[data-serie="s1"]', { timeout: 8000 });
+  assert.equal(await p.$$eval("#collRes .pcard", (x) => x.length), 2);
+  await p.fill("#fq", "breaking");
+  await p.waitForFunction(() => document.querySelectorAll("#collRes .pcard").length === 1, null, { timeout: 3000 });
+  await ir(p, "#/series");
+  await p.waitForFunction(() => location.hash === "#/coleccion?t=series", null, { timeout: 3000 });
+});
+
 await prueba("Tu año en cine", async (p) => {
   await ir(p, "#/anio");
   await p.waitForSelector(".an-hero", { timeout: 8000 });

@@ -407,14 +407,13 @@ const NAV = [
   ["recomendaciones", "Para ti", "target"],
   ["estadisticas", "Estadísticas", "chart"],
   ["pendientes", "Pendientes", "bookmark"],
-  ["series", "Series", "tv"],
   ["ajustes", "Ajustes", "settings"],
 ];
 const navItems = () => NAV.filter((n) => !(STATIC && n[0] === "ajustes") && !(ro() && n[0] === "anadir"));
 function route() {
   const h = location.hash.replace(/^#\/?/, "");
   const [name, qs] = h.split("?");
-  return { name: navItems().some((n) => n[0] === name) || ["persona", "pelicula", "buscar", "estrenos", "gustos", "anio"].includes(name) ? name : "inicio", qs: new URLSearchParams(qs || "") };
+  return { name: navItems().some((n) => n[0] === name) || ["persona", "pelicula", "buscar", "estrenos", "gustos", "anio", "series"].includes(name) ? name : "inicio", qs: new URLSearchParams(qs || "") };
 }
 function renderChrome() {
   const r = route().name;
@@ -558,17 +557,21 @@ VIEWS.inicio = (v) => {
     <div class="insights">${insights().slice(0, 3).map(insightCard).join("")}</div></section>`}`;
 };
 
-// ---------------------------------------------------------------- Colección
+// ---------------------------------------------------------------- Colección (películas y series, con panel lateral)
+const FILTROS_P = { q: "", generos: [], decade: "", country: "", saga: "", min: 0, fav: false };
+for (const [k, v] of Object.entries(FILTROS_P)) if (S.coll[k] === undefined || (k === "generos" && !Array.isArray(S.coll[k]))) S.coll[k] = Array.isArray(v) ? [] : v;
+S.collS = { q: "", tipos: [], min: 0, country: "", sort: "nota" };
 function filtered() {
   const c = S.coll;
   const q = norm(c.q);
   let L = S.db.peliculas.filter((p) => {
-    if (q && !(norm(p.titulo).includes(q) || norm(p.tituloOriginal).includes(q) || norm(p.director).includes(q))) return false;
-    if (c.genre && !(p.generos || []).includes(c.genre)) return false;
+    if (q && ![p.titulo, p.tituloOriginal, p.tituloEn, p.director, ...(p.reparto || []).map((x) => x.n)].some((x) => x && norm(x).includes(q))) return false;
+    if (c.generos.length && !(p.generos || []).some((g) => c.generos.includes(g))) return false;
     if (c.decade && Math.floor((p.anio || 0) / 10) * 10 !== +c.decade) return false;
     if (c.country && p.pais !== c.country) return false;
     if (c.saga && p.saga !== c.saga) return false;
     if (c.min && !(notaFinal(p) >= +c.min)) return false;
+    if (c.fav && !p.favorita) return false;
     return true;
   });
   const by = {
@@ -584,50 +587,105 @@ function filtered() {
   };
   return L.sort(by[c.sort] || by.nota);
 }
+const tipoSerie = (s) => (s.animacion ? "Animación" : s.tipo || "Serie");
+function seriesFiltradas() {
+  const c = S.collS, q = norm(c.q);
+  const L = S.db.series.filter((s) => (!q || [s.titulo, s.tituloOriginal, s.pais].some((x) => x && norm(x).includes(q)))
+    && (!c.tipos.length || c.tipos.includes(tipoSerie(s))) && (!c.country || s.pais === c.country) && (!c.min || (s.nota != null && s.nota >= c.min)));
+  const by = { nota: (a, b) => (b.nota ?? -1) - (a.nota ?? -1), peor: (a, b) => (a.nota ?? 99) - (b.nota ?? 99), titulo: (a, b) => a.titulo.localeCompare(b.titulo, "es"),
+    nuevo: (a, b) => String(b.anios || "").localeCompare(String(a.anios || "")), viejo: (a, b) => String(a.anios || "").localeCompare(String(b.anios || "")) };
+  return L.sort(by[c.sort] || by.nota);
+}
+const serieCard = (s) => `<div class="pcard" data-serie="${s.id}"><div class="frame">${posterHTML({ ...s, anio: s.anios, generos: serieGen(s) })}${scoreBadge(s.nota)}</div>
+  <div class="meta"><div class="t">${esc(s.titulo)}</div><div class="s">${esc([s.anios, tipoSerie(s)].filter(Boolean).join(" · "))}</div></div></div>`;
 VIEWS.coleccion = (v, qs) => {
-  for (const k of ["q", "genre", "decade", "country", "saga", "min"]) if (qs.has(k)) S.coll[k] = qs.get(k);
-  const P = S.db.peliculas;
-  const opt = (vals, sel, all) => `<option value="">${all}</option>` + vals.map((x) => `<option value="${esc(x[0])}" ${String(sel) === String(x[0]) ? "selected" : ""}>${esc(x[1])}</option>`).join("");
-  const count = (fn) => { const m = new Map(); P.forEach((p) => [].concat(fn(p)).forEach((k) => k != null && k !== "" && m.set(k, (m.get(k) || 0) + 1))); return m; };
-  const gC = count((p) => p.generos || []), cC = count((p) => p.pais), sC = count((p) => p.saga), dC = count((p) => (p.anio ? Math.floor(p.anio / 10) * 10 : null));
-  const c = S.coll;
+  const series = qs.get("t") === "series";
+  const c = series ? S.collS : S.coll;
+  if (!series) {
+    for (const k of ["q", "decade", "country", "saga"]) if (qs.has(k)) c[k] = qs.get(k);
+    if (qs.has("genre")) c.generos = qs.get("genre") ? [qs.get("genre")] : [];
+    if (qs.has("min")) c.min = +qs.get("min") || 0;
+  }
+  const BASE = series ? S.db.series : S.db.peliculas;
+  const cuenta = (fn) => { const m = new Map(); BASE.forEach((p) => [].concat(fn(p)).forEach((k) => k != null && k !== "" && m.set(k, (m.get(k) || 0) + 1))); return m; };
+  const gC = series ? cuenta(tipoSerie) : cuenta((p) => p.generos || []);
+  const cC = cuenta((p) => p.pais), dC = series ? new Map() : cuenta((p) => (p.anio ? Math.floor(p.anio / 10) * 10 : null));
+  const sel = series ? c.tipos : c.generos;
+  const generos = [...gC].sort((a, b) => b[1] - a[1]);
+  const checkG = ([g, n]) => `<label class="cl-check"><input type="checkbox" data-g="${esc(g)}" ${sel.includes(g) ? "checked" : ""}><span>${esc(g)}</span><small>${n}</small></label>`;
+  const ordenes = series ? [["nota", "Mejor nota"], ["peor", "Peor nota"], ["nuevo", "Más recientes"], ["viejo", "Más antiguas"], ["titulo", "Título A–Z"]]
+    : [["nota", "Mejor nota final"], ["peor", "Peor nota final"], ["tunota", "Mejor nota tuya"], ["nuevo", "Más recientes"], ["viejo", "Más antiguas"], ["titulo", "Título A–Z"], ["duracion", "Más largas"], ["taquilla", "Mayor taquilla"], ["registro", "Últimas registradas"]];
   v.innerHTML = `
-  <div class="page-head"><div><h1 class="h1">Mis películas</h1></div>${STATIC && !ro() ? `<div id="completarBox">${botonCompletar()}</div>` : ""}</div>
-  <div class="toolbar">
-    <label class="search">${icon("search")}<input class="input" id="fq" placeholder="Buscar película o director" value="${esc(c.q)}"></label>
-    <select class="select" id="fgenre">${opt([...gC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.genre, "Todos los géneros")}</select>
-    <select class="select" id="fdecade">${opt([...dC].sort((a, b) => b[0] - a[0]).map(([k, n]) => [k, `Años ${String(k).slice(2)} · ${k} (${n})`]), c.decade, "Todas las décadas")}</select>
-    <select class="select" id="fcountry">${opt([...cC].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} (${n})`]), c.country, "Todos los países")}</select>
-    <select class="select" id="fmin">${opt([["9", "Nota final ≥ 9"], ["8", "Nota final ≥ 8"], ["7", "Nota final ≥ 7"], ["5", "Aprobadas (≥ 5)"]], c.min, "Cualquier nota")}</select>
-    <select class="select" id="fsort">${opt([["nota", "Mejor nota final"], ["peor", "Peor nota final"], ["tunota", "Mejor nota tuya"], ["nuevo", "Más recientes"], ["viejo", "Más antiguas"], ["titulo", "Título A–Z"], ["duracion", "Más largas"], ["taquilla", "Mayor taquilla"], ["registro", "Últimas registradas"]], c.sort, "Ordenar")}</select>
-    <div class="seg"><button data-mode="grid" class="${c.mode === "grid" ? "on" : ""}" title="Carátulas">${icon("grid")}</button><button data-mode="list" class="${c.mode === "list" ? "on" : ""}" title="Lista">${icon("list")}</button></div>
-  </div>
-  <div id="collRes"></div>`;
-  pintarCompletar();
+  <div class="page-head"><div><h1 class="h1">Colección</h1></div>${!series && STATIC && !ro() ? `<div id="completarBox">${botonCompletar()}</div>` : series && !ro() ? `<button class="btn btn-primary" id="sAdd">${icon("plus")}Añadir serie</button>` : ""}</div>
+  <div class="col">
+    <aside class="col-lado">
+      <nav class="col-pest"><a class="${series ? "" : "on"}" href="#/coleccion">${icon("film")}Películas <small>${S.db.peliculas.length}</small></a><a class="${series ? "on" : ""}" href="#/coleccion?t=series">${icon("tv")}Series <small>${S.db.series.length}</small></a></nav>
+      <details class="col-filtros" ${matchMedia("(min-width: 861px)").matches ? "open" : ""}><summary>${icon("spark")}Filtros<span id="nFiltros"></span></summary>
+        <div class="cl-grupo"><h4>${series ? "Tipo" : "Género"}</h4>${generos.slice(0, 8).map(checkG).join("")}
+          ${generos.length > 8 ? `<details class="cl-mas"><summary>${generos.length - 8} más</summary>${generos.slice(8).map(checkG).join("")}</details>` : ""}</div>
+        <div class="cl-grupo"><h4>${series ? "Nota mínima" : "Nota final mínima"} <b id="minV">${c.min ? `desde ${fmt1(c.min)}` : "cualquiera"}</b></h4>
+          <input type="range" id="fmin" min="0" max="10" step="0.5" value="${c.min || 0}" aria-label="Nota mínima"><div class="cl-ndx"><span>0</span><span>5</span><span>10</span></div></div>
+        ${!series ? `<div class="cl-grupo"><h4>Década</h4><div class="cl-decadas">${[...dC].sort((a, b) => a[0] - b[0]).map(([d, n]) => `<button class="${String(c.decade) === String(d) ? "on" : ""}" data-dec="${d}" title="${n} películas">${String(d).slice(2)}s</button>`).join("")}</div></div>` : ""}
+        <div class="cl-grupo"><h4>País</h4><select class="select" id="fcountry"><option value="">Todos</option>${[...cC].sort((a, b) => b[1] - a[1]).map(([k, n]) => `<option value="${esc(k)}" ${c.country === k ? "selected" : ""}>${esc(k)} (${n})</option>`).join("")}</select></div>
+        ${!series ? `<label class="cl-check cl-fav"><input type="checkbox" id="ffav" ${c.fav ? "checked" : ""}><span>Solo favoritas ★</span></label>` : ""}
+        <button class="btn btn-sm btn-ghost" id="fclear">Quitar filtros</button>
+      </details>
+    </aside>
+    <div class="col-main">
+      <div class="col-barra">
+        <label class="search">${icon("search")}<input class="input" id="fq" placeholder="${series ? "Buscar serie o país…" : "Buscar película, director o actor…"}" value="${esc(c.q)}" autocomplete="off"></label>
+        <select class="select" id="fsort">${ordenes.map(([k, l]) => `<option value="${k}" ${c.sort === k ? "selected" : ""}>${l}</option>`).join("")}</select>
+        ${!series ? `<div class="seg"><button data-mode="grid" class="${c.mode === "grid" ? "on" : ""}" title="Carátulas">${icon("grid")}</button><button data-mode="list" class="${c.mode === "list" ? "on" : ""}" title="Lista">${icon("list")}</button></div>` : ""}
+      </div>
+      <div id="collRes"></div>
+    </div>
+  </div>`;
+  if (!series) pintarCompletar();
+  const activos = () => (c.q ? 1 : 0) + sel.length + (c.min ? 1 : 0) + (c.country ? 1 : 0) + (!series && c.decade ? 1 : 0) + (!series && c.fav ? 1 : 0) + (!series && c.saga ? 1 : 0);
   const draw = () => {
-    const L = filtered();
-    const shown = L.slice(0, c.limit);
-    const avg = mean(L.filter((p) => p.nota != null).map(notaFinal));
-    const active = ["q", "genre", "decade", "country", "saga", "min"].some((k) => c[k]);
-    $("#collRes").innerHTML = `
-      <div class="result-line"><b>${L.length}</b> ${L.length === 1 ? "película" : "películas"}${L.length ? ` · nota final media <b>${fmt2(avg)}</b> <span class="dim">(mitad tu nota, mitad IMDb, FilmAffinity, Letterboxd y SensaCine)</span>` : ""}${active ? ` · <a href="#" id="fclear" style="color:var(--gold)">Quitar filtros</a>` : ""}</div>
-      ${!L.length ? `<div class="empty"><div class="h2">Nada por aquí</div>Prueba con otros filtros.</div>` : c.mode === "grid"
-        ? `<div class="posters">${shown.map((p) => pcard(p, { final: true })).join("")}</div>`
-        : `<div class="list card" style="padding:6px">${shown.map((p) => `<div class="row" data-open="${p.id}"><div class="mini">${posterHTML(p)}</div>
-            <div style="min-width:0"><div class="t">${esc(p.titulo)}${p.favorita ? ` <span style="color:var(--gold)">★</span>` : ""}</div><div class="s">${esc([p.tituloOriginal !== p.titulo ? p.tituloOriginal : null, p.director].filter(Boolean).join(" · "))}</div></div>
-            <div class="c">${esc((p.generos || []).slice(0, 2).join(", "))}</div><div class="c">${esc(p.pais || "")}</div><div class="c num">${p.anio || ""}</div><div class="c dim num" title="Tu nota">tú ${fmt1(p.nota)}</div><span data-tip="${esc(desgloseFinal(p))}">${scoreBadge(notaFinal(p))}</span></div>`).join("")}</div>`}
-      ${L.length > c.limit ? `<div class="more"><button class="btn" id="fmore">Mostrar más (${L.length - c.limit})</button></div>` : ""}`;
-    const fc = $("#fclear");
-    if (fc) fc.onclick = (e) => { e.preventDefault(); Object.assign(c, { q: "", genre: "", decade: "", country: "", saga: "", min: "" }); location.hash = "#/coleccion"; VIEWS.coleccion(v, new URLSearchParams()); };
-    const fm = $("#fmore");
-    if (fm) fm.onclick = () => { c.limit += 240; render._keep = true; draw(); };
+    const n = activos();
+    $("#nFiltros").textContent = n ? ` · ${n}` : "";
+    const quita = (k, val, txt) => `<button class="chip on cl-quita" data-quita="${k}" ${val != null ? `data-v="${esc(val)}"` : ""}>${esc(txt)} ×</button>`;
+    const chips = [...sel.map((g) => quita("g", g, g)), c.min ? quita("min", null, `desde ${fmt1(c.min)}`) : "", c.country ? quita("country", null, c.country) : "",
+      !series && c.decade ? quita("decade", null, `años ${String(c.decade).slice(2)}`) : "", !series && c.fav ? quita("fav", null, "favoritas") : "", !series && c.saga ? quita("saga", null, c.saga) : ""].join("");
+    if (series) {
+      const L = seriesFiltradas(), con = L.filter((x) => x.nota != null);
+      $("#collRes").innerHTML = `<div class="result-line"><b>${L.length}</b> ${L.length === 1 ? "serie" : "series"}${con.length ? ` · media <b>${fmt2(mean(con.map((x) => x.nota)))}</b>` : ""}</div>${chips ? `<div class="chips cl-activos">${chips}</div>` : ""}
+        ${L.length ? `<div class="posters">${L.map(serieCard).join("")}</div>` : `<div class="empty"><div class="h2">Nada por aquí</div>Prueba con otros filtros.</div>`}`;
+    } else {
+      const L = filtered(), shown = L.slice(0, c.limit), avg = mean(L.filter((p) => p.nota != null).map(notaFinal));
+      $("#collRes").innerHTML = `
+        <div class="result-line"><b>${L.length}</b> ${L.length === 1 ? "película" : "películas"}${L.length ? ` · nota final media <b>${fmt2(avg)}</b>` : ""}</div>${chips ? `<div class="chips cl-activos">${chips}</div>` : ""}
+        ${!L.length ? `<div class="empty"><div class="h2">Nada por aquí</div>Prueba con otros filtros.</div>` : c.mode === "grid"
+          ? `<div class="posters">${shown.map((p) => pcard(p, { final: true })).join("")}</div>`
+          : `<div class="list card" style="padding:6px">${shown.map((p) => `<div class="row" data-open="${p.id}"><div class="mini">${posterHTML(p)}</div>
+              <div style="min-width:0"><div class="t">${esc(p.titulo)}${p.favorita ? ` <span style="color:var(--gold)">★</span>` : ""}</div><div class="s">${esc([p.tituloOriginal !== p.titulo ? p.tituloOriginal : null, p.director].filter(Boolean).join(" · "))}</div></div>
+              <div class="c">${esc((p.generos || []).slice(0, 2).join(", "))}</div><div class="c">${esc(p.pais || "")}</div><div class="c num">${p.anio || ""}</div><div class="c dim num" title="Tu nota">tú ${fmt1(p.nota)}</div><span data-tip="${esc(desgloseFinal(p))}">${scoreBadge(notaFinal(p))}</span></div>`).join("")}</div>`}
+        ${L.length > c.limit ? `<div class="more"><button class="btn" id="fmore">Mostrar más (${L.length - c.limit})</button></div>` : ""}`;
+      const fm = $("#fmore");
+      if (fm) fm.onclick = () => { c.limit += 240; render._keep = true; draw(); };
+    }
+    $$("[data-quita]", v).forEach((b) => (b.onclick = () => {
+      const k = b.dataset.quita;
+      if (k === "g") { const i = sel.indexOf(b.dataset.v); if (i >= 0) sel.splice(i, 1); const cb = v.querySelector(`[data-g="${CSS.escape(b.dataset.v)}"]`); if (cb) cb.checked = false; }
+      else if (k === "min") { c.min = 0; $("#fmin").value = 0; $("#minV").textContent = "cualquiera"; }
+      else if (k === "fav") { c.fav = false; $("#ffav").checked = false; }
+      else { c[k] = ""; if (k === "country") $("#fcountry").value = ""; if (k === "decade") $$("[data-dec]", v).forEach((x) => x.classList.remove("on")); }
+      draw();
+    }));
   };
+  const otra = () => { c.limit = 120; draw(); };
   let t;
-  $("#fq").oninput = (e) => { clearTimeout(t); t = setTimeout(() => { c.q = e.target.value; c.limit = 120; draw(); }, 120); };
-  [["#fgenre", "genre"], ["#fdecade", "decade"], ["#fcountry", "country"], ["#fmin", "min"], ["#fsort", "sort"]].forEach(([id, k]) => {
-    $(id).onchange = (e) => { c[k] = e.target.value; c.limit = 120; saveUI(); draw(); };
-  });
+  $("#fq").oninput = (e) => { clearTimeout(t); t = setTimeout(() => { c.q = e.target.value; otra(); }, 120); };
+  $$("[data-g]", v).forEach((cb) => (cb.onchange = () => { const g = cb.dataset.g, i = sel.indexOf(g); if (cb.checked && i < 0) sel.push(g); if (!cb.checked && i >= 0) sel.splice(i, 1); otra(); }));
+  $("#fmin").oninput = (e) => { c.min = +e.target.value; $("#minV").textContent = c.min ? `desde ${fmt1(c.min)}` : "cualquiera"; otra(); };
+  $("#fcountry").onchange = (e) => { c.country = e.target.value; otra(); };
+  $("#fsort").onchange = (e) => { c.sort = e.target.value; if (!series) saveUI(); otra(); };
+  $$("[data-dec]", v).forEach((b) => (b.onclick = () => { c.decade = String(c.decade) === b.dataset.dec ? "" : b.dataset.dec; $$("[data-dec]", v).forEach((x) => x.classList.toggle("on", String(c.decade) === x.dataset.dec)); otra(); }));
+  const fav = $("#ffav"); if (fav) fav.onchange = () => { c.fav = fav.checked; otra(); };
+  $("#fclear").onclick = () => { Object.assign(c, { q: "", min: 0, country: "" }, series ? { tipos: [] } : { generos: [], decade: "", saga: "", fav: false }); if (location.hash !== (series ? "#/coleccion?t=series" : "#/coleccion")) location.hash = series ? "#/coleccion?t=series" : "#/coleccion"; else { render._keep = true; render(); } };
   $$("[data-mode]", v).forEach((b) => (b.onclick = () => { c.mode = b.dataset.mode; saveUI(); $$("[data-mode]", v).forEach((x) => x.classList.toggle("on", x === b)); draw(); }));
+  const sa = $("#sAdd"); if (sa) sa.onclick = () => openSerieForm();
   draw();
 };
 
@@ -1341,7 +1399,7 @@ SUB.gustos = (v) => {
   </div>
   <section class="section">${sectionHead("Lo que dicen tus notas")}<div class="insights">${insights().slice(0, 4).map(insightCard).join("")}</div>
     ${insights().length > 4 ? `<details class="pliegue" style="margin-top:12px"><summary><span class="pl-t">${insights().length - 4} conclusiones más</span><span class="pl-c">Décadas, duración, sagas, cine español…</span></summary><div class="pl-cuerpo"><div class="insights">${insights().slice(4).map(insightCard).join("")}</div></div></details>` : ""}</section>
-  ${seriesInsights().length ? `<section class="section">${sectionHead("Y en series…", "#/series", "Ver tus series")}<div class="insights">${seriesInsights().map(insightCard).join("")}</div></section>` : ""}
+  ${seriesInsights().length ? `<section class="section">${sectionHead("Y en series…", "#/coleccion?t=series", "Ver tus series")}<div class="insights">${seriesInsights().map(insightCard).join("")}</div></section>` : ""}
   <section class="section"><details class="pliegue"><summary><span class="pl-t">Tus directores</span><span class="pl-c">Los ${Math.min(25, dirs.length)} con más peso en tus gustos · pulsa uno para ver su ficha</span></summary>
     <div class="pl-cuerpo"><table class="tbl"><thead><tr><th>Director</th><th class="r">Películas</th><th class="r">Nota media</th><th>Mejor</th><th>Peor</th></tr></thead><tbody>
     ${dirs.slice(0, 25).map((d) => { const s = [...d.items].sort((a, b) => b.nota - a.nota); return `<tr class="click" onclick="location.hash='#/persona?n=${encodeURIComponent(d.key)}'"><td><b>${esc(d.key)}</b></td><td class="r dim">${d.n}</td><td class="r">${scoreBadge(d.mean)}</td><td class="muted">${esc(s[0].titulo)} <span class="dim">${fmt1(s[0].nota)}</span></td><td class="muted">${esc(s[s.length - 1].titulo)} <span class="dim">${fmt1(s[s.length - 1].nota)}</span></td></tr>`; }).join("")}
@@ -1660,21 +1718,7 @@ async function addPending(item, motivo) {
 }
 
 // ---------------------------------------------------------------- Series
-VIEWS.series = (v) => {
-  const st = S.series;
-  const L = S.db.series.filter((s) => !st.tipo || s.tipo === st.tipo).sort((a, b) => (b.nota ?? -1) - (a.nota ?? -1));
-  const tipos = [...new Set(S.db.series.map((s) => s.tipo))];
-  const rated = S.db.series.filter((s) => s.nota != null);
-  v.innerHTML = `
-  <div class="page-head"><div><h1 class="h1">Series y documentales</h1><p>${S.db.series.length} títulos · media ${fmt2(mean(rated.map((s) => s.nota)))}${S.db.series.length - rated.length ? ` · ${S.db.series.length - rated.length} sin nota todavía` : ""}</p></div>
-    <button class="btn btn-primary" id="sAdd">${icon("plus")}Añadir serie</button></div>
-  ${seriesStatsHTML()}
-  <div class="toolbar" style="position:static;margin-top:26px"><div class="seg" id="sT"><button data-t="" class="${!st.tipo ? "on" : ""}">Todas</button>${tipos.map((t) => `<button data-t="${esc(t)}" class="${st.tipo === t ? "on" : ""}">${esc(t)}s</button>`).join("")}</div></div>
-  <div class="posters">${L.map((s) => `<div class="pcard" data-serie="${s.id}"><div class="frame">${posterHTML({ ...s, anio: s.anios, generos: [s.animacion ? "Animación" : s.tipo === "Documental" ? "Documental" : "Drama"] })}${scoreBadge(s.nota)}</div>
-    <div class="meta"><div class="t">${esc(s.titulo)}</div><div class="s">${esc([s.anios, s.pais].filter(Boolean).join(" · "))}</div></div></div>`).join("")}</div>`;
-  $$("#sT button", v).forEach((b) => (b.onclick = () => { st.tipo = b.dataset.t; VIEWS.series(v); }));
-  $("#sAdd").onclick = () => openSerieForm();
-};
+VIEWS.series = () => location.replace("#/coleccion?t=series");
 const serieGen = (x) => [x.animacion ? "Animación" : x.tipo === "Documental" ? "Documental" : "Drama"];
 function seriesLinks(s) {
   const ids = s.ids || {};
@@ -2591,7 +2635,7 @@ async function completarSerie(sr) {
     if (m.externals && m.externals.imdb) ids.imdb = ids.imdb || m.externals.imdb;
     await api(`series/${sr.id}`, { method: "PUT", body: { poster: m.image.medium.replace("http://", "https://"), ids } });
     await refrescarSilencioso();
-    if (route().name === "series") { render._keep = true; render(); }
+    if (["series", "coleccion"].includes(route().name)) { render._keep = true; render(); }
   } catch (e) { /* sin conexión: se queda sin carátula */ }
 }
 async function refrescarSilencioso() { try { S.db = await api("db"); S.prof = null; } catch (e) { /* */ } }
