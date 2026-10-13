@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-12",
+ "actualizado": "2026-10-13",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -254,7 +254,7 @@
    }
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Ali G: Kién es yo?",
    "original": "Ali G: Who Iz I?",
    "director": "Sacha Baron Cohen",
@@ -269,7 +269,7 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Arriba Tutto",
    "original": "Arriba Tutto",
    "director": "José Mota",
@@ -285,7 +285,7 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Blue Heron",
    "original": "Blue Heron",
    "director": "Sophy Romvari",
@@ -299,7 +299,7 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Clayface",
    "original": "Clayface",
    "director": "James Watkins",
@@ -322,7 +322,7 @@
    }
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "El samurái y el prisionero",
    "original": "Kokurojo (The Samurai and the Prisoner)aka",
    "director": "Kiyoshi Kurosawa",
@@ -336,7 +336,7 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Leones en invierno",
    "original": "Leones en invierno",
    "director": "Albert Pintó",
@@ -345,13 +345,13 @@
    ],
    "pais": "España",
    "reparto": "Luis Zahera, Roberto Álamo, Luis Callejo",
-   "sinopsis": "Un policía infiltrado atropella a una joven y se fuga. El padre de la víctima, un antiguo ultrasur, investiga por su cuenta, chocando con el pasado…",
+   "sinopsis": "Un policía infiltrado atropella a una joven y se fuga. El padre de la víctima, un antiguo ultrasur, investiga por su…",
    "poster": "https://pics.filmaffinity.com/leones_en_invierno-120820250-mmed.jpg",
    "fa": "618609",
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Los niños están bien",
    "original": "Les enfants vont bienaka",
    "director": "Nathan Ambrosioni",
@@ -365,7 +365,7 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Moscas",
    "original": "Moscasaka",
    "director": "Fernando Eimbcke",
@@ -379,7 +379,7 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Sentido y sensibilidad",
    "original": "Sense and Sensibility",
    "director": "Georgia Oakley",
@@ -403,7 +403,7 @@
    }
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Superthings: La película",
    "original": "Superthings: La película",
    "director": "Víctor Monigote",
@@ -417,7 +417,7 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Un amor posible",
    "original": "Ga-neung-han sa-rangaka",
    "director": "Lee Chang-Dong",
@@ -431,7 +431,7 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-23",
+   "fecha": "2026-10-22",
    "titulo": "Wildwood: El bosque salvaje",
    "original": "Wildwood",
    "director": "Travis Knight",
@@ -806,7 +806,7 @@
    ],
    "pais": "España",
    "sinopsis": "El 23 de octubre de 1980 una gigantesca explosión de gas mató a 50 niños y 3 adultos en el colegio público de Ortuella, Vizcaya. Este suceso, que conmocionó al pueblo vasco y a toda España, afectó y cambió las vidas de esa y muchas otras familias como la de…",
-   "poster": "https://pics.filmaffinity.com/el_nino-999691592-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/el_nino-210592722-mmed.jpg",
    "fa": "283648",
    "destacado": false
   },
@@ -1163,7 +1163,7 @@
    ],
    "pais": "Estados Unidos",
    "sinopsis": "Billie, una adolescente impulsiva y poco convencional, desata accidentalmente unos poderes mágicos secretos y sale disparada de los suburbios hacia un reino mágico llamado Hexe, donde la reciben Ms. Quill y Elias Quire. A medida que se desarrolla el viaje de…",
-   "poster": "https://pics.filmaffinity.com/hexed-630894428-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/hexed-407995099-mmed.jpg",
    "fa": "992434",
    "destacado": false
   },
