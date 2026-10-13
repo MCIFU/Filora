@@ -111,7 +111,6 @@ function extLinks(p) {
   return [
     { n: "FilmAffinity", c: "#1d4d8c", l: "FA", u: ids.filmaffinity ? `https://www.filmaffinity.com/es/film${ids.filmaffinity}.html` : `https://www.filmaffinity.com/es/search.php?stext=${q}` },
     { n: "IMDb", c: "#c9a200", l: "IMDb", u: ids.imdb ? `https://www.imdb.com/es-es/title/${ids.imdb}/` : `https://www.imdb.com/es-es/find/?q=${qy}` },
-    { n: "Rotten Tomatoes", c: "#d8321f", l: "RT", u: ids.rt ? `https://www.rottentomatoes.com/${ids.rt}` : `https://www.rottentomatoes.com/search?search=${qo}` },
     { n: "SensaCine", c: "#e30613", l: "SC", u: ids.allocine ? `https://www.sensacine.com/peliculas/pelicula-${ids.allocine}/` : `https://www.sensacine.com/buscar/?q=${q}` },
     { n: "Letterboxd", c: "#202830", l: "LB", u: ids.letterboxd ? `https://letterboxd.com/film/${ids.letterboxd}/` : `https://letterboxd.com/search/films/${qo}/` },
     { n: "JustWatch", c: "#e7b32a", l: "JW", u: `https://www.justwatch.com/es/buscar?q=${q}` },
@@ -186,6 +185,7 @@ async function loadAll() {
   S.db = db; S.est = est; S.cat = cat; S.cartTodo = cart; S.prof = null;
   filtrarCartelera(); avisarDemanda();
   if (!ro()) setTimeout(() => calcularAvisos().catch(() => {}), 2500);
+  if (STATIC && !ro()) setTimeout(completarRecientes, 4000);
   if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500);
   if (typeof completarNotasWeb === "function") setTimeout(completarNotasWeb, 8000);
 }
@@ -628,8 +628,10 @@ function openFilm(id) {
             <div class="dim">Mitad tu nota y mitad la media de las webs (${fmt1(mean(notasWebDe(p).map((x) => x[1])))})</div></div></div>` : ""}
         </div>
         ${p.resena ? `<blockquote class="review">${esc(p.resena)}</blockquote>` : ""}
+        <section id="fTrama" class="fx-sec" hidden></section>
+        <section id="fTrailer" class="fx-sec">${trailerHTML(p)}</section>
         <section id="fReparto" class="fx-sec" hidden></section>
-        <div id="fExtras" class="extras-ficha"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando IMDb, FilmAffinity, Letterboxd, Rotten Tomatoes y SensaCine…</div></div>
+        <div id="fExtras" class="extras-ficha"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando IMDb, FilmAffinity, Letterboxd y SensaCine…</div></div>
         <section id="fTaquilla" class="fx-sec">${taquillaHTML(p)}</section>
         <div class="sub">Ver en</div>
         ${linksHTML(p)}
@@ -638,6 +640,7 @@ function openFilm(id) {
     ${similares.length ? `<div class="sub" style="margin-top:34px">Del mismo director en tu colección</div><div class="strip">${similares.map((x) => pcard(x)).join("")}</div>` : ""}
     </div>`);
   if (typeof cargarExtras === "function") cargarExtras(p);
+  cargarTrama(p);
   completarFicha(p).then((n) => { if (n) { cargarReparto(n); cargarTaquilla(n); } else { cargarReparto(p); cargarTaquilla(p); } });
 }
 // ---------------------------------------------------------------- Avisos de pendientes: cartelera, estreno o plataforma
@@ -702,6 +705,8 @@ function avisosInicioHTML() {
     <div class="avisos-l">${L.slice(0, 6).map(([w, a]) => `<a class="aviso-fila" href="#/pendientes"><b>${esc(w.titulo)}</b>${a.map(avisoChip).join("")}</a>`).join("")}</div></section>`;
 }
 function pintarAvisos() {
+  const escribiendo = document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if (route().name === "pendientes" && $("#modal").hidden && !escribiendo) { render._keep = true; render(); return; } // recuenta filtros y ordena
   const ini = document.getElementById("avisosInicio");
   if (ini) ini.innerHTML = avisosInicioHTML();
   for (const el of document.querySelectorAll("[data-avisos]")) el.innerHTML = ((S.avisos && S.avisos.get(el.dataset.avisos)) || []).map(avisoChip).join("");
@@ -780,6 +785,23 @@ function pintarCompletar() {
   if (go) go.onclick = completarColeccion;
   if (stop) stop.onclick = () => { if (S.completando) S.completando.parar = true; };
 }
+// Al abrir la web: las últimas añadidas a las que les falte algo se completan solas (hasta 8 por visita)
+async function completarRecientes() {
+  if (S.completando) return;
+  const L = [...S.db.peliculas].filter((p) => faltaDatos(p) || faltaTaquilla(p))
+    .sort((a, b) => String(b["añadido"] || "").localeCompare(String(a["añadido"] || ""))).slice(0, 8);
+  let n = 0;
+  for (const p0 of L) {
+    if (S.completando) return;
+    const antes = JSON.stringify(p0);
+    if (faltaDatos(p0)) await completarFicha(p0);
+    const p = S.db.peliculas.find((x) => x.id === p0.id) || p0;
+    if (faltaTaquilla(p)) await cargarTaquilla(p);
+    if (JSON.stringify(S.db.peliculas.find((x) => x.id === p0.id)) !== antes) n++;
+    await new Promise((r) => setTimeout(r, 800));
+  }
+  if (n) { S.prof = null; toast(`${n} ${n === 1 ? "película completada" : "películas completadas"} con cartel y datos`); if (VISTAS_VIVAS.includes(route().name) && $("#modal").hidden) { render._keep = true; render(); } }
+}
 async function completarColeccion() {
   if (S.completando) return;
   const cola = S.db.peliculas.filter((p) => faltaDatos(p) || faltaTaquilla(p)).map((p) => p.id);
@@ -829,21 +851,29 @@ async function completarFicha(p, forzar = false) {
     return S.db.peliculas[i];
   } catch (e) { return null; }
 }
-// Taquilla: barra EE.UU. + resto del mundo, con el presupuesto marcado
+// Taquilla: cifra total con veredicto y barras comparables (presupuesto, EE. UU., resto del mundo, total)
 function taquillaHTML(p) {
   const t = p.taquilla || {};
   if (!t.mundial && !p.presupuesto) return "";
-  const tot = Math.max(t.mundial || 0, p.presupuesto || 0, 1);
-  const dom = t.domestica || 0, int = t.internacional || Math.max(0, (t.mundial || 0) - dom);
-  const pc = (x) => `${(100 * x / tot).toFixed(1)}%`;
+  const dom = t.domestica || 0, int = t.internacional || Math.max(0, (t.mundial || 0) - dom), tot = t.mundial || dom + int;
+  const max = Math.max(tot, p.presupuesto || 0, 1);
+  const x = p.presupuesto && tot ? tot / p.presupuesto : null;
+  const ver = x == null ? null : x >= 4 ? ["Exitazo", "exito"] : x >= 2 ? ["Rentable", "exito"] : x >= 1 ? ["Recuperó lo invertido", "justo"] : ["Fracaso en taquilla", "fracaso"];
+  const conTaq = S.db.peliculas.filter((y) => (y.taquilla || {}).mundial).sort((a, b) => b.taquilla.mundial - a.taquilla.mundial);
+  const puesto = tot ? conTaq.findIndex((y) => y.id === p.id) + 1 : 0;
+  const fila = (cls, l, v, extra = "") => (v ? `<div class="tq-fila ${cls}"><span class="tq-l">${l}</span><span class="tq-b"><i style="width:${Math.max(1, (100 * v) / max).toFixed(1)}%"></i></span><b>${money(v)}</b>${extra}</div>` : "");
   return `<div class="sub">Taquilla${(p.ids || {}).imdb ? ` · <a href="https://www.boxofficemojo.com/title/${p.ids.imdb}/" target="_blank" rel="noopener">Box Office Mojo</a>` : ""}</div>
-    ${t.mundial ? `<div class="tq-total"><b>${money(t.mundial)}</b><span>en todo el mundo${p.presupuesto ? ` · ${fmt1(t.mundial / p.presupuesto)} veces su presupuesto` : ""}</span></div>
-    <div class="tq-barra" role="img" aria-label="Reparto de la taquilla">${dom ? `<i class="tq-dom" style="width:${pc(dom)}"></i>` : ""}${int ? `<i class="tq-int" style="width:${pc(int)}"></i>` : ""}${p.presupuesto ? `<em style="left:${pc(p.presupuesto)}" title="Presupuesto"></em>` : ""}</div>` : ""}
-    <div class="boxoffice">
-      ${dom ? `<div class="k-dom"><span>EE. UU.</span><b>${money(dom)}</b></div>` : ""}
-      ${int ? `<div class="k-int"><span>Resto del mundo</span><b>${money(int)}</b></div>` : ""}
-      ${t.apertura ? `<div><span>Primer fin de semana</span><b>${money(t.apertura)}</b></div>` : ""}
-      ${p.presupuesto ? `<div class="k-pre"><span>Presupuesto</span><b>${money(p.presupuesto)}</b></div>` : ""}
+    <div class="tq">
+      ${tot ? `<div class="tq-cab"><div><b class="tq-cifra">${money(tot)}</b><span>recaudados en todo el mundo</span></div>
+        ${ver ? `<div class="tq-ver tq-${ver[1]}"><b>${fmt1(x)}×</b><span>${ver[0]}</span></div>` : ""}</div>` : ""}
+      <div class="tq-filas">
+        ${fila("tq-pre", "Presupuesto", p.presupuesto)}
+        ${fila("tq-ap", "Primer fin de semana en EE. UU.", t.apertura)}
+        ${fila("tq-dom", "EE. UU. y Canadá", dom, tot ? `<small>${Math.round((100 * dom) / tot)} %</small>` : "")}
+        ${fila("tq-int", "Resto del mundo", int, tot ? `<small>${Math.round((100 * int) / tot)} %</small>` : "")}
+        ${fila("tq-tot", "Total", tot)}
+      </div>
+      ${puesto && conTaq.length > 1 ? `<div class="tq-pie">Puesto ${puesto} de ${conTaq.length} en tu colección por taquilla${puesto === 1 ? " · la más taquillera que has visto" : ""}</div>` : ""}
     </div>`;
 }
 // Si aún no se consultó, la taquilla se pide una vez a Box Office Mojo y se guarda en la película
@@ -860,26 +890,48 @@ async function cargarTaquilla(p) {
     if (box) box.innerHTML = taquillaHTML({ ...p, ...cambios });
   } catch (e) { /* sin conexión: se intentará otra vez al abrirla */ }
 }
-// Reparto con fotos (Wikidata): el guardado o, si no hay, el de su ficha en Wikidata
+async function cargarTrama(p) {
+  const q = (p.ids || {}).wikidata;
+  if (!q || typeof entidadesWD !== "function") return;
+  try {
+    const e = (await entidadesWD([q], "sitelinks|claims", "eswiki|enwiki"))[q];
+    const sl = (e && e.sitelinks) || {};
+    const yt = valores(e, "P1651")[0];
+    const t = document.getElementById("fTrailer"); if (t && yt) t.innerHTML = trailerHTML(p, yt);
+    const tr = await tramaWiki(sl.eswiki && sl.eswiki.title, sl.enwiki && sl.enwiki.title);
+    const box = document.getElementById("fTrama");
+    if (box && tr) { box.innerHTML = tramaHTML(tr); box.hidden = false; }
+  } catch (e) { /* sin trama */ }
+}
+// Reparto con fotos y personajes (Wikidata): el guardado, completado con su ficha de Wikidata
 async function cargarReparto(p) {
   const box = document.getElementById("fReparto");
   if (!box || typeof entidadesWD !== "function") return;
-  let lista = Array.isArray(p.reparto) ? p.reparto : [];
+  let lista = Array.isArray(p.reparto) ? p.reparto.map((x) => ({ ...x })) : [];
   const q = (p.ids || {}).wikidata;
-  try {
-    if (!lista.length && q) {
-      const e = (await entidadesWD([q], "claims"))[q];
-      const qs = valores(e, "P161").map((v) => v.id).slice(0, 12);
-      const L = await entidadesWD(qs, "labels");
-      lista = qs.map((x) => ({ n: etiqueta(L[x]), q: x })).filter((x) => x.n);
-    }
+  const pintar = (fotos = {}) => {
     if (!lista.length || !document.body.contains(box)) return;
     box.hidden = false;
-    box.innerHTML = `<div class="sub">Reparto</div><div class="fx-reparto">${lista.slice(0, 12).map((x) => `<a class="pe-pers" href="#/persona?${x.q ? `q=${x.q}` : `n=${encodeURIComponent(x.n)}`}" data-close><span class="pe-foto" ${x.q ? `data-pq="${x.q}"` : ""}><b>${esc(x.n.split(" ").map((w) => w[0]).slice(0, 2).join(""))}</b></span><span class="pe-n">${esc(x.n)}</span></a>`).join("")}</div>`;
-    const qs = lista.map((x) => x.q).filter(Boolean);
-    const F = await entidadesWD(qs, "claims");
-    for (const el of box.querySelectorAll(".pe-foto[data-pq]")) { const f = valores(F[el.dataset.pq], "P18")[0]; if (f) el.innerHTML = `<img src="${fotoCommons(f, 200)}" alt="" loading="lazy" referrerpolicy="no-referrer">`; }
-  } catch (e) { /* sin Wikidata: sin reparto */ }
+    box.innerHTML = `<div class="sub">Reparto</div><div class="fx-reparto">${lista.slice(0, 12).map((x) => `<a class="pe-pers" href="#/persona?${x.q ? `q=${x.q}` : `n=${encodeURIComponent(x.n)}`}" data-close>
+      <span class="pe-foto">${fotos[x.q] ? `<img src="${fotoCommons(fotos[x.q], 200)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<b>${esc(x.n.split(" ").map((w) => w[0]).slice(0, 2).join(""))}</b>`}</span>
+      <span class="pe-n">${esc(x.n)}</span>${x.p ? `<span class="pe-r">${esc(x.p)}</span>` : ""}</a>`).join("")}</div>`;
+  };
+  pintar();
+  try {
+    if (q) {
+      const e = (await entidadesWD([q], "claims"))[q];
+      const R = repartoWD(e, 12);
+      const L = await entidadesWD(R.flatMap((r) => [r.q, r.pq].filter(Boolean)), "labels");
+      const wd = R.map((r) => ({ n: etiqueta(L[r.q]), q: r.q, p: r.ps || (r.pq ? etiqueta(L[r.pq]) : "") || undefined })).filter((x) => x.n);
+      if (!lista.length) lista = wd;
+      else for (const x of lista) { const m = wd.find((y) => (x.q && y.q === x.q) || norm(y.n) === norm(x.n)); if (m) { x.p = x.p || m.p; x.q = x.q || m.q; } }
+      // guarda los personajes la primera vez
+      if (!ro() && STATIC && lista.some((x, i) => x.p && !(p.reparto || [])[i]?.p)) api(`peliculas/${p.id}`, { method: "PUT", body: { reparto: lista.slice(0, 12) } }).then((n) => { const i = S.db.peliculas.findIndex((y) => y.id === p.id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...n }; }).catch(() => {});
+    }
+    pintar();
+    const F = await entidadesWD(lista.map((x) => x.q).filter(Boolean), "claims");
+    pintar(Object.fromEntries(lista.filter((x) => x.q).map((x) => [x.q, valores(F[x.q], "P18")[0]]).filter(([, f]) => f)));
+  } catch (e) { /* sin Wikidata: lo guardado */ }
 }
 
 // ---------------------------------------------------------------- Modal genérico
@@ -1429,23 +1481,52 @@ VIEWS.estrenos = (v) => {
 };
 
 // ---------------------------------------------------------------- Pendientes
+S.pend_ = { f: "" };
+const tieneAviso = (w, tipo) => ((S.avisos && S.avisos.get(w.id)) || []).some((a) => (tipo ? a.tipo === tipo : a.tipo !== "estreno"));
 VIEWS.pendientes = (v) => {
-  const W = [...S.db.pendientes].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || "")));
+  const W = [...S.db.pendientes].sort((a, b) => Number(tieneAviso(b)) - Number(tieneAviso(a)) || String(b.añadido || "").localeCompare(String(a.añadido || "")));
+  const filtros = [["", "Todas", () => true], ["ya", "Ya se pueden ver", (w) => tieneAviso(w)], ["cine", "En tus cines", (w) => tieneAviso(w, "cine")],
+    ["plataforma", "En plataformas", (w) => tieneAviso(w, "plataforma")], ["estreno", "Próximos estrenos", (w) => tieneAviso(w, "estreno")]];
+  const f = filtros.find((x) => x[0] === S.pend_.f) || filtros[0];
+  const L = W.filter(f[2]);
+  const tarjeta = (w) => `<article class="pd">
+    <a class="pd-cartel" href="${w.ids && w.ids.imdb ? `#/pelicula?imdb=${w.ids.imdb}` : `#/buscar?q=${encodeURIComponent(w.titulo)}`}" data-pq-pend="${w.id}">${posterHTML(w)}</a>
+    <div class="pd-info">
+      <div class="pd-t">${esc(w.titulo)}${w.anio ? ` <span class="dim">${w.anio}</span>` : ""}</div>
+      ${w.motivo ? `<div class="pd-m">${esc(w.motivo)}</div>` : ""}
+      <div class="avisos" data-avisos="${w.id}">${((S.avisos && S.avisos.get(w.id)) || []).map(avisoChip).join("")}</div>
+      <div class="pd-acc"><button class="btn btn-sm btn-primary" data-wseen="${w.id}">${icon("eye")}La he visto</button><button class="icon-btn" data-wdel="${w.id}" title="Quitar de pendientes">${icon("x")}</button></div>
+    </div></article>`;
   v.innerHTML = `
-  <div class="page-head"><div><h1 class="h1">Pendientes</h1><p>Lo que quieres ver. Cuando la veas, pulsa <b>La he visto</b> y pasa directamente a tu colección con su nota.</p></div></div>
-  <div class="card card-pad rw" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">
-    <input class="input" id="wT" placeholder="Título" style="flex:2 1 220px"><input class="input" id="wY" placeholder="Año" type="number" style="flex:0 1 110px"><input class="input" id="wM" placeholder="¿Por qué? (quién te la recomendó…)" style="flex:2 1 220px">
-    <button class="btn btn-primary" id="wAdd">${icon("plus")}Añadir</button></div>
-  ${W.length ? `<div class="wl">${W.map((w) => `<div class="card"><div style="min-width:0"><div class="t">${esc(w.titulo)} <span class="dim">${w.anio || ""}</span></div><div class="s">${esc(w.motivo || "")}</div><div class="avisos" data-avisos="${w.id}">${((S.avisos && S.avisos.get(w.id)) || []).map(avisoChip).join("")}</div></div>
-    <div style="display:flex;gap:6px"><button class="btn btn-sm" data-wseen="${w.id}">${icon("eye")}La he visto</button><button class="icon-btn" data-wdel="${w.id}" title="Quitar">${icon("x")}</button></div></div>`).join("")}</div>`
-    : `<div class="empty"><div class="h2">No tienes pendientes</div>Añade desde <a href="#/recomendaciones" style="color:var(--gold)">Para ti</a> o <a href="#/estrenos" style="color:var(--gold)">Estrenos</a>.</div>`}`;
-  $("#wAdd").onclick = async () => {
+  <div class="page-head"><div><h1 class="h1">Pendientes</h1><p>${W.length ? `${W.length} ${W.length === 1 ? "película" : "películas"} por ver${W.filter((w) => tieneAviso(w)).length ? ` · <b>${W.filter((w) => tieneAviso(w)).length} ya se pueden ver</b>` : ""}.` : "Lo que quieres ver."} Te aviso cuando lleguen a tus cines o a una plataforma.</p></div></div>
+  <form class="pd-nueva rw" id="wForm" autocomplete="off">
+    <input class="input" id="wT" placeholder="Película que quieres ver" required><input class="input" id="wY" placeholder="Año" inputmode="numeric">
+    <input class="input" id="wM" placeholder="¿Quién te la recomendó? (opcional)"><button class="btn btn-primary">${icon("plus")}Añadir</button></form>
+  ${W.length ? `<div class="chips pd-filtros">${filtros.map(([k, n, fn]) => { const c = W.filter(fn).length; return c || !k ? `<button class="chip ${f[0] === k ? "on" : ""}" data-pf="${k}">${n} · ${c}</button>` : ""; }).join("")}</div>
+    <div class="pd-grid">${L.map(tarjeta).join("")}</div>`
+    : `<div class="empty"><div class="h2">No tienes pendientes</div>Añade desde <a href="#/recomendaciones" style="color:var(--gold)">Para ti</a>, <a href="#/estrenos" style="color:var(--gold)">Estrenos</a> o el <a href="#/buscar" style="color:var(--gold)">buscador</a>.</div>`}`;
+  $$("[data-pf]", v).forEach((b) => (b.onclick = () => { S.pend_.f = b.dataset.pf; VIEWS.pendientes(v); }));
+  $("#wForm").onsubmit = async (ev) => {
+    ev.preventDefault();
     const t = $("#wT").value.trim();
     if (!t) return $("#wT").focus();
     await api("pendientes", { method: "POST", body: { titulo: t, anio: +$("#wY").value || null, motivo: $("#wM").value.trim() } });
-    await refreshDB(); toast("Añadida a pendientes"); VIEWS.pendientes(v);
+    await refreshDB(); toast("Añadida a pendientes", "bookmark"); VIEWS.pendientes(v); cartelesPendientes();
   };
+  cartelesPendientes();
 };
+// Carteles de los pendientes que no lo tienen (IMDb), guardados para la próxima vez
+async function cartelesPendientes() {
+  if (!STATIC || ro()) return;
+  const faltan = S.db.pendientes.filter((w) => !w.poster && !reciente(w.sinCartel, 15)).slice(0, 12);
+  for (const w of faltan) {
+    const r = await posterWeb(w);
+    const cambios = r.poster ? { poster: r.poster, ids: { ...(w.ids || {}), imdb: (w.ids || {}).imdb || r.imdb } } : { sinCartel: todayISO() };
+    try { const n = await api(`pendientes/${w.id}`, { method: "PUT", body: cambios }); Object.assign(w, n); } catch (e) { Object.assign(w, cambios); }
+    const el = document.querySelector(`[data-pq-pend="${w.id}"]`);
+    if (el && w.poster) el.innerHTML = posterHTML(w);
+  }
+}
 async function addPending(item, motivo) {
   await api("pendientes", { method: "POST", body: { titulo: item.titulo, anio: item.anio || null, motivo, tituloOriginal: item.tituloOriginal || item.original || null } });
   await refreshDB();
@@ -1476,7 +1557,6 @@ function seriesLinks(s) {
     { n: "FilmAffinity", c: "#1d4d8c", l: "FA", u: ids.filmaffinity ? `https://www.filmaffinity.com/es/film${ids.filmaffinity}.html` : `https://www.filmaffinity.com/es/search.php?stext=${q}` },
     { n: "IMDb", c: "#c9a200", l: "IMDb", u: ids.imdb ? `https://www.imdb.com/es-es/title/${ids.imdb}/` : `https://www.imdb.com/es-es/find/?q=${q}` },
     { n: "SensaCine", c: "#e30613", l: "SC", u: ids.allocineSerie ? `https://www.sensacine.com/series/serie-${ids.allocineSerie}/` : `https://www.sensacine.com/buscar/?q=${q}` },
-    { n: "Rotten Tomatoes", c: "#d8321f", l: "RT", u: `https://www.rottentomatoes.com/search?search=${q}` },
     { n: "JustWatch", c: "#e7b32a", l: "JW", u: `https://www.justwatch.com/es/buscar?q=${q}` },
   ];
 }
@@ -1865,6 +1945,46 @@ const WD_GEN = [[/superh[ée]ro|superhero/, "Superhéroes"], [/terror|horror|sla
   [/rom[áa]n|romance|romantic/, "Romance"], [/musical/, "Musical"], [/b[ée]lic|guerra|war film/, "Bélico"], [/western|w[ée]stern|del oeste/, "Western"],
   [/misterio|mystery|detectiv/, "Misterio"], [/biogr/, "Biográfico"], [/hist[óo]ric|period/, "Histórico"], [/famil|infantil|children/, "Familiar"],
   [/crim|polic|g[áa]ngster|noir|heist|atracos/, "Crimen"], [/drama/, "Drama"]];
+// Reparto de una entidad de Wikidata con su personaje (P453 «papel» o P4633 «nombre del personaje»)
+function repartoWD(e, n = 12) {
+  return (((e && e.claims) || {}).P161 || []).filter((c) => c.rank !== "deprecated" && c.mainsnak && c.mainsnak.datavalue).slice(0, n).map((c) => {
+    const ql = c.qualifiers || {}, v = (k) => ((ql[k] || [])[0] || {}).datavalue;
+    return { q: c.mainsnak.datavalue.value.id, pq: (v("P453") || {}).value?.id || null, ps: (v("P4633") || {}).value || null };
+  });
+}
+// Trama de una película: sección «Argumento» de Wikipedia (es, si no en) o, si no hay, el resumen inicial
+const SECC_TRAMA = /^(argumento|sinopsis|trama|historia|plot|synopsis|premise)$/i;
+async function tramaWiki(esw, enw) {
+  for (const [l, t] of [["es", esw], ["en", enw]]) {
+    if (!t) continue;
+    try {
+      const d = await (await wmFetch(`https://${l}.wikipedia.org/w/api.php?` + new URLSearchParams({ action: "query", prop: "extracts", explaintext: "1", titles: t, redirects: "1", format: "json", origin: "*" }))).json();
+      const txt = (Object.values((d.query || {}).pages || {})[0] || {}).extract || "";
+      const partes = txt.split(/\n(==+) ?([^=\n]+?) ?==+\n/);
+      for (let i = 1; i < partes.length; i += 3) if (SECC_TRAMA.test(partes[i + 1].trim()) && partes[i + 2].trim().length > 80) return { texto: partes[i + 2].trim(), lengua: l, titulo: t, completa: true };
+      if (l === "es" && partes[0].trim().length > 80) return { texto: partes[0].trim(), lengua: l, titulo: t, completa: false };
+    } catch (e) { /* esa Wikipedia no responde */ }
+  }
+  return null;
+}
+function tramaHTML(tr) {
+  if (!tr) return "";
+  const parr = tr.texto.split(/\n+/).filter((x) => x.trim());
+  const corto = parr.join(" ").length > 900;
+  return `<div class="sub">${tr.completa ? "Trama" : "Sobre la película"}${tr.lengua === "en" ? " · en inglés" : ""}</div>
+    <div class="trama ${corto ? "plegada" : ""}">${parr.map((x) => `<p>${esc(x)}</p>`).join("")}</div>
+    ${corto ? `<button class="btn btn-sm btn-ghost trama-mas" onclick="this.previousElementSibling.classList.remove('plegada');this.remove()">Leer la trama completa</button>` : ""}
+    <div class="dim trama-fuente">Fuente: <a href="https://${tr.lengua}.wikipedia.org/wiki/${encodeURIComponent(tr.titulo)}" target="_blank" rel="noopener">Wikipedia</a></div>`;
+}
+// Tráiler en YouTube: el oficial de Wikidata (P1651) si lo hay, y búsquedas en versión original y en español
+function trailerHTML(p, ytId) {
+  const vo = `${p.tituloOriginal || p.tituloEn || p.titulo} ${p.anio || ""} official trailer`.trim();
+  const es = `${p.titulo} ${p.anio || ""} tráiler español`.trim();
+  const yt = (q) => `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+  return `<div class="sub">Tráiler</div><div class="trailers">
+    <a class="trailer" href="${ytId ? `https://www.youtube.com/watch?v=${esc(ytId)}` : yt(vo)}" target="_blank" rel="noopener">${ytId ? `<img src="https://i.ytimg.com/vi/${esc(ytId)}/mqdefault.jpg" alt="" loading="lazy">` : ""}<span class="yt">▶</span><span><b>Versión original</b><small>YouTube</small></span></a>
+    <a class="trailer" href="${yt(es)}" target="_blank" rel="noopener"><span class="yt">▶</span><span><b>En español</b><small>YouTube</small></span></a></div>`;
+}
 // Wikidata y Wikipedia: en la web, a través de Vercel (caché de una semana); si falla, directo
 async function wmFetch(url) {
   if (STATIC) {
@@ -1896,7 +2016,7 @@ async function wikiDesdeQ(ids) {
   const esPeli = (e) => { const t = cv(e, "P31"); return t.some((x) => WD_FILM.has(x)) || (cv(e, "P345").some((x) => String(x).startsWith("tt")) && !t.some((x) => WD_TV.has(x)) && cv(e, "P57").length > 0); };
   const pelis = ids.map((i) => ents[i]).filter((e) => e && !e.missing && esPeli(e)).slice(0, 8);
   if (!pelis.length) return [];
-  const refs = [...new Set(pelis.flatMap((e) => [...cv(e, "P57").slice(0, 3), ...cv(e, "P495").slice(0, 1), ...cv(e, "P136"), ...cv(e, "P161").slice(0, 10)]))];
+  const refs = [...new Set(pelis.flatMap((e) => [...cv(e, "P57").slice(0, 3), ...cv(e, "P495").slice(0, 1), ...cv(e, "P136"), ...repartoWD(e, 10).flatMap((r) => [r.q, r.pq].filter(Boolean))]))];
   const labs = {};
   for (let i = 0; i < refs.length; i += 50) Object.assign(labs, (await wdApi({ action: "wbgetentities", ids: refs.slice(i, i + 50).join("|"), props: "labels", languages: "es|en" })).entities || {});
   const lab = (e, l = "es") => (e && e.labels && ((e.labels[l] || e.labels.en || {}).value)) || "";
@@ -1924,7 +2044,7 @@ async function wikiDesdeQ(ids) {
       titulo: lab(e, "es"), tituloOriginal: cv(e, "P1476")[0] || lab(e, "en"), tituloEn: lab(e, "en") || null, anio: anio ? +anio : null,
       duracion: dur ? Math.round(+dur) : null, director: cv(e, "P57").slice(0, 3).map((d) => lab(labs[d])).filter(Boolean).join(" / "),
       pais: lab(labs[cv(e, "P495")[0]]), generos: generos.slice(0, 3), ids: idsExt,
-      reparto: cv(e, "P161").slice(0, 10).map((q) => ({ n: lab(labs[q]), q })).filter((x) => x.n), poster: posters[enw] || null,
+      reparto: repartoWD(e, 10).map((r) => ({ n: lab(labs[r.q]), q: r.q, p: r.ps || (r.pq ? lab(labs[r.pq]) : "") || undefined })).filter((x) => x.n), poster: posters[enw] || null,
     };
   });
 }
@@ -2203,6 +2323,8 @@ function puntuar(r, { titulo, anio, director, duracion }) {
   if (anio && r.anio) p += r.anio === anio ? 4 : Math.abs(r.anio - anio) <= 1 ? 2 : -4;
   if (director && r.director) { const ap = palabras(director); p += [...palabras(r.director)].some((w) => ap.has(w)) ? 4 : -2; }
   if (duracion && r.duracion) p += Math.abs(r.duracion - duracion) <= 5 ? 2 : -1;
+  if (!anio && r.anio && r.anio > new Date().getFullYear()) p -= 3; // sin año, mejor la ya estrenada que una futura
+  if (r.ids && r.ids.wikidata) p += 0.5;
   return p;
 }
 async function identificar(d) {

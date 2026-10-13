@@ -41,6 +41,11 @@ const WD = {
     claims: cl({ P31: ["Q11424"], P57: ["Q2"], P161: ["Q3", "Q4"], P495: ["Q5"], P136: ["Q6"], P345: ["tt1673434"], P577: [{ time: "+2012-11-16T00:00:00Z" }], P2047: [{ amount: "+115" }] }) },
   Q2: { labels: L("Bill Condon"), claims: cl({ P31: ["Q5"], P345: ["nm0174374"], P569: [{ time: "+1955-10-22T00:00:00Z" }], P106: ["Q7"] }) },
   Q3: { labels: L("Kristen Stewart") }, Q4: { labels: L("Robert Pattinson") }, Q5: { labels: L("Estados Unidos") },
+  Q20: { labels: L("Lo imposible"), sitelinks: { eswiki: { title: "Lo imposible" } },
+    claims: { ...cl({ P31: ["Q11424"], P1651: ["abc123XYZ"] }), P161: [{ rank: "normal", mainsnak: { datavalue: { value: it("Q30") } }, qualifiers: { P453: [{ datavalue: { value: it("Q31") } }] } }] } },
+  Q40: { labels: L("Resident Evil"), claims: cl({ P31: ["Q11424"], P57: ["Q41"], P161: ["Q42"], P136: ["Q6"], P345: ["tt0120804"], P577: [{ time: "+2002-03-15T00:00:00Z" }], P2047: [{ amount: "+100" }] }) },
+  Q41: { labels: L("Paul W. S. Anderson") }, Q42: { labels: L("Milla Jovovich") },
+  Q30: { labels: L("Naomi Watts") }, Q31: { labels: L("María Bennett") },
   Q6: { labels: { es: { value: "cine fantástico" }, en: { value: "fantasy film" } } }, Q7: { labels: L("director de cine") },
 };
 
@@ -50,16 +55,20 @@ async function preparar(pagina, estado) {
   await pagina.route("https://www.wikidata.org/**", (r) => {
     const a = new URL(r.request().url()).searchParams;
     if (a.get("action") === "wbgetentities") return r.fulfill({ json: { entities: Object.fromEntries(a.get("ids").split("|").map((i) => [i, { id: i, labels: {}, claims: {}, ...(WD[i] || {}) }])) } });
-    if (a.get("list") === "search") return r.fulfill({ json: { query: { search: /tt1673434/.test(a.get("srsearch")) ? [{ title: "Q1" }] : /nm1291105|nm0174374/.test(a.get("srsearch")) ? [{ title: "Q2" }] : [] } } });
+    if (a.get("list") === "search") return r.fulfill({ json: { query: { search: /tt1673434/.test(a.get("srsearch")) ? [{ title: "Q1" }] : /tt0120804/.test(a.get("srsearch")) ? [{ title: "Q40" }] : /nm1291105|nm0174374/.test(a.get("srsearch")) ? [{ title: "Q2" }] : [] } } });
     if (a.get("action") === "wbsearchentities") return r.fulfill({ json: { search: [] } });
     return r.fulfill({ json: {} });
   });
+  await pagina.route("https://es.wikipedia.org/w/api.php**", (r) => r.fulfill({ json: { query: { pages: { 1: { extract: "Lo imposible es una película de 2012.\n\n== Argumento ==\nUna familia pasa las vacaciones de Navidad en Tailandia cuando el tsunami de 2004 arrasa la costa y los separa. María, malherida, y su hijo mayor luchan por sobrevivir mientras el padre busca al resto.\n\n== Reparto ==\nNaomi Watts" } } } } }));
   await pagina.route("https://query.wikidata.org/**", (r) => r.fulfill({ json: { results: { bindings: [] } } }));
   await pagina.route(`${BASE}/data/**`, (r) => { const u = r.request().url();
     r.fulfill({ json: /cartelera/.test(u) ? CARTELERA : /estrenos/.test(u) ? { estrenos: [] } : /catalogo/.test(u) ? [] : /cines_es/.test(u) ? [{ id: 402, nombre: "Yelmo Ocimax", ciudad: "Gijón" }] : {} }); });
   await pagina.route(`${BASE}/api/**`, (r) => {
     const u = new URL(r.request().url()), q = u.searchParams, m = r.request().method(), ruta = u.pathname.slice(5);
     if (ruta === "wm") return r.fulfill({ status: 502, body: "{}" }); // la pasarela «falla»: se usa Wikidata directo
+    if (ruta === "imdb" && /resident/i.test(q.get("q"))) return r.fulfill({ json: [
+      { imdb: "tt35538033", titulo: "Resident Evil", anio: anio + 1, reparto: "Austin Abrams", poster: POSTER + "#2026" },
+      { imdb: "tt0120804", titulo: "Resident Evil", anio: 2002, reparto: "Milla Jovovich, Michelle Rodriguez", poster: POSTER + "#2002" }] });
     if (ruta === "imdb") return r.fulfill({ json: q.get("todo") ? IMDB : IMDB.pelis });
     if (ruta === "poster") return r.fulfill({ json: { poster: POSTER, imdb: q.get("imdb") || "tt1673434" } });
     if (ruta === "taquilla") return r.fulfill({ json: { mundial: 888875751, domestica: 293144686, internacional: 595731065, presupuesto: 120000000 } });
@@ -68,6 +77,7 @@ async function preparar(pagina, estado) {
     if (ruta === "demanda") return r.fulfill({ json: { ok: true } });
     if (ruta === "db") return r.fulfill({ json: estado.db });
     if (ruta === "peliculas" && m === "POST") { const b = JSON.parse(r.request().postData()); estado.post = b; const p = { ...b, id: "p9", "añadido": new Date().toISOString() }; estado.db.peliculas.push(p); return r.fulfill({ json: p }); }
+    if (ruta.startsWith("pendientes/") && m === "PUT") { const id = ruta.split("/")[1], w = estado.db.pendientes.find((x) => x.id === id); Object.assign(w, JSON.parse(r.request().postData())); return r.fulfill({ json: w }); }
     if (ruta.startsWith("peliculas/") && m === "PUT") { const id = ruta.split("/")[1], b = JSON.parse(r.request().postData()); estado.puts.push([id, b]);
       const p = estado.db.peliculas.find((x) => x.id === id); Object.assign(p, b); return r.fulfill({ json: p }); }
     return r.fulfill({ json: {} });
@@ -124,7 +134,15 @@ await prueba("Ficha: créditos, reparto y taquilla", async (p) => {
   await p.waitForSelector("#fReparto .pe-n", { timeout: 8000 });
   assert.match(await p.textContent("#fReparto"), /Naomi Watts/);
   assert.match(await p.textContent("#fTaquilla"), /198,1 M/);
-  assert.ok(await p.$(".tq-barra .tq-dom"));
+  assert.ok(await p.$(".tq-fila.tq-dom"));
+  assert.match(await p.textContent(".tq-ver"), /4,4×\s*Exitazo/);
+  await p.waitForSelector("#fReparto .pe-r", { timeout: 8000 });
+  assert.match(await p.textContent("#fReparto"), /María Bennett/, "personaje junto al actor");
+  await p.waitForSelector("#fTrama .trama", { timeout: 8000 });
+  assert.match(await p.textContent("#fTrama"), /tsunami de 2004/);
+  assert.ok(await p.$('#fTrailer a[href*="watch?v=abc123XYZ"]'), "tráiler oficial");
+  assert.ok(await p.$('#fTrailer a[href*="espa%C3%B1ol"]'), "tráiler en español");
+  assert.doesNotMatch(await p.textContent(".fx-main"), /Rotten Tomatoes/);
 });
 
 await prueba("Ficha incompleta: se completa sola al abrirla", async (p, e) => {
@@ -133,6 +151,16 @@ await prueba("Ficha incompleta: se completa sola al abrirla", async (p, e) => {
   await p.waitForFunction(() => document.querySelector("#fTaquilla")?.textContent.includes("888,9"), null, { timeout: 10000 });
   const cambios = Object.assign({}, ...e.puts.filter(([id]) => id === "p22").map(([, b]) => b));
   assert.ok(cambios.poster && cambios.reparto && cambios.tituloEn && cambios.completado, JSON.stringify(Object.keys(cambios)));
+});
+
+await prueba("Al abrir la web se completan solas las últimas añadidas (Resident Evil sin año: la de 2002)", async (p, e) => {
+  e.db.peliculas.push({ id: "p30", titulo: "Resident Evil", nota: 6, ids: {}, taquilla: {}, generos: [], "añadido": new Date().toISOString() });
+  await ir(p, "#/coleccion");
+  await p.waitForFunction(() => document.querySelector("#toast") && /completada/.test(document.querySelector("#toast").textContent), null, { timeout: 15000 });
+  const x = e.db.peliculas.find((y) => y.id === "p30");
+  assert.equal(x.ids.imdb, "tt0120804");
+  assert.equal(x.director, "Paul W. S. Anderson");
+  assert.ok(x.poster && x.generos.length && x.reparto.length && x.taquilla.consultado);
 });
 
 await prueba("Buscador: tu colección al instante y personas y películas de IMDb", async (p) => {
@@ -152,7 +180,7 @@ await prueba("Página de película (desde el id de IMDb)", async (p) => {
   assert.match(await p.textContent("h1"), /Amanecer parte 2/i);
   assert.match(await p.textContent(".pe-aside"), /Bill Condon/);
   assert.match(await p.textContent(".pe-main"), /Kristen Stewart/);
-  await p.waitForSelector("#peTaquilla .tq-total", { timeout: 8000 });
+  await p.waitForSelector("#peTaquilla .tq-cifra", { timeout: 8000 });
 });
 
 await prueba("Página de persona (desde el id de IMDb)", async (p) => {
@@ -171,11 +199,16 @@ await prueba("Tu año en cine", async (p) => {
   assert.equal(await p.$$eval(".an-mes", (x) => x.length), 12);
 });
 
-await prueba("Pendientes: avisa si está en tus cines o en una plataforma", async (p) => {
+await prueba("Pendientes: avisa si está en tus cines o en una plataforma, con cartel y filtros", async (p, e) => {
   await ir(p, "#/pendientes");
   await p.waitForSelector('[data-avisos="w1"] .aviso-cine', { timeout: 8000 });
   await p.waitForSelector('[data-avisos="w2"] .aviso-plataforma', { timeout: 8000 });
   assert.match(await p.textContent('[data-avisos="w2"]'), /Netflix/);
+  await p.waitForFunction(() => document.querySelectorAll(".pd-cartel img").length === 2, null, { timeout: 8000 });
+  assert.ok(e.db.pendientes.every((w) => w.poster), "carteles guardados");
+  await p.click('[data-pf="plataforma"]');
+  assert.equal(await p.$$eval(".pd", (x) => x.length), 1);
+  assert.match(await p.textContent(".pd-grid"), /sociedad de la nieve/i);
 });
 
 await prueba("Completar mi colección", async (p, e) => {

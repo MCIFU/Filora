@@ -89,8 +89,8 @@ VIEWS.pelicula = async (v, qs) => {
   const e = (await entidadesWD([q], "labels|descriptions|claims|sitelinks", "enwiki|eswiki"))[q];
   if (location.hash !== yo) return;
   if (!e) { v.innerHTML = `<div class="empty"><div class="h2">No se ha podido cargar</div>Comprueba tu conexión.</div>`; return; }
-  const dirs = idsDe(e, "P57"), reparto = idsDe(e, "P161").slice(0, 18), guion = idsDe(e, "P58").slice(0, 4), musica = idsDe(e, "P86").slice(0, 2);
-  const otros = [...idsDe(e, "P495"), ...idsDe(e, "P136"), ...idsDe(e, "P364")].slice(0, 30);
+  const R = repartoWD(e, 18), dirs = idsDe(e, "P57"), reparto = R.map((r) => r.q), guion = idsDe(e, "P58").slice(0, 4), musica = idsDe(e, "P86").slice(0, 2);
+  const otros = [...idsDe(e, "P495"), ...idsDe(e, "P136"), ...idsDe(e, "P364"), ...R.map((r) => r.pq).filter(Boolean)].slice(0, 50);
   if (!idsDe(e, "P31").some((t) => WD_FILM.has(t) || WD_TV.has(t))) { v.innerHTML = `<div class="empty"><div class="h2">Esto no es una película</div>${esc(etiqueta(e))}</div>`; return; }
   // solo los nombres (rápido); las fotos del reparto llegan después
   const refs = await entidadesWD([...dirs, ...reparto, ...guion, ...musica, ...otros], "labels", "enwiki");
@@ -137,9 +137,10 @@ VIEWS.pelicula = async (v, qs) => {
   </section>
   <div class="pe-cuerpo">
     <div class="pe-main">
-      <section><div class="sub">Sinopsis</div><p class="ps-bio pe-sin" id="peSin">${esc((e.descriptions && (e.descriptions.es || e.descriptions.en || {}).value) || "")}</p></section>
+      <section id="peTrama"><div class="sub">Sobre la película</div><p class="ps-bio pe-sin">${esc((e.descriptions && (e.descriptions.es || e.descriptions.en || {}).value) || "")}</p></section>
+      <section>${trailerHTML(peli, valores(e, "P1651")[0])}</section>
       <div id="fExtras" class="extras-ficha"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando…</div></div>
-      ${reparto.length ? `<section><div class="sub">Reparto</div><div class="fx-reparto">${reparto.map((x) => persona(x, "")).join("")}</div></section>` : ""}
+      ${reparto.length ? `<section><div class="sub">Reparto</div><div class="fx-reparto">${R.map((r) => persona(r.q, esc(r.ps || (r.pq ? etiqueta(refs[r.pq]) : "")))).join("")}</div></section>` : ""}
     </div>
     <aside class="pe-aside">
       <dl class="fx-cred">
@@ -156,9 +157,8 @@ VIEWS.pelicula = async (v, qs) => {
     const { presupuesto, ...t } = r || {}; const box = $("#peTaquilla");
     if (box && (t.mundial || presupuesto)) box.innerHTML = taquillaHTML({ ids, taquilla: t, presupuesto });
   }).catch(() => {});
-  // sinopsis de Wikipedia
-  const tw = esw ? ["es", esw] : enw ? ["en", enw] : null;
-  if (tw) wmFetch(`https://${tw[0]}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(tw[1])}`).then((r) => r.json()).then((d) => { const b = $("#peSin"); if (b && d.extract) b.textContent = d.extract; }).catch(() => {});
+  // trama de Wikipedia
+  tramaWiki(esw, enw).then((tr) => { const b = $("#peTrama"); if (b && tr) b.innerHTML = tramaHTML(tr); });
   // predicción y notas/premios
   if (!mia && S.db.peliculas.length) {
     if (!peli.imdbNota && ids.imdb) try { const r = await notaIMDb(ids.imdb); if (r) peli.imdbNota = [r.v, r.n]; } catch (er) { /* */ }

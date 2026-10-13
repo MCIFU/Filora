@@ -31,13 +31,13 @@ async function notasDe(p) {
   const clave = "notas." + (ids.imdb || ids.wikidata || norm(p.titulo));
   const hit = cacheLeer(clave, 5);
   if (hit) return hit;
-  const q = new URLSearchParams(Object.entries({ fa: ids.filmaffinity, lb: ids.letterboxd, rt: ids.rt, ac: ids.allocine }).filter(([, v]) => v));
+  const q = new URLSearchParams(Object.entries({ fa: ids.filmaffinity, lb: ids.letterboxd, ac: ids.allocine }).filter(([, v]) => v));
   const [imdb, otras] = await Promise.all([
     notaIMDb(ids.imdb).catch(() => null),
     [...q].length ? fetch(`${WEB_FILORA()}/api/notas?${q}`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})) : {},
   ]);
   const out = { ...otras, ...(imdb ? { imdb } : {}) };
-  const falta = [...q.keys()].some((k) => !out[{ fa: "fa", lb: "lb", rt: "rt", ac: "sc" }[k]]);
+  const falta = [...q.keys()].some((k) => !out[{ fa: "fa", lb: "lb", ac: "sc" }[k]]);
   if (Object.keys(out).length) cacheGuardar(clave, out, falta ? 4.8 * 864e5 : 0); // incompleta: se reintenta en unas horas
   return out;
 }
@@ -53,8 +53,6 @@ function notasHTML(p, n) {
   if (n.imdb) tiles.push(t("IMDb", fmt1(n.imdb.v), 10, votos(n.imdb.n)));
   if (n.fa) tiles.push(t("FilmAffinity", fmt1(n.fa.v), 10, votos(n.fa.n)));
   if (n.lb) tiles.push(t("Letterboxd", n.lb.v.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 }), 5, votos(n.lb.n)));
-  if (n.rt && n.rt.critica != null) tiles.push(t("Rotten Tomatoes", `${n.rt.critica}%`, "", `Crítica${n.rt.publico != null ? ` · público ${n.rt.publico}%` : ""}`));
-  else if (n.rt && n.rt.publico != null) tiles.push(t("Rotten Tomatoes", `${n.rt.publico}%`, "", "Público"));
   if (n.sc) tiles.push(t("SensaCine", fmt1(n.sc.prensa ?? n.sc.usuarios), 5, n.sc.prensa != null ? `Prensa${n.sc.usuarios != null ? ` · usuarios ${fmt1(n.sc.usuarios)}` : ""}` : "Usuarios"));
   return tiles.length ? `<div class="sub">Notas en otras webs</div><div class="notas-ext">${tiles.join("")}</div>` : "";
 }
