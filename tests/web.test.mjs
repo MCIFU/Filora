@@ -70,7 +70,8 @@ async function preparar(pagina, estado) {
   await pagina.route("https://query.wikidata.org/**", (r) => r.fulfill({ json: { results: { bindings: [] } } }));
   await pagina.route(`${BASE}/data/**`, (r) => { const u = r.request().url();
     r.fulfill({ json: /cartelera/.test(u) ? CARTELERA : /estrenos/.test(u) ? { estrenos: ESTRENOS } : /catalogo/.test(u) ? CATALOGO : /cines_es/.test(u) ? [{ id: 402, nombre: "Yelmo Ocimax", ciudad: "Gijón" }] : {} }); });
-  await pagina.route(`${BASE}/api/**`, (r) => {
+  await pagina.route(`${BASE}/api/**`, async (r) => {
+    if (r.request().method() !== "GET" && !/\/api\/demanda/.test(r.request().url())) { estado.vuelo = (estado.vuelo || 0) + 1; estado.maxVuelo = Math.max(estado.maxVuelo || 0, estado.vuelo); if (estado.lentoEscribir) await new Promise((ok) => setTimeout(ok, 300)); estado.vuelo--; }
     const u = new URL(r.request().url()), q = u.searchParams, m = r.request().method(), ruta = u.pathname.slice(5);
     if (ruta === "wm") return r.fulfill({ status: 502, body: "{}" }); // la pasarela «falla»: se usa Wikidata directo
     if (ruta === "imdb" && /resident/i.test(q.get("q"))) return r.fulfill({ json: [
@@ -85,7 +86,9 @@ async function preparar(pagina, estado) {
     if (ruta === "demanda") return r.fulfill({ json: { ok: true } });
     if (ruta === "db") return estado.lento ? setTimeout(() => r.fulfill({ json: estado.db }), 3000) : r.fulfill({ json: estado.db });
     if (ruta === "peliculas" && m === "POST") { const b = JSON.parse(r.request().postData()); estado.post = b; const p = { ...b, id: "p9", "añadido": new Date().toISOString() }; estado.db.peliculas.push(p); return r.fulfill({ json: p }); }
+    if (ruta === "sync" && m === "POST") { const b = JSON.parse(r.request().postData()); for (const col of ["peliculas", "series", "pendientes"]) for (const it of b[col] || []) { const i = estado.db[col].findIndex((x) => x.id === it.id); if (i >= 0) estado.db[col][i] = it; else estado.db[col].push(it); } estado.syncs = (estado.syncs || 0) + 1; return r.fulfill({ json: estado.db }); }
     if (ruta === "pendientes" && m === "POST") { const w = { ...JSON.parse(r.request().postData()), id: "w" + (estado.db.pendientes.length + 9) }; estado.db.pendientes.push(w); return r.fulfill({ json: w }); }
+    if (ruta.startsWith("pendientes/") && m === "DELETE") { const id = ruta.split("/")[1]; estado.db.pendientes = estado.db.pendientes.filter((x) => x.id !== id); return r.fulfill({ json: { ok: true } }); }
     if (ruta.startsWith("pendientes/") && m === "PUT") { const id = ruta.split("/")[1], w = estado.db.pendientes.find((x) => x.id === id); Object.assign(w, JSON.parse(r.request().postData())); return r.fulfill({ json: w }); }
     if (ruta.startsWith("peliculas/") && m === "PUT") { const id = ruta.split("/")[1], b = JSON.parse(r.request().postData()); estado.puts.push([id, b]);
       const p = estado.db.peliculas.find((x) => x.id === id); Object.assign(p, b); return r.fulfill({ json: p }); }
@@ -211,7 +214,7 @@ await prueba("Película sin estrenar (FilmAffinity): página con cuenta atrás y
   assert.equal(w.estreno, `${anio + 1}-12-17`);
   assert.ok(w.poster);
   await ir(p, "#/pendientes");
-  await p.waitForSelector(".pd .aviso-estreno", { timeout: 8000 });
+  await p.waitForSelector(".pd2 .aviso-estreno", { timeout: 8000 });
 });
 
 await prueba("Película anunciada que Wikidata no tiene (desde el buscador)", async (p) => {
@@ -289,6 +292,47 @@ await prueba("Colección: panel lateral con Películas y Series, filtros y busca
   await p.waitForFunction(() => location.hash === "#/coleccion?t=series", null, { timeout: 3000 });
 });
 
+await prueba("Los guardados van de uno en uno y no se pierde tu nota mientras se completa la colección", async (p, e) => {
+  e.lentoEscribir = true;
+  for (let i = 0; i < 6; i++) e.db.peliculas.push({ id: "px" + i, titulo: "crepusculo amanecer parte 2", anio: 2012, nota: 5, ids: {}, taquilla: {}, generos: [] });
+  await ir(p, "#/coleccion");
+  await p.click("#completarGo", { timeout: 8000 });
+  await p.evaluate(() => openForm(S.db.peliculas.find((x) => x.id === "p1")));
+  await p.evaluate(() => { const r = document.querySelector("#fnota"); r.value = "9.7"; r.dispatchEvent(new Event("input")); });
+  await p.click("#fsave");
+  assert.match(await p.textContent('[data-open="p1"]'), /9,7|9,4|9,/, "la nota nueva se ve al momento");
+  await p.waitForFunction(() => !document.querySelector(".completar") && !document.querySelector("#completarGo"), null, { timeout: 30000 });
+  await p.waitForTimeout(800);
+  assert.equal(e.maxVuelo, 1, "nunca dos guardados a la vez");
+  assert.equal(e.db.peliculas.find((x) => x.id === "p1").nota, 9.7, "tu nota se ha guardado");
+  assert.ok(e.db.peliculas.filter((x) => x.id.startsWith("px")).every((x) => x.poster && x.taquilla.consultado), "y las completadas también");
+  assert.ok(e.syncs >= 1 && e.syncs <= 2, `por lotes: ${e.syncs} escrituras`);
+});
+
+await prueba("La ficha abierta no cambia sola a otra película", async (p, e) => {
+  e.db.peliculas[1] = { ...e.db.peliculas[1], titulo: "crepusculo amanecer parte 2", anio: 2012, poster: null, reparto: null, ids: {} };
+  await ir(p, "#/coleccion?ficha=p1");
+  await p.waitForSelector(".fx-main h2", { timeout: 8000 });
+  await p.waitForTimeout(7000); // se completa la otra por detrás
+  assert.match(await p.textContent(".fx-main h2"), /Lo imposible/);
+  assert.match(await p.textContent("#fTaquilla"), /198,1/);
+});
+
+await prueba("Pendientes: añadir con el buscador y quitar, al momento", async (p, e) => {
+  await ir(p, "#/pendientes");
+  await p.fill("#wT", "amanecer");
+  await p.waitForSelector("#wAc .ac-item", { timeout: 8000 });
+  await p.click("#wAc .ac-item");
+  await p.waitForFunction(() => /Breaking Dawn/.test(document.querySelector(".pd2-grid")?.textContent || ""), null, { timeout: 3000 });
+  await p.waitForFunction(() => !document.querySelector(".pd2.guardando"), null, { timeout: 5000 });
+  assert.ok(e.db.pendientes.some((w) => /Breaking Dawn/.test(w.titulo) && w.poster && w.ids.imdb), "guardada con cartel");
+  const antes = await p.$$eval(".pd2", (x) => x.length);
+  await p.locator(".pd2", { hasText: "Breaking Dawn" }).locator("[data-wdel]").click();
+  assert.equal(await p.$$eval(".pd2", (x) => x.length), antes - 1);
+  await p.waitForTimeout(500);
+  assert.ok(!e.db.pendientes.some((w) => /Breaking Dawn/.test(w.titulo)), "quitada en el servidor");
+});
+
 await prueba("Tu año en cine", async (p) => {
   await ir(p, "#/anio");
   await p.waitForSelector(".an-hero", { timeout: 8000 });
@@ -300,15 +344,15 @@ await prueba("Tu año en cine", async (p) => {
 
 await prueba("Pendientes: avisa si está en tus cines o en una plataforma, con cartel y filtros", async (p, e) => {
   await ir(p, "#/pendientes");
-  await p.waitForSelector('[data-avisos="w1"] .aviso-cine', { timeout: 8000 });
-  await p.waitForSelector('[data-avisos="w2"] .aviso-plataforma', { timeout: 8000 });
-  assert.match(await p.textContent('[data-avisos="w2"]'), /Netflix/);
-  await p.waitForFunction(() => document.querySelectorAll(".pd-cartel img").length === 2, null, { timeout: 8000 });
+  await p.waitForSelector('[data-pq-pend="w1"] .aviso-cine', { timeout: 8000 });
+  await p.waitForSelector('[data-pq-pend="w2"] .aviso-plataforma', { timeout: 8000 });
+  assert.match(await p.textContent('[data-pq-pend="w2"]'), /Netflix/);
+  await p.waitForFunction(() => document.querySelectorAll(".pd2-cartel img").length === 2, null, { timeout: 8000 });
   assert.ok(e.db.pendientes.every((w) => w.poster), "carteles guardados");
   await p.click('[data-pf="plataforma"]');
-  assert.equal(await p.$$eval(".pd", (x) => x.length), 1);
-  assert.match(await p.textContent(".pd-grid"), /sociedad de la nieve/i);
-  assert.ok(await p.$('.pd-grid a.pd-t[href^="#/pelicula"]'), "el título abre su ficha");
+  assert.equal(await p.$$eval(".pd2", (x) => x.length), 1);
+  assert.match(await p.textContent(".pd2-grid"), /sociedad de la nieve/i);
+  assert.ok(await p.$('.pd2-grid a.pd2-t[href^="#/pelicula"]'), "el título abre su ficha");
 });
 
 await prueba("Completar mi colección", async (p, e) => {

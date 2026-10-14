@@ -149,6 +149,7 @@ async function cargarExtras(p) {
   if (!box) return;
   const [n, pr] = await Promise.all([p.futura ? {} : notasDe(p).catch(() => ({})), premiosDe(p).catch(() => null)]); // sin estrenar: sin notas
   if (!document.body.contains(box)) return;
+  if (p.id && typeof fichaAbierta === "function" && !fichaAbierta(p.id)) return; // ya se abrió otra ficha
   const html = notasHTML(p, n || {}) + premiosHTML(pr);
   box.innerHTML = html;
   box.classList.toggle("vacio", !html);
@@ -425,18 +426,21 @@ async function completarNotasWeb() {
   try {
     const cola = S.db.peliculas.filter(necesitaNotasWeb).map((p) => p.id);
     let lote = [];
+    // se guarda la versión de AHORA de cada película (con lo que hayas cambiado mientras tanto) más sus notas
     const guardar = async () => {
       if (!lote.length) return;
       const ahora = new Date().toISOString().slice(0, 19);
-      await api("sync", { method: "POST", body: { peliculas: lote.map((x) => ({ ...x, mod: ahora })), series: [], pendientes: [] } });
+      const items = lote.map((x) => { const i = S.db.peliculas.findIndex((y) => y.id === x.id); if (i < 0) return null;
+        S.db.peliculas[i] = { ...S.db.peliculas[i], notasWeb: x.notasWeb, mod: ahora }; return S.db.peliculas[i]; }).filter(Boolean);
       lote = [];
-      S.db = await api("db"); datosCambiados();
+      await api("sync", { method: "POST", body: { peliculas: items } });
+      datosCambiados();
     };
     for (const id of cola) {
       if (ro()) break;
       const p = S.db.peliculas.find((x) => x.id === id);
       if (!p || !necesitaNotasWeb(p)) continue;
-      try { lote.push({ ...p, notasWeb: { ...(p.notasWeb || {}), ...(await notasWebDeWeb(p)) } }); } catch (e) { /* esa película, otro día */ }
+      try { lote.push({ id: p.id, notasWeb: { ...(p.notasWeb || {}), ...(await notasWebDeWeb(p)) } }); } catch (e) { /* esa película, otro día */ }
       if (lote.length >= 20) await guardar();
       await new Promise((r) => setTimeout(r, 1500));
     }

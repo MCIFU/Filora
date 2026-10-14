@@ -148,7 +148,24 @@ document.documentElement.classList.toggle("ro", ro());
 const STATIC_FILES = { cines: "data/cines_es.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
 const coleccionVacia = () => ({ peliculas: [], series: [], pendientes: [], borrados: {}, estado: { web: true, privada: true } });
 
+// Los guardados en la web van en fila, uno detrás de otro: el servidor reescribe la colección entera en
+// cada cambio y dos a la vez se pisaban (se perdían notas, pendientes y lo completado). La lectura de
+// la colección también espera su turno, para no traer una versión anterior a lo que acabas de guardar.
+let COLA = Promise.resolve();
+function enCola(fn) { const r = COLA.then(fn, fn); COLA = r.catch(() => {}); return r; }
+// Cambio al instante en pantalla y guardado por detrás; si falla, se avisa y se recarga lo guardado
+function cambiarLocal(col, id, cambios) {
+  const L = S.db[col] || [], i = L.findIndex((x) => x.id === id);
+  if (i >= 0) L[i] = { ...L[i], ...cambios, mod: modNuevo(L[i]) };
+  S.prof = null; S.cartIdx = null;
+  return L[i];
+}
+function enFondo(promesa, error = "No se ha podido guardar") {
+  return promesa.catch(async (e) => { toast(`${error}: ${e.message}`, "x"); await refreshDB().catch(() => {}); render._keep = true; render(); });
+}
 async function api(path, opts = {}) {
+  const method = opts.method || "GET";
+  if (STATIC && (method !== "GET" || path === "db") && !opts._enCola) return enCola(() => api(path, { ...opts, _enCola: true }));
   if (STATIC) {
     const method = opts.method || "GET";
     if (path.startsWith("buscar")) return wikiBuscar(decodeURIComponent(path.split("q=")[1] || ""));
@@ -743,6 +760,7 @@ function openFilm(id) {
     ${similares.length ? `<div class="sub" style="margin-top:34px">Del mismo director en tu colección</div><div class="strip">${similares.map((x) => pcard(x)).join("")}</div>` : ""}
     </div>`);
   if (typeof cargarExtras === "function") cargarExtras(p);
+  $("#modal").dataset.film = p.id;
   cargarTrama(p);
   completarFicha(p).then((n) => { if (n) { cargarReparto(n); cargarTaquilla(n); } else { cargarReparto(p); cargarTaquilla(p); } });
 }
@@ -899,53 +917,69 @@ function pintarCompletar() {
   if (go) go.onclick = completarColeccion;
   if (stop) stop.onclick = () => { if (S.completando) S.completando.parar = true; };
 }
+// Guarda varias películas de una vez (una sola escritura en el servidor en vez de una por película)
+const modNuevo = (p) => { const t = new Date().toISOString().slice(0, 19); return p.mod && p.mod >= t ? new Date(Date.parse(p.mod + "Z") + 1000).toISOString().slice(0, 19) : t; };
+async function guardarLote(ids) {
+  const items = ids.map((id) => S.db.peliculas.find((x) => x.id === id)).filter(Boolean); // la versión de ahora
+  if (!items.length) return;
+  await api("sync", { method: "POST", body: { peliculas: items } });
+}
+// Completa una lista de películas por lotes de 10; avisa(progreso) tras cada una. Devuelve cuántas mejoraron.
+async function completarVarias(ids, avisa = () => {}, parar = () => false) {
+  let lote = [], mejoradas = 0;
+  for (const id of ids) {
+    if (parar()) break;
+    const p = S.db.peliculas.find((x) => x.id === id);
+    if (p) {
+      avisa(p);
+      const c1 = faltaDatos(p) ? await cambiosFicha(p) : null;
+      const c2 = faltaTaquilla({ ...p, ...(c1 || {}), ids: { ...(p.ids || {}), ...((c1 || {}).ids || {}) } }) ? await cambiosTaquilla({ ...p, ...(c1 || {}), ids: { ...(p.ids || {}), ...((c1 || {}).ids || {}) } }) : null;
+      if (c1 || c2) {
+        const nuevo = { ...p, ...(c1 || {}), ...(c2 || {}) };
+        nuevo.mod = modNuevo(p);
+        const i = S.db.peliculas.findIndex((x) => x.id === id);
+        if (i >= 0) S.db.peliculas[i] = nuevo; // se ve al momento
+        lote.push(id);
+        if (Object.keys({ ...(c1 || {}), ...(c2 || {}) }).some((k) => !["intento", "completado", "ids"].includes(k))) mejoradas++;
+      }
+      if (lote.length >= 10) { try { await guardarLote(lote); } catch (e) { /* se reintentará */ } lote = []; }
+      await new Promise((r) => setTimeout(r, 500)); // sin saturar Wikidata ni Box Office Mojo
+    }
+    avisa(null);
+  }
+  try { await guardarLote(lote); } catch (e) { /* */ }
+  S.prof = null;
+  return mejoradas;
+}
 // Al abrir la web: las últimas añadidas a las que les falte algo se completan solas (hasta 8 por visita)
 async function completarRecientes() {
   if (S.completando) return;
-  const L = [...S.db.peliculas].filter((p) => faltaDatos(p) || faltaTaquilla(p))
-    .sort((a, b) => String(b["añadido"] || "").localeCompare(String(a["añadido"] || ""))).slice(0, 8);
-  let n = 0;
-  for (const p0 of L) {
-    if (S.completando) return;
-    const antes = JSON.stringify(p0);
-    if (faltaDatos(p0)) await completarFicha(p0);
-    const p = S.db.peliculas.find((x) => x.id === p0.id) || p0;
-    if (faltaTaquilla(p)) await cargarTaquilla(p);
-    if (JSON.stringify(S.db.peliculas.find((x) => x.id === p0.id)) !== antes) n++;
-    await new Promise((r) => setTimeout(r, 800));
-  }
-  if (n) { S.prof = null; toast(`${n} ${n === 1 ? "película completada" : "películas completadas"} con cartel y datos`); if (VISTAS_VIVAS.includes(route().name) && $("#modal").hidden) { render._keep = true; render(); } }
+  const ids = [...S.db.peliculas].filter((p) => faltaDatos(p) || faltaTaquilla(p))
+    .sort((a, b) => String(b["añadido"] || "").localeCompare(String(a["añadido"] || ""))).slice(0, 8).map((p) => p.id);
+  if (!ids.length) return;
+  S.completandoFondo = true;
+  const n = await completarVarias(ids, () => {}, () => !!S.completando);
+  S.completandoFondo = false;
+  if (n) { toast(`${n} ${n === 1 ? "película completada" : "películas completadas"} con cartel y datos`); if (VISTAS_VIVAS.includes(route().name) && $("#modal").hidden) { render._keep = true; render(); } }
 }
 async function completarColeccion() {
   if (S.completando) return;
   const cola = S.db.peliculas.filter((p) => faltaDatos(p) || faltaTaquilla(p)).map((p) => p.id);
-  S.completando = { total: cola.length, hechas: 0, mejoradas: 0, actual: "", parar: false };
+  S.completando = { total: cola.length, hechas: 0, actual: "", parar: false };
   pintarCompletar();
-  for (const id of cola) {
-    const c = S.completando;
-    if (c.parar) break;
-    let p = S.db.peliculas.find((x) => x.id === id);
-    if (!p) { c.hechas++; continue; }
-    c.actual = p.titulo; pintarCompletar();
-    const antes = JSON.stringify(p);
-    if (faltaDatos(p)) { await completarFicha(p); p = S.db.peliculas.find((x) => x.id === id) || p; }
-    if (faltaTaquilla(p)) await cargarTaquilla(p);
-    if (JSON.stringify(S.db.peliculas.find((x) => x.id === id)) !== antes) c.mejoradas++;
-    c.hechas++; pintarCompletar();
-    await new Promise((r) => setTimeout(r, 1200)); // sin saturar Wikidata ni Box Office Mojo
-  }
-  const c = S.completando;
-  S.completando = null; S.prof = null;
-  toast(`${c.mejoradas} ${c.mejoradas === 1 ? "película completada" : "películas completadas"}${c.parar ? " (detenido)" : ""}`);
+  const n = await completarVarias(cola, (p) => { const c = S.completando; if (!c) return; if (p) c.actual = p.titulo; else c.hechas++; pintarCompletar(); }, () => !S.completando || S.completando.parar);
+  const parada = S.completando && S.completando.parar;
+  S.completando = null;
+  const quedan = S.db.peliculas.filter((p) => faltaDatos(p) || faltaTaquilla(p)).length;
+  toast(`${n} ${n === 1 ? "película mejorada" : "películas mejoradas"}${parada ? " (detenido)" : ""}${quedan ? ` · ${quedan} sin datos que encontrar ahora (se reintentarán en unos días)` : ""}`);
   if (route().name === "coleccion") { render._keep = true; render(); } else pintarCompletar();
 }
 // Películas añadidas antes (o sin reconocer): al abrir la ficha se buscan y se rellena lo que falte
 const reciente = (d, dias) => d && Date.now() - Date.parse(d) < dias * 864e5;
 const faltaDatos = (p) => !p.completado && !reciente(p.intento, 30) && (!p.poster || !(p.generos || []).length || !(p.ids || {}).wikidata || !(p.reparto || []).length || !p.tituloEn);
 const faltaTaquilla = (p) => !!(p.ids || {}).imdb && !(p.taquilla || {}).consultado;
-async function completarFicha(p, forzar = false) {
-  const falta = faltaDatos(p);
-  if (!STATIC || ro() || (!falta && !forzar) || (p.completado && !forzar)) return null;
+// Lo que le falta a una película (datos, cartel, reparto…), sin guardarlo: null si no hay nada que cambiar
+async function cambiosFicha(p) {
   try {
     const m = await identificar({ titulo: p.tituloOriginal || p.titulo, anio: p.anio, director: p.director, duracion: p.duracion })
       || (p.tituloOriginal && p.tituloOriginal !== p.titulo ? await identificar({ titulo: p.titulo, anio: p.anio, director: p.director, duracion: p.duracion }) : null);
@@ -958,10 +992,28 @@ async function completarFicha(p, forzar = false) {
     }
     if (!(c.poster || p.poster)) { const r = await posterWeb({ ...p, ...c }); if (r.poster) { c.poster = r.poster; c.ids = { ...(c.ids || p.ids || {}), imdb: (c.ids || p.ids || {}).imdb || r.imdb }; } }
     if (c.ids && JSON.stringify(c.ids) === JSON.stringify(p.ids || {})) delete c.ids;
-    if (!Object.keys(c).length) return null;
+    return Object.keys(c).length ? c : null;
+  } catch (e) { return null; }
+}
+async function cambiosTaquilla(p) {
+  const imdb = (p.ids || {}).imdb;
+  if (!imdb || (p.taquilla || {}).consultado) return null;
+  try {
+    const r = await fetch(`/api/taquilla?imdb=${imdb}`);
+    if (!r.ok) return null;
+    const { presupuesto, ...taq } = (await r.json()) || {};
+    return { taquilla: { ...(p.taquilla || {}), ...taq, fuente: "boxofficemojo", consultado: todayISO() }, ...(presupuesto ? { presupuesto } : {}) };
+  } catch (e) { return null; }
+}
+async function completarFicha(p, forzar = false) {
+  const falta = faltaDatos(p);
+  if (!STATIC || ro() || (!falta && !forzar) || (p.completado && !forzar)) return null;
+  try {
+    const c = await cambiosFicha(p);
+    if (!c) return null;
     const n = await api(`peliculas/${p.id}`, { method: "PUT", body: c });
     const i = S.db.peliculas.findIndex((x) => x.id === p.id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...n };
-    if (Object.keys(c).some((k) => !["completado", "intento", "ids"].includes(k)) && !$("#modal").hidden && document.getElementById("fReparto")) { openFilm(p.id); toast("Ficha completada"); return null; }
+    if (Object.keys(c).some((k) => !["completado", "intento", "ids"].includes(k)) && fichaAbierta(p.id)) { openFilm(p.id); toast("Ficha completada"); return null; }
     return S.db.peliculas[i];
   } catch (e) { return null; }
 }
@@ -992,16 +1044,14 @@ function taquillaHTML(p) {
 }
 // Si aún no se consultó, la taquilla se pide una vez a Box Office Mojo y se guarda en la película
 async function cargarTaquilla(p) {
-  const imdb = (p.ids || {}).imdb;
-  if (!STATIC || ro() || !imdb || (p.taquilla || {}).consultado) return;
+  if (!STATIC || ro()) return;
   try {
-    const r = await (await fetch(`/api/taquilla?imdb=${imdb}`)).json();
-    const { presupuesto, ...taq } = r || {};
-    const cambios = { taquilla: { ...(p.taquilla || {}), ...taq, fuente: "boxofficemojo", consultado: todayISO() }, ...(presupuesto ? { presupuesto } : {}) };
+    const cambios = await cambiosTaquilla(p);
+    if (!cambios) return;
     const n = await api(`peliculas/${p.id}`, { method: "PUT", body: cambios });
     const i = S.db.peliculas.findIndex((x) => x.id === p.id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...n };
     const box = document.getElementById("fTaquilla");
-    if (box) box.innerHTML = taquillaHTML({ ...p, ...cambios });
+    if (box && fichaAbierta(p.id)) box.innerHTML = taquillaHTML({ ...p, ...cambios });
   } catch (e) { /* sin conexión: se intentará otra vez al abrirla */ }
 }
 async function cargarTrama(p) {
@@ -1011,10 +1061,10 @@ async function cargarTrama(p) {
     const e = (await entidadesWD([q], "sitelinks|claims", "eswiki|enwiki"))[q];
     const sl = (e && e.sitelinks) || {};
     const yt = valores(e, "P1651")[0];
-    const t = document.getElementById("fTrailer"); if (t && yt) t.innerHTML = trailerHTML(p, yt);
+    const t = document.getElementById("fTrailer"); if (t && yt && fichaAbierta(p.id)) t.innerHTML = trailerHTML(p, yt);
     const tr = await tramaWiki(sl.eswiki && sl.eswiki.title, sl.enwiki && sl.enwiki.title);
     const box = document.getElementById("fTrama");
-    if (box && tr) { box.innerHTML = tramaHTML(tr); box.hidden = false; }
+    if (box && tr && fichaAbierta(p.id)) { box.innerHTML = tramaHTML(tr); box.hidden = false; }
   } catch (e) { /* sin trama */ }
 }
 // Reparto con fotos y personajes (Wikidata): el guardado, completado con su ficha de Wikidata
@@ -1024,7 +1074,7 @@ async function cargarReparto(p) {
   let lista = Array.isArray(p.reparto) ? p.reparto.map((x) => ({ ...x })) : [];
   const q = (p.ids || {}).wikidata;
   const pintar = (fotos = {}) => {
-    if (!lista.length || !document.body.contains(box)) return;
+    if (!lista.length || !document.body.contains(box) || !fichaAbierta(p.id)) return;
     box.hidden = false;
     box.innerHTML = `<div class="sub">Reparto</div><div class="fx-reparto">${lista.slice(0, 12).map((x) => `<a class="pe-pers" href="#/persona?${x.q ? `q=${x.q}` : `n=${encodeURIComponent(x.n)}`}" data-close>
       <span class="pe-foto">${fotos[x.q] ? `<img src="${fotoCommons(fotos[x.q], 200)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<b>${esc(x.n.split(" ").map((w) => w[0]).slice(0, 2).join(""))}</b>`}</span>
@@ -1051,12 +1101,14 @@ async function cargarReparto(p) {
 // ---------------------------------------------------------------- Modal genérico
 function modal(html, cls = "") {
   const m = $("#modal");
+  delete m.dataset.film;
   m.innerHTML = `<div class="sheet ${cls}"><button class="icon-btn sheet-close" data-close title="Cerrar (Esc)">${icon("x")}</button>${html}</div>`;
   m.hidden = false;
   document.body.style.overflow = "hidden";
   m.onclick = (e) => { if (e.target === m) closeModal(); };
 }
-function closeModal() { const m = $("#modal"); m.hidden = true; m.innerHTML = ""; document.body.style.overflow = ""; }
+const fichaAbierta = (id) => { const m = $("#modal"); return !!m && !m.hidden && m.dataset.film === id; };
+function closeModal() { const m = $("#modal"); m.hidden = true; m.innerHTML = ""; delete m.dataset.film; document.body.style.overflow = ""; }
 
 // ---------------------------------------------------------------- Formulario película
 function lugarOptions(sel) {
@@ -1173,8 +1225,11 @@ function openForm(p = null, preset = {}) {
     btn.disabled = true;
     try {
       if (edit) {
-        await api(`peliculas/${p.id}`, { method: "PUT", body: data });
-        toast("Cambios guardados · Excel actualizado");
+        cambiarLocal("peliculas", p.id, data); // se ve ya; se guarda por detrás
+        closeModal(); render._keep = true; render();
+        toast(STATIC ? "Cambios guardados" : "Cambios guardados · Excel actualizado");
+        enFondo(api(`peliculas/${p.id}`, { method: "PUT", body: data }), "No se guardaron los cambios");
+        return;
       } else {
         const body = { ...data, ids: d.ids || {}, poster: d.poster || null, taquilla: {} };
         if (preset._pendiente) body.desdePendiente = preset._pendiente;
@@ -1671,31 +1726,54 @@ VIEWS.pendientes = (v) => {
   const f = filtros.find((x) => x[0] === S.pend_.f) || filtros[0];
   const L = W.filter(f[2]);
   const enlace = (w) => w.ids && w.ids.wikidata ? `#/pelicula?q=${w.ids.wikidata}` : w.ids && w.ids.imdb ? `#/pelicula?imdb=${w.ids.imdb}` : w.ids && w.ids.filmaffinity ? `#/pelicula?fa=${w.ids.filmaffinity}` : `#/buscar?q=${encodeURIComponent(w.titulo)}`;
-  const tarjeta = (w) => `<article class="pd">
-    <a class="pd-cartel" href="${enlace(w)}" data-pq-pend="${w.id}">${posterHTML(w)}</a>
-    <div class="pd-info">
-      <a class="pd-t" href="${enlace(w)}">${esc(w.titulo)}${w.anio ? ` <span class="dim">${w.anio}</span>` : ""}</a>
-      ${w.motivo && !/^(se estrena|estreno en cines|próximamente)/i.test(w.motivo) ? `<div class="pd-m">${esc(w.motivo)}</div>` : ""}
-      ${w.estreno && w.estreno > todayISO() && !tieneAviso(w, "estreno") ? `<div class="avisos"><span class="aviso aviso-estreno">${icon("calendar")}Se estrena el ${esc(fechaLarga(w.estreno))} ${w.estreno.slice(0, 4)} · ${faltaPara(w.estreno)}</span></div>` : ""}
-      <div class="avisos" data-avisos="${w.id}">${((S.avisos && S.avisos.get(w.id)) || []).map(avisoChip).join("")}</div>
-      <div class="pd-acc">${w.estreno && w.estreno > todayISO() ? "" : `<button class="btn btn-sm btn-primary" data-wseen="${w.id}">${icon("eye")}La he visto</button>`}<button class="icon-btn" data-wdel="${w.id}" title="Quitar de pendientes">${icon("x")}</button></div>
-    </div></article>`;
+  const tarjeta = (w) => { const av = (S.avisos && S.avisos.get(w.id)) || [];
+    const fut = w.estreno && w.estreno > todayISO();
+    return `<article class="pd2 ${String(w.id).startsWith("tmp") ? "guardando" : ""}">
+    <a class="pd2-cartel" href="${enlace(w)}" data-pq-pend="${w.id}">${posterHTML(w)}
+      ${av[0] ? `<span class="pd2-aviso aviso-${av[0].tipo}">${icon(av[0].tipo === "cine" ? "ticket" : av[0].tipo === "estreno" ? "calendar" : "tv")}${esc(av[0].txt)}</span>` : fut ? `<span class="pd2-aviso aviso-estreno">${icon("calendar")}${esc(faltaPara(w.estreno))}</span>` : ""}</a>
+    <a class="pd2-t" href="${enlace(w)}">${esc(w.titulo)}</a>
+    <div class="pd2-s">${esc([w.anio, w.motivo && !/^(se estrena|estreno en cines|próximamente)/i.test(w.motivo) ? w.motivo : ""].filter(Boolean).join(" · "))}</div>
+    ${av.length > 1 ? `<div class="avisos">${av.slice(1).map(avisoChip).join("")}</div>` : ""}
+    <div class="pd2-acc">${fut ? "" : `<button class="btn btn-sm" data-wseen="${w.id}" title="La he visto: ponerle nota">${icon("eye")}La vi</button>`}<button class="btn btn-sm btn-ghost" data-wdel="${w.id}" title="Quitar de pendientes">${icon("x")}Quitar</button></div>
+  </article>`; };
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Pendientes</h1><p>${W.length ? `${W.length} ${W.length === 1 ? "película" : "películas"} por ver${W.filter((w) => tieneAviso(w)).length ? ` · <b>${W.filter((w) => tieneAviso(w)).length} ya se pueden ver</b>` : ""}.` : "Lo que quieres ver."} Te aviso cuando lleguen a tus cines o a una plataforma.</p></div></div>
-  <form class="pd-nueva rw" id="wForm" autocomplete="off">
-    <input class="input" id="wT" placeholder="Película que quieres ver" required><input class="input" id="wY" placeholder="Año" inputmode="numeric">
-    <input class="input" id="wM" placeholder="¿Quién te la recomendó? (opcional)"><button class="btn btn-primary">${icon("plus")}Añadir</button></form>
+  ${ro() ? "" : `<form class="pd-nueva2 ac" id="wForm" autocomplete="off">
+    <label class="search">${icon("search")}<input class="input" id="wT" placeholder="Añade una película: escribe su título…" required></label>
+    <input class="input" id="wM" placeholder="¿Quién te la recomendó? (opcional)">
+    <button class="btn btn-primary">${icon("plus")}Añadir</button>
+    <div class="ac-list" id="wAc" hidden></div></form>`}
   ${W.length ? `<div class="chips pd-filtros">${filtros.map(([k, n, fn]) => { const c = W.filter(fn).length; return c || !k ? `<button class="chip ${f[0] === k ? "on" : ""}" data-pf="${k}">${n} · ${c}</button>` : ""; }).join("")}</div>
-    <div class="pd-grid">${L.map(tarjeta).join("")}</div>`
-    : `<div class="empty"><div class="h2">No tienes pendientes</div>Añade desde <a href="#/recomendaciones" style="color:var(--gold)">Para ti</a>, <a href="#/cartelera?t=estrenos" style="color:var(--gold)">Estrenos</a> o el <a href="#/buscar" style="color:var(--gold)">buscador</a>.</div>`}`;
+    <div class="pd2-grid">${L.map(tarjeta).join("")}</div>`
+    : `<div class="empty"><div class="h2">No tienes pendientes</div>Escribe arriba el título de una película, o añádelas desde <a href="#/recomendaciones" style="color:var(--gold)">Para ti</a>, <a href="#/cartelera?t=estrenos" style="color:var(--gold)">Estrenos</a> o el <a href="#/buscar" style="color:var(--gold)">buscador</a>.</div>`}`;
   $$("[data-pf]", v).forEach((b) => (b.onclick = () => { S.pend_.f = b.dataset.pf; VIEWS.pendientes(v); }));
-  $("#wForm").onsubmit = async (ev) => {
-    ev.preventDefault();
-    const t = $("#wT").value.trim();
-    if (!t) return $("#wT").focus();
-    await api("pendientes", { method: "POST", body: { titulo: t, anio: +$("#wY").value || null, motivo: $("#wM").value.trim() } });
-    await refreshDB(); toast("Añadida a pendientes", "bookmark"); VIEWS.pendientes(v); cartelesPendientes();
-  };
+  const form = $("#wForm");
+  if (form) {
+    const inp = $("#wT"), lista = $("#wAc");
+    let t, res = [], seq = 0;
+    const elegir = (r) => { lista.hidden = true; addPending({ titulo: r.titulo, anio: r.anio, poster: r.poster, ids: r.imdb ? { imdb: r.imdb } : {} }, $("#wM").value.trim()); inp.value = ""; $("#wM").value = ""; };
+    inp.oninput = () => {
+      clearTimeout(t);
+      const q = inp.value.trim();
+      if (q.length < 2) { lista.hidden = true; return; }
+      t = setTimeout(async () => {
+        const my = ++seq;
+        res = ((await buscarWeb(q)).pelis || []).slice(0, 6);
+        if (my !== seq) return;
+        lista.hidden = !res.length;
+        lista.innerHTML = res.map((r, i) => `<div class="ac-item" data-i="${i}"><div class="mini">${r.poster ? `<img src="${esc(r.poster)}" referrerpolicy="no-referrer" alt="">` : ""}</div><div><div style="font-weight:600">${esc(r.titulo)} <span class="dim">${r.anio || ""}</span></div><div class="s">${esc(r.reparto || "")}</div></div></div>`).join("");
+        $$(".ac-item", lista).forEach((el) => (el.onmousedown = (ev) => { ev.preventDefault(); elegir(res[+el.dataset.i]); }));
+      }, 250);
+    };
+    inp.onblur = () => setTimeout(() => (lista.hidden = true), 150);
+    form.onsubmit = (ev) => {
+      ev.preventDefault();
+      const q = inp.value.trim();
+      if (!q) return inp.focus();
+      if (!lista.hidden && res[0]) return elegir(res[0]);
+      addPending({ titulo: q }, $("#wM").value.trim()); inp.value = ""; $("#wM").value = "";
+    };
+  }
   cartelesPendientes();
 };
 // Carteles de los pendientes que no lo tienen (IMDb), guardados para la próxima vez
@@ -1707,14 +1785,22 @@ async function cartelesPendientes() {
     const cambios = r.poster ? { poster: r.poster, ids: { ...(w.ids || {}), imdb: (w.ids || {}).imdb || r.imdb } } : { sinCartel: todayISO() };
     try { const n = await api(`pendientes/${w.id}`, { method: "PUT", body: cambios }); Object.assign(w, n); } catch (e) { Object.assign(w, cambios); }
     const el = document.querySelector(`[data-pq-pend="${w.id}"]`);
-    if (el && w.poster) el.innerHTML = posterHTML(w);
+    if (el && w.poster) { const ph = el.querySelector(".ph"); if (ph) ph.outerHTML = posterHTML(w); }
   }
 }
 async function addPending(item, motivo) {
-  await api("pendientes", { method: "POST", body: { titulo: item.titulo, anio: item.anio || null, motivo, tituloOriginal: item.tituloOriginal || item.original || null,
-    poster: item.poster || null, ids: item.ids || (item.fa ? { filmaffinity: String(item.fa) } : {}), estreno: item.fecha || item.estreno || null } });
-  await refreshDB();
+  const body = { titulo: item.titulo, anio: item.anio || null, motivo, tituloOriginal: item.tituloOriginal || item.original || null,
+    poster: item.poster || null, ids: item.ids || (item.fa ? { filmaffinity: String(item.fa) } : {}), estreno: item.fecha || item.estreno || null };
+  if (S.db.pendientes.some((w) => norm(w.titulo) === norm(body.titulo) && (!w.anio || !body.anio || w.anio === body.anio))) { toast(`«${body.titulo}» ya está en tus pendientes`, "bookmark"); return; }
+  const tmp = { ...body, id: `tmp${Date.now()}`, "añadido": new Date().toISOString().slice(0, 19) };
+  S.db.pendientes.push(tmp); // aparece al momento
   toast(`«${item.titulo}» a pendientes`, "bookmark");
+  if (route().name === "pendientes") { render._keep = true; render(); }
+  try {
+    const w = await api("pendientes", { method: "POST", body });
+    const i = S.db.pendientes.findIndex((x) => x.id === tmp.id); if (i >= 0) S.db.pendientes[i] = w;
+    if (route().name === "pendientes") { render._keep = true; render(); }
+  } catch (e) { S.db.pendientes = S.db.pendientes.filter((x) => x.id !== tmp.id); toast(`No se guardó en pendientes: ${e.message}`, "x"); }
 }
 
 // ---------------------------------------------------------------- Series
@@ -2713,14 +2799,16 @@ document.addEventListener("click", async (e) => {
   if (d.edit) { e.preventDefault(); return openForm(S.db.peliculas.find((p) => p.id === d.edit)); }
   if (d.fav) {
     const p = S.db.peliculas.find((x) => x.id === d.fav);
-    await api(`peliculas/${p.id}`, { method: "PUT", body: { favorita: !p.favorita } });
-    await refreshDB(); openFilm(p.id); render._keep = true; render(); return;
+    cambiarLocal("peliculas", p.id, { favorita: !p.favorita });
+    openFilm(p.id); render._keep = true; render();
+    enFondo(api(`peliculas/${p.id}`, { method: "PUT", body: { favorita: !p.favorita } })); return;
   }
   if (d.del) {
     const p = S.db.peliculas.find((x) => x.id === d.del);
     if (!confirm(`¿Eliminar «${p.titulo}» de tu colección?`)) return;
-    await api(`peliculas/${p.id}`, { method: "DELETE" });
-    await refreshDB(); closeModal(); toast("Película eliminada"); render._keep = true; render(); return;
+    S.db.peliculas = S.db.peliculas.filter((x) => x.id !== p.id); S.prof = null;
+    closeModal(); toast("Película eliminada"); render._keep = true; render();
+    enFondo(api(`peliculas/${p.id}`, { method: "DELETE" }), "No se pudo eliminar"); return;
   }
   if (d.want !== undefined) { const c = S.cat[+d.want]; await addPending(c, `Recomendada · ${predict(c).pct}% afinidad`); if ($("#modal").hidden) { render._keep = true; render(); } else closeModal(); return; }
   if (d.seen !== undefined) { const c = S.cat[+d.seen]; return openForm(null, { titulo: c.titulo, tituloOriginal: c.tituloOriginal, anio: c.anio, director: c.director, pais: c.pais, generos: c.generos, poster: c.poster || null, ids: c.ids || {} }); }
@@ -2732,7 +2820,9 @@ document.addEventListener("click", async (e) => {
   if (d.relwant) { const x = S.est.estrenos.find((y) => y.fecha + "|" + y.titulo === d.relwant); await addPending({ ...x, anio: +x.fecha.slice(0, 4) }, `Estreno en cines el ${fechaLarga(x.fecha)}`); closeModal(); return; }
   if (d.relseen) { const x = S.est.estrenos.find((y) => y.fecha + "|" + y.titulo === d.relseen); return openForm(null, { titulo: x.titulo, tituloOriginal: x.original || null, anio: +x.fecha.slice(0, 4), director: x.director || "", pais: x.pais || "", generos: x.generos || [], saga: x.saga || "", poster: x.poster || null, lugar: (S.est.cines || [])[0]?.nombre || "" }); }
   if (d.wseen) { const w = S.db.pendientes.find((x) => x.id === d.wseen); return openForm(null, { titulo: w.titulo, tituloOriginal: w.tituloOriginal || null, anio: w.anio || "", _pendiente: w.id }); }
-  if (d.wdel) { await api(`pendientes/${d.wdel}`, { method: "DELETE" }); await refreshDB(); render._keep = true; render(); return; }
+  if (d.wdel && String(d.wdel).startsWith("tmp")) return; // aún guardándose
+  if (d.wdel) { const w = S.db.pendientes.find((x) => x.id === d.wdel); S.db.pendientes = S.db.pendientes.filter((x) => x.id !== d.wdel); render._keep = true; render();
+    toast(`«${w ? w.titulo : "Película"}» quitada de pendientes`, "x"); enFondo(api(`pendientes/${d.wdel}`, { method: "DELETE" }), "No se pudo quitar"); return; }
   if (d.serie) return openSerie(d.serie);
   if (d.sedit) return openSerieForm(S.db.series.find((s) => s.id === d.sedit));
   if (d.sdel) { if (!confirm("¿Eliminar esta serie?")) return; await api(`series/${d.sdel}`, { method: "DELETE" }); await refreshDB(); closeModal(); render(); }
