@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-13",
+ "actualizado": "2026-10-14",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -159,17 +159,17 @@
   },
   {
    "fecha": "2026-10-16",
-   "titulo": "Monstruosa Mia",
-   "original": "Monster Mia",
-   "director": "Verena Fels",
+   "titulo": "Los demonios",
+   "director": "Ken Russell",
    "generos": [
-    "Animación"
+    "Terror"
    ],
-   "pais": "Alemania",
-   "sinopsis": "Mia, una estudiante expulsada, y su rata mascota Quentin llegan a la Academia Rotwood, donde ella es la única humana…",
-   "duracion": 81,
-   "poster": "https://pics.filmaffinity.com/monster_mia-511572125-mmed.jpg",
-   "fa": "960631",
+   "pais": "Reino Unido",
+   "reparto": "Vanessa Redgrave, Oliver Reed, Dudley Sutton",
+   "sinopsis": "Un clérigo, en la Francia del XVII, es acusado de herejía. La historia se basa en los hechos reales de la ciudad de…",
+   "duracion": 103,
+   "poster": "https://pics.filmaffinity.com/the_devils_ken_russell_s_film_of_the_devils-110031893-mmed.jpg",
+   "fa": "805989",
    "destacado": false
   },
   {
@@ -198,7 +198,7 @@
    ],
    "pais": "Suecia",
    "reparto": "Areeb Zuaiter, Ahmad Matar, Ibrahim Maher",
-   "sinopsis": "Documental que narra la historia de amistad entre una cineasta de origen palestino y un atleta de Parkour en Gaza. En su…",
+   "sinopsis": "La historia de amistad entre una cineasta de origen palestino y un atleta de Parkour en Gaza. En su incesante búsqueda…",
    "duracion": 89,
    "poster": "https://pics.filmaffinity.com/yalla_parkour-152648024-mmed.jpg",
    "fa": "377115",
@@ -214,7 +214,7 @@
    ],
    "pais": "Estados Unidos",
    "reparto": "Noah Centineo, Andrew Koji, Callina Liang",
-   "sinopsis": "Nueva película basada en la saga de videojuegos \"Street Fighter\". Ambientada en 1993, los alejados Street Fighters Ryu y…",
+   "sinopsis": "Basada en la saga de videojuegos 'Street Fighter' y ambientada en 1993, los alejados Street Fighters Ryu y Ken Masters…",
    "duracion": 125,
    "poster": "https://pics.filmaffinity.com/street_fighter-871613292-mmed.jpg",
    "fa": "361470",
@@ -677,6 +677,20 @@
   },
   {
    "fecha": "2026-11-06",
+   "titulo": "George Michael: The Faith Tour",
+   "original": "George Michael: The Faith Tour",
+   "director": "David Austin / Andy Morahan",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Película restaurada de un concierto que recoge las actuaciones de George Michael en la gira «Faith Tour» de 1988 en el Palais Omnisports de París-Bercy, grabadas en 35 mm a lo largo de dos noches durante la etapa europea de la gira.",
+   "poster": "https://pics.filmaffinity.com/george_michael_the_faith_tour-828781159-mmed.jpg",
+   "fa": "406500",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-06",
    "titulo": "Godzilla Minus Zero",
    "original": "Gojira Mainasu Zeroaka",
    "director": "Takashi Yamazaki",
@@ -728,7 +742,7 @@
    ],
    "pais": "España",
    "sinopsis": "Sonia es una joven a la que le diagnostican parkinson y, lejos de venirse abajo, descubre cómo la enfermedad le impulsa a vivir de otra manera. Junto con su grupo de musicoterapia, todos enfermos, y el profesor, Pedro, buscará la forma de llegar hasta un…",
-   "poster": "https://pics.filmaffinity.com/persiguiendo_a_michael-968231005-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/persiguiendo_a_michael-688661261-mmed.jpg",
    "fa": "223101",
    "destacado": false
   },
@@ -1249,20 +1263,6 @@
    "sinopsis": "Un hombre en un puente narra la historia de Andrés (Roger Casamajor), un hombre de mediana edad que, sin tener a dónde ir, regresa a su pueblo natal en busca de refugio. Allí se reencuentra con tres figuras clave de su pasado: Lucía (Belén Cuesta), su novia…",
    "poster": "https://pics.filmaffinity.com/un_hombre_en_un_puente-195220003-mmed.jpg",
    "fa": "521359",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-12-04",
-   "titulo": "Burundanga",
-   "original": "Burundanga",
-   "director": "José Corbacho",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "sinopsis": "Berta descubre que está embarazada y no sabe qué hacer, porque duda del amor de su pareja, Manel. Aconsejada por su amiga Sílvia, decide administrarle burundanga, la llamada droga de la verdad. Pero cuando empieza a hacer efecto, Manel confiesa algo mucho más…",
-   "poster": "https://pics.filmaffinity.com/burundanga-291687803-mmed.jpg",
-   "fa": "774585",
    "destacado": false
   },
   {
