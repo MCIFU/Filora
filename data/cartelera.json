@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-14T09:59",
+ "actualizado": "2026-10-14T15:45",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -579,6 +579,13 @@
           "hora": "22:35",
           "sala": "Sala 10",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-57968"
+         }
+        ],
+        "2026-10-21": [
+         {
+          "hora": "22:35",
+          "sala": "Sala 10",
+          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-58006"
          }
         ]
        }
@@ -1917,6 +1924,18 @@
          }
         ]
        }
+      },
+      {
+       "nombre": "Whalefall (Digital) (VOS)",
+       "dias": {
+        "2026-10-20": [
+         {
+          "hora": "20:30",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36670%2Fwhalefall%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ]
+       }
       }
      ]
     },
@@ -2085,6 +2104,62 @@
           "hora": "19:40",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36760%2Fcars-20o-aniversario%3Fmode%3Dwidget%26change%3D0"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Acción",
+      "Terror",
+      "Aventura"
+     ],
+     "fa": "192931",
+     "titulo": "Boiúna: La leyenda del Amazonas",
+     "anio": 2026,
+     "pais": "Estados Unidos",
+     "director": "Mike P. Nelson",
+     "reparto": "Kiana Madeira, Jessica Rothe, Logan Marshall-Green",
+     "poster": "https://pics.filmaffinity.com/beware_boiuna-188696559-mmed.jpg",
+     "sinopsis": "Río Curuçá, Brasil. Cuando un equipo de jóvenes médicos inicia una misión humanitaria local en un barco por la selva amazónica, pronto queda claro que no todo en la selva se alegra de verlos. Tras un repentino y fatal accidente, la expedición médica se ve…",
+     "versiones": [
+      {
+       "nombre": "Boiúna: La leyenda del Amazonas (Digital)",
+       "dias": {
+        "2026-10-16": [
+         {
+          "hora": "20:20",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36758%2Fboiuna-la-leyenda-del-amazonas%3Fmode%3Dwidget%26change%3D0"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Drama"
+     ],
+     "fa": "523744",
+     "titulo": "El mal hijo",
+     "anio": 2026,
+     "pais": "España",
+     "director": "Jaime Lorente",
+     "reparto": "Miguel Ángel Puro, Susi Sánchez, Hugo Arbués",
+     "poster": "https://pics.filmaffinity.com/el_mal_hijo-972662001-mmed.jpg",
+     "sinopsis": "Cuando el padre de Rubén, un niño de once años, desaparece misteriosamente, este se ve obligado a irse a vivir con su abuela, a la que apenas conoce. En un entorno rural donde el tiempo parece haberse detenido, el chaval aprenderá de la mano de la anciana…",
+     "versiones": [
+      {
+       "nombre": "El mal hijo (Digital)",
+       "dias": {
+        "2026-10-16": [
+         {
+          "hora": "18:00",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F36759%2Fel-mal-hijo%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -3566,6 +3641,92 @@
     },
     {
      "generos": [
+      "Thriller"
+     ],
+     "fa": "249049",
+     "titulo": "Whalefall",
+     "anio": 2026,
+     "pais": "Estados Unidos",
+     "director": "Brian Duffield",
+     "reparto": "Austin Abrams, Josh Brolin, Elisabeth Shue",
+     "poster": "https://pics.filmaffinity.com/whalefall-125226915-mmed.jpg",
+     "sinopsis": "Tras la muerte de su padre, Jay Gardiner se sumerge en la costa central de California en busca de sus restos, pero es tragado por una ballena. Atrapado en su interior con solo una hora de oxígeno restante, Jay se da cuenta de que las lecciones que su padre le…",
+     "versiones": [
+      {
+       "nombre": "Whalefall (Digital)",
+       "dias": {
+        "2026-10-16": [
+         {
+          "hora": "17:10",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36049%2Fwhalefall%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "19:25",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36048%2Fwhalefall%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "21:40",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36047%2Fwhalefall%3Fmode%3Dwidget%26change%3D0"
+         }
+        ]
+       }
+      },
+      {
+       "nombre": "Whalefall (Digital) (VOS)",
+       "dias": {
+        "2026-10-20": [
+         {
+          "hora": "21:40",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36112%2Fwhalefall%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Comedia"
+     ],
+     "fa": "331187",
+     "titulo": "La maleta",
+     "anio": 2026,
+     "pais": "España",
+     "director": "Carlos Therón",
+     "reparto": "Lucía Caraballo, Alejandro Speitzer, Leonor Watling",
+     "poster": "https://pics.filmaffinity.com/la_maleta-188790900-mmed.jpg",
+     "sinopsis": "Laura y Nacho se han conocido en un vuelo, pero una vez que recojan sus maletas, su breve encuentro habrá terminado. Laura no quiere eso, así que propone un juego: si la primera maleta que sale es la de ella, esa misma noche tendrán una cita. Nacho acepta y,…",
+     "versiones": [
+      {
+       "nombre": "La maleta (Digital)",
+       "dias": {
+        "2026-10-16": [
+         {
+          "hora": "18:05",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36053%2Fla-maleta%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "20:20",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36052%2Fla-maleta%3Fmode%3Dwidget%26change%3D0"
+         },
+         {
+          "hora": "22:45",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36051%2Fla-maleta%3Fmode%3Dwidget%26change%3D0"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
       "Acción",
       "Fantasía"
      ],
@@ -3616,43 +3777,6 @@
     },
     {
      "generos": [
-      "Comedia"
-     ],
-     "fa": "331187",
-     "titulo": "La maleta",
-     "anio": 2026,
-     "pais": "España",
-     "director": "Carlos Therón",
-     "reparto": "Lucía Caraballo, Alejandro Speitzer, Leonor Watling",
-     "poster": "https://pics.filmaffinity.com/la_maleta-188790900-mmed.jpg",
-     "sinopsis": "Laura y Nacho se han conocido en un vuelo, pero una vez que recojan sus maletas, su breve encuentro habrá terminado. Laura no quiere eso, así que propone un juego: si la primera maleta que sale es la de ella, esa misma noche tendrán una cita. Nacho acepta y,…",
-     "versiones": [
-      {
-       "nombre": "La maleta (Digital)",
-       "dias": {
-        "2026-10-16": [
-         {
-          "hora": "18:05",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36053%2Fla-maleta%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "20:20",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36052%2Fla-maleta%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "22:45",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36051%2Fla-maleta%3Fmode%3Dwidget%26change%3D0"
-         }
-        ]
-       }
-      }
-     ]
-    },
-    {
-     "generos": [
       "Comedia",
       "Drama"
      ],
@@ -3691,35 +3815,38 @@
     },
     {
      "generos": [
-      "Thriller"
+      "Ciencia ficción",
+      "Drama"
      ],
-     "fa": "249049",
-     "titulo": "Whalefall",
+     "fa": "448187",
+     "titulo": "Kakeru (Sheep in the Box)",
      "anio": 2026,
-     "pais": "Estados Unidos",
-     "director": "Brian Duffield",
-     "reparto": "Austin Abrams, Josh Brolin, Elisabeth Shue",
-     "poster": "https://pics.filmaffinity.com/whalefall-125226915-mmed.jpg",
-     "sinopsis": "Tras la muerte de su padre, Jay Gardiner se sumerge en la costa central de California en busca de sus restos, pero es tragado por una ballena. Atrapado en su interior con solo una hora de oxígeno restante, Jay se da cuenta de que las lecciones que su padre le…",
+     "pais": "Japón",
+     "director": "Hirokazu Koreeda",
+     "reparto": "Haruka Ayase, Rimu Kuwaki, Daigo",
+     "poster": "https://pics.filmaffinity.com/hako_no_naka_no_hitsuji-438325340-mmed.jpg",
+     "sinopsis": "En un futuro cercano, una pareja marcada por la pérdida de su hijo acepta acoger en casa a un niño humanoide creado a su imagen con inteligencia artificial. Lo que empieza como un intento desesperado de aliviar el dolor se convierte en una nueva vida…",
      "versiones": [
       {
-       "nombre": "Whalefall (Digital)",
+       "nombre": "Kakeru (Sheep in the Box) (Digital)",
        "dias": {
         "2026-10-16": [
          {
-          "hora": "17:10",
+          "hora": "19:15",
           "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36049%2Fwhalefall%3Fmode%3Dwidget%26change%3D0"
-         },
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36050%2Fkakeru%3Fmode%3Dwidget%26change%3D0"
+         }
+        ]
+       }
+      },
+      {
+       "nombre": "Kakeru (Sheep in the Box) (Digital) (VOS)",
+       "dias": {
+        "2026-10-20": [
          {
-          "hora": "19:25",
+          "hora": "19:15",
           "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36048%2Fwhalefall%3Fmode%3Dwidget%26change%3D0"
-         },
-         {
-          "hora": "21:40",
-          "sala": "",
-          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36047%2Fwhalefall%3Fmode%3Dwidget%26change%3D0"
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F36096%2Fkakeru%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -5962,7 +6089,335 @@
    "fa": 1279,
    "nombre": "Teatro Prendes",
    "ciudad": "Candás",
-   "peliculas": []
+   "peliculas": [
+    {
+     "generos": [
+      "Aventura",
+      "Fantasía"
+     ],
+     "fa": "976447",
+     "titulo": "El árbol muy muy lejano",
+     "anio": 2026,
+     "pais": "Reino Unido",
+     "director": "Ben Gregor",
+     "reparto": "Andrew Garfield, Claire Foy, Billie Gadsdon",
+     "poster": "https://pics.filmaffinity.com/the_magic_faraway_tree-966140960-mmed.jpg",
+     "sinopsis": "Polly, Tim, y sus tres hijos son una familia moderna que se ve obligada a mudarse a la remota campiña inglesa. Poco después de su llegada, los niños descubren un árbol mágico y a sus extraordinarios y excéntricos habitantes. Conocen a personajes entrañables…",
+     "versiones": [
+      {
+       "nombre": "EL ARBOL MUY MUY LEJANO",
+       "dias": {
+        "2026-11-06": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1836&cine=TEATROPRENDESCANDAS"
+         }
+        ],
+        "2026-11-07": [
+         {
+          "hora": "17:30",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1836&cine=TEATROPRENDESCANDAS"
+         },
+         {
+          "hora": "23:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1836&cine=TEATROPRENDESCANDAS"
+         }
+        ],
+        "2026-11-08": [
+         {
+          "hora": "17:30",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1836&cine=TEATROPRENDESCANDAS"
+         },
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1836&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Animación",
+      "Aventura",
+      "Musical"
+     ],
+     "fa": "990671",
+     "titulo": "La leyenda de la ballena cantora",
+     "anio": 2025,
+     "pais": "Alemania",
+     "director": "Pavel Hrubos",
+     "reparto": "Jen Viens, Vincent Tong, Bruce Dinsmore",
+     "poster": "https://pics.filmaffinity.com/der_letzte_walsanger-316479309-mmed.jpg",
+     "sinopsis": "Vincent es una ballena jorobada adolescente que se ha quedado huérfana. Hijo del último Cantor de Ballenas, que protegía los océanos con su canto mágico, vive angustiado por la pérdida de sus padres y duda de sus propias habilidades. Cuando el monstruoso…",
+     "versiones": [
+      {
+       "nombre": "LA LEYENDA DE LA BALLENA CANTORA",
+       "dias": {
+        "2026-10-25": [
+         {
+          "hora": "17:30",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1840&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Drama",
+      "Romance"
+     ],
+     "fa": "161036",
+     "titulo": "La bola negra",
+     "anio": 2026,
+     "pais": "España",
+     "director": "Los Javis",
+     "reparto": "Guitarricadelafuente, Miguel Bernardeau, Carlos González",
+     "poster": "https://pics.filmaffinity.com/la_bola_negra-140630574-mmed.jpg",
+     "sinopsis": "Las vidas interconectadas de tres hombres en tres épocas distintas. Tres existencias íntimamente ligadas por la sexualidad y el deseo, el dolor y la herencia, y por una de las últimas obras, inacabada, de Federico García Lorca.",
+     "versiones": [
+      {
+       "nombre": "LA BOLA NEGRA",
+       "dias": {
+        "2026-10-31": [
+         {
+          "hora": "23:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1838&cine=TEATROPRENDESCANDAS"
+         }
+        ],
+        "2026-11-01": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1838&cine=TEATROPRENDESCANDAS"
+         },
+         {
+          "hora": "23:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1838&cine=TEATROPRENDESCANDAS"
+         }
+        ],
+        "2026-11-02": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1838&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Animación",
+      "Familiar",
+      "Comedia"
+     ],
+     "fa": "784546",
+     "titulo": "La familia Dino",
+     "anio": 2025,
+     "pais": "Rusia",
+     "director": "Maya Turkina / Maksim Volkov",
+     "reparto": "Roman Kurtsyn, Sergey Garmash, Pyotr Ivashchenko",
+     "poster": "https://pics.filmaffinity.com/doktor_dinozavrov-925821924-mmed.jpg",
+     "sinopsis": "Phil es un adolescente que no está pasando por el mejor momento de su vida. Sus  compañeros de clase se ríen de él, la chica que le gusta le ignora y su sueño de convertirse en veterinario se diluye ante la tradición profesional de la familia Dino: quieren…",
+     "versiones": [
+      {
+       "nombre": "LA FAMILIA DINO",
+       "dias": {
+        "2026-10-18": [
+         {
+          "hora": "17:30",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1839&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Animación",
+      "Aventura",
+      "Comedia"
+     ],
+     "fa": "523116",
+     "titulo": "Coyote vs. Acme",
+     "anio": 2026,
+     "pais": "Estados Unidos",
+     "director": "Dave Green",
+     "reparto": "Will Forte, Lana Condor, John Cena",
+     "poster": "https://pics.filmaffinity.com/coyote_vs_acme-111030623-mmed.jpg",
+     "sinopsis": "Después de que todos los productos fabricados por ACME Corporation le salgan mal a Wile E. Coyote, en su persecución del Correcaminos, contrata a un abogado humano igualmente desafortunado para demandar a la empresa. Cuando el abogado de Wile E. descubre que…",
+     "versiones": [
+      {
+       "nombre": "COYOTE VS ACME",
+       "dias": {
+        "2026-10-31": [
+         {
+          "hora": "17:30",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1834&cine=TEATROPRENDESCANDAS"
+         }
+        ],
+        "2026-11-01": [
+         {
+          "hora": "17:30",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1834&cine=TEATROPRENDESCANDAS"
+         }
+        ],
+        "2026-11-02": [
+         {
+          "hora": "17:30",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1834&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Thriller",
+      "Drama"
+     ],
+     "fa": "268103",
+     "titulo": "Cronos",
+     "anio": 2026,
+     "pais": "España",
+     "director": "Fernando González Molina",
+     "reparto": "Enric Auquer, Diana Gómez, Xavi Sáez",
+     "poster": "https://pics.filmaffinity.com/cronos-329312360-mmed.jpg",
+     "sinopsis": "Basada en testimonios reales de los diferentes implicados, la película narra el desarrollo de la operación Cronos, el dispositivo activado el 17 de agosto de 2017 como reacción al acto terrorista de las Ramblas. Cuatro días interminables de confusión,…",
+     "versiones": [
+      {
+       "nombre": "CRONOS",
+       "dias": {
+        "2026-10-16": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1835&cine=TEATROPRENDESCANDAS"
+         },
+         {
+          "hora": "23:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1835&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Drama"
+     ],
+     "fa": "983581",
+     "titulo": "Cinco segundos",
+     "anio": 2025,
+     "pais": "Italia",
+     "director": "Paolo Virzì",
+     "reparto": "Valerio Mastandrea, Galatéa Bellugi, Valeria Bruni Tedeschi",
+     "poster": "https://pics.filmaffinity.com/cinque_secondi-920789732-mmed.jpg",
+     "sinopsis": "Adriano Sereni (Valerio Mastandrea) es un hombre rudo y solitario que vive en los establos restaurados de una antigua mansión en ruinas. Un día, descubre que la villa vecina ha sido ocupada por una comunidad de jóvenes estudiantes, que se dedican a…",
+     "versiones": [
+      {
+       "nombre": "CINCO SEGUNDOS",
+       "dias": {
+        "2026-10-23": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1833&cine=TEATROPRENDESCANDAS"
+         },
+         {
+          "hora": "23:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1833&cine=TEATROPRENDESCANDAS"
+         }
+        ],
+        "2026-10-25": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1833&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Misterio"
+     ],
+     "fa": "351704",
+     "titulo": "Con la muerte en los talones",
+     "anio": 1959,
+     "pais": "Estados Unidos",
+     "director": "Alfred Hitchcock",
+     "reparto": "Cary Grant, Eva Marie Saint, James Mason",
+     "poster": "https://pics.filmaffinity.com/north_by_northwest-370099340-mmed.jpg",
+     "sinopsis": "Debido a un malentendido, a Roger O. Thornhill, un ejecutivo del mundo de la publicidad, unos espías lo confunden con un agente del gobierno llamado George Kaplan. Secuestrado por tres individuos y llevado a una mansión en la que es interrogado, consigue huir…",
+     "versiones": [
+      {
+       "nombre": "CON LA MUERTE A LOS TALONES",
+       "dias": {
+        "2026-11-07": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1419&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "generos": [
+      "Drama",
+      "Comedia"
+     ],
+     "fa": "420972",
+     "titulo": "Cinema Paradiso",
+     "anio": 1988,
+     "pais": "Italia",
+     "director": "Giuseppe Tornatore",
+     "reparto": "Philippe Noiret, Marco Leonardi, Salvatore Cascio",
+     "poster": "https://pics.filmaffinity.com/nuovo_cinema_paradiso-312728781-mmed.jpg",
+     "sinopsis": "'Cinema Paradiso' es una historia de amor por el cine. Narra la historia de Salvatore, un niño de un pueblecito italiano en el que el único pasatiempo es ir al cine. Subyugado por las imágenes en movimiento, el chico cree ciegamente que el cine es magia;…",
+     "versiones": [
+      {
+       "nombre": "CINEMA PARADISO",
+       "dias": {
+        "2026-12-05": [
+         {
+          "hora": "20:00",
+          "sala": "SALA",
+          "url": "https://kinetike.com:83/views/sesionesFuturas.aspx?idPelicula=1735&cine=TEATROPRENDESCANDAS"
+         }
+        ]
+       }
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "1300",

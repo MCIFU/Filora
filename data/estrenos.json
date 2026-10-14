@@ -439,7 +439,9 @@
     "Animación"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Cuando el hermanito de Prue McKeel es raptado por una bandada de cuervos, se verá obligada a emprender una desesperada misión de rescate. Acompañada por su torpe pero leal compañero de clase Curtis Mehlberg, Prue se adentra en un mundo de animales parlantes,…",
+   "reparto": "Peyton Elizabeth Lee, Jacob Tremblay, Carey Mulligan",
+   "sinopsis": "Cuando el hermanito de Prue McKeel es raptado por una bandada de cuervos, se verá obligada a emprender una desesperada…",
+   "duracion": 132,
    "poster": "https://pics.filmaffinity.com/wildwood-283743995-mmed.jpg",
    "fa": "119235",
    "destacado": false
@@ -772,20 +774,6 @@
    "sinopsis": "Álava, finales del siglo XIX. Mientras la III Guerra Carlista agoniza, varias mujeres aparecen estranguladas en las afueras de Vitoria. Ángela Berrosteguieta, hermana de una de las víctimas, llega en busca de justicia, decidida a demostrar que Juan Díaz de…",
    "poster": "https://pics.filmaffinity.com/sacamantecas-687718772-mmed.jpg",
    "fa": "676227",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "Sanguine",
-   "original": "Sanguineaka",
-   "director": "Marion Le Corroller",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Francia",
-   "sinopsis": "Margot, una brillante pero insegura estudiante de medicina, lucha por sobrevivir al ritmo frenético de sus prácticas en urgencias. Sin embargo, el agotamiento no es su mayor problema: una oleada de pacientes jóvenes ingresa con síntomas inexplicables que…",
-   "poster": "https://pics.filmaffinity.com/sanguine-164415651-mmed.jpg",
-   "fa": "581346",
    "destacado": false
   },
   {
@@ -1249,6 +1237,20 @@
    "sinopsis": "Oregón, 1933. Samuel Murphy (Ethan Hawke) es separado de su hija y enviado a un campo de trabajo. Un día, el alcaide Clancy (Russell Crowe) le ofrece la posibilidad de liberarlo si consigue pasar oro de contrabando a través de una peligrosa senda salvaje.…",
    "poster": "https://pics.filmaffinity.com/the_weight-365193323-mmed.jpg",
    "fa": "796217",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Sanguine",
+   "original": "Sanguineaka",
+   "director": "Marion Le Corroller",
+   "generos": [
+    "Terror"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Margot, una brillante pero insegura estudiante de medicina, lucha por sobrevivir al ritmo frenético de sus prácticas en urgencias. Sin embargo, el agotamiento no es su mayor problema: una oleada de pacientes jóvenes ingresa con síntomas inexplicables que…",
+   "poster": "https://pics.filmaffinity.com/sanguine-164415651-mmed.jpg",
+   "fa": "581346",
    "destacado": false
   },
   {
