@@ -158,6 +158,20 @@
   },
   {
    "fecha": "2026-10-16",
+   "titulo": "Monstruosa Mia",
+   "director": "Verena Fels",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Alemania",
+   "sinopsis": "Mia, una estudiante expulsada, y su rata mascota Quentin llegan a la Academia Rotwood, donde ella es la única humana…",
+   "duracion": 81,
+   "poster": "https://pics.filmaffinity.com/monster_mia-511572125-mmed.jpg",
+   "fa": "960631",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-10-16",
    "titulo": "Nightborn",
    "original": "Yön Lapsiaka",
    "director": "Hanna Bergholm",
@@ -411,8 +425,7 @@
    ],
    "pais": "Corea del Sur",
    "reparto": "Jeon Do-yeon, Sol Kyung-gu, Jo In-sung",
-   "sinopsis": "Un trabajador despedido y su mujer se cruzan en el camino de una realizadora de documentales y su pareja, y se enfrentan…",
-   "duracion": 164,
+   "sinopsis": "Un trabajador despedido y su mujer se cruzan en el camino de una realizadora de documentales y su pareja, y se enfrentan a sus deseos ocultos. Cuando sus mundos chocan, se provocan alteraciones en sus rutinas aparentemente estables. \n\nEstreno limitado en…",
    "poster": "https://pics.filmaffinity.com/ga_neung_han_sa_rang-341693834-mmed.jpg",
    "fa": "240529",
    "destacado": false
@@ -890,7 +903,7 @@
    "pais": "Estados Unidos",
    "reparto": "Johnny Depp",
    "sinopsis": "Reimaginación del clásico literario, una historia de fantasmas ambientada en el Londres de Dickens que sigue el viaje sobrenatural de un hombre para enfrentarse a su pasado, presente y futuro y luchar por una segunda oportunidad.\n\nEstreno en USA y España: 13…",
-   "poster": "https://pics.filmaffinity.com/ebenezer-372510072-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/ebenezer-321560689-mmed.jpg",
    "fa": "112391",
    "destacado": false
   },
@@ -989,7 +1002,7 @@
    ],
    "pais": "España",
    "sinopsis": "Santiago Balmes, célebre escritor y académico, reúne a sus tres hijos antes de Navidad para hacerles una petición: pasar unos días juntos en la casa costera donde veraneaban en su niñez. Para los hermanos, distanciados de su padre desde que años atrás…",
-   "poster": "https://pics.filmaffinity.com/el_mal_padre-813086333-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/el_mal_padre-632788069-mmed.jpg",
    "fa": "734485",
    "destacado": false
   },
@@ -1252,20 +1265,6 @@
    "sinopsis": "Un hombre en un puente narra la historia de Andrés (Roger Casamajor), un hombre de mediana edad que, sin tener a dónde ir, regresa a su pueblo natal en busca de refugio. Allí se reencuentra con tres figuras clave de su pasado: Lucía (Belén Cuesta), su novia…",
    "poster": "https://pics.filmaffinity.com/un_hombre_en_un_puente-195220003-mmed.jpg",
    "fa": "521359",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-12-04",
-   "titulo": "Burundanga",
-   "original": "Burundanga",
-   "director": "José Corbacho",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "sinopsis": "Berta descubre que está embarazada y no sabe qué hacer, porque duda del amor de su pareja, Manel. Aconsejada por su amiga Sílvia, decide administrarle burundanga, la llamada droga de la verdad. Pero cuando empieza a hacer efecto, Manel confiesa algo mucho más…",
-   "poster": "https://pics.filmaffinity.com/burundanga-862734937-mmed.jpg",
-   "fa": "774585",
    "destacado": false
   },
   {
