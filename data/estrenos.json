@@ -214,7 +214,7 @@
    "reparto": "Noah Centineo, Andrew Koji, Callina Liang",
    "sinopsis": "Basada en la saga de videojuegos 'Street Fighter' y ambientada en 1993, los alejados Street Fighters Ryu y Ken Masters…",
    "duracion": 119,
-   "poster": "https://pics.filmaffinity.com/street_fighter-871613292-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/street_fighter-924601767-mmed.jpg",
    "fa": "361470",
    "destacado": true,
    "ids": {
@@ -379,30 +379,6 @@
   },
   {
    "fecha": "2026-10-22",
-   "titulo": "Sentido y sensibilidad",
-   "original": "Sense and Sensibility",
-   "director": "Georgia Oakley",
-   "generos": [
-    "Romance"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Daisy Edgar-Jones, Esme Creed-Miles, Bodhi Rae Breathnach",
-   "sinopsis": "Nueva adaptación del clásico literario de Jane Austen \"Sentido y sensibilidad\". Las hermanas Elinor y Marianne Dashwood…",
-   "duracion": 131,
-   "poster": "https://pics.filmaffinity.com/sense_and_sensibility-803718727-mmed.jpg",
-   "fa": "892018",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q135436961",
-    "imdb": "tt13609648",
-    "rt": "m/sense_and_sensibility_2026",
-    "letterboxd": "sense-and-sensibility-2026",
-    "tmdb": "1503762",
-    "allocine": "1000026622"
-   }
-  },
-  {
-   "fecha": "2026-10-22",
    "titulo": "Superthings: La película",
    "original": "Superthings: La película",
    "director": "Víctor Monigote",
@@ -425,7 +401,8 @@
    ],
    "pais": "Corea del Sur",
    "reparto": "Jeon Do-yeon, Sol Kyung-gu, Jo In-sung",
-   "sinopsis": "Un trabajador despedido y su mujer se cruzan en el camino de una realizadora de documentales y su pareja, y se enfrentan a sus deseos ocultos. Cuando sus mundos chocan, se provocan alteraciones en sus rutinas aparentemente estables. \n\nEstreno limitado en…",
+   "sinopsis": "Un trabajador despedido y su mujer se cruzan en el camino de una realizadora de documentales y su pareja, y se enfrentan…",
+   "duracion": 164,
    "poster": "https://pics.filmaffinity.com/ga_neung_han_sa_rang-341693834-mmed.jpg",
    "fa": "240529",
    "destacado": false
@@ -445,6 +422,29 @@
    "poster": "https://pics.filmaffinity.com/wildwood-283743995-mmed.jpg",
    "fa": "119235",
    "destacado": false
+  },
+  {
+   "fecha": "2026-10-23",
+   "titulo": "Sentido y sensibilidad",
+   "original": "Sense and Sensibility",
+   "director": "Georgia Oakley",
+   "generos": [
+    "Romance"
+   ],
+   "pais": "Reino Unido",
+   "reparto": "Daisy Edgar-Jones, Esme Creed-Miles, Bodhi Rae Breathnach",
+   "sinopsis": "Nueva adaptación del clásico literario de Jane Austen \"Sentido y sensibilidad\". Las hermanas Elinor y Marianne Dashwood se ven obligadas a abandonar su finca de Sussex y a mudarse con un pariente lejano, en cuya casa de campo se enfrentarán a problemas…",
+   "poster": "https://pics.filmaffinity.com/sense_and_sensibility-803718727-mmed.jpg",
+   "fa": "892018",
+   "destacado": false,
+   "ids": {
+    "wikidata": "Q135436961",
+    "imdb": "tt13609648",
+    "rt": "m/sense_and_sensibility_2026",
+    "letterboxd": "sense-and-sensibility-2026",
+    "tmdb": "1503762",
+    "allocine": "1000026622"
+   }
   },
   {
    "fecha": "2026-10-30",
