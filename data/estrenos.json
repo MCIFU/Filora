@@ -1,256 +1,10 @@
 {
- "actualizado": "2026-10-15",
+ "actualizado": "2026-10-16",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
  "estrenos": [
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Boiúna: La leyenda del Amazonas",
-   "original": "Beware Boiúna",
-   "director": "Mike P. Nelson",
-   "generos": [
-    "Acción"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Kiana Madeira, Jessica Rothe, Logan Marshall-Green",
-   "sinopsis": "Río Curuçá, Brasil. Cuando un equipo de jóvenes médicos inicia una misión humanitaria local en un barco por la selva…",
-   "duracion": 104,
-   "poster": "https://pics.filmaffinity.com/beware_boiuna-188696559-mmed.jpg",
-   "fa": "192931",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Cars",
-   "original": "Cars",
-   "director": "John Lasseter",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Owen Wilson, Paul Newman, Bonnie Hunt",
-   "sinopsis": "El aspirante a campeón de carreras Rayo McQueen parece que está a punto de conseguir el éxito, la fama y todo lo que…",
-   "duracion": 116,
-   "poster": "https://pics.filmaffinity.com/cars-239233988-mmed.jpg",
-   "fa": "835259",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Chopin",
-   "original": "Chopin, Chopin!",
-   "director": "Michal Kwiecinski",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Polonia",
-   "reparto": "Eryk Kulm, Lambert Wilson, Joséphine de La Baume",
-   "sinopsis": "¿Quién es este joven y valiente pianista? ¿Quién es este compositor polaco que trasciende el poder de la música? ¿Quién…",
-   "duracion": 110,
-   "poster": "https://pics.filmaffinity.com/chopin_chopin-213812741-mmed.jpg",
-   "fa": "309577",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "El mal hijo",
-   "original": "El mal hijo",
-   "director": "Jaime Lorente",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Miguel Ángel Puro, Susi Sánchez, Hugo Arbués",
-   "sinopsis": "Cuando el padre de Rubén, un niño de once años, desaparece misteriosamente, este se ve obligado a irse a vivir con su…",
-   "duracion": 106,
-   "poster": "https://pics.filmaffinity.com/el_mal_hijo-972662001-mmed.jpg",
-   "fa": "523744",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Exorcism Chronicles: The Beginning",
-   "original": "Toemalogaka",
-   "director": "Kim Dong-Chul",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Corea del Sur",
-   "sinopsis": "El padre Park, un médico convertido en sacerdote, fue excomulgado por realizar exorcismos en una iglesia que se negaba a…",
-   "duracion": 85,
-   "poster": "https://pics.filmaffinity.com/toemalog-481527554-mmed.jpg",
-   "fa": "312633",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Kakeru (Sheep in the Box)",
-   "original": "Hako no Naka no Hitsujiaka",
-   "director": "Hirokazu Koreeda",
-   "generos": [
-    "Aventura"
-   ],
-   "pais": "Japón",
-   "reparto": "Haruka Ayase, Rimu Kuwaki, Daigo",
-   "sinopsis": "En un futuro cercano, una pareja marcada por la pérdida de su hijo acepta acoger en casa a un niño humanoide creado a su…",
-   "duracion": 126,
-   "poster": "https://pics.filmaffinity.com/hako_no_naka_no_hitsuji-438325340-mmed.jpg",
-   "fa": "448187",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "La invitación.",
-   "original": "The Invite.",
-   "director": "Olivia Wilde",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Seth Rogen, Olivia Wilde, Penélope Cruz",
-   "sinopsis": "Una pareja invita a los vecinos a su casa, lo que desencadena una velada llena de giros inesperados, revelando emociones…",
-   "duracion": 108,
-   "poster": "https://pics.filmaffinity.com/the_invite-442680119-mmed.jpg",
-   "fa": "554234",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q134083296",
-    "imdb": "tt14173636",
-    "filmaffinity": "554234",
-    "rt": "m/the_invite",
-    "letterboxd": "the-invite-2026",
-    "tmdb": "950028",
-    "allocine": "317219"
-   }
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "La maleta",
-   "original": "La maleta",
-   "director": "Carlos Therón",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "reparto": "Lucía Caraballo, Alejandro Speitzer, Leonor Watling",
-   "sinopsis": "Laura y Nacho se han conocido en un vuelo, pero una vez que recojan sus maletas, su breve encuentro habrá terminado…",
-   "duracion": 107,
-   "poster": "https://pics.filmaffinity.com/la_maleta-188790900-mmed.jpg",
-   "fa": "331187",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Los demonios",
-   "director": "Ken Russell",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Vanessa Redgrave, Oliver Reed, Dudley Sutton",
-   "sinopsis": "Un clérigo, en la Francia del XVII, es acusado de herejía. La historia se basa en los hechos reales de la ciudad de…",
-   "duracion": 103,
-   "poster": "https://pics.filmaffinity.com/the_devils_ken_russell_s_film_of_the_devils-110031893-mmed.jpg",
-   "fa": "805989",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Monstruosa Mia",
-   "director": "Verena Fels",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Alemania",
-   "sinopsis": "Mia, una estudiante expulsada, y su rata mascota Quentin llegan a la Academia Rotwood, donde ella es la única humana…",
-   "duracion": 81,
-   "poster": "https://pics.filmaffinity.com/monster_mia-511572125-mmed.jpg",
-   "fa": "960631",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Nightborn",
-   "original": "Yön Lapsiaka",
-   "director": "Hanna Bergholm",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Finlandia",
-   "reparto": "Seidi Haarla, Rupert Grint, Pamela Tola",
-   "sinopsis": "Ansiosos por formar una familia, Saga y su marido británico, Jon, se mudan a la casa aislada en lo profundo del bosque…",
-   "duracion": 92,
-   "poster": "https://pics.filmaffinity.com/yon_lapsi-430436691-mmed.jpg",
-   "fa": "693711",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Parkour en Gaza",
-   "original": "Yalla Parkour",
-   "director": "Areeb Zuaiter",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "Suecia",
-   "reparto": "Areeb Zuaiter, Ahmad Matar, Ibrahim Maher",
-   "sinopsis": "La historia de amistad entre una cineasta de origen palestino y un atleta de Parkour en Gaza. En su incesante búsqueda…",
-   "duracion": 89,
-   "poster": "https://pics.filmaffinity.com/yalla_parkour-152648024-mmed.jpg",
-   "fa": "377115",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Street Fighter",
-   "original": "Street Fighter",
-   "director": "Kitao Sakurai",
-   "generos": [
-    "Acción"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Noah Centineo, Andrew Koji, Callina Liang",
-   "sinopsis": "Basada en la saga de videojuegos 'Street Fighter' y ambientada en 1993, los alejados Street Fighters Ryu y Ken Masters…",
-   "duracion": 119,
-   "poster": "https://pics.filmaffinity.com/street_fighter-924601767-mmed.jpg",
-   "fa": "361470",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q130345436",
-    "imdb": "tt27419420",
-    "rt": "m/street_fighter_2026",
-    "letterboxd": "street-fighter-1",
-    "tmdb": "1153576",
-    "allocine": "314939"
-   }
-  },
-  {
-   "fecha": "2026-10-16",
-   "titulo": "Whalefall",
-   "original": "Whalefall",
-   "director": "Brian Duffield",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Austin Abrams, Josh Brolin, Elisabeth Shue",
-   "sinopsis": "Tras la muerte de su padre, Jay Gardiner se sumerge en la costa central de California en busca de sus restos, pero es…",
-   "duracion": 105,
-   "poster": "https://pics.filmaffinity.com/whalefall-125226915-mmed.jpg",
-   "fa": "249049",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q134876629",
-    "imdb": "tt28535715",
-    "filmaffinity": "249049",
-    "rt": "m/whalefall",
-    "letterboxd": "whalefall",
-    "tmdb": "1255833",
-    "allocine": "318791"
-   }
-  },
   {
    "fecha": "2026-10-22",
    "titulo": "Ali G: Kién es yo?",
@@ -260,8 +14,8 @@
     "Comedia"
    ],
    "pais": "Reino Unido",
-   "reparto": "Sacha Baron Cohen",
-   "sinopsis": "Tras veinte años dedicados a «relajarse, fumar y echar un polvo», Ali G se queda de piedra al descubrir que su novia de toda la vida, Julie, está embarazada de ocho meses. Ante la perspectiva de tener otra boca que alimentar, se pone las pilas y se va a…",
+   "reparto": "Sacha Baron Cohen, Morgana Robinson",
+   "sinopsis": "Tras veinte años dedicados a «relajarse, fumar y echar un polvo», Ali G se queda de piedra al descubrir que su novia de…",
    "poster": "https://pics.filmaffinity.com/ali_g_who_iz_i-150114685-mmed.jpg",
    "fa": "171400",
    "destacado": false
@@ -291,7 +45,9 @@
     "Drama"
    ],
    "pais": "Canadá",
-   "sinopsis": "A finales de los años 90, Sasha, de ocho años, y su familia de inmigrantes húngaros se mudan a una nueva casa en la isla de Vancouver. Su nuevo comienzo se ve interrumpido por el comportamiento cada vez más peligroso de Jeremy, el hijo mayor de la familia.",
+   "reparto": "Eylul Guven, Réti Iringó, Ádám Tompa",
+   "sinopsis": "A finales de los años 90, Sasha, de ocho años, y su familia de inmigrantes húngaros se mudan a una nueva casa en la isla…",
+   "duracion": 90,
    "poster": "https://pics.filmaffinity.com/blue_heron-151590097-mmed.jpg",
    "fa": "490840",
    "destacado": false
@@ -307,6 +63,7 @@
    "pais": "Estados Unidos",
    "reparto": "Tom Rhys Harries, Naomi Ackie, David Dencik",
    "sinopsis": "El meteórico ascenso de Matt Hagen, desde chico de la calle en Gotham hasta protagonista de Hollywood, se ve…",
+   "duracion": 108,
    "poster": "https://pics.filmaffinity.com/clayface-275927409-mmed.jpg",
    "fa": "514364",
    "destacado": true,
@@ -328,7 +85,9 @@
     "Thriller"
    ],
    "pais": "Japón",
-   "sinopsis": "Cuando el señor Murashige Araki se rebela contra el tiránico Nobunaga Oda, se ve asediado entre los muros de su propio castillo. Aislado, se enfrenta a una serie de misteriosos crímenes que hacen añicos el frágil orden de su corte, sumiendo a la fortaleza en…",
+   "reparto": "Masahiro Motoki, Masaki Suda, Yuriko Yoshitaka",
+   "sinopsis": "Cuando el señor Murashige Araki se rebela contra el tiránico Nobunaga Oda, se ve asediado entre los muros de su propio…",
+   "duracion": 147,
    "poster": "https://pics.filmaffinity.com/kokurojo_the_samurai_and_the_prisoner-916733907-mmed.jpg",
    "fa": "176931",
    "destacado": false
@@ -358,7 +117,9 @@
     "Drama"
    ],
    "pais": "Francia",
-   "sinopsis": "Una tarde de verano, Suzanne, acompañada de sus dos hijos pequeños, visita de improviso a su hermana Jeanne. Jeanne queda sorprendida. No solo porque no se ven desde hace meses, sino porque Suzanne parece completamente ausente. Al despertar, Jeanne se queda…",
+   "reparto": "Camille Cottin, Juliette Armanet, Monia Chokri",
+   "sinopsis": "Una tarde de verano, Suzanne, acompañada de sus dos hijos pequeños, visita de improviso a su hermana Jeanne. Jeanne…",
+   "duracion": 111,
    "poster": "https://pics.filmaffinity.com/les_enfants_vont_bien-546420515-mmed.jpg",
    "fa": "495903",
    "destacado": false
@@ -372,7 +133,9 @@
     "Drama"
    ],
    "pais": "México",
-   "sinopsis": "Olga vive una vida estrictamente regulada, sin amistades ni relaciones, en un enorme bloque de pisos. Cuando, por necesidad económica, se ve obligada a alquilar una habitación, un hombre se muda a su casa metiendo a escondidas a su hijo de nueve años en el…",
+   "reparto": "Teresita Sánchez, Bastian Escobar, Hugo Ramírez",
+   "sinopsis": "Olga vive una vida estrictamente regulada, sin amistades ni relaciones, en un enorme bloque de pisos. Cuando, por…",
+   "duracion": 102,
    "poster": "https://pics.filmaffinity.com/moscas-960593170-mmed.jpg",
    "fa": "120073",
    "destacado": false
@@ -386,7 +149,8 @@
     "Animación"
    ],
    "pais": "España",
-   "sinopsis": "Mía, Kai y Finn, tres amigos de sexto de primaria, descubren por accidente un fragmento de Kazoom que fusiona Normalópolis, su gris y ordenada ciudad, con Kaboom City, el disparatado universo de los Superthings, donde los objetos cotidianos han cobrado vida…",
+   "reparto": "Ana Morgade, Brays Efe, Núria Trifol",
+   "sinopsis": "Mía, Kai y Finn, tres amigos de sexto de primaria, descubren por accidente un fragmento de Kazoom que fusiona…",
    "poster": "https://pics.filmaffinity.com/superthings_la_pelicula-708857157-mmed.jpg",
    "fa": "643214",
    "destacado": false
@@ -432,8 +196,9 @@
     "Romance"
    ],
    "pais": "Reino Unido",
-   "reparto": "Daisy Edgar-Jones, Esme Creed-Miles, Bodhi Rae Breathnach",
-   "sinopsis": "Nueva adaptación del clásico literario de Jane Austen \"Sentido y sensibilidad\". Las hermanas Elinor y Marianne Dashwood se ven obligadas a abandonar su finca de Sussex y a mudarse con un pariente lejano, en cuya casa de campo se enfrentarán a problemas…",
+   "reparto": "Daisy Edgar-Jones, George MacKay, Esme Creed-Miles",
+   "sinopsis": "Nueva adaptación del clásico literario de Jane Austen \"Sentido y sensibilidad\". Las hermanas Elinor y Marianne Dashwood…",
+   "duracion": 131,
    "poster": "https://pics.filmaffinity.com/sense_and_sensibility-803718727-mmed.jpg",
    "fa": "892018",
    "destacado": false,
@@ -455,7 +220,9 @@
     "Terror"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Una francotiradora del ejército utiliza sus habilidades para proteger a su hija de un escuadrón de máquinas asesinas que escapó de una base militar secreta, mientras unos mercenarios intentan contenerla.",
+   "reparto": "Adria Arjona, Dan Stevens, Eric Wareheim",
+   "sinopsis": "Una francotiradora del ejército utiliza sus habilidades para proteger a su hija de un escuadrón de máquinas asesinas que…",
+   "duracion": 92,
    "poster": "https://pics.filmaffinity.com/onslaught-956757231-mmed.jpg",
    "fa": "139760",
    "destacado": false
@@ -534,7 +301,9 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "Esta es la historia de Sandra Sánchez, una mujer que nunca dejó de creer y desafió todas las convenciones. De ser descartada por el sistema a convertirse en la mejor karateka de todos los tiempos. Con la guía de Jesús del Moral, su entrenador y compañero de…",
+   "reparto": "Andrea Ros, Patrick Criado, Ernesto Alterio",
+   "sinopsis": "Esta es la historia de Sandra Sánchez, una mujer que nunca dejó de creer y desafió todas las convenciones. De ser…",
+   "duracion": 110,
    "poster": "https://pics.filmaffinity.com/karateka-686948258-mmed.jpg",
    "fa": "835232",
    "destacado": false
@@ -548,7 +317,8 @@
     "Aventura"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Klara (Jenna Ortega) es una “Amiga Artificial” cuyo único deseo es encontrar el hogar perfecto. Cuando Klara conoce a Josie (Mia Tharia), ambas perciben de inmediato que son almas gemelas. Josie tiene una relación tensa con su madre (Amy Adams) y ambas han…",
+   "reparto": "Jenna Ortega, Mia Tharia, Amy Adams",
+   "sinopsis": "Klara (Jenna Ortega) es una “Amiga Artificial” cuyo único deseo es encontrar el hogar perfecto. Cuando Klara conoce a…",
    "poster": "https://pics.filmaffinity.com/klara_and_the_sun-638753265-mmed.jpg",
    "fa": "897940",
    "destacado": true,
@@ -571,7 +341,9 @@
     "Animación"
    ],
    "pais": "Reino Unido",
-   "sinopsis": "En los días previos a Halloween, en la granja de Mossy Bottom, el granjero destruye sin querer el huerto de calabazas de su rebaño de ovejas. Shaun se convierte en un científico loco para solucionar el problema, pero la situación empeora a partir de ahí: el…",
+   "reparto": "Justin Fletcher, John Sparkes, Kate Harbour",
+   "sinopsis": "En los días previos a Halloween, en la granja de Mossy Bottom, el granjero destruye sin querer el huerto de calabazas de…",
+   "duracion": 80,
    "poster": "https://pics.filmaffinity.com/shaun_the_sheep_the_beast_of_mossy_bottom-976024649-mmed.jpg",
    "fa": "771320",
    "destacado": false
@@ -585,7 +357,9 @@
     "Terror"
    ],
    "pais": "Australia",
-   "sinopsis": "Dos adolescentes deben escapar de un ente violento que adopta la forma de la persona que más desean: el uno al otro.",
+   "reparto": "Joe Bird, Stacy Clausen, Mia Wasikowska",
+   "sinopsis": "Dos adolescentes deben escapar de un ente violento que adopta la forma de la persona que más desean: el uno al otro. (FILMAFFINITY)…",
+   "duracion": 86,
    "poster": "https://pics.filmaffinity.com/leviticus-432283138-mmed.jpg",
    "fa": "721730",
    "destacado": false,
@@ -621,8 +395,10 @@
    "generos": [
     "Comedia"
    ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Una pescadora vive en la periferia de un pueblo costero; es soltera, apestosa y objeto de burlas constantes. Un día, harta de sus estirados y estrechos vecinos, encarga un marido de mimbre para ella.\n\nPreestreno: Festival de Sundance 2026",
+   "pais": "Reino Unido",
+   "reparto": "Olivia Colman, Alexander Skarsgård, Elizabeth Debicki",
+   "sinopsis": "Una pescadora vive en la periferia de un pueblo costero; es soltera, apestosa y objeto de burlas constantes. Un día,…",
+   "duracion": 105,
    "poster": "https://pics.filmaffinity.com/wicker-359414863-mmed.jpg",
    "fa": "180963",
    "destacado": false
@@ -1269,6 +1045,104 @@
   },
   {
    "fecha": "2026-12-04",
+   "titulo": "Burundanga",
+   "original": "Burundanga",
+   "director": "José Corbacho",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España",
+   "sinopsis": "Berta descubre que está embarazada y no sabe qué hacer, porque duda del amor de su pareja, Manel. Aconsejada por su amiga Sílvia, decide administrarle burundanga, la llamada droga de la verdad. Pero cuando empieza a hacer efecto, Manel confiesa algo mucho más…",
+   "poster": "https://pics.filmaffinity.com/burundanga-862734937-mmed.jpg",
+   "fa": "774585",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Club Kid",
+   "original": "Club Kid",
+   "director": "Jordan Firstman",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "La vida de un promotor de fiestas underground en decadencia da un giro cuando tiene que hacerse cargo de un hijo de 10 años cuya existencia desconocía.\n\nPreestreno: Festival de Cannes 2026 (Un Certain Regard)",
+   "poster": "https://pics.filmaffinity.com/club_kid-180771256-mmed.jpg",
+   "fa": "525057",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Crawlers (Arácnidos)",
+   "original": "Crawlersaka",
+   "director": "Ángel Gómez Hernández",
+   "generos": [
+    "Terror"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Cuando un hombre regresa de un viaje albergando sin saberlo una nueva raza de arácnidos, los habitantes de un bloque de apartamentos son puestos en cuarentena y abandonados a su suerte contra una plaga de arañas venenosas.",
+   "poster": "https://pics.filmaffinity.com/crawlers-730323066-mmed.jpg",
+   "fa": "252092",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Desposados",
+   "original": "Desposados",
+   "director": "Vicente Villanueva",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España",
+   "sinopsis": "Cuenta la historia de cuatro matrimonios en diferentes etapas de su relación. Cuando la Iglesia descubre que un impostor ha estado suplantando al sacerdote de una parroquia durante nueve años, los enlaces celebrados por él quedan anulados. Las parejas…",
+   "poster": "https://pics.filmaffinity.com/desposados-570159762-mmed.jpg",
+   "fa": "201639",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "El fantasma de la ópera",
+   "original": "Le Fantôme de L'Opéra",
+   "director": "Alexandre Castagnetti",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Ambientada en la París actual, la historia sigue a Anastasia, una joven bailarina recién llegada a la ciudad que sueña con triunfar en el ballet y logra unirse a la prestigiosa Ópera de París. Mientras ensaya Orfeo, se enamora de un misterioso pianista. A…",
+   "poster": "https://pics.filmaffinity.com/le_fantome_de_l_opera-540893137-mmed.jpg",
+   "fa": "707193",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Fatherland",
+   "original": "Fatherlandaka",
+   "director": "Pawel Pawlikowski",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Polonia",
+   "sinopsis": "La relación entre el escritor ganador del Premio Nobel Thomas Mann y su hija Erika, actriz, escritora y piloto de carreras. En el apogeo de la Guerra Fría, y tras regresar a casa tras dieciséis años de exilio en Estados Unidos, Mann y su hija emprenden un…",
+   "poster": "https://pics.filmaffinity.com/fatherland-377223627-mmed.jpg",
+   "fa": "812894",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "I Want Your Sex",
+   "original": "I Want Your Sex",
+   "director": "Gregg Araki",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Cuando el joven Elliot (Cooper Hoffman) consigue trabajo con la provocadora artista Erika Tracy (Olivia Wilde), sus fantasías se hacen realidad en el momento en que ella lo invita a convertirse en su musa sexual. Pero pronto Elliot se siente abrumado al ser…",
+   "poster": "https://pics.filmaffinity.com/i_want_your_sex-692353349-mmed.jpg",
+   "fa": "259916",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
    "titulo": "Noche de paz 2",
    "original": "Violent Night 2",
    "director": "Tommy Wirkola",
@@ -1279,6 +1153,90 @@
    "sinopsis": "Continuación de \"Noche de paz\" (2022). El no tan simpático Papá Noel vuelve a enfundarse su traje para medirse con un despiadado gánster que se dedica a aterrorizar a las tiendas del centro comercial Silver Bell. Pero Santa Claus olvida el verdadero…",
    "poster": "https://pics.filmaffinity.com/violent_night_2-783079018-mmed.jpg",
    "fa": "808270",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Primavera",
+   "original": "Primavera",
+   "director": "Damiano Michieletto",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Italia",
+   "sinopsis": "Venecia, siglo XVIII. Cecilia es una virtuosa del violín de 20 años que permanece confinada en el orfanato Pietà. Su única escapatoria parece ser el matrimonio. Sin embargo, su vida cambia cuando Antonio Vivaldi, un compositor brillante y ambicioso, llega…",
+   "poster": "https://pics.filmaffinity.com/primavera-742746039-mmed.jpg",
+   "fa": "631908",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Ray Gunn",
+   "original": "Ray Gunn",
+   "director": "Brad Bird",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Las aventuras de Raymond Gunn, el último detective humano, en un mundo futurista habitado por igual por humanos y alienígenas. \n\nPreestreno mundial en el London Film Festival (octubre 2026).\nEstreno en cines (USA y España): 4 de diciembre.\nEstreno en Netflix:…",
+   "poster": "https://pics.filmaffinity.com/ray_gunn-164015046-mmed.jpg",
+   "fa": "276777",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Trinidad",
+   "original": "Trinidad",
+   "director": "Laura Alvea / José F. Ortuño",
+   "generos": [
+    "Western"
+   ],
+   "pais": "España",
+   "sinopsis": "A finales del siglo XIX una joven española llamada Trinidad (Gabriela Andrada) llega al Salvaje Oeste acompañada de su madre (Paz Vega) y de su hermana (Sofía Allepuz) huyendo de la justicia que la persigue en su país. Desafiando los roles que la sociedad de…",
+   "poster": "https://pics.filmaffinity.com/trinidad-155477438-mmed.jpg",
+   "fa": "688376",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Charlie Harper",
+   "original": "Charlie Harper",
+   "director": "Tom Dean / Mac Eldridge",
+   "generos": [
+    "Romance"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Harper y Charlie intentan construir una vida juntos. Mientras Harper se esfuerza por labrarse una carrera como chef, Charlie está estancado. Enfrentados a retos en su relación, luchan por demostrar que están hechos el uno para el otro, pero ¿será…",
+   "poster": "https://pics.filmaffinity.com/charlie_harper-402457429-mmed.jpg",
+   "fa": "653778",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Desmadre en la granja",
+   "original": "Animal Farm",
+   "director": "Andy Serkis",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Un grupo de animales se rebelan contra sus dueños y toman el poder de la granja. Nueva adaptación del clásico de George Orwell.",
+   "poster": "https://pics.filmaffinity.com/animal_farm-775608099-mmed.jpg",
+   "fa": "970668",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "El profesor y el amor",
+   "original": "Demain je tombe amoureuxaka",
+   "director": "Martin Provost",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Francia",
+   "sinopsis": "El día de su jubilación, Émile, profesor de literatura en Dieppe, imparte a sus jóvenes alumnos una última clase sobre literatura y amor, animándoles a convertirse en los poetas de sus propias vidas. Una alumna le pregunta por sus propios sentimientos. ¿Sigue…",
+   "poster": "https://pics.filmaffinity.com/demain_je_tombe_amoureux-709023365-mmed.jpg",
+   "fa": "800798",
    "destacado": false
   },
   {
@@ -1293,6 +1251,20 @@
    "sinopsis": "Un ex soldado se ve inmerso en una brutal carrera contrarreloj cuando una entrega médica crítica le convierte en objetivo de un despiadado cártel. Con la traición acechándole por todos lados, debe sobrevivir a la persecución y entregar su carga antes de que a…",
    "poster": "https://pics.filmaffinity.com/runner-592918297-mmed.jpg",
    "fa": "710022",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Gurú",
+   "original": "Gourou",
+   "director": "Yann Gozlan",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Matt Vasseur es el hombre del momento, es el exitoso fundador de su empresa de coaching personal, \"Expand\". Atrae a grandes multitudes que esperan cada palabra suya, deseosas de recuperar el control de sus vidas. Con su impresionante trabajo, su novia…",
+   "poster": "https://pics.filmaffinity.com/gourou-619843359-mmed.jpg",
+   "fa": "293691",
    "destacado": false
   },
   {
