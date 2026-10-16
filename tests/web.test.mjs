@@ -333,16 +333,16 @@ await prueba("Pendientes: añadir con el buscador y quitar, al momento", async (
   assert.ok(!e.db.pendientes.some((w) => /Breaking Dawn/.test(w.titulo)), "quitada en el servidor");
 });
 
-await prueba("Publicada fuera de Vercel (DeployHub): usa la API de Vercel", async (p, e) => {
+await prueba("Publicada en otro dominio: usa la API de Vercel", async (p, e) => {
   const remota = [];
-  await p.route("http://filora.localhost/**", (r) => /\/data\//.test(r.request().url())
+  await p.route("http://filora.ejemplo.es/**", (r) => /\/data\//.test(r.request().url())
     ? r.fulfill({ json: /cartelera/.test(r.request().url()) ? CARTELERA : /estrenos/.test(r.request().url()) ? { estrenos: ESTRENOS } : /catalogo/.test(r.request().url()) ? CATALOGO : {} })
-    : r.continue({ url: r.request().url().replace("http://filora.localhost", BASE) }));
+    : r.continue({ url: r.request().url().replace("http://filora.ejemplo.es", BASE) }));
   await p.route("https://filora-umber.vercel.app/api/**", (r) => { remota.push(new URL(r.request().url()).pathname);
     const ruta = new URL(r.request().url()).pathname.slice(5);
     return r.fulfill({ json: ruta === "db" ? e.db : ruta === "imdb" ? IMDB : {}, headers: { "Access-Control-Allow-Origin": "*" } }); });
   await p.addInitScript(() => localStorage.setItem("cine.pin", "1234"));
-  await p.goto("http://filora.localhost/#/coleccion");
+  await p.goto("http://filora.ejemplo.es/#/coleccion");
   await p.waitForSelector("#collRes .pcard", { timeout: 8000 });
   assert.ok(remota.includes("/api/db"), "pide la colección a Vercel");
 });

@@ -135,7 +135,8 @@ try { Object.assign(S.coll, JSON.parse(localStorage.getItem("cine.coll") || "{}"
 const saveUI = () => { try { localStorage.setItem("cine.coll", JSON.stringify({ mode: S.coll.mode, sort: S.coll.sort })); } catch (e) { /* */ } };
 
 // Versión pública (Netlify): sin servidor, lee JSON estáticos y no permite editar.
-const STATIC = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || new URLSearchParams(location.search).has("vitrina");
+// Modo PC (servidor local server.py, también detrás de DeployHub en *.localhost) o web publicada
+const STATIC = !/^(localhost|[\w-]+\.localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || new URLSearchParams(location.search).has("vitrina");
 // Dónde está la API: en Vercel, en la propia web; publicada en otro sitio (DeployHub, otro dominio…), la de Vercel
 const API = STATIC && !/(^|\.)vercel\.app$/.test(location.hostname) && !/^(127\.0\.0\.1|\[::1\])$/.test(location.hostname)
   ? "https://filora-umber.vercel.app" : "";

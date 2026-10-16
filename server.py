@@ -8,6 +8,7 @@ seguridad y regenera "Filora.xlsx" en cada cambio.
 """
 import json
 import mimetypes
+import os
 import shutil
 import sys
 import threading
@@ -30,7 +31,10 @@ from rutas import BACKUPS, CFG_PATH, DATA, DB_PATH, asegurar_db  # noqa: E402
 
 APP = ROOT / "app"
 EST_PATH = DATA / "estrenos.json"
-PORT = 8765
+# Puerto: 8765 por defecto; DeployHub u otro gestor puede darlo con la variable PORT o con --port N
+PORT = int(os.environ.get("PORT") or 8765)
+if "--port" in sys.argv:
+    PORT = int(sys.argv[sys.argv.index("--port") + 1])
 WEB = "https://filora-umber.vercel.app"  # web publicada por defecto (se cambia en Ajustes)
 
 LOCK = threading.RLock()
