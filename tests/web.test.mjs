@@ -333,6 +333,34 @@ await prueba("Pendientes: añadir con el buscador y quitar, al momento", async (
   assert.ok(!e.db.pendientes.some((w) => /Breaking Dawn/.test(w.titulo)), "quitada en el servidor");
 });
 
+await prueba("Publicada fuera de Vercel (DeployHub): usa la API de Vercel", async (p, e) => {
+  const remota = [];
+  await p.route("http://filora.localhost/**", (r) => /\/data\//.test(r.request().url())
+    ? r.fulfill({ json: /cartelera/.test(r.request().url()) ? CARTELERA : /estrenos/.test(r.request().url()) ? { estrenos: ESTRENOS } : /catalogo/.test(r.request().url()) ? CATALOGO : {} })
+    : r.continue({ url: r.request().url().replace("http://filora.localhost", BASE) }));
+  await p.route("https://filora-umber.vercel.app/api/**", (r) => { remota.push(new URL(r.request().url()).pathname);
+    const ruta = new URL(r.request().url()).pathname.slice(5);
+    return r.fulfill({ json: ruta === "db" ? e.db : ruta === "imdb" ? IMDB : {}, headers: { "Access-Control-Allow-Origin": "*" } }); });
+  await p.addInitScript(() => localStorage.setItem("cine.pin", "1234"));
+  await p.goto("http://filora.localhost/#/coleccion");
+  await p.waitForSelector("#collRes .pcard", { timeout: 8000 });
+  assert.ok(remota.includes("/api/db"), "pide la colección a Vercel");
+});
+
+await prueba("Añadir: propuestas con cartel mientras escribes; Intro sin elegir añade tal cual", async (p, e) => {
+  await ir(p, "#/anadir");
+  await p.fill("#rg_titulo", "amanecer");
+  await p.waitForSelector("#rgAc .ac-item img", { timeout: 8000 });
+  await p.keyboard.press("ArrowDown");
+  await p.keyboard.press("Enter");
+  assert.match(await p.inputValue("#rg_titulo"), /Breaking Dawn/);
+  assert.equal(await p.inputValue("#rg_anio"), "2012");
+  await p.fill("#rg_titulo", "Mi película casera");
+  await p.fill("#rg_anio", "");
+  await p.press("#rg_titulo", "Enter");
+  await p.waitForFunction(() => S.db.peliculas.some((x) => x.titulo === "Mi película casera"), null, { timeout: 8000 });
+});
+
 await prueba("Tu año en cine", async (p) => {
   await ir(p, "#/anio");
   await p.waitForSelector(".an-hero", { timeout: 8000 });

@@ -4,7 +4,7 @@
    ============================================================ */
 
 // Dirección de la web publicada: la app del PC también le pide a ella las notas.
-const WEB_FILORA = () => (STATIC ? "" : ((S.db && S.db.config && S.db.config.web) || "https://filora-umber.vercel.app").replace(/\/$/, ""));
+const WEB_FILORA = () => (STATIC ? API : ((S.db && S.db.config && S.db.config.web) || "https://filora-umber.vercel.app").replace(/\/$/, ""));
 
 // Pequeña caché en este dispositivo (no gasta nada del almacenamiento de la web).
 function cacheLeer(clave, dias) {

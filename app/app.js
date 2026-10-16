@@ -136,6 +136,9 @@ const saveUI = () => { try { localStorage.setItem("cine.coll", JSON.stringify({ 
 
 // Versión pública (Netlify): sin servidor, lee JSON estáticos y no permite editar.
 const STATIC = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || new URLSearchParams(location.search).has("vitrina");
+// Dónde está la API: en Vercel, en la propia web; publicada en otro sitio (DeployHub, otro dominio…), la de Vercel
+const API = STATIC && !/(^|\.)vercel\.app$/.test(location.hostname) && !/^(127\.0\.0\.1|\[::1\])$/.test(location.hostname)
+  ? "https://filora-umber.vercel.app" : "";
 const PIN_KEY = "cine.pin";
 const getPin = () => { try { return localStorage.getItem(PIN_KEY) || ""; } catch (e) { return ""; } };
 // Cuenta de usuario (web publicada): cada uno guarda su propia colección.
@@ -171,8 +174,8 @@ async function api(path, opts = {}) {
     if (path.startsWith("buscar")) return wikiBuscar(decodeURIComponent(path.split("q=")[1] || ""));
     if (method === "GET" && path === "db") {
       try {
-        const r = await fetch("/api/db", { cache: "no-store", headers: authHeaders() });
-        if (r.ok) return r.json();
+        const r = await fetch(`${API}/api/db`, { cache: "no-store", headers: authHeaders() });
+        if (r.ok) { const j = await r.json().catch(() => null); if (j && Array.isArray(j.peliculas)) return j; throw new Error("La API de Filora no responde con datos (¿la web está publicada sin su servidor?)"); }
         if (r.status === 401 && getSes()) { setSes(null); document.documentElement.classList.toggle("ro", ro()); toast("Tu sesión ha caducado. Vuelve a entrar", "user"); return api("db"); }
       } catch (e) { /* sin conexión con la API */ }
       return coleccionVacia(); // las colecciones son privadas: sin cuenta no se publica ninguna
@@ -184,14 +187,14 @@ async function api(path, opts = {}) {
       return r.json();
     }
     if (ro()) throw new Error("Entra con tu cuenta para guardar tus películas");
-    const r = await fetch(`/api/${path}`, { method, headers: { "Content-Type": "application/json", ...authHeaders() }, body: opts.body ? JSON.stringify(opts.body) : undefined });
+    const r = await fetch(`${API}/api/${path}`, { method, headers: { "Content-Type": "application/json", ...authHeaders() }, body: opts.body ? JSON.stringify(opts.body) : undefined });
     const j = await r.json().catch(() => ({}));
     if (r.status === 401) { setSes(null); try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ } document.documentElement.classList.toggle("ro", ro()); renderChrome(); }
     if (!r.ok) throw new Error(j.error || `Error ${r.status}`);
     datosCambiados();
     return j;
   }
-  const r = await fetch(`/api/${path}`, { headers: { "Content-Type": "application/json" }, ...opts, body: opts.body ? JSON.stringify(opts.body) : undefined });
+  const r = await fetch(`${API}/api/${path}`, { headers: { "Content-Type": "application/json" }, ...opts, body: opts.body ? JSON.stringify(opts.body) : undefined });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(j.error || `Error ${r.status}`);
   if (opts.method && opts.method !== "GET") datosCambiados();
@@ -785,7 +788,7 @@ function mismaPeli(w, titulo, original, anio) {
 async function plataformasDe(w) {
   const k = `filora.plat.${w.id}`;
   try { const c = JSON.parse(localStorage.getItem(k) || "null"); if (c && reciente(c.d, PLAT_DIAS)) return c.l; } catch (e) { /* */ }
-  const r = await fetch(`/api/plataformas?t=${encodeURIComponent(w.titulo)}${w.anio ? `&y=${w.anio}` : ""}`);
+  const r = await fetch(`${API}/api/plataformas?t=${encodeURIComponent(w.titulo)}${w.anio ? `&y=${w.anio}` : ""}`);
   if (!r.ok) throw new Error("sin JustWatch");
   const l = await r.json();
   try { localStorage.setItem(k, JSON.stringify({ d: new Date().toISOString(), l })); } catch (e) { /* */ }
@@ -999,7 +1002,7 @@ async function cambiosTaquilla(p) {
   const imdb = (p.ids || {}).imdb;
   if (!imdb || (p.taquilla || {}).consultado) return null;
   try {
-    const r = await fetch(`/api/taquilla?imdb=${imdb}`);
+    const r = await fetch(`${API}/api/taquilla?imdb=${imdb}`);
     if (!r.ok) return null;
     const { presupuesto, ...taq } = (await r.json()) || {};
     return { taquilla: { ...(p.taquilla || {}), ...taq, fuente: "boxofficemojo", consultado: todayISO() }, ...(presupuesto ? { presupuesto } : {}) };
@@ -1966,7 +1969,7 @@ async function avisarDemanda(forzar) {
   if (!ids.length) return;
   try { if (!forzar && localStorage.getItem("filora.demanda") === todayISO()) return; localStorage.setItem("filora.demanda", todayISO()); } catch (e) { /* */ }
   try {
-    const r = await fetch("/api/demanda", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cines: ids }) });
+    const r = await fetch(`${API}/api/demanda`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cines: ids }) });
     const j = await r.json();
     if (j.descargando) S.descargandoHasta = Date.now() + 12 * 60e3;
     if (cinesSinSesiones().length) esperarSesiones();
@@ -2244,7 +2247,7 @@ function trailerHTML(p, ytId) {
 // Wikidata y Wikipedia: en la web, a través de Vercel (caché de una semana); si falla, directo
 async function wmFetch(url) {
   if (STATIC) {
-    try { const r = await fetch(`/api/wm?u=${encodeURIComponent(url)}`); if (r.ok) return r; } catch (e) { /* directo */ }
+    try { const r = await fetch(`${API}/api/wm?u=${encodeURIComponent(url)}`); if (r.ok) return r; } catch (e) { /* directo */ }
   }
   return fetch(url);
 }
@@ -2308,7 +2311,7 @@ async function wikiDesdeQ(ids) {
 async function posterWeb(p) {
   try {
     const q = new URLSearchParams(p.ids && p.ids.imdb ? { imdb: p.ids.imdb } : { t: p.tituloOriginal || p.titulo, ...(p.anio ? { y: p.anio } : {}) });
-    const r = await fetch(`/api/poster?${q}`, { signal: AbortSignal.timeout(6000) });
+    const r = await fetch(`${API}/api/poster?${q}`, { signal: AbortSignal.timeout(6000) });
     return r.ok ? r.json() : {};
   } catch (e) { return {}; }
 }
@@ -2342,7 +2345,7 @@ async function completarAntes(body) {
   }
   if (b.ids.imdb && !(b.taquilla || {}).consultado) {
     try {
-      const { presupuesto, ...taq } = await (await fetch(`/api/taquilla?imdb=${b.ids.imdb}`, { signal: AbortSignal.timeout(9000) })).json();
+      const { presupuesto, ...taq } = await (await fetch(`${API}/api/taquilla?imdb=${b.ids.imdb}`, { signal: AbortSignal.timeout(9000) })).json();
       b.taquilla = { ...(b.taquilla || {}), ...taq, fuente: "boxofficemojo", consultado: todayISO() };
       if (presupuesto) b.presupuesto = presupuesto;
     } catch (e) { /* se consultará al abrir la ficha */ }
@@ -2417,7 +2420,7 @@ function openLogin(modo = "entrar") {
     const b = $("#cBtn"); b.disabled = true;
     try {
       const pin = $("#cPinIn").value.trim();
-      const r = await fetch(`/api/${crear ? "registro" : "entrar"}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ usuario, clave, ...(pin ? { pin } : {}) }) });
+      const r = await fetch(`${API}/api/${crear ? "registro" : "entrar"}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ usuario, clave, ...(pin ? { pin } : {}) }) });
       const j = await r.json().catch(() => ({}));
       if (j.pedirPin) { $("#cPinBox").hidden = false; $("#cPinIn").focus(); }
       if (!r.ok) return err(j.error || "No se ha podido conectar. Inténtalo de nuevo.");
@@ -2443,7 +2446,7 @@ function openPin() {
     ev.preventDefault();
     const pin = $("#pinIn").value.trim();
     if (!pin) return;
-    const r = await fetch("/api/login", { method: "POST", headers: { "X-Pin": pin } });
+    const r = await fetch(`${API}/api/login`, { method: "POST", headers: { "X-Pin": pin } });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) { $("#loginErr").textContent = j.error || "No se pudo entrar"; return; }
     setSes(null);
@@ -2506,7 +2509,7 @@ const CACHE_BQ = new Map();
 async function buscarWeb(q) {
   const k = norm(q);
   if (CACHE_BQ.has(k)) return CACHE_BQ.get(k);
-  const pr = (STATIC ? fetch(`/api/imdb?todo=1&q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(7000) }).then((r) => (r.ok ? r.json() : null)) : Promise.resolve(null))
+  const pr = (STATIC ? fetch(`${API}/api/imdb?todo=1&q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(7000) }).then((r) => (r.ok ? r.json() : null)) : Promise.resolve(null))
     .then((r) => r || { pelis: [], personas: [] }).catch(() => { CACHE_BQ.delete(k); return { pelis: [], personas: [] }; });
   CACHE_BQ.set(k, pr);
   return pr;
@@ -2563,7 +2566,7 @@ VIEWS.buscar = (v, qs) => {
 const durTxt = (m) => (m > 0 ? `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")} min` : "");
 async function imdbBuscar(q) {
   if (!STATIC) return [];
-  try { const r = await fetch(`/api/imdb?q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(6000) }); return r.ok ? r.json() : []; } catch (e) { return []; }
+  try { const r = await fetch(`${API}/api/imdb?q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(6000) }); return r.ok ? r.json() : []; } catch (e) { return []; }
 }
 const palabras = (t) => new Set(String(t || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !["la", "el", "los", "las", "de", "del", "the", "of", "y", "and", "a"].includes(w)));
 function parecido(a, b) { const A = palabras(a), B = palabras(b); if (!A.size || !B.size) return 0; let n = 0; for (const w of A) if (B.has(w)) n++; return n / A.size; }
@@ -2607,7 +2610,7 @@ VIEWS.anadir = (v) => {
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-importar>${icon("download")}Importar de Letterboxd, IMDb…</button><button class="btn" id="xlPaste">${icon("upload")}Pegar filas de Excel</button></div></div>
   <form class="registro" id="rgForm" autocomplete="off">
     <div class="rg-campos">
-      ${campo("titulo", "Película", 'placeholder="La sociedad de la nieve"')}
+      <div class="rg-f rg-titulo ac"><label for="rg_titulo"><span>Película</span></label><input class="input" id="rg_titulo" autocomplete="off" placeholder="Escribe el título: te propongo la película con su cartel" role="combobox" aria-controls="rgAc" aria-expanded="false"><div class="ac-list" id="rgAc" role="listbox" hidden></div></div>
       ${campo("duracion", "Duración (min)", 'inputmode="numeric" placeholder="144"')}
       ${campo("anio", "Año de estreno", 'inputmode="numeric" placeholder="2023"')}
       ${campo("nota", "Nota", 'inputmode="decimal" placeholder="0–10"')}
@@ -2665,8 +2668,47 @@ VIEWS.anadir = (v) => {
     const d = leer();
     const s = $(".rg-duracion span"); s.textContent = d.duracion ? `Duración · ${durTxt(d.duracion)}` : "Duración (min)";
   });
+  // propuestas con cartel mientras escribes el título (IMDb): ↑/↓ para moverte, Intro o clic para elegir;
+  // si no eliges ninguna, Intro añade la película tal cual la has escrito
+  const acL = $("#rgAc"), tit = F("titulo");
+  let acRes = [], acSel = -1, acT, acSeq = 0;
+  const acCerrar = () => { acL.hidden = true; acSel = -1; tit.setAttribute("aria-expanded", "false"); };
+  const acPintar = () => {
+    acL.innerHTML = acRes.map((r, i) => `<div class="ac-item ${i === acSel ? "sel" : ""}" role="option" data-i="${i}"><div class="mini">${r.poster ? `<img src="${esc(r.poster)}" referrerpolicy="no-referrer" alt="">` : ""}</div><div><div style="font-weight:600">${esc(r.titulo)} <span class="dim">${r.anio || ""}</span></div><div class="s">${esc(r.reparto || "")}</div></div></div>`).join("")
+      + `<div class="ac-empty">¿No está? Pulsa Intro y se añade tal cual.</div>`;
+    $$(".ac-item", acL).forEach((el) => (el.onmousedown = (ev) => { ev.preventDefault(); acElegir(acRes[+el.dataset.i]); }));
+  };
+  const acElegir = (r) => {
+    acCerrar();
+    tit.value = r.titulo;
+    if (r.anio) { F("anio").value = r.anio; F("anio").classList.remove("auto"); }
+    $$(".rg-f .auto").forEach((el) => { if (el !== F("anio")) { el.value = ""; el.classList.remove("auto"); } });
+    buscar();
+    F("nota").focus();
+  };
+  tit.addEventListener("input", () => {
+    clearTimeout(acT);
+    const q = tit.value.trim();
+    if (q.length < 2) return acCerrar();
+    acT = setTimeout(async () => {
+      const my = ++acSeq;
+      const r = typeof buscarWeb === "function" ? await buscarWeb(q) : { pelis: [] };
+      if (my !== acSeq || tit.value.trim() !== q) return;
+      acRes = (r.pelis || []).slice(0, 6); acSel = -1;
+      if (!acRes.length) return acCerrar();
+      acPintar(); acL.hidden = false; tit.setAttribute("aria-expanded", "true");
+    }, 250);
+  });
+  tit.addEventListener("keydown", (ev) => {
+    if (acL.hidden) return;
+    if (ev.key === "ArrowDown" || ev.key === "ArrowUp") { ev.preventDefault(); acSel = ev.key === "ArrowDown" ? Math.min(acSel + 1, acRes.length - 1) : Math.max(acSel - 1, -1); acPintar(); }
+    else if (ev.key === "Enter" && acSel >= 0) { ev.preventDefault(); acElegir(acRes[acSel]); }
+    else if (ev.key === "Escape") acCerrar();
+  });
+  tit.addEventListener("blur", () => setTimeout(acCerrar, 150));
   $("#rgSave").disabled = true;
   $("#rgForm").onsubmit = async (ev) => {
+    acCerrar();
     ev.preventDefault();
     const d = leer();
     if (!d.titulo) return F("titulo").focus();

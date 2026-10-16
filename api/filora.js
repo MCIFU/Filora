@@ -277,7 +277,18 @@ async function manejar(req) {
   }
 }
 
-export const GET = manejar;
-export const POST = manejar;
-export const PUT = manejar;
-export const DELETE = manejar;
+// CORS: la web también puede estar publicada en otro sitio (DeployHub, otro dominio) y usar esta API.
+// La sesión va en la cabecera Authorization (no en cookies), así que permitir cualquier origen no expone nada.
+const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", "Access-Control-Allow-Headers": "Authorization, X-Pin, Content-Type", "Access-Control-Max-Age": "86400" };
+async function conCors(req) {
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
+  const r = await manejar(req);
+  const h = new Headers(r.headers);
+  for (const [k, v] of Object.entries(CORS)) h.set(k, v);
+  return new Response(r.body, { status: r.status, headers: h });
+}
+export const GET = conCors;
+export const POST = conCors;
+export const PUT = conCors;
+export const DELETE = conCors;
+export const OPTIONS = conCors;

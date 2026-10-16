@@ -1418,3 +1418,7 @@ a.icon-btn { color: inherit; }
 .pd2-acc { display: flex; gap: 6px; flex-wrap: wrap; }
 .pd2-acc .btn { padding: 0 10px; height: 32px; font-size: 13px; }
 @media (max-width: 640px) { .pd-nueva2 { grid-template-columns: 1fr; } .pd2-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; } }
+.ac-item.sel { background: var(--butaca-2); box-shadow: inset 3px 0 var(--telon); }
+.rg-titulo.ac { position: relative; }
+.rg-titulo .ac-list { top: calc(100% + 4px); }
+.rg-titulo .ac-empty { padding: 8px 12px; font-size: 12.5px; color: var(--papel-3); border-top: 1px solid var(--linea); }
