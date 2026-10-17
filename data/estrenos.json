@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-16",
+ "actualizado": "2026-10-17",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -143,6 +143,30 @@
   },
   {
    "fecha": "2026-10-22",
+   "titulo": "Sentido y sensibilidad",
+   "original": "Sense and Sensibility",
+   "director": "Georgia Oakley",
+   "generos": [
+    "Romance"
+   ],
+   "pais": "Reino Unido",
+   "reparto": "Daisy Edgar-Jones, George MacKay, Esme Creed-Miles",
+   "sinopsis": "Nueva adaptación del clásico literario de Jane Austen \"Sentido y sensibilidad\". Las hermanas Elinor y Marianne Dashwood…",
+   "duracion": 131,
+   "poster": "https://pics.filmaffinity.com/sense_and_sensibility-803718727-mmed.jpg",
+   "fa": "892018",
+   "destacado": false,
+   "ids": {
+    "wikidata": "Q135436961",
+    "imdb": "tt13609648",
+    "rt": "m/sense_and_sensibility_2026",
+    "letterboxd": "sense-and-sensibility-2026",
+    "tmdb": "1503762",
+    "allocine": "1000026622"
+   }
+  },
+  {
+   "fecha": "2026-10-22",
    "titulo": "Superthings: La película",
    "original": "Superthings: La película",
    "director": "Víctor Monigote",
@@ -187,30 +211,6 @@
    "poster": "https://pics.filmaffinity.com/wildwood-283743995-mmed.jpg",
    "fa": "119235",
    "destacado": false
-  },
-  {
-   "fecha": "2026-10-23",
-   "titulo": "Sentido y sensibilidad",
-   "original": "Sense and Sensibility",
-   "director": "Georgia Oakley",
-   "generos": [
-    "Romance"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Daisy Edgar-Jones, George MacKay, Esme Creed-Miles",
-   "sinopsis": "Nueva adaptación del clásico literario de Jane Austen \"Sentido y sensibilidad\". Las hermanas Elinor y Marianne Dashwood…",
-   "duracion": 131,
-   "poster": "https://pics.filmaffinity.com/sense_and_sensibility-803718727-mmed.jpg",
-   "fa": "892018",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q135436961",
-    "imdb": "tt13609648",
-    "rt": "m/sense_and_sensibility_2026",
-    "letterboxd": "sense-and-sensibility-2026",
-    "tmdb": "1503762",
-    "allocine": "1000026622"
-   }
   },
   {
    "fecha": "2026-10-30",
