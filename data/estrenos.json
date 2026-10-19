@@ -360,8 +360,7 @@
    ],
    "pais": "Australia",
    "reparto": "Joe Bird, Stacy Clausen, Mia Wasikowska",
-   "sinopsis": "Dos adolescentes deben escapar de un ente violento que adopta la forma de la persona que más desean: el uno al otro. (FILMAFFINITY)…",
-   "duracion": 86,
+   "sinopsis": "Dos adolescentes deben escapar de un ente violento que adopta la forma de la persona que más desean: el uno al otro.",
    "poster": "https://pics.filmaffinity.com/leviticus-432283138-mmed.jpg",
    "fa": "721730",
    "destacado": false,
@@ -1097,7 +1096,7 @@
    ],
    "pais": "España",
    "sinopsis": "Cuenta la historia de cuatro matrimonios en diferentes etapas de su relación. Cuando la Iglesia descubre que un impostor ha estado suplantando al sacerdote de una parroquia durante nueve años, los enlaces celebrados por él quedan anulados. Las parejas…",
-   "poster": "https://pics.filmaffinity.com/desposados-570159762-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/desposados-818756913-mmed.jpg",
    "fa": "201639",
    "destacado": false
   },
@@ -1229,20 +1228,6 @@
   },
   {
    "fecha": "2026-12-11",
-   "titulo": "El profesor y el amor",
-   "original": "Demain je tombe amoureuxaka",
-   "director": "Martin Provost",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Francia",
-   "sinopsis": "El día de su jubilación, Émile, profesor de literatura en Dieppe, imparte a sus jóvenes alumnos una última clase sobre literatura y amor, animándoles a convertirse en los poetas de sus propias vidas. Una alumna le pregunta por sus propios sentimientos. ¿Sigue…",
-   "poster": "https://pics.filmaffinity.com/demain_je_tombe_amoureux-709023365-mmed.jpg",
-   "fa": "800798",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-12-11",
    "titulo": "Entrega al límite",
    "original": "Runner",
    "director": "Scott Waugh",
@@ -1267,6 +1252,20 @@
    "sinopsis": "Matt Vasseur es el hombre del momento, es el exitoso fundador de su empresa de coaching personal, \"Expand\". Atrae a grandes multitudes que esperan cada palabra suya, deseosas de recuperar el control de sus vidas. Con su impresionante trabajo, su novia…",
    "poster": "https://pics.filmaffinity.com/gourou-619843359-mmed.jpg",
    "fa": "293691",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "We Are Aliens",
+   "original": "We Are Aliensaka",
+   "director": "Kohei Kadowaki",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Japón",
+   "sinopsis": "Un verano, mientras cursa tercero de primaria, un chico callado llamado Tsubasa conoce a Kyotaro, el centro de admiración de la clase, y ambos se hacen íntimos amigos. Dentro de su pequeño mundo, comparten momentos irremplazables, hasta que un pequeño…",
+   "poster": "https://pics.filmaffinity.com/we_are_aliens-599886502-mmed.jpg",
+   "fa": "357282",
    "destacado": false
   },
   {
