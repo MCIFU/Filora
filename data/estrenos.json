@@ -1,26 +1,10 @@
 {
- "actualizado": "2026-10-19",
+ "actualizado": "2026-10-20",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
  "estrenos": [
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Ali G: Kién es yo?",
-   "original": "Ali G: Who Iz I?",
-   "director": "Sacha Baron Cohen",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Sacha Baron Cohen, Morgana Robinson",
-   "sinopsis": "Tras veinte años dedicados a 'relajarse, fumar y echar un polvo', Ali G se queda de piedra al descubrir que su novia de…",
-   "duracion": 89,
-   "poster": "https://pics.filmaffinity.com/ali_g_who_iz_i-150114685-mmed.jpg",
-   "fa": "171400",
-   "destacado": false
-  },
   {
    "fecha": "2026-10-22",
    "titulo": "Arriba Tutto",
@@ -360,7 +344,8 @@
    ],
    "pais": "Australia",
    "reparto": "Joe Bird, Stacy Clausen, Mia Wasikowska",
-   "sinopsis": "Dos adolescentes deben escapar de un ente violento que adopta la forma de la persona que más desean: el uno al otro.",
+   "sinopsis": "Dos adolescentes deben escapar de un ente violento que adopta la forma de la persona que más desean: el uno al otro. (FILMAFFINITY)…",
+   "duracion": 86,
    "poster": "https://pics.filmaffinity.com/leviticus-432283138-mmed.jpg",
    "fa": "721730",
    "destacado": false,
@@ -1196,6 +1181,20 @@
    "sinopsis": "A finales del siglo XIX una joven española llamada Trinidad (Gabriela Andrada) llega al Salvaje Oeste acompañada de su madre (Paz Vega) y de su hermana (Sofía Allepuz) huyendo de la justicia que la persigue en su país. Desafiando los roles que la sociedad de…",
    "poster": "https://pics.filmaffinity.com/trinidad-155477438-mmed.jpg",
    "fa": "688376",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Cartas de Estado (Yellow Letters)",
+   "original": "Gelbe Briefeaka",
+   "director": "Ilker Çatak",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Alemania",
+   "sinopsis": "Derya y Aziz, una célebre pareja de artistas de Ankara, llevan una vida plena con su hija de 13 años, Ezgi, hasta que un incidente en el estreno de su nueva obra lo cambia todo. De la noche a la mañana, se ven en la mira del Estado turco y pierden sus…",
+   "poster": "https://pics.filmaffinity.com/gelbe_briefe-835232639-mmed.jpg",
+   "fa": "487202",
    "destacado": false
   },
   {
