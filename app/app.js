@@ -136,7 +136,8 @@ const saveUI = () => { try { localStorage.setItem("cine.coll", JSON.stringify({ 
 
 // Versión pública (Netlify): sin servidor, lee JSON estáticos y no permite editar.
 // Modo PC (servidor local server.py, también detrás de DeployHub en *.localhost) o web publicada
-const STATIC = !/^(localhost|[\w-]+\.localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || new URLSearchParams(location.search).has("vitrina");
+// *.ts.net: el servidor del PC publicado en tu red privada de Tailscale (móvil incluido)
+const STATIC = !/^(localhost|[\w-]+\.localhost|127\.0\.0\.1|\[::1\]|[\w-]+\.[\w-]+\.ts\.net)$/.test(location.hostname) || new URLSearchParams(location.search).has("vitrina");
 // Dónde está la API: en Vercel, en la propia web; publicada en otro sitio (DeployHub, otro dominio…), la de Vercel
 const API = STATIC && !/(^|\.)vercel\.app$/.test(location.hostname) && !/^(127\.0\.0\.1|\[::1\])$/.test(location.hostname)
   ? "https://filora-umber.vercel.app" : "";
