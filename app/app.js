@@ -724,48 +724,45 @@ function openFilm(id) {
   const rank = [...pr.P].sort((a, b) => b.nota - a.nota).findIndex((x) => x.id === p.id) + 1;
   const pct = rank ? Math.round((1 - (rank - 1) / pr.N) * 100) : null;
   const visto = p.fechaVisto ? `Vista el ${new Date(p.fechaVisto + "T12:00").toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}${p.lugar ? ` · ${p.lugar}` : ""}` : p.lugar ? `Vista en ${p.lugar}` : null;
-  const credito = (l, v) => (v ? `<div><dt>${l}</dt><dd>${v}</dd></div>` : "");
+  const dirs = p.director ? splitDir(p.director).map((d) => `<a href="#/persona?n=${encodeURIComponent(d)}" data-close>${esc(d)}</a>`).join(", ") : "";
+  const meta = [p.anio, p.duracion ? `${Math.floor(p.duracion / 60)} h ${String(p.duracion % 60).padStart(2, "0")} min` : "", esc(p.pais || ""), dirs].filter(Boolean).join("<i>·</i>");
+  const fin = p.nota != null && notasWebDe(p).length ? notaFinal(p) : null;
+  // Ficha compacta: lo esencial arriba (cartel, datos y notas) y el resto en bloques cortos
   modal(`
-    ${p.poster ? `<div class="detail-backdrop"><img src="${esc(p.poster)}" alt="" referrerpolicy="no-referrer"></div>` : ""}
-    <div class="sheet-body"><div class="detail fx">
-      <aside class="fx-side">
-        <div class="poster">${posterHTML(p)}</div>
-        <dl class="fx-cred">
-          ${credito("Dirección", p.director ? splitDir(p.director).map((d) => `<a href="#/persona?n=${encodeURIComponent(d)}" data-close>${esc(d)}</a>`).join("<br>") : "")}
-          ${credito("Duración", p.duracion ? `${Math.floor(p.duracion / 60)} h ${String(p.duracion % 60).padStart(2, "0")} min <span class="dim">· ${p.duracion} min</span>` : "")}
-          ${credito("Estreno", p.anio || "")}
-          ${credito("País", esc(p.pais || ""))}
-          ${credito("Género", (p.generos || []).map((g) => `<a href="#/coleccion?genre=${encodeURIComponent(g)}" data-close>${esc(g)}</a>`).join(" · "))}
-          ${credito("Vista", visto ? esc(visto.replace(/^Vista (el|en) /, "")) : "")}
-        </dl>
-        <div class="fx-acts">
-          <button class="btn btn-sm" data-edit="${p.id}">${icon("edit")}Editar</button>
-          <button class="btn btn-sm" data-fav="${p.id}">${icon("star", p.favorita)}${p.favorita ? "Quitar favorita" : "Favorita"}</button>
-          <button class="btn btn-sm btn-ghost btn-danger" data-del="${p.id}" title="Eliminar">${icon("trash")}</button>
+    <div class="sheet-body fc">
+      <header class="fc-hero">
+        ${p.poster ? `<div class="fc-fondo"><img src="${esc(p.poster)}" alt="" referrerpolicy="no-referrer"></div>` : ""}
+        <div class="fc-cartel">${posterHTML(p)}</div>
+        <div class="fc-cab">
+          <h2>${esc(p.titulo)}${p.favorita ? ` <span class="fc-fav" title="Favorita">★</span>` : ""}</h2>
+          ${p.tituloOriginal && norm(p.tituloOriginal) !== norm(p.titulo) ? `<div class="fc-orig">${esc(p.tituloOriginal)}</div>` : p.tituloEn && norm(p.tituloEn) !== norm(p.titulo) ? `<div class="fc-orig">${esc(p.tituloEn)}</div>` : ""}
+          <div class="fc-meta">${meta}</div>
+          ${(p.generos || []).length ? `<div class="fc-gen">${p.generos.map((g) => `<a href="#/coleccion?genre=${encodeURIComponent(g)}" data-close>${esc(g)}</a>`).join("")}</div>` : ""}
+          <div class="fc-notas">
+            <div class="fc-n">${scoreBadge(p.nota, "lg")}<span><small>Tu nota</small><b>${veredicto(p.nota)}</b></span></div>
+            ${fin != null ? `<div class="fc-n" data-tip="${esc(desgloseFinal(p))}">${scoreBadge(fin)}<span><small>Nota final</small><b>con las webs</b></span></div>` : ""}
+            ${pct ? `<div class="fc-n"><em>${rank}º</em><span><small>de ${pr.N}</small><b>top ${Math.max(1, 101 - pct)} %</b></span></div>` : ""}
+          </div>
         </div>
-      </aside>
-      <div class="fx-main">
-        <h2>${esc(p.titulo)}</h2>
-        ${p.tituloOriginal && norm(p.tituloOriginal) !== norm(p.titulo) ? `<div class="orig">${esc(p.tituloOriginal)}</div>` : ""}
-        ${p.tituloEn && norm(p.tituloEn) !== norm(p.titulo) && norm(p.tituloEn) !== norm(p.tituloOriginal) ? `<div class="orig">${esc(p.tituloEn)} <span class="dim">· en inglés</span></div>` : ""}
-        <div class="fx-notas">
-          <div class="myscore">${scoreBadge(p.nota, "lg")}<div><div class="lbl">Tu nota${p.favorita ? ` · <span style="color:var(--gold)">★ favorita</span>` : ""}</div><div class="verdict">${veredicto(p.nota)}</div>
-            ${pct ? `<div class="dim" style="font-size:12.5px">Puesto ${rank} de ${pr.N} · mejor que el ${Math.max(0, pct - 1)}% de lo que has visto</div>` : ""}</div></div>
-          ${p.nota != null && notasWebDe(p).length ? `<div class="final-ficha">${scoreBadge(notaFinal(p))}<div><div class="lbl">Nota final</div>
-            <div class="dim">Mitad tu nota y mitad la media de las webs (${fmt1(mean(notasWebDe(p).map((x) => x[1])))})</div></div></div>` : ""}
-        </div>
-        ${p.resena ? `<blockquote class="review">${esc(p.resena)}</blockquote>` : ""}
-        <section id="fTrama" class="fx-sec" hidden></section>
-        <section id="fTrailer" class="fx-sec">${trailerHTML(p)}</section>
-        <section id="fReparto" class="fx-sec" hidden></section>
-        <div id="fExtras" class="extras-ficha"><div class="sub">Notas en otras webs</div><div class="dim cargando-mini">Consultando IMDb, FilmAffinity, Letterboxd y SensaCine…</div></div>
-        <section id="fTaquilla" class="fx-sec">${taquillaHTML(p)}</section>
-        <div class="sub">Ver en</div>
-        ${linksHTML(p)}
+      </header>
+      <div class="fc-barra">
+        <span class="fc-vista">${visto ? `${icon("eye")}${esc(visto)}` : ""}</span>
+        <span class="fc-acts">
+          <button class="icon-btn" data-edit="${p.id}" title="Editar">${icon("edit")}</button>
+          <button class="icon-btn ${p.favorita ? "on" : ""}" data-fav="${p.id}" title="${p.favorita ? "Quitar de favoritas" : "Marcar como favorita"}">${icon("star", p.favorita)}</button>
+          <button class="icon-btn btn-danger" data-del="${p.id}" title="Eliminar">${icon("trash")}</button>
+        </span>
       </div>
-    </div>
-    ${similares.length ? `<div class="sub" style="margin-top:34px">Del mismo director en tu colección</div><div class="strip">${similares.map((x) => pcard(x)).join("")}</div>` : ""}
-    </div>`);
+      ${p.resena ? `<blockquote class="review">${esc(p.resena)}</blockquote>` : ""}
+      <div id="fExtras" class="extras-ficha"><div class="dim cargando-mini">Consultando notas de IMDb, FilmAffinity, Letterboxd y SensaCine…</div></div>
+      <section id="fTrama" class="fx-sec" hidden></section>
+      <section id="fReparto" class="fx-sec" hidden></section>
+      <section id="fTrailer" class="fx-sec">${trailerHTML(p)}</section>
+      <section id="fTaquilla" class="fx-sec">${taquillaHTML(p)}</section>
+      <div class="sub">Ver en</div>
+      ${linksHTML(p)}
+      ${similares.length ? `<div class="sub">Del mismo director en tu colección</div><div class="strip">${similares.map((x) => pcard(x)).join("")}</div>` : ""}
+    </div>`, "narrow fc-sheet");
   if (typeof cargarExtras === "function") cargarExtras(p);
   $("#modal").dataset.film = p.id;
   cargarTrama(p);
@@ -1071,7 +1068,7 @@ async function cargarTrama(p) {
     const t = document.getElementById("fTrailer"); if (t && yt && fichaAbierta(p.id)) t.innerHTML = trailerHTML(p, yt);
     const tr = await tramaWiki(sl.eswiki && sl.eswiki.title, sl.enwiki && sl.enwiki.title);
     const box = document.getElementById("fTrama");
-    if (box && tr && fichaAbierta(p.id)) { box.innerHTML = tramaHTML(tr); box.hidden = false; }
+    if (box && tr && fichaAbierta(p.id)) { box.innerHTML = tramaHTML(tr); box.hidden = false; const t = box.querySelector(".trama"); if (t) t.onclick = () => t.classList.add("abierta"); }
   } catch (e) { /* sin trama */ }
 }
 // Reparto con fotos y personajes (Wikidata): el guardado, completado con su ficha de Wikidata

@@ -141,8 +141,8 @@ await prueba("Añadir: reconoce un título aproximado y guarda cartel, géneros,
 
 await prueba("Ficha: créditos, reparto y taquilla", async (p) => {
   await ir(p, "#/coleccion?ficha=p1");
-  await p.waitForSelector(".fx-cred", { timeout: 8000 });
-  assert.match(await p.textContent(".fx-cred"), /1 h 54 min/);
+  await p.waitForSelector(".fc-meta", { timeout: 8000 });
+  assert.match(await p.textContent(".fc-meta"), /1 h 54 min/);
   await p.waitForSelector("#fReparto .pe-n", { timeout: 8000 });
   assert.match(await p.textContent("#fReparto"), /Naomi Watts/);
   assert.match(await p.textContent("#fTaquilla"), /198,1 M/);
@@ -154,7 +154,7 @@ await prueba("Ficha: créditos, reparto y taquilla", async (p) => {
   assert.match(await p.textContent("#fTrama"), /tsunami de 2004/);
   assert.ok(await p.$('#fTrailer a[href*="watch?v=abc123XYZ"]'), "tráiler oficial");
   assert.ok(await p.$('#fTrailer a[href*="espa%C3%B1ol"]'), "tráiler en español");
-  assert.doesNotMatch(await p.textContent(".fx-main"), /Rotten Tomatoes/);
+  assert.doesNotMatch(await p.textContent(".fc"), /Rotten Tomatoes/);
 });
 
 await prueba("Ficha incompleta: se completa sola al abrirla", async (p, e) => {
@@ -312,9 +312,9 @@ await prueba("Los guardados van de uno en uno y no se pierde tu nota mientras se
 await prueba("La ficha abierta no cambia sola a otra película", async (p, e) => {
   e.db.peliculas[1] = { ...e.db.peliculas[1], titulo: "crepusculo amanecer parte 2", anio: 2012, poster: null, reparto: null, ids: {} };
   await ir(p, "#/coleccion?ficha=p1");
-  await p.waitForSelector(".fx-main h2", { timeout: 8000 });
+  await p.waitForSelector(".fc-cab h2", { timeout: 8000 });
   await p.waitForTimeout(7000); // se completa la otra por detrás
-  assert.match(await p.textContent(".fx-main h2"), /Lo imposible/);
+  assert.match(await p.textContent(".fc-cab h2"), /Lo imposible/);
   assert.match(await p.textContent("#fTaquilla"), /198,1/);
 });
 
