@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "python server.py --no-browser",
     "test": "node tests/api.test.mjs && node tests/cuentas.test.mjs",
     "test:web": "node tests/web.test.mjs"
   },

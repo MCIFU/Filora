@@ -196,6 +196,8 @@ async function api(path, opts = {}) {
     return j;
   }
   const r = await fetch(`${API}/api/${path}`, { headers: { "Content-Type": "application/json" }, ...opts, body: opts.body ? JSON.stringify(opts.body) : undefined });
+  // Si /api devuelve una página HTML es que nadie ejecuta server.py (p. ej. DeployHub sirviendo archivos estáticos)
+  if (!/json/.test(r.headers.get("content-type") || "")) throw Object.assign(new Error("Responde una página, no el servidor de Filora"), { sinServidor: true });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(j.error || `Error ${r.status}`);
   if (opts.method && opts.method !== "GET") datosCambiados();
@@ -2952,6 +2954,8 @@ addEventListener("visibilitychange", () => { if (document.visibilityState === "h
   } catch (e) {
     $("#view").innerHTML = STATIC
       ? `<div class="empty"><div class="h2">No se han podido cargar los datos</div>Prueba a recargar la página.<br><span class="dim">${esc(e.message)}</span></div>`
+      : e.sinServidor
+      ? `<div class="empty"><div class="h2">Falta el servidor de Filora</div>Esta dirección sirve los archivos, pero no ejecuta <code>server.py</code>, que es quien guarda tu colección.<br>En DeployHub pon <b>Servir como: Comando</b> con <code>npm start</code> (o <code>python server.py --no-browser</code>) y vuelve a desplegar.</div>`
       : `<div class="empty"><div class="h2">No puedo conectar con la app</div>Arranca el servidor con <code>Iniciar.bat</code> (o <code>python server.py</code>) y recarga.<br><span class="dim">${esc(e.message)}</span></div>`;
   }
 })();
