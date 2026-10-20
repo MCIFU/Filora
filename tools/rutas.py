@@ -4,12 +4,14 @@
 - data/db.json         copia inicial opcional (tampoco va a git)
 """
 import json
+import os
 import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-LOCAL = DATA / "local"
+# FILORA_DATOS: otra carpeta con tu colección (p. ej. DeployHub, que trabaja en su propia copia del repo)
+LOCAL = Path(os.environ["FILORA_DATOS"]) if os.environ.get("FILORA_DATOS") else DATA / "local"
 DB_PATH = LOCAL / "db.json"
 DB_SEMILLA = DATA / "db.json"
 BACKUPS = LOCAL / "backups"
