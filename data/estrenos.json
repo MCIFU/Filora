@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-20",
+ "actualizado": "2026-10-21",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -160,6 +160,7 @@
    "pais": "España",
    "reparto": "Ana Morgade, Brays Efe, Núria Trifol",
    "sinopsis": "Mía, Kai y Finn, tres amigos de sexto de primaria, descubren por accidente un fragmento de Kazoom que fusiona…",
+   "duracion": 93,
    "poster": "https://pics.filmaffinity.com/superthings_la_pelicula-708857157-mmed.jpg",
    "fa": "643214",
    "destacado": false
