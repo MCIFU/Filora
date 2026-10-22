@@ -1,202 +1,10 @@
 {
- "actualizado": "2026-10-21",
+ "actualizado": "2026-10-22",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
  "estrenos": [
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Arriba Tutto",
-   "original": "Arriba Tutto",
-   "director": "José Mota",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "reparto": "José Mota, Karra Elejalde, Pablo Cabello",
-   "sinopsis": "1905. La feliz infancia de Michi, un niño de siete años finaliza bruscamente con la violenta muerte de su padre, un…",
-   "duracion": 98,
-   "poster": "https://pics.filmaffinity.com/arriba_tutto-516999941-mmed.jpg",
-   "fa": "232354",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Blue Heron",
-   "original": "Blue Heron",
-   "director": "Sophy Romvari",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Canadá",
-   "reparto": "Eylul Guven, Réti Iringó, Ádám Tompa",
-   "sinopsis": "A finales de los años 90, Sasha, de ocho años, y su familia de inmigrantes húngaros se mudan a una nueva casa en la isla…",
-   "duracion": 90,
-   "poster": "https://pics.filmaffinity.com/blue_heron-151590097-mmed.jpg",
-   "fa": "490840",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Clayface",
-   "original": "Clayface",
-   "director": "James Watkins",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Tom Rhys Harries, Naomi Ackie, David Dencik",
-   "sinopsis": "El meteórico ascenso de Matt Hagen, desde chico de la calle en Gotham hasta protagonista de Hollywood, se ve…",
-   "duracion": 108,
-   "poster": "https://pics.filmaffinity.com/clayface-535843038-mmed.jpg",
-   "fa": "514364",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q131460936",
-    "imdb": "tt34890576",
-    "rt": "m/clayface",
-    "letterboxd": "clayface",
-    "tmdb": "1400940",
-    "allocine": "1000016901"
-   }
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "El samurái y el prisionero",
-   "original": "Kokurojo (The Samurai and the Prisoner)aka",
-   "director": "Kiyoshi Kurosawa",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Japón",
-   "reparto": "Masahiro Motoki, Masaki Suda, Yuriko Yoshitaka",
-   "sinopsis": "Cuando el señor Murashige Araki se rebela contra el tiránico Nobunaga Oda, se ve asediado entre los muros de su propio…",
-   "duracion": 147,
-   "poster": "https://pics.filmaffinity.com/kokurojo_the_samurai_and_the_prisoner-916733907-mmed.jpg",
-   "fa": "176931",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Leones en invierno",
-   "original": "Leones en invierno",
-   "director": "Albert Pintó",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "España",
-   "reparto": "Luis Zahera, Roberto Álamo, Luis Callejo",
-   "sinopsis": "Un policía infiltrado atropella a una joven y se fuga. El padre de la víctima, un antiguo ultrasur, investiga por su…",
-   "duracion": 117,
-   "poster": "https://pics.filmaffinity.com/leones_en_invierno-670137609-mmed.jpg",
-   "fa": "618609",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Los niños están bien",
-   "original": "Les enfants vont bienaka",
-   "director": "Nathan Ambrosioni",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Francia",
-   "reparto": "Camille Cottin, Juliette Armanet, Monia Chokri",
-   "sinopsis": "Una tarde de verano, Suzanne, acompañada de sus dos hijos pequeños, visita de improviso a su hermana Jeanne. Jeanne…",
-   "duracion": 111,
-   "poster": "https://pics.filmaffinity.com/les_enfants_vont_bien-546420515-mmed.jpg",
-   "fa": "495903",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Moscas",
-   "original": "Moscasaka",
-   "director": "Fernando Eimbcke",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "México",
-   "reparto": "Teresita Sánchez, Bastian Escobar, Hugo Ramírez",
-   "sinopsis": "Olga vive una vida estrictamente regulada, sin amistades ni relaciones, en un enorme bloque de pisos. Cuando, por…",
-   "duracion": 102,
-   "poster": "https://pics.filmaffinity.com/moscas-960593170-mmed.jpg",
-   "fa": "120073",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Sentido y sensibilidad",
-   "original": "Sense and Sensibility",
-   "director": "Georgia Oakley",
-   "generos": [
-    "Romance"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Daisy Edgar-Jones, George MacKay, Esme Creed-Miles",
-   "sinopsis": "Nueva adaptación del clásico literario de Jane Austen 'Sentido y sensibilidad'. Las hermanas Elinor y Marianne Dashwood…",
-   "duracion": 131,
-   "poster": "https://pics.filmaffinity.com/sense_and_sensibility-803718727-mmed.jpg",
-   "fa": "892018",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q135436961",
-    "imdb": "tt13609648",
-    "rt": "m/sense_and_sensibility_2026",
-    "letterboxd": "sense-and-sensibility-2026",
-    "tmdb": "1503762",
-    "allocine": "1000026622"
-   }
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Superthings: La película",
-   "original": "Superthings: La película",
-   "director": "Víctor Monigote",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "España",
-   "reparto": "Ana Morgade, Brays Efe, Núria Trifol",
-   "sinopsis": "Mía, Kai y Finn, tres amigos de sexto de primaria, descubren por accidente un fragmento de Kazoom que fusiona…",
-   "duracion": 93,
-   "poster": "https://pics.filmaffinity.com/superthings_la_pelicula-708857157-mmed.jpg",
-   "fa": "643214",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Un amor posible",
-   "original": "Ga-neung-han sa-rangaka",
-   "director": "Lee Chang-Dong",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Corea del Sur",
-   "reparto": "Jeon Do-yeon, Sol Kyung-gu, Jo In-sung",
-   "sinopsis": "Un trabajador despedido y su mujer se cruzan en el camino de una realizadora de documentales y su pareja, y se enfrentan…",
-   "duracion": 164,
-   "poster": "https://pics.filmaffinity.com/ga_neung_han_sa_rang-789581686-mmed.jpg",
-   "fa": "240529",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-22",
-   "titulo": "Wildwood: El bosque salvaje",
-   "original": "Wildwood",
-   "director": "Travis Knight",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Peyton Elizabeth Lee, Jacob Tremblay, Carey Mulligan",
-   "sinopsis": "Cuando el hermanito de Prue McKeel es raptado por una bandada de cuervos, se verá obligada a emprender una desesperada…",
-   "duracion": 132,
-   "poster": "https://pics.filmaffinity.com/wildwood-283743995-mmed.jpg",
-   "fa": "119235",
-   "destacado": false
-  },
   {
    "fecha": "2026-10-30",
    "titulo": "Aniquilación",
@@ -222,7 +30,8 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "Ana, estudiante de último curso de periodismo, le encargan el TFG sobre Pío Baroja, con gran disgusto para ella. Es un viejo gruñón, huraño, que protestaba por todo y casi todos, y encima colaboró con la dictadura de Franco. Le piden lea “Las inquietudes de…",
+   "reparto": "Nahia Bergasa, Álvaro Subiés, Julio Montañana Hidalgo",
+   "sinopsis": "En esta historia híbrida entre ficción y documental a Ana, estudiante de último curso de periodismo, le encargan el TFG…",
    "poster": "https://pics.filmaffinity.com/el_mundo_es_ansi-867541610-mmed.jpg",
    "fa": "261184",
    "destacado": false
@@ -236,7 +45,9 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "Leo y Lorea se han querido. Quizá se siguen queriendo. Pero algo en ellos se ha roto. Su relación, tras cinco años, ha terminado. Él carga con su padre enfermo, atrapado entre la responsabilidad y una desconexión emocional que le pesa. Ella, enredada entre…",
+   "reparto": "Oriol Pla, Marina Salas, Gemma Martínez",
+   "sinopsis": "Leo y Lorea se han querido. Quizá se siguen queriendo. Pero algo en ellos se ha roto. Su relación, tras cinco años, ha…",
+   "duracion": 110,
    "poster": "https://pics.filmaffinity.com/esta_soledad-990250394-mmed.jpg",
    "fa": "209702",
    "destacado": false
@@ -250,7 +61,9 @@
     "Animación"
    ],
    "pais": "México",
-   "sinopsis": "Gungo es considerado el cavernícola más débil de la tribu, pero como es el hijo del jefe, cree que tiene el futuro asegurado y que no debe demostrar su valía de ninguna manera. Sin embargo, es traicionado por un grupo de rebeldes que quieren usurpar el poder…",
+   "reparto": "Ricky Limón, Karen Torres, Daniel Sosa",
+   "sinopsis": "Gungo es considerado el cavernícola más débil de la tribu, pero como es el hijo del jefe, cree que tiene el futuro…",
+   "duracion": 94,
    "poster": "https://pics.filmaffinity.com/gungo_y_los_juegos_cavernicolas-751225962-mmed.jpg",
    "fa": "394293",
    "destacado": false
@@ -264,7 +77,9 @@
     "Acción"
    ],
    "pais": "Corea del Sur",
-   "sinopsis": "Los refuerzos se han desviado para combatir los incendios forestales y se han cortado todas las comunicaciones. El jefe del puesto policial de Hope, Bum-seok, y la agente Sung-ae luchan por defender un pueblo de ancianos, mientras que en las montañas, Sung-ki…",
+   "reparto": "Hwang Jung-min, Jo In-sung, Jung Ho-yeon",
+   "sinopsis": "Los refuerzos se han desviado para combatir los incendios forestales y se han cortado todas las comunicaciones. El jefe…",
+   "duracion": 160,
    "poster": "https://pics.filmaffinity.com/hope-397969968-mmed.jpg",
    "fa": "761467",
    "destacado": true,
@@ -369,7 +184,9 @@
     "Comedia"
    ],
    "pais": "Francia",
-   "sinopsis": "Es 1985, Vincent, a punto de cumplir trece años, vive en un suburbio parisino de clase media con un hermano mayor distante y unos padres en constante conflicto. Ya no es tan niño, pero tampoco un adulto. La historia sigue a Vincent en esta particular etapa de…",
+   "reparto": "Louis Garrel, Camille Cottin, Pierre Lottin",
+   "sinopsis": "Es 1985, Vincent, a punto de cumplir trece años, vive en un suburbio parisino de clase media con un hermano mayor…",
+   "duracion": 116,
    "poster": "https://pics.filmaffinity.com/juste_une_illusion-638403615-mmed.jpg",
    "fa": "226199",
    "destacado": false
@@ -399,7 +216,9 @@
     "Fantasía"
    ],
    "pais": "Alemania",
-   "sinopsis": "La vida de Willow cambia por completo cuando hereda de su tía Alwina una pequeña casa, un misterioso bosque... y un extraordinario don: el poder de la brujería. Para descubrir el verdadero alcance de su legado, deberá encontrar a otras tres jóvenes con…",
+   "reparto": "Ava Petsch, Cora Trube, Anna von Seld",
+   "sinopsis": "La vida de Willow cambia por completo cuando hereda de su tía Alwina una pequeña casa, un misterioso bosque... y un…",
+   "duracion": 100,
    "poster": "https://pics.filmaffinity.com/ein_madchen_namens_willow-584411352-mmed.jpg",
    "fa": "376048",
    "destacado": false
@@ -413,7 +232,8 @@
     "Animación"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Un astuto gato lleva el caos con sus travesuras a la vida de un par de hermanos que lidian con su mudanza a una nueva ciudad.\n\nEstreno: noviembre 2026",
+   "reparto": "Bill Hader, Giancarlo Esposito, Matt Berry",
+   "sinopsis": "Un astuto gato lleva el caos con sus travesuras a la vida de un par de hermanos que lidian con su mudanza a una nueva ciudad. Estreno: noviembre 2026…",
    "poster": "https://pics.filmaffinity.com/the_cat_in_the_hat-251267191-mmed.jpg",
    "fa": "373516",
    "destacado": false,
@@ -435,7 +255,8 @@
     "Animación"
    ],
    "pais": "Francia",
-   "sinopsis": "A las afueras de un remoto pueblo pesquero vive con su familia la misteriosa Lucy, una niña de once años que tiene visiones y una llamativa melena blanca. Sus dones despiertan una curiosidad que pronto se convierte en recelo entre los vecinos del pueblo.…",
+   "sinopsis": "A las afueras de un remoto pueblo pesquero vive con su familia la misteriosa Lucy, una niña de once años que tiene…",
+   "duracion": 85,
    "poster": "https://pics.filmaffinity.com/le_mystere_lucy_lost-951555881-mmed.jpg",
    "fa": "377127",
    "destacado": false
@@ -463,7 +284,9 @@
     "Fantasía"
    ],
    "pais": "Japón",
-   "sinopsis": "Secuela de \"Godzilla Minus One\" (2023). Retoma la historia en 1949, dos años después de los tumultuosos acontecimientos de aquella película, y continúa la historia de la familia Shikishima, que se enfrenta a una nueva calamidad.\n\nEstreno en cines: noviembre…",
+   "reparto": "Ryunosuke Kamiki, Minami Hamabe, Miou Tanaka",
+   "sinopsis": "Secuela de \"Godzilla Minus One\" (2023). La guerra dejó a Japón en la ruina. Godzilla lo hundió aún más. Han pasado dos…",
+   "duracion": 135,
    "poster": "https://pics.filmaffinity.com/gojira_mainasu_zero-757830996-mmed.jpg",
    "fa": "624236",
    "destacado": true,
@@ -485,7 +308,9 @@
     "Drama"
    ],
    "pais": "Francia",
-   "sinopsis": "Nueva adaptación de la famosa novela de Victor Hugo. Tras pasar 19 años en prisión por robar una barra de pan, Jean Valjean sale de la cárcel convertido en un hombre endurecido. Busca la redención reinventándose a sí mismo como un dignatario respetado bajo…",
+   "reparto": "Vincent Lindon, Tahar Rahim, Camille Cottin",
+   "sinopsis": "Nueva adaptación de la famosa novela de Victor Hugo. Tras pasar 19 años en prisión por robar una barra de pan, Jean…",
+   "duracion": 178,
    "poster": "https://pics.filmaffinity.com/les_miserables-960172731-mmed.jpg",
    "fa": "361235",
    "destacado": false,
@@ -506,7 +331,8 @@
     "Comedia"
    ],
    "pais": "España",
-   "sinopsis": "Sonia es una joven a la que le diagnostican parkinson y, lejos de venirse abajo, descubre cómo la enfermedad le impulsa a vivir de otra manera. Junto con su grupo de musicoterapia, todos enfermos, y el profesor, Pedro, buscará la forma de llegar hasta un…",
+   "reparto": "Nuria Herrero, Michel Noher, Paco Tous",
+   "sinopsis": "Sonia es una joven a la que le diagnostican parkinson y, lejos de venirse abajo, descubre cómo la enfermedad le impulsa…",
    "poster": "https://pics.filmaffinity.com/persiguiendo_a_michael-688661261-mmed.jpg",
    "fa": "223101",
    "destacado": false
@@ -534,7 +360,9 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "Año 1974. Ana tiene 19 años, vive en Barcelona y es -a ojos de su acomodada familia- una chica rebelde. Tras una fuga nocturna, su padre decide ponerla en manos del Patronato de protección a la Mujer, institución especializada en “mujeres caídas o en…",
+   "reparto": "Zoe Bonafonte, Manuela Calle, Adelfa Calvo",
+   "sinopsis": "Año 1974. Ana tiene 19 años, vive en Barcelona y es -a ojos de su acomodada familia- una chica rebelde. Tras una fuga…",
+   "duracion": 136,
    "poster": "https://pics.filmaffinity.com/ruega_por_nosotras-406628296-mmed.jpg",
    "fa": "999787",
    "destacado": false
@@ -548,7 +376,9 @@
     "Thriller"
    ],
    "pais": "España",
-   "sinopsis": "Álava, finales del siglo XIX. Mientras la III Guerra Carlista agoniza, varias mujeres aparecen estranguladas en las afueras de Vitoria. Ángela Berrosteguieta, hermana de una de las víctimas, llega en busca de justicia, decidida a demostrar que Juan Díaz de…",
+   "reparto": "Antonio de la Torre, Patricia López Arnaiz, Josean Bengoetxea",
+   "sinopsis": "Álava, finales del siglo XIX. Mientras la III Guerra Carlista agoniza, varias mujeres aparecen estranguladas en las…",
+   "duracion": 109,
    "poster": "https://pics.filmaffinity.com/sacamantecas-687718772-mmed.jpg",
    "fa": "676227",
    "destacado": false
@@ -1032,6 +862,20 @@
   },
   {
    "fecha": "2026-11-27",
+   "titulo": "Todo el mundo quiere a Bill Evans",
+   "original": "Everybody Digs Bill Evans",
+   "director": "Grant Gee",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Irlanda",
+   "sinopsis": "Junio de 1961, Nueva York. El legendario pianista de jazz Bill Evans ha encontrado su propia voz y ha formado el trío perfecto junto al contrabajista Scott LaFaro, su alma gemela musical. Una residencia en el Village Vanguard culmina con la grabación en…",
+   "poster": "https://pics.filmaffinity.com/everybody_digs_bill_evans-615981345-mmed.jpg",
+   "fa": "381682",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
    "titulo": "Un hombre en un puente",
    "original": "Un hombre en un puente",
    "director": "David Martín de los Santos",
@@ -1200,6 +1044,34 @@
   },
   {
    "fecha": "2026-12-11",
+   "titulo": "Cartas de Estado (Yellow Letters)",
+   "original": "Gelbe Briefeaka",
+   "director": "Ilker Çatak",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Alemania",
+   "sinopsis": "Derya y Aziz, una célebre pareja de artistas de Ankara, llevan una vida plena con su hija de 13 años, Ezgi, hasta que un incidente en el estreno de su nueva obra lo cambia todo. De la noche a la mañana, se ven en la mira del Estado turco y pierden sus…",
+   "poster": "https://pics.filmaffinity.com/gelbe_briefe-835232639-mmed.jpg",
+   "fa": "487202",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Censurada",
+   "original": "Censurada",
+   "director": "Mario Garza",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "sinopsis": "En 1969, en España, una organista disléxica inicia un romance prohibido con una mujer idealista que la inspira a escribir una canción y rebelarse contra la sociedad censora de Franco tras la muerte de su hermano.",
+   "poster": "https://pics.filmaffinity.com/censurada-108588681-mmed.jpg",
+   "fa": "440626",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
    "titulo": "Charlie Harper",
    "original": "Charlie Harper",
    "director": "Tom Dean / Mac Eldridge",
@@ -1214,16 +1086,30 @@
   },
   {
    "fecha": "2026-12-11",
-   "titulo": "Desmadre en la granja",
-   "original": "Animal Farm",
-   "director": "Andy Serkis",
+   "titulo": "Charlie el superperro",
+   "original": "Charlie the Wonderdog",
+   "director": "Shea Wageman",
    "generos": [
     "Animación"
    ],
-   "pais": "Reino Unido",
-   "sinopsis": "Un grupo de animales se rebelan contra sus dueños y toman el poder de la granja. Nueva adaptación del clásico de George Orwell.",
-   "poster": "https://pics.filmaffinity.com/animal_farm-775608099-mmed.jpg",
-   "fa": "970668",
+   "pais": "Canadá",
+   "sinopsis": "Charlie es un perro muy especial: curioso, optimista y con una sensibilidad única para entender a quienes le rodean. Aunque a simple vista parece un cachorro normal, Charlie tiene un don extraordinario que le permite vivir aventuras increíbles y cambiar la…",
+   "poster": "https://pics.filmaffinity.com/charlie_the_wonderdog-139782607-mmed.jpg",
+   "fa": "459110",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "El día que ella volvió",
+   "original": "Geunyeoga doraon nalaka",
+   "director": "Hong Sang-soo",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Corea del Sur",
+   "sinopsis": "Tras terminar el rodaje de una película independiente, una actriz tiene que dar tres entrevistas sobre ella. Después, en clase de interpretación, su profesora le pide que recree las entrevistas. Pero, por alguna razón, no es capaz de recordarlas.",
+   "poster": "https://pics.filmaffinity.com/geunyeoga_doraon_nal-683021081-mmed.jpg",
+   "fa": "752081",
    "destacado": false
   },
   {
@@ -1256,6 +1142,48 @@
   },
   {
    "fecha": "2026-12-11",
+   "titulo": "Jasmine & Jambo",
+   "original": "Jasmine & Jambo",
+   "director": "Sílvia Cortés",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "España",
+   "sinopsis": "Jasmine percibe que la música del mundo no suena bien desde que perdió a sus padres. Una partitura misteriosa la lleva a Soundland, el país secreto de la música. Allí conoce a Jambo, que le explica el poder de la Partitura Eterna. Juntos tratarán de salvar la…",
+   "poster": "https://pics.filmaffinity.com/jasmine_jambo-882533383-mmed.jpg",
+   "fa": "973660",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Lejos de los árboles",
+   "original": "Lejos de los árboles",
+   "director": "Meritxell Colell",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "sinopsis": "Adela, una artista sonora mexicana, viaja desde la selva hasta los Andes peruanos junto a Lucho (guía y traductor). Siguiendo el legado de su abuelo —un republicano exiliado en México—, teje un mapa sonoro de lenguas en peligro de extinción. Cuando irrumpe el…",
+   "poster": "https://pics.filmaffinity.com/lejos_de_los_arboles-607943083-mmed.jpg",
+   "fa": "385436",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Salen las lobas",
+   "original": "Salen las lobas",
+   "director": "Claudia Estrada Tarascó",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "sinopsis": "Luna, una adolescente de quince años, es enviada a un centro de internamiento juvenil tras ser acusada por su padre de malos tratos. Allí conoce a Yanira, Rocío y Melissa, tres internas con las que formará una amistad que cambiará su manera de enfrentarse al…",
+   "poster": "https://pics.filmaffinity.com/salen_las_lobas-314881532-mmed.jpg",
+   "fa": "837486",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
    "titulo": "We Are Aliens",
    "original": "We Are Aliensaka",
    "director": "Kohei Kadowaki",
@@ -1269,14 +1197,27 @@
    "destacado": false
   },
   {
-   "fecha": "2026-12-18",
-   "titulo": "Cartas amarillas",
-   "original": "Gelbe Briefe",
-   "director": "İlker Çatak",
+   "fecha": "2026-12-17",
+   "titulo": "Vengadores: Doomsday",
+   "original": "Avengers: Doomsday",
+   "director": "Anthony Russo / Joe Russo",
    "generos": [
-    "Drama"
+    "Acción"
    ],
-   "pais": "Alemania"
+   "pais": "Estados Unidos",
+   "sinopsis": "Primera de las dos películas de Los Vengadores para la Fase 6 del MCU. Se desconoce el argumento pero, por los cómics en los que se inspira, la historia sigue al Doctor Doom (Robert Downey Jr.) emergiendo como la mayor amenaza del multiverso, poniendo en…",
+   "poster": "https://pics.filmaffinity.com/avengers_doomsday-379951360-mmed.jpg",
+   "fa": "302450",
+   "saga": "UCM",
+   "destacado": true,
+   "ids": {
+    "wikidata": "Q113244839",
+    "imdb": "tt21357150",
+    "rt": "m/avengers_doomsday",
+    "letterboxd": "avengers-doomsday",
+    "tmdb": "1003596",
+    "allocine": "269068"
+   }
   },
   {
    "fecha": "2026-12-18",
@@ -1284,11 +1225,12 @@
    "original": "Dune: Part Three",
    "director": "Denis Villeneuve",
    "generos": [
-    "Ciencia ficción",
-    "Aventura",
-    "Drama"
+    "Aventura"
    ],
    "pais": "Estados Unidos",
+   "sinopsis": "Diecisiete años después de su ascenso al trono, Paul Atreides reina como el Mesías desde Arrakis mientras la yihad librada en su nombre ha segado miles de millones de vidas. Atormentado por visiones de una extinción inevitable, debe enfrentar una conspiración…",
+   "poster": "https://pics.filmaffinity.com/dune_part_three-863807991-mmed.jpg",
+   "fa": "766877",
    "saga": "Dune",
    "destacado": true,
    "ids": {
@@ -1299,31 +1241,35 @@
     "letterboxd": "dune-part-three",
     "tmdb": "1170608",
     "allocine": "324508"
-   },
-   "poster": "https://upload.wikimedia.org/wikipedia/en/7/7b/Dune_Part_Three_poster.jpg"
+   }
   },
   {
    "fecha": "2026-12-18",
-   "titulo": "Vengadores: Doomsday",
-   "original": "Avengers: Doomsday",
-   "director": "Anthony Russo / Joe Russo",
+   "titulo": "La Gradiva",
+   "original": "La Gradiva",
+   "director": "Marine Atlan",
    "generos": [
-    "Superhéroes",
-    "Acción",
-    "Ciencia ficción"
+    "Drama"
    ],
-   "pais": "Estados Unidos",
-   "saga": "UCM",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q113244839",
-    "imdb": "tt21357150",
-    "rt": "m/avengers_doomsday",
-    "letterboxd": "avengers-doomsday",
-    "tmdb": "1003596",
-    "allocine": "269068"
-   },
-   "poster": "https://upload.wikimedia.org/wikipedia/en/e/ee/Avengers_Doomsday_poster.jpg"
+   "pais": "Francia",
+   "sinopsis": "Un pequeño grupo de estudiantes de secundaria franceses se embarca en un viaje escolar a Pompeya para explorar sus ruinas y los cuerpos petrificados por el Vesubio en el año 79 d.C. En esta ciudad fantasma, de repente se ven invadidos por una sensación de…",
+   "poster": "https://pics.filmaffinity.com/la_gradiva-652774603-mmed.jpg",
+   "fa": "269502",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-18",
+   "titulo": "Talento para matar",
+   "original": "A Talent for Murder",
+   "director": "Anton Corbijn",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Suiza",
+   "sinopsis": "Un joven agente literario (Alden Ehrenreich) es enviado a Suiza para convencer a la famosa escritora Patricia Highsmith (Helen Mirren) de que escriba una última entrega de la antología de Ripley. La confrontación inicial entre la autora y el editor derivará…",
+   "poster": "https://pics.filmaffinity.com/a_talent_for_murder-736912254-mmed.jpg",
+   "fa": "685783",
+   "destacado": false
   },
   {
    "fecha": "2026-12-25",
