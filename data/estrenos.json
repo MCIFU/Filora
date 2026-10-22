@@ -208,22 +208,6 @@
    "destacado": false
   },
   {
-   "fecha": "2026-10-30",
-   "titulo": "Willow y las guardianas de los cuatro elementos",
-   "original": "Ein Mädchen namens Willowaka",
-   "director": "Mike Marzuk",
-   "generos": [
-    "Fantasía"
-   ],
-   "pais": "Alemania",
-   "reparto": "Ava Petsch, Cora Trube, Anna von Seld",
-   "sinopsis": "La vida de Willow cambia por completo cuando hereda de su tía Alwina una pequeña casa, un misterioso bosque... y un…",
-   "duracion": 100,
-   "poster": "https://pics.filmaffinity.com/ein_madchen_namens_willow-584411352-mmed.jpg",
-   "fa": "376048",
-   "destacado": false
-  },
-  {
    "fecha": "2026-11-06",
    "titulo": "El gato con sombrero",
    "original": "The Cat in the Hat",
@@ -270,7 +254,9 @@
     "Documental"
    ],
    "pais": "Reino Unido",
-   "sinopsis": "Película restaurada de un concierto que recoge las actuaciones de George Michael en la gira «Faith Tour» de 1988 en el Palais Omnisports de París-Bercy, grabadas en 35 mm a lo largo de dos noches durante la etapa europea de la gira.",
+   "reparto": "George Michael",
+   "sinopsis": "Película restaurada de un concierto que recoge las actuaciones de George Michael en la gira «Faith Tour» de 1988 en el…",
+   "duracion": 113,
    "poster": "https://pics.filmaffinity.com/george_michael_the_faith_tour-828781159-mmed.jpg",
    "fa": "406500",
    "destacado": false
@@ -680,20 +666,6 @@
   },
   {
    "fecha": "2026-11-20",
-   "titulo": "Pinocho desatado",
-   "original": "Pinocchio Unstrung",
-   "director": "Rhys Frake-Waterfield / Scott Chambers",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Reino Unido",
-   "sinopsis": "Reimaginación macabra de 'Pinocho' dentro del Twisted Childhood Universe. Geppetto presenta a su nieto James un muñeco mágico llamado Pinocho, con el que entabla una amistad. Sin embargo, sin ser consciente de la ingenuidad de Pinocho, James lo introduce en…",
-   "poster": "https://pics.filmaffinity.com/pinocchio_unstrung-443299427-mmed.jpg",
-   "fa": "191465",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-20",
    "titulo": "Rose",
    "original": "Rose",
    "director": "Markus Schleinzer",
@@ -718,6 +690,21 @@
    "sinopsis": "Los primeros años de la vida de George Washington, primer presidente de los Estados Unidos.",
    "poster": "https://pics.filmaffinity.com/young_washington-550593982-mmed.jpg",
    "fa": "991503",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Willow y las guardianas de los cuatro elementos",
+   "original": "Ein Mädchen namens Willowaka",
+   "director": "Mike Marzuk",
+   "generos": [
+    "Fantasía"
+   ],
+   "pais": "Alemania",
+   "reparto": "Ava Petsch, Cora Trube, Anna von Seld",
+   "sinopsis": "La vida de Willow cambia por completo cuando hereda de su tía Alwina una pequeña casa, un misterioso bosque... y un extraordinario don: el poder de la brujería. Para descubrir el verdadero alcance de su legado, deberá encontrar a otras tres jóvenes con…",
+   "poster": "https://pics.filmaffinity.com/ein_madchen_namens_willow-584411352-mmed.jpg",
+   "fa": "376048",
    "destacado": false
   },
   {
@@ -1150,7 +1137,7 @@
    ],
    "pais": "España",
    "sinopsis": "Jasmine percibe que la música del mundo no suena bien desde que perdió a sus padres. Una partitura misteriosa la lleva a Soundland, el país secreto de la música. Allí conoce a Jambo, que le explica el poder de la Partitura Eterna. Juntos tratarán de salvar la…",
-   "poster": "https://pics.filmaffinity.com/jasmine_jambo-882533383-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/jasmine_jambo-482863542-mmed.jpg",
    "fa": "973660",
    "destacado": false
   },
@@ -1218,6 +1205,20 @@
     "tmdb": "1003596",
     "allocine": "269068"
    }
+  },
+  {
+   "fecha": "2026-12-18",
+   "titulo": "Desmadre en la granja",
+   "original": "Animal Farm",
+   "director": "Andy Serkis",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Un grupo de animales se rebelan contra sus dueños y toman el poder de la granja. Nueva adaptación del clásico de George Orwell.",
+   "poster": "https://pics.filmaffinity.com/animal_farm-775608099-mmed.jpg",
+   "fa": "970668",
+   "destacado": false
   },
   {
    "fecha": "2026-12-18",
