@@ -111,31 +111,6 @@
   },
   {
    "fecha": "2026-10-30",
-   "titulo": "Klara y el sol",
-   "original": "Klara and the Sun",
-   "director": "Taika Waititi",
-   "generos": [
-    "Aventura"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Jenna Ortega, Mia Tharia, Amy Adams",
-   "sinopsis": "Klara (Jenna Ortega) es una 'Amiga Artificial' cuyo único deseo es encontrar el hogar perfecto. Cuando Klara conoce a…",
-   "duracion": 116,
-   "poster": "https://pics.filmaffinity.com/klara_and_the_sun-638753265-mmed.jpg",
-   "fa": "897940",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q124409386",
-    "imdb": "tt14371256",
-    "filmaffinity": "897940",
-    "rt": "m/klara_and_the_sun",
-    "letterboxd": "klara-and-the-sun",
-    "tmdb": "858035",
-    "allocine": "315883"
-   }
-  },
-  {
-   "fecha": "2026-10-30",
    "titulo": "La oveja Shaun: Misión calabaza",
    "original": "Shaun the Sheep: The Beast of Mossy Bottom",
    "director": "Steve Cox / Matthew Walker",
@@ -209,6 +184,49 @@
   },
   {
    "fecha": "2026-11-06",
+   "titulo": "11",
+   "original": "11",
+   "director": "Clàudia Serra / Paula Serra",
+   "generos": [
+    "Terror"
+   ],
+   "pais": "España",
+   "sinopsis": "Diez personas, ocho niños y dos monitores, quedan atrapados en un remoto refugio de los Pirineos cuando una violenta tormenta de nieve corta todos los accesos. Sin electricidad, sin agua, incomunicados y con el rescate cada vez más lejos, solo les queda…",
+   "poster": "https://pics.filmaffinity.com/11-177697453-mmed.jpg",
+   "fa": "193838",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-06",
+   "titulo": "Bob y Bobek, tras la pista de la zanahoria",
+   "original": "Bob a Bobek ve filmu: Na stope Mrkvojedaaka",
+   "director": "Ondrej Pecha / Mirek Zachariás",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "República Checa",
+   "sinopsis": "Todo el vecindario está a punto de enfrentarse al desafío del concurso «Raíz de Oro» de este año, que premia a las mejores verduras. Bob y Bobek también quieren participar, aunque la jardinería no es precisamente lo suyo. Uno de los vecinos más tramposos,…",
+   "poster": "https://pics.filmaffinity.com/bob_a_bobek_ve_filmu_na_stope_mrkvojeda-821432838-mmed.jpg",
+   "fa": "616891",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-06",
+   "titulo": "El contrato. Un pacto con el diablo",
+   "director": "Massimo Paolucci",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Italia",
+   "reparto": "Kevin Spacey, Eric Roberts, Vincent Spano",
+   "sinopsis": "Giuseppe es un periodista fracasado cuya ambición por alcanzar el éxito no conoce límites. Cuando decide investigar la…",
+   "duracion": 105,
+   "poster": "https://pics.filmaffinity.com/the_contract-764085276-mmed.jpg",
+   "fa": "385922",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-06",
    "titulo": "El gato con sombrero",
    "original": "The Cat in the Hat",
    "director": "Alessandro Carloni / Erica Rivinoja",
@@ -243,6 +261,20 @@
    "duracion": 85,
    "poster": "https://pics.filmaffinity.com/le_mystere_lucy_lost-951555881-mmed.jpg",
    "fa": "377127",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-06",
+   "titulo": "Fiesta Pagäna",
+   "director": "Álvaro Brechner",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "reparto": "Adrián Lastra, Adriá Mondaray, Guillermo Furiase",
+   "sinopsis": "Mägo de Oz sacudió los cimientos del rock español al atreverse a mezclar la fuerza del heavy metal con la tradición del…",
+   "poster": "https://pics.filmaffinity.com/fiesta_pagana-438096656-mmed.jpg",
+   "fa": "885072",
    "destacado": false
   },
   {
@@ -310,17 +342,16 @@
   },
   {
    "fecha": "2026-11-06",
-   "titulo": "Persiguiendo a Michael",
-   "original": "Persiguiendo a Michael",
-   "director": "Juana Macías",
+   "titulo": "Por qué no escribo nada",
+   "original": "Por qué no escribo nada",
+   "director": "Isabel Fernández",
    "generos": [
-    "Comedia"
+    "Documental"
    ],
    "pais": "España",
-   "reparto": "Nuria Herrero, Michel Noher, Paco Tous",
-   "sinopsis": "Sonia es una joven a la que le diagnostican parkinson y, lejos de venirse abajo, descubre cómo la enfermedad le impulsa…",
-   "poster": "https://pics.filmaffinity.com/persiguiendo_a_michael-688661261-mmed.jpg",
-   "fa": "223101",
+   "sinopsis": "Tras escribir 'Nada' con solo 23 años, la carrera de Carmen Laforet parecía prometer una larga trayectoria de éxitos. Sin embargo, esa no acabó siendo la realidad. Su posterior bibliografía, escasa y discreta, se achaca a la poca producción literaria, pero…",
+   "poster": "https://pics.filmaffinity.com/por_que_no_escribo_nada-858145390-mmed.jpg",
+   "fa": "132883",
    "destacado": false
   },
   {
@@ -588,6 +619,20 @@
   },
   {
    "fecha": "2026-11-20",
+   "titulo": "El director",
+   "original": "El director",
+   "director": "Dani de la Orden",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "sinopsis": "Tras más de dos décadas cubriendo guerras y conflictos, el corresponsal David Jiménez es nombrado director de uno de los principales diarios del país. Su defensa de un periodismo riguroso choca desde el principio con los intereses ocultos del diario,…",
+   "poster": "https://pics.filmaffinity.com/el_director-562682472-mmed.jpg",
+   "fa": "247502",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
    "titulo": "El mal padre",
    "original": "El mal padre",
    "director": "Roberto Bueso",
@@ -734,20 +779,6 @@
    "sinopsis": "Diez años después de los últimos eventos, los papeles se invierten y Greg Focker (Ben Stiller) se enfrenta a su mayor reto: ser el suegro. Cuando su hijo Henry anuncia su compromiso, Greg intenta ser el patriarca comprensivo que nunca tuvo, pero la presión…",
    "poster": "https://pics.filmaffinity.com/focker_in_law-431643787-mmed.jpg",
    "fa": "580952",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "El director",
-   "original": "El director",
-   "director": "Dani de la Orden",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "sinopsis": "Tras más de dos décadas cubriendo guerras y conflictos, el corresponsal David Jiménez es nombrado director de uno de los principales diarios del país. Su defensa de un periodismo riguroso choca desde el principio con los intereses ocultos del diario,…",
-   "poster": "https://pics.filmaffinity.com/el_director-423286297-mmed.jpg",
-   "fa": "247502",
    "destacado": false
   },
   {
@@ -1172,6 +1203,20 @@
   },
   {
    "fecha": "2026-12-11",
+   "titulo": "The Holiday (Vacaciones)",
+   "original": "The Holidayaka",
+   "director": "Nancy Meyers",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Amanda Woods (Cameron Diaz), una chica americana que posee una próspera agencia de publicidad especializada en trailers de películas, vive en el sur de California y acaba de romper con su novio (Edward Burns). Por su parte, Iris Simpkins (Kate Winslet),…",
+   "poster": "https://pics.filmaffinity.com/the_holiday-810135804-mmed.jpg",
+   "fa": "676444",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
    "titulo": "We Are Aliens",
    "original": "We Are Aliensaka",
    "director": "Kohei Kadowaki",
@@ -1182,43 +1227,6 @@
    "sinopsis": "Un verano, mientras cursa tercero de primaria, un chico callado llamado Tsubasa conoce a Kyotaro, el centro de admiración de la clase, y ambos se hacen íntimos amigos. Dentro de su pequeño mundo, comparten momentos irremplazables, hasta que un pequeño…",
    "poster": "https://pics.filmaffinity.com/we_are_aliens-599886502-mmed.jpg",
    "fa": "357282",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-12-17",
-   "titulo": "Vengadores: Doomsday",
-   "original": "Avengers: Doomsday",
-   "director": "Anthony Russo / Joe Russo",
-   "generos": [
-    "Acción"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Primera de las dos películas de Los Vengadores para la Fase 6 del MCU. Se desconoce el argumento pero, por los cómics en los que se inspira, la historia sigue al Doctor Doom (Robert Downey Jr.) emergiendo como la mayor amenaza del multiverso, poniendo en…",
-   "poster": "https://pics.filmaffinity.com/avengers_doomsday-379951360-mmed.jpg",
-   "fa": "302450",
-   "saga": "UCM",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q113244839",
-    "imdb": "tt21357150",
-    "rt": "m/avengers_doomsday",
-    "letterboxd": "avengers-doomsday",
-    "tmdb": "1003596",
-    "allocine": "269068"
-   }
-  },
-  {
-   "fecha": "2026-12-18",
-   "titulo": "Desmadre en la granja",
-   "original": "Animal Farm",
-   "director": "Andy Serkis",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Reino Unido",
-   "sinopsis": "Un grupo de animales se rebelan contra sus dueños y toman el poder de la granja. Nueva adaptación del clásico de George Orwell.",
-   "poster": "https://pics.filmaffinity.com/animal_farm-775608099-mmed.jpg",
-   "fa": "970668",
    "destacado": false
   },
   {
@@ -1244,34 +1252,6 @@
     "tmdb": "1170608",
     "allocine": "324508"
    }
-  },
-  {
-   "fecha": "2026-12-18",
-   "titulo": "La Gradiva",
-   "original": "La Gradiva",
-   "director": "Marine Atlan",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Francia",
-   "sinopsis": "Un pequeño grupo de estudiantes de secundaria franceses se embarca en un viaje escolar a Pompeya para explorar sus ruinas y los cuerpos petrificados por el Vesubio en el año 79 d.C. En esta ciudad fantasma, de repente se ven invadidos por una sensación de…",
-   "poster": "https://pics.filmaffinity.com/la_gradiva-652774603-mmed.jpg",
-   "fa": "269502",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-12-18",
-   "titulo": "Talento para matar",
-   "original": "A Talent for Murder",
-   "director": "Anton Corbijn",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Suiza",
-   "sinopsis": "Un joven agente literario (Alden Ehrenreich) es enviado a Suiza para convencer a la famosa escritora Patricia Highsmith (Helen Mirren) de que escriba una última entrega de la antología de Ripley. La confrontación inicial entre la autora y el editor derivará…",
-   "poster": "https://pics.filmaffinity.com/a_talent_for_murder-736912254-mmed.jpg",
-   "fa": "685783",
-   "destacado": false
   },
   {
    "fecha": "2026-12-25",
