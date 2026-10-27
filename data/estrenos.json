@@ -7,22 +7,6 @@
  "estrenos": [
   {
    "fecha": "2026-10-30",
-   "titulo": "Aniquilación",
-   "original": "Onslaught",
-   "director": "Adam Wingard",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Adria Arjona, Dan Stevens, Eric Wareheim",
-   "sinopsis": "Una francotiradora del ejército utiliza sus habilidades para proteger a su hija de un escuadrón de máquinas asesinas que…",
-   "duracion": 92,
-   "poster": "https://pics.filmaffinity.com/onslaught-956757231-mmed.jpg",
-   "fa": "139760",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-30",
    "titulo": "El mundo es ansí",
    "original": "El mundo es ansí",
    "director": "Miguel Ángel Calvo Buttini",
@@ -191,7 +175,9 @@
     "Terror"
    ],
    "pais": "España",
-   "sinopsis": "Diez personas, ocho niños y dos monitores, quedan atrapados en un remoto refugio de los Pirineos cuando una violenta tormenta de nieve corta todos los accesos. Sin electricidad, sin agua, incomunicados y con el rescate cada vez más lejos, solo les queda…",
+   "reparto": "Mia Sala-Patau, Pablo Scapigliati, Matias Zocca",
+   "sinopsis": "Diez personas, ocho niños y dos monitores, quedan atrapados en un remoto refugio de los Pirineos cuando una violenta…",
+   "duracion": 89,
    "poster": "https://pics.filmaffinity.com/11-177697453-mmed.jpg",
    "fa": "193838",
    "destacado": false
@@ -1252,6 +1238,20 @@
     "tmdb": "1170608",
     "allocine": "324508"
    }
+  },
+  {
+   "fecha": "2026-12-18",
+   "titulo": "Talento para matar",
+   "original": "A Talent for Murder",
+   "director": "Anton Corbijn",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Suiza",
+   "sinopsis": "Un joven agente literario (Alden Ehrenreich) es enviado a Suiza para convencer a la famosa escritora Patricia Highsmith (Helen Mirren) de que escriba una última entrega de la antología de Ripley. La confrontación inicial entre la autora y el editor derivará…",
+   "poster": "https://pics.filmaffinity.com/a_talent_for_murder-736912254-mmed.jpg",
+   "fa": "685783",
+   "destacado": false
   },
   {
    "fecha": "2026-12-25",
