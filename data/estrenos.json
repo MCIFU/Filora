@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-27",
+ "actualizado": "2026-10-28",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -16,6 +16,7 @@
    "pais": "España",
    "reparto": "Nahia Bergasa, Álvaro Subiés, Julio Montañana Hidalgo",
    "sinopsis": "En esta historia híbrida entre ficción y documental a Ana, estudiante de último curso de periodismo, le encargan el TFG…",
+   "duracion": 82,
    "poster": "https://pics.filmaffinity.com/el_mundo_es_ansi-867541610-mmed.jpg",
    "fa": "261184",
    "destacado": false
@@ -176,8 +177,7 @@
    ],
    "pais": "España",
    "reparto": "Mia Sala-Patau, Pablo Scapigliati, Matias Zocca",
-   "sinopsis": "Diez personas, ocho niños y dos monitores, quedan atrapados en un remoto refugio de los Pirineos cuando una violenta…",
-   "duracion": 89,
+   "sinopsis": "Diez personas, ocho niños y dos monitores, quedan atrapados en un remoto refugio de los Pirineos cuando una violenta tormenta de nieve corta todos los accesos. Sin electricidad, sin agua, incomunicados y con el rescate cada vez más lejos, solo les queda…",
    "poster": "https://pics.filmaffinity.com/11-177697453-mmed.jpg",
    "fa": "193838",
    "destacado": false
