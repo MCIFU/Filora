@@ -6,168 +6,6 @@
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
  "estrenos": [
   {
-   "fecha": "2026-10-30",
-   "titulo": "El mundo es ansí",
-   "original": "El mundo es ansí",
-   "director": "Miguel Ángel Calvo Buttini",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Nahia Bergasa, Álvaro Subiés, Julio Montañana Hidalgo",
-   "sinopsis": "En esta historia híbrida entre ficción y documental a Ana, estudiante de último curso de periodismo, le encargan el TFG…",
-   "duracion": 82,
-   "poster": "https://pics.filmaffinity.com/el_mundo_es_ansi-867541610-mmed.jpg",
-   "fa": "261184",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-30",
-   "titulo": "Esta soledad",
-   "original": "Esta soledad",
-   "director": "Javier Giner",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Oriol Pla, Marina Salas, Gemma Martínez",
-   "sinopsis": "Leo y Lorea se han querido. Quizá se siguen queriendo. Pero algo en ellos se ha roto. Su relación, tras cinco años, ha…",
-   "duracion": 110,
-   "poster": "https://pics.filmaffinity.com/esta_soledad-990250394-mmed.jpg",
-   "fa": "209702",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-30",
-   "titulo": "Gungo y los juegos cavernícolas",
-   "original": "Gungo y los juegos cavernícolas",
-   "director": "Gabriel Riva Palacio Alatriste / Rodolfo Riva-Palacio Alatriste",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "México",
-   "reparto": "Ricky Limón, Karen Torres, Daniel Sosa",
-   "sinopsis": "Gungo es considerado el cavernícola más débil de la tribu, pero como es el hijo del jefe, cree que tiene el futuro…",
-   "duracion": 94,
-   "poster": "https://pics.filmaffinity.com/gungo_y_los_juegos_cavernicolas-751225962-mmed.jpg",
-   "fa": "394293",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-30",
-   "titulo": "Hope",
-   "original": "Hopeaka",
-   "director": "Na Hong-jin",
-   "generos": [
-    "Acción"
-   ],
-   "pais": "Corea del Sur",
-   "reparto": "Hwang Jung-min, Jo In-sung, Jung Ho-yeon",
-   "sinopsis": "Los refuerzos se han desviado para combatir los incendios forestales y se han cortado todas las comunicaciones. El jefe…",
-   "duracion": 160,
-   "poster": "https://pics.filmaffinity.com/hope-397969968-mmed.jpg",
-   "fa": "761467",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q117429496",
-    "imdb": "tt27369017",
-    "filmaffinity": "761467",
-    "rt": "m/hope_2026",
-    "letterboxd": "hope-2026",
-    "tmdb": "1058424",
-    "allocine": "314882"
-   }
-  },
-  {
-   "fecha": "2026-10-30",
-   "titulo": "Karateka",
-   "original": "Karateka",
-   "director": "Aritz Moreno",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Andrea Ros, Patrick Criado, Ernesto Alterio",
-   "sinopsis": "Esta es la historia de Sandra Sánchez, una mujer que nunca dejó de creer y desafió todas las convenciones. De ser…",
-   "duracion": 110,
-   "poster": "https://pics.filmaffinity.com/karateka-686948258-mmed.jpg",
-   "fa": "835232",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-30",
-   "titulo": "La oveja Shaun: Misión calabaza",
-   "original": "Shaun the Sheep: The Beast of Mossy Bottom",
-   "director": "Steve Cox / Matthew Walker",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Justin Fletcher, John Sparkes, Nina Sosanya",
-   "sinopsis": "En los días previos a Halloween, en la granja de Mossy Bottom, el granjero destruye sin querer el huerto de calabazas de…",
-   "duracion": 80,
-   "poster": "https://pics.filmaffinity.com/shaun_the_sheep_the_beast_of_mossy_bottom-976024649-mmed.jpg",
-   "fa": "771320",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-30",
-   "titulo": "Leviticus",
-   "original": "Leviticus",
-   "director": "Adrian Chiarella",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Australia",
-   "reparto": "Joe Bird, Stacy Clausen, Mia Wasikowska",
-   "sinopsis": "Dos adolescentes deben escapar de un ente violento que adopta la forma de la persona que más desean: el uno al otro. (FILMAFFINITY)…",
-   "duracion": 86,
-   "poster": "https://pics.filmaffinity.com/leviticus-432283138-mmed.jpg",
-   "fa": "721730",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q137557964",
-    "imdb": "tt39143902",
-    "filmaffinity": "721730",
-    "rt": "m/leviticus",
-    "letterboxd": "leviticus-2026",
-    "tmdb": "1564614",
-    "allocine": "1000037443"
-   }
-  },
-  {
-   "fecha": "2026-10-30",
-   "titulo": "Tiempos de ilusión",
-   "original": "Juste une illusion",
-   "director": "Olivier Nakache / Eric Toledano",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Francia",
-   "reparto": "Louis Garrel, Camille Cottin, Pierre Lottin",
-   "sinopsis": "Es 1985, Vincent, a punto de cumplir trece años, vive en un suburbio parisino de clase media con un hermano mayor…",
-   "duracion": 116,
-   "poster": "https://pics.filmaffinity.com/juste_une_illusion-638403615-mmed.jpg",
-   "fa": "226199",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-10-30",
-   "titulo": "Wicker",
-   "original": "Wicker",
-   "director": "Alex Huston Fischer / Eleanor Wilson",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Olivia Colman, Alexander Skarsgård, Elizabeth Debicki",
-   "sinopsis": "Una pescadora vive en la periferia de un pueblo costero; es soltera, apestosa y objeto de burlas constantes. Un día,…",
-   "duracion": 105,
-   "poster": "https://pics.filmaffinity.com/wicker-743002925-mmed.jpg",
-   "fa": "180963",
-   "destacado": false
-  },
-  {
    "fecha": "2026-11-06",
    "titulo": "11",
    "original": "11",
@@ -177,7 +15,8 @@
    ],
    "pais": "España",
    "reparto": "Mia Sala-Patau, Pablo Scapigliati, Matias Zocca",
-   "sinopsis": "Diez personas, ocho niños y dos monitores, quedan atrapados en un remoto refugio de los Pirineos cuando una violenta tormenta de nieve corta todos los accesos. Sin electricidad, sin agua, incomunicados y con el rescate cada vez más lejos, solo les queda…",
+   "sinopsis": "Diez personas, ocho niños y dos monitores, quedan atrapados en un remoto refugio de los Pirineos cuando una violenta…",
+   "duracion": 89,
    "poster": "https://pics.filmaffinity.com/11-177697453-mmed.jpg",
    "fa": "193838",
    "destacado": false
@@ -191,7 +30,9 @@
     "Animación"
    ],
    "pais": "República Checa",
-   "sinopsis": "Todo el vecindario está a punto de enfrentarse al desafío del concurso «Raíz de Oro» de este año, que premia a las mejores verduras. Bob y Bobek también quieren participar, aunque la jardinería no es precisamente lo suyo. Uno de los vecinos más tramposos,…",
+   "reparto": "Krystof Hádek, Matoj Hádek, Milan Steindler",
+   "sinopsis": "Todo el vecindario está a punto de enfrentarse al desafío del concurso «Raíz de Oro» de este año, que premia a las…",
+   "duracion": 82,
    "poster": "https://pics.filmaffinity.com/bob_a_bobek_ve_filmu_na_stope_mrkvojeda-821432838-mmed.jpg",
    "fa": "616891",
    "destacado": false
@@ -335,7 +176,9 @@
     "Documental"
    ],
    "pais": "España",
-   "sinopsis": "Tras escribir 'Nada' con solo 23 años, la carrera de Carmen Laforet parecía prometer una larga trayectoria de éxitos. Sin embargo, esa no acabó siendo la realidad. Su posterior bibliografía, escasa y discreta, se achaca a la poca producción literaria, pero…",
+   "reparto": "Mónica López, Carmen Laforet",
+   "sinopsis": "Tras escribir 'Nada' con solo 23 años, la carrera de Carmen Laforet parecía prometer una larga trayectoria de éxitos…",
+   "duracion": 103,
    "poster": "https://pics.filmaffinity.com/por_que_no_escribo_nada-858145390-mmed.jpg",
    "fa": "132883",
    "destacado": false
@@ -397,7 +240,8 @@
     "Thriller"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Un hombre desesperado planea un elaborado atraco contra el corrupto sistema financiero que arruinó su vida, con un grupo que documenta sus actos en redes sociales.\n\nEstreno en cines: otoño 2026",
+   "reparto": "Nicholas Hoult, Zoë Kravitz, Anna Sawai",
+   "sinopsis": "Un hombre desesperado planea un elaborado atraco contra el corrupto sistema financiero que arruinó su vida, con un grupo…",
    "poster": "https://pics.filmaffinity.com/how_to_rob_a_bank-400118344-mmed.jpg",
    "fa": "299150",
    "destacado": false,
@@ -419,7 +263,8 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "El 23 de octubre de 1980 una gigantesca explosión de gas mató a 50 niños y 3 adultos en el colegio público de Ortuella, Vizcaya. Este suceso, que conmocionó al pueblo vasco y a toda España, afectó y cambió las vidas de esa y muchas otras familias como la de…",
+   "reparto": "Belén Cuesta, Karra Elejalde, Raquel Ferri",
+   "sinopsis": "El 23 de octubre de 1980 una gigantesca explosión de gas mató a 50 niños y 3 adultos en el colegio público de Ortuella,…",
    "poster": "https://pics.filmaffinity.com/el_nino-210592722-mmed.jpg",
    "fa": "283648",
    "destacado": false
@@ -461,7 +306,8 @@
     "Animación"
    ],
    "pais": "Singapur",
-   "sinopsis": "Un joven periodista español se adentra en las vidas entrelazadas de dos amantes mientras investiga el origen de un viejo violín. La investigación le lleva al Singapur de 1941, donde el sueño de dos jóvenes violinistas, Kai y Fei, se ve truncado por la…",
+   "sinopsis": "Un joven periodista español se adentra en las vidas entrelazadas de dos amantes mientras investiga el origen de un viejo…",
+   "duracion": 114,
    "poster": "https://pics.filmaffinity.com/the_violinist-602690253-mmed.jpg",
    "fa": "906872",
    "destacado": false
@@ -527,8 +373,8 @@
     "Fantasía"
    ],
    "pais": "Estados Unidos",
-   "reparto": "Johnny Depp",
-   "sinopsis": "Reimaginación del clásico literario, una historia de fantasmas ambientada en el Londres de Dickens que sigue el viaje sobrenatural de un hombre para enfrentarse a su pasado, presente y futuro y luchar por una segunda oportunidad.\n\nEstreno en USA y España: 13…",
+   "reparto": "Johnny Depp, Rupert Grint, Andrea Riseborough",
+   "sinopsis": "Reimaginación del clásico literario, una historia de fantasmas ambientada en el Londres de Dickens que sigue el viaje…",
    "poster": "https://pics.filmaffinity.com/ebenezer-321560689-mmed.jpg",
    "fa": "112391",
    "destacado": false
@@ -542,7 +388,9 @@
     "Terror"
    ],
    "pais": "Reino Unido",
-   "sinopsis": "1858. Winifred Notty, una institutriz aparentemente perfecta, pero con unas formas inquietantes, llega a la mansión Ensor House. Su misión es educar y cuidar de los dos niños de la familia. Pero empieza a obsesionarse con formar parte de la familia. Bajo una…",
+   "reparto": "Maika Monroe, Thomasin McKenzie, Ruth Wilson",
+   "sinopsis": "1858. Winifred Notty, una institutriz aparentemente perfecta, pero con unas formas inquietantes, llega a la mansión…",
+   "duracion": 102,
    "poster": "https://pics.filmaffinity.com/victorian_psycho-266092679-mmed.jpg",
    "fa": "916686",
    "destacado": false,
@@ -563,7 +411,9 @@
     "Misterio"
    ],
    "pais": "Reino Unido",
-   "sinopsis": "Poco antes del golpe de Estado chileno de 1973, los agentes de la CIA Chris (John Malkovich) y Lee (Sam Rockwell) son enviados desde Santiago a la Isla de Pascua por su jefe de oficina, MJ (Steve Buscemi). Entre las emblemáticas estatuas de la isla, y…",
+   "reparto": "John Malkovich, Sam Rockwell, Steve Buscemi",
+   "sinopsis": "Poco antes del golpe de Estado chileno de 1973, los agentes de la CIA Chris (John Malkovich) y Lee (Sam Rockwell) son…",
+   "duracion": 118,
    "poster": "https://pics.filmaffinity.com/wild_horse_nine-895746008-mmed.jpg",
    "fa": "366928",
    "destacado": true,
@@ -1245,6 +1095,34 @@
    "destacado": false
   },
   {
+   "fecha": "2026-12-17",
+   "titulo": "Vengadores: Doomsday",
+   "original": "Avengers: Doomsday",
+   "director": "Anthony Russo / Joe Russo",
+   "generos": [
+    "Acción"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Primera de las dos películas de Los Vengadores para la Fase 6 del MCU. Se desconoce el argumento pero, por los cómics en los que se inspira, la historia sigue al Doctor Doom (Robert Downey Jr.) emergiendo como la mayor amenaza del multiverso, poniendo en…",
+   "poster": "https://pics.filmaffinity.com/avengers_doomsday-379951360-mmed.jpg",
+   "fa": "302450",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-18",
+   "titulo": "Desmadre en la granja",
+   "original": "Animal Farm",
+   "director": "Andy Serkis",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Un grupo de animales se rebelan contra sus dueños y toman el poder de la granja. Nueva adaptación del clásico de George Orwell.",
+   "poster": "https://pics.filmaffinity.com/animal_farm-775608099-mmed.jpg",
+   "fa": "970668",
+   "destacado": false
+  },
+  {
    "fecha": "2026-12-18",
    "titulo": "Dune: Parte Tres",
    "original": "Dune: Part Three",
@@ -1270,6 +1148,20 @@
   },
   {
    "fecha": "2026-12-18",
+   "titulo": "La Gradiva",
+   "original": "La Gradiva",
+   "director": "Marine Atlan",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Un pequeño grupo de estudiantes de secundaria franceses se embarca en un viaje escolar a Pompeya para explorar sus ruinas y los cuerpos petrificados por el Vesubio en el año 79 d.C. En esta ciudad fantasma, de repente se ven invadidos por una sensación de…",
+   "poster": "https://pics.filmaffinity.com/la_gradiva-652774603-mmed.jpg",
+   "fa": "269502",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-18",
    "titulo": "Talento para matar",
    "original": "A Talent for Murder",
    "director": "Anton Corbijn",
@@ -1284,56 +1176,60 @@
   },
   {
    "fecha": "2026-12-25",
-   "titulo": "Historias paralelas",
-   "original": "Parallel Tales",
-   "director": "Asghar Farhadi",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Francia",
-   "ids": {
-    "wikidata": "Q134184074",
-    "imdb": "tt36646880",
-    "rt": "m/parallel_tales",
-    "letterboxd": "parallel-tales",
-    "tmdb": "1157869",
-    "allocine": "1000023480"
-   },
-   "poster": "https://upload.wikimedia.org/wikipedia/en/c/c7/Parallel-tales-2026.jpg"
-  },
-  {
-   "fecha": "2026-12-25",
    "titulo": "Jumanji: Mundo abierto",
-   "original": "Jumanji 3",
+   "original": "Jumanji: Open World",
    "director": "Jake Kasdan",
    "generos": [
-    "Aventura",
-    "Comedia",
-    "Acción"
+    "Aventura"
    ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Continuación de \"Jumanji: Siguiente nivel\" (2019). Nuestros héroes ya han logrado escapar de las peligrosas selvas de Jumanji, pero esta vez Jumanji se libera de su consola y desata el caos en nuestro mundo.",
+   "poster": "https://pics.filmaffinity.com/jumanji_open_world-888781720-mmed.jpg",
+   "fa": "592449",
    "saga": "Jumanji",
    "destacado": true
   },
   {
    "fecha": "2026-12-25",
-   "titulo": "Werwulf",
-   "original": "Werwulf",
-   "director": "Robert Eggers",
+   "titulo": "Sucederá esta noche",
+   "original": "Succederà questa notteaka",
+   "director": "Nanni Moretti",
    "generos": [
-    "Terror",
-    "Histórico"
+    "Romance"
    ],
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q131853471",
-    "imdb": "tt35514120",
-    "filmaffinity": "399436",
-    "rt": "m/werwulf",
-    "letterboxd": "werwulf",
-    "tmdb": "1421903",
-    "allocine": "1000018715"
-   },
-   "poster": "https://upload.wikimedia.org/wikipedia/en/7/73/Werwulf_poster.jpg"
+   "pais": "Italia",
+   "sinopsis": "Se inspira libremente en la colección de relatos 'Hungry Heart' (Lev Raev), del escritor  Eshkol Nevo. Moretti ha adaptado esta compilación de cuentos junto a sus habituales coguionistas, Federica Pontremoli y Valia Santella. \n\nPreestreno mundial en el…",
+   "poster": "https://pics.filmaffinity.com/succedera_questa_notte-991071560-mmed.jpg",
+   "fa": "822886",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-25",
+   "titulo": "You Can See Everything (Puedes verlo todo)",
+   "original": "You Can See Everything",
+   "director": "Nathan Fielder / Lance Oppenheim",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Treinta y cuatro días antes de ingresar en prisión por fraude, Elizabeth Holmes, la famosa fundadora de la empresa tecnológica de análisis de sangre Theranos, invita a un equipo de rodaje escéptico a documentar cada uno de sus movimientos. Lo que comienza…",
+   "poster": "https://pics.filmaffinity.com/you_can_see_everything-431870991-mmed.jpg",
+   "fa": "757838",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
+   "titulo": "Perfectos conocidos",
+   "original": "Perfectos conocidos",
+   "director": "Javier Fesser",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España",
+   "sinopsis": "Las tres generaciones de la familia de Ana se reúnen en un chalet de una isla canaria. Poco después de llegar, quedan aislados por la erupción de un volcán. Mientras la lava se acerca lentamente y esperan el rescate y los nervios están a flor de piel, sus…",
+   "poster": "https://pics.filmaffinity.com/perfectos_conocidos-152733115-mmed.jpg",
+   "fa": "826748",
+   "destacado": false
   },
   {
    "fecha": "2027-01-22",
