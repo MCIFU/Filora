@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-28",
+ "actualizado": "2026-10-29",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -501,6 +501,20 @@
    "sinopsis": "Una familia acude a la casa abandonada de su tía para celebrar la Navidad en el campo, sin saber que una familia de ratones ya habita la casa, y no les interesan las visitas. Así que sólo queda una cosa por hacer: poner trampas, estar atentos y defenderse.",
    "poster": "https://pics.filmaffinity.com/hvis_ingen_gar_i_fella-798734028-mmed.jpg",
    "fa": "711767",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "Rocky",
+   "original": "Rocky",
+   "director": "John G. Avildsen",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Rocky Balboa es un desconocido boxeador a quien se le ofrece la posibilidad de pelear por el título mundial de los pesos pesados. Con una gran fuerza de voluntad, Rocky se prepara concienzudamente para el combate y también para los cambios que acabarán…",
+   "poster": "https://pics.filmaffinity.com/rocky-253483905-mmed.jpg",
+   "fa": "192554",
    "destacado": false
   },
   {
@@ -1157,6 +1171,20 @@
    "sinopsis": "Jasmine percibe que la música del mundo no suena bien desde que perdió a sus padres. Una partitura misteriosa la lleva a Soundland, el país secreto de la música. Allí conoce a Jambo, que le explica el poder de la Partitura Eterna. Juntos tratarán de salvar la…",
    "poster": "https://pics.filmaffinity.com/jasmine_jambo-482863542-mmed.jpg",
    "fa": "973660",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
+   "titulo": "Kiro",
+   "original": "Kiro",
+   "director": "María Yáñez",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "España",
+   "sinopsis": "Rinde homenaje a Ana Kiro, una de las grandes figuras de la cultura popular gallega, y a la especial relación que mantuvo con su público. La artista se forjó su estatus de diva popular en los años 80 y 90 recorriendo verbenas por toda Galicia, vendiendo…",
+   "poster": "https://pics.filmaffinity.com/kiro-147281540-mmed.jpg",
+   "fa": "635674",
    "destacado": false
   },
   {
