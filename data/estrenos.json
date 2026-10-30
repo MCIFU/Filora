@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-29",
+ "actualizado": "2026-10-30",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -573,6 +573,20 @@
    "sinopsis": "A principios del siglo XVII, un misterioso soldado llega a un aislado pueblo protestante de Alemania afirmando ser el heredero de una granja abandonada. Aunque demuestra ser un buen hombre y se integra en la comunidad, las sospechas de los aldeanos sobre su…",
    "poster": "https://pics.filmaffinity.com/rose-181943635-mmed.jpg",
    "fa": "941297",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Virginia Woolf: Noche y día",
+   "original": "Virginia Woolf's Night & Day",
+   "director": "Tina Gharavi",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Londres, 1910. Katharine Hilbery (Haley Bennett) hace todo lo posible por evitar el amor y el matrimonio, especialmente si el candidato es William (Jack Whitehall), un viejo amigo de la familia elegido por sus padres. Cuando su padre, el señor Hilbery…",
+   "poster": "https://pics.filmaffinity.com/virginia_woolf_s_night_day-298332967-mmed.jpg",
+   "fa": "523850",
    "destacado": false
   },
   {
