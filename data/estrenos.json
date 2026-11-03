@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-02",
+ "actualizado": "2026-11-03",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -63,6 +63,7 @@
    "pais": "Estados Unidos",
    "reparto": "Bill Hader, Giancarlo Esposito, Matt Berry",
    "sinopsis": "Un astuto gato lleva el caos con sus travesuras a la vida de un par de hermanos que lidian con su mudanza a una nueva ciudad. Estreno: noviembre 2026…",
+   "duracion": 105,
    "poster": "https://pics.filmaffinity.com/the_cat_in_the_hat-251267191-mmed.jpg",
    "fa": "373516",
    "destacado": false,
@@ -403,6 +404,20 @@
   },
   {
    "fecha": "2026-11-13",
+   "titulo": "Washington. El origen de un líder",
+   "original": "Young Washingtonaka",
+   "director": "Jon Erwin",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Los primeros años de la vida de George Washington, primer presidente de los Estados Unidos.",
+   "poster": "https://pics.filmaffinity.com/young_washington-550593982-mmed.jpg",
+   "fa": "991503",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-13",
    "titulo": "Wild Horse Nine",
    "original": "Wild Horse Nine",
    "director": "Martin McDonagh",
@@ -586,20 +601,6 @@
    "sinopsis": "Londres, 1910. Katharine Hilbery (Haley Bennett) hace todo lo posible por evitar el amor y el matrimonio, especialmente si el candidato es William (Jack Whitehall), un viejo amigo de la familia elegido por sus padres. Cuando su padre, el señor Hilbery…",
    "poster": "https://pics.filmaffinity.com/virginia_woolf_s_night_day-298332967-mmed.jpg",
    "fa": "523850",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-20",
-   "titulo": "Washington. El origen de un líder",
-   "original": "Young Washingtonaka",
-   "director": "Jon Erwin",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Los primeros años de la vida de George Washington, primer presidente de los Estados Unidos.",
-   "poster": "https://pics.filmaffinity.com/young_washington-550593982-mmed.jpg",
-   "fa": "991503",
    "destacado": false
   },
   {
@@ -825,20 +826,6 @@
    "sinopsis": "Cuenta la historia de cuatro matrimonios en diferentes etapas de su relación. Cuando la Iglesia descubre que un impostor ha estado suplantando al sacerdote de una parroquia durante nueve años, los enlaces celebrados por él quedan anulados. Las parejas…",
    "poster": "https://pics.filmaffinity.com/desposados-818756913-mmed.jpg",
    "fa": "201639",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-12-04",
-   "titulo": "El fantasma de la ópera",
-   "original": "Le Fantôme de L'Opéra",
-   "director": "Alexandre Castagnetti",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Francia",
-   "sinopsis": "Ambientada en la París actual, la historia sigue a Anastasia, una joven bailarina recién llegada a la ciudad que sueña con triunfar en el ballet y logra unirse a la prestigiosa Ópera de París. Mientras ensaya Orfeo, se enamora de un misterioso pianista. A…",
-   "poster": "https://pics.filmaffinity.com/le_fantome_de_l_opera-540893137-mmed.jpg",
-   "fa": "707193",
    "destacado": false
   },
   {
@@ -1185,6 +1172,20 @@
    "sinopsis": "Un joven agente literario (Alden Ehrenreich) es enviado a Suiza para convencer a la famosa escritora Patricia Highsmith (Helen Mirren) de que escriba una última entrega de la antología de Ripley. La confrontación inicial entre la autora y el editor derivará…",
    "poster": "https://pics.filmaffinity.com/a_talent_for_murder-736912254-mmed.jpg",
    "fa": "685783",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-25",
+   "titulo": "Año cero: El nacimiento de Cristo",
+   "original": "Zero A.D.: The Birth of Christ",
+   "director": "Alejandro Monteverde",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Una estrella se alza sobre Belén y unos sabios llegados de Oriente preguntan por el rey recién nacido. Alarmado, Herodes está dispuesto a todo para conservar su trono. Su temor desata la persecución de los inocentes, y María deberá proteger al niño que las…",
+   "poster": "https://pics.filmaffinity.com/zero_a_d_the_birth_of_christ-594700299-mmed.jpg",
+   "fa": "492442",
    "destacado": false
   },
   {
