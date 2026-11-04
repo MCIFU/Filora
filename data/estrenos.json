@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-03",
+ "actualizado": "2026-11-04",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -244,6 +244,7 @@
    "pais": "Estados Unidos",
    "reparto": "Nicholas Hoult, Zoë Kravitz, Anna Sawai",
    "sinopsis": "Un hombre desesperado planea un elaborado atraco contra el corrupto sistema financiero que arruinó su vida, con un grupo…",
+   "duracion": 122,
    "poster": "https://pics.filmaffinity.com/how_to_rob_a_bank-400118344-mmed.jpg",
    "fa": "299150",
    "destacado": false,
@@ -376,6 +377,7 @@
    "pais": "Estados Unidos",
    "reparto": "Johnny Depp, Rupert Grint, Andrea Riseborough",
    "sinopsis": "Reimaginación del clásico literario, una historia de fantasmas ambientada en el Londres de Dickens que sigue el viaje…",
+   "duracion": 116,
    "poster": "https://pics.filmaffinity.com/ebenezer-321560689-mmed.jpg",
    "fa": "112391",
    "destacado": false
@@ -729,6 +731,20 @@
    "sinopsis": "Oregón, 1933. Samuel Murphy (Ethan Hawke) es separado de su hija y enviado a un campo de trabajo. Un día, el alcaide Clancy (Russell Crowe) le ofrece la posibilidad de liberarlo si consigue pasar oro de contrabando a través de una peligrosa senda salvaje.…",
    "poster": "https://pics.filmaffinity.com/the_weight-365193323-mmed.jpg",
    "fa": "796217",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Puella Magi Madoka Magica. La película: La noche de Walpurgis - El ascenso",
+   "original": "Gekijōban Mahō Shōjo Madoka Magica: Walpurgis no Kaitenaka",
+   "director": "Akiyuki Shinbo",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Japón",
+   "sinopsis": "Película secuela de \"Puella Magi Madoka Magica 3: Rebellion\", con motivo del décimo aniversario del estreno de la serie anime \"Madoka Magica\". Nos sitúa en un mundo aparentemente apacible, pero el equilibrio puede romperse en cualquier momento. Con la…",
+   "poster": "https://pics.filmaffinity.com/gekijoban_maho_shojo_madoka_magica_walpurgis_no_kaiten-249783119-mmed.jpg",
+   "fa": "316736",
    "destacado": false
   },
   {
@@ -1203,20 +1219,6 @@
    "fa": "592449",
    "saga": "Jumanji",
    "destacado": true
-  },
-  {
-   "fecha": "2026-12-25",
-   "titulo": "Sucederá esta noche",
-   "original": "Succederà questa notteaka",
-   "director": "Nanni Moretti",
-   "generos": [
-    "Romance"
-   ],
-   "pais": "Italia",
-   "sinopsis": "Se inspira libremente en la colección de relatos 'Hungry Heart' (Lev Raev), del escritor  Eshkol Nevo. Moretti ha adaptado esta compilación de cuentos junto a sus habituales coguionistas, Federica Pontremoli y Valia Santella. \n\nPreestreno mundial en el…",
-   "poster": "https://pics.filmaffinity.com/succedera_questa_notte-991071560-mmed.jpg",
-   "fa": "822886",
-   "destacado": false
   },
   {
    "fecha": "2026-12-25",
