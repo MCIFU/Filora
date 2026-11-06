@@ -1,236 +1,22 @@
 {
- "actualizado": "2026-11-05",
+ "actualizado": "2026-11-06",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
  "estrenos": [
   {
-   "fecha": "2026-11-06",
-   "titulo": "11",
-   "original": "11",
-   "director": "Clàudia Serra / Paula Serra",
+   "fecha": "2026-10-01",
+   "titulo": "El más allá",
+   "original": "The Great Beyond",
+   "director": "J.J. Abrams",
    "generos": [
-    "Terror"
-   ],
-   "pais": "España",
-   "reparto": "Mia Sala-Patau, Pablo Scapigliati, Matias Zocca",
-   "sinopsis": "Diez personas, ocho niños y dos monitores, quedan atrapados en un remoto refugio de los Pirineos cuando una violenta…",
-   "duracion": 89,
-   "poster": "https://pics.filmaffinity.com/11-177697453-mmed.jpg",
-   "fa": "193838",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "Bob y Bobek, tras la pista de la zanahoria",
-   "original": "Bob a Bobek ve filmu: Na stope Mrkvojedaaka",
-   "director": "Ondrej Pecha / Mirek Zachariás",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "República Checa",
-   "reparto": "Krystof Hádek, Matoj Hádek, Milan Steindler",
-   "sinopsis": "Todo el vecindario está a punto de enfrentarse al desafío del concurso 'Raíz de Oro' de este año, que premia a las…",
-   "duracion": 82,
-   "poster": "https://pics.filmaffinity.com/bob_a_bobek_ve_filmu_na_stope_mrkvojeda-821432838-mmed.jpg",
-   "fa": "616891",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "El contrato. Un pacto con el diablo",
-   "director": "Massimo Paolucci",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Italia",
-   "reparto": "Kevin Spacey, Eric Roberts, Vincent Spano",
-   "sinopsis": "Giuseppe es un periodista fracasado cuya ambición por alcanzar el éxito no conoce límites. Cuando decide investigar la…",
-   "duracion": 105,
-   "poster": "https://pics.filmaffinity.com/the_contract-764085276-mmed.jpg",
-   "fa": "385922",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "El gato con sombrero",
-   "original": "The Cat in the Hat",
-   "director": "Alessandro Carloni / Erica Rivinoja",
-   "generos": [
-    "Animación"
+    "Drama"
    ],
    "pais": "Estados Unidos",
-   "reparto": "Bill Hader, Giancarlo Esposito, Matt Berry",
-   "sinopsis": "Un astuto gato lleva el caos con sus travesuras a la vida de un par de hermanos que lidian con su mudanza a una nueva ciudad. Estreno: noviembre 2026…",
-   "duracion": 105,
-   "poster": "https://pics.filmaffinity.com/the_cat_in_the_hat-251267191-mmed.jpg",
-   "fa": "373516",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q122932991",
-    "imdb": "tt2321555",
-    "filmaffinity": "373516",
-    "rt": "m/the_cat_in_the_hat",
-    "letterboxd": "the-cat-in-the-hat-2026",
-    "tmdb": "1117898"
-   }
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "El misterio de Lucy Lost",
-   "original": "Le Mystère Lucy Lost",
-   "director": "Olivier Clert",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Francia",
-   "sinopsis": "A las afueras de un remoto pueblo pesquero vive con su familia la misteriosa Lucy, una niña de once años que tiene…",
-   "duracion": 85,
-   "poster": "https://pics.filmaffinity.com/le_mystere_lucy_lost-951555881-mmed.jpg",
-   "fa": "377127",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "Fiesta Pagäna",
-   "director": "Álvaro Brechner",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Adrián Lastra, Adriá Mondaray, Guillermo Furiase",
-   "sinopsis": "Mägo de Oz sacudió los cimientos del rock español al atreverse a mezclar la fuerza del heavy metal con la tradición del…",
-   "duracion": 132,
-   "poster": "https://pics.filmaffinity.com/fiesta_pagana-438096656-mmed.jpg",
-   "fa": "885072",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "George Michael: The Faith Tour",
-   "original": "George Michael: The Faith Tour",
-   "director": "David Austin / Andy Morahan",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "George Michael",
-   "sinopsis": "Documental restaurado de un concierto que recoge las actuaciones de George Michael en la gira 'Faith Tour' de 1988 en el…",
-   "duracion": 113,
-   "poster": "https://pics.filmaffinity.com/george_michael_the_faith_tour-828781159-mmed.jpg",
-   "fa": "406500",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "Godzilla Minus Zero",
-   "original": "Gojira Mainasu Zeroaka",
-   "director": "Takashi Yamazaki",
-   "generos": [
-    "Fantasía"
-   ],
-   "pais": "Japón",
-   "reparto": "Ryunosuke Kamiki, Minami Hamabe, Miou Tanaka",
-   "sinopsis": "Secuela de 'Godzilla Minus One' (2023). La guerra dejó a Japón en la ruina. Godzilla lo hundió aún más. Han pasado dos…",
-   "duracion": 135,
-   "poster": "https://pics.filmaffinity.com/gojira_mainasu_zero-757830996-mmed.jpg",
-   "fa": "624236",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q136700760",
-    "imdb": "tt34384661",
-    "rt": "m/godzilla_minus_zero",
-    "letterboxd": "godzilla-minus-zero",
-    "tmdb": "1381071",
-    "allocine": "1000014492"
-   }
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "Los miserables",
-   "original": "Les misérables",
-   "director": "Fred Cavayé",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Francia",
-   "reparto": "Vincent Lindon, Tahar Rahim, Camille Cottin",
-   "sinopsis": "Nueva adaptación de la famosa novela de Victor Hugo. Tras pasar 19 años en prisión por robar una barra de pan, Jean…",
-   "duracion": 178,
-   "poster": "https://pics.filmaffinity.com/les_miserables-960172731-mmed.jpg",
-   "fa": "361235",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q138509280",
-    "imdb": "tt35518109",
-    "letterboxd": "les-miserables-2026",
-    "tmdb": "1241803",
-    "allocine": "326160"
-   }
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "Por qué no escribo nada",
-   "original": "Por qué no escribo nada",
-   "director": "Isabel Fernández",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "España",
-   "reparto": "Mónica López, Carmen Laforet",
-   "sinopsis": "Tras escribir 'Nada' con solo 23 años, la carrera de Carmen Laforet parecía prometer una larga trayectoria de éxitos…",
-   "duracion": 103,
-   "poster": "https://pics.filmaffinity.com/por_que_no_escribo_nada-858145390-mmed.jpg",
-   "fa": "132883",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "Ramayana: El nacimiento de una leyenda",
-   "original": "Ramayana",
-   "director": "Nitesh Tiwari",
-   "generos": [
-    "Acción"
-   ],
-   "pais": "India",
-   "reparto": "Ranbir Kapoor, Ravii Dubey, Sai Pallavi",
-   "sinopsis": "Rama es el más grande de todos los tiempos porque vivió una vida en la que las decisiones que tomó fueron siempre en…",
-   "duracion": 165,
-   "poster": "https://pics.filmaffinity.com/ramayana-718005306-mmed.jpg",
-   "fa": "361599",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "Ruega por nosotras",
-   "original": "Ruega por nosotras",
-   "director": "Daniel Monzón",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Zoe Bonafonte, Manuela Calle, Adelfa Calvo",
-   "sinopsis": "Año 1974. Ana tiene 19 años, vive en Barcelona y es -a ojos de su acomodada familia- una chica rebelde. Tras una fuga…",
-   "duracion": 136,
-   "poster": "https://pics.filmaffinity.com/ruega_por_nosotras-406628296-mmed.jpg",
-   "fa": "999787",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-06",
-   "titulo": "Sacamantecas",
-   "original": "Sacamantecas",
-   "director": "David P. Sañudo",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "España",
-   "reparto": "Antonio de la Torre, Patricia López Arnaiz, Josean Bengoetxea",
-   "sinopsis": "Álava, finales del siglo XIX. Mientras la III Guerra Carlista agoniza, varias mujeres aparecen estranguladas en las…",
-   "duracion": 109,
-   "poster": "https://pics.filmaffinity.com/sacamantecas-687718772-mmed.jpg",
-   "fa": "676227",
+   "sinopsis": "Una joven pareja de recién casados lucha por sobrevivir contra una entidad sobrenatural. \n\nEstreno en cines USA y España: octubre 2027",
+   "poster": "https://pics.filmaffinity.com/the_great_beyond-845722316-mmed.jpg",
+   "fa": "610926",
    "destacado": false
   },
   {
@@ -281,7 +67,9 @@
     "Drama"
    ],
    "pais": "Argentina",
-   "sinopsis": "Milo, de nueve años, vive en un pueblo remoto de Argentina donde estudia malambo, una danza folclórica llena de bravura. Es un bailarín excelente, pero su único deseo es escapar del campo en tren hacia el Buenos Aires de sus sueños.",
+   "reparto": "Milo Barría, Rita Pauls, Mariano Barria",
+   "sinopsis": "Milo, de nueve años, vive en un pueblo remoto de Argentina donde estudia malambo, una danza folclórica llena de bravura…",
+   "duracion": 75,
    "poster": "https://pics.filmaffinity.com/el_tren_fluvial-326005484-mmed.jpg",
    "fa": "233329",
    "destacado": false
@@ -295,7 +83,9 @@
     "Documental"
    ],
    "pais": "España",
-   "sinopsis": "Largometraje documental construido con archivo, testimonios sonoros y grabaciones actuales que explora cómo la historia del flamenco está íntimamente ligada a la modernidad y al nacimiento de las máquinas. Entre el cuento y el ensayo, propone un viaje por…",
+   "reparto": "Rocío Molina, Alba Flores, C. Tangana",
+   "sinopsis": "Largometraje documental construido con archivo, testimonios sonoros y grabaciones actuales que explora cómo la historia…",
+   "duracion": 78,
    "poster": "https://pics.filmaffinity.com/jaleos-767340486-mmed.jpg",
    "fa": "897230",
    "destacado": false
@@ -309,7 +99,8 @@
     "Animación"
    ],
    "pais": "Singapur",
-   "sinopsis": "Un joven periodista español se adentra en las vidas entrelazadas de dos amantes mientras investiga el origen de un viejo violín. La investigación le lleva al Singapur de 1941, donde el sueño de dos jóvenes violinistas, Kai y Fei, se ve truncado por la…",
+   "sinopsis": "Un joven periodista español se adentra en las vidas entrelazadas de dos amantes mientras investiga el origen de un viejo…",
+   "duracion": 114,
    "poster": "https://pics.filmaffinity.com/the_violinist-602690253-mmed.jpg",
    "fa": "906872",
    "destacado": false
@@ -323,8 +114,9 @@
     "Thriller"
    ],
    "pais": "Estados Unidos",
-   "reparto": "Matthew McConaughey",
-   "sinopsis": "En lo más profundo de los bosques de la Oklahoma rural, el carismático y musicalmente dotado Amziah King lidera una banda de inadaptados que tocan bluegrass mientras supervisa la principal operación de fabricación de miel del pueblo. Cuando la hija adoptiva…",
+   "reparto": "Matthew McConaughey, Angelina LookingGlass, Kurt Russell",
+   "sinopsis": "En lo más profundo de los bosques de la Oklahoma rural, el carismático y musicalmente dotado Amziah King lidera una…",
+   "duracion": 130,
    "poster": "https://pics.filmaffinity.com/the_rivals_of_amziah_king-955386817-mmed.jpg",
    "fa": "184041",
    "destacado": true,
@@ -347,7 +139,9 @@
     "Animación"
    ],
    "pais": "Noruega",
-   "sinopsis": "Una familia acude a la casa abandonada de su tía para celebrar la Navidad en el campo, sin saber que una familia de ratones ya habita la casa, y no les interesan las visitas. Así que sólo queda una cosa por hacer: poner trampas, estar atentos y defenderse.",
+   "reparto": "Vegard Strand Eide, Flo Fagerli, Pål Sverre Hagen",
+   "sinopsis": "Una familia acude a la casa abandonada de su tía para celebrar la Navidad en el campo, sin saber que una familia de…",
+   "duracion": 80,
    "poster": "https://pics.filmaffinity.com/hvis_ingen_gar_i_fella-798734028-mmed.jpg",
    "fa": "711767",
    "destacado": false
@@ -361,7 +155,9 @@
     "Drama"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Rocky Balboa es un desconocido boxeador a quien se le ofrece la posibilidad de pelear por el título mundial de los pesos pesados. Con una gran fuerza de voluntad, Rocky se prepara concienzudamente para el combate y también para los cambios que acabarán…",
+   "reparto": "Sylvester Stallone, Talia Shire, Burt Young",
+   "sinopsis": "Rocky Balboa es un desconocido boxeador a quien se le ofrece la posibilidad de pelear por el título mundial de los pesos…",
+   "duracion": 119,
    "poster": "https://pics.filmaffinity.com/rocky-253483905-mmed.jpg",
    "fa": "192554",
    "destacado": false
@@ -414,7 +210,9 @@
     "Drama"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Los primeros años de la vida de George Washington, primer presidente de los Estados Unidos.",
+   "reparto": "William Franklyn-Miller, Mary-Louise Parker, Ben Kingsley",
+   "sinopsis": "Antes de ser el Padre de la Nación, fue un soldado que luchaba por sobrevivir. Un solo paso en falso catapultó al joven…",
+   "duracion": 125,
    "poster": "https://pics.filmaffinity.com/young_washington-550593982-mmed.jpg",
    "fa": "991503",
    "destacado": false
@@ -452,7 +250,8 @@
     "Comedia"
    ],
    "pais": "España",
-   "sinopsis": "Primavera de 1992, Madrid, Chueca, en pleno bullicio previo a un verano que promete ser histórico para España. Pepe regenta una taberna catalana que no puede estar peor: su local está en las últimas, las deudas le quitan el sueño, y por si fuera poco, su…",
+   "reparto": "Pablo Puyol, Octavi Pujades, Santiago Urrialde",
+   "sinopsis": "Primavera de 1992, Madrid, Chueca, en pleno bullicio previo a un verano que promete ser histórico para España. Pepe…",
    "poster": "https://pics.filmaffinity.com/me_entiendes_o_te_lo_explico-943354500-mmed.jpg",
    "fa": "860793",
    "destacado": false
@@ -1222,6 +1021,20 @@
   },
   {
    "fecha": "2026-12-25",
+   "titulo": "Sucederá esta noche",
+   "original": "Succederà questa notteaka",
+   "director": "Nanni Moretti",
+   "generos": [
+    "Romance"
+   ],
+   "pais": "Italia",
+   "sinopsis": "Se inspira libremente en la colección de relatos 'Hungry Heart' (Lev Raev), del escritor  Eshkol Nevo. Moretti ha adaptado esta compilación de cuentos junto a sus habituales coguionistas, Federica Pontremoli y Valia Santella. \n\nPreestreno mundial en el…",
+   "poster": "https://pics.filmaffinity.com/succedera_questa_notte-991071560-mmed.jpg",
+   "fa": "822886",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-25",
    "titulo": "You Can See Everything (Puedes verlo todo)",
    "original": "You Can See Everything",
    "director": "Nathan Fielder / Lance Oppenheim",
@@ -1236,6 +1049,62 @@
   },
   {
    "fecha": "2027-01-01",
+   "titulo": "Angry Birds 3: La película",
+   "original": "The Angry Birds Movie 3",
+   "director": "John Rice",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Un Angry Bird se enfrentará al mayor reto de su vida, la paternidad… y, de paso, salvará el mundo.\n\nEstreno en cines: 1 de enero 2027.",
+   "poster": "https://pics.filmaffinity.com/the_angry_birds_movie_3-203902740-mmed.jpg",
+   "fa": "105531",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
+   "titulo": "Cobarde",
+   "original": "Coward",
+   "director": "Lukas Dhont",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Bélgica",
+   "sinopsis": "1916. Primera Guerra Mundial. Pierre es un joven soldado belga, recién llegado al frente, que está ansioso por demostrar su valía. Allí conoce a Francis, que decide levantar el ánimo de sus compañeros montando un espectáculo teatral. En medio de la violencia,…",
+   "poster": "https://pics.filmaffinity.com/coward-712973032-mmed.jpg",
+   "fa": "833055",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
+   "titulo": "Ink",
+   "original": "Ink",
+   "director": "Danny Boyle",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "A finales de la década de 1960, en Gran Bretaña, el magnate de los medios de comunicación Rupert Murdoch adquiere el periódico The Sun, que atravesaba dificultades, y se propone cambiar su rumbo editorial y noticioso por completo. Junto al director Larry…",
+   "poster": "https://pics.filmaffinity.com/ink-347403335-mmed.jpg",
+   "fa": "527623",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
+   "titulo": "November 1963",
+   "original": "November 1963",
+   "director": "Roland Joffé",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Recrea las 48 horas previas y posteriores al asesinato del presidente John F. Kennedy, vistas desde dentro de la mafia de Chicago en lugar de a través de los registros oficiales.",
+   "poster": "https://pics.filmaffinity.com/november_1963-351003108-mmed.jpg",
+   "fa": "894798",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
    "titulo": "Perfectos conocidos",
    "original": "Perfectos conocidos",
    "director": "Javier Fesser",
@@ -1244,8 +1113,92 @@
    ],
    "pais": "España",
    "sinopsis": "Las tres generaciones de la familia de Ana se reúnen en un chalet de una isla canaria. Poco después de llegar, quedan aislados por la erupción de un volcán. Mientras la lava se acerca lentamente y esperan el rescate y los nervios están a flor de piel, sus…",
-   "poster": "https://pics.filmaffinity.com/perfectos_conocidos-152733115-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/perfectos_conocidos-586860717-mmed.jpg",
    "fa": "826748",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
+   "titulo": "Vaya tropa",
+   "original": "Vaya tropa",
+   "director": "Curro Velázquez",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España",
+   "sinopsis": "Montse y Berto, unos padres desesperados que han probado todos los métodos educativos a su alcance con sus cuatro hijos malcriados, deciden contratar los servicios de la temible y misteriosa Teniente Martínez, una mezcla entre Mary Poppins y La Teniente…",
+   "poster": "https://pics.filmaffinity.com/vaya_tropa-943638024-mmed.jpg",
+   "fa": "862985",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
+   "titulo": "Violette: Cambiar el agua de las flores",
+   "original": "Changer l'eau des fleurs",
+   "director": "Jean-Pierre Jeunet",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Violette Toussaint, guarda de un cementerio en un pequeño pueblo de Borgoña, es una observadora singular y una oyente compasiva. Su apacible vida transcurre entre conversaciones con los peculiares trabajadores del cementerio y los numerosos visitantes que…",
+   "poster": "https://pics.filmaffinity.com/changer_l_eau_des_fleurs-943572463-mmed.jpg",
+   "fa": "372937",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
+   "titulo": "Carta blanca",
+   "original": "Carta blanca",
+   "director": "Gerardo Herrero",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "España",
+   "sinopsis": "En 1921, Juan Faura se alista en la Legión para ser enviado a la Guerra de Marruecos. Allí queda atrapado en la venganza personal del jefe de pelotón, el sargento Antonio Bermejo, cuyo hermano acaba de ser torturado y asesinado en el Desastre de Annual.…",
+   "poster": "https://pics.filmaffinity.com/carta_blanca-927161589-mmed.jpg",
+   "fa": "425654",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
+   "titulo": "Paper Tiger. Negocios de familia",
+   "original": "Paper Tiger",
+   "director": "James Gray",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Dos hermanos que persiguen el sueño americano se ven de repente envueltos en un plan que resulta ser demasiado bueno para ser verdad. Pero mientras intentan abrirse camino en un mundo de corrupción y violencia cada vez más peligroso, se encuentran ellos…",
+   "poster": "https://pics.filmaffinity.com/paper_tiger-417777854-mmed.jpg",
+   "fa": "740724",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
+   "titulo": "¡Behemoth!",
+   "original": "Behemoth!",
+   "director": "Tony Gilroy",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Alex Serian, un talentoso violonchelista, vuelve a Los Ángeles después de veinte años viajando por el mundo. Cuando la música, el hilo conductor de toda su vida, lo lleva por un camino inesperado, Alex se embarca en una experiencia transformadora que cambiará…",
+   "poster": "https://pics.filmaffinity.com/behemoth-336337801-mmed.jpg",
+   "fa": "845337",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-08",
+   "titulo": "Licántropo",
+   "original": "Werwulf",
+   "director": "Robert Eggers",
+   "generos": [
+    "Terror"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "En la Inglaterra del siglo XIII, una misteriosa criatura acecha en una zona rural envuelta en niebla, mientras el folclore local se convierte en una aterradora realidad para los aldeanos.",
+   "poster": "https://pics.filmaffinity.com/werwulf-276949698-mmed.jpg",
+   "fa": "399436",
    "destacado": false
   },
   {
