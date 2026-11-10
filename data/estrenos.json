@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-09",
+ "actualizado": "2026-11-10",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -647,6 +647,34 @@
   },
   {
    "fecha": "2026-12-04",
+   "titulo": "Dune",
+   "original": "Dune",
+   "director": "Denis Villeneuve",
+   "generos": [
+    "Aventura"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "En el Año 10191 el desértico planeta Arrakis, feudo de la familia Harkonnen desde hace generaciones, queda en manos de la Casa de los Atreides por orden del emperador. Con ello  les cede la explotación de las reservas de especia, la materia prima más valiosa…",
+   "poster": "https://pics.filmaffinity.com/dune-209834814-mmed.jpg",
+   "fa": "847055",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Dune: Parte Dos",
+   "original": "Dune: Part Twoaka",
+   "director": "Denis Villeneuve",
+   "generos": [
+    "Aventura"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Tras los sucesos de la primera parte acontecidos en el planeta Arrakis, el joven Paul Atreides se une a la tribu de los Fremen y comienza un viaje espiritual y marcial para convertirse en mesías, mientras intenta evitar el horrible pero inevitable futuro que…",
+   "poster": "https://pics.filmaffinity.com/dune_part_two-802143593-mmed.jpg",
+   "fa": "180929",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
    "titulo": "Fatherland",
    "original": "Fatherlandaka",
    "director": "Pawel Pawlikowski",
@@ -671,6 +699,20 @@
    "sinopsis": "Cuando el joven Elliot (Cooper Hoffman) consigue trabajo con la provocadora artista Erika Tracy (Olivia Wilde), sus fantasías se hacen realidad en el momento en que ella lo invita a convertirse en su musa sexual. Pero pronto Elliot se siente abrumado al ser…",
    "poster": "https://pics.filmaffinity.com/i_want_your_sex-692353349-mmed.jpg",
    "fa": "259916",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-04",
+   "titulo": "Momonsters. Película de Navidad",
+   "original": "Momonsters. Película de Navidad",
+   "director": "Javier Martinez / Christian Garnez",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "España",
+   "sinopsis": "¡Los Momonsters van a conocer a Papá Noel! Les ha invitado a Laponia para que presencien la creación de nuevos Momonsters, pero algo sale mal y, en vez de ser los mejores amigos de los niños, los nuevos Momonsters se convierten en los peores amigos de los…",
+   "poster": "https://pics.filmaffinity.com/momonsters_pelicula_de_navidad-706996425-mmed.jpg",
+   "fa": "195149",
    "destacado": false
   },
   {
@@ -1003,6 +1045,20 @@
    "sinopsis": "Una estrella se alza sobre Belén y unos sabios llegados de Oriente preguntan por el rey recién nacido. Alarmado, Herodes está dispuesto a todo para conservar su trono. Su temor desata la persecución de los inocentes, y María deberá proteger al niño que las…",
    "poster": "https://pics.filmaffinity.com/zero_a_d_the_birth_of_christ-594700299-mmed.jpg",
    "fa": "492442",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-25",
+   "titulo": "Detective Conan: El caso especial 30",
+   "original": "Meitantei Conan: 30-go Satsujin Jikenaka",
+   "director": "Nobuharu Kamanaka",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Japón",
+   "sinopsis": "Se ha puesto en circulación un nuevo billete de 10 000 yenes en el que aparece la Torre de Tōtō, y el país está alborotado por la noticia. Al mismo tiempo, se ha encontrado dinero falso con ese mismo diseño en la escena de un delito en Tokio.",
+   "poster": "https://pics.filmaffinity.com/meitantei_conan_30_go_satsujin_jiken-216159437-mmed.jpg",
+   "fa": "790843",
    "destacado": false
   },
   {
