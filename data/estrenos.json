@@ -1,24 +1,10 @@
 {
- "actualizado": "2026-11-10",
+ "actualizado": "2026-11-11",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
  "estrenos": [
-  {
-   "fecha": "2026-10-01",
-   "titulo": "El más allá",
-   "original": "The Great Beyond",
-   "director": "J.J. Abrams",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Una joven pareja de recién casados lucha por sobrevivir contra una entidad sobrenatural. \n\nEstreno en cines USA y España: octubre 2027",
-   "poster": "https://pics.filmaffinity.com/the_great_beyond-845722316-mmed.jpg",
-   "fa": "610926",
-   "destacado": false
-  },
   {
    "fecha": "2026-11-13",
    "titulo": "Cómo robar un banco",
@@ -45,6 +31,21 @@
   },
   {
    "fecha": "2026-11-13",
+   "titulo": "El cielo es para siempre",
+   "director": "Ricardo del Pozo",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "reparto": "Carla Pascual, Olatz Beobide, Paqui Rondan",
+   "sinopsis": "En las vidas de una familia cristiana actual irrumpe, de pronto, la historia de unas mártires de la persecución…",
+   "duracion": 79,
+   "poster": "https://pics.filmaffinity.com/el_cielo_es_para_siempre-694658384-mmed.jpg",
+   "fa": "676350",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-13",
    "titulo": "El niño",
    "original": "El niño",
    "director": "Mariano Barroso",
@@ -54,6 +55,7 @@
    "pais": "España",
    "reparto": "Belén Cuesta, Karra Elejalde, Raquel Ferri",
    "sinopsis": "El 23 de octubre de 1980 una gigantesca explosión de gas mató a 50 niños y 3 adultos en el colegio público de Ortuella,…",
+   "duracion": 104,
    "poster": "https://pics.filmaffinity.com/el_nino-210592722-mmed.jpg",
    "fa": "283648",
    "destacado": false
@@ -129,6 +131,21 @@
     "tmdb": "1124142",
     "allocine": "316021"
    }
+  },
+  {
+   "fecha": "2026-11-13",
+   "titulo": "Muguruza FM 40 Tour",
+   "director": "Ander Merino / Fermín Muguruza",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "España",
+   "reparto": "Fermín Muguruza",
+   "sinopsis": "Cuatro décadas después de subir por primera vez a un escenario, Fermin Muguruza se embarca en su última gira a gran…",
+   "duracion": 103,
+   "poster": "https://pics.filmaffinity.com/muguruza_fm_40_tour-837177603-mmed.jpg",
+   "fa": "832627",
+   "destacado": false
   },
   {
    "fecha": "2026-11-13",
@@ -350,7 +367,8 @@
    ],
    "pais": "Estados Unidos",
    "reparto": "Joseph Zada, Mckenna Grace, Ralph Fiennes",
-   "sinopsis": "Vuelve al mundo de Panem 24 años antes de los acontecimientos de la primera película, comenzando en la mañana de la cosecha de los 50º Juegos del Hambre, también denominados como el Segundo Vasallaje de los Veinticinco. Allí participa un joven Haymitch…",
+   "sinopsis": "Vuelve al mundo de Panem 24 años antes de los acontecimientos de la primera película, comenzando en la mañana de la…",
+   "duracion": 150,
    "poster": "https://pics.filmaffinity.com/the_hunger_games_sunrise_on_the_reaping-697757768-mmed.jpg",
    "fa": "161937",
    "destacado": true,
@@ -475,6 +493,20 @@
    "sinopsis": "Chelo es una mujer que quiere divorciarse de su marido Javier y construir una vida lejos de una relación que ya está acabada. Marta es una periodista que no puede llegar a todo con un pasado que arrastra y a veces duele. Lo que ellas no saben aún es que aquel…",
    "poster": "https://pics.filmaffinity.com/hermanas-377583177-mmed.jpg",
    "fa": "875260",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "La gran fiesta del cine",
+   "original": "La gran fiesta del cine",
+   "director": "Toni Agustí / María S. Torregrosa",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España",
+   "sinopsis": "Cinco años después de rodar \"La última cena\", un largometraje experimental sin presupuesto, un grupo de técnicos y artistas de cine se reúne para celebrar el inesperado éxito de la película y decidir qué hacer con los beneficios generados en cines y…",
+   "poster": "https://pics.filmaffinity.com/la_gran_fiesta_del_cine-366296653-mmed.jpg",
+   "fa": "760550",
    "destacado": false
   },
   {
@@ -829,6 +861,20 @@
   },
   {
    "fecha": "2026-12-11",
+   "titulo": "Dos + Dos",
+   "original": "Dos + Dosaka",
+   "director": "Gracia Querejeta",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "España",
+   "sinopsis": "Adrián y Julieta son un matrimonio modélico… en apariencia. Él, cirujano plástico de prestigio y de ego inflamable; ella, presentadora del tiempo que lleva años prediciendo tormentas emocionales en casa. Después de diecisiete años juntos, sus conversaciones…",
+   "poster": "https://pics.filmaffinity.com/dos_dos-493842841-mmed.jpg",
+   "fa": "613750",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
    "titulo": "El día que ella volvió",
    "original": "Geunyeoga doraon nalaka",
    "director": "Hong Sang-soo",
@@ -1120,20 +1166,6 @@
   },
   {
    "fecha": "2027-01-01",
-   "titulo": "Cobarde",
-   "original": "Coward",
-   "director": "Lukas Dhont",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Bélgica",
-   "sinopsis": "1916. Primera Guerra Mundial. Pierre es un joven soldado belga, recién llegado al frente, que está ansioso por demostrar su valía. Allí conoce a Francis, que decide levantar el ánimo de sus compañeros montando un espectáculo teatral. En medio de la violencia,…",
-   "poster": "https://pics.filmaffinity.com/coward-712973032-mmed.jpg",
-   "fa": "833055",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-01",
    "titulo": "Ink",
    "original": "Ink",
    "director": "Danny Boyle",
@@ -1144,20 +1176,6 @@
    "sinopsis": "A finales de la década de 1960, en Gran Bretaña, el magnate de los medios de comunicación Rupert Murdoch adquiere el periódico The Sun, que atravesaba dificultades, y se propone cambiar su rumbo editorial y noticioso por completo. Junto al director Larry…",
    "poster": "https://pics.filmaffinity.com/ink-347403335-mmed.jpg",
    "fa": "527623",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-01",
-   "titulo": "November 1963",
-   "original": "November 1963",
-   "director": "Roland Joffé",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Recrea las 48 horas previas y posteriores al asesinato del presidente John F. Kennedy, vistas desde dentro de la mafia de Chicago en lugar de a través de los registros oficiales.",
-   "poster": "https://pics.filmaffinity.com/november_1963-351003108-mmed.jpg",
-   "fa": "894798",
    "destacado": false
   },
   {
@@ -1186,20 +1204,6 @@
    "sinopsis": "Montse y Berto, unos padres desesperados que han probado todos los métodos educativos a su alcance con sus cuatro hijos malcriados, deciden contratar los servicios de la temible y misteriosa Teniente Martínez, una mezcla entre Mary Poppins y La Teniente…",
    "poster": "https://pics.filmaffinity.com/vaya_tropa-943638024-mmed.jpg",
    "fa": "862985",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-01",
-   "titulo": "Violette: Cambiar el agua de las flores",
-   "original": "Changer l'eau des fleurs",
-   "director": "Jean-Pierre Jeunet",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Francia",
-   "sinopsis": "Violette Toussaint, guarda de un cementerio en un pequeño pueblo de Borgoña, es una observadora singular y una oyente compasiva. Su apacible vida transcurre entre conversaciones con los peculiares trabajadores del cementerio y los numerosos visitantes que…",
-   "poster": "https://pics.filmaffinity.com/changer_l_eau_des_fleurs-943572463-mmed.jpg",
-   "fa": "372937",
    "destacado": false
   },
   {
