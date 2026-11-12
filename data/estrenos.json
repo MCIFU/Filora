@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-11",
+ "actualizado": "2026-11-12",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -88,7 +88,7 @@
    "reparto": "Rocío Molina, Alba Flores, C. Tangana",
    "sinopsis": "Largometraje documental construido con archivo, testimonios sonoros y grabaciones actuales que explora cómo la historia…",
    "duracion": 78,
-   "poster": "https://pics.filmaffinity.com/jaleos-767340486-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/jaleos-599065407-mmed.jpg",
    "fa": "897230",
    "destacado": false
   },
@@ -310,7 +310,9 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "Tras más de dos décadas cubriendo guerras y conflictos, el corresponsal David Jiménez es nombrado director de uno de los principales diarios del país. Su defensa de un periodismo riguroso choca desde el principio con los intereses ocultos del diario,…",
+   "reparto": "David Verdaguer, Alberto San Juan, Carmen Machi",
+   "sinopsis": "Tras más de dos décadas cubriendo guerras y conflictos, el corresponsal David Jiménez es nombrado director de uno de los…",
+   "duracion": 115,
    "poster": "https://pics.filmaffinity.com/el_director-562682472-mmed.jpg",
    "fa": "247502",
    "destacado": false
@@ -367,7 +369,7 @@
    ],
    "pais": "Estados Unidos",
    "reparto": "Joseph Zada, Mckenna Grace, Ralph Fiennes",
-   "sinopsis": "Vuelve al mundo de Panem 24 años antes de los acontecimientos de la primera película, comenzando en la mañana de la…",
+   "sinopsis": "El mundo de Panem 24 años antes de los acontecimientos de la primera película, comenzando en la mañana de la cosecha de…",
    "duracion": 150,
    "poster": "https://pics.filmaffinity.com/the_hunger_games_sunrise_on_the_reaping-697757768-mmed.jpg",
    "fa": "161937",
@@ -1202,7 +1204,7 @@
    ],
    "pais": "España",
    "sinopsis": "Montse y Berto, unos padres desesperados que han probado todos los métodos educativos a su alcance con sus cuatro hijos malcriados, deciden contratar los servicios de la temible y misteriosa Teniente Martínez, una mezcla entre Mary Poppins y La Teniente…",
-   "poster": "https://pics.filmaffinity.com/vaya_tropa-943638024-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/vaya_tropa-401228805-mmed.jpg",
    "fa": "862985",
    "destacado": false
   },
