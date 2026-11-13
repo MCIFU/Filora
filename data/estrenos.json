@@ -1,276 +1,22 @@
 {
- "actualizado": "2026-11-12",
+ "actualizado": "2026-11-13",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
  "nota": "Fechas de estreno en cines de España. Las fechas lejanas pueden cambiar.",
  "estrenos": [
   {
-   "fecha": "2026-11-13",
-   "titulo": "Cómo robar un banco",
-   "original": "How to Rob a Bank",
-   "director": "David Leitch",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Nicholas Hoult, Zoë Kravitz, Anna Sawai",
-   "sinopsis": "Un hombre desesperado planea un elaborado atraco contra el corrupto sistema financiero que arruinó su vida, con un grupo…",
-   "duracion": 122,
-   "poster": "https://pics.filmaffinity.com/how_to_rob_a_bank-400118344-mmed.jpg",
-   "fa": "299150",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q134520822",
-    "imdb": "tt35866986",
-    "rt": "m/how_to_rob_a_bank_2026",
-    "letterboxd": "how-to-rob-a-bank-2026",
-    "tmdb": "1437511",
-    "allocine": "1000020289"
-   }
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "El cielo es para siempre",
-   "director": "Ricardo del Pozo",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Carla Pascual, Olatz Beobide, Paqui Rondan",
-   "sinopsis": "En las vidas de una familia cristiana actual irrumpe, de pronto, la historia de unas mártires de la persecución…",
-   "duracion": 79,
-   "poster": "https://pics.filmaffinity.com/el_cielo_es_para_siempre-694658384-mmed.jpg",
-   "fa": "676350",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "El niño",
-   "original": "El niño",
-   "director": "Mariano Barroso",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Belén Cuesta, Karra Elejalde, Raquel Ferri",
-   "sinopsis": "El 23 de octubre de 1980 una gigantesca explosión de gas mató a 50 niños y 3 adultos en el colegio público de Ortuella,…",
-   "duracion": 104,
-   "poster": "https://pics.filmaffinity.com/el_nino-210592722-mmed.jpg",
-   "fa": "283648",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "El tren fluvial",
-   "original": "El tren fluvial",
-   "director": "Lorenzo Ferro / Lucas Vignale",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Argentina",
-   "reparto": "Milo Barría, Rita Pauls, Mariano Barria",
-   "sinopsis": "Milo, de nueve años, vive en un pueblo remoto de Argentina donde estudia malambo, una danza folclórica llena de bravura…",
-   "duracion": 75,
-   "poster": "https://pics.filmaffinity.com/el_tren_fluvial-326005484-mmed.jpg",
-   "fa": "233329",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "Jaleos",
-   "original": "Jaleos",
-   "director": "Isaki Lacuesta",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "España",
-   "reparto": "Rocío Molina, Alba Flores, C. Tangana",
-   "sinopsis": "Largometraje documental construido con archivo, testimonios sonoros y grabaciones actuales que explora cómo la historia…",
-   "duracion": 78,
-   "poster": "https://pics.filmaffinity.com/jaleos-599065407-mmed.jpg",
-   "fa": "897230",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "La violinista",
-   "original": "The Violinist",
-   "director": "Ervin Han / Raúl García",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Singapur",
-   "sinopsis": "Un joven periodista español se adentra en las vidas entrelazadas de dos amantes mientras investiga el origen de un viejo…",
-   "duracion": 114,
-   "poster": "https://pics.filmaffinity.com/the_violinist-602690253-mmed.jpg",
-   "fa": "906872",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "Los rivales de Amziah King",
-   "original": "The Rivals of Amziah King",
-   "director": "Andrew Patterson",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Matthew McConaughey, Angelina LookingGlass, Kurt Russell",
-   "sinopsis": "En lo más profundo de los bosques de la Oklahoma rural, el carismático y musicalmente dotado Amziah King lidera una…",
-   "duracion": 130,
-   "poster": "https://pics.filmaffinity.com/the_rivals_of_amziah_king-955386817-mmed.jpg",
-   "fa": "184041",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q122585845",
-    "imdb": "tt27706593",
-    "filmaffinity": "184041",
-    "rt": "m/the_rivals_of_amziah_king",
-    "letterboxd": "the-rivals-of-amziah-king",
-    "tmdb": "1124142",
-    "allocine": "316021"
-   }
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "Muguruza FM 40 Tour",
-   "director": "Ander Merino / Fermín Muguruza",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "España",
-   "reparto": "Fermín Muguruza",
-   "sinopsis": "Cuatro décadas después de subir por primera vez a un escenario, Fermin Muguruza se embarca en su última gira a gran…",
-   "duracion": 103,
-   "poster": "https://pics.filmaffinity.com/muguruza_fm_40_tour-837177603-mmed.jpg",
-   "fa": "832627",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "Ratones al ataque: Operación Navidad",
-   "original": "Hvis ingen går i fellaaka",
-   "director": "Henrik Martin Dahlsbakken",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Noruega",
-   "reparto": "Vegard Strand Eide, Flo Fagerli, Pål Sverre Hagen",
-   "sinopsis": "Una familia acude a la casa abandonada de su tía para celebrar la Navidad en el campo, sin saber que una familia de…",
-   "duracion": 80,
-   "poster": "https://pics.filmaffinity.com/hvis_ingen_gar_i_fella-798734028-mmed.jpg",
-   "fa": "711767",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "Rocky",
-   "original": "Rocky",
-   "director": "John G. Avildsen",
+   "fecha": "2026-10-01",
+   "titulo": "El más allá",
+   "original": "The Great Beyond",
+   "director": "J.J. Abrams",
    "generos": [
     "Drama"
    ],
    "pais": "Estados Unidos",
-   "reparto": "Sylvester Stallone, Talia Shire, Burt Young",
-   "sinopsis": "Rocky Balboa es un desconocido boxeador a quien se le ofrece la posibilidad de pelear por el título mundial de los pesos…",
-   "duracion": 119,
-   "poster": "https://pics.filmaffinity.com/rocky-253483905-mmed.jpg",
-   "fa": "192554",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "Scrooge y los fantasmas de la Navidad",
-   "original": "Ebenezer",
-   "director": "Ti West",
-   "generos": [
-    "Fantasía"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Johnny Depp, Rupert Grint, Andrea Riseborough",
-   "sinopsis": "Reimaginación del clásico literario, una historia de fantasmas ambientada en el Londres de Dickens que sigue el viaje…",
-   "duracion": 116,
-   "poster": "https://pics.filmaffinity.com/ebenezer-321560689-mmed.jpg",
-   "fa": "112391",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "Victorian Psycho",
-   "original": "Victorian Psycho",
-   "director": "Zachary Wigon",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Maika Monroe, Thomasin McKenzie, Ruth Wilson",
-   "sinopsis": "1858. Winifred Notty, una institutriz aparentemente perfecta, pero con unas formas inquietantes, llega a la mansión…",
-   "duracion": 102,
-   "poster": "https://pics.filmaffinity.com/victorian_psycho-266092679-mmed.jpg",
-   "fa": "916686",
-   "destacado": false,
-   "ids": {
-    "wikidata": "Q130751977",
-    "imdb": "tt34374553",
-    "rt": "m/victorian_psycho",
-    "tmdb": "1379486",
-    "allocine": "1000014318"
-   }
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "Washington. El origen de un líder",
-   "original": "Young Washingtonaka",
-   "director": "Jon Erwin",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "William Franklyn-Miller, Mary-Louise Parker, Ben Kingsley",
-   "sinopsis": "Antes de ser el Padre de la Nación, fue un soldado que luchaba por sobrevivir. Un solo paso en falso catapultó al joven…",
-   "duracion": 125,
-   "poster": "https://pics.filmaffinity.com/young_washington-550593982-mmed.jpg",
-   "fa": "991503",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "Wild Horse Nine",
-   "original": "Wild Horse Nine",
-   "director": "Martin McDonagh",
-   "generos": [
-    "Misterio"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "John Malkovich, Sam Rockwell, Steve Buscemi",
-   "sinopsis": "Poco antes del golpe de Estado chileno de 1973, los agentes de la CIA Chris (John Malkovich) y Lee (Sam Rockwell) son…",
-   "duracion": 118,
-   "poster": "https://pics.filmaffinity.com/wild_horse_nine-895746008-mmed.jpg",
-   "fa": "366928",
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q133341572",
-    "imdb": "tt15799564",
-    "rt": "m/wild_horse_nine",
-    "letterboxd": "wild-horse-nine",
-    "tmdb": "891621",
-    "allocine": "298024"
-   }
-  },
-  {
-   "fecha": "2026-11-13",
-   "titulo": "¿Me entiendes o te lo explico?",
-   "original": "¿Me entiendes o te lo explico?",
-   "director": "Jordi Calvet",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "reparto": "Pablo Puyol, Octavi Pujades, Santiago Urrialde",
-   "sinopsis": "Primavera de 1992, Madrid, Chueca, en pleno bullicio previo a un verano que promete ser histórico para España. Pepe…",
-   "poster": "https://pics.filmaffinity.com/me_entiendes_o_te_lo_explico-943354500-mmed.jpg",
-   "fa": "860793",
+   "sinopsis": "Una joven pareja de recién casados lucha por sobrevivir contra una entidad sobrenatural. \n\nEstreno en cines USA y España: octubre 2027",
+   "poster": "https://pics.filmaffinity.com/the_great_beyond-845722316-mmed.jpg",
+   "fa": "610926",
    "destacado": false
   },
   {
@@ -282,7 +28,9 @@
     "Terror"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Tras años de secuelas cutres y un fandom en declive, la franquicia slasher 'Camp Miasma' es puesta en manos de una joven y entusiasta directora para que la resucite. Pero cuando visita a la estrella de la película original, una actriz que ahora vive recluida…",
+   "reparto": "Hannah Einbinder, Gillian Anderson, Amanda Fix",
+   "sinopsis": "Tras años de secuelas cutres y un fandom en declive, la franquicia slasher 'Camp Miasma' es puesta en manos de una joven…",
+   "duracion": 112,
    "poster": "https://pics.filmaffinity.com/teenage_sex_and_death_at_camp_miasma-515473998-mmed.jpg",
    "fa": "963191",
    "destacado": false
@@ -296,7 +44,9 @@
     "Comedia"
    ],
    "pais": "España",
-   "sinopsis": "Una comedia romántica que entrelaza cuatro historias, realistas y aspiracionales, sobre el amor contemporáneo. Con Barcelona como escenario, las tramas se desarrollan en una de sus fechas más emblemáticas: el día de Sant Jordi, cuando la ciudad se llena de…",
+   "reparto": "Natalia Verbeke, Javier Rey, Susana Abaitua",
+   "sinopsis": "Una comedia romántica que entrelaza cuatro historias, realistas y aspiracionales, sobre el amor contemporáneo. Con…",
+   "duracion": 87,
    "poster": "https://pics.filmaffinity.com/citas_la_pelicula-361129412-mmed.jpg",
    "fa": "137728",
    "destacado": false
@@ -326,7 +76,9 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "Santiago Balmes, célebre escritor y académico, reúne a sus tres hijos antes de Navidad para hacerles una petición: pasar unos días juntos en la casa costera donde veraneaban en su niñez. Para los hermanos, distanciados de su padre desde que años atrás…",
+   "reparto": "Eduard Fernández, Adam Jezierski, Francesco Carril",
+   "sinopsis": "Santiago Balmes, célebre escritor y académico, reúne a sus tres hijos antes de Navidad para hacerles una petición: pasar…",
+   "duracion": 120,
    "poster": "https://pics.filmaffinity.com/el_mal_padre-632788069-mmed.jpg",
    "fa": "734485",
    "destacado": false
@@ -340,7 +92,8 @@
     "Drama"
    ],
    "pais": "España",
-   "sinopsis": "Delia (Amaia Salamanca) e Inés (Marta Hazas) son dos hermanas unidas por una vocación y enfrentadas desde hace años por heridas familiares y conflictos del pasado. Ambas son abogadas, pero tienen visiones radicalmente opuestas de entender el derecho y la…",
+   "reparto": "Amaia Salamanca, Marta Hazas, Ginés García Millán",
+   "sinopsis": "Delia (Amaia Salamanca) e Inés (Marta Hazas) son dos hermanas unidas por una vocación y enfrentadas desde hace años por…",
    "poster": "https://pics.filmaffinity.com/hechos_probados-400518286-mmed.jpg",
    "fa": "426287",
    "destacado": false
@@ -354,7 +107,9 @@
     "Animación"
    ],
    "pais": "Francia",
-   "sinopsis": "Christophe, un chico de 11 años, intenta seguir los pasos de su padre ayudando en la granja familiar en la que viven. Pero todo cambia el día que tiene que llevar un corsé metálico por prescripción médica, que le obliga a desatender las tareas cotidianas de…",
+   "reparto": "Alexandre Astier, Rod Paradot, Brune Moulin",
+   "sinopsis": "Christophe, un chico de 11 años, intenta seguir los pasos de su padre ayudando en la granja familiar en la que viven…",
+   "duracion": 90,
    "poster": "https://pics.filmaffinity.com/le_corset-388941512-mmed.jpg",
    "fa": "947062",
    "destacado": false
@@ -393,8 +148,10 @@
     "Comedia"
    ],
    "pais": "Francia",
-   "sinopsis": "Tras descubrir la verdad sobre sus orígenes gracias a unas pruebas de ADN cuyos resultados fueron, como mínimo, sorprendentes, los Bouvier-Sauvage y los Martin deciden hacer las paces y organizar la boda de sus hijos. Pero no contaban con un imprevisto de…",
-   "poster": "https://pics.filmaffinity.com/cocorico_2-334986138-mmed.jpg",
+   "reparto": "Christian Clavier, Didier Bourdon, Sylvie Testud",
+   "sinopsis": "Tras descubrir la verdad sobre sus orígenes gracias a unas pruebas de ADN cuyos resultados fueron, como mínimo,…",
+   "duracion": 91,
+   "poster": "https://pics.filmaffinity.com/cocorico_2-757569643-mmed.jpg",
    "fa": "236550",
    "destacado": false
   },
@@ -407,7 +164,9 @@
     "Drama"
    ],
    "pais": "Austria",
-   "sinopsis": "A principios del siglo XVII, un misterioso soldado llega a un aislado pueblo protestante de Alemania afirmando ser el heredero de una granja abandonada. Aunque demuestra ser un buen hombre y se integra en la comunidad, las sospechas de los aldeanos sobre su…",
+   "reparto": "Sandra Hüller, Caro Braun, Marisa Growaldt",
+   "sinopsis": "A principios del siglo XVII, un misterioso soldado llega a un aislado pueblo protestante de Alemania afirmando ser el…",
+   "duracion": 93,
    "poster": "https://pics.filmaffinity.com/rose-181943635-mmed.jpg",
    "fa": "941297",
    "destacado": false
@@ -421,7 +180,9 @@
     "Comedia"
    ],
    "pais": "Reino Unido",
-   "sinopsis": "Londres, 1910. Katharine Hilbery (Haley Bennett) hace todo lo posible por evitar el amor y el matrimonio, especialmente si el candidato es William (Jack Whitehall), un viejo amigo de la familia elegido por sus padres. Cuando su padre, el señor Hilbery…",
+   "reparto": "Haley Bennett, Elyas M'Barek, Lily Allen",
+   "sinopsis": "Londres, 1910. Katharine Hilbery (Haley Bennett) hace todo lo posible por evitar el amor y el matrimonio, especialmente…",
+   "duracion": 95,
    "poster": "https://pics.filmaffinity.com/virginia_woolf_s_night_day-298332967-mmed.jpg",
    "fa": "523850",
    "destacado": false
@@ -436,7 +197,8 @@
    ],
    "pais": "Alemania",
    "reparto": "Ava Petsch, Cora Trube, Anna von Seld",
-   "sinopsis": "La vida de Willow cambia por completo cuando hereda de su tía Alwina una pequeña casa, un misterioso bosque... y un extraordinario don: el poder de la brujería. Para descubrir el verdadero alcance de su legado, deberá encontrar a otras tres jóvenes con…",
+   "sinopsis": "La vida de Willow cambia por completo cuando hereda de su tía Alwina una pequeña casa, un misterioso bosque... y un…",
+   "duracion": 100,
    "poster": "https://pics.filmaffinity.com/ein_madchen_namens_willow-584411352-mmed.jpg",
    "fa": "376048",
    "destacado": false
@@ -450,7 +212,8 @@
     "Comedia"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Asesinato, chantaje, robo, extorsión… Otro verano más en Hollywood. Es 1977, ocho años después de que Cliff Booth (Brad Pitt) se cruzara con la familia Manson en el Hollywood de 1969 que vimos en Érase una vez en Hollywood.\n\nEn Las nuevas desventuras de Cliff…",
+   "reparto": "Brad Pitt, Elizabeth Debicki, Scott Caan",
+   "sinopsis": "Asesinato, chantaje, robo, extorsión… Otro verano más en Hollywood. Es 1977, ocho años después de que Cliff Booth (Brad…",
    "poster": "https://pics.filmaffinity.com/the_further_mis_adventures_of_cliff_booth-383848904-mmed.jpg",
    "fa": "630924",
    "destacado": false
@@ -1168,6 +931,20 @@
   },
   {
    "fecha": "2027-01-01",
+   "titulo": "Cobarde",
+   "original": "Coward",
+   "director": "Lukas Dhont",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Bélgica",
+   "sinopsis": "1916. Primera Guerra Mundial. Pierre es un joven soldado belga, recién llegado al frente, que está ansioso por demostrar su valía. Allí conoce a Francis, que decide levantar el ánimo de sus compañeros montando un espectáculo teatral. En medio de la violencia,…",
+   "poster": "https://pics.filmaffinity.com/coward-712973032-mmed.jpg",
+   "fa": "833055",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
    "titulo": "Ink",
    "original": "Ink",
    "director": "Danny Boyle",
@@ -1178,6 +955,20 @@
    "sinopsis": "A finales de la década de 1960, en Gran Bretaña, el magnate de los medios de comunicación Rupert Murdoch adquiere el periódico The Sun, que atravesaba dificultades, y se propone cambiar su rumbo editorial y noticioso por completo. Junto al director Larry…",
    "poster": "https://pics.filmaffinity.com/ink-347403335-mmed.jpg",
    "fa": "527623",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
+   "titulo": "November 1963",
+   "original": "November 1963",
+   "director": "Roland Joffé",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Recrea las 48 horas previas y posteriores al asesinato del presidente John F. Kennedy, vistas desde dentro de la mafia de Chicago en lugar de a través de los registros oficiales.",
+   "poster": "https://pics.filmaffinity.com/november_1963-351003108-mmed.jpg",
+   "fa": "894798",
    "destacado": false
   },
   {
@@ -1224,6 +1015,20 @@
   },
   {
    "fecha": "2027-01-06",
+   "titulo": "Minotauro",
+   "original": "Minotauraka",
+   "director": "Andrey Zvyagintsev",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Rusia, 2022. Gleb, un exitoso hombre de negocios, se ve acorralado por las crecientes presiones empresariales y por un mundo cada vez más inestable. Su vida, tan cuidadosamente ordenada, amenaza con desmoronarse y arrastrarle al colapso emocional y moral.…",
+   "poster": "https://pics.filmaffinity.com/minotaur-228478526-mmed.jpg",
+   "fa": "979095",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
    "titulo": "Paper Tiger. Negocios de familia",
    "original": "Paper Tiger",
    "director": "James Gray",
@@ -1262,6 +1067,104 @@
    "sinopsis": "En la Inglaterra del siglo XIII, una misteriosa criatura acecha en una zona rural envuelta en niebla, mientras el folclore local se convierte en una aterradora realidad para los aldeanos.",
    "poster": "https://pics.filmaffinity.com/werwulf-276949698-mmed.jpg",
    "fa": "399436",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-08",
+   "titulo": "Spa Weekend",
+   "original": "Spa Weekend",
+   "director": "Jon Lucas / Scott Moore",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Tres amigas se van a pasar el fin de semana a un spa, pero la estancia se convierte en un caos cuando se les une otra amiga, muy juerguista.",
+   "poster": "https://pics.filmaffinity.com/spa_weekend-187438819-mmed.jpg",
+   "fa": "885884",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-08",
+   "titulo": "Un hombre de nuestro tiempo",
+   "original": "Notre salutaka",
+   "director": "Emmanuel Marre",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Bélgica",
+   "sinopsis": "En septiembre de 1940, en la Francia ocupada se instaura el régimen de Pétain, el gobierno colaboracionista con la Alemania nazi. Henri Marre, de 49 años, llega a Vichy sin un céntimo, sin contactos, lejos de su esposa e hijos. Ve en la nueva administración…",
+   "poster": "https://pics.filmaffinity.com/notre_salut-800402615-mmed.jpg",
+   "fa": "264455",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-15",
+   "titulo": "Asterix: The Kingdom of Nubia",
+   "original": "Astérix et le Royaume de Nubie",
+   "director": "Alexandre Heboyan",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Astérix y los habitantes de la aldea se convierten en niños después de que un extraño elixir de la juventud caiga accidentalmente en la poción mágica. Para encontrar el antídoto y salvar la aldea de los ataques romanos, Astérix y Obélix se embarcan en una…",
+   "poster": "https://pics.filmaffinity.com/asterix_et_le_royaume_de_nubie-711482917-mmed.jpg",
+   "fa": "626700",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-15",
+   "titulo": "Beekeeper 2",
+   "original": "The Beekeeper 2",
+   "director": "Timo Tjahjanto",
+   "generos": [
+    "Acción"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Ahora convertido en fugitivo, el antiguo asesino a sueldo del gobierno Adam Clay continúa su venganza contra aquellos que le hicieron daño. Secuela de \"Beekeeper: El protector\". \n\nEstreno en cines: enero 2027",
+   "poster": "https://pics.filmaffinity.com/the_beekeeper_2-440801157-mmed.jpg",
+   "fa": "430889",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-15",
+   "titulo": "Fjord",
+   "original": "Fjord",
+   "director": "Cristian Mungiu",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Rumanía",
+   "sinopsis": "Los Gheorghiu, una pareja rumano-noruega muy religiosa, se instalan en un pueblo situado en un remoto fiordo, donde entablan una estrecha relación con sus vecinos, los Halberg. Sus hijos se hacen amigos a pesar de las diferencias en su educación. Cuando la…",
+   "poster": "https://pics.filmaffinity.com/fjord-460195010-mmed.jpg",
+   "fa": "986738",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-15",
+   "titulo": "Hijos de sangre y hueso",
+   "original": "Children of Blood and Bone",
+   "director": "Gina Prince-Bythewood",
+   "generos": [
+    "Acción"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "En el épico mundo de fantasía de Orïsha, una joven se embarca en una misión para recuperar la magia que le fue arrebatada violentamente a su pueblo. Ella y su hermano se alían con la hija y el hijo del rey para rebelarse contra su brutal régimen.",
+   "poster": "https://pics.filmaffinity.com/children_of_blood_and_bone-133498525-mmed.jpg",
+   "fa": "941506",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-15",
+   "titulo": "Veo caer edificios como rayos",
+   "original": "I See Buildings Fall Like Lightning",
+   "director": "Clio Barnard",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Patrick, Shiv, Oli, Conor y Rian, cinco amigos que crecieron juntos en Birmingham, se encuentran afrontando la vida adulta: secretos que rompen relaciones, excesos autodestructivos, sueños y nuevas responsabilidades, mientras el pasado insiste en no dejarlos…",
+   "poster": "https://pics.filmaffinity.com/i_see_buildings_fall_like_lightning-447756431-mmed.jpg",
+   "fa": "149328",
    "destacado": false
   },
   {
