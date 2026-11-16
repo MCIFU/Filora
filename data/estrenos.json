@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-15",
+ "actualizado": "2026-11-16",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -588,7 +588,7 @@
    "original": "Censurada",
    "director": "Mario Garza",
    "generos": [
-    "Drama"
+    "Romance"
    ],
    "pais": "España",
    "sinopsis": "En 1969, en España, una organista disléxica inicia un romance prohibido con una mujer idealista que la inspira a escribir una canción y rebelarse contra la sociedad censora de Franco tras la muerte de su hermano.",
@@ -1099,7 +1099,7 @@
   },
   {
    "fecha": "2027-01-15",
-   "titulo": "Asterix: The Kingdom of Nubia",
+   "titulo": "Astérix. El reino de Nubia",
    "original": "Astérix et le Royaume de Nubie",
    "director": "Alexandre Heboyan",
    "generos": [
