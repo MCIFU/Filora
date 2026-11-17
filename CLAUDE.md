@@ -58,3 +58,4 @@ App local para llevar el registro de las películas que veo, con Excel sincroniz
 - Añadir: el campo Película propone películas con cartel (IMDb) mientras escribes (↑/↓ e Intro o clic); Intro sin elegir añade lo escrito.
 - Móvil y web sin Vercel: Tailscale en PC y móvil + `tailscale serve --bg 8765` → https://<pc>.<red>.ts.net (*.ts.net = modo PC). Requiere el PC encendido con Iniciar.bat.
 - Iniciar.bat hace `git pull --ff-only` al arrancar (descarta antes los cambios locales de cartelera/estrenos/fa_cache): lo que se sube a main llega solo al PC.
+- En el PC (STATIC=false), las búsquedas de solo lectura (IMDb, carteles, taquilla, plataformas) van a la API de Vercel (API_WEB en app.js): así se encuentran los estrenos recientes al añadir.

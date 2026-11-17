@@ -219,7 +219,7 @@ VIEWS.pelicula = async (v, qs) => {
       <div class="sub">Ver en</div>${linksHTML(peli)}
     </aside>
   </div>`;
-  if (ids.imdb && STATIC) fetch(`${API}/api/taquilla?imdb=${ids.imdb}`).then((r) => r.json()).then((r) => {
+  if (ids.imdb) fetch(`${API_WEB}/api/taquilla?imdb=${ids.imdb}`).then((r) => r.json()).then((r) => {
     const { presupuesto, ...t } = r || {}; const box = $("#peTaquilla");
     if (box && (t.mundial || presupuesto)) box.innerHTML = taquillaHTML({ ids, taquilla: t, presupuesto });
   }).catch(() => {});

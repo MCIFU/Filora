@@ -150,6 +150,8 @@ const setSes = (s) => { try { s ? localStorage.setItem(SES_KEY, JSON.stringify(s
 const ro = () => STATIC && !getPin() && !getSes(); // solo lectura: web publicada sin cuenta ni PIN
 const authHeaders = () => { const ses = getSes(); return ses ? { Authorization: `Bearer ${ses.token}` } : getPin() ? { "X-Pin": getPin() } : {}; };
 document.documentElement.classList.toggle("ro", ro());
+// Búsquedas de solo lectura (IMDb, carteles, taquilla, plataformas): en el PC también van a la API de la web
+const API_WEB = STATIC ? API : "https://filora-umber.vercel.app";
 const STATIC_FILES = { cines: "data/cines_es.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
 const coleccionVacia = () => ({ peliculas: [], series: [], pendientes: [], borrados: {}, estado: { web: true, privada: true } });
 
@@ -789,7 +791,7 @@ function mismaPeli(w, titulo, original, anio) {
 async function plataformasDe(w) {
   const k = `filora.plat.${w.id}`;
   try { const c = JSON.parse(localStorage.getItem(k) || "null"); if (c && reciente(c.d, PLAT_DIAS)) return c.l; } catch (e) { /* */ }
-  const r = await fetch(`${API}/api/plataformas?t=${encodeURIComponent(w.titulo)}${w.anio ? `&y=${w.anio}` : ""}`);
+  const r = await fetch(`${API_WEB}/api/plataformas?t=${encodeURIComponent(w.titulo)}${w.anio ? `&y=${w.anio}` : ""}`);
   if (!r.ok) throw new Error("sin JustWatch");
   const l = await r.json();
   try { localStorage.setItem(k, JSON.stringify({ d: new Date().toISOString(), l })); } catch (e) { /* */ }
@@ -1003,7 +1005,7 @@ async function cambiosTaquilla(p) {
   const imdb = (p.ids || {}).imdb;
   if (!imdb || (p.taquilla || {}).consultado) return null;
   try {
-    const r = await fetch(`${API}/api/taquilla?imdb=${imdb}`);
+    const r = await fetch(`${API_WEB}/api/taquilla?imdb=${imdb}`);
     if (!r.ok) return null;
     const { presupuesto, ...taq } = (await r.json()) || {};
     return { taquilla: { ...(p.taquilla || {}), ...taq, fuente: "boxofficemojo", consultado: todayISO() }, ...(presupuesto ? { presupuesto } : {}) };
@@ -2312,7 +2314,7 @@ async function wikiDesdeQ(ids) {
 async function posterWeb(p) {
   try {
     const q = new URLSearchParams(p.ids && p.ids.imdb ? { imdb: p.ids.imdb } : { t: p.tituloOriginal || p.titulo, ...(p.anio ? { y: p.anio } : {}) });
-    const r = await fetch(`${API}/api/poster?${q}`, { signal: AbortSignal.timeout(6000) });
+    const r = await fetch(`${API_WEB}/api/poster?${q}`, { signal: AbortSignal.timeout(6000) });
     return r.ok ? r.json() : {};
   } catch (e) { return {}; }
 }
@@ -2346,7 +2348,7 @@ async function completarAntes(body) {
   }
   if (b.ids.imdb && !(b.taquilla || {}).consultado) {
     try {
-      const { presupuesto, ...taq } = await (await fetch(`${API}/api/taquilla?imdb=${b.ids.imdb}`, { signal: AbortSignal.timeout(9000) })).json();
+      const { presupuesto, ...taq } = await (await fetch(`${API_WEB}/api/taquilla?imdb=${b.ids.imdb}`, { signal: AbortSignal.timeout(9000) })).json();
       b.taquilla = { ...(b.taquilla || {}), ...taq, fuente: "boxofficemojo", consultado: todayISO() };
       if (presupuesto) b.presupuesto = presupuesto;
     } catch (e) { /* se consultará al abrir la ficha */ }
@@ -2510,7 +2512,7 @@ const CACHE_BQ = new Map();
 async function buscarWeb(q) {
   const k = norm(q);
   if (CACHE_BQ.has(k)) return CACHE_BQ.get(k);
-  const pr = (STATIC ? fetch(`${API}/api/imdb?todo=1&q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(7000) }).then((r) => (r.ok ? r.json() : null)) : Promise.resolve(null))
+  const pr = (fetch(`${API_WEB}/api/imdb?todo=1&q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(7000) }).then((r) => (r.ok ? r.json() : null)))
     .then((r) => r || { pelis: [], personas: [] }).catch(() => { CACHE_BQ.delete(k); return { pelis: [], personas: [] }; });
   CACHE_BQ.set(k, pr);
   return pr;
@@ -2567,7 +2569,7 @@ VIEWS.buscar = (v, qs) => {
 const durTxt = (m) => (m > 0 ? `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")} min` : "");
 async function imdbBuscar(q) {
   if (!STATIC) return [];
-  try { const r = await fetch(`${API}/api/imdb?q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(6000) }); return r.ok ? r.json() : []; } catch (e) { return []; }
+  try { const r = await fetch(`${API_WEB}/api/imdb?q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(6000) }); return r.ok ? r.json() : []; } catch (e) { return []; }
 }
 const palabras = (t) => new Set(String(t || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !["la", "el", "los", "las", "de", "del", "the", "of", "y", "and", "a"].includes(w)));
 function parecido(a, b) { const A = palabras(a), B = palabras(b); if (!A.size || !B.size) return 0; let n = 0; for (const w of A) if (B.has(w)) n++; return n / A.size; }
