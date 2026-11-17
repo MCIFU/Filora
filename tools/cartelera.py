@@ -118,6 +118,11 @@ def cines_elegidos():
             ids += [c["id"] for c in prefs.get("cines", []) if c.get("id")]
         except Exception:
             pass
+    if not ids and CART_PATH.exists():  # la web no respondió o nadie la abrió en 30 días: se siguen los cines de siempre
+        try:
+            ids = [int(c["fa"]) for c in json.loads(CART_PATH.read_text(encoding="utf-8")).get("cines", []) if c.get("fa")]
+        except Exception:
+            pass
     ids = list(dict.fromkeys(int(i) for i in ids))[:MAX_CINES]
     catalogo = {c["id"]: c for c in json.loads(CINES_PATH.read_text(encoding="utf-8"))["cines"]} if CINES_PATH.exists() else {}
     return [{"fa_id": i, "id": str(i), "nombre": catalogo.get(i, {}).get("nombre", f"Cine {i}"),
