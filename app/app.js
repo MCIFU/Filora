@@ -750,7 +750,7 @@ function openFilm(id) {
           ${(p.generos || []).length ? `<div class="fc-gen">${p.generos.map((g) => `<a href="#/coleccion?genre=${encodeURIComponent(g)}" data-close>${esc(g)}</a>`).join("")}</div>` : ""}
           <div class="fc-notas">
             <div class="fc-n">${scoreBadge(p.nota, "lg")}<span><small>Tu nota</small><b>${veredicto(p.nota)}</b></span></div>
-            ${fin != null ? `<div class="fc-n" data-tip="${esc(desgloseFinal(p))}">${scoreBadge(fin)}<span><small>Nota final</small><b>con las webs</b></span></div>` : ""}
+            ${fin != null ? `<div class="fc-n" data-tip="${esc(desgloseFinal(p))}">${scoreBadge(fin)}<span><small>Nota final</small><b>${((d) => Math.abs(d) < 0.25 ? "como las webs" : `${d > 0 ? "+" : "−"}${fmt1(Math.abs(d))} que las webs`)(p.nota - mean(notasWebDe(p).map((x) => x[1])))}</b></span></div>` : ""}
             ${pct ? `<div class="fc-n"><em>${rank}º</em><span><small>de ${pr.N}</small><b>top ${Math.max(1, 101 - pct)} %</b></span></div>` : ""}
           </div>
         </div>
@@ -1585,9 +1585,11 @@ VIEWS.recomendaciones = (v) => {
           <div class="pe-acciones"><a class="btn btn-primary" href="${fichaDe(hoy)}">Ver ficha</a>${!ro() && !hoy.pend ? `<button class="btn" data-want="${hoy._i}">${icon("bookmark")}Guardar en pendientes</button>` : ""}<a class="btn btn-ghost" href="https://www.justwatch.com/es/buscar?q=${encodeURIComponent(hoy.titulo)}" target="_blank" rel="noopener">${icon("play")}Dónde verla</a></div>
         </div></section>` : ""}
       ${top.length ? `<section class="section">${sectionHead("Te van a encantar")}<div class="rms">${top.map((r) => recMini(r)).join("")}</div></section>` : ""}
+      ${!f.genre && !f.era ? animosHTML(L.filter((r) => r !== hoy)) : ""}
       ${!f.genre && !f.era ? `<section class="section" id="recDir">${sectionHead("Más de tus directores favoritos")}<div class="dim cargando-mini">Buscando en sus filmografías…</div></section>` : ""}
       ${cines.length && !f.genre && !f.era ? `<section class="section">${sectionHead("En tus cines y te encajan", "#/cartelera", "Ver sesiones")}<div class="rms">${cines.map((r) => recMini(r, false)).join("")}</div></section>` : ""}
       ${resto.length ? `<details class="section rec-mas"><summary>${sectionHead(`Otras ${resto.length} que pueden gustarte`)}</summary><div class="rms">${resto.map((r) => recMini(r)).join("")}</div></details>` : ""}`;
+    $$("[data-animo]", v).forEach((b) => (b.onclick = () => { S.recAnimo = b.dataset.animo; draw(); }));
     if (!f.genre && !f.era) recsDirectores().then(async (L) => {
       const box = $("#recDir"); if (!box) return;
       const X = L.map((x) => ({ ...x, m: predict(x) })).filter((x) => x.m.pct >= 45).sort((a, b) => b.m.nota - a.m.nota).filter(diversify(2)).slice(0, 12);
@@ -1611,6 +1613,25 @@ VIEWS.recomendaciones = (v) => {
   $$("#re button", v).forEach((b) => (b.onclick = () => { f.era = b.dataset.e; $$("#re button", v).forEach((x) => x.classList.toggle("on", x === b)); draw(); }));
   draw();
 };
+// «¿Qué te apetece?»: la misma lista de recomendaciones vista por estado de ánimo
+const ANIMOS = [
+  ["reir", "Reírme", (c) => c.generos.includes("Comedia")],
+  ["pensar", "Algo que me remueva", (c) => c.generos.includes("Drama") && !c.generos.includes("Comedia")],
+  ["tension", "Tensión", (c) => c.generos.some((g) => ["Thriller", "Crimen", "Misterio"].includes(g))],
+  ["miedo", "Pasar miedo", (c) => c.generos.includes("Terror")],
+  ["evadirme", "Evadirme", (c) => c.generos.some((g) => ["Ciencia ficción", "Fantasía", "Aventura", "Animación"].includes(g))],
+  ["clasico", "Un clásico", (c) => c.anio < 1980],
+  ["espanol", "Cine español", (c) => /españa/i.test(c.pais || "")],
+  ["nuevo", "Algo reciente", (c) => c.anio >= new Date().getFullYear() - 3],
+];
+function animosHTML(L) {
+  const hay = ANIMOS.map(([k, l, f]) => [k, l, L.filter(f)]).filter((x) => x[2].length >= 2);
+  if (!hay.length) return "";
+  const sel = hay.find((x) => x[0] === S.recAnimo) || hay[0];
+  return `<section class="section">${sectionHead("¿Qué te apetece?")}
+    <div class="chips animos">${hay.map(([k, l, X]) => `<button class="chip ${k === sel[0] ? "on" : ""}" data-animo="${k}">${l} <small>${X.length}</small></button>`).join("")}</div>
+    <div class="rms">${sel[2].slice(0, 6).map((r) => recMini(r)).join("")}</div></section>`;
+}
 function openCat(i) {
   const c = S.cat[i];
   const m = predict(c);
