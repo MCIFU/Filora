@@ -1,0 +1,20 @@
+name: Publicar en Vercel
+# main ya no se publica sola: la web solo cambia cuando main llega a la rama «publicar».
+# A mano: pestaña Actions → «Publicar en Vercel» → Run workflow. Y una vez al día, para la cartelera.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 6 * * *"   # 07:30 en España (invierno) / 08:30 (verano)
+permissions:
+  contents: write
+concurrency: publicar
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Llevar main a publicar
+        run: git push origin HEAD:refs/heads/publicar
