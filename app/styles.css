@@ -1534,3 +1534,11 @@ a.icon-btn { color: inherit; }
 .dia-mas { width: 70px; aspect-ratio: 2/3; border: 1.5px dashed var(--linea-2); background: none; color: var(--papel-2); font: 700 18px var(--display); cursor: pointer; }
 .dia-mas:hover { border-color: var(--bombilla); color: var(--bombilla); }
 @media (max-width: 640px) { .dia-mas { width: 60px; } }
+/* Ver con alguien */
+.jt-anadir { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 14px; align-items: end; padding: 18px; margin-bottom: 18px; }
+.jt-f { display: grid; gap: 6px; } .jt-f span { font: 600 15px/1 var(--creditos); letter-spacing: .08em; text-transform: uppercase; color: var(--papel-3); }
+.jt-f textarea { height: auto; min-height: 46px; padding: 10px 12px; resize: vertical; font: 12px/1.4 ui-monospace, monospace; }
+.jt-amigos { margin-bottom: 24px; } .jt-amigos small { opacity: .6; margin-left: 4px; }
+.jt-pcts { display: flex; gap: 14px; margin-top: 6px; }
+.jt-pcts span { display: grid; font-size: 12px; color: var(--papel-3); } .jt-pcts b { font: 800 20px/1 var(--display); color: var(--papel); }
+@media (max-width: 760px) { .jt-anadir { grid-template-columns: 1fr; } }

@@ -64,3 +64,7 @@ App local para llevar el registro de las películas que veo, con Excel sincroniz
 - Servidor del PC: POST /api/sync con {peliculas:[…]} guarda un lote (lo usa «Completar»); sin cuerpo sincroniza con la web.
 
 - Publicación en Vercel: vercel.json ignoreCommand → tools/vercel_publicar.mjs: solo se publica un commit de main con «[publicar]» en el mensaje; el resto se cancela sin gastar. `.github/workflows/publicar.yml` hace ese commit (data/publicado.txt) a diario a las 06:30 UTC o a mano (Actions → Publicar en Vercel → Run workflow). Para publicar un cambio al momento, poner [publicar] en su mensaje. La rama `publicar` de GitHub ya no se usa.
+- Ver con alguien (app/juntos.js, #/juntos, botón en Para ti): «Copiar mi código» = notas comprimidas (FJ1 + deflate + base64, sin servidor); se pega el código de la otra persona (se guarda en localStorage filora.juntos) y recsJuntos predice para los dos (conColeccion cambia un momento S.db/S.prof) y ordena por el % del que menos le gustaría.
+- PC: tras añadir una película (enrich_background) se piden sus notas web (completar_notas_web([id])); si la web no trae FilmAffinity (Vercel está bloqueado por FA), nota_fa_directa la lee desde el PC.
+- Añadir: reseña rápida opcional (rg_resena). Cartelera: chip «Fin de semana» (sábado+domingo; enCartelera/sesionesHTML aceptan una lista de días).
+- Pruebas con 650 películas (coleccionGrande): el diario de Tu año empieza plegado si hay >40 y cada mes enseña 14 con «+N».

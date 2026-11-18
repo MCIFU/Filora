@@ -335,7 +335,8 @@ VIEWS.recomendaciones = (v) => {
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Para ti</h1>
     <p>Películas que no has visto, elegidas por lo que de verdad te gusta: tus géneros, directores, países y épocas, y lo que dicen IMDb, FilmAffinity y Letterboxd. El % es la probabilidad de que le des un ${fmt1(pr.umbral)} o más.</p>
-    ${cv && cv.azar ? `<p class="dim" style="font-size:12.5px">Probado con tus ${pr.N} notas: acierta con un error medio de ±${fmt1(cv.mae)} puntos (adivinando tu media fallaría ±${fmt1(cv.azar)}).</p>` : ""}</div></div>
+    ${cv && cv.azar ? `<p class="dim" style="font-size:12.5px">Probado con tus ${pr.N} notas: acierta con un error medio de ±${fmt1(cv.mae)} puntos (adivinando tu media fallaría ±${fmt1(cv.azar)}).</p>` : ""}</div>
+    <a class="btn" href="#/juntos">${icon("user")}Ver con alguien</a></div>
   <details class="filtros-rec" ${f.genre || f.era ? "open" : ""}><summary>${icon("spark")}Filtrar por género o época${f.genre || f.era ? ` · ${[f.genre, { clasicos: "clásicos", modernas: "1990–2019", recientes: "2020+" }[f.era]].filter(Boolean).join(", ")}` : ""}</summary>
     <div class="chips" id="rg"><button class="chip ${!f.genre ? "on" : ""}" data-g="">Todos los géneros</button>${GENEROS.filter((g) => S.cat.some((c) => c.generos.includes(g))).map((g) => `<button class="chip ${f.genre === g ? "on" : ""}" data-g="${g}">${g}</button>`).join("")}</div>
     <div class="seg" id="re">${[["", "Todas"], ["clasicos", "Clásicos"], ["modernas", "1990–2019"], ["recientes", "2020+"]].map(([k, l]) => `<button data-e="${k}" class="${f.era === k ? "on" : ""}">${l}</button>`).join("")}</div>

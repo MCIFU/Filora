@@ -441,7 +441,7 @@ const navItems = () => NAV.filter((n) => !(STATIC && n[0] === "ajustes") && !(ro
 function route() {
   const h = location.hash.replace(/^#\/?/, "");
   const [name, qs] = h.split("?");
-  return { name: navItems().some((n) => n[0] === name) || ["persona", "pelicula", "buscar", "estrenos", "gustos", "anio", "series"].includes(name) ? name : "inicio", qs: new URLSearchParams(qs || "") };
+  return { name: navItems().some((n) => n[0] === name) || ["persona", "pelicula", "buscar", "estrenos", "gustos", "anio", "series", "juntos"].includes(name) ? name : "inicio", qs: new URLSearchParams(qs || "") };
 }
 function renderChrome() {
   const r = route().name;

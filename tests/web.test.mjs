@@ -436,6 +436,22 @@ await prueba("Cartelera: «Fin de semana» junta las sesiones del sábado y el d
   assert.match(txt, /18:00/); assert.match(txt, /20:30/);
 });
 
+await prueba("Ver con alguien: con su código propone películas para los dos", async (p) => {
+  await ir(p, "#/juntos");
+  await p.waitForSelector("#jtCopiar", { timeout: 8000 });
+  const codigo = await p.evaluate(() => codigoMio("Ana"));
+  assert.match(codigo, /^FJ1/);
+  const vuelta = await p.evaluate((c) => leerCodigo(c), codigo);
+  assert.equal(vuelta.nombre, "Ana");
+  assert.equal(vuelta.P.length, 2, "lleva las notas");
+  await p.fill("#jtNombre", "Ana");
+  await p.fill("#jtCodigo", codigo);
+  await p.click("#jtAdd");
+  await p.waitForSelector(".jt-pcts", { timeout: 8000 });
+  assert.match(await p.textContent("#jtRes"), /Para ver con Ana/);
+  assert.match(await p.textContent(".jt-pcts"), /tú[\s\S]*Ana/);
+});
+
 // Una colección del tamaño de la real (650 películas, la mitad este año) para ver que nada se rompe ni va lento
 function coleccionGrande(e) {
   const lugares = ["Yelmo Ocimax", "Ocine Los Fresnos", "Netflix", "Filmin", "Movistar Plus+", "En casa", "Prime Video", "Max"];
