@@ -904,6 +904,7 @@ SUB.anio = (v, qs) => {
   </section>
   <section class="section an-meses-w"><div class="sub">Mes a mes${mesTop[1] ? ` · tu mes más cinéfilo fue ${MESES[mesTop[0]]} (${mesTop[1]})` : ""}</div>
     <div class="an-meses">${R.meses.map((m, i) => `<div class="an-mes ${i === mesTop[0] && m.length ? "top" : ""}" title="${MESES[i]}: ${m.length}"><b>${m.length || ""}</b><i style="height:${(100 * m.length / maxMes).toFixed(0)}%"></i><span>${MESES[i].slice(0, 3)}</span></div>`).join("")}</div></section>
+  ${diarioHTML(R)}
   <section class="section an-dos">${peli(R.mejor, "La mejor del año")}${R.peor && R.peor !== R.mejor ? peli(R.peor, "La que menos te gustó") : ""}</section>
   ${R.top.length >= 3 ? `<section class="section">${sectionHead(`Tus ${R.top.length} mejores de ${y}`)}<div class="posters">${R.top.map((p) => pcard(p)).join("")}</div></section>` : ""}
   <section class="section an-rankings">
@@ -913,6 +914,14 @@ SUB.anio = (v, qs) => {
   </section>
   <section class="section an-dos">${peli(R.taquilla, `La más taquillera · ${R.taquilla ? money(R.taquilla.taquilla.mundial) : ""}`)}${peli(R.larga, `La más larga · ${R.larga ? durTxt(R.larga.duracion) : ""}`)}</section>`;
 };
+// Diario del año: cada mes con los carteles de lo que viste, en orden y con el día
+function diarioHTML(R) {
+  const meses = R.meses.map((L, i) => [i, [...L].sort((a, b) => String(fechaDe(a)).localeCompare(String(fechaDe(b))))]).filter(([, L]) => L.length).reverse();
+  if (!meses.length) return "";
+  return `<section class="section"><details class="pliegue diario" open><summary><span class="pl-t">Tu diario</span><span class="pl-c">${R.n} ${R.n === 1 ? "película" : "películas"} día a día</span></summary>
+    <div class="pl-cuerpo">${meses.map(([i, L]) => `<div class="dia-mes"><div class="dia-m">${MESES[i]}<small>${L.length}</small></div>
+      <div class="dia-fila">${L.map((p) => `<a class="dia-p" data-open="${p.id}" href="#" title="${esc(p.titulo)}${p.lugar ? ` · ${esc(p.lugar)}` : ""}"><span class="dia-c">${posterHTML(p)}</span><span class="dia-d">${+String(fechaDe(p)).slice(8, 10) || ""}</span>${p.nota != null ? `<span class="dia-n" style="background:${scoreColor(p.nota)}">${fmt1(p.nota)}</span>` : ""}</a>`).join("")}</div></div>`).join("")}</div></details></section>`;
+}
 // ---------------------------------------------------------------- Completar la colección entera, poco a poco
 S.completando = null;
 function botonCompletar() {
@@ -1654,13 +1663,17 @@ function upcoming() { const t = addDays(todayISO(), -6); return (S.est.estrenos 
 function relCard(e) {
   const m = e.m || predict(e);
   const seen = isSeen({ titulo: e.titulo, anio: +e.fecha.slice(0, 4), original: e.original, fecha: e.fecha }, seenSet());
-  return `<div class="card rel rel2" ${e.fa ? `onclick="location.hash='#/pelicula?fa=${e.fa}'"` : `data-rel="${esc(e.fecha + "|" + e.titulo)}"`} style="cursor:pointer">
+  const pendiente = S.db.pendientes.some((w) => norm(w.titulo) === norm(e.titulo));
+  const avisar = seen || ro() ? "" : pendiente ? `<span class="chip gold rel-avisar">${icon("bookmark")}Te aviso</span>`
+    : `<button class="chip rel-avisar" data-relwant="${esc(e.fecha + "|" + e.titulo)}" title="Guardar en pendientes y avisarme cuando llegue a mis cines">${icon("bookmark")}Avisarme</button>`;
+  return `<div class="card rel rel2" ${e.fa ? `onclick="if(!event.target.closest('[data-relwant]'))location.hash='#/pelicula?fa=${e.fa}'"` : `data-rel="${esc(e.fecha + "|" + e.titulo)}"`} style="cursor:pointer">
     <div class="frame">${posterHTML({ ...e, anio: e.fecha.slice(0, 4) })}</div>
     <div class="rel-cuerpo">
       <div class="cfilm-head"><div style="min-width:0"><div class="rel-fecha">${diaSemana(e.fecha)} ${fechaLarga(e.fecha)}${e.provisional ? " · provisional" : ""}</div>
         <div class="t">${esc(e.titulo)}${e.destacado ? ` <span class="dest" title="Estreno destacado">●</span>` : ""}</div>
         <div class="s">${esc([e.director, e.pais].filter(Boolean).join(" · ") || "—")}</div></div>
         ${seen ? `<span class="chip on">${icon("check")}Vista</span>` : matchTag(m.pct)}</div>
+      ${avisar}
       ${e.reparto && !/loading|movie card/i.test(e.reparto) ? `<div class="rel-rep">Con ${esc(e.reparto)}</div>` : ""}
       ${e.sinopsis ? `<p class="rel-sin">${esc(e.sinopsis)}</p>` : ""}
       ${(e.generos || []).length ? `<div class="chips">${e.generos.slice(0, 3).map((g) => `<span class="chip">${g}</span>`).join("")}</div>` : ""}
@@ -2919,7 +2932,7 @@ document.addEventListener("click", async (e) => {
     try { localStorage.setItem("cine.desc", JSON.stringify([...s])); } catch (err) { /* */ }
     toast("Vale, no te la volveré a sugerir", "eyeoff"); render._keep = true; render(); return;
   }
-  if (d.relwant) { const x = S.est.estrenos.find((y) => y.fecha + "|" + y.titulo === d.relwant); await addPending({ ...x, anio: +x.fecha.slice(0, 4) }, `Estreno en cines el ${fechaLarga(x.fecha)}`); closeModal(); return; }
+  if (d.relwant) { const x = S.est.estrenos.find((y) => y.fecha + "|" + y.titulo === d.relwant); await addPending({ ...x, anio: +x.fecha.slice(0, 4), estreno: x.fecha }, `Estreno en cines el ${fechaLarga(x.fecha)}`); if ($("#modal").hidden) { render._keep = true; render(); } else closeModal(); return; }
   if (d.relseen) { const x = S.est.estrenos.find((y) => y.fecha + "|" + y.titulo === d.relseen); return openForm(null, { titulo: x.titulo, tituloOriginal: x.original || null, anio: +x.fecha.slice(0, 4), director: x.director || "", pais: x.pais || "", generos: x.generos || [], saga: x.saga || "", poster: x.poster || null, lugar: (S.est.cines || [])[0]?.nombre || "" }); }
   if (d.wseen) { const w = S.db.pendientes.find((x) => x.id === d.wseen); return openForm(null, { titulo: w.titulo, tituloOriginal: w.tituloOriginal || null, anio: w.anio || "", _pendiente: w.id }); }
   if (d.wdel && String(d.wdel).startsWith("tmp")) return; // aún guardándose
