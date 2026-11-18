@@ -550,7 +550,7 @@ VIEWS.inicio = (v) => {
   const tira = (L) => { const h = L.map((p) => `<img src="${esc(p.poster)}" alt="" loading="eager" referrerpolicy="no-referrer">`).join(""); return `<div class="reel"><div class="reel-track">${h}${h}</div></div>`; };
 
   v.innerHTML = `
-  <section class="hero">
+  <section class="hero ${vacia || ro() ? "" : "hero-corto"}">
     <div class="reels" aria-hidden="true">${tiras.map(tira).join("")}</div>
     <div class="hero-content">
       <h1><span>Filora</span></h1>
@@ -570,6 +570,7 @@ VIEWS.inicio = (v) => {
     </div>
   </section>
 
+  ${vacia || ro() ? "" : peliHoyHTML(recs)}
   <div id="avisosInicio">${avisosInicioHTML()}</div>
   ${hoyHTML()}
 
@@ -581,13 +582,13 @@ VIEWS.inicio = (v) => {
     <div class="strip">${ultimas.map((p) => pcard(p)).join("")}</div></section>`}
 
   <section class="section">${sectionHead("Podrían gustarte", "#/recomendaciones", "Todas las recomendaciones")}
-    <div class="strip">${recs.map((r) => pcard(r, { match: r.m.pct, cat: r._i })).join("")}</div></section>
+    <div class="strip">${recs.filter((r) => vacia || ro() || r !== (recs.find((x) => !x.pend) || recs[0])).map((r) => pcard(r, { match: r.m.pct, cat: r._i })).join("")}</div></section>
 
   ${prox.length ? `<section class="section">${sectionHead("Próximos estrenos", "#/cartelera?t=estrenos", "Calendario completo")}
     <div class="rels">${prox.map(relCard).join("")}</div></section>` : ""}
 
   ${vacia ? "" : `<section class="section">${sectionHead("Cómo ves el cine", "#/estadisticas?t=gustos", "Tu perfil completo")}
-    <div class="insights">${insights().slice(0, 3).map(insightCard).join("")}</div></section>`}`;
+    <div class="insights">${insights().slice(0, 4).map(insightCard).join("")}</div></section>`}`;
 };
 
 // ---------------------------------------------------------------- Colección (películas y series, con panel lateral)
@@ -2140,6 +2141,18 @@ function carteleraCard(p, dia, cineId) {
       ${i.generos.length ? `<div class="chips" style="margin:8px 0 2px">${i.generos.slice(0, 3).map((x) => `<span class="chip">${x}</span>`).join("")}</div>` : ""}
       ${sesionesHTML(p, dia, 1, cineId)}
     </div></div>`;
+}
+// Inicio: la película que más te encaja hoy, con su porqué, a un toque de la ficha
+function peliHoyHTML(recs) {
+  const hoy = recs.find((r) => !r.pend) || recs[0];
+  if (!hoy) return "";
+  return `<section class="section"><div class="rec-hoy rec-hoy-ini">
+    <a class="rec-hoy-cartel" href="${fichaDe(hoy)}">${posterHTML(hoy)}</a>
+    <div><div class="eyebrow">Tu película para hoy</div><a class="rec-hoy-t" href="${fichaDe(hoy)}">${esc(hoy.titulo)}</a>
+      <div class="dim">${esc([hoy.anio, hoy.director, hoy.pais].filter(Boolean).join(" · "))}</div>
+      <div class="rec-hoy-n">${scoreBadge(hoy.m.nota, "lg")}<div><b>${gustaraTxt(hoy.m.pct)}</b><small class="rec-hoy-por">${esc(hoy.m.why.slice(0, 2).join(" · ") || "Nota que predigo que le darías")}</small></div></div>
+      <div class="rec-hoy-acc"><a class="btn btn-primary" href="${fichaDe(hoy)}">Ver ficha</a><a class="btn btn-ghost" href="#/recomendaciones">Otras para ti</a></div>
+    </div></div></section>`;
 }
 function hoyHTML() {
   if (!misCines().length) return `<section class="section">${sectionHead("Hoy en tus cines")}${elegirCinesHTML()}</section>`;

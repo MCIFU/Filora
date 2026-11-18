@@ -1500,3 +1500,12 @@ a.icon-btn { color: inherit; }
   .rg-nota, .rg-fecha { grid-column: span 3; } .rg-lugar { grid-column: 1 / -1; }
   .rg-mas-c { grid-template-columns: 1fr 1fr; }
 }
+/* Inicio con colección: portada más baja para que lo útil (película para hoy, tus cines, pendientes) se vea sin bajar */
+.hero.hero-corto { min-height: min(46vh, 420px); padding: 56px var(--margen) 60px; }
+.hero.hero-corto h1 { font-size: clamp(42px, 8vw, 110px); }
+.hero.hero-corto .hero-lead { margin-top: 18px; }
+.hero.hero-corto .hero-actions { margin-top: 22px; }
+.rec-hoy-ini { grid-template-columns: 150px minmax(0, 1fr); }
+.rec-hoy-por { display: block; font-size: 13px; color: var(--papel-3); margin-top: 2px; }
+.rec-hoy-acc { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+@media (min-width: 1100px) { .insights { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 32px; } }
