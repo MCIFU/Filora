@@ -149,8 +149,9 @@ function sesionesHTML(p, dia, maxDias = 1, cineId = "") {
   const hoy = todayISO(), ahora = hhmm();
   return (p.cines || []).filter((c) => !cineId || c.id === cineId).map((c) => {
     const bloques = c.versiones.map((v) => {
-      const dias = Object.keys(v.dias).sort().filter((d) => (dia ? d === dia : d >= hoy)).slice(0, maxDias);
-      return dias.map((d) => `<div class="ses-row"><span class="ses-v">${esc(versionCorta(v.nombre))}${!dia ? ` · <span class="dim">${d === hoy ? "hoy" : `${diaSemana(d).slice(0, 3)} ${+d.slice(8)}`}</span>` : ""}</span>
+      const varios = Array.isArray(dia);
+      const dias = Object.keys(v.dias).sort().filter((d) => (varios ? dia.includes(d) : dia ? d === dia : d >= hoy)).slice(0, varios ? dia.length : maxDias);
+      return dias.map((d) => `<div class="ses-row"><span class="ses-v">${esc(versionCorta(v.nombre))}${!dia || varios ? ` · <span class="dim">${d === hoy ? "hoy" : `${diaSemana(d).slice(0, 3)} ${+d.slice(8)}`}</span>` : ""}</span>
         <span class="ses-times">${v.dias[d].map((x) => { const pasada = d === hoy && x.hora < ahora; return `<a class="time ${pasada ? "past" : ""}" href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.sala || "Comprar entradas")}">${x.hora}</a>`; }).join("")}</span></div>`).join("");
     }).join("");
     return bloques ? `<div class="ses-cine"><div class="ses-name">${icon("pin")}${esc(c.nombre.replace("Premium ", ""))}</div><div class="ses-filas">${bloques}</div></div>` : "";
@@ -164,7 +165,8 @@ function diasCartelera() {
 function enCartelera(dia, cineId = "") {
   const out = [];
   for (const p of carteleraIdx().values()) {
-    if (p.cines.some((c) => (!cineId || c.id === cineId) && c.versiones.some((v) => v.dias[dia]))) out.push({ ...p, info: infoCartelera(p) });
+    const enDia = (v) => (Array.isArray(dia) ? dia.some((d) => v.dias[d]) : v.dias[dia]);
+    if (p.cines.some((c) => (!cineId || c.id === cineId) && c.versiones.some(enDia))) out.push({ ...p, info: infoCartelera(p) });
   }
   return out.sort((a, b) => (a.info.vista ? 1 : 0) - (b.info.vista ? 1 : 0) || b.info.m.pct - a.info.m.pct);
 }
@@ -207,11 +209,13 @@ function hoyHTML() {
 SUB.cartelera = (v) => {
   const st = S.cart_;
   const dias = diasCartelera();
-  if (!st.dia || !dias.includes(st.dia)) st.dia = dias[0];
+  const finde = (() => { const sab = dias.find((d) => new Date(d + "T12:00").getDay() === 6); const dom = sab ? addDays(sab, 1) : dias.find((d) => new Date(d + "T12:00").getDay() === 0); return [sab, dom].filter((d) => d && dias.includes(d)); })();
+  if (!st.dia || (st.dia !== "finde" && !dias.includes(st.dia)) || (st.dia === "finde" && !finde.length)) st.dia = dias[0];
+  const diaSel = st.dia === "finde" ? finde : st.dia;
   const cines = ((S.cart && S.cart.cines) || []).filter((c) => (c.peliculas || []).length);
   const act = S.cart && S.cart.actualizado ? new Date(S.cart.actualizado) : null;
   const viejo = act && Date.now() - act.getTime() > 2.5 * 864e5;
-  const L = st.dia ? enCartelera(st.dia, st.cine) : [];
+  const L = st.dia ? enCartelera(diaSel, st.cine) : [];
   const hoy = todayISO();
   const etiqueta = (d) => (d === hoy ? "Hoy" : d === addDays(hoy, 1) ? "Mañana" : `${diaSemana(d).slice(0, 3)} ${+d.slice(8)}`);
   const lim = addDays(hoy, 8);
@@ -236,11 +240,11 @@ SUB.cartelera = (v) => {
     : `Las sesiones de <b>${esc(pendientes.map((c) => c.nombre).join(", "))}</b> llegarán en la próxima actualización (cada 3 horas, de 7:00 a 22:00).`}</span></div>` : ""}
   ${dias.length ? `
   <div class="toolbar" style="position:static">
-    <div class="chips">${dias.map((d) => `<button class="chip ${d === st.dia ? "on" : ""}" data-cday="${d}">${etiqueta(d)}</button>`).join("")}</div>
+    <div class="chips">${dias.map((d) => `<button class="chip ${d === st.dia ? "on" : ""}" data-cday="${d}">${etiqueta(d)}</button>`).join("")}${finde.length ? `<button class="chip chip-finde ${st.dia === "finde" ? "on" : ""}" data-cday="finde">Fin de semana</button>` : ""}</div>
     <div class="seg"><button data-ccine="" class="${!st.cine ? "on" : ""}">Todos</button>${cines.map((c) => `<button data-ccine="${c.id}" class="${st.cine === c.id ? "on" : ""}">${esc(cineCorto(c.nombre))}</button>`).join("")}</div>
   </div>
-  <div class="result-line"><b>${L.length}</b> películas ${st.dia === hoy ? "hoy" : `el ${etiqueta(st.dia).toLowerCase()}`} · ordenadas por lo que encajan contigo</div>
-  <div class="cfilms cartel-fija">${L.map((p) => carteleraCard(p, st.dia, st.cine)).join("")}</div>`
+  <div class="result-line"><b>${L.length}</b> películas ${st.dia === "finde" ? "este fin de semana" : st.dia === hoy ? "hoy" : `el ${etiqueta(st.dia).toLowerCase()}`} · ordenadas por lo que encajan contigo</div>
+  <div class="cfilms cartel-fija">${L.map((p) => carteleraCard(p, diaSel, st.cine)).join("")}</div>`
   : pendientes.length === mis.length ? "" : `<div class="empty"><div class="h2">Sin sesiones cargadas</div>${STATIC ? "Vuelve a intentarlo más tarde." : "Pulsa «Actualizar ahora» para descargarlas."}</div>`}
   ${preventa.length ? `<section class="section">${sectionHead("Entradas ya a la venta (preventa)")}<div class="cfilms cartel-fija">${preventa.map(({ p }) => carteleraCard({ ...p, info: infoCartelera(p) }, null, "")).join("")}</div></section>` : ""}`;
   const up = $("#cartUpd");

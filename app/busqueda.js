@@ -422,6 +422,7 @@ VIEWS.anadir = (v) => {
       ${campo("fecha", "La viste el", `type="date" value="${todayISO()}" max="${todayISO()}"`)}
       <label class="rg-f rg-lugar"><span>Dónde</span><input class="input" id="rg_lugar" autocomplete="off" placeholder="Cine, Netflix, en casa…" list="rgLugares">
         <datalist id="rgLugares">${lugares.map((l) => `<option value="${esc(l)}">`).join("")}</datalist></label>
+      <label class="rg-f rg-resena"><span>Reseña <em class="rg-opc">opcional</em></span><input class="input" id="rg_resena" autocomplete="off" maxlength="280" placeholder="En una línea: qué te pareció"></label>
       ${lugares.length ? `<div class="rg-chips">${lugares.slice(0, 6).map((l) => `<button type="button" class="chip" data-lugar="${esc(l)}">${esc(l)}</button>`).join("")}</div>` : ""}
       <details class="rg-mas" id="rgMas"><summary>Corregir datos <span class="dim">duración, año, director y país: se rellenan solos</span></summary>
         <div class="rg-mas-c">
@@ -442,7 +443,7 @@ VIEWS.anadir = (v) => {
     titulo: F("titulo").value.trim(), duracion: parseInt(F("duracion").value, 10) || null, anio: parseInt(F("anio").value, 10) || null,
     director: F("director").value.trim() || null, pais: F("pais").value.trim() || null,
     nota: F("nota").value.trim() ? Math.round(clamp(parseFloat(F("nota").value.replace(",", ".")), 0, 10) * 10) / 10 : null,
-    fecha: F("fecha").value || todayISO(), lugar: F("lugar").value.trim() || null,
+    fecha: F("fecha").value || todayISO(), lugar: F("lugar").value.trim() || null, resena: F("resena").value.trim(),
   });
   let match = null, t, seq = 0;
   const pintar = (m, d) => {
@@ -536,7 +537,7 @@ VIEWS.anadir = (v) => {
       anio: d.anio || (m && m.anio) || null, duracion: d.duracion || (m && m.duracion) || null,
       director: d.director || (m && m.director) || null, pais: d.pais || (m && m.pais) || null, nota: d.nota,
       generos: m ? m.generos : [], ids: m ? m.ids : {}, poster: m ? m.poster : null, reparto: m ? m.reparto || [] : [],
-      taquilla: {}, resena: "", favorita: false, fechaVisto: d.fecha, ...(d.lugar ? { lugar: d.lugar } : {}),
+      taquilla: {}, resena: d.resena, favorita: false, fechaVisto: d.fecha, ...(d.lugar ? { lugar: d.lugar } : {}),
     };
     const tmp = { ...body, id: `tmp${Date.now()}` };
     $("#rgRecientes").insertAdjacentHTML("afterbegin", pcard(tmp));

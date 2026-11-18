@@ -124,6 +124,7 @@ await prueba("Añadir: reconoce un título aproximado y guarda cartel, géneros,
   await p.fill("#rg_nota", "6");
   await p.fill("#rg_fecha", "2026-11-01");
   await p.fill("#rg_lugar", "Yelmo Ocimax");
+  await p.fill("#rg_resena", "Más entretenida de lo que esperaba");
   await p.waitForSelector(".rg-info .rg-t", { timeout: 8000 });
   assert.match(await p.textContent(".rg-t"), /Amanecer parte 2/i);
   assert.equal(await p.inputValue("#rg_duracion"), "115", "rellena la duración");
@@ -135,6 +136,7 @@ await prueba("Añadir: reconoce un título aproximado y guarda cartel, géneros,
   assert.equal(b.nota, 6);
   assert.equal(b.fechaVisto, "2026-11-01", "fecha en que la viste");
   assert.equal(b.lugar, "Yelmo Ocimax", "dónde la viste");
+  assert.equal(b.resena, "Más entretenida de lo que esperaba", "reseña rápida");
   assert.ok(b.poster, "cartel");
   assert.ok(b.generos.length, "géneros");
   assert.equal(b.ids.wikidata, "Q1");
@@ -415,6 +417,24 @@ await prueba("Móvil: añadir y ficha sin desbordar el ancho", async (p) => {
     assert.ok(w <= 420, `${h}: ${w}px de ancho`);
   }
 }, 400);
+
+await prueba("Cartelera: «Fin de semana» junta las sesiones del sábado y el domingo", async (p) => {
+  const iso = (d) => d.toISOString().slice(0, 10);
+  const sab = new Date(); sab.setUTCHours(12); sab.setUTCDate(sab.getUTCDate() + ((6 - sab.getUTCDay() + 7) % 7 || 7));
+  const dom = new Date(sab); dom.setUTCDate(sab.getUTCDate() + 1);
+  const ses = (h) => [{ hora: h, url: "https://example.com" }];
+  const cart = { actualizado: hoy, cines: [{ id: "402", nombre: "Yelmo Ocimax", peliculas: [
+    { titulo: "Solo el sábado", anio: anio, versiones: [{ nombre: "Castellano", dias: { [iso(sab)]: ses("18:00") } }] },
+    { titulo: "Solo el domingo", anio: anio, versiones: [{ nombre: "Castellano", dias: { [iso(dom)]: ses("20:30") } }] }] }] };
+  await p.route(`${BASE}/data/cartelera.json*`, (r) => r.fulfill({ json: cart }));
+  await ir(p, "#/cartelera");
+  await p.waitForSelector('[data-cday="finde"]', { timeout: 8000 });
+  await p.click('[data-cday="finde"]');
+  await p.waitForFunction(() => document.querySelectorAll(".cfilm").length === 2, null, { timeout: 8000 });
+  const txt = await p.textContent("#view");
+  assert.match(txt, /este fin de semana/);
+  assert.match(txt, /18:00/); assert.match(txt, /20:30/);
+});
 
 // ---- Modo PC (server.py): sin ?vitrina en 127.0.0.1; IMDb y carteles salen de la API de Vercel
 async function modoPC(p, e) {

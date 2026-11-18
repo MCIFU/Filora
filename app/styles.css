@@ -1525,3 +1525,8 @@ a.icon-btn { color: inherit; }
 .dia-n { position: absolute; right: 4px; bottom: 4px; padding: 2px 4px; color: #fff; font: 700 12px/1 var(--texto); }
 .dia-p:hover .dia-c { outline: 2px solid var(--bombilla); }
 @media (max-width: 640px) { .dia-mes { grid-template-columns: 1fr; gap: 8px; } .dia-p { width: 60px; } }
+.rg-resena { grid-column: 1 / -1; order: 1; }
+.rg-chips { order: 0; }
+.rg-mas { order: 2; }
+.rg-opc { font: 400 12px var(--texto); text-transform: none; letter-spacing: 0; color: rgba(20, 17, 46, .5); margin-left: 4px; }
+.chip-finde { margin-left: 8px; }
