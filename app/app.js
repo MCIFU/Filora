@@ -2614,19 +2614,30 @@ async function identificar(d) {
 VIEWS.anadir = (v) => {
   if (ro()) { location.hash = "#/inicio"; return; }
   const recientes = [...S.db.peliculas].sort((a, b) => String(b.añadido || "").localeCompare(String(a.añadido || ""))).slice(0, 24);
+  // tus sitios habituales (los más usados) y tus cines, para elegir con un toque
+  const usos = {};
+  for (const p of S.db.peliculas) if (p.lugar) usos[p.lugar] = (usos[p.lugar] || 0) + 1;
+  const lugares = [...new Set([...Object.entries(usos).sort((a, b) => b[1] - a[1]).map(([l]) => l), ...misCines().map((c) => c.nombre)])].slice(0, 12);
   const campo = (k, l, extra = "") => `<label class="rg-f rg-${k}"><span>${l}</span><input class="input" id="rg_${k}" autocomplete="off" ${extra}></label>`;
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Añadir película</h1>
-    <p>Rellena lo que sepas. Con eso reconozco la película y le añado sola el género, el cartel y los títulos en español e inglés.</p></div>
+    <p>Escribe el título y tu nota. Reconozco la película y le añado sola el cartel, la duración, el director, el género y el reparto.</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-importar>${icon("download")}Importar de Letterboxd, IMDb…</button><button class="btn" id="xlPaste">${icon("upload")}Pegar filas de Excel</button></div></div>
   <form class="registro" id="rgForm" autocomplete="off">
     <div class="rg-campos">
       <div class="rg-f rg-titulo ac"><label for="rg_titulo"><span>Película</span></label><input class="input" id="rg_titulo" autocomplete="off" placeholder="Escribe el título: te propongo la película con su cartel" role="combobox" aria-controls="rgAc" aria-expanded="false"><div class="ac-list" id="rgAc" role="listbox" hidden></div></div>
-      ${campo("duracion", "Duración (min)", 'inputmode="numeric" placeholder="144"')}
-      ${campo("anio", "Año de estreno", 'inputmode="numeric" placeholder="2023"')}
-      ${campo("nota", "Nota", 'inputmode="decimal" placeholder="0–10"')}
-      ${campo("director", "Director", 'placeholder="J. A. Bayona"')}
-      ${campo("pais", "País", 'placeholder="España"')}
+      ${campo("nota", "Tu nota", 'inputmode="decimal" placeholder="0–10"')}
+      ${campo("fecha", "La viste el", `type="date" value="${todayISO()}" max="${todayISO()}"`)}
+      <label class="rg-f rg-lugar"><span>Dónde</span><input class="input" id="rg_lugar" autocomplete="off" placeholder="Cine, Netflix, en casa…" list="rgLugares">
+        <datalist id="rgLugares">${lugares.map((l) => `<option value="${esc(l)}">`).join("")}</datalist></label>
+      ${lugares.length ? `<div class="rg-chips">${lugares.slice(0, 6).map((l) => `<button type="button" class="chip" data-lugar="${esc(l)}">${esc(l)}</button>`).join("")}</div>` : ""}
+      <details class="rg-mas" id="rgMas"><summary>Corregir datos <span class="dim">duración, año, director y país: se rellenan solos</span></summary>
+        <div class="rg-mas-c">
+        ${campo("duracion", "Duración (min)", 'inputmode="numeric" placeholder="144"')}
+        ${campo("anio", "Año de estreno", 'inputmode="numeric" placeholder="2023"')}
+        ${campo("director", "Director", 'placeholder="J. A. Bayona"')}
+        ${campo("pais", "País", 'placeholder="España"')}
+        </div></details>
     </div>
     <div class="rg-match" id="rgMatch"><div class="rg-vacio">Escribe el título y te digo qué película es.</div></div>
     <button class="btn btn-primary rg-go" id="rgSave" type="submit">${icon("check")}Añadir a mi colección</button>
@@ -2639,12 +2650,13 @@ VIEWS.anadir = (v) => {
     titulo: F("titulo").value.trim(), duracion: parseInt(F("duracion").value, 10) || null, anio: parseInt(F("anio").value, 10) || null,
     director: F("director").value.trim() || null, pais: F("pais").value.trim() || null,
     nota: F("nota").value.trim() ? Math.round(clamp(parseFloat(F("nota").value.replace(",", ".")), 0, 10) * 10) / 10 : null,
+    fecha: F("fecha").value || todayISO(), lugar: F("lugar").value.trim() || null,
   });
   let match = null, t, seq = 0;
   const pintar = (m, d) => {
     const box = $("#rgMatch");
     if (!d.titulo) { box.innerHTML = `<div class="rg-vacio">Escribe el título y te digo qué película es.</div>`; return; }
-    if (!m) { box.innerHTML = `<div class="rg-vacio">No la reconozco todavía. Prueba a añadir el año o el director (se guardará igualmente tal cual).</div>`; return; }
+    if (!m) { $("#rgMas").open = true; box.innerHTML = `<div class="rg-vacio">No la reconozco todavía. Prueba a añadir el año o el director (se guardará igualmente tal cual).</div>`; return; }
     box.innerHTML = `<div class="rg-mini">${m.poster ? `<img src="${esc(m.poster)}" alt="" referrerpolicy="no-referrer">` : ""}</div>
       <div class="rg-info"><div class="eyebrow">Es esta</div><div class="rg-t">${esc(m.titulo)}</div>
       <div class="dim">${esc(m.tituloEn && norm(m.tituloEn) !== norm(m.titulo) ? m.tituloEn : "")}</div>
@@ -2732,14 +2744,14 @@ VIEWS.anadir = (v) => {
       anio: d.anio || (m && m.anio) || null, duracion: d.duracion || (m && m.duracion) || null,
       director: d.director || (m && m.director) || null, pais: d.pais || (m && m.pais) || null, nota: d.nota,
       generos: m ? m.generos : [], ids: m ? m.ids : {}, poster: m ? m.poster : null, reparto: m ? m.reparto || [] : [],
-      taquilla: {}, resena: "", favorita: false, fechaVisto: todayISO(),
+      taquilla: {}, resena: "", favorita: false, fechaVisto: d.fecha, ...(d.lugar ? { lugar: d.lugar } : {}),
     };
     const tmp = { ...body, id: `tmp${Date.now()}` };
     $("#rgRecientes").insertAdjacentHTML("afterbegin", pcard(tmp));
     const card = () => document.querySelector(`#rgRecientes [data-open="${tmp.id}"]`);
     card().classList.add("xl-guardando");
     toast(`«${body.titulo}» añadida${body.nota != null ? ` con un ${fmt1(body.nota)}` : ""}`);
-    $("#rgForm").reset(); $$(".rg-f .auto").forEach((el) => el.classList.remove("auto")); match = null; pintar(null, { titulo: "" }); $("#rgSave").disabled = true; $(".rg-duracion span").textContent = "Duración (min)"; F("titulo").focus();
+    $("#rgForm").reset(); F("fecha").value = d.fecha; F("lugar").value = d.lugar || ""; $("#rgMas").open = false; $$(".rg-f .auto").forEach((el) => el.classList.remove("auto")); match = null; pintar(null, { titulo: "" }); $("#rgSave").disabled = true; $(".rg-duracion span").textContent = "Duración (min)"; F("titulo").focus();
     try {
       const p = await api("peliculas", { method: "POST", body: await completarAntes(body) });
       S.db.peliculas.push(p); S.prof = null;
@@ -2747,6 +2759,9 @@ VIEWS.anadir = (v) => {
       renderChrome();
     } catch (e) { const c = card(); if (c) c.remove(); toast(`No se guardó «${body.titulo}»: ${e.message}`, "x"); }
   };
+  const marcarLugar = () => $$("[data-lugar]", v).forEach((x) => x.classList.toggle("on", x.dataset.lugar === F("lugar").value));
+  $$("[data-lugar]", v).forEach((b) => (b.onclick = () => { F("lugar").value = F("lugar").value === b.dataset.lugar ? "" : b.dataset.lugar; marcarLugar(); }));
+  F("lugar").addEventListener("input", marcarLugar);
   $("#xlPaste").onclick = openPegar;
   setTimeout(() => F("titulo").focus(), 80);
 };

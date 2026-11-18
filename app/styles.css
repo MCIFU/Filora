@@ -1486,3 +1486,17 @@ a.icon-btn { color: inherit; }
 /* aviso de pendientes: en una esquina, sin tapar el contenido, y se abre al tocarlo */
 .toast.toast-aviso { left: auto; right: 24px; transform: none; cursor: pointer; }
 @media (max-width: 640px) { .toast.toast-aviso { right: 16px; left: 16px; bottom: 84px; } }
+/* Añadir: lo esencial a la vista (película, nota, fecha, dónde) y los datos que se rellenan solos, plegados */
+.rg-nota, .rg-fecha, .rg-lugar { grid-column: span 2; }
+.rg-chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; margin-top: -4px; }
+.rg-chips .chip { border-color: rgba(20, 17, 46, .25); color: var(--tinta); background: transparent; cursor: pointer; }
+.rg-chips .chip.on { background: var(--telon); border-color: var(--telon); color: #fff; }
+.rg-mas { grid-column: 1 / -1; border-top: 1px solid rgba(20, 17, 46, .15); padding-top: 10px; }
+.rg-mas summary { cursor: pointer; font: 600 16px/1.3 var(--creditos); letter-spacing: .08em; text-transform: uppercase; color: rgba(20, 17, 46, .75); }
+.rg-mas summary .dim { text-transform: none; letter-spacing: 0; font: 400 13px var(--texto); color: rgba(20, 17, 46, .55); margin-left: 6px; }
+.rg-mas-c { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 16px; margin-top: 12px; }
+.rg-mas-c .rg-f { grid-column: auto; }
+@media (max-width: 860px) {
+  .rg-nota, .rg-fecha { grid-column: span 3; } .rg-lugar { grid-column: 1 / -1; }
+  .rg-mas-c { grid-template-columns: 1fr 1fr; }
+}

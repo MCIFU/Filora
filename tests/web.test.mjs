@@ -119,8 +119,11 @@ const ir = (p, hash) => p.goto(`${BASE}/?vitrina${hash}`);
 await prueba("Añadir: reconoce un título aproximado y guarda cartel, géneros, reparto y taquilla", async (p, e) => {
   await ir(p, "#/anadir");
   await p.fill("#rg_titulo", "crepusculo amanecer parte 2");
+  await p.click("#rgMas summary");
   await p.fill("#rg_anio", "2012");
   await p.fill("#rg_nota", "6");
+  await p.fill("#rg_fecha", "2026-11-01");
+  await p.fill("#rg_lugar", "Yelmo Ocimax");
   await p.waitForSelector(".rg-info .rg-t", { timeout: 8000 });
   assert.match(await p.textContent(".rg-t"), /Amanecer parte 2/i);
   assert.equal(await p.inputValue("#rg_duracion"), "115", "rellena la duración");
@@ -130,6 +133,8 @@ await prueba("Añadir: reconoce un título aproximado y guarda cartel, géneros,
   assert.ok(b, "se ha guardado");
   assert.equal(b.titulo, "Crepúsculo: Amanecer parte 2");
   assert.equal(b.nota, 6);
+  assert.equal(b.fechaVisto, "2026-11-01", "fecha en que la viste");
+  assert.equal(b.lugar, "Yelmo Ocimax", "dónde la viste");
   assert.ok(b.poster, "cartel");
   assert.ok(b.generos.length, "géneros");
   assert.equal(b.ids.wikidata, "Q1");
@@ -356,6 +361,7 @@ await prueba("Añadir: propuestas con cartel mientras escribes; Intro sin elegir
   assert.match(await p.inputValue("#rg_titulo"), /Breaking Dawn/);
   assert.equal(await p.inputValue("#rg_anio"), "2012");
   await p.fill("#rg_titulo", "Mi película casera");
+  await p.evaluate(() => { document.querySelector("#rgMas").open = true; });
   await p.fill("#rg_anio", "");
   await p.press("#rg_titulo", "Enter");
   await p.waitForFunction(() => S.db.peliculas.some((x) => x.titulo === "Mi película casera"), null, { timeout: 8000 });
