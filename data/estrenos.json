@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-17",
+ "actualizado": "2026-11-18",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -33,6 +33,20 @@
    "duracion": 112,
    "poster": "https://pics.filmaffinity.com/teenage_sex_and_death_at_camp_miasma-515473998-mmed.jpg",
    "fa": "963191",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
+   "titulo": "Bailar la muerte",
+   "director": "Luis E. Parés",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "España",
+   "sinopsis": "Explora las huellas del flamenco, salvaje y libre, atravesado por la Guerra Civil, el exilio y la dictadura. Construida…",
+   "duracion": 80,
+   "poster": "https://pics.filmaffinity.com/bailar_la_muerte-498413103-mmed.jpg",
+   "fa": "574051",
    "destacado": false
   },
   {
@@ -94,6 +108,7 @@
    "pais": "España",
    "reparto": "Amaia Salamanca, Marta Hazas, Ginés García Millán",
    "sinopsis": "Delia (Amaia Salamanca) e Inés (Marta Hazas) son dos hermanas unidas por una vocación y enfrentadas desde hace años por…",
+   "duracion": 109,
    "poster": "https://pics.filmaffinity.com/hechos_probados-400518286-mmed.jpg",
    "fa": "426287",
    "destacado": false
@@ -141,6 +156,21 @@
   },
   {
    "fecha": "2026-11-20",
+   "titulo": "Noche y día",
+   "director": "Tina Gharavi",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Reino Unido",
+   "reparto": "Haley Bennett, Elyas M'Barek, Lily Allen",
+   "sinopsis": "Londres, 1910. Katharine Hilbery (Haley Bennett) hace todo lo posible por evitar el amor y el matrimonio, especialmente…",
+   "duracion": 95,
+   "poster": "https://pics.filmaffinity.com/virginia_woolf_s_night_day-298332967-mmed.jpg",
+   "fa": "523850",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
    "titulo": "Ooh La La! ¿Quién lo hubiera pensado?",
    "original": "Cocorico 2aka",
    "director": "Julien Hervé",
@@ -157,6 +187,20 @@
   },
   {
    "fecha": "2026-11-20",
+   "titulo": "Recuerdo tu nombre",
+   "director": "Silvia Venegas Venegas",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "España",
+   "sinopsis": "La arqueóloga Laura Muñoz lucha contra el tiempo y el olvido para descubrir la verdad oculta en las fosas comunes de la…",
+   "duracion": 80,
+   "poster": "https://pics.filmaffinity.com/recuerdo_tu_nombre-363739458-mmed.jpg",
+   "fa": "682710",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
    "titulo": "Rose",
    "original": "Rose",
    "director": "Markus Schleinzer",
@@ -169,22 +213,6 @@
    "duracion": 93,
    "poster": "https://pics.filmaffinity.com/rose-587223111-mmed.jpg",
    "fa": "941297",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-20",
-   "titulo": "Virginia Woolf: Noche y día",
-   "original": "Virginia Woolf's Night & Day",
-   "director": "Tina Gharavi",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Reino Unido",
-   "reparto": "Haley Bennett, Elyas M'Barek, Lily Allen",
-   "sinopsis": "Londres, 1910. Katharine Hilbery (Haley Bennett) hace todo lo posible por evitar el amor y el matrimonio, especialmente…",
-   "duracion": 95,
-   "poster": "https://pics.filmaffinity.com/virginia_woolf_s_night_day-298332967-mmed.jpg",
-   "fa": "523850",
    "destacado": false
   },
   {
@@ -213,7 +241,8 @@
    ],
    "pais": "Estados Unidos",
    "reparto": "Brad Pitt, Elizabeth Debicki, Scott Caan",
-   "sinopsis": "Asesinato, chantaje, robo, extorsión… Otro verano más en Hollywood. Es 1977, ocho años después de que Cliff Booth (Brad Pitt) se cruzara con la familia Manson en el Hollywood de 1969 que vimos en Érase una vez en Hollywood.\n\nEn Las nuevas desventuras de Cliff…",
+   "sinopsis": "Asesinato, chantaje, robo, extorsión… Otro verano más en Hollywood. Es 1977, ocho años después de que Cliff Booth (Brad…",
+   "duracion": 141,
    "poster": "https://pics.filmaffinity.com/the_further_mis_adventures_of_cliff_booth-383848904-mmed.jpg",
    "fa": "630924",
    "destacado": false
@@ -987,6 +1016,20 @@
   },
   {
    "fecha": "2027-01-01",
+   "titulo": "Pinocho desatado",
+   "original": "Pinocchio Unstrung",
+   "director": "Rhys Frake-Waterfield / Scott Chambers",
+   "generos": [
+    "Terror"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Reimaginación macabra de 'Pinocho' dentro del Twisted Childhood Universe. Geppetto presenta a su nieto James un muñeco mágico llamado Pinocho, con el que entabla una amistad. Sin embargo, sin ser consciente de la ingenuidad de Pinocho, James lo introduce en…",
+   "poster": "https://pics.filmaffinity.com/pinocchio_unstrung-443299427-mmed.jpg",
+   "fa": "191465",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-01",
    "titulo": "Vaya tropa",
    "original": "Vaya tropa",
    "director": "Curro Velázquez",
@@ -1099,20 +1142,6 @@
   },
   {
    "fecha": "2027-01-15",
-   "titulo": "Astérix. El reino de Nubia",
-   "original": "Astérix et le Royaume de Nubie",
-   "director": "Alexandre Heboyan",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Francia",
-   "sinopsis": "Astérix y los habitantes de la aldea se convierten en niños después de que un extraño elixir de la juventud caiga accidentalmente en la poción mágica. Para encontrar el antídoto y salvar la aldea de los ataques romanos, Astérix y Obélix se embarcan en una…",
-   "poster": "https://pics.filmaffinity.com/asterix_et_le_royaume_de_nubie-711482917-mmed.jpg",
-   "fa": "626700",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-15",
    "titulo": "Beekeeper 2",
    "original": "The Beekeeper 2",
    "director": "Timo Tjahjanto",
@@ -1127,20 +1156,6 @@
   },
   {
    "fecha": "2027-01-15",
-   "titulo": "Fjord",
-   "original": "Fjord",
-   "director": "Cristian Mungiu",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Rumanía",
-   "sinopsis": "Los Gheorghiu, una pareja rumano-noruega muy religiosa, se instalan en un pueblo situado en un remoto fiordo, donde entablan una estrecha relación con sus vecinos, los Halberg. Sus hijos se hacen amigos a pesar de las diferencias en su educación. Cuando la…",
-   "poster": "https://pics.filmaffinity.com/fjord-460195010-mmed.jpg",
-   "fa": "986738",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-15",
    "titulo": "Hijos de sangre y hueso",
    "original": "Children of Blood and Bone",
    "director": "Gina Prince-Bythewood",
@@ -1151,20 +1166,6 @@
    "sinopsis": "En el épico mundo de fantasía de Orïsha, una joven se embarca en una misión para recuperar la magia que le fue arrebatada violentamente a su pueblo. Ella y su hermano se alían con la hija y el hijo del rey para rebelarse contra su brutal régimen.",
    "poster": "https://pics.filmaffinity.com/children_of_blood_and_bone-133498525-mmed.jpg",
    "fa": "941506",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-15",
-   "titulo": "Veo caer edificios como rayos",
-   "original": "I See Buildings Fall Like Lightning",
-   "director": "Clio Barnard",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Reino Unido",
-   "sinopsis": "Patrick, Shiv, Oli, Conor y Rian, cinco amigos que crecieron juntos en Birmingham, se encuentran afrontando la vida adulta: secretos que rompen relaciones, excesos autodestructivos, sueños y nuevas responsabilidades, mientras el pasado insiste en no dejarlos…",
-   "poster": "https://pics.filmaffinity.com/i_see_buildings_fall_like_lightning-447756431-mmed.jpg",
-   "fa": "149328",
    "destacado": false
   },
   {
