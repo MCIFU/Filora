@@ -1530,3 +1530,7 @@ a.icon-btn { color: inherit; }
 .rg-mas { order: 2; }
 .rg-opc { font: 400 12px var(--texto); text-transform: none; letter-spacing: 0; color: rgba(20, 17, 46, .5); margin-left: 4px; }
 .chip-finde { margin-left: 8px; }
+.dia-corta .dia-p:nth-child(n + 15) { display: none; }
+.dia-mas { width: 70px; aspect-ratio: 2/3; border: 1.5px dashed var(--linea-2); background: none; color: var(--papel-2); font: 700 18px var(--display); cursor: pointer; }
+.dia-mas:hover { border-color: var(--bombilla); color: var(--bombilla); }
+@media (max-width: 640px) { .dia-mas { width: 60px; } }

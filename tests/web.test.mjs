@@ -436,6 +436,43 @@ await prueba("Cartelera: «Fin de semana» junta las sesiones del sábado y el d
   assert.match(txt, /18:00/); assert.match(txt, /20:30/);
 });
 
+// Una colección del tamaño de la real (650 películas, la mitad este año) para ver que nada se rompe ni va lento
+function coleccionGrande(e) {
+  const lugares = ["Yelmo Ocimax", "Ocine Los Fresnos", "Netflix", "Filmin", "Movistar Plus+", "En casa", "Prime Video", "Max"];
+  const G = ["Drama", "Comedia", "Thriller", "Terror", "Ciencia ficción", "Animación", "Romance", "Acción"];
+  e.db.peliculas = Array.from({ length: 650 }, (_, i) => ({ id: `g${i}`, titulo: `Película número ${i} con un título bastante largo`, anio: 1950 + (i % 75),
+    nota: Math.round((3 + (i * 37 % 70) / 10) * 10) / 10, director: `Director ${i % 90}`, pais: ["España", "Estados Unidos", "Francia", "Japón"][i % 4],
+    generos: [G[i % 8], G[(i + 3) % 8]], duracion: 85 + (i % 70), lugar: lugares[i % 8], origen: "app", ids: {},
+    fechaVisto: i % 2 ? `${anio}-${String(1 + ((i >> 1) % 12)).padStart(2, "0")}-${String(1 + (i % 28)).padStart(2, "0")}` : `${anio - 1}-06-15`,
+    "añadido": `${anio}-01-01T10:00:00` }));
+}
+await prueba("Colección grande: Tu año con diario de 325 películas", async (p, e) => {
+  coleccionGrande(e);
+  await ir(p, "#/anio");
+  const t0 = Date.now();
+  await p.waitForSelector(".diario", { timeout: 8000 });
+  assert.equal(await p.$eval(".diario", (d) => d.open), false, "con tantas películas empieza plegado");
+  await p.click(".diario summary");
+  assert.equal(await p.$$eval(".diario .dia-p", (x) => x.length), 325);
+  assert.ok(await p.$(".dia-mas"), "cada mes enseña 14 y un +N");
+  assert.equal(await p.$$eval(".diario .dia-mes", (x) => x.length), 12);
+  assert.ok(Date.now() - t0 < 4000, `tarda ${Date.now() - t0} ms`);
+});
+await prueba("Colección grande: Añadir muestra 6 sitios habituales y en el móvil no se sale", async (p, e) => {
+  coleccionGrande(e);
+  await ir(p, "#/anadir");
+  await p.waitForSelector(".rg-chips [data-lugar]", { timeout: 8000 });
+  assert.equal(await p.$$eval(".rg-chips [data-lugar]", (x) => x.length), 6);
+  await p.click('.rg-chips [data-lugar="Netflix"]');
+  assert.equal(await p.inputValue("#rg_lugar"), "Netflix");
+  for (const h of ["#/anadir", "#/anio"]) {
+    await ir(p, h);
+    await p.waitForTimeout(1200);
+    const w = await p.evaluate(() => document.documentElement.scrollWidth);
+    assert.ok(w <= 420, `${h}: ${w}px de ancho`);
+  }
+}, 400);
+
 // ---- Modo PC (server.py): sin ?vitrina en 127.0.0.1; IMDb y carteles salen de la API de Vercel
 async function modoPC(p, e) {
   e.remota = [];

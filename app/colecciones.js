@@ -384,9 +384,9 @@ SUB.anio = (v, qs) => {
 function diarioHTML(R) {
   const meses = R.meses.map((L, i) => [i, [...L].sort((a, b) => String(fechaDe(a)).localeCompare(String(fechaDe(b))))]).filter(([, L]) => L.length).reverse();
   if (!meses.length) return "";
-  return `<section class="section"><details class="pliegue diario" open><summary><span class="pl-t">Tu diario</span><span class="pl-c">${R.n} ${R.n === 1 ? "película" : "películas"} día a día</span></summary>
+  return `<section class="section"><details class="pliegue diario" ${R.n <= 40 ? "open" : ""}><summary><span class="pl-t">Tu diario</span><span class="pl-c">${R.n} ${R.n === 1 ? "película" : "películas"} día a día</span></summary>
     <div class="pl-cuerpo">${meses.map(([i, L]) => `<div class="dia-mes"><div class="dia-m">${MESES[i]}<small>${L.length}</small></div>
-      <div class="dia-fila">${L.map((p) => `<a class="dia-p" data-open="${p.id}" href="#" title="${esc(p.titulo)}${p.lugar ? ` · ${esc(p.lugar)}` : ""}"><span class="dia-c">${posterHTML(p)}</span><span class="dia-d">${+String(fechaDe(p)).slice(8, 10) || ""}</span>${p.nota != null ? `<span class="dia-n" style="background:${scoreColor(p.nota)}">${fmt1(p.nota)}</span>` : ""}</a>`).join("")}</div></div>`).join("")}</div></details></section>`;
+      <div class="dia-fila ${L.length > 14 ? "dia-corta" : ""}">${L.map((p) => `<a class="dia-p" data-open="${p.id}" href="#" title="${esc(p.titulo)}${p.lugar ? ` · ${esc(p.lugar)}` : ""}"><span class="dia-c">${posterHTML(p)}</span><span class="dia-d">${+String(fechaDe(p)).slice(8, 10) || ""}</span>${p.nota != null ? `<span class="dia-n" style="background:${scoreColor(p.nota)}">${fmt1(p.nota)}</span>` : ""}</a>`).join("")}${L.length > 14 ? `<button class="dia-mas" type="button" onclick="this.parentNode.classList.remove('dia-corta');this.remove()">+${L.length - 14}</button>` : ""}</div></div>`).join("")}</div></details></section>`;
 }
 // ---------------------------------------------------------------- Completar la colección entera, poco a poco
 S.completando = null;
