@@ -1,10 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "git": {
-    "deploymentEnabled": {
-      "main": false
-    }
-  },
+  "ignoreCommand": "node tools/vercel_publicar.mjs",
   "framework": null,
   "installCommand": "npm install",
   "buildCommand": "python3 tools/build_static.py || python tools/build_static.py",

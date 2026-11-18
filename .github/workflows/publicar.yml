@@ -1,6 +1,7 @@
 name: Publicar en Vercel
-# main ya no se publica sola: la web solo cambia cuando main llega a la rama «publicar».
-# A mano: pestaña Actions → «Publicar en Vercel» → Run workflow. Y una vez al día, para la cartelera.
+# Vercel solo publica los commits de main con [publicar] en el mensaje (tools/vercel_publicar.mjs).
+# Este flujo deja ese commit una vez al día (para la cartelera) o cuando lo lances a mano:
+# pestaña Actions → «Publicar en Vercel» → Run workflow.
 on:
   workflow_dispatch:
   schedule:
@@ -13,8 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
-      - name: Llevar main a publicar
-        run: git push origin HEAD:refs/heads/publicar
+      - name: Marcar la publicación
+        run: |
+          git config user.name "publicar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          date -u +%Y-%m-%dT%H:%M:%SZ > data/publicado.txt
+          git add data/publicado.txt
+          git commit -m "Publicar en Vercel: $(date +%Y-%m-%d) [publicar]"
+          git push

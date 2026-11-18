@@ -1,10 +1,10 @@
-"""Genera la versión web de solo lectura (para Netlify u otro hosting estático).
+"""Genera la versión web de solo lectura (Vercel u otro hosting estático).
 
     python tools/build_static.py   ->  app/data/{estrenos,catalogo,cartelera}.json
 
 La colección (data/db.json) NO se publica: es privada y solo la sirve la API a su dueño.
 
-Netlify lo ejecuta en cada despliegue (ver netlify.toml), así la web pública
+Vercel lo ejecuta en cada despliegue (ver vercel.json), así la web pública
 siempre muestra lo último que hayas subido a GitHub. No necesita librerías.
 """
 import json
