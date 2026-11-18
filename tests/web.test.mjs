@@ -416,6 +416,42 @@ await prueba("Móvil: añadir y ficha sin desbordar el ancho", async (p) => {
   }
 }, 400);
 
+// ---- Modo PC (server.py): sin ?vitrina en 127.0.0.1; IMDb y carteles salen de la API de Vercel
+async function modoPC(p, e) {
+  e.remota = [];
+  e.db.estado = { pin: true, sync: "ok", sync_at: new Date(Date.now() - 3 * 60000).toISOString() };
+  await p.route("https://filora-umber.vercel.app/api/**", (r) => { const u = new URL(r.request().url()); e.remota.push(u.pathname);
+    return r.fulfill({ json: u.pathname === "/api/imdb" ? (u.searchParams.get("todo") ? IMDB : IMDB.pelis) : {}, headers: { "Access-Control-Allow-Origin": "*" } }); });
+}
+await prueba("PC: el pie dice dónde se guarda y cuándo se sincronizó", async (p, e) => {
+  await modoPC(p, e);
+  await p.goto(`${BASE}/#/inicio`);
+  await p.waitForSelector("#sideFoot b", { timeout: 8000 });
+  assert.match(await p.textContent("#sideFoot"), /Guardado en tu PC/);
+  assert.match(await p.textContent("#sideFoot"), /Sincronizado con la web hace 3 min/);
+});
+
+await prueba("PC: al añadir propone películas de IMDb (vía la web) y guarda en el servidor local", async (p, e) => {
+  await modoPC(p, e);
+  await p.goto(`${BASE}/#/anadir`);
+  await p.fill("#rg_titulo", "amanecer");
+  await p.waitForSelector("#rgAc .ac-item img", { timeout: 8000 });
+  assert.ok(e.remota.includes("/api/imdb"), "busca en IMDb a través de Vercel");
+  await p.keyboard.press("ArrowDown");
+  await p.keyboard.press("Enter");
+  await p.fill("#rg_nota", "7");
+  await p.click("#rgSave");
+  await p.waitForFunction(() => !document.querySelector(".xl-guardando"), null, { timeout: 8000 });
+  assert.ok(e.post && /Breaking Dawn|Amanecer/i.test(e.post.titulo), "se guarda en /api/peliculas del PC");
+  assert.equal(e.post.nota, 7);
+});
+
+await prueba("PC: «Completar mi colección» también está en el PC", async (p, e) => {
+  await modoPC(p, e);
+  await p.goto(`${BASE}/#/coleccion`);
+  await p.waitForSelector("#completarGo", { timeout: 8000 });
+});
+
 await navegador.close();
 servidor.close();
 if (fallos) { console.log(`\n${fallos} ${fallos === 1 ? "prueba falla" : "pruebas fallan"}`); process.exit(1); }
