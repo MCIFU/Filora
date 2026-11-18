@@ -276,24 +276,44 @@ function recMini(r, acciones = true) {
   </article>`;
 }
 // Más películas de tus directores favoritos (Wikidata), que no estén en el catálogo ni vistas
-async function recsDirectores() {
-  const k = "recsdir." + S.db.peliculas.length;
+// Filmografías de tus directores favoritos (Wikidata): cuántas has visto y cuáles te faltan
+async function filmografiasDirectores() {
+  const k = "filmdir1." + S.db.peliculas.length;
   const hit = typeof cacheLeer === "function" ? cacheLeer(k, 3) : null;
   if (hit) return hit;
-  const pr = profile(), seen = seenSet();
+  const pr = profile(), seen = seenSet(), hoy = new Date().getFullYear();
   const dirs = [...pr.directors.values()].filter((d) => d.n >= 3 && d.adj > 0.2).sort((a, b) => b.adj - a.adj).slice(0, 8);
   const out = [];
   for (const d of dirs) {
     try {
       const q = await resolverPersona(d.key);
       if (!q) continue;
-      const L = await filmografiaRapida(q);
-      for (const x of L.filter((x) => [...(x.roles || [])].includes("Dirección") && x.anio && x.anio <= new Date().getFullYear() && !isSeen({ titulo: x.t, anio: x.anio }, seen)).slice(0, 6))
-        out.push({ titulo: x.t, anio: x.anio, director: d.key, ids: { wikidata: x.q, ...(x.i ? { imdb: x.i } : {}) }, w: x.w, sl: x.sl });
+      const pelis = (await filmografiaRapida(q)).filter((x) => [...(x.roles || [])].includes("Dirección") && x.anio && x.anio <= hoy);
+      const faltan = pelis.filter((x) => !isSeen({ titulo: x.t, anio: x.anio }, seen))
+        .map((x) => ({ titulo: x.t, anio: x.anio, director: d.key, ids: { wikidata: x.q, ...(x.i ? { imdb: x.i } : {}) }, w: x.w, sl: x.sl }));
+      if (pelis.length) out.push({ director: d.key, q, total: pelis.length, vistas: pelis.length - faltan.length, media: d.mean, faltan });
     } catch (e) { /* ese director no se encuentra */ }
   }
   if (typeof cacheGuardar === "function") cacheGuardar(k, out);
   return out;
+}
+async function recsDirectores() {
+  return (await filmografiasDirectores()).flatMap((f) => f.faltan.slice(0, 6));
+}
+// Para ti: «Has visto 7 de 12 de Nolan», con las que faltan ordenadas por tu %
+async function pintarFilmografias(box) {
+  const F = (await filmografiasDirectores()).filter((f) => f.faltan.length && f.vistas >= 2);
+  if (!box.isConnected) return;
+  if (!F.length) { box.remove(); return; }
+  for (const f of F) f.lista = f.faltan.map((x) => ({ ...x, m: predict(x) })).sort((a, b) => b.m.pct - a.m.pct).slice(0, 6);
+  const cart = typeof cartelesWiki === "function" ? await cartelesWiki(F.flatMap((f) => f.lista.map((x) => x.w)).filter(Boolean)) : {};
+  for (const f of F) for (const x of f.lista) x.poster = cart[x.w] || null;
+  if (!box.isConnected) return;
+  box.innerHTML = `${sectionHead("Filmografías por completar")}${F.map((f) => `<div class="fl-dir">
+      <div class="fl-cab"><a class="fl-n" href="#/persona?q=${f.q}">${esc(f.director)}</a>
+        <span class="fl-c">Has visto <b>${f.vistas}</b> de ${f.total}${f.media ? ` · le das un ${fmt1(f.media)} de media` : ""}</span>
+        <span class="fl-barra"><i style="width:${(100 * f.vistas / f.total).toFixed(0)}%"></i></span></div>
+      <div class="rms">${f.lista.map((r) => recMini(r, false)).join("")}</div></div>`).join("")}`;
 }
 VIEWS.recomendaciones = (v) => {
   const f = S.recs;
@@ -318,18 +338,11 @@ VIEWS.recomendaciones = (v) => {
         </div></section>` : ""}
       ${top.length ? `<section class="section">${sectionHead("Te van a encantar")}<div class="rms">${top.map((r) => recMini(r)).join("")}</div></section>` : ""}
       ${!f.genre && !f.era ? animosHTML(L.filter((r) => r !== hoy)) : ""}
-      ${!f.genre && !f.era ? `<section class="section" id="recDir">${sectionHead("Más de tus directores favoritos")}<div class="dim cargando-mini">Buscando en sus filmografías…</div></section>` : ""}
+      ${!f.genre && !f.era ? `<section class="section" id="recDir">${sectionHead("Filmografías por completar")}<div class="dim cargando-mini">Buscando en las filmografías de tus directores favoritos…</div></section>` : ""}
       ${cines.length && !f.genre && !f.era ? `<section class="section">${sectionHead("En tus cines y te encajan", "#/cartelera", "Ver sesiones")}<div class="rms">${cines.map((r) => recMini(r, false)).join("")}</div></section>` : ""}
       ${resto.length ? `<details class="section rec-mas"><summary>${sectionHead(`Otras ${resto.length} que pueden gustarte`)}</summary><div class="rms">${resto.map((r) => recMini(r)).join("")}</div></details>` : ""}`;
     $$("[data-animo]", v).forEach((b) => (b.onclick = () => { S.recAnimo = b.dataset.animo; draw(); }));
-    if (!f.genre && !f.era) recsDirectores().then(async (L) => {
-      const box = $("#recDir"); if (!box) return;
-      const X = L.map((x) => ({ ...x, m: predict(x) })).filter((x) => x.m.pct >= 45).sort((a, b) => b.m.nota - a.m.nota).filter(diversify(2)).slice(0, 12);
-      if (!X.length) { box.remove(); return; }
-      const cart = typeof cartelesWiki === "function" ? await cartelesWiki(X.map((x) => x.w).filter(Boolean)) : {};
-      for (const x of X) x.poster = cart[x.w] || null;
-      box.innerHTML = `${sectionHead("Más de tus directores favoritos")}<div class="rms">${X.map((r) => recMini(r, false)).join("")}</div>`;
-    }).catch(() => { const box = $("#recDir"); if (box) box.remove(); });
+    if (!f.genre && !f.era && $("#recDir")) pintarFilmografias($("#recDir")).catch(() => { const box = $("#recDir"); if (box) box.remove(); });
   };
   const cv = pr.cv;
   v.innerHTML = `

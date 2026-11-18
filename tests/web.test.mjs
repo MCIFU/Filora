@@ -452,6 +452,42 @@ await prueba("Ver con alguien: con su código propone películas para los dos", 
   assert.match(await p.textContent(".jt-pcts"), /tú[\s\S]*Ana/);
 });
 
+await prueba("Para ti: filmografías por completar (has visto 3 de 5 de Bayona)", async (p, e) => {
+  const mk = (id, titulo, anio, nota, director) => ({ id, titulo, anio, nota, director, pais: "España", generos: ["Drama"], ids: {}, origen: "app" });
+  e.db.peliculas = [mk("b1", "El orfanato", 2007, 8.6, "J. A. Bayona"), mk("b2", "Lo imposible", 2012, 8.8, "J. A. Bayona"), mk("b3", "Un monstruo viene a verme", 2016, 8.4, "J. A. Bayona"),
+    mk("o1", "Otra 1", 2010, 5.5, "Otro"), mk("o2", "Otra 2", 2011, 6, "Otro"), mk("o3", "Otra 3", 2013, 5, "Otra")];
+  await ir(p, "#/inicio");
+  await p.waitForSelector(".hero", { timeout: 8000 });
+  await p.evaluate(() => {
+    window.resolverPersona = async () => "Q1";
+    window.filmografiaRapida = async () => [["El orfanato", 2007], ["Lo imposible", 2012], ["Un monstruo viene a verme", 2016], ["Jurassic World: El reino caído", 2018], ["La sociedad de la nieve", 2023]]
+      .map(([t, anio], i) => ({ t, anio, q: "Q9" + i, roles: new Set(["Dirección"]) }));
+    window.cartelesWiki = async () => ({});
+  });
+  await p.evaluate(() => { location.hash = "#/recomendaciones"; });
+  await p.waitForSelector(".fl-dir", { timeout: 8000 });
+  const txt = await p.textContent(".fl-dir");
+  assert.match(txt, /J\. A\. Bayona/);
+  assert.match(txt, /Has visto 3 de 5/);
+  assert.match(txt, /Jurassic World/); assert.match(txt, /sociedad de la nieve/);
+  assert.equal(await p.$$eval(".fl-dir .rm", (x) => x.length), 2);
+});
+
+await prueba("Atajos de teclado: / busca, n añade, ? enseña la ayuda y Esc cierra", async (p) => {
+  await ir(p, "#/inicio");
+  await p.waitForSelector(".hero", { timeout: 8000 });
+  await p.keyboard.press("/");
+  await p.waitForFunction(() => location.hash === "#/buscar" && document.activeElement?.id === "bq", null, { timeout: 5000 });
+  await p.keyboard.press("Escape");
+  await p.keyboard.press("n");
+  await p.waitForFunction(() => location.hash === "#/anadir", null, { timeout: 5000 });
+  await p.keyboard.press("Escape");
+  await p.keyboard.press("?");
+  await p.waitForSelector(".atajos kbd", { timeout: 5000 });
+  await p.keyboard.press("Escape");
+  await p.waitForFunction(() => document.querySelector("#modal").hidden, null, { timeout: 5000 });
+});
+
 // Una colección del tamaño de la real (650 películas, la mitad este año) para ver que nada se rompe ni va lento
 function coleccionGrande(e) {
   const lugares = ["Yelmo Ocimax", "Ocine Los Fresnos", "Netflix", "Filmin", "Movistar Plus+", "En casa", "Prime Video", "Max"];

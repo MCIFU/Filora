@@ -49,12 +49,24 @@ document.addEventListener("click", async (e) => {
   if (d.sedit) return openSerieForm(S.db.series.find((s) => s.id === d.sedit));
   if (d.sdel) { if (!confirm("¿Eliminar esta serie?")) return; await api(`series/${d.sdel}`, { method: "DELETE" }); await refreshDB(); closeModal(); render(); }
 });
+// Atajos de teclado (PC): / buscar · n añadir · Esc cerrar · ? ayuda
+const ATAJOS = [["/", "Buscar películas, personas y tu colección"], ["n", "Añadir una película"], ["c", "Ir a tu colección"], ["p", "Para ti"], ["Esc", "Cerrar la ficha o salir del campo de texto"], ["?", "Ver estos atajos"]];
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && !$("#modal").hidden) closeModal();
-  const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const el = document.activeElement;
+  const typing = /INPUT|TEXTAREA|SELECT/.test(el?.tagName) || el?.isContentEditable;
+  if (e.key === "Escape") {
+    if (!$("#modal").hidden) { closeModal(); return; }
+    if (typing) { el.blur(); return; }
+  }
   if (typing || !$("#modal").hidden) return;
-  if (e.key === "/") { e.preventDefault(); if (route().name !== "coleccion") location.hash = "#/coleccion"; setTimeout(() => $("#fq")?.focus(), 60); }
-  if (e.key === "n" && !ro()) { e.preventDefault(); openForm(); }
+  const ir = (h) => { e.preventDefault(); if (location.hash !== h) location.hash = h; };
+  if (e.key === "/") { ir("#/buscar"); setTimeout(() => $("#bq")?.focus(), 80); }
+  else if (e.key === "n" && !ro()) { ir("#/anadir"); setTimeout(() => $("#rg_titulo")?.focus(), 80); }
+  else if (e.key === "c") ir("#/coleccion");
+  else if (e.key === "p") ir("#/recomendaciones");
+  else if (e.key === "?") { e.preventDefault(); modal(`<div class="sheet-body"><div class="eyebrow">Teclado</div><h2 class="h2" style="margin:6px 0 16px">Atajos</h2>
+    <dl class="atajos">${ATAJOS.map(([k, t]) => `<div><dt><kbd>${k}</kbd></dt><dd>${t}</dd></div>`).join("")}</dl></div>`, "narrow"); }
 });
 // tooltips
 const tip = document.createElement("div");

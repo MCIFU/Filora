@@ -1542,3 +1542,15 @@ a.icon-btn { color: inherit; }
 .jt-pcts { display: flex; gap: 14px; margin-top: 6px; }
 .jt-pcts span { display: grid; font-size: 12px; color: var(--papel-3); } .jt-pcts b { font: 800 20px/1 var(--display); color: var(--papel); }
 @media (max-width: 760px) { .jt-anadir { grid-template-columns: 1fr; } }
+.atajos { display: grid; gap: 10px; margin: 0; }
+.atajos > div { display: grid; grid-template-columns: 70px 1fr; align-items: center; gap: 12px; }
+.atajos dd { margin: 0; color: var(--papel-2); }
+kbd { display: inline-block; min-width: 30px; padding: 4px 8px; border: 1.5px solid var(--linea-2); border-bottom-width: 3px; border-radius: 4px; font: 700 14px/1 var(--texto); text-align: center; color: var(--papel); }
+/* Para ti: filmografías por completar */
+.fl-dir { margin-bottom: 30px; }
+.fl-cab { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 4px 14px; margin-bottom: 14px; }
+.fl-n { font: 800 24px/1 var(--display); text-transform: uppercase; }
+.fl-n:hover { color: var(--bombilla); }
+.fl-c { color: var(--papel-2); font-size: 14px; } .fl-c b { color: var(--papel); }
+.fl-barra { grid-column: 1 / -1; height: 6px; background: var(--linea-2); }
+.fl-barra i { display: block; height: 100%; background: var(--salida); }
