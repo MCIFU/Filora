@@ -229,6 +229,8 @@ def enrich_background(kind, item_id):
             except Exception:
                 bom = None
         if not (ids or poster or extra or bom):
+            if kind == "film":
+                completar_notas_web([item_id], espera=0)
             return
         with LOCK:
             db = load_db()
@@ -248,6 +250,8 @@ def enrich_background(kind, item_id):
                     taquilla.aplicar(it, bom)
                 it["mod"] = ahora()
                 save_db(db)
+        if kind == "film":  # con los ids ya guardados, sus notas en FilmAffinity, Letterboxd y SensaCine
+            completar_notas_web([item_id], espera=0)
     threading.Thread(target=run, daemon=True).start()
 
 
@@ -530,13 +534,14 @@ def _necesita_notas_web(p):
     return dias > 60 or (falta and dias > 3)
 
 
-def completar_notas_web():
+def completar_notas_web(solo=None, espera=20):
     """Notas de FilmAffinity, Letterboxd y SensaCine de cada película (para la nota final).
-    Se piden a la web publicada (/api/notas) poco a poco y se guardan cada 20 películas."""
-    time.sleep(20)
+    Se piden a la web publicada (/api/notas) poco a poco y se guardan cada 20 películas.
+    Al arrancar repasa toda la colección; tras añadir una película (solo=[id]) solo esa."""
+    time.sleep(espera)
     web = ((read_json(CFG_PATH, {}) or {}).get("web") or WEB).rstrip("/")
     with LOCK:
-        pendientes = [p["id"] for p in load_db()["peliculas"] if _necesita_notas_web(p)]
+        pendientes = [p["id"] for p in load_db()["peliculas"] if (solo is None or p["id"] in solo) and _necesita_notas_web(p)]
     hechas = {}
     def guardar():
         if not hechas:
