@@ -488,6 +488,18 @@ await prueba("Atajos de teclado: / busca, n añade, ? enseña la ayuda y Esc cie
   await p.waitForFunction(() => document.querySelector("#modal").hidden, null, { timeout: 5000 });
 });
 
+await prueba("Tu año en una imagen vertical para compartir", async (p) => {
+  await ir(p, "#/anio");
+  await p.waitForSelector("#anCompartir", { timeout: 8000 });
+  const [descarga] = await Promise.all([p.waitForEvent("download", { timeout: 15000 }), p.click("#anCompartir")]);
+  assert.match(descarga.suggestedFilename(), new RegExp(`filora-${anio}\\.png`));
+  const ruta = await descarga.path();
+  const { readFileSync } = await import("node:fs");
+  const png = readFileSync(ruta);
+  assert.equal(png.readUInt32BE(16), 1080, "ancho"); assert.equal(png.readUInt32BE(20), 1920, "alto");
+  if (process.env.CAPTURAS) await descarga.saveAs(join(process.env.CAPTURAS, "imagen_anio.png"));
+});
+
 // Una colección del tamaño de la real (650 películas, la mitad este año) para ver que nada se rompe ni va lento
 function coleccionGrande(e) {
   const lugares = ["Yelmo Ocimax", "Ocine Los Fresnos", "Netflix", "Filmin", "Movistar Plus+", "En casa", "Prime Video", "Max"];

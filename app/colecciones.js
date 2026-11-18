@@ -358,7 +358,8 @@ SUB.anio = (v, qs) => {
   const ranking = (L, titulo, enlace) => L.length ? `<div class="an-rank"><div class="sub">${titulo}</div><ol>${L.slice(0, 5).map(([k, X]) => `<li><span>${enlace ? enlace(k) : esc(k)}</span><b>${X.length}</b></li>`).join("")}</ol></div>` : "";
   v.innerHTML = `
   <div class="page-head"><div><h1 class="h1">Tu año en cine</h1></div>
-    <div class="chips">${anios.slice(0, 8).map((a) => `<a class="chip ${a === y ? "on" : ""}" href="#/estadisticas?t=anio&a=${a}">${a}</a>`).join("")}</div></div>
+    <div class="an-acc"><div class="chips">${anios.slice(0, 8).map((a) => `<a class="chip ${a === y ? "on" : ""}" href="#/estadisticas?t=anio&a=${a}">${a}</a>`).join("")}</div>
+    <button class="btn" id="anCompartir">${icon("upload")}Compartir mi ${y}</button></div></div>
   <section class="an-hero">
     <div class="an-anio">${y}</div>
     <div class="an-cifras">
@@ -379,7 +380,56 @@ SUB.anio = (v, qs) => {
     ${ranking(R.paises, "Países")}
   </section>
   <section class="section an-dos">${peli(R.taquilla, `La más taquillera · ${R.taquilla ? money(R.taquilla.taquilla.mundial) : ""}`)}${peli(R.larga, `La más larga · ${R.larga ? durTxt(R.larga.duracion) : ""}`)}</section>`;
+  $("#anCompartir").onclick = async (ev) => { const b = ev.currentTarget; b.disabled = true; try { await compartirAnio(R); } catch (e) { toast(`No se pudo crear la imagen: ${e.message}`, "x"); } b.disabled = false; };
 };
+// Tu año en una imagen vertical (1080×1920) para Instagram o WhatsApp: cifras, top 5 con carteles y mes más cinéfilo
+async function imagenAnio(R) {
+  const W = 1080, H = 1920, c = document.createElement("canvas");
+  c.width = W; c.height = H;
+  const g = c.getContext("2d");
+  const css = (v, d) => getComputedStyle(document.documentElement).getPropertyValue(v).trim() || d;
+  const SALA = "#13102e", PAPEL = "#efeaff", TELON = css("--telon", "#ff6b4a"), BOMB = "#8f7cff", TENUE = "rgba(239,234,255,.62)";
+  await document.fonts.ready;
+  g.fillStyle = SALA; g.fillRect(0, 0, W, H);
+  // perforaciones de película arriba y abajo
+  g.fillStyle = "rgba(239,234,255,.12)";
+  for (let x = 30; x < W; x += 70) { g.fillRect(x, 34, 34, 22); g.fillRect(x, H - 56, 34, 22); }
+  const txt = (t, x, y, font, color, align = "left") => { g.font = font; g.fillStyle = color; g.textAlign = align; g.fillText(t, x, y); };
+  const corta = (t, max) => { let u = String(t); while (g.measureText(u).width > max && u.length > 3) u = u.slice(0, -2); return u === String(t) ? u : u.trimEnd() + "…"; };
+  txt("FILORA · TU AÑO EN CINE", 80, 150, "700 34px 'Sofia Sans Extra Condensed', sans-serif", TENUE);
+  txt(String(R.y), 70, 360, "800 250px Montserrat, sans-serif", TELON);
+  const cifras = [[R.n, R.n === 1 ? "película" : "películas"], [Math.round(R.horas), "horas"], [R.media != null ? fmt1(R.media) : "–", "nota media"]];
+  cifras.forEach(([v, l], i) => { const x = 80 + i * 320; txt(String(v), x, 520, "800 96px Montserrat, sans-serif", PAPEL); txt(l.toUpperCase(), x, 568, "600 34px 'Sofia Sans Extra Condensed', sans-serif", TENUE); });
+  const mesTop = R.meses.map((m, i) => [i, m.length]).sort((a, b) => b[1] - a[1])[0];
+  if (mesTop && mesTop[1]) { txt("TU MES MÁS CINÉFILO", 80, 680, "600 34px 'Sofia Sans Extra Condensed', sans-serif", TENUE); txt(`${MESES[mesTop[0]][0].toUpperCase() + MESES[mesTop[0]].slice(1)} · ${mesTop[1]} ${mesTop[1] === 1 ? "película" : "películas"}`, 80, 740, "700 54px Montserrat, sans-serif", BOMB); }
+  txt(`TU TOP ${Math.min(5, R.top.length)}`, 80, 860, "600 34px 'Sofia Sans Extra Condensed', sans-serif", TENUE);
+  const carga = (u) => new Promise((ok) => { if (!u) return ok(null); const im = new Image(); im.crossOrigin = "anonymous"; im.referrerPolicy = "no-referrer"; im.onload = () => ok(im); im.onerror = () => ok(null); im.src = u; setTimeout(() => ok(null), 6000); });
+  const top = R.top.slice(0, 5);
+  const imgs = await Promise.all(top.map((p) => carga(p.poster)));
+  top.forEach((p, i) => {
+    const y = 900 + i * 176, x = 80;
+    g.fillStyle = "rgba(239,234,255,.08)"; g.fillRect(x, y, 104, 156);
+    if (imgs[i]) g.drawImage(imgs[i], x, y, 104, 156); // si algún cartel no permite exportarse, toBlob falla y se repite sin carteles
+    txt(String(i + 1), x + 140, y + 70, "800 56px Montserrat, sans-serif", TENUE);
+    g.font = "700 44px Montserrat, sans-serif"; txt(corta(p.titulo.toUpperCase(), 600), x + 210, y + 66, g.font, PAPEL);
+    txt([p.anio, splitDir(p.director)[0]].filter(Boolean).join(" · "), x + 210, y + 114, "500 32px 'Instrument Sans', sans-serif", TENUE);
+    g.fillStyle = scoreColor(p.nota); g.fillRect(W - 200, y + 34, 120, 84);
+    txt(fmt1(p.nota), W - 140, y + 95, "800 52px Montserrat, sans-serif", "#fff", "center");
+  });
+  txt("filora", W / 2, H - 100, "700 34px Montserrat, sans-serif", TENUE, "center");
+  try { return await new Promise((ok, ko) => c.toBlob((b) => (b ? ok(b) : ko(new Error("sin imagen"))), "image/png")); }
+  catch (e) { // algún cartel contaminó el lienzo: se repite sin carteles
+    return imagenAnio({ ...R, top: R.top.map((p) => ({ ...p, poster: null })) });
+  }
+}
+async function compartirAnio(R) {
+  const b = await imagenAnio(R);
+  const f = new File([b], `filora-${R.y}.png`, { type: "image/png" });
+  if (navigator.canShare && navigator.canShare({ files: [f] })) { try { await navigator.share({ files: [f], title: `Mi ${R.y} en cine` }); return; } catch (e) { if (e.name === "AbortError") return; } }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = f.name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  toast(`Imagen guardada: ${f.name}`);
+}
 // Diario del año: cada mes con los carteles de lo que viste, en orden y con el día
 function diarioHTML(R) {
   const meses = R.meses.map((L, i) => [i, [...L].sort((a, b) => String(fechaDe(a)).localeCompare(String(fechaDe(b))))]).filter(([, L]) => L.length).reverse();

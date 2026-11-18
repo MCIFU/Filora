@@ -68,3 +68,6 @@ App local para llevar el registro de las películas que veo, con Excel sincroniz
 - PC: tras añadir una película (enrich_background) se piden sus notas web (completar_notas_web([id])); si la web no trae FilmAffinity (Vercel está bloqueado por FA), nota_fa_directa la lee desde el PC.
 - Añadir: reseña rápida opcional (rg_resena). Cartelera: chip «Fin de semana» (sábado+domingo; enCartelera/sesionesHTML aceptan una lista de días).
 - Pruebas con 650 películas (coleccionGrande): el diario de Tu año empieza plegado si hay >40 y cada mes enseña 14 con «+N».
+- Para ti: «Filmografías por completar» (descubrir.js filmografiasDirectores/pintarFilmografias: tus directores con ≥3 vistas y afinidad, total y vistas desde Wikidata, las que faltan por tu %; caché 3 días; recsDirectores sale de ahí).
+- Tu año en una imagen (colecciones.js imagenAnio/compartirAnio): canvas 1080×1920 con cifras, mes más cinéfilo y top 5 con carteles (crossOrigin; si alguno impide exportar, se rehace sin carteles); en el móvil abre «Compartir», en el PC descarga filora-AAAA.png.
+- Atajos (arranque.js ATAJOS): / buscador, n añadir, c colección, p Para ti, ? ayuda, Esc cierra la ficha o sale del campo.

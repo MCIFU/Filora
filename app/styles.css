@@ -1554,3 +1554,4 @@ kbd { display: inline-block; min-width: 30px; padding: 4px 8px; border: 1.5px so
 .fl-c { color: var(--papel-2); font-size: 14px; } .fl-c b { color: var(--papel); }
 .fl-barra { grid-column: 1 / -1; height: 6px; background: var(--linea-2); }
 .fl-barra i { display: block; height: 100%; background: var(--salida); }
+.an-acc { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
