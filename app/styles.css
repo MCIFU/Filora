@@ -1483,3 +1483,6 @@ a.icon-btn { color: inherit; }
   .fc-meta { font-size: 17px; }
   .fc-notas { gap: 10px 18px; margin-top: 12px; }
 }
+/* aviso de pendientes: en una esquina, sin tapar el contenido, y se abre al tocarlo */
+.toast.toast-aviso { left: auto; right: 24px; transform: none; cursor: pointer; }
+@media (max-width: 640px) { .toast.toast-aviso { right: 16px; left: 16px; bottom: 84px; } }

@@ -420,6 +420,21 @@ class Handler(BaseHTTPRequestHandler):
                 CFG_PATH.write_text(json.dumps(cfg, ensure_ascii=False, indent=1), encoding="utf-8")
                 return self.send_json({"ok": True})
             if parts[1:] == ["sync"]:
+                lote = self.body().get("peliculas")
+                if isinstance(lote, list):  # la app guarda varias películas completadas de una vez
+                    with LOCK:
+                        db = load_db()
+                        por_id = {x["id"]: x for x in db["peliculas"]}
+                        n = 0
+                        for nueva in lote:
+                            it = por_id.get(nueva.get("id"))
+                            if it is not None:
+                                it.update({k: v for k, v in nueva.items() if k != "id"})
+                                it["mod"] = ahora()
+                                n += 1
+                        if n:
+                            save_db(db)
+                    return self.send_json({"ok": True, "guardadas": n})
                 ok = sync_web()
                 return self.send_json({"ok": ok, "sync": STATE["sync"]})
             if parts[1:] == ["excel", "regenerar"]:

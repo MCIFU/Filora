@@ -211,7 +211,7 @@ async function loadAll() {
   S.db = db; S.est = est; S.cat = cat; S.cartTodo = cart; S.prof = null;
   filtrarCartelera(); avisarDemanda();
   if (!ro()) setTimeout(() => calcularAvisos().catch(() => {}), 2500);
-  if (STATIC && !ro()) setTimeout(completarRecientes, 4000);
+  if (!ro()) setTimeout(completarRecientes, 4000);
   if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500);
   if (typeof completarNotasWeb === "function") setTimeout(completarNotasWeb, 8000);
 }
@@ -245,12 +245,14 @@ setInterval(comprobarCambios, STATIC ? 120e3 : 15e3);
 
 async function refreshDB() { S.db = await api("db"); S.prof = null; S.cartIdx = null; filtrarCartelera(); renderChrome(); if (typeof completarNotasImdb === "function") setTimeout(completarNotasImdb, 1500); }
 
-function toast(msg, ic = "check") {
+function toast(msg, ic = "check", enlace = null) {
   const t = $("#toast");
   t.innerHTML = `${icon(ic)}<span>${esc(msg)}</span>`;
+  t.classList.toggle("toast-aviso", !!enlace);
+  t.onclick = enlace ? () => { t.hidden = true; location.hash = enlace; } : null;
   t.hidden = false;
   clearTimeout(toast._t);
-  toast._t = setTimeout(() => (t.hidden = true), 3200);
+  toast._t = setTimeout(() => (t.hidden = true), enlace ? 6000 : 3200);
 }
 
 // ---------------------------------------------------------------- perfil de gustos
@@ -461,7 +463,7 @@ function renderChrome() {
       ? `<b style="color:var(--gold)">Hola, ${esc(ses.usuario)}</b><br><span class="dim">Tu colección se guarda en tu cuenta y la ves en cualquier dispositivo</span><br><a href="#" data-logout class="dim" style="text-decoration:underline">Salir</a>`
       : ro()
       ? `<b>Tu colección es privada</b><br><span class="dim">Crea una cuenta o entra para verla y editarla</span><br><a href="#" data-login class="dim" style="text-decoration:underline">Entrar</a>`
-      : `<b style="color:var(--gold)">Modo edición</b><br><span class="dim">Los cambios se guardan en la web y llegan a tu PC</span><br><a href="#" data-logout class="dim" style="text-decoration:underline">Salir</a>`;
+      : `<b style="color:var(--gold)">Modo edición</b><br><span class="dim">Tus cambios se guardan al momento</span><br><a href="#" data-logout class="dim" style="text-decoration:underline">Salir</a>`;
     const c = $("#cuenta");
     if (c) {
       c.hidden = false;
@@ -475,7 +477,12 @@ function renderChrome() {
   }
   $("#sideFoot").innerHTML = e.excel_error
     ? `<span class="warn">⚠ ${esc(e.excel_error)}</span>`
-    : `<b>Excel sincronizado</b>${hora ? ` · ${hora}` : ""}<br><span class="dim">${e.pin ? (e.sync === "ok" ? "Sincronizado con la web" : esc(e.sync || "Sincronizando con la web…")) : "Web sin sincronizar (Ajustes)"}</span><br><a href="/api/excel" class="dim">Descargar Filora.xlsx</a>`;
+    : `<b>Guardado en tu PC</b><br><span class="dim">${e.pin ? (e.sync === "ok" ? `Sincronizado con la web${e.sync_at ? ` ${haceRato(e.sync_at)}` : ""}` : esc(e.sync || "Sincronizando con la web…")) : "Sin sincronizar con la web (pon tu PIN en Ajustes)"}</span><br><a href="/api/excel" class="dim">Excel${hora ? ` (${hora})` : ""}</a>`;
+}
+// «hace un momento», «hace 3 min», «hace 2 h»
+function haceRato(iso) {
+  const m = Math.round((Date.now() - Date.parse(iso)) / 60000);
+  return m < 1 ? "hace un momento" : m < 60 ? `hace ${m} min` : m < 1440 ? `hace ${Math.round(m / 60)} h` : `el ${new Date(iso).toLocaleDateString("es-ES", { day: "numeric", month: "short" })}`;
 }
 function render() {
   const { name, qs } = route();
@@ -566,7 +573,7 @@ VIEWS.inicio = (v) => {
   <div id="avisosInicio">${avisosInicioHTML()}</div>
   ${hoyHTML()}
 
-  ${vacia ? "" : `<section class="section">${sectionHead("El Olimpo", "#/coleccion?min=9", `Las ${pr.P.filter((p) => p.nota >= 9).length} con un 9 o más`)}
+  ${vacia ? "" : `<section class="section">${sectionHead("El Olimpo", "#/coleccion?min=9", ((n) => n ? `${n === 1 ? "La única" : `Las ${n}`} con un 9 o más` : "Tus mejores notas")(pr.P.filter((p) => p.nota >= 9).length))}
     <ol class="olimpo">${olimpo.map((p) => `<li data-open="${p.id}"><div class="mini">${posterHTML(p)}</div>
       <div style="min-width:0"><div class="t">${esc(p.titulo)}</div><div class="s">${esc([splitDir(p.director).join(" y "), p.anio].filter(Boolean).join(", "))}</div></div>${scoreBadge(p.nota)}</li>`).join("")}</ol></section>
 
@@ -642,7 +649,7 @@ VIEWS.coleccion = (v, qs) => {
   const ordenes = series ? [["nota", "Mejor nota"], ["peor", "Peor nota"], ["nuevo", "Más recientes"], ["viejo", "Más antiguas"], ["titulo", "Título A–Z"]]
     : [["nota", "Mejor nota final"], ["peor", "Peor nota final"], ["tunota", "Mejor nota tuya"], ["nuevo", "Más recientes"], ["viejo", "Más antiguas"], ["titulo", "Título A–Z"], ["duracion", "Más largas"], ["taquilla", "Mayor taquilla"], ["registro", "Últimas registradas"]];
   v.innerHTML = `
-  <div class="page-head"><div><h1 class="h1">Colección</h1></div>${!series && STATIC && !ro() ? `<div id="completarBox">${botonCompletar()}</div>` : series && !ro() ? `<button class="btn btn-primary" id="sAdd">${icon("plus")}Añadir serie</button>` : ""}</div>
+  <div class="page-head"><div><h1 class="h1">Colección</h1></div>${!series && !ro() ? `<div id="completarBox">${botonCompletar()}</div>` : series && !ro() ? `<button class="btn btn-primary" id="sAdd">${icon("plus")}Añadir serie</button>` : ""}</div>
   <div class="col">
     <aside class="col-lado">
       <nav class="col-pest"><a class="${series ? "" : "on"}" href="#/coleccion">${icon("film")}Películas <small>${S.db.peliculas.length}</small></a><a class="${series ? "on" : ""}" href="#/coleccion?t=series">${icon("tv")}Series <small>${S.db.series.length}</small></a></nav>
@@ -821,17 +828,19 @@ async function calcularAvisos() {
   }
   S.avisos = out; pintarAvisos(); avisarNovedades();
 }
-// Toast la primera vez que aparece cada aviso
+// Aviso discreto, como mucho una vez al día y solo por pendientes que antes no se podían ver
 function avisarNovedades() {
-  const k = "filora.avisos.vistos";
+  const k = "filora.avisos.vistos", kd = "filora.avisos.dia";
   let vistos; try { vistos = new Set(JSON.parse(localStorage.getItem(k) || "[]")); } catch (e) { vistos = new Set(); }
   const nuevos = [];
-  for (const [id, L] of S.avisos) for (const a of L) { const c = `${id}|${a.tipo}|${a.txt}`; if (!vistos.has(c)) { nuevos.push([id, a]); vistos.add(c); } }
+  for (const [id, L] of S.avisos) for (const a of L) { const c = `${id}|${a.tipo}`; if (!vistos.has(c)) { nuevos.push([id, a]); vistos.add(c); } }
   try { localStorage.setItem(k, JSON.stringify([...vistos].slice(-500))); } catch (e) { /* */ }
   const ahora = nuevos.filter(([, a]) => a.tipo !== "estreno");
-  if (!ahora.length) return;
+  let dia = ""; try { dia = localStorage.getItem(kd) || ""; } catch (e) { /* */ }
+  if (!ahora.length || dia === todayISO()) return;
+  try { localStorage.setItem(kd, todayISO()); } catch (e) { /* */ }
   const w = S.db.pendientes.find((x) => x.id === ahora[0][0]);
-  toast(ahora.length === 1 && w ? `«${w.titulo}» de tus pendientes: ${ahora[0][1].txt.toLowerCase()}` : `${ahora.length} pendientes ya se pueden ver`, "bookmark");
+  toast(ahora.length === 1 && w ? `«${w.titulo}» de tus pendientes: ${ahora[0][1].txt.toLowerCase()}` : `${ahora.length} pendientes ya se pueden ver`, "bookmark", "#/pendientes");
 }
 const avisoChip = (a) => `<span class="aviso aviso-${a.tipo}">${icon(a.tipo === "cine" ? "ticket" : a.tipo === "estreno" ? "calendar" : "tv")}${esc(a.txt)}</span>`;
 function avisosInicioHTML() {
@@ -1013,7 +1022,7 @@ async function cambiosTaquilla(p) {
 }
 async function completarFicha(p, forzar = false) {
   const falta = faltaDatos(p);
-  if (!STATIC || ro() || (!falta && !forzar) || (p.completado && !forzar)) return null;
+  if (ro() || (!falta && !forzar) || (p.completado && !forzar)) return null;
   try {
     const c = await cambiosFicha(p);
     if (!c) return null;
@@ -1050,7 +1059,7 @@ function taquillaHTML(p) {
 }
 // Si aún no se consultó, la taquilla se pide una vez a Box Office Mojo y se guarda en la película
 async function cargarTaquilla(p) {
-  if (!STATIC || ro()) return;
+  if (ro()) return;
   try {
     const cambios = await cambiosTaquilla(p);
     if (!cambios) return;
@@ -1096,7 +1105,7 @@ async function cargarReparto(p) {
       if (!lista.length) lista = wd;
       else for (const x of lista) { const m = wd.find((y) => (x.q && y.q === x.q) || norm(y.n) === norm(x.n)); if (m) { x.p = x.p || m.p; x.q = x.q || m.q; } }
       // guarda los personajes la primera vez
-      if (!ro() && STATIC && lista.some((x, i) => x.p && !(p.reparto || [])[i]?.p)) api(`peliculas/${p.id}`, { method: "PUT", body: { reparto: lista.slice(0, 12) } }).then((n) => { const i = S.db.peliculas.findIndex((y) => y.id === p.id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...n }; }).catch(() => {});
+      if (!ro() && lista.some((x, i) => x.p && !(p.reparto || [])[i]?.p)) api(`peliculas/${p.id}`, { method: "PUT", body: { reparto: lista.slice(0, 12) } }).then((n) => { const i = S.db.peliculas.findIndex((y) => y.id === p.id); if (i >= 0) S.db.peliculas[i] = { ...S.db.peliculas[i], ...n }; }).catch(() => {});
     }
     pintar();
     const F = await entidadesWD(lista.map((x) => x.q).filter(Boolean), "claims");
@@ -1388,7 +1397,7 @@ function insights() {
   const most = [...pr.genres.values()].sort((a, b) => b.n - a.n)[0];
   const aprob = P.filter((p) => p.nota >= 5).length / P.length;
   const exig = pr.mu < 6 ? "exigente" : pr.mu < 6.8 ? "equilibrado" : "generoso";
-  out.push({ big: fmt2(pr.mu), ttl: `Eres un espectador ${exig}`, txt: `Tu nota media es ${fmt2(pr.mu)} y apruebas el ${Math.round(aprob * 100)}% de lo que ves. Solo ${P.filter((p) => p.nota >= 9).length} películas han llegado al 9.` });
+  out.push({ big: fmt2(pr.mu), ttl: `Eres un espectador ${exig}`, txt: `Tu nota media es ${fmt2(pr.mu)} y apruebas el ${Math.round(aprob * 100)}% de lo que ves. ${((n) => n === 0 ? "Ninguna ha llegado todavía al 9." : n === 1 ? "Solo una ha llegado al 9." : `${n} han llegado al 9.`)(P.filter((p) => p.nota >= 9).length)}` });
   if (favG[0]) out.push({ big: fmt1(favG[0].mean), ttl: `Tu terreno: ${frase(favG[0].key)}`, txt: `Es donde más brillas: media de ${fmt1(favG[0].mean)} en ${favG[0].n} películas${favG[1] ? `, seguido de ${frase(favG[1].key)} (${fmt1(favG[1].mean)})` : ""}.` });
   const dirs = [...pr.directors.values()].filter((d) => d.n >= 3).sort((a, b) => b.adj - a.adj);
   if (dirs[0]) out.push({ big: fmt1(dirs[0].mean), ttl: `Director de cabecera: ${dirs[0].key}`, txt: `${dirs[0].n} películas vistas con una media de ${fmt1(dirs[0].mean)}. Detrás: ${dirs.slice(1, 3).map((d) => `${d.key} (${fmt1(d.mean)})`).join(" y ")}.` });
@@ -1784,7 +1793,7 @@ VIEWS.pendientes = (v) => {
 };
 // Carteles de los pendientes que no lo tienen (IMDb), guardados para la próxima vez
 async function cartelesPendientes() {
-  if (!STATIC || ro()) return;
+  if (ro()) return;
   const faltan = S.db.pendientes.filter((w) => !w.poster && !reciente(w.sinCartel, 15)).slice(0, 12);
   for (const w of faltan) {
     const r = await posterWeb(w);
@@ -2568,7 +2577,6 @@ VIEWS.buscar = (v, qs) => {
 };
 const durTxt = (m) => (m > 0 ? `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")} min` : "");
 async function imdbBuscar(q) {
-  if (!STATIC) return [];
   try { const r = await fetch(`${API_WEB}/api/imdb?q=${encodeURIComponent(q)}`, { signal: AbortSignal.timeout(6000) }); return r.ok ? r.json() : []; } catch (e) { return []; }
 }
 const palabras = (t) => new Set(String(t || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !["la", "el", "los", "las", "de", "del", "the", "of", "y", "and", "a"].includes(w)));
