@@ -480,8 +480,9 @@ await prueba("Atajos de teclado: / busca, n añade, ? enseña la ayuda y Esc cie
   await p.waitForFunction(() => location.hash === "#/buscar" && document.activeElement?.id === "bq", null, { timeout: 5000 });
   await p.keyboard.press("Escape");
   await p.keyboard.press("n");
-  await p.waitForFunction(() => location.hash === "#/anadir", null, { timeout: 5000 });
+  await p.waitForFunction(() => location.hash === "#/anadir" && document.activeElement?.id === "rg_titulo", null, { timeout: 5000 });
   await p.keyboard.press("Escape");
+  assert.notEqual(await p.evaluate(() => document.activeElement?.id), "rg_titulo", "Esc sale del campo");
   await p.keyboard.press("?");
   await p.waitForSelector(".atajos kbd", { timeout: 5000 });
   await p.keyboard.press("Escape");
