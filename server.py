@@ -9,6 +9,7 @@ seguridad y regenera "Filora.xlsx" en cada cambio.
 import json
 import mimetypes
 import os
+import re
 import shutil
 import sys
 import threading
@@ -534,6 +535,23 @@ def _necesita_notas_web(p):
     return dias > 60 or (falta and dias > 3)
 
 
+def nota_fa_directa(fa_id):
+    """Nota media y votos de FilmAffinity leídos de su ficha (mismo criterio que lib/notas.mjs leerFA)."""
+    try:
+        req = urllib.request.Request(f"https://www.filmaffinity.com/es/film{fa_id}.html",
+                                     headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36",
+                                              "Accept-Language": "es-ES,es;q=0.9"})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            h = r.read().decode("utf-8", "replace")
+    except Exception:
+        return None
+    v = re.search(r'itemprop="ratingValue" content="([\d.,]+)"', h) or re.search(r'id="movie-rat-avg"[^>]*>\s*([\d.,]+)', h)
+    n = re.search(r'itemprop="ratingCount" content="(\d+)"', h) or re.search(r'id="movie-count-rat"[^>]*>[^\d]*([\d.]+)', h)
+    if not v:
+        return None
+    return {"v": float(v.group(1).replace(",", ".")), "n": int(n.group(1).replace(".", "")) if n else None}
+
+
 def completar_notas_web(solo=None, espera=20):
     """Notas de FilmAffinity, Letterboxd y SensaCine de cada película (para la nota final).
     Se piden a la web publicada (/api/notas) poco a poco y se guardan cada 20 películas.
@@ -567,6 +585,8 @@ def completar_notas_web(solo=None, espera=20):
         except Exception:
             time.sleep(10)
             continue
+        if i.get("filmaffinity") and not n.get("fa"):
+            n["fa"] = nota_fa_directa(i["filmaffinity"])  # a la web le bloquean FilmAffinity; desde el PC suele responder
         w = {"t": date.today().isoformat()}
         if n.get("fa"):
             w["fa"] = [n["fa"]["v"], n["fa"].get("n")]
