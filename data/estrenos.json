@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-18",
+ "actualizado": "2026-11-19",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -67,6 +67,20 @@
   },
   {
    "fecha": "2026-11-20",
+   "titulo": "Con Hasan en Gaza",
+   "director": "Kamal Aljafari",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "Palestina",
+   "sinopsis": "Recientemente se han redescubierto tres cintas MiniDV de 2001 sobre la vida en Gaza. Estas imágenes son ahora testimonio…",
+   "duracion": 106,
+   "poster": "https://pics.filmaffinity.com/with_hasan_in_gaza-380171927-mmed.jpg",
+   "fa": "968717",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-20",
    "titulo": "El director",
    "original": "El director",
    "director": "Dani de la Orden",
@@ -108,7 +122,7 @@
    "pais": "España",
    "reparto": "Amaia Salamanca, Marta Hazas, Ginés García Millán",
    "sinopsis": "Delia (Amaia Salamanca) e Inés (Marta Hazas) son dos hermanas unidas por una vocación y enfrentadas desde hace años por…",
-   "duracion": 109,
+   "duracion": 104,
    "poster": "https://pics.filmaffinity.com/hechos_probados-400518286-mmed.jpg",
    "fa": "426287",
    "destacado": false
@@ -125,7 +139,7 @@
    "reparto": "Alexandre Astier, Rod Paradot, Brune Moulin",
    "sinopsis": "Christophe, un chico de 11 años, intenta seguir los pasos de su padre ayudando en la granja familiar en la que viven…",
    "duracion": 90,
-   "poster": "https://pics.filmaffinity.com/le_corset-388941512-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/le_corset-523675510-mmed.jpg",
    "fa": "947062",
    "destacado": false
   },
@@ -140,7 +154,7 @@
    "pais": "Estados Unidos",
    "reparto": "Joseph Zada, Mckenna Grace, Ralph Fiennes",
    "sinopsis": "El mundo de Panem 24 años antes de los acontecimientos de la primera película, comenzando en la mañana de la cosecha de…",
-   "duracion": 150,
+   "duracion": 158,
    "poster": "https://pics.filmaffinity.com/the_hunger_games_sunrise_on_the_reaping-697757768-mmed.jpg",
    "fa": "161937",
    "destacado": true,
@@ -982,7 +996,7 @@
    ],
    "pais": "Reino Unido",
    "sinopsis": "A finales de la década de 1960, en Gran Bretaña, el magnate de los medios de comunicación Rupert Murdoch adquiere el periódico The Sun, que atravesaba dificultades, y se propone cambiar su rumbo editorial y noticioso por completo. Junto al director Larry…",
-   "poster": "https://pics.filmaffinity.com/ink-347403335-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/ink-285808289-mmed.jpg",
    "fa": "527623",
    "destacado": false
   },
@@ -1138,20 +1152,6 @@
    "sinopsis": "En septiembre de 1940, en la Francia ocupada se instaura el régimen de Pétain, el gobierno colaboracionista con la Alemania nazi. Henri Marre, de 49 años, llega a Vichy sin un céntimo, sin contactos, lejos de su esposa e hijos. Ve en la nueva administración…",
    "poster": "https://pics.filmaffinity.com/notre_salut-800402615-mmed.jpg",
    "fa": "264455",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-15",
-   "titulo": "Beekeeper 2",
-   "original": "The Beekeeper 2",
-   "director": "Timo Tjahjanto",
-   "generos": [
-    "Acción"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Ahora convertido en fugitivo, el antiguo asesino a sueldo del gobierno Adam Clay continúa su venganza contra aquellos que le hicieron daño. Secuela de \"Beekeeper: El protector\". \n\nEstreno en cines: enero 2027",
-   "poster": "https://pics.filmaffinity.com/the_beekeeper_2-440801157-mmed.jpg",
-   "fa": "430889",
    "destacado": false
   },
   {
