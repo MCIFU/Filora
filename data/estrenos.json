@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-19",
+ "actualizado": "2026-11-20",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -280,7 +280,7 @@
    ],
    "pais": "España",
    "reparto": "Pablo Chiapella, Patricia Conde, Salva Reina",
-   "sinopsis": "Cuenta la historia de cuatro matrimonios en diferentes etapas de su relación. Cuando la Iglesia descubre que un impostor…",
+   "sinopsis": "Cuenta la historia de cuatro matrimonios en diferentes etapas de su relación. Cuando la Iglesia descubre que un impostor ha estado suplantando al sacerdote de una parroquia durante nueve años, los enlaces celebrados por él quedan anulados. Las parejas…",
    "poster": "https://pics.filmaffinity.com/desposados-570159762-mmed.jpg",
    "fa": "201639",
    "destacado": false
@@ -535,7 +535,7 @@
    ],
    "pais": "España",
    "sinopsis": "Jasmine percibe que la música del mundo no suena bien desde que perdió a sus padres. Una partitura misteriosa la lleva a Soundland, el país secreto de la música. Allí conoce a Jambo, que le explica el poder de la Partitura Eterna. Juntos tratarán de salvar la…",
-   "poster": "https://pics.filmaffinity.com/jasmine_jambo-482863542-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/jasmine_jambo-497482012-mmed.jpg",
    "fa": "973660",
    "destacado": false
   },
@@ -790,7 +790,7 @@
   },
   {
    "fecha": "2027-01-01",
-   "titulo": "Ink",
+   "titulo": "Ink. El escándalo es noticia",
    "original": "Ink",
    "director": "Danny Boyle",
    "generos": [
@@ -874,6 +874,20 @@
   },
   {
    "fecha": "2027-01-06",
+   "titulo": "Licántropo",
+   "original": "Werwulf",
+   "director": "Robert Eggers",
+   "generos": [
+    "Terror"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "En la Inglaterra del siglo XIII, una misteriosa criatura acecha en una zona rural envuelta en niebla, mientras el folclore local se convierte en una aterradora realidad para los aldeanos.",
+   "poster": "https://pics.filmaffinity.com/werwulf-276949698-mmed.jpg",
+   "fa": "399436",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
    "titulo": "Minotauro",
    "original": "Minotauraka",
    "director": "Andrey Zvyagintsev",
@@ -912,20 +926,6 @@
    "sinopsis": "Alex Serian, un talentoso violonchelista, vuelve a Los Ángeles después de veinte años viajando por el mundo. Cuando la música, el hilo conductor de toda su vida, lo lleva por un camino inesperado, Alex se embarca en una experiencia transformadora que cambiará…",
    "poster": "https://pics.filmaffinity.com/behemoth-336337801-mmed.jpg",
    "fa": "845337",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-08",
-   "titulo": "Licántropo",
-   "original": "Werwulf",
-   "director": "Robert Eggers",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "En la Inglaterra del siglo XIII, una misteriosa criatura acecha en una zona rural envuelta en niebla, mientras el folclore local se convierte en una aterradora realidad para los aldeanos.",
-   "poster": "https://pics.filmaffinity.com/werwulf-276949698-mmed.jpg",
-   "fa": "399436",
    "destacado": false
   },
   {
