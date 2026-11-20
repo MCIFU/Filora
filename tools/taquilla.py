@@ -13,7 +13,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140 Safari/537.36"
@@ -82,14 +82,14 @@ def main():
             time.sleep(3)
             continue
         aplicar(p, d)
-        p["mod"] = datetime.utcnow().isoformat(timespec="seconds")
+        p["mod"] = datetime.now(timezone.utc).replace(tzinfo=None).isoformat(timespec="seconds")
         ok += bool(d)
         if n % 25 == 0:
             print(f"  [{n}/{len(pend)}] con datos: {ok}")
-            db["actualizado"] = datetime.utcnow().isoformat(timespec="seconds")
+            db["actualizado"] = datetime.now(timezone.utc).replace(tzinfo=None).isoformat(timespec="seconds")
             ruta.write_text(json.dumps(db, ensure_ascii=False, indent=1), encoding="utf-8")
         time.sleep(1.1)
-    db["actualizado"] = datetime.utcnow().isoformat(timespec="seconds")
+    db["actualizado"] = datetime.now(timezone.utc).replace(tzinfo=None).isoformat(timespec="seconds")
     ruta.write_text(json.dumps(db, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"Hecho: {ok} películas con taquilla de Box Office Mojo")
 

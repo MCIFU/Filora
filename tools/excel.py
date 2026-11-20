@@ -8,7 +8,7 @@ import os
 import sys
 import tempfile
 from collections import Counter, defaultdict
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from openpyxl import Workbook, load_workbook
@@ -388,7 +388,7 @@ def import_pro(path=XLSX_PATH, db=None):
     by_id = {p["id"]: p for p in db["peliculas"]}
     changed = added = 0
     import random
-    marca = datetime.utcnow().isoformat(timespec="seconds")
+    marca = datetime.now(timezone.utc).replace(tzinfo=None).isoformat(timespec="seconds")
     for row in ws.iter_rows(min_row=2, values_only=True):
         g = lambda h: _val(row[idx[h]]) if h in idx and idx[h] < len(row) else None
         if not g("Título"):
@@ -421,7 +421,7 @@ def import_pro(path=XLSX_PATH, db=None):
                 p["mod"] = marca
                 changed += 1
         else:
-            p = {**upd, "id": f"p{datetime.utcnow():%Y%m%d%H%M%S}{random.randint(0, 999999):06d}",
+            p = {**upd, "id": f"p{datetime.now(timezone.utc).replace(tzinfo=None):%Y%m%d%H%M%S}{random.randint(0, 999999):06d}",
                  "taquilla": {**taq, "mundial": None}, "ids": {}, "poster": None, "origen": "excel-nueva",
                  "mod": marca, "añadido": marca}
             db["peliculas"].append(p)
@@ -454,7 +454,7 @@ def import_pro(path=XLSX_PATH, db=None):
                     nota = float(nota.replace(",", "."))
                 director = g("Director") or ""
                 db["peliculas"].append({
-                    "id": f"p{datetime.utcnow():%Y%m%d%H%M%S}{random.randint(0, 999999):06d}",
+                    "id": f"p{datetime.now(timezone.utc).replace(tzinfo=None):%Y%m%d%H%M%S}{random.randint(0, 999999):06d}",
                     "titulo": titulo, "tituloOriginal": None, "anio": anio,
                     "duracion": int(g("Duración")) if g("Duración") else None,
                     "nota": round(float(nota), 1) if nota is not None else None,

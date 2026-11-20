@@ -18,7 +18,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import webbrowser
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -68,7 +68,7 @@ def backup():
 
 
 def ahora():
-    return datetime.utcnow().isoformat(timespec="seconds")
+    return datetime.now(timezone.utc).replace(tzinfo=None).isoformat(timespec="seconds")
 
 
 def write_db(db):
@@ -97,7 +97,7 @@ def regenerate_excel(db=None):
 def next_id(items=None, prefix="p"):
     """Id con fecha y hora (igual que en la web), único aunque se añada a la vez en el PC y el móvil."""
     import random
-    return f"{prefix}{datetime.utcnow():%Y%m%d%H%M%S}{random.randint(0, 999999):06d}"
+    return f"{prefix}{datetime.now(timezone.utc).replace(tzinfo=None):%Y%m%d%H%M%S}{random.randint(0, 999999):06d}"
 
 
 # ------------------------------------------------------------------ sincronización con la web
