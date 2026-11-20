@@ -27,6 +27,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import excel  # noqa: E402
 import taquilla
 import imdb_notas  # noqa: E402
+import webs  # noqa: E402
 import wiki  # noqa: E402
 from rutas import BACKUPS, CFG_PATH, DATA, DB_PATH, asegurar_db  # noqa: E402
 
@@ -358,6 +359,21 @@ class Handler(BaseHTTPRequestHandler):
                 cfg = read_json(CFG_PATH, {}) or {}
                 return self.send_json({**db, "estado": {**STATE, "tmdb": bool(cfg.get("tmdbKey")), "pin": bool(cfg.get("pin"))},
                                        "config": {k: v for k, v in cfg.items() if k not in ("tmdbKey", "pin")}})
+            # ---- consultas a otras webs hechas desde el PC (antes pasaban por Vercel)
+            q1 = lambda k: (qs.get(k) or [""])[0].strip() or None
+            if parts[1:] == ["imdb"]:
+                return self.send_json(webs.buscar_imdb(q1("q") or "", todo=bool(q1("todo"))))
+            if parts[1:] == ["poster"]:
+                return self.send_json(webs.poster_imdb(q1("imdb"), q1("t"), q1("y")))
+            if parts[1:] == ["notas"]:
+                return self.send_json(webs.notas(q1("fa"), q1("lb"), q1("ac")))
+            if parts[1:] == ["taquilla"]:
+                return self.send_json(webs.taquilla_imdb(q1("imdb")))
+            if parts[1:] == ["plataformas"]:
+                try:
+                    return self.send_json(webs.plataformas(q1("t"), q1("y")))
+                except Exception:
+                    return self.send_json([])
             if parts[1:] == ["estrenos"]:
                 return self.send_json(read_json(EST_PATH, {"estrenos": [], "cines": []}))
             if parts[1:] == ["cartelera"]:
@@ -535,29 +551,11 @@ def _necesita_notas_web(p):
     return dias > 60 or (falta and dias > 3)
 
 
-def nota_fa_directa(fa_id):
-    """Nota media y votos de FilmAffinity leídos de su ficha (mismo criterio que lib/notas.mjs leerFA)."""
-    try:
-        req = urllib.request.Request(f"https://www.filmaffinity.com/es/film{fa_id}.html",
-                                     headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36",
-                                              "Accept-Language": "es-ES,es;q=0.9"})
-        with urllib.request.urlopen(req, timeout=15) as r:
-            h = r.read().decode("utf-8", "replace")
-    except Exception:
-        return None
-    v = re.search(r'itemprop="ratingValue" content="([\d.,]+)"', h) or re.search(r'id="movie-rat-avg"[^>]*>\s*([\d.,]+)', h)
-    n = re.search(r'itemprop="ratingCount" content="(\d+)"', h) or re.search(r'id="movie-count-rat"[^>]*>[^\d]*([\d.]+)', h)
-    if not v:
-        return None
-    return {"v": float(v.group(1).replace(",", ".")), "n": int(n.group(1).replace(".", "")) if n else None}
-
-
 def completar_notas_web(solo=None, espera=20):
     """Notas de FilmAffinity, Letterboxd y SensaCine de cada película (para la nota final).
-    Se piden a la web publicada (/api/notas) poco a poco y se guardan cada 20 películas.
+    Las pide el propio PC (tools/webs.py) poco a poco y se guardan cada 20 películas.
     Al arrancar repasa toda la colección; tras añadir una película (solo=[id]) solo esa."""
     time.sleep(espera)
-    web = ((read_json(CFG_PATH, {}) or {}).get("web") or WEB).rstrip("/")
     with LOCK:
         pendientes = [p["id"] for p in load_db()["peliculas"] if (solo is None or p["id"] in solo) and _necesita_notas_web(p)]
     hechas = {}
@@ -578,15 +576,7 @@ def completar_notas_web(solo=None, espera=20):
         if not p:
             continue
         i = p.get("ids") or {}
-        q = urllib.parse.urlencode({k: v for k, v in {"fa": i.get("filmaffinity"), "lb": i.get("letterboxd"), "ac": i.get("allocine")}.items() if v})
-        try:
-            with urllib.request.urlopen(urllib.request.Request(f"{web}/api/notas?{q}", headers={"User-Agent": "Filora-PC/1.0"}), timeout=40) as r:
-                n = json.loads(r.read().decode("utf-8"))
-        except Exception:
-            time.sleep(10)
-            continue
-        if i.get("filmaffinity") and not n.get("fa"):
-            n["fa"] = nota_fa_directa(i["filmaffinity"])  # a la web le bloquean FilmAffinity; desde el PC suele responder
+        n = webs.notas_externas(i.get("filmaffinity"), i.get("letterboxd"), i.get("allocine"))
         w = {"t": date.today().isoformat()}
         if n.get("fa"):
             w["fa"] = [n["fa"]["v"], n["fa"].get("n")]

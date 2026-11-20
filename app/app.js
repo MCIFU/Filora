@@ -150,8 +150,8 @@ const setSes = (s) => { try { s ? localStorage.setItem(SES_KEY, JSON.stringify(s
 const ro = () => STATIC && !getPin() && !getSes(); // solo lectura: web publicada sin cuenta ni PIN
 const authHeaders = () => { const ses = getSes(); return ses ? { Authorization: `Bearer ${ses.token}` } : getPin() ? { "X-Pin": getPin() } : {}; };
 document.documentElement.classList.toggle("ro", ro());
-// Búsquedas de solo lectura (IMDb, carteles, taquilla, plataformas): en el PC también van a la API de la web
-const API_WEB = STATIC ? API : "https://filora-umber.vercel.app";
+// Búsquedas de solo lectura (IMDb, carteles, taquilla, plataformas, notas)
+const API_WEB = API; // en el PC las responde server.py (tools/webs.py), sin Vercel
 const STATIC_FILES = { cines: "data/cines_es.json", estrenos: "data/estrenos.json", catalogo: "data/catalogo.json", cartelera: "data/cartelera.json" };
 const coleccionVacia = () => ({ peliculas: [], series: [], pendientes: [], borrados: {}, estado: { web: true, privada: true } });
 

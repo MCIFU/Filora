@@ -11,6 +11,7 @@ import gzip
 import io
 import json
 import sys
+import time
 import urllib.request
 from pathlib import Path
 
@@ -70,8 +71,10 @@ def nota(tt):
 
 def rellenar(db):
     """Pone imdbNota a las películas que aún no la tienen. Devuelve cuántas ha completado."""
-    if not (OUT / "00.json").exists():
-        main()
+    f = OUT / "00.json"
+    if not f.exists() or time.time() - f.stat().st_mtime > 7 * 86400:  # se renuevan cada semana
+        if main():
+            _trozos.clear()
     n = 0
     for p in db.get("peliculas", []):
         if p.get("imdbNota"):

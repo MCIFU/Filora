@@ -2,7 +2,7 @@
 // - /api/*           siempre a la red (datos en vivo y edición)
 // - app y datos      red primero; si no hay conexión, la copia guardada
 // - carteles/fuentes caché primero (no cambian), con límite de tamaño
-const V = "filora-v31";
+const V = "filora-v32";
 const BASE = ["./", "index.html", "styles.css", "app.js", "colecciones.js", "descubrir.js", "juntos.js", "cines.js", "busqueda.js", "arranque.js", "premios-iconos.js", "extras.js", "premios.js", "ficha-wd.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", (e) => {
