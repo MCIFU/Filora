@@ -174,6 +174,14 @@ async function completarDesdeWiki(p) {
 // ---------------------------------------------------------------- Cuentas (web publicada)
 function openCuenta() {
   const ses = getSes();
+  if (!ses && typeof nubeActiva === "function" && nubeActiva()) {
+    const c = nubeCfg();
+    modal(`<div class="sheet-body"><div class="eyebrow">Sincronizada con GitHub</div><h2 class="h2" style="margin:6px 0 10px">${esc(c.repo)}</h2>
+      <p class="muted" style="margin:0 0 18px">${fmtInt(S.db.peliculas.length)} películas. Se guardan en tu repositorio privado de GitHub, sin Vercel; el PC se sincroniza con el mismo repositorio.</p>
+      <button class="btn" id="nubeOff" style="width:100%;justify-content:center">${icon("x")}Desconectar este dispositivo</button></div>`, "narrow");
+    $("#nubeOff").onclick = async () => { nubeGuardarCfg(null); document.documentElement.classList.toggle("ro", ro()); closeModal(); await refreshDB(); render(); toast("Desconectado de GitHub"); };
+    return;
+  }
   if (ses || getPin()) {
     modal(`<div class="sheet-body"><div class="eyebrow">${ses ? "Tu cuenta" : "Modo edición"}</div><h2 class="h2" style="margin:6px 0 10px">${ses ? esc(ses.usuario) : "Dueño"}</h2>
       <p class="muted" style="margin:0 0 18px">${ses ? `${fmtInt(S.db.peliculas.length)} películas y ${fmtInt(S.db.series.length)} series guardadas en tu cuenta. Entra con el mismo usuario en otro dispositivo para verlas allí.` : "Estás editando la colección pública con tu PIN."}</p>
@@ -210,7 +218,9 @@ function openLogin(modo = "entrar") {
       <p id="cErr" role="alert" style="color:var(--red);min-height:22px;margin:10px 0 6px"></p>
       <button class="btn btn-primary" id="cBtn" style="width:100%;justify-content:center">${icon(crear ? "plus" : "check")}${crear ? "Crear cuenta" : "Entrar"}</button>
     </form>
+    <button type="button" class="btn btn-ghost" id="cNube" style="width:100%;justify-content:center;margin-top:10px">${icon("refresh")}Sin Vercel: conectar con GitHub</button>
     </div>`, "narrow");
+  $("#cNube").onclick = () => openNube();
   setTimeout(() => $("#cUser").focus(), 60);
   document.querySelectorAll(".cuenta-f [data-modo]").forEach((b) => (b.onclick = () => openLogin(b.dataset.modo)));
   const err = (m) => ($("#cErr").textContent = m);
@@ -237,6 +247,32 @@ function openLogin(modo = "entrar") {
     } catch (e) {
       err("No se ha podido conectar. Comprueba tu conexión.");
     } finally { b.disabled = false; }
+  };
+}
+// Sin Vercel: tu colección en un repositorio privado de GitHub, con una clave personal guardada solo en este dispositivo
+function openNube() {
+  const c = (typeof nubeCfg === "function" && nubeCfg()) || { repo: "MCIFU/filora-datos" };
+  modal(`<div class="sheet-body"><div class="eyebrow">Sincronizar sin Vercel</div><h2 class="h2" style="margin:6px 0 10px">Conectar con GitHub</h2>
+    <p class="muted" style="margin:0 0 14px">Tu colección se guarda en un repositorio <b>privado</b> tuyo de GitHub. Pon aquí el mismo repositorio y la misma clave que en Ajustes de Filora en el PC.</p>
+    <form id="nubeF" novalidate>
+      <label class="lbl" for="nRepo">Repositorio privado</label><input class="input" id="nRepo" value="${esc(c.repo || "")}" placeholder="MCIFU/filora-datos" autocapitalize="none" spellcheck="false">
+      <label class="lbl" for="nTok" style="margin-top:12px">Clave de GitHub</label><input class="input" id="nTok" type="password" autocomplete="off" placeholder="github_pat_…">
+      <p id="nErr" role="alert" style="color:var(--red);min-height:22px;margin:10px 0 6px"></p>
+      <button class="btn btn-primary" id="nBtn" style="width:100%;justify-content:center">${icon("check")}Conectar</button>
+    </form></div>`, "narrow");
+  $("#nubeF").onsubmit = async (ev) => {
+    ev.preventDefault();
+    const cfg = { repo: $("#nRepo").value.trim().replace(/^https:\/\/github\.com\//, "").replace(/\/$/, ""), token: $("#nTok").value.trim() };
+    if (!/^[\w.-]+\/[\w.-]+$/.test(cfg.repo) || !cfg.token) { $("#nErr").textContent = "Pon el repositorio (usuario/nombre) y la clave."; return; }
+    $("#nBtn").disabled = true;
+    try {
+      await nubeProbar(cfg);
+      nubeGuardarCfg(cfg); setSes(null);
+      try { localStorage.removeItem(PIN_KEY); } catch (e) { /* */ }
+      document.documentElement.classList.toggle("ro", ro());
+      closeModal(); await refreshDB(); location.hash = "#/inicio"; render();
+      toast(`Conectado a ${cfg.repo}: ${fmtInt(S.db.peliculas.length)} películas`, "check");
+    } catch (e) { $("#nErr").textContent = e.message; } finally { $("#nBtn").disabled = false; }
   };
 }
 // El dueño de la colección pública puede seguir editándola con su PIN.

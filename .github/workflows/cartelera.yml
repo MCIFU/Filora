@@ -39,5 +39,6 @@ jobs:
             echo "Sin cambios"
           else
             git commit -m "Cartelera y estrenos: $(date +%Y-%m-%d)"
-            git push
+            git pull --rebase -q origin main
+          git push
           fi

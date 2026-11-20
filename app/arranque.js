@@ -110,7 +110,7 @@ if ("serviceWorker" in navigator && location.protocol === "https:") {
 
 // ---------------------------------------------------------------- arranque
 // Arranque instantáneo: se pinta con la última copia guardada en este navegador y se actualiza por detrás.
-const COPIA_KEY = () => `filora.copia.${(getSes() || {}).usuario || (getPin() ? "pin" : "anon")}`;
+const COPIA_KEY = () => `filora.copia.${(getSes() || {}).usuario || (getPin() ? "pin" : (typeof nubeActiva === "function" && nubeActiva()) ? "github" : "anon")}`;
 function guardarCopia() {
   if (!STATIC || !S.db) return;
   try { localStorage.setItem(COPIA_KEY(), JSON.stringify({ t: Date.now(), db: S.db, est: S.est, cat: S.cat, cart: S.cartTodo })); }

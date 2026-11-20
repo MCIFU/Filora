@@ -69,18 +69,21 @@ def nota(tt):
     return _trozos[k].get(tt)
 
 
-def rellenar(db):
-    """Pone imdbNota a las películas que aún no la tienen. Devuelve cuántas ha completado."""
+def asegurar_datos():
+    """Descarga los datos oficiales de IMDb si faltan o tienen más de una semana."""
     f = OUT / "00.json"
-    if not f.exists() or time.time() - f.stat().st_mtime > 7 * 86400:  # se renuevan cada semana
+    if not f.exists() or time.time() - f.stat().st_mtime > 7 * 86400:
         if main():
             _trozos.clear()
+
+
+def rellenar(db):
+    """Pone o actualiza imdbNota con los datos oficiales de IMDb de esta semana. Devuelve cuántas han cambiado."""
+    asegurar_datos()
     n = 0
-    for p in db.get("peliculas", []):
-        if p.get("imdbNota"):
-            continue
+    for p in db.get("peliculas", []):  # también pone al día las que ya la tenían (nota y votos cambian)
         r = nota((p.get("ids") or {}).get("imdb"))
-        if r:
+        if r and p.get("imdbNota") != r:
             p["imdbNota"] = r
             n += 1
     return n

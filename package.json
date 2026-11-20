@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "python server.py --no-browser",
-    "test": "node tests/api.test.mjs && node tests/cuentas.test.mjs",
+    "test": "node tests/api.test.mjs && node tests/cuentas.test.mjs && python3 tests/test_github_sync.py",
     "test:web": "node tests/web.test.mjs"
   },
   "dependencies": {

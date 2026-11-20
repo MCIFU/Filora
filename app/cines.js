@@ -21,6 +21,7 @@ async function avisarDemanda(forzar) {
   const ids = misCines().map((c) => c.id);
   if (!ids.length) return;
   try { if (!forzar && localStorage.getItem("filora.demanda") === todayISO()) return; localStorage.setItem("filora.demanda", todayISO()); } catch (e) { /* */ }
+  if (typeof nubeActiva === "function" && nubeActiva()) { nubeAvisarCines({ cines: misCines() }).catch(() => {}); return; } // sin Vercel: GitHub
   try {
     const r = await fetch(`${API}/api/demanda`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cines: ids }) });
     const j = await r.json();

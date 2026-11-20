@@ -501,6 +501,36 @@ await prueba("Tu año en una imagen vertical para compartir", async (p) => {
   if (process.env.CAPTURAS) await descarga.saveAs(join(process.env.CAPTURAS, "imagen_anio.png"));
 });
 
+await prueba("Sin Vercel: la web lee y guarda tu colección en tu repositorio privado de GitHub", async (p, e) => {
+  const remoto = { peliculas: [{ id: "g1", titulo: "Guardada en GitHub", anio: 2020, nota: 8, director: "Alguien", generos: ["Drama"], ids: {}, mod: "2026-11-01T00:00:00" }],
+    series: [], pendientes: [], borrados: {}, preferencias: { cines: [{ id: 402, nombre: "Yelmo Ocimax" }], mod: "2026-11-01T00:00:00" } };
+  let sha = "s0"; const puts = [], vercel = [];
+  const b64 = (o) => Buffer.from(JSON.stringify(o)).toString("base64");
+  await p.route("https://filora-umber.vercel.app/**", (r) => { vercel.push(r.request().url()); return r.fulfill({ status: 503, body: "" }); });
+  await p.route("https://api.github.com/**", (r) => {
+    const u = r.request().url(), m = r.request().method(), h = { "Access-Control-Allow-Origin": "*" };
+    if (/filora-datos$/.test(u)) return r.fulfill({ json: { private: true }, headers: h });
+    if (/filora-datos\/contents\/db\.json/.test(u)) {
+      if (m === "GET") return r.fulfill({ json: { content: b64(remoto), sha }, headers: h });
+      const b = JSON.parse(r.request().postData());
+      if (b.sha !== sha) return r.fulfill({ status: 409, json: {}, headers: h });
+      Object.assign(remoto, JSON.parse(Buffer.from(b.content, "base64").toString())); sha = "s" + (puts.length + 1); puts.push(b);
+      return r.fulfill({ json: { content: { sha } }, headers: h });
+    }
+    return r.fulfill({ status: 404, json: {}, headers: h });
+  });
+  await p.addInitScript(() => { localStorage.removeItem("cine.pin"); localStorage.setItem("filora.github", JSON.stringify({ repo: "MCIFU/filora-datos", token: "github_pat_prueba" })); });
+  await p.goto(`${BASE}/?vitrina#/coleccion`);
+  await p.waitForFunction(() => document.querySelector("#collRes")?.textContent.includes("Guardada en GitHub"), null, { timeout: 8000 });
+  assert.equal(await p.evaluate(() => ro()), false, "con GitHub se puede editar");
+  await p.evaluate(() => api("pendientes", { method: "POST", body: { titulo: "Añadida desde el móvil" } }));
+  assert.ok(remoto.pendientes.some((w) => w.titulo === "Añadida desde el móvil"), "se guarda en GitHub");
+  sha = "otro"; // otro dispositivo guardó entretanto: se relee y se repite
+  await p.evaluate(() => api("peliculas/g1", { method: "PUT", body: { nota: 9 } }));
+  assert.equal(remoto.peliculas[0].nota, 9);
+  assert.ok(!vercel.some((u) => /\/api\/(db|pendientes|peliculas|sync)/.test(u)), "la colección no pasa por Vercel");
+});
+
 // Una colección del tamaño de la real (650 películas, la mitad este año) para ver que nada se rompe ni va lento
 function coleccionGrande(e) {
   const lugares = ["Yelmo Ocimax", "Ocine Los Fresnos", "Netflix", "Filmin", "Movistar Plus+", "En casa", "Prime Video", "Max"];

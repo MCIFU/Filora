@@ -708,7 +708,11 @@ VIEWS.ajustes = (v) => {
     <div class="card"><h3>${icon("download")} Tu Excel</h3><p>Cada cambio que haces aquí regenera <code>Filora.xlsx</code> en la carpeta de la app, con hojas de resumen, películas, series, UCM, pendientes y estrenos.</p>
       ${e.excel_error ? `<p style="color:var(--gold)">⚠ ${esc(e.excel_error)}</p>` : ""}
       <div class="acts"><a class="btn btn-primary" href="/api/excel">${icon("download")}Descargar Excel</a><button class="btn" id="xRegen">${icon("refresh")}Regenerar</button></div></div>
-    <div class="card"><h3>${icon("globe")} Sincronizar con la web</h3><p>Escribe la dirección de tu web y el mismo <b>PIN</b> que configuraste en Vercel. Tu PC y la web se sincronizarán solos (al arrancar, tras cada cambio y cada 5 minutos), así lo que añadas desde el móvil llega a tu Excel.</p>
+    <div class="card"><h3>${icon("refresh")} Sincronizar sin Vercel (GitHub)</h3><p>Tu colección se guarda también en un repositorio <b>privado</b> tuyo de GitHub y se sincroniza con el móvil (al arrancar, tras cada cambio y cada 5 minutos). En el móvil, abre la web y pulsa el botón de cuenta → «Sin Vercel: conectar con GitHub» con el mismo repositorio y la misma clave.</p>
+      <p class="dim" style="font-size:12.5px">Estado: ${e.github ? `${esc(e.github)} · ${esc(e.sync || "pendiente")}` : "sin configurar"}${e.github && e.sync_at ? ` · última vez ${new Date(e.sync_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}` : ""}</p>
+      <div class="acts" style="margin-bottom:8px"><input class="input" id="ghRepo" placeholder="Repositorio privado (MCIFU/filora-datos)" value="${esc(e.github || "MCIFU/filora-datos")}" style="flex:1" autocapitalize="none" spellcheck="false"></div>
+      <div class="acts"><input class="input" id="ghTok" type="password" autocomplete="off" placeholder="${e.github ? "Clave guardada ✓ (escribe para cambiarla)" : "Clave de GitHub (github_pat_…)"}" style="flex:1"><button class="btn" id="ghSave">Guardar</button><button class="btn btn-ghost" id="ghNow">${icon("refresh")}Sincronizar ahora</button></div></div>
+    <div class="card"><h3>${icon("globe")} Sincronizar con la web de Vercel (opcional)</h3><p>Escribe la dirección de tu web y el mismo <b>PIN</b> que configuraste en Vercel. Tu PC y la web se sincronizarán solos (al arrancar, tras cada cambio y cada 5 minutos), así lo que añadas desde el móvil llega a tu Excel.</p>
       <p class="dim" style="font-size:12.5px">Estado: ${e.pin ? esc(e.sync || "pendiente") : "sin PIN"}${e.sync_at ? ` · última vez ${new Date(e.sync_at).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}` : ""}</p>
       <div class="acts" style="margin-bottom:8px"><input class="input" id="webLocal" type="url" placeholder="Dirección de tu web (por defecto https://filora-umber.vercel.app)" value="${esc((S.db.config || {}).web || "")}" style="flex:1"><button class="btn" id="webSave">Guardar</button></div>
       <div class="acts"><input class="input" id="pinLocal" type="password" inputmode="numeric" placeholder="${e.pin ? "PIN guardado ✓ (escribe para cambiarlo)" : "PIN de edición"}" style="flex:1"><button class="btn" id="pinSave">Guardar</button><button class="btn btn-ghost" id="syncNow">${icon("refresh")}Sincronizar ahora</button></div></div>
@@ -725,6 +729,15 @@ VIEWS.ajustes = (v) => {
   $("#xRegen").onclick = async () => { const r = await api("excel/regenerar", { method: "POST" }); await refreshDB(); toast(r.ok ? "Excel regenerado" : r.excel_error, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
   $("#xImp").onclick = async () => { try { const r = await api("excel/importar", { method: "POST" }); await refreshDB(); toast(`${r.modificadas} modificadas · ${r.nuevas} nuevas`); } catch (err) { toast(err.message, "x"); } };
   $("#pinSave").onclick = async () => { const k = $("#pinLocal").value.trim(); if (k.length < 4) return toast("El PIN debe tener al menos 4 caracteres", "x"); await api("config", { method: "POST", body: { pin: k } }); const r = await api("sync", { method: "POST" }); await refreshDB(); toast(r.ok ? "PIN guardado · sincronizado con la web" : r.sync, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
+  $("#ghSave").onclick = async () => {
+    const repo = $("#ghRepo").value.trim().replace(/^https:\/\/github\.com\//, "").replace(/\/$/, ""), token = $("#ghTok").value.trim();
+    if (!/^[\w.-]+\/[\w.-]+$/.test(repo)) return toast("Pon el repositorio como usuario/nombre", "x");
+    if (!token && !e.github) return toast("Falta la clave de GitHub", "x");
+    await api("config", { method: "POST", body: { gh_repo: repo, ...(token ? { gh_token: token } : {}) } });
+    const r = await api("sync", { method: "POST" }); await refreshDB();
+    toast(r.ok ? "Sincronizado con GitHub" : r.sync, r.ok ? "check" : "x"); VIEWS.ajustes(v);
+  };
+  $("#ghNow").onclick = async () => { const r = await api("sync", { method: "POST" }); await refreshDB(); toast(r.ok ? "Sincronizado" : r.sync, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
   $("#webSave").onclick = async () => { const w = $("#webLocal").value.trim(); await api("config", { method: "POST", body: { web: w || null } }); await refreshDB(); toast("Dirección guardada"); VIEWS.ajustes(v); };
   $("#syncNow").onclick = async () => { const r = await api("sync", { method: "POST" }); await loadAll(); toast(r.ok ? "Sincronizado con la web" : r.sync, r.ok ? "check" : "x"); VIEWS.ajustes(v); };
   $("#tmdbSave").onclick = async () => { const k = $("#tmdbKey").value.trim(); if (!k) return; await api("config", { method: "POST", body: { tmdbKey: k } }); await refreshDB(); toast("Clave guardada"); VIEWS.ajustes(v); };

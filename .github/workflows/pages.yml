@@ -1,0 +1,45 @@
+name: Publicar en GitHub Pages
+# La web de Filora sin Vercel: https://mcifu.github.io/Filora/ (la colección se sincroniza con tu repositorio privado, app/nube.js).
+# Se publica con cada cambio en main y a diario. Hay que activarlo una vez: Settings → Pages → Source: GitHub Actions.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "45 6 * * *"
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - name: ¿Está GitHub Pages activado?
+        id: activo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1; then echo "si=1" >> "$GITHUB_OUTPUT"; else echo "GitHub Pages no está activado (Settings → Pages → Source: GitHub Actions): no se publica."; fi
+      - uses: actions/checkout@v4
+        if: steps.activo.outputs.si
+      - uses: actions/setup-python@v5
+        if: steps.activo.outputs.si
+        with:
+          python-version: "3.12"
+      - name: Generar los datos de la web
+        if: steps.activo.outputs.si
+        run: python tools/build_static.py
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.activo.outputs.si
+        with:
+          path: app
+      - uses: actions/deploy-pages@v4
+        if: steps.activo.outputs.si
+        id: despliegue

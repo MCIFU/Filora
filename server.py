@@ -28,6 +28,7 @@ import excel  # noqa: E402
 import taquilla
 import imdb_notas  # noqa: E402
 import webs  # noqa: E402
+import github_sync  # noqa: E402
 import wiki  # noqa: E402
 from rutas import BACKUPS, CFG_PATH, DATA, DB_PATH, asegurar_db  # noqa: E402
 
@@ -141,6 +142,60 @@ def sync_web():
     return True
 
 
+def sync_github():
+    """Fusiona la colección del PC con tu repositorio privado de GitHub (sin Vercel). None si no está configurado."""
+    cfg = read_json(CFG_PATH, {}) or {}
+    token, repo = cfg.get("gh_token"), cfg.get("gh_repo")
+    if not (token and repo):
+        return None
+    with LOCK:
+        db = load_db()
+    enviado = db.get("actualizado")
+    fusion = github_sync.sincronizar(token, repo, db)  # red fuera del cerrojo
+    with LOCK:
+        actual = load_db()
+        if actual.get("actualizado") != enviado:
+            SYNC_EVENT.set()  # cambiaste algo mientras tanto: se repite enseguida
+            return True
+        cols = ("peliculas", "series", "pendientes", "borrados", "preferencias")
+        if any(json.dumps(actual.get(c), sort_keys=True) != json.dumps(fusion.get(c), sort_keys=True) for c in cols):
+            for c in cols:
+                if c in fusion:
+                    actual[c] = fusion[c]
+            actual["actualizado"] = fusion.get("actualizado") or ahora()
+            write_db(actual)  # sin volver a disparar otra sincronización
+    cines = (fusion.get("preferencias") or {}).get("cines") or []
+    clave = json.dumps(sorted(str(c.get("id")) for c in cines))
+    if cines and STATE.get("cines_avisados") != clave:
+        try:
+            github_sync.avisar_cines(token, cines)
+            STATE["cines_avisados"] = clave
+        except Exception:
+            pass
+    return True
+
+
+def sincronizar_todo():
+    """GitHub (sin Vercel) y, si pusiste el PIN, también la web de Vercel."""
+    cfg = read_json(CFG_PATH, {}) or {}
+    hay_gh, hay_pin = bool(cfg.get("gh_token") and cfg.get("gh_repo")), bool(cfg.get("pin"))
+    if not hay_gh and not hay_pin:
+        STATE["sync"] = "Sin sincronizar: pon tu repositorio de GitHub en Ajustes"
+        return False
+    ok = True
+    if hay_gh:
+        try:
+            sync_github()
+        except Exception as e:
+            STATE["sync"] = f"GitHub: {e}"
+            ok = False
+    if hay_pin:
+        ok = sync_web() and ok
+    if ok:
+        STATE["sync"], STATE["sync_at"] = "ok", datetime.now().isoformat(timespec="seconds")
+    return ok
+
+
 def hilo_sync():
     SYNC_EVENT.set()  # primera sincronización al arrancar
     while True:
@@ -148,7 +203,7 @@ def hilo_sync():
         SYNC_EVENT.clear()
         time.sleep(2)  # agrupa varios cambios seguidos
         try:
-            sync_web()
+            sincronizar_todo()
         except Exception as e:
             STATE["sync"] = f"Error: {e}"
 
@@ -357,8 +412,8 @@ class Handler(BaseHTTPRequestHandler):
             if parts[1:] == ["db"]:
                 db = load_db()
                 cfg = read_json(CFG_PATH, {}) or {}
-                return self.send_json({**db, "estado": {**STATE, "tmdb": bool(cfg.get("tmdbKey")), "pin": bool(cfg.get("pin"))},
-                                       "config": {k: v for k, v in cfg.items() if k not in ("tmdbKey", "pin")}})
+                return self.send_json({**db, "estado": {**STATE, "tmdb": bool(cfg.get("tmdbKey")), "pin": bool(cfg.get("pin")), "github": cfg.get("gh_repo") if cfg.get("gh_token") else None},
+                                       "config": {k: v for k, v in cfg.items() if k not in ("tmdbKey", "pin", "gh_token")}})
             # ---- consultas a otras webs hechas desde el PC (antes pasaban por Vercel)
             q1 = lambda k: (qs.get(k) or [""])[0].strip() or None
             if parts[1:] == ["imdb"]:
@@ -456,7 +511,7 @@ class Handler(BaseHTTPRequestHandler):
                         if n:
                             save_db(db)
                     return self.send_json({"ok": True, "guardadas": n})
-                ok = sync_web()
+                ok = sincronizar_todo()
                 return self.send_json({"ok": ok, "sync": STATE["sync"]})
             if parts[1:] == ["excel", "regenerar"]:
                 regenerate_excel()
@@ -548,7 +603,45 @@ def _necesita_notas_web(p):
         return True
     dias = (date.today() - date.fromisoformat(w.get("t", "2000-01-01"))).days
     falta = (i.get("filmaffinity") and not w.get("fa")) or (i.get("letterboxd") and not w.get("lb")) or (i.get("allocine") and not w.get("sc"))
-    return dias > 60 or (falta and dias > 3)
+    reciente = (p.get("anio") or 0) >= date.today().year - 1  # las de este año y el pasado aún reciben votos: cada semana
+    return dias > (7 if reciente else 60) or (falta and dias > 3)
+
+
+def poner_al_dia():
+    """Al arrancar: taquilla de las películas recientes (aún en cines o recién salidas) cada semana,
+    y cartel, ids y datos de las que no se reconocieron todavía (como «Completar mi colección»)."""
+    time.sleep(45)
+    hoy = date.today()
+    with LOCK:
+        pelis = [dict(p) for p in load_db()["peliculas"]]
+    def toca_taquilla(p):
+        imdb = (p.get("ids") or {}).get("imdb")
+        if not imdb:
+            return False
+        hecho = (p.get("taquilla") or {}).get("consultado")
+        if not hecho:
+            return True
+        dias = (hoy - date.fromisoformat(hecho[:10])).days
+        return dias > 7 if (p.get("anio") or 0) >= hoy.year - 1 else False
+    for p in [p for p in pelis if toca_taquilla(p)][:200]:
+        try:
+            datos = taquilla.consultar(p["ids"]["imdb"])
+        except Exception:
+            time.sleep(5)
+            continue
+        with LOCK:
+            db = load_db()
+            it = next((x for x in db["peliculas"] if x["id"] == p["id"]), None)
+            if it:
+                taquilla.aplicar(it, datos)
+                it["mod"] = ahora()
+                save_db(db)
+        time.sleep(1.5)
+    sin_datos = [p["id"] for p in pelis if not (p.get("ids") or {}).get("wikidata") or not p.get("poster")]
+    for pid in sin_datos[:30]:
+        enrich_background("film", pid)
+        time.sleep(4)
+    STATE["al_dia"] = datetime.now().isoformat(timespec="seconds")
 
 
 def completar_notas_web(solo=None, espera=20):
@@ -594,6 +687,7 @@ def completar_notas_web(solo=None, espera=20):
 def completar_notas_imdb():
     """Nota y votos de IMDb para cada película (la predicción de gustos los usa)."""
     try:
+        imdb_notas.asegurar_datos()  # la descarga (unos segundos) fuera del cerrojo: la app sigue guardando
         with LOCK:
             db = load_db()
             if imdb_notas.rellenar(db):
@@ -616,6 +710,7 @@ def main():
     threading.Thread(target=hilo_sync, daemon=True).start()
     threading.Thread(target=completar_notas_imdb, daemon=True).start()
     threading.Thread(target=completar_notas_web, daemon=True).start()
+    threading.Thread(target=poner_al_dia, daemon=True).start()
     threading.Thread(target=hilo_excel, daemon=True).start()
     srv = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
     url = f"http://localhost:{PORT}"

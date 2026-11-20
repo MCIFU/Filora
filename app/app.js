@@ -147,7 +147,7 @@ const getPin = () => { try { return localStorage.getItem(PIN_KEY) || ""; } catch
 const SES_KEY = "filora.sesion";
 const getSes = () => { try { return JSON.parse(localStorage.getItem(SES_KEY) || "null"); } catch (e) { return null; } };
 const setSes = (s) => { try { s ? localStorage.setItem(SES_KEY, JSON.stringify(s)) : localStorage.removeItem(SES_KEY); } catch (e) { /* */ } };
-const ro = () => STATIC && !getPin() && !getSes(); // solo lectura: web publicada sin cuenta ni PIN
+const ro = () => STATIC && !getPin() && !getSes() && !(typeof nubeActiva === "function" && nubeActiva()); // solo lectura: web publicada sin cuenta, PIN ni GitHub
 const authHeaders = () => { const ses = getSes(); return ses ? { Authorization: `Bearer ${ses.token}` } : getPin() ? { "X-Pin": getPin() } : {}; };
 document.documentElement.classList.toggle("ro", ro());
 // Búsquedas de solo lectura (IMDb, carteles, taquilla, plataformas, notas)
@@ -175,6 +175,12 @@ async function api(path, opts = {}) {
   if (STATIC && (method !== "GET" || path === "db") && !opts._enCola) return enCola(() => api(path, { ...opts, _enCola: true }));
   if (STATIC) {
     const method = opts.method || "GET";
+    // sin Vercel: la colección se lee y se guarda en tu repositorio privado de GitHub (nube.js)
+    if (typeof nubeActiva === "function" && nubeActiva() && !getSes() && ((method === "GET" && path === "db") || (method !== "GET" && path !== "demanda"))) {
+      const j = await nubeApi(path, opts);
+      if (method !== "GET") datosCambiados();
+      return j;
+    }
     if (path.startsWith("buscar")) return wikiBuscar(decodeURIComponent(path.split("q=")[1] || ""));
     if (method === "GET" && path === "db") {
       try {
@@ -477,7 +483,7 @@ function renderChrome() {
   }
   $("#sideFoot").innerHTML = e.excel_error
     ? `<span class="warn">⚠ ${esc(e.excel_error)}</span>`
-    : `<b>Guardado en tu PC</b><br><span class="dim">${e.pin ? (e.sync === "ok" ? `Sincronizado con la web${e.sync_at ? ` ${haceRato(e.sync_at)}` : ""}` : esc(e.sync || "Sincronizando con la web…")) : "Sin sincronizar con la web (pon tu PIN en Ajustes)"}</span><br><a href="/api/excel" class="dim">Excel${hora ? ` (${hora})` : ""}</a>`;
+    : `<b>Guardado en tu PC</b><br><span class="dim">${e.pin || e.github ? (e.sync === "ok" ? `Sincronizado${e.github ? " con GitHub" : " con la web"}${e.sync_at ? ` ${haceRato(e.sync_at)}` : ""}` : esc(e.sync || "Sincronizando…")) : "Sin sincronizar (configúralo en Ajustes)"}</span><br><a href="/api/excel" class="dim">Excel${hora ? ` (${hora})` : ""}</a>`;
 }
 // «hace un momento», «hace 3 min», «hace 2 h»
 function haceRato(iso) {
