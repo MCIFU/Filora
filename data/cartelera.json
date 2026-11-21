@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-21T13:16",
+ "actualizado": "2026-11-21T20:24",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -3613,11 +3613,6 @@
        "dias": {
         "2026-11-21": [
          {
-          "hora": "12:00",
-          "sala": "Sala 1 XL",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-58455"
-         },
-         {
           "hora": "18:15",
           "sala": "Sala 1 XL",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-58451"
@@ -3694,11 +3689,6 @@
        "dias": {
         "2026-11-21": [
          {
-          "hora": "12:15",
-          "sala": "Sala 2",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-58996"
-         },
-         {
           "hora": "15:10",
           "sala": "Sala 10",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59487"
@@ -3769,11 +3759,6 @@
        "nombre": "El Director",
        "dias": {
         "2026-11-21": [
-         {
-          "hora": "12:30",
-          "sala": "Sala 10",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59360"
-         },
          {
           "hora": "16:50",
           "sala": "Sala 7",
@@ -3852,11 +3837,6 @@
        "nombre": "SCROOGE Y LOS FANTASMAS DE LA NAVIDAD",
        "dias": {
         "2026-11-21": [
-         {
-          "hora": "12:15",
-          "sala": "Sala 9",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59337"
-         },
          {
           "hora": "16:05",
           "sala": "Sala 9",
@@ -3972,18 +3952,6 @@
          }
         ]
        }
-      },
-      {
-       "nombre": "Wild Horse Nine (VIP Bed)",
-       "dias": {
-        "2026-11-21": [
-         {
-          "hora": "11:55",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59479"
-         }
-        ]
-       }
       }
      ]
     },
@@ -4064,11 +4032,6 @@
        "dias": {
         "2026-11-21": [
          {
-          "hora": "12:10",
-          "sala": "Sala 5",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59336"
-         },
-         {
           "hora": "15:45",
           "sala": "Sala 2",
           "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59363"
@@ -4144,18 +4107,6 @@
       {
        "nombre": "El gato con sombrero (VIP Bed)",
        "dias": {
-        "2026-11-21": [
-         {
-          "hora": "12:05",
-          "sala": "Sala 4",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59335"
-         },
-         {
-          "hora": "14:30",
-          "sala": "Sala 3",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59340"
-         }
-        ],
         "2026-11-22": [
          {
           "hora": "12:05",
@@ -4189,11 +4140,6 @@
        "nombre": "Ruega por nosotras",
        "dias": {
         "2026-11-21": [
-         {
-          "hora": "12:30",
-          "sala": "Sala 7",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59339"
-         },
          {
           "hora": "22:40",
           "sala": "Sala 7",
@@ -4281,11 +4227,6 @@
        "nombre": "La Bola Negra",
        "dias": {
         "2026-11-21": [
-         {
-          "hora": "12:15",
-          "sala": "Sala 8",
-          "url": "https://web.cinesa.es/compra/butacas/?showtimeId=022-59338"
-         },
          {
           "hora": "21:40",
           "sala": "Sala 8",
