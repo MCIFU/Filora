@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-22",
+ "actualizado": "2026-11-23",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -1045,7 +1045,7 @@
    "original": "5 minutos más",
    "director": "Javier Ruiz Caldera",
    "generos": [
-    "Comedia"
+    "Fantasía"
    ],
    "pais": "España",
    "sinopsis": "Un matrimonio en crisis decide pasar un fin de semana de turismo rural en una casa aislada en el campo. Allí se reúnen con un encargado de la agencia que les enseña la casa y les entrega las llaves. Pero antes de que los deje solos, sucede una cosa…",
@@ -1125,20 +1125,6 @@
   },
   {
    "fecha": "2027-01-22",
-   "titulo": "Mu-Ki-Ra",
-   "original": "Mu-Ki-Ra",
-   "director": "Estefanía Piñeres",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Colombia",
-   "sinopsis": "En una tierra acechada por monstruos hechos de vegetación, Cleo, una niña de trece años, enfrentará su peor pesadilla cuando Martín, su hermano pequeño, sea atrapado por uno de ellos. Con la ayuda de Lolo, una anciana mágica, y una divertida osa hormiguera…",
-   "poster": "https://pics.filmaffinity.com/mu_ki_ra-599610423-mmed.jpg",
-   "fa": "811234",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-22",
    "titulo": "Yo soy Rocky",
    "original": "I Play Rocky",
    "director": "Peter Farrelly",
@@ -1173,6 +1159,20 @@
    "sinopsis": "Un policía veterano y su joven confidente son dos hombres enfrentados por sus principios pero unidos por la soledad en sus trabajos, la lealtad y el sentimiento de abandono. En medio de una peligrosa operación policial, ambos cruzarán límites que los…",
    "poster": "https://pics.filmaffinity.com/el_confidente-577864969-mmed.jpg",
    "fa": "366729",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-29",
+   "titulo": "El debut",
+   "original": "The Debut",
+   "director": "Jesse Eisenberg",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Cuando Mona Friedman consigue un pequeño papel en un teatro comunitario, pasa de ser una ama de casa tímida y discreta a convertirse en una apasionada actriz, dispuesta a hacer cualquier cosa para proteger la integridad artística de su papel, aunque eso…",
+   "poster": "https://pics.filmaffinity.com/the_debut-590344615-mmed.jpg",
+   "fa": "902267",
    "destacado": false
   },
   {
