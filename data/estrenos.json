@@ -53,6 +53,21 @@
   },
   {
    "fecha": "2026-11-27",
+   "titulo": "Entre fronteras",
+   "director": "Mark Freiburger",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "reparto": "Elizabeth Mitchell, Liz Tabish, Ana Ularu",
+   "sinopsis": "En una Unión Soviética que se desmorona, la familia Petrosyan se encuentra marginada, dondequiera que vaya. Su herencia…",
+   "duracion": 90,
+   "poster": "https://pics.filmaffinity.com/beyond_borders-569952483-mmed.jpg",
+   "fa": "979946",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
    "titulo": "Hechizo: Bienvenidos a Hexe",
    "original": "Hexed",
    "director": "Fawn Veerasunthorn / Jason Hand",
@@ -85,6 +100,35 @@
   },
   {
    "fecha": "2026-11-27",
+   "titulo": "Hora y veinte",
+   "director": "Marc Romero",
+   "generos": [
+    "Acción"
+   ],
+   "pais": "España",
+   "reparto": "Macarena Gómez, Roberto Álamo, Emma Suárez",
+   "sinopsis": "Manuela hará todo lo posible para encontrar a su hijo de 6 años, quien desaparece el día de Nochebuena en un centro…",
+   "duracion": 80,
+   "poster": "https://pics.filmaffinity.com/hora_y_veinte-748195801-mmed.jpg",
+   "fa": "345522",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Kotodama, el camino del espejo",
+   "director": "Eugenio Tardón / Carla Cañellas",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "España",
+   "sinopsis": "lnari emprende un viaje en busca del significado del Kotodama adentrándose en el arte de la caligrafía japonesa,…",
+   "duracion": 76,
+   "poster": "https://pics.filmaffinity.com/kotodama_el_camino_del_espejo-397644596-mmed.jpg",
+   "fa": "296839",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
    "titulo": "La gran fiesta del cine",
    "original": "La gran fiesta del cine",
    "director": "Toni Agustí / María S. Torregrosa",
@@ -93,7 +137,7 @@
    ],
    "pais": "España",
    "reparto": "Marta Belenguer, Lorena López, Carles Sanjaime",
-   "sinopsis": "Cinco años después de rodar \"La última cena\", un largometraje experimental sin presupuesto, un grupo de técnicos y…",
+   "sinopsis": "Cinco años después de rodar 'La última cena', un largometraje experimental sin presupuesto, un grupo de técnicos y…",
    "duracion": 82,
    "poster": "https://pics.filmaffinity.com/la_gran_fiesta_del_cine-366296653-mmed.jpg",
    "fa": "760550",
@@ -129,22 +173,6 @@
    "duracion": 92,
    "poster": "https://pics.filmaffinity.com/la_maleta_de_alex-475257961-mmed.jpg",
    "fa": "818262",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Mailin",
-   "original": "Mailin",
-   "director": "María Silvia Esteve",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "Argentina",
-   "reparto": "Mailín Gobbo, Michelle Gobbo, Leandra De Filippis",
-   "sinopsis": "Mailin le cuenta a su hija un cuento antes de dormir. Es un cuento de hadas que pronto se vuelve oscuro, sobre una niña…",
-   "duracion": 89,
-   "poster": "https://pics.filmaffinity.com/mailin-752631896-mmed.jpg",
-   "fa": "623848",
    "destacado": false
   },
   {
@@ -342,7 +370,7 @@
   },
   {
    "fecha": "2026-12-04",
-   "titulo": "Momonsters. Película de Navidad",
+   "titulo": "Momonsters. La película de Navidad",
    "original": "Momonsters. Película de Navidad",
    "director": "Javier Martinez / Christian Garnez",
    "generos": [
@@ -350,7 +378,7 @@
    ],
    "pais": "España",
    "sinopsis": "¡Los Momonsters van a conocer a Papá Noel! Les ha invitado a Laponia para que presencien la creación de nuevos Momonsters, pero algo sale mal y, en vez de ser los mejores amigos de los niños, los nuevos Momonsters se convierten en los peores amigos de los…",
-   "poster": "https://pics.filmaffinity.com/momonsters_pelicula_de_navidad-706996425-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/momonsters_pelicula_de_navidad-827447329-mmed.jpg",
    "fa": "195149",
    "destacado": false
   },
@@ -525,6 +553,20 @@
   },
   {
    "fecha": "2026-12-11",
+   "titulo": "Hansel y Gretel: Misión Bella Durmiente",
+   "original": "Ganzel i Gretel. Missiya Spyashchaya krasavitsaaka",
+   "director": "Vladimir Nikolaev",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Rusia",
+   "sinopsis": "En esta ocasión, Hansel y Gretel ya no son los niños perdidos del bosque. Son dos de los mejores agentes de la Agencia Secreta de Control Mágico, acostumbrados a perseguir hechiceros, desenmascarar villanos y resolver misiones imposibles.Su nuevo encargo…",
+   "poster": "https://pics.filmaffinity.com/ganzel_i_gretel_missiya_spyashchaya_krasavitsa-115983510-mmed.jpg",
+   "fa": "789066",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-11",
    "titulo": "Jasmine & Jambo",
    "original": "Jasmine & Jambo",
    "director": "Sílvia Cortés",
@@ -617,7 +659,7 @@
    ],
    "pais": "Estados Unidos",
    "sinopsis": "Primera de las dos películas de Los Vengadores para la Fase 6 del MCU. Se desconoce el argumento pero, por los cómics en los que se inspira, la historia sigue al Doctor Doom (Robert Downey Jr.) emergiendo como la mayor amenaza del multiverso, poniendo en…",
-   "poster": "https://pics.filmaffinity.com/avengers_doomsday-479201067-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/avengers_doomsday-108428991-mmed.jpg",
    "fa": "302450",
    "destacado": false
   },
@@ -658,6 +700,20 @@
     "tmdb": "1170608",
     "allocine": "324508"
    }
+  },
+  {
+   "fecha": "2026-12-18",
+   "titulo": "El elfo",
+   "original": "Skrzat. Nowy poczatekaka",
+   "director": "Krzystof Komander",
+   "generos": [
+    "Aventura"
+   ],
+   "pais": "Polonia",
+   "sinopsis": "Hania, una niña de once años que cree en los duendes, se convierte en objeto de burlas. Para salvar el mundo de fantasía que creó junto a su madre, recientemente fallecida, debe demostrar a todos que las criaturas de los cuentos de hadas realmente existen.…",
+   "poster": "https://pics.filmaffinity.com/skrzat_nowy_poczatek-590719937-mmed.jpg",
+   "fa": "951842",
+   "destacado": false
   },
   {
    "fecha": "2026-12-18",
@@ -872,6 +928,34 @@
   },
   {
    "fecha": "2027-01-06",
+   "titulo": "La casa de mis abuelos",
+   "original": "Ach, diese Lücke, diese entsetzliche Lücke",
+   "director": "Simon Verhoeven",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Alemania",
+   "sinopsis": "Joachim, un joven sensible y desorientado, se encuentra dividido entre la implacable presión de la escuela de arte dramático en la que acaba de ser admitido y el peculiar refugio que encuentra en el hogar de sus excéntricos abuelos en Múnich.",
+   "poster": "https://pics.filmaffinity.com/ach_diese_lucke_diese_entsetzliche_lucke-627863996-mmed.jpg",
+   "fa": "849125",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
+   "titulo": "Las aguas",
+   "original": "As augas",
+   "director": "Ledicia Sola",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "España",
+   "sinopsis": "La vida de Nora da un giro inesperado a sus 43 años: tras romper con su pareja, vuelve al manantial de su infancia con la esperanza de que sus aguas le ayuden a curar todos sus males. Sus amigas Antía y Marta no están dispuestas a dejarla sola y juntas…",
+   "poster": "https://pics.filmaffinity.com/as_augas-705421671-mmed.jpg",
+   "fa": "348233",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
    "titulo": "Licántropo",
    "original": "Werwulf",
    "director": "Robert Eggers",
@@ -900,6 +984,20 @@
   },
   {
    "fecha": "2027-01-06",
+   "titulo": "Miss Moxy",
+   "original": "Miss Moxy",
+   "director": "Vincent Bal / Wip Vernooij",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Países Bajos (Holanda)",
+   "sinopsis": "Una gata mimada forma equipo con un perro irritante y un pájaro anciano para viajar a casa a través del sur de Europa, aprendiendo lecciones de vida y amistad por el camino.",
+   "poster": "https://pics.filmaffinity.com/miss_moxy-896962483-mmed.jpg",
+   "fa": "635839",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
    "titulo": "Paper Tiger. Negocios de familia",
    "original": "Paper Tiger",
    "director": "James Gray",
@@ -910,6 +1008,20 @@
    "sinopsis": "Dos hermanos que persiguen el sueño americano se ven de repente envueltos en un plan que resulta ser demasiado bueno para ser verdad. Pero mientras intentan abrirse camino en un mundo de corrupción y violencia cada vez más peligroso, se encuentran ellos…",
    "poster": "https://pics.filmaffinity.com/paper_tiger-417777854-mmed.jpg",
    "fa": "740724",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
+   "titulo": "Un hombre de nuestro tiempo",
+   "original": "Notre salutaka",
+   "director": "Emmanuel Marre",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Bélgica",
+   "sinopsis": "En septiembre de 1940, en la Francia ocupada se instaura el régimen de Pétain, el gobierno colaboracionista con la Alemania nazi. Henri Marre, de 49 años, llega a Vichy sin un céntimo, sin contactos, lejos de su esposa e hijos. Ve en la nueva administración…",
+   "poster": "https://pics.filmaffinity.com/notre_salut-800402615-mmed.jpg",
+   "fa": "264455",
    "destacado": false
   },
   {
@@ -938,20 +1050,6 @@
    "sinopsis": "Tres amigas se van a pasar el fin de semana a un spa, pero la estancia se convierte en un caos cuando se les une otra amiga, muy juerguista.",
    "poster": "https://pics.filmaffinity.com/spa_weekend-187438819-mmed.jpg",
    "fa": "885884",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-08",
-   "titulo": "Un hombre de nuestro tiempo",
-   "original": "Notre salutaka",
-   "director": "Emmanuel Marre",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Bélgica",
-   "sinopsis": "En septiembre de 1940, en la Francia ocupada se instaura el régimen de Pétain, el gobierno colaboracionista con la Alemania nazi. Henri Marre, de 49 años, llega a Vichy sin un céntimo, sin contactos, lejos de su esposa e hijos. Ve en la nueva administración…",
-   "poster": "https://pics.filmaffinity.com/notre_salut-800402615-mmed.jpg",
-   "fa": "264455",
    "destacado": false
   },
   {
@@ -1050,76 +1148,6 @@
    "sinopsis": "Un matrimonio en crisis decide pasar un fin de semana de turismo rural en una casa aislada en el campo. Allí se reúnen con un encargado de la agencia que les enseña la casa y les entrega las llaves. Pero antes de que los deje solos, sucede una cosa…",
    "poster": "https://pics.filmaffinity.com/5_minutos_mas-430801939-mmed.jpg",
    "fa": "836838",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-22",
-   "titulo": "A morte nos teus ollos",
-   "original": "A morte nos teus ollos",
-   "director": "Guillermo de Oliveira",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "España",
-   "sinopsis": "Vigo, Galicia, años 90. Deza, un policía nacional suspendido desde hace tres años, intenta rehacer su vida y recuperar a su familia. Todo cambia cuando Estrada, un agente corrupto, aprovecha la inestabilidad laboral de Deza y le propone un golpe: robar una…",
-   "poster": "https://pics.filmaffinity.com/a_morte_nos_teus_ollos-498103734-mmed.jpg",
-   "fa": "790547",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-22",
-   "titulo": "Bajañí",
-   "original": "Bajañí",
-   "director": "Fernando Trueba",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "España",
-   "sinopsis": "Bajañí es el nombre que recibe la guitarra española en caló. Partiendo de este instrumento, y en concreto, de la guitarra y el arte de Niño Josele, Fernando Trueba invita a los espectadores a escuchar la música como nunca lo habían hecho. Se trata de un nuevo…",
-   "poster": "https://pics.filmaffinity.com/bajani-528334630-mmed.jpg",
-   "fa": "495186",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-22",
-   "titulo": "Elsinor",
-   "original": "Elsinore",
-   "director": "Simon Stone",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Reino Unido",
-   "sinopsis": "Biopic del aclamado actor británico Ian Charleson, conocido por la oscarizada 'Carros de fuego', centrado en sus últimos años de vida y su célebre interpretación de 'Hamlet' en el National Theatre de Londres en 1989, cuando ya estaba gravemente enfermo de…",
-   "poster": "https://pics.filmaffinity.com/elsinore-455876715-mmed.jpg",
-   "fa": "855331",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-22",
-   "titulo": "Jupiter",
-   "original": "Jupiter",
-   "director": "Alexandre Smia",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Francia",
-   "sinopsis": "Recién elegido, el presidente francés Paul Archambault es convocado de urgencia al búnker antiatómico Júpiter, situado bajo el Palacio del Elíseo. Debe hacer frente a una crisis internacional desatada tras el intento de asesinato de su homólogo ruso. Tras…",
-   "poster": "https://pics.filmaffinity.com/jupiter-889956777-mmed.jpg",
-   "fa": "234898",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-22",
-   "titulo": "Monstruosa Mia",
-   "original": "Monster Mia",
-   "director": "Verena Fels",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Alemania",
-   "sinopsis": "Mia, una estudiante expulsada, y su rata mascota Quentin llegan a la Academia Rotwood, donde ella es la única humana entre sus compañeros monstruosos. Debido al odio del director Van Vlad hacia los humanos, Mia deberá formar equipo con los monstruos para…",
-   "poster": "https://pics.filmaffinity.com/monster_mia-511572125-mmed.jpg",
-   "fa": "960631",
    "destacado": false
   },
   {
