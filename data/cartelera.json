@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-23T15:46",
+ "actualizado": "2026-11-24T03:11",
  "fuente": "FilmAffinity",
  "cines": [
   {
@@ -1593,6 +1593,13 @@
           "hora": "17:15",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F38159%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-11-26": [
+         {
+          "hora": "17:15",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Fgijon%2Fyelmo-cines-ocimax%2Fevento%2F38185%2Fen-el-corazon-de-la-bestia%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -5072,6 +5079,13 @@
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F37496%2Fadolescencia-sexo-y-muerte-en-campamento-miasma%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
+        ],
+        "2026-11-26": [
+         {
+          "hora": "18:10",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F37540%2Fadolescencia-sexo-y-muerte-en-campamento-miasma%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
         ]
        }
       }
@@ -5106,6 +5120,13 @@
           "hora": "20:40",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F37526%2Firon-boy%3Fmode%3Dwidget%26change%3D0"
+         }
+        ],
+        "2026-11-26": [
+         {
+          "hora": "20:40",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F37544%2Firon-boy%3Fmode%3Dwidget%26change%3D0"
          }
         ]
        }
@@ -5269,6 +5290,13 @@
           "hora": "19:35",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F37478%2Fscrooge-y-los-fantasmas-de-la-navidad%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-11-26": [
+         {
+          "hora": "19:35",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F37530%2Fscrooge-y-los-fantasmas-de-la-navidad%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
@@ -5629,6 +5657,13 @@
           "hora": "22:10",
           "sala": "",
           "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F37380%2Fgodzilla-minus-zero%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
+         }
+        ],
+        "2026-11-26": [
+         {
+          "hora": "22:10",
+          "sala": "",
+          "url": "https://www.awin1.com/cread.php?awinmid=24761&awinaffid=1474736&ued=https%3A%2F%2Fcine.entradas.com%2Fcine%2Foviedo%2Fyelmo-cines-los-prados%2Fevento%2F37529%2Fgodzilla-minus-zero%3Fmode%3Dwidget%26change%3D0%26language%3DVOSE"
          }
         ]
        }
