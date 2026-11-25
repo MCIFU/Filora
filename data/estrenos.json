@@ -184,10 +184,25 @@
     "Animación"
    ],
    "pais": "Japón",
-   "sinopsis": "Película secuela de \"Puella Magi Madoka Magica 3: Rebellion\", con motivo del décimo aniversario del estreno de la serie…",
+   "sinopsis": "Película secuela de 'Puella Magi Madoka Magica 3: Rebellion', con motivo del décimo aniversario del estreno de la serie…",
    "duracion": 120,
    "poster": "https://pics.filmaffinity.com/gekijoban_maho_shojo_madoka_magica_walpurgis_no_kaiten-249783119-mmed.jpg",
    "fa": "316736",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
+   "titulo": "Redención",
+   "director": "Marcel Kunzler",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Brasil",
+   "reparto": "Ander Belotto, Elisa Brites, Leandro Lefa",
+   "sinopsis": "Diez años después de una epidemia que vació las ciudades, un pequeño grupo de supervivientes resiste tras los muros…",
+   "duracion": 74,
+   "poster": "https://pics.filmaffinity.com/redemcao-588244548-mmed.jpg",
+   "fa": "345075",
    "destacado": false
   },
   {
@@ -1132,20 +1147,6 @@
    "sinopsis": "Un matrimonio en crisis decide pasar un fin de semana de turismo rural en una casa aislada en el campo. Allí se reúnen con un encargado de la agencia que les enseña la casa y les entrega las llaves. Pero antes de que los deje solos, sucede una cosa…",
    "poster": "https://pics.filmaffinity.com/5_minutos_mas-430801939-mmed.jpg",
    "fa": "836838",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-22",
-   "titulo": "A morte nos teus ollos",
-   "original": "A morte nos teus ollos",
-   "director": "Guillermo de Oliveira",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "España",
-   "sinopsis": "Vigo, Galicia, años 90. Deza, un policía nacional suspendido desde hace tres años, intenta rehacer su vida y recuperar a su familia. Todo cambia cuando Estrada, un agente corrupto, aprovecha la inestabilidad laboral de Deza y le propone un golpe: robar una…",
-   "poster": "https://pics.filmaffinity.com/a_morte_nos_teus_ollos-498103734-mmed.jpg",
-   "fa": "790547",
    "destacado": false
   },
   {
