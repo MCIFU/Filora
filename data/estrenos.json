@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-24",
+ "actualizado": "2026-11-25",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -17,22 +17,6 @@
    "sinopsis": "Una joven pareja de recién casados lucha por sobrevivir contra una entidad sobrenatural. \n\nEstreno en cines USA y España: octubre 2027",
    "poster": "https://pics.filmaffinity.com/the_great_beyond-845722316-mmed.jpg",
    "fa": "610926",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-25",
-   "titulo": "Las nuevas desventuras de Cliff Booth",
-   "original": "The Further Mis-Adventures of Cliff Booth",
-   "director": "David Fincher",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Brad Pitt, Elizabeth Debicki, Scott Caan",
-   "sinopsis": "Asesinato, chantaje, robo, extorsión… Otro verano más en Hollywood. Es 1977, ocho años después de que Cliff Booth (Brad…",
-   "duracion": 141,
-   "poster": "https://pics.filmaffinity.com/the_further_mis_adventures_of_cliff_booth-383848904-mmed.jpg",
-   "fa": "630924",
    "destacado": false
   },
   {
@@ -1148,6 +1132,20 @@
    "sinopsis": "Un matrimonio en crisis decide pasar un fin de semana de turismo rural en una casa aislada en el campo. Allí se reúnen con un encargado de la agencia que les enseña la casa y les entrega las llaves. Pero antes de que los deje solos, sucede una cosa…",
    "poster": "https://pics.filmaffinity.com/5_minutos_mas-430801939-mmed.jpg",
    "fa": "836838",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-22",
+   "titulo": "A morte nos teus ollos",
+   "original": "A morte nos teus ollos",
+   "director": "Guillermo de Oliveira",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "España",
+   "sinopsis": "Vigo, Galicia, años 90. Deza, un policía nacional suspendido desde hace tres años, intenta rehacer su vida y recuperar a su familia. Todo cambia cuando Estrada, un agente corrupto, aprovecha la inestabilidad laboral de Deza y le propone un golpe: robar una…",
+   "poster": "https://pics.filmaffinity.com/a_morte_nos_teus_ollos-498103734-mmed.jpg",
+   "fa": "790547",
    "destacado": false
   },
   {
