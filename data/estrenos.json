@@ -177,6 +177,21 @@
   },
   {
    "fecha": "2026-11-27",
+   "titulo": "Para vivir: El implacable tiempo de Pablo Milanés",
+   "director": "Fabien Pisani",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "México",
+   "reparto": "Pablo Milanés, Silvio Rodríguez, Joaquín Sabina",
+   "sinopsis": "Muchos reconocen y admiran la obra y la voz de Pablo Milanés. Pocos conocen la historia de cómo se convirtió en una…",
+   "duracion": 106,
+   "poster": "https://pics.filmaffinity.com/para_vivir_el_implacable_tiempo_de_pablo_milanes-517850844-mmed.jpg",
+   "fa": "416179",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-11-27",
    "titulo": "Puella Magi Madoka Magica. La película: La noche de Walpurgis - El ascenso",
    "original": "Gekijōban Mahō Shōjo Madoka Magica: Walpurgis no Kaitenaka",
    "director": "Akiyuki Shinbo",
@@ -464,20 +479,6 @@
    "sinopsis": "En 1969, en España, una organista disléxica inicia un romance prohibido con una mujer idealista que la inspira a escribir una canción y rebelarse contra la sociedad censora de Franco tras la muerte de su hermano.",
    "poster": "https://pics.filmaffinity.com/censurada-108588681-mmed.jpg",
    "fa": "440626",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-12-11",
-   "titulo": "Charlie y Harper",
-   "original": "Charlie Harper",
-   "director": "Tom Dean / Mac Eldridge",
-   "generos": [
-    "Romance"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Harper y Charlie intentan construir una vida juntos. Mientras Harper se esfuerza por labrarse una carrera como chef, Charlie está estancado. Enfrentados a retos en su relación, luchan por demostrar que están hechos el uno para el otro, pero ¿será…",
-   "poster": "https://pics.filmaffinity.com/charlie_harper-402457429-mmed.jpg",
-   "fa": "653778",
    "destacado": false
   },
   {
@@ -1024,20 +1025,6 @@
    "destacado": false
   },
   {
-   "fecha": "2027-01-08",
-   "titulo": "Spa Weekend",
-   "original": "Spa Weekend",
-   "director": "Jon Lucas / Scott Moore",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Tres amigas se van a pasar el fin de semana a un spa, pero la estancia se convierte en un caos cuando se les une otra amiga, muy juerguista.",
-   "poster": "https://pics.filmaffinity.com/spa_weekend-187438819-mmed.jpg",
-   "fa": "885884",
-   "destacado": false
-  },
-  {
    "fecha": "2027-01-15",
    "titulo": "Astérix. El reino de Nubia",
    "original": "Astérix et le Royaume de Nubie",
@@ -1131,7 +1118,7 @@
    ],
    "pais": "España",
    "sinopsis": "Un matrimonio en crisis decide pasar un fin de semana de turismo rural en una casa aislada en el campo. Allí se reúnen con un encargado de la agencia que les enseña la casa y les entrega las llaves. Pero antes de que los deje solos, sucede una cosa…",
-   "poster": "https://pics.filmaffinity.com/5_minutos_mas-430801939-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/5_minutos_mas-355119340-mmed.jpg",
    "fa": "836838",
    "destacado": false
   },
@@ -1147,6 +1134,20 @@
    "sinopsis": "Vigo, Galicia, años 90. Deza, un policía nacional suspendido desde hace tres años, intenta rehacer su vida y recuperar a su familia. Todo cambia cuando Estrada, un agente corrupto, aprovecha la inestabilidad laboral de Deza y le propone un golpe: robar una…",
    "poster": "https://pics.filmaffinity.com/a_morte_nos_teus_ollos-498103734-mmed.jpg",
    "fa": "790547",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-22",
+   "titulo": "Elsinor",
+   "original": "Elsinore",
+   "director": "Simon Stone",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Biopic del aclamado actor británico Ian Charleson, conocido por la oscarizada 'Carros de fuego', centrado en sus últimos años de vida y su célebre interpretación de 'Hamlet' en el National Theatre de Londres en 1989, cuando ya estaba gravemente enfermo de…",
+   "poster": "https://pics.filmaffinity.com/elsinore-455876715-mmed.jpg",
+   "fa": "855331",
    "destacado": false
   },
   {
