@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-25",
+ "actualizado": "2026-11-26",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -59,7 +59,7 @@
     "Animación"
    ],
    "pais": "Estados Unidos",
-   "reparto": "Hailee Steinfeld, Rashida Jones, Tracey Ullman",
+   "reparto": "Hailee Steinfeld, Rashida Jones, Jodie Foster",
    "sinopsis": "Billie, una adolescente impulsiva y poco convencional, desata accidentalmente unos poderes mágicos secretos y sale…",
    "duracion": 103,
    "poster": "https://pics.filmaffinity.com/hexed-407995099-mmed.jpg",
@@ -524,20 +524,6 @@
   },
   {
    "fecha": "2026-12-11",
-   "titulo": "Entrega al límite",
-   "original": "Runner",
-   "director": "Scott Waugh",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Un ex soldado se ve inmerso en una brutal carrera contrarreloj cuando una entrega médica crítica le convierte en objetivo de un despiadado cártel. Con la traición acechándole por todos lados, debe sobrevivir a la persecución y entregar su carga antes de que a…",
-   "poster": "https://pics.filmaffinity.com/runner-592918297-mmed.jpg",
-   "fa": "710022",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-12-11",
    "titulo": "Gurú",
    "original": "Gourou",
    "director": "Yann Gozlan",
@@ -927,6 +913,20 @@
   },
   {
    "fecha": "2027-01-06",
+   "titulo": "Entrega al límite",
+   "original": "Runner",
+   "director": "Scott Waugh",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Un ex soldado se ve inmerso en una brutal carrera contrarreloj cuando una entrega médica crítica le convierte en objetivo de un despiadado cártel. Con la traición acechándole por todos lados, debe sobrevivir a la persecución y entregar su carga antes de que a…",
+   "poster": "https://pics.filmaffinity.com/runner-592918297-mmed.jpg",
+   "fa": "710022",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-06",
    "titulo": "La casa de mis abuelos",
    "original": "Ach, diese Lücke, diese entsetzliche Lücke",
    "director": "Simon Verhoeven",
@@ -963,7 +963,7 @@
    ],
    "pais": "Estados Unidos",
    "sinopsis": "En la Inglaterra del siglo XIII, una misteriosa criatura acecha en una zona rural envuelta en niebla, mientras el folclore local se convierte en una aterradora realidad para los aldeanos.",
-   "poster": "https://pics.filmaffinity.com/werwulf-276949698-mmed.jpg",
+   "poster": "https://pics.filmaffinity.com/werwulf-552595351-mmed.jpg",
    "fa": "399436",
    "destacado": false
   },
@@ -993,20 +993,6 @@
    "sinopsis": "Una gata mimada forma equipo con un perro irritante y un pájaro anciano para viajar a casa a través del sur de Europa, aprendiendo lecciones de vida y amistad por el camino.",
    "poster": "https://pics.filmaffinity.com/miss_moxy-896962483-mmed.jpg",
    "fa": "635839",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-01-06",
-   "titulo": "Paper Tiger. Negocios de familia",
-   "original": "Paper Tiger",
-   "director": "James Gray",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Dos hermanos que persiguen el sueño americano se ven de repente envueltos en un plan que resulta ser demasiado bueno para ser verdad. Pero mientras intentan abrirse camino en un mundo de corrupción y violencia cada vez más peligroso, se encuentran ellos…",
-   "poster": "https://pics.filmaffinity.com/paper_tiger-417777854-mmed.jpg",
-   "fa": "740724",
    "destacado": false
   },
   {
@@ -1147,6 +1133,20 @@
    "sinopsis": "Un matrimonio en crisis decide pasar un fin de semana de turismo rural en una casa aislada en el campo. Allí se reúnen con un encargado de la agencia que les enseña la casa y les entrega las llaves. Pero antes de que los deje solos, sucede una cosa…",
    "poster": "https://pics.filmaffinity.com/5_minutos_mas-430801939-mmed.jpg",
    "fa": "836838",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-22",
+   "titulo": "A morte nos teus ollos",
+   "original": "A morte nos teus ollos",
+   "director": "Guillermo de Oliveira",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "España",
+   "sinopsis": "Vigo, Galicia, años 90. Deza, un policía nacional suspendido desde hace tres años, intenta rehacer su vida y recuperar a su familia. Todo cambia cuando Estrada, un agente corrupto, aprovecha la inestabilidad laboral de Deza y le propone un golpe: robar una…",
+   "poster": "https://pics.filmaffinity.com/a_morte_nos_teus_ollos-498103734-mmed.jpg",
+   "fa": "790547",
    "destacado": false
   },
   {
