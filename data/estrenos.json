@@ -569,6 +569,20 @@
   },
   {
    "fecha": "2026-12-25",
+   "titulo": "Puedes verlo todo (You Can See Everything)",
+   "original": "You Can See Everything",
+   "director": "Nathan Fielder / Lance Oppenheim",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Treinta y cuatro días antes de ingresar en prisión por fraude, Elizabeth Holmes, la famosa fundadora de la empresa tecnológica de análisis de sangre Theranos, invita a un equipo de rodaje escéptico a documentar cada uno de sus movimientos. Lo que comienza…",
+   "poster": "https://pics.filmaffinity.com/you_can_see_everything-431870991-mmed.jpg",
+   "fa": "757838",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-25",
    "titulo": "Sucederá esta noche",
    "original": "Succederà questa notteaka",
    "director": "Nanni Moretti",
@@ -579,20 +593,6 @@
    "sinopsis": "Se inspira libremente en la colección de relatos 'Hungry Heart' (Lev Raev), del escritor  Eshkol Nevo. Moretti ha adaptado esta compilación de cuentos junto a sus habituales coguionistas, Federica Pontremoli y Valia Santella. \n\nPreestreno mundial en el…",
    "poster": "https://pics.filmaffinity.com/succedera_questa_notte-469009502-mmed.jpg",
    "fa": "822886",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-12-25",
-   "titulo": "You Can See Everything (Puedes verlo todo)",
-   "original": "You Can See Everything",
-   "director": "Nathan Fielder / Lance Oppenheim",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Treinta y cuatro días antes de ingresar en prisión por fraude, Elizabeth Holmes, la famosa fundadora de la empresa tecnológica de análisis de sangre Theranos, invita a un equipo de rodaje escéptico a documentar cada uno de sus movimientos. Lo que comienza…",
-   "poster": "https://pics.filmaffinity.com/you_can_see_everything-431870991-mmed.jpg",
-   "fa": "757838",
    "destacado": false
   },
   {
@@ -1097,20 +1097,6 @@
   },
   {
    "fecha": "2027-02-05",
-   "titulo": "Musk",
-   "original": "Musk",
-   "director": "Alex Gibney",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "Estados Unidos",
-   "sinopsis": "Un análisis exhaustivo y sin censura sobre Elon Musk, multimillonario del sector tecnológico que ocupa el cargo de director ejecutivo de Tesla, SpaceX y X (antes Twitter),  una de las figuras empresariales más influyentes y controvertidas del…",
-   "poster": "https://pics.filmaffinity.com/musk-945596534-mmed.jpg",
-   "fa": "632395",
-   "destacado": false
-  },
-  {
-   "fecha": "2027-02-05",
    "titulo": "Nunca olvides que te quiero",
    "original": "Remain",
    "director": "M. Night Shyamalan",
@@ -1163,6 +1149,20 @@
    "sinopsis": "El don para proteger a los culpables del que goza una exitosa abogada penalista  comienza a corroer su mundo desde dentro.",
    "poster": "https://pics.filmaffinity.com/a_place_in_hell-985928976-mmed.jpg",
    "fa": "186117",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-04-23",
+   "titulo": "La loca historia de las galaxias: La nueva",
+   "original": "Spaceballs: The New One",
+   "director": "Josh Greenbaum",
+   "generos": [
+    "Comedia"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Secuela de \"La loca historia de las galaxias\" (1987). Un piloto estelar y su fiel compañero deben acudir al rescate de una princesa y salvar el planeta Druidia de las garras del malvado Spaceballs. \n\nEstreno en cines: abril 2027",
+   "poster": "https://pics.filmaffinity.com/spaceballs_the_new_one-951762148-mmed.jpg",
+   "fa": "800506",
    "destacado": false
   },
   {
