@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-26",
+ "actualizado": "2026-11-27",
  "fuentes": [
   "FilmAffinity (próximos estrenos en España)"
  ],
@@ -20,255 +20,6 @@
    "destacado": false
   },
   {
-   "fecha": "2026-11-27",
-   "titulo": "Ahora los suegros son ellos",
-   "original": "Focker In-Law",
-   "director": "John Hamburg",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Robert De Niro, Ben Stiller, Ariana Grande",
-   "sinopsis": "Diez años después de los últimos eventos, los papeles se invierten y Greg Focker (Ben Stiller) se enfrenta a su mayor…",
-   "duracion": 105,
-   "poster": "https://pics.filmaffinity.com/focker_in_law-431643787-mmed.jpg",
-   "fa": "580952",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Entre fronteras",
-   "director": "Mark Freiburger",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Elizabeth Mitchell, Liz Tabish, Ana Ularu",
-   "sinopsis": "En una Unión Soviética que se desmorona, la familia Petrosyan se encuentra marginada, dondequiera que vaya. Su herencia…",
-   "duracion": 90,
-   "poster": "https://pics.filmaffinity.com/beyond_borders-569952483-mmed.jpg",
-   "fa": "979946",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Hechizo: Bienvenidos a Hexe",
-   "original": "Hexed",
-   "director": "Fawn Veerasunthorn / Jason Hand",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Hailee Steinfeld, Rashida Jones, Jodie Foster",
-   "sinopsis": "Billie, una adolescente impulsiva y poco convencional, desata accidentalmente unos poderes mágicos secretos y sale…",
-   "duracion": 103,
-   "poster": "https://pics.filmaffinity.com/hexed-407995099-mmed.jpg",
-   "fa": "992434",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Hermanas",
-   "original": "Hermanas",
-   "director": "Ione Hernández Sáenz",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Elena Anaya, Emma Suárez, Carlota Keiko",
-   "sinopsis": "Chelo es una mujer que quiere divorciarse de su marido Javier y construir una vida lejos de una relación que ya está…",
-   "duracion": 102,
-   "poster": "https://pics.filmaffinity.com/hermanas-377583177-mmed.jpg",
-   "fa": "875260",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Hora y veinte",
-   "director": "Marc Romero",
-   "generos": [
-    "Acción"
-   ],
-   "pais": "España",
-   "reparto": "Macarena Gómez, Roberto Álamo, Emma Suárez",
-   "sinopsis": "Manuela hará todo lo posible para encontrar a su hijo de 6 años, quien desaparece el día de Nochebuena en un centro…",
-   "duracion": 80,
-   "poster": "https://pics.filmaffinity.com/hora_y_veinte-748195801-mmed.jpg",
-   "fa": "345522",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Kotodama, el camino del espejo",
-   "director": "Eugenio Tardón / Carla Cañellas",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "España",
-   "sinopsis": "lnari emprende un viaje en busca del significado del Kotodama adentrándose en el arte de la caligrafía japonesa,…",
-   "duracion": 76,
-   "poster": "https://pics.filmaffinity.com/kotodama_el_camino_del_espejo-397644596-mmed.jpg",
-   "fa": "296839",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "La gran fiesta del cine",
-   "original": "La gran fiesta del cine",
-   "director": "Toni Agustí / María S. Torregrosa",
-   "generos": [
-    "Comedia"
-   ],
-   "pais": "España",
-   "reparto": "Marta Belenguer, Lorena López, Carles Sanjaime",
-   "sinopsis": "Cinco años después de rodar 'La última cena', un largometraje experimental sin presupuesto, un grupo de técnicos y…",
-   "duracion": 82,
-   "poster": "https://pics.filmaffinity.com/la_gran_fiesta_del_cine-366296653-mmed.jpg",
-   "fa": "760550",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "La libertad doble",
-   "original": "La libertad dobleaka",
-   "director": "Lisandro Alonso",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Argentina",
-   "reparto": "Misael Saavedra, Catalina Saavedra",
-   "sinopsis": "Misael vive como leñador independiente en el bosque, disfrutando de su libertad solitaria. Cuando debe cuidar a su…",
-   "duracion": 100,
-   "poster": "https://pics.filmaffinity.com/la_libertad_doble-817329231-mmed.jpg",
-   "fa": "455408",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "La maleta de Álex",
-   "original": "La maleta de Álexaka",
-   "director": "Alejandro Cortés Calahorra",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "España",
-   "reparto": "Dodó Angulo Zabala, Loli Astoreka, Esther Velasco",
-   "sinopsis": "Diez años después de la muerte de Álex Angulo, Dodó, la hija que el actor adoptó en China, regresa desde Taiwán para…",
-   "duracion": 92,
-   "poster": "https://pics.filmaffinity.com/la_maleta_de_alex-475257961-mmed.jpg",
-   "fa": "818262",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Oro sin ley",
-   "original": "The Weight",
-   "director": "Padraic McKinley",
-   "generos": [
-    "Aventura"
-   ],
-   "pais": "Estados Unidos",
-   "reparto": "Ethan Hawke, Russell Crowe, Julia Jones",
-   "sinopsis": "Oregón, 1933. Samuel Murphy (Ethan Hawke) es separado de su hija y enviado a un campo de trabajo. Un día, el alcaide…",
-   "duracion": 115,
-   "poster": "https://pics.filmaffinity.com/the_weight-365193323-mmed.jpg",
-   "fa": "796217",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Para vivir: El implacable tiempo de Pablo Milanés",
-   "director": "Fabien Pisani",
-   "generos": [
-    "Documental"
-   ],
-   "pais": "México",
-   "reparto": "Pablo Milanés, Silvio Rodríguez, Joaquín Sabina",
-   "sinopsis": "Muchos reconocen y admiran la obra y la voz de Pablo Milanés. Pocos conocen la historia de cómo se convirtió en una…",
-   "duracion": 106,
-   "poster": "https://pics.filmaffinity.com/para_vivir_el_implacable_tiempo_de_pablo_milanes-517850844-mmed.jpg",
-   "fa": "416179",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Puella Magi Madoka Magica. La película: La noche de Walpurgis - El ascenso",
-   "original": "Gekijōban Mahō Shōjo Madoka Magica: Walpurgis no Kaitenaka",
-   "director": "Akiyuki Shinbo",
-   "generos": [
-    "Animación"
-   ],
-   "pais": "Japón",
-   "sinopsis": "Película secuela de 'Puella Magi Madoka Magica 3: Rebellion', con motivo del décimo aniversario del estreno de la serie…",
-   "duracion": 120,
-   "poster": "https://pics.filmaffinity.com/gekijoban_maho_shojo_madoka_magica_walpurgis_no_kaiten-249783119-mmed.jpg",
-   "fa": "316736",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Redención",
-   "director": "Marcel Kunzler",
-   "generos": [
-    "Thriller"
-   ],
-   "pais": "Brasil",
-   "reparto": "Ander Belotto, Elisa Brites, Leandro Lefa",
-   "sinopsis": "Diez años después de una epidemia que vació las ciudades, un pequeño grupo de supervivientes resiste tras los muros…",
-   "duracion": 74,
-   "poster": "https://pics.filmaffinity.com/redemcao-588244548-mmed.jpg",
-   "fa": "345075",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Sanguine",
-   "original": "Sanguineaka",
-   "director": "Marion Le Corroller",
-   "generos": [
-    "Terror"
-   ],
-   "pais": "Francia",
-   "reparto": "Mara Taquin, Karin Viard, Kim Higelin",
-   "sinopsis": "Margot, una brillante pero insegura estudiante de medicina, lucha por sobrevivir al ritmo frenético de sus prácticas en…",
-   "duracion": 101,
-   "poster": "https://pics.filmaffinity.com/sanguine-164415651-mmed.jpg",
-   "fa": "581346",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Todo el mundo quiere a Bill Evans",
-   "original": "Everybody Digs Bill Evans",
-   "director": "Grant Gee",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "Irlanda",
-   "reparto": "Anders Danielsen Lie, Bill Pullman, Laurie Metcalf",
-   "sinopsis": "Junio de 1961, Nueva York. El legendario pianista de jazz Bill Evans ha encontrado su propia voz y ha formado el trío…",
-   "duracion": 102,
-   "poster": "https://pics.filmaffinity.com/everybody_digs_bill_evans-615981345-mmed.jpg",
-   "fa": "381682",
-   "destacado": false
-  },
-  {
-   "fecha": "2026-11-27",
-   "titulo": "Un hombre en un puente",
-   "original": "Un hombre en un puente",
-   "director": "David Martín de los Santos",
-   "generos": [
-    "Drama"
-   ],
-   "pais": "España",
-   "reparto": "Roger Casamajor, Belén Cuesta, Juanfra Juárez",
-   "sinopsis": "Andrés (Roger Casamajor), un hombre de mediana edad sin tener a dónde ir, regresa a su pueblo natal en busca de refugio…",
-   "duracion": 116,
-   "poster": "https://pics.filmaffinity.com/un_hombre_en_un_puente-195220003-mmed.jpg",
-   "fa": "521359",
-   "destacado": false
-  },
-  {
    "fecha": "2026-12-04",
    "titulo": "Burundanga",
    "original": "Burundanga",
@@ -278,7 +29,8 @@
    ],
    "pais": "España",
    "reparto": "Adriana Torrebejano, Marcel Borrás, Carol Rovira",
-   "sinopsis": "Berta descubre que está embarazada y no sabe qué hacer, porque duda del amor de su pareja, Manel. Aconsejada por su amiga Sílvia, decide administrarle burundanga, la llamada droga de la verdad. Pero cuando empieza a hacer efecto, Manel confiesa algo mucho más…",
+   "sinopsis": "Berta descubre que está embarazada y no sabe qué hacer, porque duda del amor de su pareja, Manel. Aconsejada por su…",
+   "duracion": 88,
    "poster": "https://pics.filmaffinity.com/burundanga-862734937-mmed.jpg",
    "fa": "774585",
    "destacado": false
@@ -292,7 +44,9 @@
     "Drama"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "La vida de un promotor de fiestas underground en decadencia da un giro cuando tiene que hacerse cargo de un hijo de 10 años cuya existencia desconocía.\n\nPreestreno: Festival de Cannes 2026 (Un Certain Regard)",
+   "reparto": "Jordan Firstman, Reggie Absolom, Diego Calva",
+   "sinopsis": "La vida de un promotor de fiestas underground en decadencia da un giro cuando tiene que hacerse cargo de un hijo de 10…",
+   "duracion": 126,
    "poster": "https://pics.filmaffinity.com/club_kid-180771256-mmed.jpg",
    "fa": "525057",
    "destacado": false
@@ -306,7 +60,9 @@
     "Terror"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Cuando un hombre regresa de un viaje albergando sin saberlo una nueva raza de arácnidos, los habitantes de un bloque de apartamentos son puestos en cuarentena y abandonados a su suerte contra una plaga de arañas venenosas.",
+   "reparto": "Matilda Lutz, Gregg Sulkin, Chris Rogers",
+   "sinopsis": "Cuando un hombre regresa de un viaje albergando sin saberlo una nueva raza de arácnidos, los habitantes de un bloque de…",
+   "duracion": 86,
    "poster": "https://pics.filmaffinity.com/crawlers-730323066-mmed.jpg",
    "fa": "252092",
    "destacado": false
@@ -321,7 +77,7 @@
    ],
    "pais": "España",
    "reparto": "Pablo Chiapella, Patricia Conde, Salva Reina",
-   "sinopsis": "Cuenta la historia de cuatro matrimonios en diferentes etapas de su relación. Cuando la Iglesia descubre que un impostor ha estado suplantando al sacerdote de una parroquia durante nueve años, los enlaces celebrados por él quedan anulados. Las parejas…",
+   "sinopsis": "Cuenta la historia de cuatro matrimonios en diferentes etapas de su relación. Cuando la Iglesia descubre que un impostor…",
    "poster": "https://pics.filmaffinity.com/desposados-570159762-mmed.jpg",
    "fa": "201639",
    "destacado": false
@@ -335,7 +91,9 @@
     "Aventura"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "En el Año 10191 el desértico planeta Arrakis, feudo de la familia Harkonnen desde hace generaciones, queda en manos de la Casa de los Atreides por orden del emperador. Con ello  les cede la explotación de las reservas de especia, la materia prima más valiosa…",
+   "reparto": "Timothée Chalamet, Rebecca Ferguson, Oscar Isaac",
+   "sinopsis": "En el Año 10191 el desértico planeta Arrakis, feudo de la familia Harkonnen desde hace generaciones, queda en manos de…",
+   "duracion": 155,
    "poster": "https://pics.filmaffinity.com/dune-209834814-mmed.jpg",
    "fa": "847055",
    "destacado": false
@@ -349,7 +107,9 @@
     "Aventura"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Tras los sucesos de la primera parte acontecidos en el planeta Arrakis, el joven Paul Atreides se une a la tribu de los Fremen y comienza un viaje espiritual y marcial para convertirse en mesías, mientras intenta evitar el horrible pero inevitable futuro que…",
+   "reparto": "Timothée Chalamet, Zendaya, Rebecca Ferguson",
+   "sinopsis": "Tras los sucesos de la primera parte acontecidos en el planeta Arrakis, el joven Paul Atreides se une a la tribu de los…",
+   "duracion": 166,
    "poster": "https://pics.filmaffinity.com/dune_part_two-802143593-mmed.jpg",
    "fa": "180929",
    "destacado": false
@@ -363,7 +123,9 @@
     "Drama"
    ],
    "pais": "Polonia",
-   "sinopsis": "La relación entre el escritor ganador del Premio Nobel Thomas Mann y su hija Erika, actriz, escritora y piloto de carreras. En el apogeo de la Guerra Fría, y tras regresar a casa tras dieciséis años de exilio en Estados Unidos, Mann y su hija emprenden un…",
+   "reparto": "Sandra Hüller, Hanns Zischler, August Diehl",
+   "sinopsis": "La relación entre el escritor ganador del Premio Nobel Thomas Mann y su hija Erika, actriz, escritora y piloto de…",
+   "duracion": 82,
    "poster": "https://pics.filmaffinity.com/fatherland-377223627-mmed.jpg",
    "fa": "812894",
    "destacado": false
@@ -377,7 +139,9 @@
     "Thriller"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Cuando el joven Elliot (Cooper Hoffman) consigue trabajo con la provocadora artista Erika Tracy (Olivia Wilde), sus fantasías se hacen realidad en el momento en que ella lo invita a convertirse en su musa sexual. Pero pronto Elliot se siente abrumado al ser…",
+   "reparto": "Olivia Wilde, Cooper Hoffman, Mason Gooding",
+   "sinopsis": "Cuando el joven Elliot (Cooper Hoffman) consigue trabajo con la provocadora artista Erika Tracy (Olivia Wilde), sus…",
+   "duracion": 90,
    "poster": "https://pics.filmaffinity.com/i_want_your_sex-692353349-mmed.jpg",
    "fa": "259916",
    "destacado": false
@@ -391,7 +155,9 @@
     "Animación"
    ],
    "pais": "España",
-   "sinopsis": "¡Los Momonsters van a conocer a Papá Noel! Les ha invitado a Laponia para que presencien la creación de nuevos Momonsters, pero algo sale mal y, en vez de ser los mejores amigos de los niños, los nuevos Momonsters se convierten en los peores amigos de los…",
+   "reparto": "Jana Massot, Melania Pérez, Elisabeth Bargalló",
+   "sinopsis": "¡Los Momonsters van a conocer a Papá Noel! Les ha invitado a Laponia para que presencien la creación de nuevos…",
+   "duracion": 70,
    "poster": "https://pics.filmaffinity.com/momonsters_pelicula_de_navidad-827447329-mmed.jpg",
    "fa": "195149",
    "destacado": false
@@ -406,7 +172,8 @@
    ],
    "pais": "Estados Unidos",
    "reparto": "David Harbour, Kristen Bell, Jared Harris",
-   "sinopsis": "Continuación de \"Noche de paz\" (2022). El no tan simpático Papá Noel vuelve a enfundarse su traje para medirse con un despiadado gánster que se dedica a aterrorizar a las tiendas del centro comercial Silver Bell. Pero Santa Claus olvida el verdadero…",
+   "sinopsis": "Continuación de \"Noche de paz\" (2022). El no tan simpático Papá Noel vuelve a enfundarse su traje para medirse con un…",
+   "duracion": 110,
    "poster": "https://pics.filmaffinity.com/violent_night_2-783079018-mmed.jpg",
    "fa": "808270",
    "destacado": false
@@ -420,7 +187,9 @@
     "Drama"
    ],
    "pais": "Italia",
-   "sinopsis": "Venecia, siglo XVIII. Cecilia es una virtuosa del violín de 20 años que permanece confinada en el orfanato Pietà. Su única escapatoria parece ser el matrimonio. Sin embargo, su vida cambia cuando Antonio Vivaldi, un compositor brillante y ambicioso, llega…",
+   "reparto": "Tecla Insolia, Michele Riondino, Andrea Pennacchi",
+   "sinopsis": "Venecia, siglo XVIII. Cecilia es una virtuosa del violín de 20 años que permanece confinada en el orfanato Pietà. Su…",
+   "duracion": 110,
    "poster": "https://pics.filmaffinity.com/primavera-742746039-mmed.jpg",
    "fa": "631908",
    "destacado": false
@@ -434,7 +203,9 @@
     "Animación"
    ],
    "pais": "Estados Unidos",
-   "sinopsis": "Las aventuras de Raymond Gunn, el último detective humano, en un mundo futurista habitado por igual por humanos y alienígenas. \n\nPreestreno mundial en el London Film Festival (octubre 2026).\nEstreno en cines (USA y España): 4 de diciembre.\nEstreno en Netflix:…",
+   "reparto": "Sam Rockwell, Scarlett Johansson, Tom Waits",
+   "sinopsis": "Las aventuras de Raymond Gunn, el último detective humano, en un mundo futurista habitado por igual por humanos y…",
+   "duracion": 119,
    "poster": "https://pics.filmaffinity.com/ray_gunn-841978009-mmed.jpg",
    "fa": "276777",
    "destacado": false
@@ -448,7 +219,9 @@
     "Western"
    ],
    "pais": "España",
-   "sinopsis": "A finales del siglo XIX una joven española llamada Trinidad (Gabriela Andrada) llega al Salvaje Oeste acompañada de su madre (Paz Vega) y de su hermana (Sofía Allepuz) huyendo de la justicia que la persigue en su país. Desafiando los roles que la sociedad de…",
+   "reparto": "Gabriela Andrada, Karla Sofía Gascón, Paz Vega",
+   "sinopsis": "A finales del siglo XIX una joven española llamada Trinidad (Gabriela Andrada) llega al Salvaje Oeste acompañada de su…",
+   "duracion": 115,
    "poster": "https://pics.filmaffinity.com/trinidad-312295503-mmed.jpg",
    "fa": "688376",
    "destacado": false
@@ -462,7 +235,9 @@
     "Drama"
    ],
    "pais": "Alemania",
-   "sinopsis": "Derya y Aziz, una célebre pareja de artistas de Ankara, llevan una vida plena con su hija de 13 años, Ezgi, hasta que un incidente en el estreno de su nueva obra lo cambia todo. De la noche a la mañana, se ven en la mira del Estado turco y pierden sus…",
+   "reparto": "Özgü Namal, Tansu Biçer, Leyla Smyrna Cabas",
+   "sinopsis": "Derya y Aziz, una célebre pareja de artistas de Ankara, llevan una vida plena con su hija de 13 años, Ezgi, hasta que un…",
+   "duracion": 128,
    "poster": "https://pics.filmaffinity.com/gelbe_briefe-835232639-mmed.jpg",
    "fa": "487202",
    "destacado": false
@@ -504,7 +279,9 @@
     "Comedia"
    ],
    "pais": "España",
-   "sinopsis": "Adrián y Julieta son un matrimonio modélico… en apariencia. Él, cirujano plástico de prestigio y de ego inflamable; ella, presentadora del tiempo que lleva años prediciendo tormentas emocionales en casa. Después de diecisiete años juntos, sus conversaciones…",
+   "reparto": "Diego Martín, Natalia Verbeke, Marta Hazas",
+   "sinopsis": "Adrián y Julieta son un matrimonio modélico… en apariencia. Él, cirujano plástico de prestigio y de ego inflamable;…",
+   "duracion": 90,
    "poster": "https://pics.filmaffinity.com/dos_dos-493842841-mmed.jpg",
    "fa": "613750",
    "destacado": false
@@ -532,7 +309,9 @@
     "Drama"
    ],
    "pais": "Francia",
-   "sinopsis": "Matt Vasseur es el hombre del momento, es el exitoso fundador de su empresa de coaching personal, \"Expand\". Atrae a grandes multitudes que esperan cada palabra suya, deseosas de recuperar el control de sus vidas. Con su impresionante trabajo, su novia…",
+   "reparto": "Pierre Niney, Marion Barbeau, Anthony Bajon",
+   "sinopsis": "Matt Vasseur es el hombre del momento, es el exitoso fundador de su empresa de coaching personal, \"Expand\". Atrae a…",
+   "duracion": 126,
    "poster": "https://pics.filmaffinity.com/gourou-619843359-mmed.jpg",
    "fa": "293691",
    "destacado": false
@@ -630,7 +409,9 @@
     "Animación"
    ],
    "pais": "Japón",
-   "sinopsis": "Un verano, mientras cursa tercero de primaria, un chico callado llamado Tsubasa conoce a Kyotaro, el centro de admiración de la clase, y ambos se hacen íntimos amigos. Dentro de su pequeño mundo, comparten momentos irremplazables, hasta que un pequeño…",
+   "reparto": "Ryôta Bandô, Harumi Edo, Yûto Maki",
+   "sinopsis": "Un verano, mientras cursa tercero de primaria, un chico callado llamado Tsubasa conoce a Kyotaro, el centro de…",
+   "duracion": 116,
    "poster": "https://pics.filmaffinity.com/we_are_aliens-599886502-mmed.jpg",
    "fa": "357282",
    "destacado": false
@@ -741,6 +522,20 @@
    "sinopsis": "Una estrella se alza sobre Belén y unos sabios llegados de Oriente preguntan por el rey recién nacido. Alarmado, Herodes está dispuesto a todo para conservar su trono. Su temor desata la persecución de los inocentes, y María deberá proteger al niño que las…",
    "poster": "https://pics.filmaffinity.com/zero_a_d_the_birth_of_christ-594700299-mmed.jpg",
    "fa": "492442",
+   "destacado": false
+  },
+  {
+   "fecha": "2026-12-25",
+   "titulo": "Carol",
+   "original": "Carol",
+   "director": "Todd Haynes",
+   "generos": [
+    "Romance"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Nueva York, años 50. Therese Belivet (Rooney Mara), una joven dependienta de una tienda de Manhattan que sueña con una vida mejor, conoce un día a Carol Aird (Cate Blanchett), una mujer elegante y sofisticada que se encuentra atrapada en un matrimonio…",
+   "poster": "https://pics.filmaffinity.com/carol-180515019-mmed.jpg",
+   "fa": "584711",
    "destacado": false
   },
   {
@@ -1138,6 +933,20 @@
   },
   {
    "fecha": "2027-01-22",
+   "titulo": "Bajañí",
+   "original": "Bajañí",
+   "director": "Fernando Trueba",
+   "generos": [
+    "Documental"
+   ],
+   "pais": "España",
+   "sinopsis": "Bajañí es el nombre que recibe la guitarra española en caló. Partiendo de este instrumento, y en concreto, de la guitarra y el arte de Niño Josele, Fernando Trueba invita a los espectadores a escuchar la música como nunca lo habían hecho. Se trata de un nuevo…",
+   "poster": "https://pics.filmaffinity.com/bajani-528334630-mmed.jpg",
+   "fa": "495186",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-22",
    "titulo": "Elsinor",
    "original": "Elsinore",
    "director": "Simon Stone",
@@ -1148,6 +957,34 @@
    "sinopsis": "Biopic del aclamado actor británico Ian Charleson, conocido por la oscarizada 'Carros de fuego', centrado en sus últimos años de vida y su célebre interpretación de 'Hamlet' en el National Theatre de Londres en 1989, cuando ya estaba gravemente enfermo de…",
    "poster": "https://pics.filmaffinity.com/elsinore-455876715-mmed.jpg",
    "fa": "855331",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-22",
+   "titulo": "Jupiter",
+   "original": "Jupiter",
+   "director": "Alexandre Smia",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Francia",
+   "sinopsis": "Recién elegido, el presidente francés Paul Archambault es convocado de urgencia al búnker antiatómico Júpiter, situado bajo el Palacio del Elíseo. Debe hacer frente a una crisis internacional desatada tras el intento de asesinato de su homólogo ruso. Tras…",
+   "poster": "https://pics.filmaffinity.com/jupiter-889956777-mmed.jpg",
+   "fa": "234898",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-22",
+   "titulo": "Monstruosa Mia",
+   "original": "Monster Mia",
+   "director": "Verena Fels",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Alemania",
+   "sinopsis": "Mia, una estudiante expulsada, y su rata mascota Quentin llegan a la Academia Rotwood, donde ella es la única humana entre sus compañeros monstruosos. Debido al odio del director Van Vlad hacia los humanos, Mia deberá formar equipo con los monstruos para…",
+   "poster": "https://pics.filmaffinity.com/monster_mia-511572125-mmed.jpg",
+   "fa": "960631",
    "destacado": false
   },
   {
@@ -1203,67 +1040,144 @@
    "destacado": false
   },
   {
-   "fecha": "2027-02-12",
-   "titulo": "El exorcista",
-   "original": "The Exorcist",
-   "director": "Mike Flanagan",
+   "fecha": "2027-01-29",
+   "titulo": "El rescate",
+   "original": "The Rescue",
+   "director": "Potsy Ponciroli",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Un antiguo vaquero de rodeo toma cartas en el asunto cuando su hija es secuestrada para pedir un rescate. Acompañado por su fiel perro, se propone traerla de vuelta a casa y no se detendrá ante nada para encontrarla.",
+   "poster": "https://pics.filmaffinity.com/the_rescue-420126270-mmed.jpg",
+   "fa": "423235",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-01-29",
+   "titulo": "River",
+   "original": "River",
+   "director": "Joshua Giuliano",
    "generos": [
     "Terror"
-   ]
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Tres hermanos se reencuentran tras la muerte de su padre. Pronto se dan cuenta de que les acecha un asesino sin rostro.",
+   "poster": "https://pics.filmaffinity.com/river-701652229-mmed.jpg",
+   "fa": "294617",
+   "destacado": false
   },
   {
-   "fecha": "2027-03-19",
-   "titulo": "Sonic 4: La película",
-   "original": "Sonic the Hedgehog 4",
+   "fecha": "2027-02-05",
+   "titulo": "Ice Age: En ebullición",
+   "original": "Ice Age: Boiling Pointaka",
+   "director": "John Donkin",
    "generos": [
-    "Acción",
-    "Aventura",
-    "Comedia"
+    "Animación"
    ],
-   "ids": {
-    "wikidata": "Q131495871",
-    "imdb": "tt16744566",
-    "letterboxd": "sonic-the-hedgehog-4",
-    "tmdb": "1401586",
-    "allocine": "1000017329"
-   }
+   "pais": "Estados Unidos",
+   "sinopsis": "Sexta entrega de la saga \"Ice Age\". Contará con la aparición de Baby Scrat, que apareció por primera vez en \"Scrat Tales\".\n\nEstreno: febrero de 2027.",
+   "poster": "https://pics.filmaffinity.com/ice_age_boiling_point-363125910-mmed.jpg",
+   "fa": "764843",
+   "destacado": false
   },
   {
-   "fecha": "2027-03-26",
-   "titulo": "Godzilla x Kong: Supernova",
-   "original": "Godzilla x Kong: Supernova",
+   "fecha": "2027-02-05",
+   "titulo": "Josephine",
+   "original": "Josephine",
+   "director": "Beth de Araújo",
    "generos": [
-    "Acción",
-    "Ciencia ficción"
+    "Drama"
    ],
-   "ids": {
-    "wikidata": "Q133820356",
-    "imdb": "tt32561550",
-    "letterboxd": "godzilla-x-kong-supernova",
-    "tmdb": "1288438",
-    "allocine": "1000002997"
-   },
-   "poster": "https://upload.wikimedia.org/wikipedia/en/f/f8/Godzilla_X_Kong_Supernova_logo.png"
+   "pais": "Estados Unidos",
+   "sinopsis": "Una niña de ocho años ve cómo su vida se desmorona tras presenciar un brutal asalto en el Golden Gate Park de San Francisco. A medida que su miedo se transforma en comportamiento agresivo y paranoia, los adultos que la rodean, que se ven impotentes de poder…",
+   "poster": "https://pics.filmaffinity.com/josephine-358280148-mmed.jpg",
+   "fa": "443239",
+   "destacado": false
   },
   {
-   "fecha": "2027-03-26",
-   "titulo": "The Legend of Zelda",
-   "original": "The Legend of Zelda",
-   "director": "Wes Ball",
+   "fecha": "2027-02-05",
+   "titulo": "Musk",
+   "original": "Musk",
+   "director": "Alex Gibney",
    "generos": [
-    "Aventura",
-    "Fantasía",
-    "Acción"
+    "Documental"
    ],
-   "destacado": true,
-   "ids": {
-    "wikidata": "Q123367920",
-    "imdb": "tt29873948",
-    "letterboxd": "the-legend-of-zelda",
-    "tmdb": "1177369",
-    "allocine": "223110"
-   },
-   "poster": "https://thumb.wikimedia.org/wikipedia/en/thumb/a/ab/The_Legend_of_Zelda_film_logo.jpg/500px-The_Legend_of_Zelda_film_logo.jpg"
+   "pais": "Estados Unidos",
+   "sinopsis": "Un análisis exhaustivo y sin censura sobre Elon Musk, multimillonario del sector tecnológico que ocupa el cargo de director ejecutivo de Tesla, SpaceX y X (antes Twitter),  una de las figuras empresariales más influyentes y controvertidas del…",
+   "poster": "https://pics.filmaffinity.com/musk-945596534-mmed.jpg",
+   "fa": "632395",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-02-05",
+   "titulo": "Nunca olvides que te quiero",
+   "original": "Remain",
+   "director": "M. Night Shyamalan",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Cuando el solitario arquitecto Tate Gordon se traslada a un pequeño pueblo costero para terminar su último proyecto, conoce a una joven seductora que le saca de su caparazón y le sumerge en el centro de un misterio mortal que se cierne sobre el…",
+   "poster": "https://pics.filmaffinity.com/remain-251434624-mmed.jpg",
+   "fa": "625718",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-02-05",
+   "titulo": "Todo va a salir bien",
+   "original": "Tender Loving Care",
+   "director": "Mike Leigh",
+   "generos": [
+    "Drama"
+   ],
+   "pais": "Reino Unido",
+   "sinopsis": "Amy (Kate O'Flynn), trabajadora social en el servicio público de protección a la infancia, regresa a vivir con su alegre mejor amiga, Rosie (Alice Bailey Johnson), tras el fracaso de una relación amorosa. Rosie, que trabaja como asistente social, se enfrenta…",
+   "poster": "https://pics.filmaffinity.com/tender_loving_care-139626159-mmed.jpg",
+   "fa": "782578",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-02-05",
+   "titulo": "Witch on the Holy Night",
+   "original": "Mahōtsukai no Yoruaka",
+   "director": "Hikaru Kondo / Masaru Takeuchi",
+   "generos": [
+    "Animación"
+   ],
+   "pais": "Japón",
+   "sinopsis": "Película anime basada en la aclamada novela gráfica \"Witch on the Holy Night\".  Aoko Aozaki, una estudiante normal de secundaria, es realmente una bruja que vive en el mundo moderno... aunque aún es solo una aprendiz. Mientras, pasa los días junto con su…",
+   "poster": "https://pics.filmaffinity.com/mahotsukai_no_yoru-715995509-mmed.jpg",
+   "fa": "759894",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-04-23",
+   "titulo": "A Place in Hell",
+   "original": "A Place in Hell",
+   "director": "Chloe Domont",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "El don para proteger a los culpables del que goza una exitosa abogada penalista  comienza a corroer su mundo desde dentro.",
+   "poster": "https://pics.filmaffinity.com/a_place_in_hell-985928976-mmed.jpg",
+   "fa": "186117",
+   "destacado": false
+  },
+  {
+   "fecha": "2027-04-23",
+   "titulo": "Sed de sangre",
+   "original": "Day Drinker",
+   "director": "Marc Webb",
+   "generos": [
+    "Thriller"
+   ],
+   "pais": "Estados Unidos",
+   "sinopsis": "Un enigmático forastero establece vínculo con una camarera que acaba de perder al amor de su vida. Este encuentro provoca que sus destinos se entrelacen de manera inesperada.",
+   "poster": "https://pics.filmaffinity.com/day_drinker-985360344-mmed.jpg",
+   "fa": "915467",
+   "destacado": false
   },
   {
    "fecha": "2027-05-28",
